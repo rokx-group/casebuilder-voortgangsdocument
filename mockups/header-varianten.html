@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — headervarianten</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ── vergelijkpagina — alleen voor deze mockup, niet voor het merk ── */
+body{background:#EDF0F4}
+.vgl{max-width:1440px;margin:0 auto;padding:34px 24px 90px}
+.kop{margin:44px 0 14px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.kop .nr{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--blue)}
+.kop h3{font-size:24px}
+.kop .hgt{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--mute);margin-left:auto}
+.uitleg{font-size:14px;color:var(--mute);max-width:78ch;margin-bottom:16px;line-height:1.65}
+.uitleg b{color:var(--ink)}
+.demo{background:#fff;border:1px solid var(--rule);box-shadow:0 1px 3px rgba(0,40,70,.07);overflow:hidden}
+.demo .vulling{height:110px;background:
+  linear-gradient(var(--bg),var(--bg)) padding-box;
+  border-top:0;display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:#B9C2CC}
+.demo .wrap{max-width:1280px}
+
+/* ═══ gedeelde, rustiger headerbouwstenen ═══ */
+.h-bar{background:#fff;border-bottom:1px solid var(--rule)}
+.h-bar .wrap{display:flex;align-items:center;gap:32px}
+.h-logo{font-family:var(--disp);font-weight:900;font-size:26px;letter-spacing:.01em;color:#000;white-space:nowrap}
+.h-logo em{font-style:normal;color:var(--logo)}
+/* zoekveld — rustiger: geen donker blok, alleen een icoon */
+.h-zoek{flex:1;max-width:460px;display:flex;align-items:center;gap:10px;height:42px;
+  border:1px solid var(--rule);background:var(--bg);padding:0 14px}
+.h-zoek:focus-within{border-color:var(--dark);background:#fff}
+.h-zoek svg{flex:none;color:var(--mute)}
+.h-zoek input{flex:1;border:0;background:transparent;font-family:var(--body);font-size:14px;outline:0;color:var(--ink)}
+.h-zoek input::placeholder{color:var(--mute)}
+/* rechterkant — één regel, DM Sans, geen dubbeldekkers */
+.h-acties{margin-left:auto;display:flex;align-items:center;gap:24px;font-size:14px;color:var(--ink)}
+.h-acties a{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.h-acties a:hover{color:var(--blue)}
+.h-acties .stil{color:var(--mute)}
+.h-badge{display:inline-flex;align-items:center;justify-content:center;min-width:19px;height:19px;padding:0 5px;
+  background:var(--dark);color:#fff;font-family:var(--body);font-weight:700;font-size:11px;line-height:1}
+.h-offerte{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:15px;letter-spacing:.05em;
+  border:1.5px solid var(--dark);color:var(--dark);padding:9px 16px}
+.h-offerte:hover{background:var(--dark);color:#fff}
+/* navigatie — één gewicht, één actief-signaal */
+.h-nav{background:#fff;border-bottom:1px solid var(--rule)}
+.h-nav .wrap{display:flex;align-items:center;gap:34px;height:46px}
+.h-nav a{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:16px;letter-spacing:.05em;
+  color:var(--dark);height:100%;display:flex;align-items:center;border-bottom:3px solid transparent}
+.h-nav a:hover{border-bottom-color:var(--rule)}
+.h-nav a.on{border-bottom-color:var(--cyan)}
+.h-nav .rechts{margin-left:auto;display:flex;align-items:center;gap:22px;font-size:14px;color:var(--mute)}
+.h-nav .rechts b{color:var(--dark);font-weight:500}
+
+/* ── A: twee balken ── */
+.va .h-bar .wrap{height:74px}
+
+/* ── B: één balk ── */
+.vb .h-bar .wrap{height:72px;gap:38px}
+.vb .h-nav-inline{display:flex;align-items:center;gap:30px;height:72px}
+.vb .h-nav-inline a{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:16px;letter-spacing:.05em;
+  color:var(--dark);height:100%;display:flex;align-items:center;border-bottom:3px solid transparent}
+.vb .h-nav-inline a:hover{border-bottom-color:var(--rule)}
+.vb .h-nav-inline a.on{border-bottom-color:var(--cyan)}
+.vb .h-icoon{display:flex;align-items:center;gap:9px;font-size:14px}
+
+/* ── C: drie balken, rustige typografie ── */
+.vc .h-util{background:var(--bg);border-bottom:1px solid var(--rule)}
+.vc .h-util .wrap{display:flex;align-items:center;justify-content:flex-end;gap:22px;height:32px;
+  font-size:13px;color:var(--mute)}
+.vc .h-util a:hover{color:var(--dark)}
+.vc .h-bar .wrap{height:76px}
+</style>
+</head>
+<body>
+<div class="vgl">
+
+  <div class="kop"><span class="nr">// NU</span><h3>Huidig — drie balken</h3><span class="hgt">166 px chrome</span></div>
+  <p class="uitleg">Ter vergelijking, ongewijzigd. Let op de vijf verschillende typografische behandelingen tussen de bovenrand en het kruimelpad, en op het feit dat de <b>donkerste balk het minst belangrijke bevat</b>.</p>
+  <div class="demo">
+    <div class="util">
+      <div class="wrap mono">
+        <div>PROFLITE · DOESBURG · SINDS 1987</div>
+        <div class="r"><a href="#">NL ▾</a><a href="#">ZAKELIJK ACCOUNT</a><a href="#">INLOGGEN</a></div>
+      </div>
+    </div>
+    <header class="main" style="position:static">
+      <div class="wrap">
+        <div class="logo"><em>case</em>Builder.com</div>
+        <form class="search" onsubmit="return false"><input placeholder="Zoek op artikelnummer of onderdeel…"><button>⌕</button></form>
+        <div class="hdr-r">
+          <div class="lnk"><b>Offerte</b><span>Binnen 4 uur</span></div>
+          <div class="lnk"><b>Winkelwagen</b><span>3 artikelen</span></div>
+        </div>
+      </div>
+    </header>
+    <nav class="primary">
+      <div class="wrap">
+        <a href="#">Flightcases</a><a href="#">Wat ga je vervoeren?</a>
+        <a href="#" class="on">Onderdelen</a><a href="#" class="sec">Service</a>
+        <div class="tel">Direct advies · <b>+31 (0)575 575734</b></div>
+      </div>
+    </nav>
+    <div class="vulling">PAGINA-INHOUD</div>
+  </div>
+
+  <div class="kop"><span class="nr">// A</span><h3>Twee balken — aanbevolen</h3><span class="hgt">120 px chrome · −28%</span></div>
+  <p class="uitleg">De utility-balk verdwijnt; taal en inloggen schuiven naar rechts in de hoofdbalk, de merkregel naar de footer. <b>Offerte wordt een knop</b> — het is de belangrijkste actie op de site en verdiende geen dubbeldekkerlabel maar vorm. Winkelwagen krijgt een telbadge in plaats van een tweede regel. De navigatie houdt één gewicht en één actief-signaal (cyaan streep). Alleen het logo blijft 900-condensed; alles rechts is DM Sans en wijkt terug.</p>
+  <div class="demo va">
+    <div class="h-bar">
+      <div class="wrap">
+        <div class="h-logo"><em>case</em>Builder.com</div>
+        <form class="h-zoek" onsubmit="return false">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+          <input placeholder="Zoek op artikelnummer of onderdeel…">
+        </form>
+        <div class="h-acties">
+          <a href="#" class="stil">Inloggen</a>
+          <a href="#" class="h-offerte">Offerte</a>
+          <a href="#">Winkelwagen <span class="h-badge">3</span></a>
+        </div>
+      </div>
+    </div>
+    <nav class="h-nav">
+      <div class="wrap">
+        <a href="#">Flightcases</a><a href="#">Wat ga je vervoeren?</a>
+        <a href="#" class="on">Onderdelen</a><a href="#">Service</a>
+        <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#" class="stil">NL ▾</a></div>
+      </div>
+    </nav>
+    <div class="vulling">PAGINA-INHOUD</div>
+  </div>
+
+  <div class="kop"><span class="nr">// B</span><h3>Eén balk — maximaal rustig</h3><span class="hgt">72 px chrome · −57%</span></div>
+  <p class="uitleg">Navigatie in de hoofdbalk, zoeken wordt een icoon dat een veld uitklapt. Erg rustig, maar er is een prijs: <b>bij vijf of meer hoofditems loopt dit vast</b>, en zoeken achter een klik verstoppen is riskant voor een site waar mensen op artikelnummer zoeken. Alleen kiezen als het menu écht op vier items blijft.</p>
+  <div class="demo vb">
+    <div class="h-bar">
+      <div class="wrap">
+        <div class="h-logo"><em>case</em>Builder.com</div>
+        <div class="h-nav-inline">
+          <a href="#">Flightcases</a><a href="#">Wat ga je vervoeren?</a>
+          <a href="#" class="on">Onderdelen</a><a href="#">Service</a>
+        </div>
+        <div class="h-acties">
+          <a href="#" class="h-icoon stil"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg> Zoeken</a>
+          <a href="#" class="stil">Inloggen</a>
+          <a href="#" class="h-offerte">Offerte</a>
+          <a href="#">Winkelwagen <span class="h-badge">3</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="vulling">PAGINA-INHOUD</div>
+  </div>
+
+  <div class="kop"><span class="nr">// C</span><h3>Drie balken, rustige typografie</h3><span class="hgt">154 px chrome · −7%</span></div>
+  <p class="uitleg">Structuur blijft, alleen de typografie kalmeert. De belangrijkste ingreep: <b>de bovenbalk wordt lichtgrijs in plaats van marineblauw</b>, zodat het gewicht klopt met het belang. Mono verdwijnt uit de header (die blijft voor eyebrows en specs, waar hij thuishoort). Minste impact op de rest van het ontwerp, maar je houdt 154px chrome — op een laptop is dat een vijfde van het scherm voordat er iets te zien is.</p>
+  <div class="demo vc">
+    <div class="h-util">
+      <div class="wrap">
+        <a href="#">Zakelijk account</a><a href="#">Inloggen</a><a href="#">NL ▾</a>
+      </div>
+    </div>
+    <div class="h-bar">
+      <div class="wrap">
+        <div class="h-logo"><em>case</em>Builder.com</div>
+        <form class="h-zoek" onsubmit="return false">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+          <input placeholder="Zoek op artikelnummer of onderdeel…">
+        </form>
+        <div class="h-acties">
+          <a href="#" class="h-offerte">Offerte</a>
+          <a href="#">Winkelwagen <span class="h-badge">3</span></a>
+        </div>
+      </div>
+    </div>
+    <nav class="h-nav">
+      <div class="wrap">
+        <a href="#">Flightcases</a><a href="#">Wat ga je vervoeren?</a>
+        <a href="#" class="on">Onderdelen</a><a href="#">Service</a>
+        <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span></div>
+      </div>
+    </nav>
+    <div class="vulling">PAGINA-INHOUD</div>
+  </div>
+
+</div>
+</body>
+</html>

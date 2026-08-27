@@ -62,35 +62,55 @@ h1,h2,h3,h4,h5{font-family:var(--disp);text-transform:uppercase;letter-spacing:.
 .btn-out:hover{background:var(--dark);color:#fff}
 .btn-sm{font-size:14px;padding:11px 18px}
 
-/* ── header ──────────────────────────────────────────────── */
-.util{background:var(--dark);color:rgba(255,255,255,.72)}
-.util .wrap{display:flex;justify-content:space-between;align-items:center;height:34px}
-.util a:hover{color:var(--cyan)}
-.util .r{display:flex;gap:26px}
+/* ── header — twee balken (variant A) ────────────────────
+   Eén balk voor identiteit, zoeken en acties; één voor navigatie.
+   De utility-balk is vervallen: taal en inloggen staan nu rechts in de
+   hoofdbalk, de merkregel (Proflite · Doesburg · sinds 1987) in de
+   footer. Alleen het woordmerk is 900-condensed — al het overige in de
+   header is DM Sans en wijkt terug. Mono komt hier niet voor; die blijft
+   voor eyebrows, specs en kruimelpad. */
 header.main{border-bottom:1px solid var(--rule);background:#fff;position:sticky;top:0;z-index:40}
-header.main .wrap{display:flex;align-items:center;gap:36px;height:80px}
+header.main .wrap{display:flex;align-items:center;gap:32px;height:74px}
 /* wordmark — brandbook §09: "case" cyaan/logoblauw, "Builder.com" zwart.
    Op donker: volledig uitgekeerd naar wit. */
-.logo{font-family:var(--disp);font-weight:900;font-size:28px;letter-spacing:.01em;color:#000;white-space:nowrap}
+.logo{font-family:var(--disp);font-weight:900;font-size:26px;letter-spacing:.01em;color:#000;white-space:nowrap}
 .logo em{font-style:normal;color:var(--logo)}
 .dark .logo,.navy .logo,footer .logo{color:#fff}
 .dark .logo em,.navy .logo em,footer .logo em{color:var(--cyan)}
-.search{flex:1;display:flex;border:1.5px solid var(--rule);height:46px;max-width:520px}
-.search input{flex:1;border:0;padding:0 16px;font-family:var(--body);font-size:14px;outline:0}
+/* zoeken — vlak veld met icoon. Het donkere knopblok van eerder trok
+   evenveel aandacht als het woordmerk, terwijl zoeken een gereedschap is
+   en geen bestemming. */
+.search{flex:1;max-width:460px;display:flex;align-items:center;gap:10px;height:42px;
+  border:1px solid var(--rule);background:var(--bg);padding:0 14px}
+.search:focus-within{border-color:var(--dark);background:#fff}
+.search svg{flex:none;color:var(--mute)}
+.search input{flex:1;border:0;background:transparent;font-family:var(--body);font-size:14px;outline:0;color:var(--ink)}
 .search input::placeholder{color:var(--mute)}
-.search button{background:var(--dark);color:#fff;border:0;width:52px;cursor:pointer;font-size:16px}
-.hdr-r{margin-left:auto;display:flex;align-items:center;gap:28px}
-.hdr-r .lnk{display:flex;flex-direction:column;line-height:1.15}
-.hdr-r .lnk b{font-family:var(--disp);text-transform:uppercase;font-size:15px;letter-spacing:.04em;color:var(--dark)}
-.hdr-r .lnk span{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+/* acties — één regel per item. Offerte is de belangrijkste actie op de
+   site en krijgt daarom vorm (knop) in plaats van een tweede tekstregel;
+   de winkelwagen krijgt een telbadge in plaats van "3 artikelen". */
+.hdr-r{margin-left:auto;display:flex;align-items:center;gap:24px;font-size:14px;color:var(--ink)}
+.hdr-r a{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.hdr-r a:hover{color:var(--blue)}
+.hdr-r .stil{color:var(--mute)}
+.hdr-r .btn-out:hover{color:#fff}
+.telbadge{display:inline-flex;align-items:center;justify-content:center;min-width:19px;height:19px;padding:0 5px;
+  background:var(--dark);color:#fff;font-family:var(--body);font-weight:700;font-size:11px;line-height:1}
+
+/* navigatie — één gewicht, één actief-signaal (de cyaan streep).
+   .sec dempt een ingang bewust in kleur (onderdelen en service krijgen
+   lager op de pagina een volwaardig blok), maar houdt hetzelfde gewicht:
+   twee signalen voor hetzelfde onderscheid is er één te veel. */
 nav.primary{border-bottom:1px solid var(--rule);background:#fff}
-nav.primary .wrap{display:flex;gap:38px;align-items:center;height:52px}
+nav.primary .wrap{display:flex;gap:34px;align-items:center;height:46px}
 nav.primary a{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:16px;letter-spacing:.05em;
   color:var(--dark);height:100%;display:flex;align-items:center;border-bottom:3px solid transparent}
-nav.primary a:hover,nav.primary a.on{border-bottom-color:var(--cyan)}
-nav.primary a.sec{color:var(--mute);font-weight:600}
-nav.primary .tel{margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--mute);text-transform:uppercase}
-nav.primary .tel b{color:var(--dark)}
+nav.primary a:hover{border-bottom-color:var(--rule)}
+nav.primary a.on{border-bottom-color:var(--cyan)}
+nav.primary a.sec{color:var(--mute)}
+nav.primary .rechts{margin-left:auto;display:flex;align-items:center;gap:22px;font-size:14px;color:var(--mute)}
+nav.primary .rechts b{color:var(--dark);font-weight:500}
+nav.primary .rechts a:hover{color:var(--dark)}
 
 /* kruimelpad */
 .crumbs{border-bottom:1px solid var(--rule);background:var(--bg)}
@@ -168,13 +188,18 @@ footer .bot{border-top:1px solid rgba(255,255,255,.15);margin-top:44px;padding-t
   .wrap{padding:0 18px}
   section{padding:56px 0}
   .cases{grid-template-columns:repeat(2,1fr)}
-  .search,.hdr-r{display:none}
-  .util .wrap>div:first-child{display:none}
-  .util .r{gap:16px}
-  .util .mono,.util .r a{font-size:9px;letter-spacing:.1em}
+  /* zoeken verhuist naar de nav-balk-hoogte op mobiel: het veld past niet
+     naast logo en acties. Offerte en winkelwagen blijven staan — dat zijn
+     de twee dingen waarvoor iemand op zijn telefoon terugkomt. */
+  header.main .wrap{height:64px;gap:16px}
+  .logo{font-size:22px}
+  .search{display:none}
+  .hdr-r{gap:14px;font-size:13px}
+  .hdr-r .stil{display:none}
+  .hdr-r .btn-sm{padding:9px 13px;font-size:13px}
   nav.primary .wrap{overflow-x:auto;gap:22px;-webkit-overflow-scrolling:touch}
   nav.primary a{white-space:nowrap;font-size:14px}
-  nav.primary .tel{display:none}
+  nav.primary .rechts{display:none}
   .topbar{font-size:8.5px;letter-spacing:.1em;left:18px;right:18px}
   .beslag>.hk{width:16px;height:16px}
   .beslag>.hk.tl,.beslag>.hk.tr{top:16px}
