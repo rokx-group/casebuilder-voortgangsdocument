@@ -448,6 +448,12 @@
   .panel-head, .wfurl { border-bottom-color:var(--line-soft); }
   .stats { gap:1px; }
   .empty { border-radius:var(--r); }
+
+  .anch { position:relative; }
+  .anch > a.hash { text-decoration:none; color:var(--faint); margin-left:9px;
+    font-family:"IBM Plex Mono",monospace; font-size:.62em; opacity:0; transition:opacity .12s; }
+  .anch:hover > a.hash, a.hash:focus-visible { opacity:1; color:var(--accent); }
+  h2.anch, h3.anch { scroll-margin-top:20px; }
 </style>
 </head>
 <body>
@@ -1765,10 +1771,10 @@
     <section>
       <div class="sec-head">
         <span class="eyebrow">Eerstvolgende</span>
-        <h2>28 augustus 2026</h2>
+        <h2 class="anch" id="m-2026-08-28">28 augustus 2026<a class="hash" href="#m-2026-08-28" aria-label="Link naar deze meeting">#</a></h2>
       </div>
 
-      <h3 class="tablabel">1 &middot; Terugblik</h3>
+      <h3 class="tablabel anch" id="m-2026-08-28-terugblik">1 &middot; Terugblik<a class="hash" href="#m-2026-08-28-terugblik" aria-label="Link naar deze sectie">#</a></h3>
       <div class="mtiles">
         <div class="mt deels"><div class="mtop"><span class="mn">test</span><h4>Testresultaten</h4><p>De connection test tussen frontend en casebuilder api is geslaagd — het technisch risicovolste punt is aangetoond. <strong>Nog niet getest:</strong> de stresstest staat niet ingepland, en de configurator-handoff tegen Medusa is nog niet gebouwd.</p></div><span class="tag">deels</span></div>
         <div class="mt af"><div class="mtop"><span class="mn">stack</span><h4>Medusa</h4><p>Webshop-skeleton staat. Stack bevestigd, Magento valt af — pakket B, schone lei en code-first.</p></div><span class="tag">afgerond</span></div>
@@ -1778,7 +1784,7 @@
         <div class="mt af"><div class="mtop"><span class="mn">tpl</span><h4>Hoe een contentpagina eruitziet</h4><p>Eén sjabloon dekt zeven servicepagina&#39;s: koptekst, tekstkolom uit blokken, sectienavigatie en een contactblok. <strong>Wat daarvoor nodig is:</strong> de blokkenbibliotheek plus de teksten zelf.</p></div><span class="tag">afgerond</span></div>
       </div>
 
-      <h3 class="tablabel">2 &middot; Vooruitblik</h3>
+      <h3 class="tablabel anch" id="m-2026-08-28-vooruitblik">2 &middot; Vooruitblik<a class="hash" href="#m-2026-08-28-vooruitblik" aria-label="Link naar deze sectie">#</a></h3>
       <div class="mtiles">
         <div class="mt gepland"><div class="mtop"><span class="mn">sep</span><h4>CI/CD en omgevingen</h4><p>Pipelines, dev-acceptance en productie. Plus de beslissing over de 38 subcategorieën, zodra GA4 er is.</p></div><span class="tag">gepland</span></div>
         <div class="mt gepland"><div class="mtop"><span class="mn">okt</span><h4>Blokkenbibliotheek en Medusa</h4><p>Sanity-templates en de webshop full build. Contentproductie start hier.</p></div><span class="tag">gepland</span></div>
@@ -1789,7 +1795,7 @@
         <div class="mt gepland"><div class="mtop"><span class="mn">mrt</span><h4>Livegang</h4><p>User acceptance, performance- en securityreview, dan de switch.</p></div><span class="tag">gepland</span></div>
       </div>
 
-      <h3 class="tablabel">3 &middot; Wat we nog nodig hebben</h3>
+      <h3 class="tablabel anch" id="m-2026-08-28-nodig">3 &middot; Wat we nog nodig hebben<a class="hash" href="#m-2026-08-28-nodig" aria-label="Link naar deze sectie">#</a></h3>
       <div class="mtiles">
         <div class="mt cb"><div class="mtop"><span class="mn">01</span><h4>Toegang tot GA4, Search Console en GTM</h4><p>Aangevraagd op 5 augustus, nog niet geregeld. GTM is het meest urgent: zonder events op de configuratorstappen bouwt elke week een gat op in de nulmeting.</p></div><span class="tag">van cb</span></div>
         <div class="mt cb"><div class="mtop"><span class="mn">02</span><h4>Testaccount voor het klantportaal</h4><p>Bepaalt of herbestellen nieuw gebouwd wordt of alleen verhuisd.</p></div><span class="tag">van cb</span></div>
@@ -1849,6 +1855,19 @@
         selectWf(hash.slice(3));
         return;
       }
+      var el = hash && document.getElementById(hash);
+      if (el) {
+        var pnl = el;
+        while (pnl && pnl.className.indexOf('tabpanel') === -1) pnl = pnl.parentElement;
+        if (pnl) {
+          var owner = document.getElementById(pnl.getAttribute('aria-labelledby'));
+          if (owner) {
+            selectTab(owner);
+            el.scrollIntoView({ block: 'start' });
+            return;
+          }
+        }
+      }
       selectTab(tabByHash(hash) || document.getElementById(DEFAULT));
       if (hash === 'wireframes' && !document.querySelector('.wfitem[aria-current="true"]')) {
         selectWf(wfBtns[0].getAttribute('data-wf'));
@@ -1882,11 +1901,13 @@
     });
 
     document.addEventListener('click', function (e) {
-      var a = e.target.closest && e.target.closest('a[href^="#wf-"]');
+      var a = e.target.closest && e.target.closest('a[href^="#"]');
       if (!a) return;
+      var h = a.getAttribute('href').slice(1);
+      if (!h) return;
       e.preventDefault();
-      go(a.getAttribute('href').slice(1), true);
-      window.scrollTo({ top: 0, behavior: 'auto' });
+      go(h, true);
+      if (h.indexOf('wf-') === 0) window.scrollTo({ top: 0, behavior: 'auto' });
     });
 
     window.addEventListener('popstate', function () { go(location.hash.slice(1), false); });
