@@ -468,6 +468,10 @@
   .mt a.live:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
 
   .mt .mtop > a.live + a.live { margin-top:1px; }
+
+  .mt ul { margin:2px 0 0; padding-left:15px; }
+  .mt ul li { font-size:13px; color:var(--muted); line-height:1.5; padding:1.5px 0; }
+  .mt ul li strong { color:var(--ink); font-weight:600; }
 </style>
 </head>
 <body>
@@ -1800,7 +1804,7 @@
         <div class="mt af"><div class="mtop"><span class="mn">04</span><h4>Minimale frontend om de configurator te testen</h4><p>Connection test tussen frontend en casebuilder api geslaagd, plus de iframe-embed met POST-integratie. Het technisch risicovolste punt is aangetoond.</p><a class="live" href="https://casebuilder-web.vercel.app" target="_blank" rel="noopener noreferrer">bekijk de testomgeving &#8599;</a></div><span class="tag">afgerond</span></div>
         <div class="mt deels"><div class="mtop"><span class="mn">05</span><h4>Sitemap en sitestructuur</h4><p>386 pagina&#39;s worden er 311 over veertien sjablonen. Zeventien besteltaken getoetst tegen de nieuwe boom: zes gaten gevonden, drie opgelost in het ontwerp.</p></div><span class="tag">in review</span></div>
         <div class="mt deels"><div class="mtop"><span class="mn">06</span><h4>Wireframes — hoe een contentpagina eruitziet</h4><p>Veertien sjablonen uitgetekend. Eén sjabloon dekt zeven servicepagina&#39;s: koptekst, tekstkolom uit blokken, sectienavigatie, contactblok. <strong>Wat daarvoor nodig is:</strong> de blokkenbibliotheek plus de teksten.</p></div><span class="tag">in review</span></div>
-        <div class="mt deels"><div class="mtop"><span class="mn">07</span><h4>Testresultaten</h4><p><strong>Medusa houdt het prima.</strong> De database filtert 1.000 producten in 82 ms en 3.000 in 164 ms, tegen een grens van 500. De admin blijft ruim onder de 2 seconden, met 0,00% fouten. <strong>Het knelpunt zit in de frontend:</strong> die haalt álle producten op in elf verzoeken en filtert daarna in het geheugen, in plaats van de database het werk te laten doen. Resultaat: 27 seconden laadtijd bij 1.000 producten. Paginatie en filteren op databaseniveau lossen dat op — precies wat in het categorie-ontwerp staat.</p><a class="live" href="https://docs.google.com/document/d/1pY7MQxi06DV0y_98nmLTkq7isR0lsShYSuS3cogkq3o/edit" target="_blank" rel="noopener noreferrer">lees het testdocument &#8599;</a></div><span class="tag">in review</span></div>
+        <div class="mt deels"><div class="mtop"><span class="mn">07</span><h4>Testresultaten</h4><ul><li><strong>Medusa haalt alle grenzen.</strong> Filteren: 82 ms bij 1.000, 164 ms bij 3.000 — grens 500 ms.</li><li>Admin blijft onder 470 ms, tegen een grens van 2 seconden.</li><li>Nul fouten, in elke meting.</li><li><strong>Het knelpunt zit in de frontend:</strong> die haalt álle producten op en filtert in het geheugen.</li><li>27 seconden laadtijd bij 1.000 producten.</li><li>Paginatie en filteren in de database lossen het op — staat al in het categorie-ontwerp.</li></ul><a class="live" href="https://docs.google.com/document/d/1pY7MQxi06DV0y_98nmLTkq7isR0lsShYSuS3cogkq3o/edit" target="_blank" rel="noopener noreferrer">lees het testdocument &#8599;</a></div><span class="tag">in review</span></div>
       </div>
 
       <h3 class="tablabel anch" id="m-2026-08-28-vooruitblik">2 &middot; Vooruitblik<a class="hash" href="#m-2026-08-28-vooruitblik" aria-label="Link naar deze sectie">#</a></h3>
