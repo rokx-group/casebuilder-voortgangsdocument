@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — categoriepagina mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ── categoriepagina — paginaspecifiek, bovenop brand.css ── */
+.cathead{background:var(--bg);border-bottom:1px solid var(--rule);padding:38px 0 34px}
+.cathead h1{font-size:clamp(34px,4.2vw,52px)}
+.cathead .lead{margin-top:14px}
+.catlay{display:grid;grid-template-columns:236px minmax(0,1fr);gap:44px;padding:38px 0 80px}
+.filters{position:sticky;top:96px;align-self:start;display:flex;flex-direction:column;gap:26px}
+.fset h4{font-size:15px;letter-spacing:.06em;padding-bottom:9px;border-bottom:1px solid var(--rule);margin-bottom:11px}
+.fset label{display:flex;align-items:center;gap:10px;padding:5px 0;font-size:14px;color:var(--mute);cursor:pointer}
+.fset label:hover{color:var(--ink)}
+.bx{width:14px;height:14px;border:1.5px solid var(--rule);flex:none;background:#fff}
+.bx.on{background:var(--cyan);border-color:var(--cyan)}
+.fset .num{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--rule)}
+.toolbar{display:flex;align-items:center;gap:18px;flex-wrap:wrap;border-bottom:1px solid var(--rule);padding-bottom:14px;margin-bottom:24px}
+.toolbar .cnt{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.toolbar .cnt b{color:var(--dark)}
+.toolbar .sort{margin-left:auto}
+.parts{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.part{border:1px solid var(--rule);background:#fff;display:flex;flex-direction:column;transition:.15s}
+.part:hover{border-color:var(--dark)}
+.part .im{background:var(--bg);aspect-ratio:4/3;position:relative;display:flex;align-items:center;justify-content:center}
+.part .im .sc{position:absolute;left:12px;bottom:11px;display:flex;align-items:center;gap:6px;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--mute)}
+.part .im .sc i{display:block;width:30px;height:2px;background:var(--rule)}
+.part .bd{padding:16px 16px 18px;border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:6px;flex:1}
+.part h4{font-size:18px;font-weight:700;line-height:1.05}
+.part .sku{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.part .pr{font-family:var(--disp);font-size:22px;font-weight:900;color:var(--dark);letter-spacing:.02em;margin-top:2px}
+.part .pr i{font-style:normal;display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--mute);font-weight:400}
+.part .stk{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#2F7355}
+.part .buy{display:flex;gap:8px;margin-top:auto;padding-top:12px}
+.qty{display:flex;align-items:center;border:1.5px solid var(--rule)}
+.qty span{padding:0 10px;color:var(--mute);cursor:pointer;user-select:none}
+.qty b{padding:8px 10px;font-family:var(--mono);font-size:13px;border-left:1.5px solid var(--rule);border-right:1.5px solid var(--rule)}
+.pager{display:flex;gap:8px;justify-content:center;margin-top:38px}
+.pager a{border:1px solid var(--rule);padding:9px 15px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--mute)}
+.pager a.on{background:var(--dark);border-color:var(--dark);color:#fff}
+.crosslink{border:1px solid var(--rule);padding:26px 30px;margin-top:44px;display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+.crosslink h3{font-size:22px}
+.crosslink p{font-size:14px;color:var(--mute);max-width:52ch;margin-top:6px}
+.crosslink .btn{margin-left:auto}
+@media(max-width:1080px){.catlay{grid-template-columns:1fr;gap:26px}.filters{position:static}.parts{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.parts{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="util">
+  <div class="wrap mono">
+    <div>PROFLITE · DOESBURG · SINDS 1987</div>
+    <div class="r">
+      <a href="#">NL ▾</a>
+      <a href="#">ZAKELIJK ACCOUNT</a>
+      <a href="#">INLOGGEN</a>
+    </div>
+  </div>
+</div>
+
+<header class="main">
+  <div class="wrap">
+    <div class="logo"><em>case</em>Builder.com</div>
+    <form class="search" onsubmit="return false">
+      <input placeholder="Zoek op artikelnummer of onderdeel…">
+      <button>⌕</button>
+    </form>
+    <div class="hdr-r">
+      <div class="lnk"><b>Offerte</b><span>Binnen 4 uur</span></div>
+      <div class="lnk"><b>Winkelwagen</b><span>3 artikelen</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="primary">
+  <div class="wrap">
+    <a href="#">Flightcases</a>
+    <a href="#">Wat ga je vervoeren?</a>
+    <a href="#" class="on">Onderdelen</a>
+    <a href="#" class="sec">Service</a>
+    <div class="tel">Direct advies · <b>+31 (0)575 575734</b></div>
+  </div>
+</nav>
+
+<div class="crumbs">
+  <div class="wrap">
+    <a href="#">Onderdelen</a><span class="sep">/</span>
+    <a href="#">Hoeken</a><span class="sep">/</span>
+    <span>Balhoeken</span>
+  </div>
+</div>
+
+<div class="cathead ruit ruit-aanzet">
+  <div class="wrap">
+    <div class="ey ey-dark">// ONDERDELEN — HOEKEN</div>
+    <h1>Balhoeken</h1>
+    <p class="lead">De balhoek beschermt de kwetsbaarste plek van een case: de hoek waar twee zijden en een rand
+      samenkomen. Kies op de dikte van je plaatmateriaal — 30 mm bij 7 mm plaat, 40 mm bij 9 mm,
+      50 mm voor zwaardere constructies.</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="catlay">
+
+    <aside class="filters">
+      <div class="fset">
+        <h4>Maat</h4>
+        <label><span class="bx on"></span>30 mm<span class="num">4</span></label>
+        <label><span class="bx"></span>40 mm<span class="num">7</span></label>
+        <label><span class="bx"></span>50 mm<span class="num">5</span></label>
+      </div>
+      <div class="fset">
+        <h4>Materiaal</h4>
+        <label><span class="bx"></span>Staal<span class="num">9</span></label>
+        <label><span class="bx"></span>Aluminium<span class="num">4</span></label>
+      </div>
+      <div class="fset">
+        <h4>Afwerking</h4>
+        <label><span class="bx"></span>Verzinkt<span class="num">6</span></label>
+        <label><span class="bx"></span>Zwart gepoedercoat<span class="num">5</span></label>
+        <label><span class="bx"></span>Blank<span class="num">3</span></label>
+      </div>
+      <div class="fset">
+        <h4>Voorraad</h4>
+        <label><span class="bx on"></span>Direct leverbaar<span class="num">12</span></label>
+      </div>
+    </aside>
+
+    <div>
+      <div class="toolbar">
+        <span class="cnt"><b>14</b> artikelen</span>
+        <span class="cnt">Prijzen excl. btw</span>
+        <span class="cnt">Vandaag besteld · morgen verstuurd</span>
+        <div class="chips sort"><span class="chip on">Meest besteld</span><span class="chip">Prijs</span><span class="chip">Maat</span></div>
+      </div>
+
+      <div class="parts">
+
+        <article class="part">
+          <div class="im"><svg width="104" height="80" viewBox="0 0 104 80" fill="none"><path d="M8 72V26A16 16 0 0 1 24 10h72" stroke="#8FA3B0" stroke-width="8" stroke-linecap="square"/><path d="M22 72V33a9 9 0 0 1 9-9h65" stroke="#C3D0D8" stroke-width="5"/><circle cx="36" cy="56" r="4" fill="#8FA3B0"/><circle cx="62" cy="36" r="4" fill="#8FA3B0"/></svg><span class="sc"><i></i>30 MM</span></div>
+          <div class="bd">
+            <h4>Balhoek klein</h4>
+            <span class="sku">EG-0100 · staal verzinkt</span>
+            <span class="pr">€ 0,95<i>€ 1,15 incl. btw</i></span>
+            <span class="stk">Op voorraad</span>
+            <div class="buy"><div class="qty"><span>−</span><b>25</b><span>+</span></div><button class="btn btn-pri btn-sm" style="flex:1;justify-content:center">In wagen</button></div>
+          </div>
+        </article>
+
+        <article class="part">
+          <div class="im"><svg width="104" height="80" viewBox="0 0 104 80" fill="none"><path d="M8 72V26A16 16 0 0 1 24 10h72" stroke="#8FA3B0" stroke-width="9" stroke-linecap="square"/><path d="M22 72V33a9 9 0 0 1 9-9h65" stroke="#C3D0D8" stroke-width="6"/><circle cx="36" cy="56" r="4.5" fill="#8FA3B0"/><circle cx="62" cy="36" r="4.5" fill="#8FA3B0"/></svg><span class="sc"><i></i>40 MM</span></div>
+          <div class="bd">
+            <h4>Balhoek medium</h4>
+            <span class="sku">EG-0105 · staal verzinkt</span>
+            <span class="pr">€ 1,45<i>€ 1,75 incl. btw</i></span>
+            <span class="stk">Op voorraad</span>
+            <div class="buy"><div class="qty"><span>−</span><b>25</b><span>+</span></div><button class="btn btn-pri btn-sm" style="flex:1;justify-content:center">In wagen</button></div>
+          </div>
+        </article>
+
+        <article class="part">
+          <div class="im"><svg width="104" height="80" viewBox="0 0 104 80" fill="none"><path d="M8 72V24A18 18 0 0 1 26 6h70" stroke="#8FA3B0" stroke-width="10" stroke-linecap="square"/><path d="M24 72V32a10 10 0 0 1 10-10h62" stroke="#C3D0D8" stroke-width="7"/><circle cx="38" cy="56" r="5" fill="#8FA3B0"/><circle cx="66" cy="34" r="5" fill="#8FA3B0"/></svg><span class="sc"><i></i>50 MM</span></div>
+          <div class="bd">
+            <h4>Balhoek groot</h4>
+            <span class="sku">EG-0110 · staal verzinkt</span>
+            <span class="pr">€ 1,95<i>€ 2,36 incl. btw</i></span>
+            <span class="stk">Op voorraad</span>
+            <div class="buy"><div class="qty"><span>−</span><b>10</b><span>+</span></div><button class="btn btn-pri btn-sm" style="flex:1;justify-content:center">In wagen</button></div>
+          </div>
+        </article>
+
+        <article class="part">
+          <div class="im"><svg width="104" height="80" viewBox="0 0 104 80" fill="none"><path d="M8 72V26A16 16 0 0 1 24 10h72" stroke="#3A4750" stroke-width="9" stroke-linecap="square"/><path d="M22 72V33a9 9 0 0 1 9-9h65" stroke="#7C8A94" stroke-width="6"/><circle cx="36" cy="56" r="4.5" fill="#3A4750"/><circle cx="62" cy="36" r="4.5" fill="#3A4750"/></svg><span class="sc"><i></i>40 MM</span></div>
+          <div class="bd">
+            <h4>Balhoek medium, zwart</h4>
+            <span class="sku">EG-0106 · gepoedercoat</span>
+            <span class="pr">€ 1,65<i>€ 2,00 incl. btw</i></span>
+            <span class="stk">Op voorraad</span>
+            <div class="buy"><div class="qty"><span>−</span><b>25</b><span>+</span></div><button class="btn btn-pri btn-sm" style="flex:1;justify-content:center">In wagen</button></div>
+          </div>
+        </article>
+
+        <article class="part">
+          <div class="im"><svg width="104" height="80" viewBox="0 0 104 80" fill="none"><path d="M8 72V24A18 18 0 0 1 26 6h70" stroke="#3A4750" stroke-width="10" stroke-linecap="square"/><path d="M24 72V32a10 10 0 0 1 10-10h62" stroke="#7C8A94" stroke-width="7"/><circle cx="38" cy="56" r="5" fill="#3A4750"/><circle cx="66" cy="34" r="5" fill="#3A4750"/></svg><span class="sc"><i></i>50 MM</span></div>
+          <div class="bd">
+            <h4>Balhoek groot, zwart</h4>
+            <span class="sku">EG-0111 · gepoedercoat</span>
+            <span class="pr">€ 2,15<i>€ 2,60 incl. btw</i></span>
+            <span class="stk">Op voorraad</span>
+            <div class="buy"><div class="qty"><span>−</span><b>10</b><span>+</span></div><button class="btn btn-pri btn-sm" style="flex:1;justify-content:center">In wagen</button></div>
+          </div>
+        </article>
+
+        <article class="part">
+          <div class="im"><svg width="104" height="80" viewBox="0 0 104 80" fill="none"><path d="M8 72V26A16 16 0 0 1 24 10h72" stroke="#A9B6BE" stroke-width="9" stroke-linecap="square"/><path d="M22 72V33a9 9 0 0 1 9-9h65" stroke="#D2DCE2" stroke-width="6"/><circle cx="36" cy="56" r="4.5" fill="#A9B6BE"/><circle cx="62" cy="36" r="4.5" fill="#A9B6BE"/></svg><span class="sc"><i></i>40 MM</span></div>
+          <div class="bd">
+            <h4>Balhoek medium, aluminium</h4>
+            <span class="sku">EG-0107 · blank</span>
+            <span class="pr">€ 1,55<i>€ 1,88 incl. btw</i></span>
+            <span class="stk">Op voorraad</span>
+            <div class="buy"><div class="qty"><span>−</span><b>40</b><span>+</span></div><button class="btn btn-pri btn-sm" style="flex:1;justify-content:center">In wagen</button></div>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="pager"><a href="#" class="on">1</a><a href="#">2</a><a href="#">→</a></div>
+
+      <div class="crosslink">
+        <div>
+          <h3>Bouw je een complete case?</h3>
+          <p>Balhoeken werken samen met hoekprofiel 30×30 en popnagels 4×10. In het bouwpakket zitten ze al in de juiste aantallen.</p>
+        </div>
+        <a class="btn btn-out" href="#">Bekijk bouwpakketten →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="logo"><em>case</em>Builder.com</div>
+        <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br>+31 (0)575 575734</p>
+      </div>
+      <div><h5>Flightcases</h5><a href="#">Koffer</a><a href="#">Hoedcase</a><a href="#">Trunccase</a><a href="#">Rackcase enkel</a><a href="#">Rackcase dubbel</a></div>
+      <div><h5>Onderdelen</h5><a href="#">Profielen</a><a href="#">Hoeken</a><a href="#">Sluitingen</a><a href="#">Wielen</a><a href="#">Schuimplastic</a></div>
+      <div><h5>Service</h5><a href="#">Levertijden</a><a href="#">Verzending</a><a href="#">Zaagservice</a><a href="#">Zakelijk bestellen</a><a href="#">Contact</a></div>
+    </div>
+    <div class="bot"><span>© 2026 Proflite BV · KVK 09123456</span><span>Algemene voorwaarden · Privacy</span></div>
+  </div>
+</footer>
+
+</body>
+</html>

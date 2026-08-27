@@ -1,0 +1,189 @@
+/* ══════════════════════════════════════════════════════════════
+   Casebuilder — gedeeld stylesheet voor de mockups
+   Strikt volgens CB-Brandrichtlijnen v1 (Proflite Doesburg 2026)
+   ══════════════════════════════════════════════════════════════ */
+
+:root{
+  /* kleuren — brandbook §03 */
+  --dark:#003352; --blue:#0066A8; --cyan:#66C4E8; --logo:#0093D1;
+  --ink:#1A1A1A; --void:#06121C; --lightblue:#E6EFF6; --bg:#F2F5F9;
+  --rule:#D9DEE5; --mute:#6B7480; --white:#fff;
+  /* fonts — brandbook §01: drie, geen vervangers */
+  --disp:'Barlow Condensed',sans-serif;
+  --body:'DM Sans',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+  --wrap:1280px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);color:var(--ink);background:var(--white);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+/* ── primitieven ─────────────────────────────────────────── */
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 32px}
+.disp{font-family:var(--disp);text-transform:uppercase;letter-spacing:.03em;color:var(--dark);font-weight:900;line-height:.95}
+.mono{font-family:var(--mono);text-transform:uppercase;letter-spacing:.18em;font-size:11px;font-weight:500}
+.ey{font-family:var(--mono);text-transform:uppercase;letter-spacing:.18em;font-size:11px;font-weight:500;color:var(--cyan)}
+.ey-dark{color:var(--blue)}
+.lead{font-size:17px;color:var(--mute);max-width:62ch}
+h1,h2,h3,h4,h5{font-family:var(--disp);text-transform:uppercase;letter-spacing:.02em;color:var(--dark);font-weight:900;line-height:1}
+
+/* blueprint-ruit — brandbook §06 */
+.ruit{position:relative;isolation:isolate}
+.ruit::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background-image:linear-gradient(var(--dark) 1px,transparent 1px),linear-gradient(90deg,var(--dark) 1px,transparent 1px);
+  background-size:28px 28px;opacity:.05}
+.ruit-dark::before{background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);opacity:.07}
+.ruit-veld::before{-webkit-mask-image:radial-gradient(ellipse 70% 75% at 50% 45%,#000 20%,transparent 78%);mask-image:radial-gradient(ellipse 70% 75% at 50% 45%,#000 20%,transparent 78%)}
+.ruit-aanzet::before{-webkit-mask-image:linear-gradient(135deg,#000 0%,transparent 55%);mask-image:linear-gradient(135deg,#000 0%,transparent 55%)}
+
+/* hoekbeslag — alleen op paginaniveau-vlakken */
+.beslag{position:relative}
+.beslag>.hk{position:absolute;width:26px;height:26px;border:1.5px solid var(--cyan);z-index:2;pointer-events:none}
+.beslag>.hk.tl{top:30px;left:30px;border-right:0;border-bottom:0}
+.beslag>.hk.tr{top:30px;right:30px;border-left:0;border-bottom:0}
+.beslag>.hk.bl{bottom:30px;left:30px;border-right:0;border-top:0}
+.beslag>.hk.br{bottom:30px;right:30px;border-left:0;border-top:0}
+.serie{position:absolute;left:32px;bottom:26px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:rgba(255,255,255,.35);z-index:2}
+.topbar{position:absolute;top:26px;left:32px;right:32px;display:flex;justify-content:space-between;
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:rgba(255,255,255,.4);z-index:2;text-transform:uppercase}
+
+/* knoppen */
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--disp);text-transform:uppercase;letter-spacing:.05em;
+  font-weight:700;font-size:16px;padding:15px 26px;border:1.5px solid transparent;cursor:pointer;transition:.15s}
+.btn-pri{background:var(--cyan);color:var(--void)}
+.btn-pri:hover{background:#8ad3ef}
+.btn-ghost{border-color:rgba(255,255,255,.35);color:#fff}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+.btn-dark{background:var(--dark);color:#fff}
+.btn-dark:hover{background:var(--blue)}
+.btn-out{border-color:var(--dark);color:var(--dark);background:transparent}
+.btn-out:hover{background:var(--dark);color:#fff}
+.btn-sm{font-size:14px;padding:11px 18px}
+
+/* ── header ──────────────────────────────────────────────── */
+.util{background:var(--dark);color:rgba(255,255,255,.72)}
+.util .wrap{display:flex;justify-content:space-between;align-items:center;height:34px}
+.util a:hover{color:var(--cyan)}
+.util .r{display:flex;gap:26px}
+header.main{border-bottom:1px solid var(--rule);background:#fff;position:sticky;top:0;z-index:40}
+header.main .wrap{display:flex;align-items:center;gap:36px;height:80px}
+/* wordmark — brandbook §09: "case" cyaan/logoblauw, "Builder.com" zwart.
+   Op donker: volledig uitgekeerd naar wit. */
+.logo{font-family:var(--disp);font-weight:900;font-size:28px;letter-spacing:.01em;color:#000;white-space:nowrap}
+.logo em{font-style:normal;color:var(--logo)}
+.dark .logo,.navy .logo,footer .logo{color:#fff}
+.dark .logo em,.navy .logo em,footer .logo em{color:var(--cyan)}
+.search{flex:1;display:flex;border:1.5px solid var(--rule);height:46px;max-width:520px}
+.search input{flex:1;border:0;padding:0 16px;font-family:var(--body);font-size:14px;outline:0}
+.search input::placeholder{color:var(--mute)}
+.search button{background:var(--dark);color:#fff;border:0;width:52px;cursor:pointer;font-size:16px}
+.hdr-r{margin-left:auto;display:flex;align-items:center;gap:28px}
+.hdr-r .lnk{display:flex;flex-direction:column;line-height:1.15}
+.hdr-r .lnk b{font-family:var(--disp);text-transform:uppercase;font-size:15px;letter-spacing:.04em;color:var(--dark)}
+.hdr-r .lnk span{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+nav.primary{border-bottom:1px solid var(--rule);background:#fff}
+nav.primary .wrap{display:flex;gap:38px;align-items:center;height:52px}
+nav.primary a{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:16px;letter-spacing:.05em;
+  color:var(--dark);height:100%;display:flex;align-items:center;border-bottom:3px solid transparent}
+nav.primary a:hover,nav.primary a.on{border-bottom-color:var(--cyan)}
+nav.primary a.sec{color:var(--mute);font-weight:600}
+nav.primary .tel{margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--mute);text-transform:uppercase}
+nav.primary .tel b{color:var(--dark)}
+
+/* kruimelpad */
+.crumbs{border-bottom:1px solid var(--rule);background:var(--bg)}
+.crumbs .wrap{display:flex;gap:10px;align-items:center;height:44px;font-family:var(--mono);
+  font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.crumbs a:hover{color:var(--dark)}
+.crumbs .sep{color:var(--rule)}
+
+/* ── secties ─────────────────────────────────────────────── */
+section{padding:88px 0}
+section.tight{padding:56px 0}
+.sec-head{margin-bottom:44px}
+.sec-head h2{font-size:clamp(30px,3.4vw,44px);margin:12px 0 14px}
+
+/* donker vlak */
+.dark{background:var(--void);color:#fff}
+.dark h1,.dark h2,.dark h3{color:#fff}
+.dark p{color:rgba(255,255,255,.78)}
+.navy{background:var(--dark);color:#fff}
+.navy h1,.navy h2,.navy h3{color:#fff}
+.navy p{color:rgba(255,255,255,.8)}
+
+/* chips */
+.chips{display:flex;gap:9px;flex-wrap:wrap}
+.chip{border:1px solid var(--rule);padding:8px 15px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--mute);cursor:pointer;background:#fff;transition:.12s}
+.chip:hover,.chip.on{border-color:var(--cyan);color:var(--dark)}
+
+/* zoekveld groot */
+.field{display:flex;border:1.5px solid var(--dark);height:62px}
+.field input{flex:1;border:0;padding:0 20px;font-family:var(--body);font-size:16px;outline:0}
+.field button{background:var(--dark);color:#fff;border:0;padding:0 30px;cursor:pointer;
+  font-family:var(--disp);text-transform:uppercase;font-weight:700;letter-spacing:.05em;font-size:15px}
+
+/* casekaart */
+.cases{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
+.case{border:1px solid var(--rule);background:#fff;display:flex;flex-direction:column;transition:.15s}
+.case:hover{border-color:var(--dark)}
+.case .im{background:var(--bg);aspect-ratio:1;display:flex;align-items:center;justify-content:center;padding:14px}
+.case .bd{padding:18px 18px 22px;border-top:1px solid var(--rule)}
+.case h4{font-size:18px;font-weight:700;line-height:1.05}
+.case .d{font-size:13px;color:var(--mute);margin-top:7px;min-height:36px}
+.case .pr{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--dark);margin-top:12px;text-transform:uppercase}
+.case .pr b{font-family:var(--disp);font-size:19px;letter-spacing:.02em}
+.case .pr i{font-style:normal;color:var(--mute);font-size:9.5px;display:block;margin-top:2px}
+
+/* specificatietabel */
+.spec{width:100%;border-collapse:collapse}
+.spec th,.spec td{text-align:left;padding:11px 0;border-bottom:1px solid var(--rule);font-size:14px}
+.spec th{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-weight:500;width:42%}
+.spec td b{font-family:var(--disp);text-transform:uppercase;letter-spacing:.03em;font-size:16px;color:var(--dark)}
+
+/* footer */
+footer{background:var(--void);color:rgba(255,255,255,.66);padding:64px 0 30px}
+footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:44px}
+footer h5{font-size:15px;letter-spacing:.06em;color:#fff;font-weight:700;
+  border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:9px;margin-bottom:15px}
+footer a{display:block;padding:5px 0;font-size:14px}
+footer a:hover{color:var(--cyan)}
+footer .adr{font-size:14px;line-height:1.8}
+footer .bot{border-top:1px solid rgba(255,255,255,.15);margin-top:44px;padding-top:20px;display:flex;
+  justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+
+/* annotatielaag — hoort niet bij het merk, alleen bij de mockup */
+.note{background:#fffbe6;border-left:3px solid #e0b400;padding:12px 18px;font-size:13px;
+  font-family:var(--mono);letter-spacing:.03em;color:#6b5600;line-height:1.6}
+.note b{color:#4a3b00}
+
+/* ── responsive ──────────────────────────────────────────── */
+@media(max-width:1080px){
+  .cases{grid-template-columns:repeat(3,1fr)}
+  footer .cols{grid-template-columns:1fr 1fr}
+}
+@media(max-width:760px){
+  .wrap{padding:0 18px}
+  section{padding:56px 0}
+  .cases{grid-template-columns:repeat(2,1fr)}
+  .search,.hdr-r{display:none}
+  .util .wrap>div:first-child{display:none}
+  .util .r{gap:16px}
+  .util .mono,.util .r a{font-size:9px;letter-spacing:.1em}
+  nav.primary .wrap{overflow-x:auto;gap:22px;-webkit-overflow-scrolling:touch}
+  nav.primary a{white-space:nowrap;font-size:14px}
+  nav.primary .tel{display:none}
+  .topbar{font-size:8.5px;letter-spacing:.1em;left:18px;right:18px}
+  .beslag>.hk{width:16px;height:16px}
+  .beslag>.hk.tl,.beslag>.hk.tr{top:16px}
+  .beslag>.hk.bl,.beslag>.hk.br{bottom:16px}
+  .beslag>.hk.tl,.beslag>.hk.bl{left:16px}
+  .beslag>.hk.tr,.beslag>.hk.br{right:16px}
+  .serie{left:18px}
+  .field{height:54px}
+  .field button{padding:0 18px;font-size:13px}
+  footer .cols{grid-template-columns:1fr;gap:28px}
+  footer .bot{flex-direction:column;gap:8px}
+}

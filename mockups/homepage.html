@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — homepage mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --dark:#003352; --blue:#0066A8; --cyan:#66C4E8; --logo:#0093D1;
+  --ink:#1A1A1A; --void:#06121C; --lightblue:#E6EFF6; --bg:#F2F5F9;
+  --rule:#D9DEE5; --mute:#6B7480; --white:#fff;
+  --disp:'Barlow Condensed',sans-serif;
+  --body:'DM Sans',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+  --wrap:1280px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);color:var(--ink);background:var(--white);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+/* ---------- primitieven ---------- */
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 32px}
+.disp{font-family:var(--disp);text-transform:uppercase;letter-spacing:.03em;color:var(--dark);font-weight:900;line-height:.95}
+.mono{font-family:var(--mono);text-transform:uppercase;letter-spacing:.18em;font-size:11px;font-weight:500}
+.ey{font-family:var(--mono);text-transform:uppercase;letter-spacing:.18em;font-size:11px;font-weight:500;color:var(--cyan)}
+.lead{font-size:17px;color:var(--mute);max-width:62ch}
+
+/* blueprint-ruit */
+.ruit{position:relative;isolation:isolate}
+.ruit::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background-image:linear-gradient(var(--dark) 1px,transparent 1px),linear-gradient(90deg,var(--dark) 1px,transparent 1px);
+  background-size:28px 28px;opacity:.05;
+}
+.ruit-dark::before{background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);opacity:.07}
+/* ruit-veld: vol in het midden, schoon naar de randen */
+.ruit-veld::before{-webkit-mask-image:radial-gradient(ellipse 70% 75% at 50% 45%,#000 20%,transparent 78%);mask-image:radial-gradient(ellipse 70% 75% at 50% 45%,#000 20%,transparent 78%)}
+/* ruit-aanzet: zet aan in een hoek en vloeit uit */
+.ruit-aanzet::before{-webkit-mask-image:linear-gradient(135deg,#000 0%,transparent 55%);mask-image:linear-gradient(135deg,#000 0%,transparent 55%)}
+
+/* hoekbeslag — alleen op paginaniveau-vlakken */
+.beslag{position:relative}
+.beslag>.hk{position:absolute;width:26px;height:26px;border:1.5px solid var(--cyan);z-index:2;pointer-events:none}
+.beslag>.hk.tl{top:30px;left:30px;border-right:0;border-bottom:0}
+.beslag>.hk.tr{top:30px;right:30px;border-left:0;border-bottom:0}
+.beslag>.hk.bl{bottom:30px;left:30px;border-right:0;border-top:0}
+.beslag>.hk.br{bottom:30px;right:30px;border-left:0;border-top:0}
+
+/* knoppen */
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--disp);text-transform:uppercase;letter-spacing:.05em;
+  font-weight:700;font-size:16px;padding:15px 26px;border:1.5px solid transparent;cursor:pointer;transition:.15s}
+.btn-pri{background:var(--cyan);color:var(--void)}
+.btn-pri:hover{background:#8ad3ef}
+.btn-ghost{border-color:rgba(255,255,255,.35);color:#fff}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+.btn-dark{background:var(--dark);color:#fff}
+.btn-dark:hover{background:var(--blue)}
+.btn-out{border-color:var(--dark);color:var(--dark)}
+.btn-out:hover{background:var(--dark);color:#fff}
+
+/* ---------- header ---------- */
+.util{background:var(--dark);color:rgba(255,255,255,.72)}
+.util .wrap{display:flex;justify-content:space-between;align-items:center;height:34px}
+.util a:hover{color:var(--cyan)}
+.util .r{display:flex;gap:26px}
+
+header.main{border-bottom:1px solid var(--rule);background:#fff;position:sticky;top:0;z-index:40}
+header.main .wrap{display:flex;align-items:center;gap:36px;height:80px}
+.logo{font-family:var(--disp);font-weight:900;font-size:28px;letter-spacing:.01em;color:var(--dark);white-space:nowrap}
+.logo em{font-style:normal;color:var(--logo)}
+.search{flex:1;display:flex;border:1.5px solid var(--rule);height:46px;max-width:520px}
+.search input{flex:1;border:0;padding:0 16px;font-family:var(--body);font-size:14px;outline:0}
+.search input::placeholder{color:var(--mute)}
+.search button{background:var(--dark);color:#fff;border:0;width:52px;cursor:pointer;font-size:16px}
+.hdr-r{margin-left:auto;display:flex;align-items:center;gap:28px}
+.hdr-r .lnk{display:flex;flex-direction:column;line-height:1.15}
+.hdr-r .lnk b{font-family:var(--disp);text-transform:uppercase;font-size:15px;letter-spacing:.04em;color:var(--dark)}
+.hdr-r .lnk span{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+
+nav.primary{border-bottom:1px solid var(--rule);background:#fff}
+nav.primary .wrap{display:flex;gap:38px;align-items:center;height:52px}
+nav.primary a{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:16px;letter-spacing:.05em;
+  color:var(--dark);height:100%;display:flex;align-items:center;border-bottom:3px solid transparent}
+nav.primary a:hover{border-bottom-color:var(--cyan)}
+nav.primary a.sec{color:var(--mute);font-weight:600}
+nav.primary .tel{margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--mute);text-transform:uppercase}
+nav.primary .tel b{color:var(--dark)}
+
+/* ---------- hero ---------- */
+.hero{background:var(--void);color:#fff;position:relative;overflow:hidden}
+.hero .wrap{padding-top:96px;padding-bottom:80px;position:relative;z-index:1}
+.hero h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:.02em;
+  font-size:clamp(46px,6.2vw,86px);line-height:.92;color:#fff;max-width:15ch;margin:18px 0 0}
+.hero h1 .acc{color:var(--cyan)}
+.hero p.sub{margin-top:22px;max-width:56ch;font-size:18px;color:rgba(255,255,255,.78)}
+.hero .cta{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap}
+.hero .specs{display:flex;gap:0;margin-top:64px;border-top:1px solid rgba(255,255,255,.18);flex-wrap:wrap}
+.hero .specs div{flex:1;min-width:200px;padding:20px 24px 0 0}
+.hero .specs .k{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--cyan);text-transform:uppercase}
+.hero .specs .v{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:19px;letter-spacing:.03em;margin-top:6px;color:#fff}
+.serie{position:absolute;left:32px;bottom:26px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:rgba(255,255,255,.35);z-index:2}
+.hero-topbar{position:absolute;top:26px;left:32px;right:32px;display:flex;justify-content:space-between;
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:rgba(255,255,255,.4);z-index:2;text-transform:uppercase}
+
+/* ---------- secties ---------- */
+section{padding:88px 0}
+.sec-head{margin-bottom:44px}
+.sec-head h2{font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:.02em;
+  font-size:clamp(30px,3.4vw,44px);line-height:1;color:var(--dark);margin:12px 0 14px}
+
+/* drie ingangen */
+.ingangen{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.ing{background:#fff;padding:38px 32px 34px;display:flex;flex-direction:column;min-height:330px;transition:.15s}
+.ing:hover{background:var(--lightblue)}
+.ing .n{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--cyan)}
+.ing h3{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:26px;letter-spacing:.03em;
+  color:var(--dark);margin:16px 0 12px;line-height:1.05}
+.ing p{font-size:15px;color:var(--mute);flex:1}
+.ing .go{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:15px;letter-spacing:.05em;
+  color:var(--blue);margin-top:22px;display:flex;align-items:center;gap:9px}
+.ing:hover .go{color:var(--dark)}
+
+/* fit-finder */
+.fit{background:var(--lightblue)}
+.fit .box{background:#fff;border:1px solid var(--rule);padding:46px 44px}
+.fit .field{display:flex;border:1.5px solid var(--dark);height:62px;margin-top:26px;max-width:660px}
+.fit .field input{flex:1;border:0;padding:0 20px;font-family:var(--body);font-size:16px;outline:0}
+.fit .field button{background:var(--dark);color:#fff;border:0;padding:0 30px;cursor:pointer;
+  font-family:var(--disp);text-transform:uppercase;font-weight:700;letter-spacing:.05em;font-size:15px}
+.chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+.chip{border:1px solid var(--rule);padding:8px 15px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--mute);cursor:pointer;background:#fff}
+.chip:hover{border-color:var(--cyan);color:var(--dark)}
+
+/* casetypes */
+.cases{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
+.case{border:1px solid var(--rule);background:#fff;display:flex;flex-direction:column;transition:.15s}
+.case:hover{border-color:var(--dark)}
+.case .im{background:var(--bg);aspect-ratio:1;display:flex;align-items:center;justify-content:center;padding:14px}
+.case .bd{padding:18px 18px 22px;border-top:1px solid var(--rule)}
+.case h4{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:18px;letter-spacing:.03em;color:var(--dark);line-height:1.05}
+.case .d{font-size:13px;color:var(--mute);margin-top:7px;min-height:36px}
+.case .pr{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--dark);margin-top:12px;text-transform:uppercase}
+.case .pr b{font-family:var(--disp);font-size:19px;letter-spacing:.02em}
+.case .pr i{font-style:normal;color:var(--mute);font-size:9.5px;display:block;margin-top:2px}
+
+/* geruststelling */
+.assure{background:var(--dark);color:#fff}
+.assure .grid{display:grid;grid-template-columns:1.15fr 1fr;gap:70px;align-items:center}
+.assure h2{font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:.02em;
+  font-size:clamp(30px,3.4vw,46px);line-height:1;color:#fff;margin:14px 0 18px}
+.assure p{color:rgba(255,255,255,.8);font-size:17px;max-width:52ch}
+.assure .steps{border-left:1px solid rgba(255,255,255,.2);padding-left:34px}
+.assure .st{display:flex;gap:18px;padding:16px 0}
+.assure .st+.st{border-top:1px solid rgba(255,255,255,.14)}
+.assure .st .i{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--cyan);padding-top:4px;white-space:nowrap}
+.assure .st b{font-family:var(--disp);text-transform:uppercase;font-size:17px;letter-spacing:.03em;font-weight:700;display:block}
+.assure .st span{font-size:14px;color:rgba(255,255,255,.68)}
+
+/* onderdelen — gedegradeerd */
+.parts{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--bg)}
+.parts .row{display:flex;align-items:center;gap:44px;flex-wrap:wrap}
+.parts h3{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:24px;letter-spacing:.03em;color:var(--dark)}
+.parts p{font-size:14.5px;color:var(--mute);max-width:44ch;margin-top:6px}
+.parts .cats{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}
+.parts .cats a{border:1px solid var(--rule);background:#fff;padding:9px 14px;font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.parts .cats a:hover{border-color:var(--dark);color:var(--dark)}
+
+/* trust */
+.trust .row{display:flex;gap:60px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.trust .score{display:flex;align-items:baseline;gap:12px}
+.trust .score b{font-family:var(--disp);font-size:52px;font-weight:900;color:var(--dark);line-height:1}
+.trust .score span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:36px}
+.q{border-left:2px solid var(--cyan);padding-left:20px}
+.q p{font-size:14.5px;color:var(--ink)}
+.q cite{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-style:normal;display:block;margin-top:9px}
+
+/* footer */
+footer{background:var(--void);color:rgba(255,255,255,.66);padding:64px 0 30px}
+footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:44px}
+footer h5{font-family:var(--disp);text-transform:uppercase;font-size:15px;letter-spacing:.06em;color:#fff;
+  border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:9px;margin-bottom:15px}
+footer a{display:block;padding:5px 0;font-size:14px}
+footer a:hover{color:var(--cyan)}
+footer .adr{font-size:14px;line-height:1.8}
+footer .bot{border-top:1px solid rgba(255,255,255,.15);margin-top:44px;padding-top:20px;display:flex;
+  justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+
+/* annotatie-laag voor de mockup zelf */
+.note{position:relative;background:#fffbe6;border-left:3px solid #e0b400;padding:12px 18px;font-size:13px;
+  font-family:var(--mono);letter-spacing:.03em;color:#6b5600;text-transform:none}
+.note b{color:#4a3b00}
+
+@media(max-width:1080px){
+  .cases{grid-template-columns:repeat(3,1fr)}
+  .assure .grid{grid-template-columns:1fr;gap:40px}
+  footer .cols{grid-template-columns:1fr 1fr}
+}
+@media(max-width:760px){
+  .wrap{padding:0 18px}
+  .ingangen{grid-template-columns:1fr}
+  .cases{grid-template-columns:repeat(2,1fr)}
+  .quotes{grid-template-columns:1fr}
+  .search,.hdr-r{display:none}
+  section{padding:56px 0}
+  /* mono-balk: tracking + vaste tekst maken 'm breder dan de viewport */
+  .util .wrap>div:first-child{display:none}
+  .util .r{gap:16px}
+  .util .mono,.util .r a{font-size:9px;letter-spacing:.1em}
+  /* nav mag horizontaal scrollen i.p.v. de pagina oprekken */
+  nav.primary .wrap{overflow-x:auto;gap:22px;-webkit-overflow-scrolling:touch}
+  nav.primary a{white-space:nowrap;font-size:14px}
+  nav.primary .tel{display:none}
+  .hero .wrap{padding-top:56px;padding-bottom:52px}
+  .hero .specs div{min-width:50%;padding-right:12px}
+  .hero-topbar{font-size:8.5px;letter-spacing:.1em;left:18px;right:18px}
+  .beslag>.hk{width:16px;height:16px}
+  .beslag>.hk.tl,.beslag>.hk.tr{top:16px}
+  .beslag>.hk.bl,.beslag>.hk.br{bottom:16px}
+  .beslag>.hk.tl,.beslag>.hk.bl{left:16px}
+  .beslag>.hk.tr,.beslag>.hk.br{right:16px}
+  .serie{left:18px}
+  .fit .box{padding:28px 20px}
+  .fit .field{height:54px}
+  .fit .field button{padding:0 18px;font-size:13px}
+  .assure .steps{padding-left:20px}
+  .parts .cats{margin-left:0;margin-top:18px}
+  footer .cols{grid-template-columns:1fr;gap:28px}
+  footer .bot{flex-direction:column;gap:8px}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ HEADER ══════════ -->
+<div class="util">
+  <div class="wrap mono">
+    <div>PROFLITE · DOESBURG · SINDS 1987</div>
+    <div class="r">
+      <a href="#">NL ▾</a>
+      <a href="#">ZAKELIJK ACCOUNT</a>
+      <a href="#">INLOGGEN</a>
+    </div>
+  </div>
+</div>
+
+<header class="main">
+  <div class="wrap">
+    <div class="logo"><em>case</em>Builder.com</div>
+    <form class="search" onsubmit="return false">
+      <input placeholder="Zoek op case, onderdeel of apparatuur…">
+      <button>⌕</button>
+    </form>
+    <div class="hdr-r">
+      <div class="lnk"><b>Offerte</b><span>Binnen 4 uur</span></div>
+      <div class="lnk"><b>Winkelwagen</b><span>0 artikelen</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="primary">
+  <div class="wrap">
+    <a href="#cases">Flightcases</a>
+    <a href="#fit">Wat ga je vervoeren?</a>
+    <a href="#" class="sec">Onderdelen</a>
+    <a href="#" class="sec">Service</a>
+    <div class="tel">Direct advies · <b>+31 (0)575 575734</b></div>
+  </div>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<div class="hero ruit ruit-dark ruit-veld beslag">
+  <span class="hk tl"></span><span class="hk tr"></span><span class="hk bl"></span><span class="hk br"></span>
+  <div class="hero-topbar"><span>// 01 — FLIGHTCASES OP MAAT</span><span>PROFLITE · DOESBURG · 2026</span></div>
+  <div class="wrap">
+    <div class="ey">// GEEN OFFERTETRAJECT · GEEN WACHTTIJD</div>
+    <h1>Je flightcase staat <span class="acc">over tien dagen</span> op de kade</h1>
+    <p class="sub">Configureer online tot op de millimeter, zie meteen wat het kost, en laat je maten
+      gratis controleren door een casebouwer voordat je bestelt.</p>
+    <div class="cta">
+      <a class="btn btn-pri" href="#">Start met configureren →</a>
+      <a class="btn btn-ghost" href="#fit">Wat ga je vervoeren?</a>
+    </div>
+    <div class="specs">
+      <div><div class="k">// LEVERTIJD</div><div class="v">10 werkdagen</div></div>
+      <div><div class="k">// PRIJS</div><div class="v">Direct zichtbaar</div></div>
+      <div><div class="k">// UITVOERING</div><div class="v">Bouwpakket of kant-en-klaar</div></div>
+      <div><div class="k">// CONTROLE</div><div class="v">Specialist kijkt mee</div></div>
+    </div>
+  </div>
+  <div class="serie">CB-2026-0001</div>
+</div>
+
+<!-- ══════════ DRIE INGANGEN ══════════ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ey">// 02 — WAAR BEGIN JE?</div>
+      <h2>Drie manieren om bij de juiste case te komen</h2>
+      <p class="lead">Je hoeft niet te weten hoe een flightcase heet om er een te bestellen.</p>
+    </div>
+    <div class="ingangen">
+      <a class="ing" href="#cases">
+        <div class="n">// 01</div>
+        <h3>Ik weet welke case ik nodig heb</h3>
+        <p>Kies je model, vul je maten in en bestel. Voor wie dit vaker doet — je configuratie
+           staat in je account, dus de volgende is een kwestie van dupliceren.</p>
+        <div class="go">Naar de modellen →</div>
+      </a>
+      <a class="ing" href="#fit">
+        <div class="n">// 02</div>
+        <h3>Ik weet wat erin moet</h3>
+        <p>Zeg welke apparatuur of welk instrument je vervoert. Wij bepalen het casetype
+           en de binnenmaat, jij controleert het.</p>
+        <div class="go">Zoek op apparatuur →</div>
+      </a>
+      <a class="ing" href="#assure">
+        <div class="n">// 03</div>
+        <h3>Ik wil er eerst iemand over spreken</h3>
+        <p>Logisch bij een case die dure apparatuur moet beschermen. Stel je configuratie samen
+           en laat een casebouwer meekijken voordat er iets besteld wordt.</p>
+        <div class="go">Zo werkt dat →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FIT-FINDER ══════════ -->
+<section class="fit" id="fit">
+  <div class="wrap">
+    <div class="box ruit ruit-aanzet">
+      <div class="ey">// 03 — ZOEK OP WAT JE VERVOERT</div>
+      <h2 class="disp" style="font-size:clamp(30px,3.4vw,44px);margin:12px 0 14px">Wat moet er beschermd worden?</h2>
+      <p class="lead">Typ je apparatuur, instrument of machine. Wij zoeken de bijbehorende binnenmaat erbij —
+        je hoeft zelf niets op te meten.</p>
+      <form class="field" onsubmit="return false">
+        <input placeholder="bijv. Gibson Les Paul, 19&quot; rack 6HE, CNC-meetunit…">
+        <button>Zoeken</button>
+      </form>
+      <div class="chips">
+        <span class="chip">Gibson Les Paul</span>
+        <span class="chip">Fender Stratocaster</span>
+        <span class="chip">19&quot; rack — 6 HE</span>
+        <span class="chip">LED-paneel 500×500</span>
+        <span class="chip">Moving head</span>
+        <span class="chip">Mengtafel 32 kanalen</span>
+        <span class="chip">Meetapparatuur</span>
+        <span class="chip">Ik heb CAD-maten</span>
+      </div>
+      <div class="note" style="margin-top:28px">
+        <b>Mockup-notitie:</b> dit blok is de grootste aanname in het ontwerp. Het werkt alleen met een
+        apparatuur-datamodel (model → afmetingen → casetype). Zie frontend-plan.md §8 — begin met één
+        categorie helemaal af, niet alles half.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CASETYPES ══════════ -->
+<section id="cases">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ey">// 04 — MODELLEN</div>
+      <h2>Vijf modellen, elk volledig op maat</h2>
+      <p class="lead">De prijs hieronder is de basisuitvoering. Afmetingen, kleur, beslag en wielen
+        stel je zelf samen — de prijs loopt live mee.</p>
+    </div>
+    <div class="cases">
+      <a class="case" href="#">
+        <div class="im"><img src="assets/flightcase-koffer.jpg" alt="Koffer"></div>
+        <div class="bd">
+          <h4>Koffer</h4>
+          <div class="d">Draagbare transportkoffer</div>
+          <div class="pr">vanaf <b>€ 149,50</b><i>€ 180,90 incl. btw</i></div>
+        </div>
+      </a>
+      <a class="case" href="#">
+        <div class="im"><img src="assets/flightcase-hoedcase.jpg" alt="Hoedcase"></div>
+        <div class="bd">
+          <h4>Hoedcase</h4>
+          <div class="d">Case met afneembaar deksel</div>
+          <div class="pr">vanaf <b>€ 167,75</b><i>€ 202,98 incl. btw</i></div>
+        </div>
+      </a>
+      <a class="case" href="#">
+        <div class="im"><img src="assets/flightcase-trunccase.jpg" alt="Trunccase"></div>
+        <div class="bd">
+          <h4>Trunccase</h4>
+          <div class="d">Universele flightcase op wielen</div>
+          <div class="pr">vanaf <b>€ 212,40</b><i>€ 257,00 incl. btw</i></div>
+        </div>
+      </a>
+      <a class="case" href="#">
+        <div class="im"><img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt="Rackcase enkel"></div>
+        <div class="bd">
+          <h4>Rackcase enkel</h4>
+          <div class="d">Rackcase met afneembaar voordeksel</div>
+          <div class="pr">vanaf <b>€ 189,75</b><i>€ 229,60 incl. btw</i></div>
+        </div>
+      </a>
+      <a class="case" href="#">
+        <div class="im"><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt="Rackcase dubbel"></div>
+        <div class="bd">
+          <h4>Rackcase dubbel</h4>
+          <div class="d">Voor- en achterdeksel afneembaar</div>
+          <div class="pr">vanaf <b>€ 224,30</b><i>€ 271,40 incl. btw</i></div>
+        </div>
+      </a>
+    </div>
+    <div class="note" style="margin-top:24px">
+      <b>Mockup-notitie:</b> prijzen excl. btw leidend, incl. eronder — omgekeerd aan de huidige site
+      (besluit B2B-leidend). Alleen de rackcase-prijs is echt (€ 189,75); de overige vier zijn plaatsvervangers.
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ GERUSTSTELLING ══════════ -->
+<section class="assure ruit ruit-dark ruit-aanzet" id="assure">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <div class="ey">// 05 — VOOR JE BESTELT</div>
+        <h2>Laat je configuratie controleren</h2>
+        <p>Een case van een paar honderd euro die apparatuur van tienduizenden moet beschermen —
+          daar wil je niet alleen voor tekenen. Klaar met configureren? Laat een casebouwer
+          je maten nakijken voordat er iets in productie gaat. Kost niets en je zit nergens aan vast.</p>
+        <div class="cta" style="margin-top:32px">
+          <a class="btn btn-pri" href="#">Configuratie laten nakijken</a>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="st"><div class="i">// 01</div><div><b>Jij configureert</b><span>Model, maten, uitvoering, beslag — zo ver als je komt.</span></div></div>
+        <div class="st"><div class="i">// 02</div><div><b>Wij kijken mee</b><span>Een casebouwer controleert maten, gewicht en beslag op haalbaarheid.</span></div></div>
+        <div class="st"><div class="i">// 03</div><div><b>Je hoort het binnen 4 uur</b><span>Akkoord, of een voorstel met wat er beter kan. Per mail of telefonisch.</span></div></div>
+        <div class="st"><div class="i">// 04</div><div><b>Jij beslist</b><span>Pas daarna bestel je. Of niet — ook prima.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ONDERDELEN (gedegradeerd) ══════════ -->
+<section class="parts" style="padding:44px 0">
+  <div class="wrap">
+    <div class="row">
+      <div>
+        <h3>Losse onderdelen</h3>
+        <p>Profielen, hoeken, beslag, schuim en 19″-artikelen — voor reparatie en eigen bouw.</p>
+      </div>
+      <div class="cats">
+        <a href="#">Profielen</a><a href="#">Hoeken</a><a href="#">Handgrepen</a>
+        <a href="#">Sluitingen</a><a href="#">Wielen</a><a href="#">Schuim</a>
+        <a href="#">19&quot; artikelen</a><a href="#">Alle onderdelen →</a>
+      </div>
+    </div>
+    <div class="note" style="margin-top:22px">
+      <b>Mockup-notitie:</b> onderdelen zijn hier bewust gedegradeerd — één strook laag op de pagina in plaats
+      van het megamenu links in de navigatiebalk. Wel volledig vindbaar via zoek, account en deze links.
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ TRUST ══════════ -->
+<section class="trust">
+  <div class="wrap">
+    <div class="row">
+      <div>
+        <div class="ey">// 06 — WAT KLANTEN ZEGGEN</div>
+        <h2 class="disp" style="font-size:clamp(28px,3vw,38px);margin-top:12px">Al 39 jaar de cases achter de tour</h2>
+      </div>
+      <div class="score">
+        <b>4,63</b>
+        <span>eKomi · 1.240 beoordelingen<br>Thuiswinkel Waarborg</span>
+      </div>
+    </div>
+    <div class="quotes">
+      <div class="q"><p>"Super nette en professionele afwerking."</p><cite>08-04-2026 · geverifieerd</cite></div>
+      <div class="q"><p>"Snelle levering, maten klopten tot op de millimeter."</p><cite>12-02-2026 · geverifieerd</cite></div>
+      <div class="q"><p>"Even gebeld over de binnenmaat, direct iemand aan de lijn die het snapte."</p><cite>28-01-2026 · geverifieerd</cite></div>
+    </div>
+    <div class="note" style="margin-top:26px">
+      <b>Mockup-notitie:</b> trustmarks staan bewust laag op de pagina in plaats van in de hero
+      (besluit B2B-leidend). De eerste twee citaten zijn echt van de live site; het derde is fictief.
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="logo" style="color:#fff;font-size:24px"><em style="color:var(--cyan)">case</em>Builder.com</div>
+        <div class="adr" style="margin-top:16px">
+          Casebuilder Proflite B.V.<br>
+          Broekhuizerweg 3, Doesburg<br>
+          +31 (0) 575 575734<br>
+          info@casebuilder.com
+        </div>
+      </div>
+      <div>
+        <h5>Cases</h5>
+        <a href="#">Koffer</a><a href="#">Hoedcase</a><a href="#">Trunccase</a>
+        <a href="#">Rackcase enkel</a><a href="#">Rackcase dubbel</a>
+      </div>
+      <div>
+        <h5>Service</h5>
+        <a href="#">Klantenservice</a><a href="#">Verzendkosten</a>
+        <a href="#">Zaagservice</a><a href="#">Contact opnemen</a>
+      </div>
+      <div>
+        <h5>Zakelijk</h5>
+        <a href="#">Zakelijk account</a><a href="#">Offerte aanvragen</a>
+        <a href="#">Grotere series</a><a href="#">Over Casebuilder</a>
+      </div>
+    </div>
+    <div class="bot">
+      <span>CB-2026-0001 · HOMEPAGE · MOCKUP V1</span>
+      <span>Proflite Doesburg 2026</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

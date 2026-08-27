@@ -1,0 +1,1898 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="CaseBuilder — de live sitestructuur naast de nieuwe frontend, met templateverdeling, besteltaken en openstaande vragen.">
+<title>Sitemap nu vs straks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap">
+<style>
+  /* reset */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; }
+  img, svg, video { max-width: 100%; height: auto; display: block; }
+  button { font: inherit; color: inherit; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  }
+
+  .flow { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px; align-items:stretch; }
+  .stage { background:var(--surface); border:1px solid var(--line); border-radius:3px; padding:16px 18px;
+    display:flex; flex-direction:column; gap:8px; }
+  .stage.ours { border-color:var(--accent); border-top:3px solid var(--accent); }
+  .stage.theirs { border-top:3px solid var(--line); }
+  .stage h4 { font-family:"Barlow Condensed",sans-serif; font-size:18px; font-weight:600; margin:0; color:var(--ink); }
+  .stage .who { font-family:"IBM Plex Mono",monospace; font-size:9.5px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--faint); }
+  .stage ul { margin:0; padding-left:16px; font-size:13px; color:var(--muted); line-height:1.65; }
+  .stage.ours .who { color:var(--accent); }
+
+  .layers { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; }
+  .layer { background:var(--surface); border:1px solid var(--line); border-radius:3px; padding:17px 20px;
+    display:flex; flex-direction:column; gap:7px; }
+  .layer .tool { font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--accent); }
+  .layer h4 { font-family:"Barlow Condensed",sans-serif; font-size:19px; font-weight:600; margin:0; }
+  .layer p { font-size:13.5px; color:var(--muted); }
+
+  .qlist { display:flex; flex-direction:column; gap:1px; background:var(--line);
+    border:1px solid var(--line); border-radius:3px; overflow:hidden; }
+  .q { background:var(--surface); display:grid; grid-template-columns:34px 1fr; }
+  .q .n { font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--faint);
+    padding:15px 0 15px 14px; font-variant-numeric:tabular-nums; }
+  .q .body { padding:15px 20px 15px 8px; display:flex; flex-direction:column; gap:5px; }
+  .q .qq { font-size:15px; font-weight:600; }
+  .q .why { font-size:13.5px; color:var(--muted); }
+  .q .src { font-family:"IBM Plex Mono",monospace; font-size:10.5px; color:var(--faint); }
+
+  .track { display:flex; flex-direction:column; gap:1px; background:var(--line);
+    border:1px solid var(--line); border-radius:3px; overflow:hidden; }
+  .item { background:var(--surface); display:grid; grid-template-columns:96px 1fr auto; gap:0; align-items:baseline; }
+  @media (max-width:700px){ .item { grid-template-columns:1fr; gap:4px; padding-bottom:8px; } }
+  .item .when { font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--faint);
+    padding:13px 0 13px 16px; white-space:nowrap; }
+  .item .what { padding:13px 16px 13px 10px; font-size:14.5px; }
+  .item .what small { display:block; font-size:12.5px; color:var(--muted); margin-top:2px; }
+  .item .st { padding:13px 16px; }
+  @media (max-width:700px){ .item .when, .item .what, .item .st { padding:2px 16px; } .item .when { padding-top:12px; } }
+
+  .miles { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:12px; }
+  .mile { background:var(--surface); border:1px solid var(--line); border-radius:3px;
+    padding:15px 18px; display:flex; gap:12px; align-items:baseline; }
+  .mile .mn { font-family:"IBM Plex Mono",monospace; font-size:12px; font-weight:600; color:var(--accent);
+    background:var(--accent-bg); border-radius:2px; padding:3px 7px; flex:none; }
+  .mile .mt { font-size:14px; }
+
+  /* ---------- wireframes ---------- */
+  .wfgrid { display:flex; flex-direction:column; gap:32px; }
+  .wf { margin:0; display:flex; flex-direction:column; gap:10px; scroll-margin-top:24px; }
+  .wf figcaption { display:flex; flex-wrap:wrap; align-items:baseline; gap:12px; }
+  .wf figcaption h3 { font-family:"IBM Plex Mono",monospace; font-size:15px; font-weight:600; color:var(--primary); }
+  .wf figcaption .wfmeta { font-size:13px; color:var(--muted); }
+  .wfframe { border:1px solid var(--line); border-radius:3px; overflow:hidden; background:var(--surface-2); }
+  .wfurl { font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--faint);
+    padding:7px 12px; background:var(--surface); border-bottom:1px solid var(--line); }
+  .wfpage { padding:12px; display:flex; flex-direction:column; gap:8px; }
+  .wfrow { display:flex; gap:8px; align-items:stretch; }
+  .wfcol { display:flex; flex-direction:column; gap:8px; flex:1 1 0; min-width:0; }
+  .b { background:var(--surface); border:1px solid var(--line); border-radius:2px;
+    font-family:"IBM Plex Mono",monospace; font-size:10.5px; line-height:1.45; color:var(--muted);
+    padding:9px 11px; flex:1 1 0; min-width:0; display:flex; align-items:center; }
+  .b.tall { min-height:96px; }
+  .b.xtall { min-height:150px; }
+  .b.nav { background:var(--surface-2); color:var(--faint); }
+  .b.cta { border-color:var(--accent); color:var(--accent); background:var(--accent-bg); }
+  .b.soft { border-style:dashed; }
+  .b.head { font-family:"Barlow Condensed",sans-serif; font-size:16px; font-weight:600; color:var(--ink); }
+  .b.w2 { flex-grow:2; } .b.w3 { flex-grow:3; }
+  .wfcol.w2 { flex-grow:2; } .wfcol.w3 { flex-grow:3; }
+  .wfnote { font-size:13px; color:var(--muted); }
+  .wfnote strong { color:var(--ink); font-weight:600; }
+  table.tpl a { color:var(--accent); text-decoration:none; border-bottom:1px solid currentColor; }
+  table.tpl a:hover { color:var(--primary); }
+  table.tpl a:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+
+  .tab.tab-right { margin-left:auto; }
+  @media (max-width:620px){ .tab.tab-right { margin-left:0; } }
+
+  .wflayout { display:grid; grid-template-columns:210px minmax(0,1fr); gap:24px; align-items:start; }
+  @media (max-width:820px){ .wflayout { grid-template-columns:1fr; } }
+  .wfnav { position:sticky; top:16px; display:flex; flex-direction:column; gap:1px;
+    background:var(--line); border:1px solid var(--line); border-radius:3px; overflow:hidden; }
+  @media (max-width:820px){ .wfnav { position:static; flex-direction:row; flex-wrap:wrap; } }
+  .wfitem { background:var(--surface); border:none; cursor:pointer; text-align:left;
+    font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--muted);
+    padding:9px 12px; display:flex; justify-content:space-between; align-items:baseline; gap:10px; }
+  .wfitem .c { color:var(--faint); font-size:10.5px; font-variant-numeric:tabular-nums; }
+  .wfitem:hover { color:var(--ink); }
+  .wfitem[aria-current="true"] { background:var(--accent-bg); color:var(--accent); font-weight:600; }
+  .wfitem[aria-current="true"] .c { color:var(--accent); }
+  .wfitem:focus-visible { outline:2px solid var(--accent); outline-offset:-2px; }
+  .wfstage .wf[hidden] { display:none; }
+
+  .srclink { display:inline-flex; align-items:center; gap:9px; align-self:flex-start;
+    background:var(--surface); border:1px solid var(--line); border-radius:3px;
+    padding:9px 14px; text-decoration:none; color:var(--ink); font-size:14px; }
+  .srclink:hover { border-color:var(--accent); color:var(--accent); }
+  .srclink:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .srclink .tag { font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--faint); }
+  .srclink:hover .tag { color:var(--accent); }
+
+  /* ---------- schakelaar wireframe / ontwerp ---------- */
+  .wftoggle { display:inline-flex; border:1px solid var(--line); border-radius:3px; overflow:hidden; margin-left:auto; }
+  .wftoggle button { appearance:none; background:var(--surface); border:none; cursor:pointer;
+    font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--muted); padding:6px 11px; }
+  .wftoggle button + button { border-left:1px solid var(--line); }
+  .wftoggle button[aria-pressed="true"] { background:var(--accent-bg); color:var(--accent); font-weight:600; }
+  .wftoggle button[disabled] { color:var(--faint); cursor:not-allowed; }
+  .wftoggle button:focus-visible { outline:2px solid var(--accent); outline-offset:-2px; }
+  .wf[data-mode="design"] .wfframe { display:none; }
+  .wf[data-mode="wire"] .dv { display:none; }
+
+  /* ---------- ontwerpweergave — gegenereerd uit mockups/assets/brand.css
+     en mockups/categorie.html; niet met de hand bewerken ---------- */
+  .dv{border:1px solid var(--line);border-radius:3px;overflow:hidden;background:#fff;color:#1A1A1A}
+  .dv .wrap{max-width:none;padding:0 26px}
+  .dv section{padding:44px 0}
+  .dv header.main{position:static}
+  .dv .filters{position:static}
+  .dv{--dark:#003352; --blue:#0066A8; --cyan:#66C4E8; --logo:#0093D1;
+  --ink:#1A1A1A; --void:#06121C; --lightblue:#E6EFF6; --bg:#F2F5F9;
+  --rule:#D9DEE5; --mute:#6B7480; --white:#fff;
+  
+  --disp:'Barlow Condensed',sans-serif;
+  --body:'DM Sans',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+  --wrap:1280px;}.dv *{box-sizing:border-box;margin:0;padding:0}.dv{font-family:var(--body);color:var(--ink);background:var(--white);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}.dv img{max-width:100%;display:block}.dv a{color:inherit;text-decoration:none}.dv .wrap{max-width:var(--wrap);margin:0 auto;padding:0 32px}.dv .disp{font-family:var(--disp);text-transform:uppercase;letter-spacing:.03em;color:var(--dark);font-weight:900;line-height:.95}.dv .mono{font-family:var(--mono);text-transform:uppercase;letter-spacing:.18em;font-size:11px;font-weight:500}.dv .ey{font-family:var(--mono);text-transform:uppercase;letter-spacing:.18em;font-size:11px;font-weight:500;color:var(--cyan)}.dv .ey-dark{color:var(--blue)}.dv .lead{font-size:17px;color:var(--mute);max-width:62ch}.dv h1,.dv h2,.dv h3,.dv h4,.dv h5{font-family:var(--disp);text-transform:uppercase;letter-spacing:.02em;color:var(--dark);font-weight:900;line-height:1}.dv .ruit{position:relative;isolation:isolate}.dv .ruit::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background-image:linear-gradient(var(--dark) 1px,transparent 1px),linear-gradient(90deg,var(--dark) 1px,transparent 1px);
+  background-size:28px 28px;opacity:.05}.dv .ruit-dark::before{background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);opacity:.07}.dv .ruit-veld::before{-webkit-mask-image:radial-gradient(ellipse 70% 75% at 50% 45%,#000 20%,transparent 78%);mask-image:radial-gradient(ellipse 70% 75% at 50% 45%,#000 20%,transparent 78%)}.dv .ruit-aanzet::before{-webkit-mask-image:linear-gradient(135deg,#000 0%,transparent 55%);mask-image:linear-gradient(135deg,#000 0%,transparent 55%)}.dv .beslag{position:relative}.dv .beslag>.hk{position:absolute;width:26px;height:26px;border:1.5px solid var(--cyan);z-index:2;pointer-events:none}.dv .beslag>.hk.tl{top:30px;left:30px;border-right:0;border-bottom:0}.dv .beslag>.hk.tr{top:30px;right:30px;border-left:0;border-bottom:0}.dv .beslag>.hk.bl{bottom:30px;left:30px;border-right:0;border-top:0}.dv .beslag>.hk.br{bottom:30px;right:30px;border-left:0;border-top:0}.dv .serie{position:absolute;left:32px;bottom:26px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:rgba(255,255,255,.35);z-index:2}.dv .topbar{position:absolute;top:26px;left:32px;right:32px;display:flex;justify-content:space-between;
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:rgba(255,255,255,.4);z-index:2;text-transform:uppercase}.dv .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--disp);text-transform:uppercase;letter-spacing:.05em;
+  font-weight:700;font-size:16px;padding:15px 26px;border:1.5px solid transparent;cursor:pointer;transition:.15s}.dv .btn-pri{background:var(--cyan);color:var(--void)}.dv .btn-pri:hover{background:#8ad3ef}.dv .btn-ghost{border-color:rgba(255,255,255,.35);color:#fff}.dv .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}.dv .btn-dark{background:var(--dark);color:#fff}.dv .btn-dark:hover{background:var(--blue)}.dv .btn-out{border-color:var(--dark);color:var(--dark);background:transparent}.dv .btn-out:hover{background:var(--dark);color:#fff}.dv .btn-sm{font-size:14px;padding:11px 18px}.dv .util{background:var(--dark);color:rgba(255,255,255,.72)}.dv .util .wrap{display:flex;justify-content:space-between;align-items:center;height:34px}.dv .util a:hover{color:var(--cyan)}.dv .util .r{display:flex;gap:26px}.dv header.main{border-bottom:1px solid var(--rule);background:#fff;position:sticky;top:0;z-index:40}.dv header.main .wrap{display:flex;align-items:center;gap:36px;height:80px}.dv .logo{font-family:var(--disp);font-weight:900;font-size:28px;letter-spacing:.01em;color:#000;white-space:nowrap}.dv .logo em{font-style:normal;color:var(--logo)}.dv .dark .logo,.dv .navy .logo,.dv footer .logo{color:#fff}.dv .dark .logo em,.dv .navy .logo em,.dv footer .logo em{color:var(--cyan)}.dv .search{flex:1;display:flex;border:1.5px solid var(--rule);height:46px;max-width:520px}.dv .search input{flex:1;border:0;padding:0 16px;font-family:var(--body);font-size:14px;outline:0}.dv .search input::placeholder{color:var(--mute)}.dv .search button{background:var(--dark);color:#fff;border:0;width:52px;cursor:pointer;font-size:16px}.dv .hdr-r{margin-left:auto;display:flex;align-items:center;gap:28px}.dv .hdr-r .lnk{display:flex;flex-direction:column;line-height:1.15}.dv .hdr-r .lnk b{font-family:var(--disp);text-transform:uppercase;font-size:15px;letter-spacing:.04em;color:var(--dark)}.dv .hdr-r .lnk span{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}.dv nav.primary{border-bottom:1px solid var(--rule);background:#fff}.dv nav.primary .wrap{display:flex;gap:38px;align-items:center;height:52px}.dv nav.primary a{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:16px;letter-spacing:.05em;
+  color:var(--dark);height:100%;display:flex;align-items:center;border-bottom:3px solid transparent}.dv nav.primary a:hover,.dv nav.primary a.on{border-bottom-color:var(--cyan)}.dv nav.primary a.sec{color:var(--mute);font-weight:600}.dv nav.primary .tel{margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--mute);text-transform:uppercase}.dv nav.primary .tel b{color:var(--dark)}.dv .crumbs{border-bottom:1px solid var(--rule);background:var(--bg)}.dv .crumbs .wrap{display:flex;gap:10px;align-items:center;height:44px;font-family:var(--mono);
+  font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}.dv .crumbs a:hover{color:var(--dark)}.dv .crumbs .sep{color:var(--rule)}.dv section{padding:88px 0}.dv section.tight{padding:56px 0}.dv .sec-head{margin-bottom:44px}.dv .sec-head h2{font-size:clamp(30px,3.4vw,44px);margin:12px 0 14px}.dv .dark{background:var(--void);color:#fff}.dv .dark h1,.dv .dark h2,.dv .dark h3{color:#fff}.dv .dark p{color:rgba(255,255,255,.78)}.dv .navy{background:var(--dark);color:#fff}.dv .navy h1,.dv .navy h2,.dv .navy h3{color:#fff}.dv .navy p{color:rgba(255,255,255,.8)}.dv .chips{display:flex;gap:9px;flex-wrap:wrap}.dv .chip{border:1px solid var(--rule);padding:8px 15px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--mute);cursor:pointer;background:#fff;transition:.12s}.dv .chip:hover,.dv .chip.on{border-color:var(--cyan);color:var(--dark)}.dv .field{display:flex;border:1.5px solid var(--dark);height:62px}.dv .field input{flex:1;border:0;padding:0 20px;font-family:var(--body);font-size:16px;outline:0}.dv .field button{background:var(--dark);color:#fff;border:0;padding:0 30px;cursor:pointer;
+  font-family:var(--disp);text-transform:uppercase;font-weight:700;letter-spacing:.05em;font-size:15px}.dv .cases{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}.dv .case{border:1px solid var(--rule);background:#fff;display:flex;flex-direction:column;transition:.15s}.dv .case:hover{border-color:var(--dark)}.dv .case .im{background:var(--bg);aspect-ratio:1;display:flex;align-items:center;justify-content:center;padding:14px}.dv .case .bd{padding:18px 18px 22px;border-top:1px solid var(--rule)}.dv .case h4{font-size:18px;font-weight:700;line-height:1.05}.dv .case .d{font-size:13px;color:var(--mute);margin-top:7px;min-height:36px}.dv .case .pr{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--dark);margin-top:12px;text-transform:uppercase}.dv .case .pr b{font-family:var(--disp);font-size:19px;letter-spacing:.02em}.dv .case .pr i{font-style:normal;color:var(--mute);font-size:9.5px;display:block;margin-top:2px}.dv .spec{width:100%;border-collapse:collapse}.dv .spec th,.dv .spec td{text-align:left;padding:11px 0;border-bottom:1px solid var(--rule);font-size:14px}.dv .spec th{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-weight:500;width:42%}.dv .spec td b{font-family:var(--disp);text-transform:uppercase;letter-spacing:.03em;font-size:16px;color:var(--dark)}.dv footer{background:var(--void);color:rgba(255,255,255,.66);padding:64px 0 30px}.dv footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:44px}.dv footer h5{font-size:15px;letter-spacing:.06em;color:#fff;font-weight:700;
+  border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:9px;margin-bottom:15px}.dv footer a{display:block;padding:5px 0;font-size:14px}.dv footer a:hover{color:var(--cyan)}.dv footer .adr{font-size:14px;line-height:1.8}.dv footer .bot{border-top:1px solid rgba(255,255,255,.15);margin-top:44px;padding-top:20px;display:flex;
+  justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4)}.dv .note{background:#fffbe6;border-left:3px solid #e0b400;padding:12px 18px;font-size:13px;
+  font-family:var(--mono);letter-spacing:.03em;color:#6b5600;line-height:1.6}.dv .note b{color:#4a3b00}@media(max-width:1080px){.dv .cases{grid-template-columns:repeat(3,1fr)}.dv footer .cols{grid-template-columns:1fr 1fr}}@media(max-width:760px){.dv .wrap{padding:0 18px}.dv section{padding:56px 0}.dv .cases{grid-template-columns:repeat(2,1fr)}.dv .search,.dv .hdr-r{display:none}.dv .util .wrap>div:first-child{display:none}.dv .util .r{gap:16px}.dv .util .mono,.dv .util .r a{font-size:9px;letter-spacing:.1em}.dv nav.primary .wrap{overflow-x:auto;gap:22px;-webkit-overflow-scrolling:touch}.dv nav.primary a{white-space:nowrap;font-size:14px}.dv nav.primary .tel{display:none}.dv .topbar{font-size:8.5px;letter-spacing:.1em;left:18px;right:18px}.dv .beslag>.hk{width:16px;height:16px}.dv .beslag>.hk.tl,.dv .beslag>.hk.tr{top:16px}.dv .beslag>.hk.bl,.dv .beslag>.hk.br{bottom:16px}.dv .beslag>.hk.tl,.dv .beslag>.hk.bl{left:16px}.dv .beslag>.hk.tr,.dv .beslag>.hk.br{right:16px}.dv .serie{left:18px}.dv .field{height:54px}.dv .field button{padding:0 18px;font-size:13px}.dv footer .cols{grid-template-columns:1fr;gap:28px}.dv footer .bot{flex-direction:column;gap:8px}}.dv .cathead{background:var(--bg);border-bottom:1px solid var(--rule);padding:38px 0 34px}.dv .cathead h1{font-size:clamp(34px,4.2vw,52px)}.dv .cathead .lead{margin-top:14px}.dv .catlay{display:grid;grid-template-columns:236px minmax(0,1fr);gap:44px;padding:38px 0 80px}.dv .filters{position:sticky;top:96px;align-self:start;display:flex;flex-direction:column;gap:26px}.dv .fset h4{font-size:15px;letter-spacing:.06em;padding-bottom:9px;border-bottom:1px solid var(--rule);margin-bottom:11px}.dv .fset label{display:flex;align-items:center;gap:10px;padding:5px 0;font-size:14px;color:var(--mute);cursor:pointer}.dv .fset label:hover{color:var(--ink)}.dv .bx{width:14px;height:14px;border:1.5px solid var(--rule);flex:none;background:#fff}.dv .bx.on{background:var(--cyan);border-color:var(--cyan)}.dv .fset .num{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--rule)}.dv .toolbar{display:flex;align-items:center;gap:18px;flex-wrap:wrap;border-bottom:1px solid var(--rule);padding-bottom:14px;margin-bottom:24px}.dv .toolbar .cnt{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}.dv .toolbar .cnt b{color:var(--dark)}.dv .toolbar .sort{margin-left:auto}.dv .parts{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.dv .part{border:1px solid var(--rule);background:#fff;display:flex;flex-direction:column;transition:.15s}.dv .part:hover{border-color:var(--dark)}.dv .part .im{background:var(--bg);aspect-ratio:4/3;position:relative;display:flex;align-items:center;justify-content:center}.dv .part .im .sc{position:absolute;left:12px;bottom:11px;display:flex;align-items:center;gap:6px;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--mute)}.dv .part .im .sc i{display:block;width:30px;height:2px;background:var(--rule)}.dv .part .bd{padding:16px 16px 18px;border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:6px;flex:1}.dv .part h4{font-size:18px;font-weight:700;line-height:1.05}.dv .part .sku{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}.dv .part .pr{font-family:var(--disp);font-size:22px;font-weight:900;color:var(--dark);letter-spacing:.02em;margin-top:2px}.dv .part .pr i{font-style:normal;display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--mute);font-weight:400}.dv .part .stk{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#2F7355}.dv .part .buy{display:flex;gap:8px;margin-top:auto;padding-top:12px}.dv .qty{display:flex;align-items:center;border:1.5px solid var(--rule)}.dv .qty span{padding:0 10px;color:var(--mute);cursor:pointer;user-select:none}.dv .qty b{padding:8px 10px;font-family:var(--mono);font-size:13px;border-left:1.5px solid var(--rule);border-right:1.5px solid var(--rule)}.dv .pager{display:flex;gap:8px;justify-content:center;margin-top:38px}.dv .pager a{border:1px solid var(--rule);padding:9px 15px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--mute)}.dv .pager a.on{background:var(--dark);border-color:var(--dark);color:#fff}.dv .crosslink{border:1px solid var(--rule);padding:26px 30px;margin-top:44px;display:flex;gap:26px;align-items:center;flex-wrap:wrap}.dv .crosslink h3{font-size:22px}.dv .crosslink p{font-size:14px;color:var(--mute);max-width:52ch;margin-top:6px}.dv .crosslink .btn{margin-left:auto}@media(max-width:1080px){.dv .catlay{grid-template-columns:1fr;gap:26px}.dv .filters{position:static}.dv .parts{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.dv .parts{grid-template-columns:1fr}}
+
+  .srcrow { display:flex; gap:10px; flex-wrap:wrap; }
+  .principles { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:12px; }
+  .pr { background:var(--surface); border:1px solid var(--line); border-radius:3px; padding:16px 19px;
+    display:flex; flex-direction:column; gap:6px; }
+  .pr .rank { font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--accent); }
+  .pr h4 { font-family:"Barlow Condensed",sans-serif; font-size:19px; font-weight:600; margin:0; }
+  .pr p { font-size:13.5px; color:var(--muted); }
+  .steps { display:flex; flex-direction:column; gap:1px; background:var(--line);
+    border:1px solid var(--line); border-radius:3px; overflow:hidden; }
+  .step { background:var(--surface); display:grid; grid-template-columns:30px 1fr; }
+  .step .sn { font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--accent);
+    padding:13px 0 13px 14px; }
+  .step .sb { padding:13px 18px 13px 6px; font-size:14px; }
+  .step .sb code { font-size:.88em; }
+
+  .wfitem { flex-direction:column; align-items:stretch; gap:3px; padding:10px 12px; }
+  .wfitem .u { font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink); }
+  .wfitem .m { display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+  .wfitem .t { font-family:"Inter",sans-serif; font-size:11px; color:var(--faint); }
+  .wfitem[aria-current="true"] .u { color:var(--accent); }
+  .wfitem[aria-current="true"] .t { color:var(--accent); }
+  @media (max-width:820px){ .wfnav { flex-direction:column; } }
+
+  .wffull { display:inline-flex; align-items:center; font-family:"IBM Plex Mono",monospace;
+    font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; text-decoration:none;
+    color:var(--accent); border:1px solid var(--line); border-left:none; padding:6px 11px; background:var(--surface); }
+  .wffull:hover { border-color:var(--accent); background:var(--accent-bg); }
+  .wffull:focus-visible { outline:2px solid var(--accent); outline-offset:-2px; }
+
+  .mtiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(212px,1fr)); gap:12px; }
+  .mt { background:var(--surface); border:1.5px solid var(--line); border-radius:3px;
+    display:flex; flex-direction:column; overflow:hidden; }
+  .mt .mtop { padding:15px 16px 14px; display:flex; flex-direction:column; gap:7px; flex:1; }
+  .mt .mn { font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--faint); }
+  .mt h4 { font-family:"Barlow Condensed",sans-serif; font-size:19px; font-weight:600;
+    line-height:1.1; margin:0; color:var(--ink); text-wrap:balance; }
+  .mt p { font-size:13px; color:var(--muted); line-height:1.5; }
+  .mt .tag { border-top:1.5px solid var(--line); padding:8px 16px;
+    font-family:"Inter",sans-serif; font-size:10px; font-weight:600; letter-spacing:.09em;
+    text-transform:uppercase; }
+  .mt.af      { border-color:var(--keep); }
+  .mt.af .tag { border-top-color:var(--keep); background:var(--keep-bg); color:var(--keep); }
+  .mt.af .mn  { color:var(--keep); }
+  .mt.loopt      { border-color:var(--accent); }
+  .mt.loopt .tag { border-top-color:var(--accent); background:var(--accent-bg); color:var(--accent); }
+  .mt.loopt .mn  { color:var(--accent); }
+  .mt.gepland .tag { background:var(--surface-2); color:var(--faint); }
+  .mt.cb      { border-color:var(--drop); }
+  .mt.cb .tag { border-top-color:var(--drop); background:var(--drop-bg); color:var(--drop); }
+  .mt.cb .mn  { color:var(--drop); }
+
+  .mt.deels      { border-color:var(--open); }
+  .mt.deels .tag { border-top-color:var(--open); background:var(--open-bg); color:var(--open); }
+  .mt.deels .mn  { color:var(--open); }
+  .mt.beslissing      { border-color:var(--primary); }
+  .mt.beslissing .tag { border-top-color:var(--primary); background:var(--surface-2); color:var(--primary); }
+  .mt.beslissing .mn  { color:var(--primary); }
+  .mt.actie      { border-color:var(--accent); border-style:dashed; }
+  .mt.actie .tag { border-top:1.5px dashed var(--accent); background:var(--accent-bg); color:var(--accent); }
+  .mt.actie .mn  { color:var(--accent); }
+</style>
+<style>
+  :root {
+    --bg:#EFF3F6; --surface:#FFFFFF; --surface-2:#F7FAFC;
+    --ink:#0B1E2B; --muted:#5A6B77; --faint:#8B9BA6;
+    --line:#DCE4EA; --line-soft:#E8EEF2;
+    --primary:#003352; --accent:#0277A8; --accent-bg:#E2F1F9;
+    --keep:#2F7355; --keep-bg:#E4F0EA;
+    --move:#5A6B77; --move-bg:#E9EFF3;
+    --drop:#A34418; --drop-bg:#FBEBE3;
+    --open:#7A5B10; --open-bg:#F7EFDC;
+    --shadow:0 1px 2px rgba(11,30,43,.06), 0 8px 24px -12px rgba(11,30,43,.18);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg:#081420; --surface:#0F2130; --surface-2:#142838;
+      --ink:#E4EDF3; --muted:#93A6B3; --faint:#6E8393;
+      --line:#1D3547; --line-soft:#172C3C;
+      --primary:#6FC2E8; --accent:#4FB4E4; --accent-bg:#10303F;
+      --keep:#62B792; --keep-bg:#102F26;
+      --move:#93A6B3; --move-bg:#172C3C;
+      --drop:#E08A5F; --drop-bg:#33201A;
+      --open:#D9B25E; --open-bg:#2E2513;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg:#081420; --surface:#0F2130; --surface-2:#142838;
+    --ink:#E4EDF3; --muted:#93A6B3; --faint:#6E8393;
+    --line:#1D3547; --line-soft:#172C3C;
+    --primary:#6FC2E8; --accent:#4FB4E4; --accent-bg:#10303F;
+    --keep:#62B792; --keep-bg:#102F26;
+    --move:#93A6B3; --move-bg:#172C3C;
+    --drop:#E08A5F; --drop-bg:#33201A;
+    --open:#D9B25E; --open-bg:#2E2513;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+
+  body { background:var(--bg); color:var(--ink);
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:1220px; margin:0 auto; padding:56px 24px 96px; display:flex; flex-direction:column; gap:52px; }
+
+  h1,h2,h3 { font-family:"Barlow Condensed","Inter",sans-serif; font-weight:600; text-wrap:balance; margin:0; line-height:1.1; }
+  h1 { font-size:clamp(38px,6vw,60px); letter-spacing:-.01em; }
+  h2 { font-size:clamp(26px,3.4vw,34px); }
+  h3 { font-size:21px; }
+  p { margin:0; }
+
+  .eyebrow { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11px; font-weight:500;
+    letter-spacing:.16em; text-transform:uppercase; color:var(--faint); }
+
+  .masthead { display:flex; flex-direction:column; gap:16px; }
+  .masthead p.lede { font-size:18px; color:var(--muted); max-width:64ch; }
+
+  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1px;
+    background:var(--line); border:1px solid var(--line); border-radius:3px; overflow:hidden; }
+  .stat { background:var(--surface); padding:15px 18px; display:flex; flex-direction:column; gap:3px; }
+  .stat .n { font-family:"Barlow Condensed",sans-serif; font-size:30px; font-weight:600; color:var(--primary); line-height:1;
+    font-variant-numeric:tabular-nums; }
+  .stat .l { font-size:12.5px; color:var(--muted); }
+
+  .thesis { background:var(--surface); border:1px solid var(--line); border-left:3px solid var(--primary);
+    border-radius:3px; padding:24px 28px; display:flex; flex-direction:column; gap:11px; box-shadow:var(--shadow); }
+  .thesis p { font-size:16.5px; max-width:74ch; }
+  .thesis strong { font-weight:600; }
+
+  .trees { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; align-items:start; }
+  @media (max-width:940px){ .trees { grid-template-columns:1fr; } }
+
+  .panel { background:var(--surface); border:1px solid var(--line); border-radius:3px;
+    overflow:hidden; box-shadow:var(--shadow); display:flex; flex-direction:column; }
+  .panel-head { padding:17px 22px 15px; border-bottom:1px solid var(--line); display:flex; flex-direction:column; gap:4px; }
+  .panel-head .sub { font-size:12.5px; color:var(--muted); }
+  .panel-body { padding:16px 14px 22px 18px; overflow-x:auto; }
+
+  ul.tree, ul.tree ul { list-style:none; margin:0; padding:0; }
+  ul.tree { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:13px; line-height:1.5; }
+  ul.tree ul { margin-left:8px; padding-left:14px; border-left:1px solid var(--line-soft); }
+  ul.tree li { padding:2.5px 0; }
+  .node { display:flex; flex-wrap:wrap; align-items:baseline; gap:7px; }
+  .path { color:var(--ink); font-weight:500; white-space:nowrap; }
+  .path.root { color:var(--primary); font-weight:600; }
+  .note { font-family:"Inter",sans-serif; font-size:12px; color:var(--muted); }
+  .host { font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--faint); }
+
+  .chip { font-family:"Inter",sans-serif; font-size:9.5px; font-weight:600; letter-spacing:.07em;
+    text-transform:uppercase; padding:2px 6px; border-radius:2px; white-space:nowrap; }
+  .chip-move { background:var(--move-bg); color:var(--move); }
+  .chip-drop { background:var(--drop-bg); color:var(--drop); }
+  .chip-keep { background:var(--keep-bg); color:var(--keep); }
+  .chip-open { background:var(--open-bg); color:var(--open); }
+
+  .legend { display:flex; flex-wrap:wrap; gap:16px; align-items:center; padding:0 2px; }
+  .legend span.item { display:flex; align-items:center; gap:6px; font-size:12.5px; color:var(--muted); }
+
+  .group-label { font-family:"Inter",sans-serif; font-size:10.5px; font-weight:600; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--faint); padding:16px 0 5px; }
+
+  section { display:flex; flex-direction:column; gap:18px; }
+  .sec-head { display:flex; flex-direction:column; gap:6px; }
+  .sec-head p { color:var(--muted); max-width:70ch; font-size:15.5px; }
+
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px; }
+  .card { background:var(--surface); border:1px solid var(--line); border-radius:3px; padding:19px 22px;
+    display:flex; flex-direction:column; gap:9px; }
+  .card h3 { font-size:19px; }
+  .card p { font-size:14.5px; color:var(--muted); }
+  .card p strong { color:var(--ink); font-weight:600; }
+  code { font-family:"IBM Plex Mono",monospace; font-size:.9em; background:var(--surface-2);
+    border:1px solid var(--line-soft); border-radius:2px; padding:1px 5px; color:var(--ink); }
+
+  .warn { background:var(--drop-bg); border:1px solid var(--drop); border-radius:3px; padding:16px 20px;
+    display:flex; flex-direction:column; gap:8px; }
+  .warn h3 { font-size:18px; color:var(--drop); }
+  .warn p { font-size:14.5px; color:var(--ink); max-width:80ch; }
+
+  table.tpl { width:100%; border-collapse:collapse; font-size:14px; background:var(--surface);
+    border:1px solid var(--line); border-radius:3px; overflow:hidden; }
+  table.tpl th, table.tpl td { text-align:left; padding:10px 16px; border-bottom:1px solid var(--line-soft); }
+  table.tpl th { font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--faint); font-weight:500; background:var(--surface-2); }
+  table.tpl td.num { text-align:right; font-variant-numeric:tabular-nums; font-weight:600; }
+  table.tpl td.mono { font-family:"IBM Plex Mono",monospace; font-size:12.5px; }
+  table.tpl tr:last-child td { border-bottom:none; }
+  .scroller { overflow-x:auto; }
+
+  .taskgroups { display:flex; flex-direction:column; gap:26px; }
+  .taskgroup { display:flex; flex-direction:column; gap:10px; }
+  .taskgroup > h3 { font-size:20px; color:var(--primary); }
+  .tasklist { display:flex; flex-direction:column; gap:1px; background:var(--line);
+    border:1px solid var(--line); border-radius:3px; overflow:hidden; }
+  .task { background:var(--surface); display:grid; grid-template-columns:38px 1fr 1fr; gap:0; align-items:start; }
+  @media (max-width:760px){ .task { grid-template-columns:38px 1fr; } .task .route { grid-column:2; padding-top:0; } }
+  .task .num { font-family:"IBM Plex Mono",monospace; font-size:12px; font-weight:600; color:var(--faint);
+    padding:14px 0 14px 14px; font-variant-numeric:tabular-nums; }
+  .task .want { padding:14px 18px 14px 10px; font-size:14.5px; }
+  .task .route { padding:14px 18px; font-family:"IBM Plex Mono",monospace; font-size:12px;
+    color:var(--muted); line-height:1.7; border-left:1px solid var(--line-soft); }
+  @media (max-width:760px){ .task .route { border-left:none; padding-left:10px; } }
+  .task .route .gap { display:inline-block; font-family:"Inter",sans-serif; font-size:10px; font-weight:600;
+    letter-spacing:.07em; text-transform:uppercase; background:var(--open-bg); color:var(--open);
+    padding:2px 6px; border-radius:2px; margin-top:5px; }
+
+  table.tpl td.blocks { color:var(--ink); }
+  table.tpl td.blocks em { font-style:normal; color:var(--drop); font-weight:600; }
+  table.tpl td.id { font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--faint); }
+  .urgent { background:var(--surface); border:1px solid var(--drop); border-left:3px solid var(--drop);
+    border-radius:3px; padding:18px 22px; display:flex; flex-direction:column; gap:9px; }
+  .urgent h3 { font-size:19px; color:var(--drop); }
+  .urgent p { font-size:14.5px; color:var(--muted); max-width:78ch; }
+  .urgent p strong { color:var(--ink); font-weight:600; }
+  h3.tablabel { padding-top:14px; }
+
+  /* vaste kolombreedtes zodat gelijksoortige tabellen op elkaar uitlijnen */
+  table.tpl.fixed { table-layout:fixed; min-width:640px; }
+  table.tpl.fixed th:nth-child(1), table.tpl.fixed td:nth-child(1) { width:26%; }
+  table.tpl.fixed th:nth-child(2), table.tpl.fixed td:nth-child(2) { width:13%; }
+  table.tpl.fixed th:nth-child(3), table.tpl.fixed td:nth-child(3) { width:61%; }
+
+  table.tpl.fixed2 { table-layout:fixed; min-width:720px; }
+  table.tpl.fixed2 th:nth-child(1), table.tpl.fixed2 td:nth-child(1) { width:28%; }
+  table.tpl.fixed2 th:nth-child(2), table.tpl.fixed2 td:nth-child(2) { width:22%; }
+  table.tpl.fixed2 th:nth-child(3), table.tpl.fixed2 td:nth-child(3) { width:50%; }
+
+  .statwrap { display:flex; flex-direction:column; gap:8px; }
+  .statcap { font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--faint); }
+  .stats.next .n { color:var(--accent); }
+  .stat .d { font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--faint);
+    font-variant-numeric:tabular-nums; }
+
+  /* ---------- fasetabs ---------- */
+  .tabs { display:flex; gap:2px; border-bottom:1px solid var(--line); flex-wrap:wrap; }
+  .tab { appearance:none; background:none; border:none; cursor:pointer;
+    font-family:"Barlow Condensed","Inter",sans-serif; font-size:19px; font-weight:600;
+    color:var(--faint); padding:10px 18px 12px; border-bottom:2px solid transparent;
+    margin-bottom:-1px; display:flex; align-items:baseline; gap:9px; }
+  .tab:hover { color:var(--muted); }
+  .tab .tnum { font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:500;
+    letter-spacing:.1em; color:var(--faint); }
+  .tab[aria-selected="true"] { color:var(--primary); border-bottom-color:var(--primary); }
+  .tab[aria-selected="true"] .tnum { color:var(--accent); }
+  .tab:focus-visible { outline:2px solid var(--accent); outline-offset:2px; border-radius:2px; }
+  .tabpanel[hidden] { display:none; }
+  .tabpanel { display:flex; flex-direction:column; gap:52px; }
+
+  .empty { background:var(--surface); border:1px dashed var(--line); border-radius:3px;
+    padding:44px 32px; display:flex; flex-direction:column; gap:10px; align-items:flex-start; }
+  .empty h2 { color:var(--ink); }
+  .empty p { color:var(--muted); font-size:15.5px; max-width:62ch; }
+
+  /* ---------- zachtere afronding en randen ---------- */
+  :root { --r:10px; --r-sm:7px; --shadow-soft:0 1px 2px rgba(11,30,43,.04), 0 10px 30px -18px rgba(11,30,43,.22); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --shadow-soft:0 1px 2px rgba(0,0,0,.3), 0 12px 32px -18px rgba(0,0,0,.7); } }
+  :root[data-theme="dark"] { --shadow-soft:0 1px 2px rgba(0,0,0,.3), 0 12px 32px -18px rgba(0,0,0,.7); }
+
+  .mt, .card, .panel, .stats, .qlist, .track, .steps, .tasklist, .decisions,
+  .thesis, .warn, .urgent, .empty, .srclink, .wfframe, .dv, .wfnav, .stage,
+  .layer, .pr, .mile, .wftoggle, table.tpl { border-radius:var(--r); }
+  .stat, .item, .q, .step, .task, .decision, .wfitem, .wftoggle button, .wffull { border-radius:0; }
+
+  .mt { border-width:1px; box-shadow:var(--shadow-soft); }
+  .mt .mtop { padding:19px 20px 17px; gap:8px; }
+  .mt .tag { border-top-width:1px; padding:10px 20px; }
+  .mt.actie { border-style:solid; }
+  .mt.actie .tag { border-top:1px solid var(--accent); }
+  .mtiles { gap:14px; }
+
+  .card, .panel, .thesis, .qlist, .track, .steps, .tasklist, .decisions, .stats,
+  .layer, .pr, .mile, table.tpl { box-shadow:var(--shadow-soft); }
+  .card, .layer, .pr { border-width:1px; padding:20px 22px; }
+  .warn, .urgent { box-shadow:var(--shadow-soft); }
+
+  .b { border-radius:var(--r-sm); }
+  .chip { border-radius:99px; padding:3px 9px; }
+  .wftoggle { overflow:hidden; }
+  .wffull { border-radius:0 var(--r) var(--r) 0; }
+  .wftoggle button:first-child { border-radius:var(--r) 0 0 var(--r); }
+
+  .panel-head, .wfurl { border-bottom-color:var(--line-soft); }
+  .stats { gap:1px; }
+  .empty { border-radius:var(--r); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="tabs" role="tablist" aria-label="Projectfase">
+    <button class="tab" role="tab" id="t1" data-hash="definitie" aria-controls="p1" aria-selected="false"><span class="tnum">01</span>Definitiefase</button>
+    <button class="tab" role="tab" id="t2" data-hash="ontwerp" aria-controls="p2" aria-selected="true"><span class="tnum">02</span>Ontwerpfase</button>
+    <button class="tab" role="tab" id="t3" data-hash="bouw" aria-controls="p3" aria-selected="false"><span class="tnum">03</span>Bouwfase</button>
+    <button class="tab" role="tab" id="t5" data-hash="content" aria-controls="p5" aria-selected="false"><span class="tnum">04</span>Contentfase</button>
+    <button class="tab" role="tab" id="t6" data-hash="livegang" aria-controls="p6" aria-selected="false"><span class="tnum">05</span>Live-gang</button>
+    <button class="tab tab-right" role="tab" id="t4" data-hash="wireframes" aria-controls="p4" aria-selected="false">Wireframes</button>
+    <button class="tab" role="tab" id="t7" data-hash="meetings" aria-controls="p7" aria-selected="false">Meetings</button>
+  </div>
+
+  <div class="tabpanel" id="p1" role="tabpanel" aria-labelledby="t1" hidden>
+
+    <header class="masthead">
+      <span class="eyebrow">CaseBuilder</span>
+      <h1>Definitiefase</h1>
+      <p class="lede">De architectuur waarop het ontwerp rust: waar de grens ligt tussen wat wij bouwen en wat van CaseBuilder blijft, welke lagen daarbinnen bestaan, en welke keuzes nog openstaan.</p>
+      <div class="srcrow">
+        <a class="srclink" href="https://docs.google.com/document/d/1i-uPzuidKTSGHmeWRdUQ6MksPGPez4vU/edit" target="_blank" rel="noopener noreferrer"><span class="tag">bron</span> Architectuurvoorstel &rarr;</a>
+        <a class="srclink" href="https://docs.google.com/document/d/1AGyHei97i9vNrJOAFBLmV5M_f7SBXMgl/edit" target="_blank" rel="noopener noreferrer"><span class="tag">bron</span> Scenario&#39;s &amp; keuzes &rarr;</a>
+      </div>
+    </header>
+
+    <div class="thesis">
+      <span class="eyebrow">Het uitgangspunt</span>
+      <p>Eén principe maakt alles overzichtelijk: <strong>wij bouwen alles tot aan de casebuilder api.</strong> Alles daarachter — productie, CRM (Ridder), voorraad en verzending — blijft van CaseBuilder en verandert niet.</p>
+      <p>De casebuilder api is het luik in de muur, en werkt twee kanten op. <strong>Erin:</strong> bestellingen gaan door naar de productie. <strong>Eruit:</strong> order- en klantgegevens komen terug voor het klantportaal — inclusief telefonische orders die CaseBuilder zelf aanmaakt.</p>
+      <p>Gevolg: <strong>Magento is geen fundament maar een vervangbare schil.</strong> De productieketen hangt aan de casebuilder api, niet aan de webshop.</p>
+    </div>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Uit het infrastructuurbord</span>
+        <h2>De keten, van klik tot doos</h2>
+        <p>Vijf schakels. De eerste is van ons, de rest niet. De grens loopt precies door de casebuilder api.</p>
+      </div>
+      <div class="flow">
+        <div class="stage ours">
+          <span class="who">Wij bouwen</span>
+          <h4>Sales set-up</h4>
+          <ul>
+            <li>Website en content</li>
+            <li>Webshop: catalogus, wagen, checkout</li>
+            <li>Configurator (extern, embedded)</li>
+            <li>Klantportaal</li>
+          </ul>
+        </div>
+        <div class="stage theirs">
+          <span class="who">Van CaseBuilder</span>
+          <h4>Sales ↔ productie</h4>
+          <ul>
+            <li>cb_core_v2 — orderregels en klantinfo</li>
+            <li>Ridder DB · profile 0 DB · pf_core</li>
+            <li>Migration services api</li>
+            <li>Shop floor service</li>
+          </ul>
+        </div>
+        <div class="stage theirs">
+          <span class="who">Van CaseBuilder</span>
+          <h4>Productie</h4>
+          <ul>
+            <li>Werkvoorbereiding</li>
+            <li>Order vrijgeven</li>
+            <li>Productieproces</li>
+            <li>CRM Ridder</li>
+          </ul>
+        </div>
+        <div class="stage theirs">
+          <span class="who">Van CaseBuilder</span>
+          <h4>Pick &amp; pack</h4>
+          <ul>
+            <li>Client-app</li>
+            <li>Verzending</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Scenario 1 — de basis</span>
+        <h2>Vier lagen, niet in één tool proppen</h2>
+        <p>Ze voelen als hetzelfde soort werk, maar het zijn verschillende systemen. Dat scherp houden voorkomt dat je iets bouwt dat alles half doet.</p>
+      </div>
+      <div class="layers">
+        <div class="layer">
+          <span class="tool">Sanity</span>
+          <h4>Content-CMS</h4>
+          <p>Pagina's, blog, teksten, landingspagina's — met een blokkenbibliotheek zodat een medewerker zelf pagina's samenstelt uit on-brand bouwblokken. <strong>Geen producten.</strong></p>
+        </div>
+        <div class="layer">
+          <span class="tool">Medusa Cloud</span>
+          <h4>Webshop</h4>
+          <p>Catalogus, winkelwagen, checkout, betalen, klantaccounts. Hier beheert een medewerker de producten — niet in het CMS. Harde voorwaarde: managed, niet self-hosted.</p>
+        </div>
+        <div class="layer">
+          <span class="tool">casebuilder api</span>
+          <h4>Klantportaal</h4>
+          <p>Een paar schermen ín de frontend. <strong>Fase 1 toont alleen wat online is besteld.</strong> De bidirectionele stroom met de CRM — telefonische en mailorders erbij — komt later, niet nu.</p>
+        </div>
+        <div class="layer">
+          <span class="tool">alleen scenario 2</span>
+          <h4>PIM</h4>
+          <p>Verdeelstation voor productinformatie. Feeds binnen, verrijken, en productdata plus per-kanaal prijzen naar Bol, Amazon en eBay. Een latere uitbreiding, geen verbouwing.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">De meetlat</span>
+        <h2>Uitgangspunten</h2>
+        <p>In volgorde van belang. Elke keuze hierboven en hieronder moet hierop terug te voeren zijn — dat is wat een keuze onderbouwd maakt in plaats van een voorkeur.</p>
+      </div>
+      <div class="principles">
+        <div class="pr"><span class="rank">1</span><h4>Veiligheid &amp; compliance</h4><p>Enterprise-klant; budget is niet de beperkende factor. PCI, GDPR en EU-dataresidentie wegen zwaarder dan kostenoptimalisatie.</p></div>
+        <div class="pr"><span class="rank">2</span><h4>Gebruiksgemak</h4><p>Een niet-technische medewerker moet het dagelijkse werk zelf kunnen: pagina&#39;s, blogs, medewerkers, producten.</p></div>
+        <div class="pr"><span class="rank">3</span><h4>Onderhoudbaarheid</h4><p>De stack moet prettig te ontwikkelen en te onderhouden zijn.</p></div>
+        <div class="pr"><span class="rank">4</span><h4>Kosten</h4><p>Relevant, maar ondergeschikt aan de drie hierboven.</p></div>
+      </div>
+      <div class="cards">
+        <div class="card"><h3>Afhankelijkheid van één persoon minimaliseren</h3><p>Bewezen, bestaande oplossingen boven maatwerk, en een mainstream stack die elke developer kan overnemen. <strong>Dit principe verklaart bijna elke afwijzing verderop.</strong></p></div>
+        <div class="card"><h3>Frontend-vrijheid behouden</h3><p>In een headless opzet staat de frontend los van de backend. Volledige ontwerp- en featurevrijheid, ongeacht welke CMS- of webshopkeuze eronder ligt.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Van klik tot productie</span>
+        <h2>De datastroom</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><span class="sn">1</span><span class="sb">Bezoeker opent een pagina &rarr; de frontend haalt content uit <strong>Sanity</strong> en producten uit <strong>Medusa</strong>.</span></div>
+        <div class="step"><span class="sn">2</span><span class="sb">Toevoegen aan winkelwagen &mdash; een catalogusartikel óf een geconfigureerde flightcase &rarr; regel in de Medusa-cart, met de volledige configuratie als metadata.</span></div>
+        <div class="step"><span class="sn">3</span><span class="sb">Afrekenen &rarr; Medusa maakt een betaalsessie &rarr; klant betaalt via iDEAL &rarr; order geplaatst.</span></div>
+        <div class="step"><span class="sn">4</span><span class="sb">De order gaat via de <strong>casebuilder api</strong> door naar de productie.</span></div>
+        <div class="step"><span class="sn">5</span><span class="sb">Het klantportaal haalt de bestellingen weer op uit de casebuilder api.</span></div>
+      </div>
+      <div class="warn">
+        <h3>Stap 3 en 4 zijn nog niet dichtgetimmerd</h3>
+        <p>Het architectuurvoorstel noteert het zelf: <em>&quot;via de casebuilder api doorgezet is iets te simpel gezegd misschien.&quot;</em> Heeft de casebuilder api een endpoint dat betaling geslaagd of mislukt afhandelt? Zit dat nu in Magento, dan moeten wij het in onze backend bouwen en doorzetten. <strong>Dat is nieuwbouw, geen koppeling.</strong></p>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Uit het keuzedocument</span>
+        <h2>Vier knoppen</h2>
+        <p>De keuzes zijn los van elkaar te draaien. Knop 3 is een businesskeuze en gaat vóór de rest — die bepaalt namelijk welk CMS past.</p>
+      </div>
+      <div class="scroller">
+        <table class="tpl fixed2">
+          <thead><tr><th>Knop</th><th>Opties</th><th>Stand</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1</strong> Commerce-backend</td><td class="mono">Magento headless<br>Medusa Cloud<br>Shopify Plus</td><td class="blocks"><em>Medusa &mdash; 95% zeker.</em> Magento blijft niet. Harde voorwaarde: Cloud, niet self-hosted, anders komt de infra- en securitylast terug op ons.</td></tr>
+            <tr><td><strong>2</strong> Content-CMS</td><td class="mono">Sanity<br>Storyblok<br>Contentful</td><td class="blocks"><em>Sanity.</em> Schema staat in code en dus in versiebeheer — past bij een code-first opzet. Let op de SSO-klif: SAML is een dure add-on.</td></tr>
+            <tr><td><strong>3</strong> Editor-vrijheid</td><td class="mono">1 · alleen velden<br>2 · blokkenbibliotheek<br>3 · vrije visuele builder</td><td class="blocks"><em>Niveau 2.</em> De redactie stelt pagina&#39;s samen uit on-brand blokken. Kan niets lelijks maken, en heeft de developer niet nodig voor een nieuwe pagina.</td></tr>
+            <tr><td><strong>4</strong> Verkoopkanalen</td><td class="mono">alleen eigen webshop<br>+ marktplaatsen via PIM</td><td class="blocks"><em>Open.</em> Zijn Bol, Amazon en eBay een echt doel, dan gaat de PIM mee én moet Shopify serieus worden afgewogen — marktplaatskoppelingen zijn daar kant-en-klaar.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cards">
+        <div class="card"><h3>Betaling staat los</h3><p>iDEAL is verplicht voor NL — ruim 60% van de klanten. De provider plugt in de commerce-backend en is dus verwisselbaar. <strong>Mollie</strong> voor lokaal en eenvoud (geen maandkosten, ~€0,30 per iDEAL-transactie), <strong>Stripe</strong> voor de sterkste API en Stripe Tax, dat de EU-btw uit handen neemt. Deze keuze kan tot het laatst wachten.</p></div>
+        <div class="card"><h3>EU-btw is een aandachtspunt bij Medusa</h3><p>NL plus DE, OSS, B2B reverse-charge en VIES draag je op Medusa meer zelf dan op Shopify. Mitigeren met Stripe Tax of een aparte tax-service — maar het moet wel belegd worden.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Overwogen en niet gekozen</span>
+        <h2>Wat is afgevallen</h2>
+        <p>Bewaard omdat de afweging waardevoller is dan de uitkomst — als een aanname verschuift, weet je welke optie terugkomt.</p>
+      </div>
+      <div class="scroller">
+        <table class="tpl fixed2">
+          <thead><tr><th>Optie</th><th>Waarom niet</th><th>Wanneer wel</th></tr></thead>
+          <tbody>
+            <tr><td>Custom CMS / custom checkout</td><td class="blocks">Overdracht lastig, alles leunt op één persoon, en het bestaat al. Bij checkout komt echt geld plus aansprakelijkheid: PCI, btw, fraude.</td><td>Nooit — die last koop je in</td></tr>
+            <tr><td>WordPress headless</td><td class="blocks">Houdt de PHP- en pluginonderhoudslast, en is twee systemen zelf beheren.</td><td>Bij behoud van een bestaande investering — geldt hier niet</td></tr>
+            <tr><td>Magento behouden</td><td class="blocks">Zwaar en prijzig om te draaien en te beveiligen, niet code-first, erft technische schuld en oude maatwerkmodules.</td><td>Was valide tot de audit — nu vervallen</td></tr>
+            <tr><td>Shopify Plus</td><td class="blocks">Per-verkoop cut en lock-in; zelfgeprijsde configuratie-items vragen Draft Orders of Functions.</td><td>Als multi-channel een echt kerndoel wordt</td></tr>
+            <tr><td>Self-hosted commerce</td><td class="blocks">Zet de ops- en securitylast terug op ons — botst met uitgangspunt 1.</td><td>Nooit binnen deze uitgangspunten</td></tr>
+            <tr><td>commercetools / composable</td><td class="blocks">Zescijferige trajecten.</td><td>Bij een veelvoud van deze omvang</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Risico&#39;s</span>
+        <h2>Waar het mis kan gaan</h2>
+      </div>
+      <div class="cards">
+        <div class="card"><h3>De verborgen 80%</h3><p>De zichtbare checkout is de makkelijke 20%. De rest zit in de back-officekoppelingen, en die bepalen hoe zwaar overnemen wordt. <strong>Audit eerst</strong> — er ligt een aparte checklist.</p></div>
+        <div class="card"><h3>De productlijst bepaalt de dikte van de webshop</h3><p>Waar de catalogus vandaan komt — casebuilder api, Magento of Panelcom — bepaalt hoe dun de webshoplaag kan zijn. Wordt het een handmatige Excel-upload, dan is de vervolgvraag hoe prijs en voorraad actueel blijven.</p></div>
+        <div class="card"><h3>Medusa Cloud is jong</h3><p>Mist het lange enterprise-trackrecord van de grootste spelers. Een reële overweging tegen uitgangspunt 1, en de reden dat Shopify in beeld blijft.</p></div>
+        <div class="card"><h3>Security-musts</h3><p>Prijzen altijd server-side bepalen of verifiëren. Hosted checkout. DPA tekenen met elke leverancier. EU-dataregio aanzetten. Tracking via Tag Manager, nooit in code of CMS.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Snelle referentie</span>
+        <h2>De stack</h2>
+      </div>
+      <div class="scroller">
+        <table class="tpl fixed">
+          <thead><tr><th>Laag</th><th>Keuze</th><th>Toelichting</th></tr></thead>
+          <tbody>
+            <tr><td>Frontend</td><td class="mono">Next.js + Tailwind</td><td>Deploy op Vercel, met CI/CD en previews</td></tr>
+            <tr><td>Content</td><td class="mono">Sanity</td><td>Headless CMS, EU-dataregio, blokkenbibliotheek</td></tr>
+            <tr><td>Webshop</td><td class="mono">Medusa Cloud</td><td>Managed. Magento vervallen; Shopify alleen terug bij multi-channel</td></tr>
+            <tr><td>Betalen</td><td class="mono">Mollie of Stripe</td><td>iDEAL verplicht; keuze kan tot het laatst wachten</td></tr>
+            <tr><td>Tracking</td><td class="mono">Google Tag Manager</td><td>Niet in code, niet in het CMS</td></tr>
+            <tr><td>Configurator</td><td class="mono">extern, embedded</td><td>iframe met postMessage; voedt de winkelwagen</td></tr>
+            <tr><td>PIM</td><td class="mono">alleen scenario 2</td><td>Nog te beslissen — hangt op knop 4</td></tr>
+            <tr><td>Grens</td><td class="mono">casebuilder api</td><td>Alles daarachter blijft van CaseBuilder</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Nog niet vastgelegd</span>
+        <h2>Vijf pakketten</h2>
+        <p>Stand eind augustus: <strong>Magento blijft niet</strong> en Medusa is voor 95% zeker. Daarmee valt pakket A af en is B de facto gekozen. De andere drie staan er voor de volledigheid — en omdat C, D en E nog echte keuzes bevatten over editor-vrijheid en multi-channel.</p>
+      </div>
+      <div class="scroller">
+        <table class="tpl">
+          <thead><tr><th>Pakket</th><th>Commerce</th><th>Content</th><th>Risico</th><th>Kies als</th></tr></thead>
+          <tbody>
+            <tr><td><strong>A</strong> Behoud <span class="chip chip-drop">vervallen</span></td><td class="mono">Magento headless</td><td class="mono">Sanity · blokken</td><td>Laag op proces, midden op ops</td><td>Magento blijft niet — besloten</td></tr>
+            <tr><td><strong>B</strong> Schone lei <span class="chip chip-keep">gekozen</span></td><td class="mono">Medusa Cloud</td><td class="mono">Sanity · blokken</td><td>Midden/hoog</td><td>Code-first, cut-vrij, Magento is oud</td></tr>
+            <tr><td><strong>C</strong> Autonomie</td><td class="mono">Medusa of Magento</td><td class="mono">Storyblok · vrij</td><td>Midden</td><td>Redactie moet alles visueel kunnen</td></tr>
+            <tr><td><strong>D</strong> Controle</td><td class="mono">Medusa of Magento</td><td class="mono">Sanity · vaste velden</td><td>Laag visueel, hoge dev-afhankelijkheid</td><td>Merkconsistentie boven zelfstandigheid</td></tr>
+            <tr><td><strong>E</strong> Ontzorging</td><td class="mono">Shopify Plus</td><td class="mono">Sanity of Storyblok</td><td>Laag en bewezen</td><td>Multi-channel is een echt kerndoel</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <h3>De configurator blijft zoals hij is</h3>
+          <p>Extern en embedded, een iframe-shell met postMessage. Het enige integratiepunt is de bestel-knop die het geconfigureerde item in de winkelwagen legt. Nu via Magento's add-to-cart API, straks tegen Medusa als custom line item met de volledige configuratie als metadata. <strong>De zaagservice werkt met hetzelfde patroon</strong> — een service-line-item met de zaagmaten als metadata.</p>
+        </div>
+        <div class="card">
+          <h3>Vertrouw nooit een prijs uit de browser</h3>
+          <p>Óf de configurator tekent de payload server-to-server, óf de geprijsde configuratie wordt server-side opgehaald via een config-ID. Anders is de prijs manipuleerbaar. Dit geldt in elk van de vijf pakketten.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Voor Gert</span>
+        <h2>Openstaande vragen uit de architectuurdocumenten</h2>
+      </div>
+      <div class="qlist">
+        <div class="q"><span class="n">01</span><span class="body"><span class="qq">Levert de casebuilder api de productlijst?</span><span class="why">En de losse-onderdelen-catalogus — via de casebuilder api, of via Panelcom? Bij een mandje met schroeven én cases: lopen die beide door hetzelfde luik?</span><span class="src">bepaalt hoe dun de webshop-laag kan zijn, en of Magento nog nodig is</span></span></div>
+        <div class="q"><span class="n">02</span><span class="body"><span class="qq">Geeft de casebuilder api orderstatus en klantgegevens terug?</span><span class="why">Inclusief telefonische orders die CaseBuilder zelf aanmaakt.</span><span class="src">zonder dit bestaat het klantportaal niet</span></span></div>
+        <div class="q"><span class="n">03</span><span class="body"><span class="qq">Is er een feed-API voor Panelcom, of alleen een statische download?</span><span class="why">En komt die rechtstreeks bij ons binnen, of blijft die via CaseBuilder lopen?</span><span class="src">handwerk versus automatisch en altijd actueel</span></span></div>
+        <div class="q"><span class="n">04</span><span class="body"><span class="qq">Zijn Bol, Amazon en eBay een concreet doel, of "ooit misschien"?</span><span class="why">Bepaalt of de PIM nu een kernlaag is of fase 2 — én of Shopify serieus tegen Medusa afgewogen moet worden.</span><span class="src">scenario 1 of scenario 2</span></span></div>
+        <div class="q"><span class="n">05</span><span class="body"><span class="qq">Wat komt er uit de audit?</span><span class="why">Welke back-office-koppelingen en welke custom Magento-logica moeten mee? De zichtbare checkout is de makkelijke 20%; de verborgen 80% zit in de koppelingen.</span><span class="src">de scharnierfactor voor de pakketkeuze</span></span></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Van onze kant</span>
+        <h2>Wat het bord oproept</h2>
+        <p>Gelezen van het infrastructuurbord, naast de twee documenten. Deze staan nergens genoteerd.</p>
+      </div>
+      <div class="qlist">
+        <div class="q"><span class="n">06</span><span class="body"><span class="qq">Adyen of Stripe — of allebei?</span><span class="why">Het bord noemt <code>adyen — magento success order status</code> én <code>stripe — custom db webhook maken voor successful payment</code>. De architectuurdocumenten adviseren Mollie of Stripe. Wat draait er vandaag echt?</span><span class="src">bepaalt of de betaalkoppeling migratie of nieuwbouw is</span></span></div>
+        <div class="q"><span class="n">07</span><span class="body"><span class="qq">Is de casebuilder api hetzelfde als de REST API van cb_core_v2?</span><span class="why">Het bord tekent ze als twee blokken: een groene casebuilder api naast cb_core_v2, dat volgens de notitie een eigen schema en REST API heeft. Eén ding met twee namen, of twee lagen?</span><span class="src">bepaalt waar precies het luik zit</span></span></div>
+        <div class="q"><span class="n">08</span><span class="body"><span class="qq">Het klantportaal pollt nu.</span><span class="why">Het bord toont een watchdog die klantorders uit de database pollt en offline orders terugduwt. Het architectuurvoorstel gaat uit van een directe read op de casebuilder api. Blijft die watchdog bestaan, of vervalt hij?</span><span class="src">verschil tussen verhuizen en herbouwen</span></span></div>
+        <div class="q"><span class="n">09</span><span class="body"><span class="qq">Wanneer wordt de flash ID bijgewerkt?</span><span class="why">Bij het openen van de configurator ontstaat een flash ID in cb_core_v2. Gebeurt de update bij elke ontwerpwijziging, of alleen bij toevoegen aan de winkelwagen?</span><span class="src">bepaalt of een gedeelde configuratie-URL zonder login kan bestaan</span></span></div>
+        <div class="q"><span class="n">10</span><span class="body"><span class="qq">Wie is Trim, en wat is rack247?</span><span class="why">Het bord toont in GitLab een privérepo <code>website casebuilder (trim)</code> en een open repo <code>rack247 (trim)</code>. Een tweede webshop of merk dat ook door deze rebuild geraakt wordt?</span><span class="src">niet genoemd in enig document</span></span></div>
+        <div class="q"><span class="n">11</span><span class="body"><span class="qq">Wat betekent de getekende overlap?</span><span class="why">Tussen de migration services api en de shop floor service staat expliciet <code>overlap</code>. Als daar functionaliteit dubbel ligt, raakt dat de belofte dat alles achter het luik ongemoeid blijft.</span><span class="src">risico voor de scheidslijn</span></span></div>
+        <div class="q"><span class="n">12</span><span class="body"><span class="qq">Staan Sentry en Datadog al aan?</span><span class="why">Het bord noteert ze met "Check Roks" ernaast — dat leest als voornemen, niet als bestaande situatie.</span><span class="src">zonder foutmonitoring bouw je blind</span></span></div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="tabpanel" id="p3" role="tabpanel" aria-labelledby="t3" hidden>
+
+    <header class="masthead">
+      <span class="eyebrow">CaseBuilder</span>
+      <h1>Bouwfase</h1>
+      <p class="lede">Stand van zaken per eind augustus 2026, gelezen van de planning. Groen is af; de rest staat gepland of loopt.</p>
+      <a class="srclink" href="https://www.figma.com/board/AcEVUtEcwFhtOzbR7IS9L9/casebuilder?node-id=82-2192" target="_blank" rel="noopener noreferrer"><span class="tag">bron</span> Gantt-chart in Figma →</a>
+      <div class="statwrap">
+        <span class="statcap">Peildatum 27 augustus</span>
+        <div class="stats">
+          <div class="stat"><span class="n">7</span><span class="l">afgerond</span></div>
+          <div class="stat"><span class="n">8</span><span class="l">loopt in augustus</span><span class="d">deels parallel</span></div>
+          <div class="stat"><span class="n">10</span><span class="l">milestones</span><span class="d">1 t/m 6</span></div>
+          <div class="stat"><span class="n">2</span><span class="l">CB-afhankelijk</span><span class="d">wacht op CaseBuilder</span></div>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Toetsmomenten</span>
+        <h2>Milestones</h2>
+        <p>Chronologisch, met de stand per eind augustus. Twee zijn afgerond, drie lopen, één wacht op CaseBuilder.</p>
+      </div>
+      <div class="mtiles">
+        <div class="mt af"><div class="mtop"><span class="mn">1</span><h4>Tool set-up klaar</h4><p>Vercel-project, Sanity-basisinrichting en de bevestigde stack: Medusa, Sanity, Next.js.</p></div><span class="tag">afgerond</span></div>
+        <div class="mt loopt"><div class="mtop"><span class="mn">2a</span><h4>Minimale frontend om een geconfigureerd product te bestellen</h4><p>Medusa-skeleton plus de configurator-embed met POST-integratie. Loopt in augustus.</p></div><span class="tag">onderhanden</span></div>
+        <div class="mt cb"><div class="mtop"><span class="mn">2b</span><h4>We zien de order terug in het webshopportaal</h4><p>Hangt op het Magento-orderendpoint en de watchdog-koppeling met cb_core_v2 — beide van CaseBuilder.</p></div><span class="tag">wacht op cb</span></div>
+        <div class="mt gepland"><div class="mtop"><span class="mn">3</span><h4>Stresstest — bugs zijn in beeld</h4><p>Nog niet ingepland. Bepaalt hoeveel reparatiewerk er vóór de bouwfase-afronding bij komt.</p></div><span class="tag">gepland</span></div>
+        <div class="mt af"><div class="mtop"><span class="mn">4</span><h4>Sitemap, wireframes en user flows uitgestippeld</h4><p>Veertien sjablonen, zeventien besteltaken en de volledige nieuwe boom liggen er.</p></div><span class="tag">afgerond</span></div>
+        <div class="mt loopt"><div class="mtop"><span class="mn">4</span><h4>API en endpoint klaar</h4><p>Casebuilder API skeleton en de API-contracten worden in augustus vastgelegd.</p></div><span class="tag">onderhanden</span></div>
+        <div class="mt gepland"><div class="mtop"><span class="mn">4</span><h4>Hoofdtemplates staan in de CMS</h4><p>Sanity-templates en de blokkenbibliotheek — oktober.</p></div><span class="tag">gepland</span></div>
+        <div class="mt loopt"><div class="mtop"><span class="mn">5a</span><h4>Designprototype klaar</h4><p>Design frontend loopt; categoriepagina is af, de overige dertien volgen.</p></div><span class="tag">onderhanden</span></div>
+        <div class="mt gepland"><div class="mtop"><span class="mn">5b</span><h4>Website usability-test</h4><p>Nog niet belegd. Vraagt een werkend prototype en deelnemers uit de doelgroep.</p></div><span class="tag">te plannen</span></div>
+        <div class="mt gepland"><div class="mtop"><span class="mn">6</span><h4>Eerste contentpagina&#39;s live</h4><p>Vraagt de blokkenbibliotheek én de vertaalbeslissing — beide staan nog open.</p></div><span class="tag">gepland</span></div>
+      </div>
+    </section>
+
+    <div class="legend">
+      <span class="item"><span class="chip chip-keep">af</span> afgerond</span>
+      <span class="item"><span class="chip chip-move">loopt</span> in augustus onderhanden</span>
+      <span class="item"><span class="chip chip-open">gepland</span> staat verderop</span>
+      <span class="item"><span class="chip chip-drop">cb</span> hangt op CaseBuilder</span>
+    </div>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Research &amp; discovery · architecture</span>
+        <h2>Wat af is</h2>
+        <p>Zeven blokken staan op groen. Daarmee ligt het fundament: het huidige systeem is in kaart, de stack is bevestigd en de verbinding met de casebuilder api is aantoonbaar getest.</p>
+      </div>
+      <div class="track">
+        <div class="item"><span class="when">jul 1–15</span><span class="what">Stakeholder-interviews en workshops</span><span class="st"><span class="chip chip-keep">af</span></span></div>
+        <div class="item"><span class="when">jul 8–22</span><span class="what">Huidig systeem in kaart gebracht<small>Levert de crawl van 386 URL's die onder de ontwerpfase ligt</small></span><span class="st"><span class="chip chip-keep">af</span></span></div>
+        <div class="item"><span class="when">jul 20 – aug 13</span><span class="what">Connection test frontend ↔ casebuilder api<small>Via de configurator — het technisch risicovolste punt, en het is aangetoond</small></span><span class="st"><span class="chip chip-keep">af</span></span></div>
+        <div class="item"><span class="when">aug</span><span class="what">Tech stack bevestigd: Medusa, Sanity, PIM</span><span class="st"><span class="chip chip-keep">af</span></span></div>
+        <div class="item"><span class="when">aug</span><span class="what">Vercel-project opgezet</span><span class="st"><span class="chip chip-keep">af</span></span></div>
+        <div class="item"><span class="when">aug</span><span class="what">Sanity CMS basisinrichting</span><span class="st"><span class="chip chip-keep">af</span></span></div>
+        <div class="item"><span class="when">jul 15–29</span><span class="what">Tool-evaluatie: PIM, webshop, CMS<small>Levert de twee architectuurdocumenten uit de definitiefase</small></span><span class="st"><span class="chip chip-keep">af</span></span></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Augustus</span>
+        <h2>Wat nu loopt</h2>
+        <p>Vier sporen tegelijk: set-up, cms en design, webshop, en de api-contracten. Dit document zit in het eerste blok.</p>
+      </div>
+      <div class="track">
+        <div class="item"><span class="when">aug</span><span class="what">User flows, sitemap, wireframes, productcategorieën<small>Dit document — zie de ontwerpfase</small></span><span class="st"><span class="chip chip-move">loopt</span></span></div>
+        <div class="item"><span class="when">aug</span><span class="what">Design frontend</span><span class="st"><span class="chip chip-move">loopt</span></span></div>
+        <div class="item"><span class="when">aug</span><span class="what">Casebuilder API skeleton</span><span class="st"><span class="chip chip-move">loopt</span></span></div>
+        <div class="item"><span class="when">aug</span><span class="what">Definitieve datastroom-diagram</span><span class="st"><span class="chip chip-move">loopt</span></span></div>
+        <div class="item"><span class="when">aug</span><span class="what">API-contracten casebuilder api vastleggen</span><span class="st"><span class="chip chip-move">loopt</span></span></div>
+        <div class="item"><span class="when">aug</span><span class="what">Medusa webshop skeleton</span><span class="st"><span class="chip chip-move">loopt</span></span></div>
+        <div class="item"><span class="when">aug</span><span class="what">Configurator iframe-embed, POST-integratie<small>De koppeling die van Magento's add-to-cart naar Medusa verhuist</small></span><span class="st"><span class="chip chip-move">loopt</span></span></div>
+        <div class="item"><span class="when">aug</span><span class="what">Prototype klantportaal</span><span class="st"><span class="chip chip-move">loopt</span></span></div>
+        <div class="item"><span class="when">aug / sep</span><span class="what">Contentstrategie — productcategorieën<small>Hier landt de beslissing over de 38 subcategorieën</small></span><span class="st"><span class="chip chip-move">loopt</span></span></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Vanaf september</span>
+        <h2>Wat er nog staat</h2>
+      </div>
+      <div class="track">
+        <div class="item"><span class="when">sep</span><span class="what">GitHub CI/CD-pipelines</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
+        <div class="item"><span class="when">sep</span><span class="what">Dev-acceptance en productieomgevingen</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
+        <div class="item"><span class="when">aug</span><span class="what">Endpoint voor Magento-klantportaalorders<small>Zodat lopende orders zichtbaar blijven tijdens de overgang</small></span><span class="st"><span class="chip chip-drop">cb</span></span></div>
+        <div class="item"><span class="when">aug</span><span class="what">cb_core_v2 koppelen met watchdog aan het klantportaal</span><span class="st"><span class="chip chip-drop">cb</span></span></div>
+        <div class="item"><span class="when">okt</span><span class="what">Sanity CMS-templates en componenten<small>De blokkenbibliotheek — niveau 2 uit het keuzedocument</small></span><span class="st"><span class="chip chip-open">gepland</span></span></div>
+        <div class="item"><span class="when">okt</span><span class="what">Webshop Medusa full build</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
+        <div class="item"><span class="when">nov</span><span class="what">CMS Sanity contentstructuur-import</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
+        <div class="item"><span class="when">nov mid</span><span class="what">Werkend prototype op staging</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
+        <div class="item"><span class="when">dec</span><span class="what">Klantportaal custom frontend full build</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
+        <div class="item"><span class="when">dec / jan</span><span class="what">Orderproductie-statusupdates van cb_core naar klantportaal<small>E-mail en status — de terugstroom uit het luik</small></span><span class="st"><span class="chip chip-open">gepland</span></span></div>
+        <div class="item"><span class="when">jan</span><span class="what">Stripe payment integration</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
+        <div class="item"><span class="when">feb</span><span class="what">Volledige end-to-end test</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
+        <div class="item"><span class="when">mrt 8–20</span><span class="what">User acceptance</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
+        <div class="item"><span class="when">mrt 20–31</span><span class="what">Performance- en securityreview</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Wat opvalt</span>
+        <h2>Drie dingen om te checken</h2>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <h3>De datumlabels lopen niet met de balken mee</h3>
+          <p>Verschillende blokken dragen een label dat niet klopt met hun positie op de tijdlijn — <code>Sep 14–19 Vercel project setup</code> staat groen en dus af, terwijl september nog moet beginnen. Waarschijnlijk zijn balken verschoven zonder dat de labels mee zijn gegaan. <strong>Ik heb de positie aangehouden, niet het label.</strong> Even nalopen voordat iemand hier een planning uit afleidt.</p>
+        </div>
+        <div class="card">
+          <h3>Twee blokken hangen op CaseBuilder</h3>
+          <p>Het endpoint voor Magento-klantportaalorders en de watchdog-koppeling met cb_core_v2 staan beide met een CB-markering. Die staan in augustus gepland maar zijn niet van ons. <strong>Loopt daar iets, of wacht dat nog?</strong> Milestone 2b hangt eraan.</p>
+        </div>
+        <div class="card">
+          <h3>Redirects staan nergens in de planning</h3>
+          <p>Het stappenplan in <code>redirects.md</code> beslaat negen stappen, waarvan de inventaris al kan starten. In de planning zie ik migratie en go-live wel als rij, maar geen blok voor de redirect-mapping. Bij 386 URL's met bestaande posities is dat geen restpost — en de test moet vóór livegang draaien.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="tabpanel" id="p2" role="tabpanel" aria-labelledby="t2">
+
+  <header class="masthead">
+    <span class="eyebrow">CaseBuilder</span>
+    <h1>Sitemap nu vs straks</h1>
+    <p class="lede">Links wat er vandaag live staat, geverifieerd tegen de crawl van 5 augustus en de site zelf. Rechts de nieuwe structuur, met de twee besluiten van vandaag verwerkt.</p>
+    <div class="statwrap">
+      <span class="statcap">Nu — live</span>
+      <div class="stats">
+        <div class="stat"><span class="n">386</span><span class="l">bereikbare pagina's</span></div>
+        <div class="stat"><span class="n">15</span><span class="l">unieke templates</span></div>
+        <div class="stat"><span class="n">233</span><span class="l">productpagina's</span></div>
+        <div class="stat"><span class="n">4</span><span class="l">losse applicaties</span><span class="d">rootsite · shop · configurator · portaal</span></div>
+        <div class="stat"><span class="n">5</span><span class="l">locales</span></div>
+      </div>
+    </div>
+
+    <div class="statwrap">
+      <span class="statcap">Straks — nieuwe frontend</span>
+      <div class="stats next">
+        <div class="stat"><span class="n">311</span><span class="l">bereikbare pagina's</span><span class="d">−75 · filtervarianten vervallen</span></div>
+        <div class="stat"><span class="n">14</span><span class="l">unieke templates</span><span class="d">−1 · plus programmatic</span></div>
+        <div class="stat"><span class="n">233</span><span class="l">productpagina's</span><span class="d">gelijk · alle 233 mee</span></div>
+        <div class="stat"><span class="n">2</span><span class="l">losse applicaties</span><span class="d">−2 · frontend + configurator</span></div>
+        <div class="stat"><span class="n">5</span><span class="l">locales</span><span class="d">gelijk · nl · en · de · fr · es</span></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="thesis">
+    <span class="eyebrow">Twee besluiten verwerkt</span>
+    <p><strong>Modelnamen blijven zoals ze live staan</strong> — koffer, hoedcase, trunccase, rackcase-enkel-deksel, rackcase-dubbel-deksel. Het augustus-voorstel kortte de laatste twee in; dat is teruggedraaid.</p>
+    <p><strong>De losse B2B-tak vervalt.</strong> De hele site is zakelijk; een aparte ingang zou impliceren dat de rest dat niet is. Functionaliteit gaat naar het account, de voorwaarden naar de servicehub. <code>/case-voor</code> blijft — dat is juist de particuliere instroom vanuit Google.</p>
+  </div>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Naast elkaar</span>
+      <h2>De twee bomen</h2>
+      <p>Links staat per regel wat ermee gebeurt. Rechts geen labels — die boom is de bestemming.</p>
+    </div>
+
+    <div class="legend">
+      <span class="item"><span class="chip chip-move">verplaatst</span> bestaat, krijgt een nieuwe URL</span>
+      <span class="item"><span class="chip chip-drop">vervalt</span> verdwijnt, 301 naar dichtstbijzijnde</span>
+      <span class="item"><span class="chip chip-open">open</span> beslissing staat nog uit</span>
+    </div>
+
+    <div class="trees">
+
+      <div class="panel">
+        <div class="panel-head">
+          <h3>Nu — live</h3>
+          <span class="sub">Magento 2 op <code>/nl-nl/</code> · crawl 2026-08-05</span>
+        </div>
+        <div class="panel-body">
+
+          <div class="group-label">Vóór de shop</div>
+          <ul class="tree">
+            <li><div class="node"><span class="path root">casebuilder.com/</span><span class="chip chip-drop">vervalt</span><span class="note">landenkiezer · aparte ASP.NET-app · nl/en/de/fr/es</span></div></li>
+            <li><div class="node"><span class="path root">/nl/</span><span class="chip chip-drop">vervalt</span><span class="note">301 → /nl-nl/ · bestaande keten</span></div></li>
+          </ul>
+
+          <div class="group-label">De webshop</div>
+          <ul class="tree">
+            <li><div class="node"><span class="path root">/nl-nl/</span><span class="chip chip-move">verplaatst</span><span class="note">homepage</span></div></li>
+            <li>
+              <div class="node"><span class="path root">/flightcases.html</span><span class="chip chip-move">verplaatst</span><span class="note">overzicht · 5 modellen</span></div>
+              <ul>
+                <li><div class="node"><span class="path">/flightcase-koffer.html</span><span class="chip chip-move">verplaatst</span></div></li>
+                <li><div class="node"><span class="path">/flightcase-hoedcase.html</span><span class="chip chip-move">verplaatst</span></div></li>
+                <li><div class="node"><span class="path">/flightcase-trunccase.html</span><span class="chip chip-move">verplaatst</span></div></li>
+                <li><div class="node"><span class="path">/flightcase-rackcase-enkel-deksel.html</span><span class="chip chip-move">verplaatst</span></div></li>
+                <li><div class="node"><span class="path">/flightcase-rackcase-dubbel-deksel.html</span><span class="chip chip-move">verplaatst</span></div></li>
+                <li><div class="node"><span class="host">configurator.casebuilder.com/?locale=nl-NL&amp;key=6002</span><span class="chip chip-move">verplaatst</span><span class="note">popup · geen eigen URL</span></div></li>
+              </ul>
+            </li>
+            <li><div class="node"><span class="path root">/flightcase</span><span class="chip chip-drop">vervalt</span><span class="note">losse CMS-pagina</span></div></li>
+            <li><div class="node"><span class="path root">/homepage-special-products.html</span><span class="chip chip-drop">vervalt</span><span class="note">geen equivalent</span></div></li>
+            <li>
+              <div class="node"><span class="path root">/onderdelen.html</span><span class="chip chip-move">verplaatst</span><span class="note">catalogus · megamenu</span></div>
+              <ul>
+                <li><div class="node"><span class="path">/onderdelen/profielen</span><span class="note">hoekprofielen · rackprofielen · diverse · sluitprofielen</span></div></li>
+                <li><div class="node"><span class="path">/onderdelen/hoeken</span><span class="note">balhoeken · platte hoeken · overzethoeken</span></div></li>
+                <li><div class="node"><span class="path">/onderdelen/handgrepen</span><span class="note">inbouw · opbouw</span></div></li>
+                <li><div class="node"><span class="path">/onderdelen/sluitingen</span><span class="note">inbouw · opbouw</span></div></li>
+                <li><div class="node"><span class="path">/onderdelen/scharnieren</span><span class="note">inbouw · opbouw</span></div></li>
+                <li><div class="node"><span class="path">/onderdelen/voetjes</span><span class="note">rubber · metaal</span></div></li>
+                <li><div class="node"><span class="path">/onderdelen/schuimplastic</span><span class="note">hard · zacht · noppen · pluk</span></div></li>
+                <li><div class="node"><span class="path">/onderdelen/19-artikelen</span><span class="note">8 subcategorieën</span></div></li>
+                <li><div class="node"><span class="path">/onderdelen/bevestiging-en-tools</span><span class="note">7 subcategorieën</span></div></li>
+                <li><div class="node"><span class="path">/onderdelen/schotels-en-labels</span><span class="note">blind · geponst · ventilatie · tourlabels</span></div></li>
+              </ul>
+            </li>
+            <li><div class="node"><span class="path root">/{sku}.html</span><span class="chip chip-move">verplaatst</span><span class="note">233 productpagina's, op rootniveau</span></div></li>
+            <li><div class="node"><span class="path root">/catalogsearch/result/?q=…</span><span class="chip chip-move">verplaatst</span><span class="note">zoekresultaten</span></div></li>
+          </ul>
+
+          <div class="group-label">Content en service</div>
+          <ul class="tree">
+            <li><div class="node"><span class="path root">/klantenservice</span><span class="chip chip-move">verplaatst</span></div></li>
+            <li><div class="node"><span class="path root">/verzendkosten</span><span class="chip chip-move">verplaatst</span></div></li>
+            <li><div class="node"><span class="path root">/neem-met-ons-contact-op</span><span class="chip chip-move">verplaatst</span></div></li>
+            <li><div class="node"><span class="path root">/catalog/category/view/s/zaagservice/id/76</span><span class="chip chip-move">verplaatst</span><span class="note">zaagservice · ID-URL, onvindbaar</span></div></li>
+            <li><div class="node"><span class="path root">/over-casebuildercom</span><span class="chip chip-move">verplaatst</span><span class="note">spelfout in de slug</span></div></li>
+            <li><div class="node"><span class="path root">/algemene-voorwaarden</span><span class="chip chip-move">verplaatst</span></div></li>
+            <li><div class="node"><span class="path root">/privacy</span><span class="chip chip-move">verplaatst</span></div></li>
+          </ul>
+
+          <div class="group-label">Transactie en account</div>
+          <ul class="tree">
+            <li><div class="node"><span class="path root">/customer/account/…</span><span class="chip chip-move">verplaatst</span><span class="note">login · registreren · wachtwoord · 4 pagina's</span></div></li>
+            <li><div class="node"><span class="path root">/checkout…</span><span class="chip chip-move">verplaatst</span><span class="note">winkelwagen · afrekenen · Adyen</span></div></li>
+            <li><div class="node"><span class="host">portal.casebuilder.com</span><span class="chip chip-open">open</span><span class="note">derde app · IIS 8.5, EOL · HTTP Basic · inhoud onbekend</span></div></li>
+          </ul>
+
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h3>Straks — nieuwe frontend</h3>
+          <span class="sub">Augustus-structuur, met de besluiten van vandaag · paden getoond zonder locale-prefix</span>
+        </div>
+        <div class="panel-body">
+
+          <div class="group-label">Configureren en bestellen</div>
+          <ul class="tree">
+            <li><div class="node"><span class="path root">/</span><span class="note">homepage · drie ingangen op intentie</span></div></li>
+            <li>
+              <div class="node"><span class="path root">/flightcases</span><span class="note">overzicht · 5 modellen</span></div>
+              <ul>
+                <li><div class="node"><span class="path">/koffer</span></div></li>
+                <li><div class="node"><span class="path">/hoedcase</span></div></li>
+                <li><div class="node"><span class="path">/trunccase</span></div></li>
+                <li><div class="node"><span class="path">/rackcase-enkel-deksel</span></div></li>
+                <li><div class="node"><span class="path">/rackcase-dubbel-deksel</span></div></li>
+              </ul>
+            </li>
+            <li>
+              <div class="node"><span class="path root">/case-voor</span><span class="note">fit-finder · wat ga je vervoeren?</span></div>
+              <ul>
+                <li><div class="node"><span class="path">/gibson-les-paul</span></div></li>
+                <li><div class="node"><span class="path">/19-inch-rack-6he</span></div></li>
+                <li><div class="node"><span class="path">/moving-head</span></div></li>
+                <li><div class="node"><span class="path">/…</span><span class="note">programmatic, per apparatuur</span></div></li>
+              </ul>
+            </li>
+            <li>
+              <div class="node"><span class="path root">/configurator</span><span class="note">eigen pagina, geen popup</span></div>
+              <ul>
+                <li><div class="node"><span class="path">/{ref}</span><span class="note">deelbaar · flash ID in cb_core_v2</span></div></li>
+              </ul>
+            </li>
+            <li>
+              <div class="node"><span class="path root">/laten-controleren</span><span class="note">specialist kijkt mee</span></div>
+              <ul>
+                <li><div class="node"><span class="path">/bedankt</span></div></li>
+              </ul>
+            </li>
+          </ul>
+
+          <div class="group-label">Catalogus</div>
+          <ul class="tree">
+            <li>
+              <div class="node"><span class="path root">/onderdelen</span><span class="note">compleet, maar uit de hoofdnavigatie</span></div>
+              <ul>
+                <li><div class="node"><span class="path">/{categorie}</span><span class="note">10×</span></div></li>
+                <li><div class="node"><span class="path">/{categorie}/{sub}</span><span class="note">38× · te snoeien op GA4-data</span></div></li>
+                <li><div class="node"><span class="path">/{sku}</span><span class="note">productpagina · 233×</span></div></li>
+              </ul>
+            </li>
+            <li><div class="node"><span class="path root">/zoeken</span><span class="note">?q= · SKU-zoek</span></div></li>
+          </ul>
+
+          <div class="group-label">Content en service</div>
+          <ul class="tree">
+            <li>
+              <div class="node"><span class="path root">/service</span><span class="note">servicehub</span></div>
+              <ul>
+                <li><div class="node"><span class="path">/levertijden</span></div></li>
+                <li><div class="node"><span class="path">/verzending</span></div></li>
+                <li><div class="node"><span class="path">/zaagservice</span></div></li>
+                <li><div class="node"><span class="path">/zakelijk-bestellen</span><span class="note">op rekening · staffels · series</span></div></li>
+                <li><div class="node"><span class="path">/offerte</span><span class="note">aanvraagformulier</span></div></li>
+                <li><div class="node"><span class="path">/contact</span></div></li>
+              </ul>
+            </li>
+            <li><div class="node"><span class="path root">/over-casebuilder</span></div></li>
+            <li><div class="node"><span class="path root">/algemene-voorwaarden</span></div></li>
+            <li><div class="node"><span class="path root">/privacy</span></div></li>
+          </ul>
+
+          <div class="group-label">Transactie en account</div>
+          <ul class="tree">
+            <li>
+              <div class="node"><span class="path root">/account</span><span class="note">fase 1: alleen online bestelde cases · CRM-terugstroom later</span></div>
+              <ul>
+                <li><div class="node"><span class="path">/orders</span><span class="note">orderhistorie</span></div></li>
+                <li><div class="node"><span class="path">/herbestellen</span><span class="note">opnieuw uit eerdere order</span></div></li>
+                <li><div class="node"><span class="path">/configuraties</span><span class="note">bewaarde cases · ook onafgekochte? open</span></div></li>
+                <li><div class="node"><span class="path">/offertes</span><span class="note">lopend en akkoord</span></div></li>
+                <li><div class="node"><span class="path">/gegevens</span><span class="note">adressen · facturatie · op rekening</span></div></li>
+              </ul>
+            </li>
+            <li><div class="node"><span class="path root">/checkout</span><span class="note">wagen → afrekenen → bevestiging</span></div></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Waar de 386 uit bestaan</span>
+      <h2>Templateverdeling</h2>
+      <p>371 van de 386 pagina's zijn twee templates. De site is qua schermen klein en qua content groot — dat bepaalt waar het bouwwerk zit.</p>
+    </div>
+    <h3>Nu — Magento 2</h3>
+    <div class="scroller">
+      <table class="tpl fixed">
+        <thead><tr><th>Template</th><th style="text-align:right">Pagina's</th><th>Wat het is</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">catalog-product-view</td><td class="num">233</td><td>Productdetail — onderdelen én flightcases</td></tr>
+          <tr><td class="mono">page-with-filter</td><td class="num">138</td><td>Categorie-overzicht met layered navigation</td></tr>
+          <tr><td class="mono">cms-*</td><td class="num">8</td><td>Losse contentpagina's</td></tr>
+          <tr><td class="mono">customer-account-*</td><td class="num">4</td><td>Login, registreren, wachtwoord vergeten</td></tr>
+          <tr><td class="mono">checkout-cart-index</td><td class="num">2</td><td>Winkelwagen en checkout</td></tr>
+          <tr><td class="mono">page-product-configurable</td><td class="num">1</td><td>Zaagservice</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="padding-top:14px">Straks — nieuwe frontend</h3>
+    <div class="scroller">
+      <table class="tpl fixed">
+        <thead><tr><th>Template</th><th style="text-align:right">Pagina's</th><th>Wat het is</th></tr></thead>
+        <tbody>
+          <tr><td class="mono"><a href="#wf-pdp-onderdeel">pdp-onderdeel</a></td><td class="num">233</td><td>Productdetail per SKU</td></tr>
+          <tr><td class="mono"><a href="#wf-categorie">categorie</a></td><td class="num">49</td><td>/onderdelen + 10 categorieën + 38 subcategorieën</td></tr>
+          <tr><td class="mono"><a href="#wf-content">content</a></td><td class="num">7</td><td>Levertijden, verzending, zaagservice, zakelijk bestellen, over ons, voorwaarden, privacy</td></tr>
+          <tr><td class="mono"><a href="#wf-account">account</a></td><td class="num">6</td><td>Overzicht, orders, herbestellen, configuraties, offertes, gegevens</td></tr>
+          <tr><td class="mono"><a href="#wf-casetype">casetype</a></td><td class="num">5</td><td>De vijf modellen</td></tr>
+          <tr><td class="mono"><a href="#wf-formulier">formulier</a></td><td class="num">3</td><td>Laten controleren, offerte, contact</td></tr>
+          <tr><td class="mono"><a href="#wf-homepage">homepage</a></td><td class="num">1</td><td>De belangrijkste pagina van de site &mdash; eigen sjabloon</td></tr>
+          <tr><td class="mono"><a href="#wf-servicehub">servicehub</a></td><td class="num">1</td><td>/service met vier onderliggende pagina’s</td></tr>
+          <tr><td class="mono"><a href="#wf-tool">tool</a></td><td class="num">2</td><td>Configurator en fit-finder</td></tr>
+          <tr><td class="mono"><a href="#wf-overzicht">overzicht</a></td><td class="num">1</td><td>/flightcases</td></tr>
+          <tr><td class="mono"><a href="#wf-zoekresultaat">zoekresultaat</a></td><td class="num">1</td><td>/zoeken</td></tr>
+          <tr><td class="mono"><a href="#wf-checkout">checkout</a></td><td class="num">1</td><td>Wagen → afrekenen → bevestiging</td></tr>
+          <tr><td class="mono"><a href="#wf-bevestiging">bevestiging</a></td><td class="num">1</td><td>/laten-controleren/bedankt</td></tr>
+          <tr><td class="mono"><a href="#wf-case-voor-resultaat">case-voor-resultaat</a></td><td class="num">n</td><td>Programmatic per apparatuur — nul bij livegang, groeit onbeperkt</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <h3>311 in plaats van 386</h3>
+        <p>Vijfenzeventig pagina's minder, en dat is bijna volledig <strong>één oorzaak</strong>: de ~90 sorteer-, filter- en paginavarianten zijn geen pagina's meer maar parameter-URL's met een canonical. Er komen tegelijk nieuwe pagina's bij — servicehub, account, fit-finder — dus het echte verschil is groter dan het saldo suggereert.</p>
+      </div>
+      <div class="card">
+        <h3>Nog steeds twee templates</h3>
+        <p>282 van de 311 pagina's zijn <code>pdp-onderdeel</code> en <code>categorie</code> — <strong>91%</strong>, tegen 96% nu. Het bouwwerk verschuift dus nauwelijks: wie die twee templates goed maakt, heeft negen tiende van de site af. De rest is klein in aantal en groot in aandacht.</p>
+      </div>
+      <div class="card">
+        <h3>Eén template groeit onbeperkt</h3>
+        <p><code>case-voor-resultaat</code> is de enige die niet vaststaat. Bij livegang nul, daarna zo veel als je apparaten kunt beschrijven. <strong>Dat is de hele SEO-groei van het plan</strong> — en dus ook de enige plek waar een contentproces nodig is dat na livegang doorloopt.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Voordat de mapping af is</span>
+      <h2>Drie dingen die niet kloppen</h2>
+    </div>
+
+    <div class="warn">
+      <h3>De subcategorieën tellen niet op</h3>
+      <p>Het redirect-stappenplan rekent met <strong>~30 subcategorieën</strong> (regel P3). Het megamenu op de live site bevat er <strong>38</strong>. Acht URL's die geen doel krijgen als je op het patroon vertrouwt. Tel ze hard uit de crawl voordat P3 wordt toegepast.</p>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <h3>138 categoriepagina's, 48 echte categorieën</h3>
+        <p>10 categorieën plus 38 subcategorieën is <strong>48</strong>. De crawl vond er 138 met dat template. De overige ~90 zijn sorteer-, filter- en paginavarianten. Die krijgen canonical of noindex, <strong>geen 301</strong> — precies regel 5 uit de uitgangspunten. Zonder die scheiding blaast de mappingtabel op tot driemaal de nodige omvang.</p>
+      </div>
+      <div class="card">
+        <h3>Het klantportaal is niet meegenomen</h3>
+        <p><code>portal.casebuilder.com</code> is een derde applicatie naast de shop en de rootsite, op IIS 8.5 — end-of-life sinds oktober 2023. Bevestigd: daar zitten <strong>klanten</strong> achter, geen dealers of interne gebruikers. Daarmee is het geen los systeem maar een tweede klantomgeving, en gaat wat erin zit mee naar <code>/account</code>. Wát erin zit is nog onbekend — <strong>testaccount aanvragen</strong>, want het bepaalt of herbestellen nieuw gebouwd wordt of verhuisd.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Beslist · 27 augustus</span>
+      <h2>Locales</h2>
+      <p>Dezelfde vijf talen blijven, met automatische detectie en een handmatige wissel in de header. De locale blijft daarbij in het pad — detectie kiest, de URL bewaart die keuze.</p>
+    </div>
+
+    <div class="scroller">
+      <table class="tpl fixed2">
+        <thead><tr><th>Regel</th><th>Concreet</th><th>Waarom</th></tr></thead>
+        <tbody>
+          <tr><td>Locale altijd in het pad, ook voor Nederlands</td><td class="mono">/nl/… /en/… /de/…</td><td class="blocks"><em>Anders verlies je vier van de vijf markten.</em> Googlebot stuurt geen Accept-Language en crawlt vanaf Amerikaanse IP's — één URL die per bezoeker varieert levert precies één indexeerbare taal op.</td></tr>
+          <tr><td>Detectie alleen op de kale root</td><td class="mono">/ → 302, nooit 301</td><td class="blocks">Een 301 wordt door browser én Google gecached. Dan zit iedereen vast op de taal van de eerste bezoeker.</td></tr>
+          <tr><td>Handmatige wissel schrijft een voorkeur</td><td class="mono">cookie wint van detectie</td><td class="blocks">Wie eenmaal kiest, hoeft dat niet elke keer opnieuw te doen.</td></tr>
+          <tr><td>Nooit automatisch doorsturen op een diepe URL</td><td class="mono">balkje, geen redirect</td><td class="blocks">Landt iemand via Google op <code>/nl/onderdelen/hoeken</code>, dan blijft die daar. <em>Doorsturen sloopt het zoekresultaat waarop is geklikt.</em></td></tr>
+          <tr><td>hreflang op elke pagina, x-default op de root</td><td class="mono">5 varianten per URL</td><td class="blocks">Zonder losse URL's valt er niets te annoteren en ziet Google vijf losse sites in plaats van vijf varianten.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Alle vijf bestaan echt</h3>
+        <p>Gecontroleerd op 27 augustus: <code>nl-nl</code>, <code>en-nl</code>, <code>de-de</code>, <code>fr-fr</code> én <code>es-es</code> geven allemaal <strong>200</strong>. De aanname uit user-flows.md §6 dat <code>es-es</code> mogelijk niet bestaat, klopt niet — al zegt een 200 niets over hoe gevuld de vertaling is.</p>
+      </div>
+      <div class="card">
+        <h3>Nog te beslissen: taalcode of land-taalcode</h3>
+        <p><code>en-nl</code> betekent letterlijk <em>Engels voor de Nederlandse markt</em> — een Engelstalige inkoper in België valt daarbuiten. Omdat élke URL toch verandert, kost <code>/en/</code> nu niets en verbreedt het je bereik. <strong>Tenzij</strong> prijzen, BTW of verzendkosten per land verschillen; dan dragen de landcodes betekenis.</p>
+      </div>
+      <div class="card">
+        <h3>De bestaande keten draait om</h3>
+        <p><code>/nl/</code> stuurt nu door naar <code>/nl-nl/</code> — geverifieerd, geeft een 301. Gaan we naar <code>/nl/</code>, dan keert die richting. Volgens uitgangspunt 2 moeten <strong>zowel <code>/nl/…</code> als <code>/nl-nl/…</code> in één hop</strong> naar de eindbestemming, niet via elkaar.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Toets voor de structuur</span>
+      <h2>Zeventien besteltaken</h2>
+      <p>Wat iemand met een bestelintentie komt doen, in haar eigen woorden — en waar de nieuwe boom haar naartoe stuurt. De gemarkeerde regels zijn de gaten: daar heeft de structuur nog geen antwoord.</p>
+    </div>
+
+    <div class="taskgroups">
+
+      <div class="taskgroup">
+        <h3>Zij weet wat ze wil</h3>
+        <div class="tasklist">
+          <div class="task"><span class="num">01</span><span class="want">Ik weet het model én de maten — bestellen maar.</span><span class="route">/flightcases/{model} → /configurator → /checkout</span></div>
+          <div class="task"><span class="num">02</span><span class="want">Ik wil precies dezelfde case als vorige keer, nog één.</span><span class="route">/account/orders → /account/herbestellen → /checkout</span></div>
+          <div class="task"><span class="num">03</span><span class="want">Dezelfde case, maar één maat groter.</span><span class="route">/account/configuraties → /configurator/{ref} → maat aanpassen</span></div>
+          <div class="task"><span class="num">04</span><span class="want">Dezelfde case, maar in het blauw en met ons logo erop.</span><span class="route">/account/configuraties → /configurator/{ref} → uitvoering<br><span class="gap">gat · bedrukking komt in geen enkel document voor</span></span></div>
+          <div class="task"><span class="num">05</span><span class="want">Ik wil er tien, met staffelprijs.</span><span class="route">/service/zakelijk-bestellen → /service/offerte<br><span class="gap">gat · geen aantal in de configurator</span></span></div>
+        </div>
+      </div>
+
+      <div class="taskgroup">
+        <h3>Zij weet het product, niet de maten</h3>
+        <div class="tasklist">
+          <div class="task"><span class="num">06</span><span class="want">Ik weet wat erin moet, maar niet hoe groot de case moet zijn.</span><span class="route">/case-voor → resultaat → /configurator</span></div>
+          <div class="task"><span class="num">07</span><span class="want">Mijn apparaat is te afwijkend voor de configurator.</span><span class="route">/service/offerte<br><span class="gap">gat · geen uitstap vanuit de configurator</span></span></div>
+          <div class="task"><span class="num">08</span><span class="want">Ik heb hem geconfigureerd, maar klopt dit wel?</span><span class="route">/configurator → /laten-controleren → /bedankt</span></div>
+        </div>
+      </div>
+
+      <div class="taskgroup">
+        <h3>Zij weet het nog niet</h3>
+        <div class="tasklist">
+          <div class="task"><span class="num">09</span><span class="want">Wat kost zoiets ongeveer, voordat ik ga klikken?</span><span class="route">/flightcases/{model} — vanafprijs op de modelpagina</span></div>
+          <div class="task"><span class="num">10</span><span class="want">Welk type heb ik eigenlijk nodig?</span><span class="route">/flightcases — overzicht<br><span class="gap">gat · geen vergelijking of beslisboom</span></span></div>
+          <div class="task"><span class="num">11</span><span class="want">Ik zocht op "case voor Gibson Les Paul" en kwam hier.</span><span class="route">/case-voor/gibson-les-paul → /configurator</span></div>
+        </div>
+      </div>
+
+      <div class="taskgroup">
+        <h3>Zij bouwt zelf</h3>
+        <div class="tasklist">
+          <div class="task"><span class="num">12</span><span class="want">Ik bouw hem zelf — stuur maar als bouwpakket.</span><span class="route">/configurator<br><span class="gap">gat · onbekend wáár die keuze valt</span></span></div>
+          <div class="task"><span class="num">13</span><span class="want">Ik mis één sluiting, precies dezelfde als toen.</span><span class="route">/zoeken?q={sku} of /account/herbestellen → /checkout</span></div>
+          <div class="task"><span class="num">14</span><span class="want">Ik wil alleen plaatmateriaal op maat gezaagd, geen case.</span><span class="route">/service/zaagservice → /checkout<br><span class="note">service-line-item met zaagmaten als metadata</span></span></div>
+        </div>
+      </div>
+
+      <div class="taskgroup">
+        <h3>Zij moet het intern rondkrijgen</h3>
+        <div class="tasklist">
+          <div class="task"><span class="num">15</span><span class="want">Ik wil dit ontwerp intern rondsturen voordat we bestellen.</span><span class="route">/configurator/{ref} — deelbare link, geen login nodig</span></div>
+          <div class="task"><span class="num">16</span><span class="want">Onze inkoop wil er een formele offerte bij.</span><span class="route">/configurator/{ref} → /service/offerte → /account/offertes</span></div>
+          <div class="task"><span class="num">17</span><span class="want">Wij willen op rekening bestellen — nieuwe klant worden.</span><span class="route">/service/zakelijk-bestellen → /account registreren</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Voordat dit gebouwd kan worden</span>
+      <h2>Wat we nog niet weten</h2>
+      <p>Uit <code>user-flows.md</code> §5 en §6, aangevuld met wat vandaag naar boven kwam. Per regel staat wat er stilligt zolang het antwoord ontbreekt — niet wat het "handig" zou maken.</p>
+    </div>
+
+    <div class="urgent">
+      <h3>GTM heeft haast, de rest niet</h3>
+      <p>De configurator draait in een popup zonder eigen URL, dus GA ziet nu vrijwel niets van de belangrijkste flow op de site. <strong>Elke week zonder events bouwt een gat op dat later niet te dichten is.</strong> Instrumenteer je nu, dan weet je bij het ontwerpen op welke stap mensen afhaken én heb je een nulmeting. Instrumenteer je pas bij livegang, dan blijft "is het beter geworden?" onbeantwoordbaar. Minimaal nodig: een event per stapovergang plus één op de handoff naar de winkelwagen.</p>
+      <p>Aangevraagd op <strong>5 augustus</strong>. Vandaag is het 27 augustus.</p>
+    </div>
+
+    <h3 class="tablabel">Toegang die we missen</h3>
+    <div class="scroller">
+      <table class="tpl fixed2">
+        <thead><tr><th>Wat</th><th>ID</th><th>Blokkeert</th></tr></thead>
+        <tbody>
+          <tr><td>Magento order-export · 12 mnd, orderregels + SKU</td><td class="id">Magento admin / DB</td><td class="blocks"><em>De prominentie-vraag.</em> Wat is de omzetverhouding flightcases versus losse onderdelen? Bepaalt de homepage en hoeveel de catalogus waard is.</td></tr>
+          <tr><td>GTM · publish-rechten</td><td class="id">shop + rootsite</td><td class="blocks"><em>De nulmeting.</em> Tijdgevoelig — zie hierboven.</td></tr>
+          <tr><td>GA4 · viewer volstaat</td><td class="id">property casebuilder.com</td><td class="blocks"><em>Het snoeien van de 38 subcategorieën</em> en de prioritering van de redirect-mapping. Zonder verkeer per URL is elke keuze een gok.</td></tr>
+          <tr><td>Google Search Console</td><td class="id">domein casebuilder.com</td><td class="blocks"><em>De keuze tussen /case-voor en redactionele landingspagina's.</em> Ook de enige bron voor URL's die Google kent maar die nergens gelinkt zijn.</td></tr>
+          <tr><td>Magento zoektermenrapport</td><td class="id">Magento admin</td><td class="blocks"><em>De navigatie en /zoeken.</em> Wat bezoekers zoeken maar niet vinden is directe input voor welke facetten een URL verdienen.</td></tr>
+          <tr><td>Testaccount als klant</td><td class="id">shop + portal</td><td class="blocks"><em>Of /account/herbestellen nieuw gebouwd wordt of verhuisd.</em> Raakt besteltaak 02, 03 en 13.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="tablabel">Vragen die we zelf kunnen beantwoorden</h3>
+    <div class="scroller">
+      <table class="tpl fixed2">
+        <thead><tr><th>Vraag</th><th>Hoe</th><th>Blokkeert</th></tr></thead>
+        <tbody>
+          <tr><td>Wat geeft de configurator terug bij stap 5?</td><td>Zelf een configuratie doorlopen en de netwerkaanroepen meelezen</td><td class="blocks"><em>Het technisch risicovolste punt van de migratie.</em> De nieuwe frontend moet dit contract overnemen zonder Magento's custom options.</td></tr>
+          <tr><td>Waar valt de keuze bouwpakket of kant-en-klaar?</td><td>Configuratie doorlopen tot de winkelwagen</td><td class="blocks">Besteltaak 12. Verandert levertijd én waarschijnlijk de doelgroep.</td></tr>
+          <tr><td>Bestaat de B2B-flow offline — op rekening, staffels?</td><td>Navragen bij de klant</td><td class="blocks">Besteltaak 05 en 17, en de inhoud van /service/zakelijk-bestellen.</td></tr>
+          <tr><td>Levert CaseBuilder bedrukking en logo's?</td><td>Navragen bij de klant</td><td class="blocks">Besteltaak 04. <em>Komt in geen enkel document voor</em> — niet in de configuratorstappen, niet in het merkboek, niet in de sitemap.</td></tr>
+          <tr><td>Zijn en-nl, de-de, fr-fr en es-es volwaardig of half gevuld?</td><td>Steekproef op de live site per locale</td><td class="blocks"><em>Élke redirect.</em> Blijft de locale in het pad, of gaat NL naar de root?</td></tr>
+          <tr><td>Is zaagservice een dienst of een product?</td><td>Huidige pagina bekijken, navragen</td><td class="blocks">Besteltaak 14 en de plek in de servicehub.</td></tr>
+          <tr><td>Trustpilot 4,68 of eKomi 4,63?</td><td>In de browser kijken — widget laadt via JavaScript</td><td class="blocks">De trust-strategie op de homepage. De twee documenten noemen verschillende platforms.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  </div>
+
+  <div class="tabpanel" id="p4" role="tabpanel" aria-labelledby="t4" hidden>
+
+    <header class="masthead">
+      <span class="eyebrow">CaseBuilder · ontwerpfase</span>
+      <h1>Wireframes</h1>
+      <p class="lede">Veertien sjablonen dekken de hele site. Geen plaatjes maar structuur: wat er op het scherm staat en in welke volgorde. Kies er links één.</p>
+    </header>
+
+    <div class="wflayout">
+      <nav class="wfnav" aria-label="Sjablonen">
+        <button class="wfitem" type="button" data-wf="pdp-onderdeel" aria-current="true"><span class="u">/onderdelen/{sku}</span><span class="m"><span class="t">pdp-onderdeel</span><span class="c">233</span></span></button>
+        <button class="wfitem" type="button" data-wf="categorie"><span class="u">/onderdelen/{cat}/{sub}</span><span class="m"><span class="t">categorie</span><span class="c">49</span></span></button>
+        <button class="wfitem" type="button" data-wf="content"><span class="u">/service/levertijden</span><span class="m"><span class="t">content</span><span class="c">7</span></span></button>
+        <button class="wfitem" type="button" data-wf="account"><span class="u">/account/orders</span><span class="m"><span class="t">account</span><span class="c">6</span></span></button>
+        <button class="wfitem" type="button" data-wf="casetype"><span class="u">/flightcases/{model}</span><span class="m"><span class="t">casetype</span><span class="c">5</span></span></button>
+        <button class="wfitem" type="button" data-wf="formulier"><span class="u">/laten-controleren</span><span class="m"><span class="t">formulier</span><span class="c">3</span></span></button>
+        <button class="wfitem" type="button" data-wf="homepage"><span class="u">/</span><span class="m"><span class="t">homepage</span><span class="c">1</span></span></button>
+        <button class="wfitem" type="button" data-wf="servicehub"><span class="u">/service</span><span class="m"><span class="t">servicehub</span><span class="c">1</span></span></button>
+        <button class="wfitem" type="button" data-wf="tool"><span class="u">/configurator</span><span class="m"><span class="t">tool</span><span class="c">2</span></span></button>
+        <button class="wfitem" type="button" data-wf="overzicht"><span class="u">/flightcases</span><span class="m"><span class="t">overzicht</span><span class="c">1</span></span></button>
+        <button class="wfitem" type="button" data-wf="zoekresultaat"><span class="u">/zoeken</span><span class="m"><span class="t">zoekresultaat</span><span class="c">1</span></span></button>
+        <button class="wfitem" type="button" data-wf="checkout"><span class="u">/checkout</span><span class="m"><span class="t">checkout</span><span class="c">1</span></span></button>
+        <button class="wfitem" type="button" data-wf="bevestiging"><span class="u">/laten-controleren/bedankt</span><span class="m"><span class="t">bevestiging</span><span class="c">1</span></span></button>
+        <button class="wfitem" type="button" data-wf="case-voor-resultaat"><span class="u">/case-voor/{apparaat}</span><span class="m"><span class="t">case-voor-resultaat</span><span class="c">n</span></span></button>
+      </nav>
+      <div class="wfstage">
+<figure class="wf" data-mode="wire" id="wf-pdp-onderdeel">
+  <figcaption><h3>/onderdelen/{sku}</h3><span class="wfmeta">pdp-onderdeel &middot; 233 pagina&#39;s · productdetail per SKU</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" disabled>ontwerp volgt</button></span></figcaption>
+  <div class="wfframe"><div class="wfurl">/onderdelen/eg-0105</div><div class="wfpage"><div class="b nav">header · logo · flightcases · wat ga je vervoeren? · onderdelen · service · ☎ · wagen</div><div class="b">kruimelpad</div><div class="wfrow"><div class="wfcol w2"><div class="b xtall">foto met schaalreferentie — klein, medium en groot zijn nu niet te onderscheiden</div></div><div class="wfcol"><div class="b head">H1 · Balhoek medium, verzinkt</div><div class="b">EG-0105 — SKU ondergeschikt, niet als titel</div><div class="b">€ 1,45 excl. — incl. BTW klein eronder, niet doorgestreept</div><div class="b cta">aantal [ 25 ] · in winkelwagen</div><div class="b">voorraad · levertijd</div><div class="b soft">eerder besteld: 12 maart, 40 stuks</div></div></div><div class="b">specificaties · maat · materiaal · boorgat · dikte</div><div class="b">combineer met · profiel X · popnagel Y</div><div class="b nav">footer · modellen · onderdelen · service · voorwaarden · privacy · taal</div></div></div>
+  <p class="wfnote">Drie correcties op de huidige PDP: de SKU is geen titel, de BTW-weergave lijkt niet op een korting, en de foto heeft een schaalreferentie.</p>
+</figure>
+<figure class="wf" data-mode="wire" hidden id="wf-categorie">
+  <figcaption><h3>/onderdelen/{cat}/{sub}</h3><span class="wfmeta">categorie &middot; 49 pagina&#39;s · /onderdelen en (sub)categorieën</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" data-mode="design" aria-pressed="false">ontwerp</button><a class="wffull" href="mockups/categorie.html" target="_blank" rel="noopener">volledige pagina &#8599;</a></span></figcaption>
+  <div class="wfframe"><div class="wfurl">/onderdelen/hoeken/balhoeken</div><div class="wfpage"><div class="b nav">header · logo · flightcases · wat ga je vervoeren? · onderdelen · service · ☎ · wagen</div><div class="b">kruimelpad · onderdelen › hoeken › balhoeken</div><div class="b head">H1 · Balhoeken</div><div class="b">introtekst · waarvoor, welke maten, hoe kiezen — dit maakt de pagina indexeerbaar</div><div class="wfrow"><div class="wfcol"><div class="b xtall">filters<br><br>maat<br>materiaal<br>afwerking<br>merk<br><br>parameter-URL&#39;s → canonical, geen 301</div></div><div class="wfcol w3"><div class="wfrow"><div class="b tall">product · foto met schaalreferentie · naam · prijs excl. · [ 10 ] + wagen</div><div class="b tall">product</div><div class="b tall">product</div></div><div class="wfrow"><div class="b tall">product</div><div class="b tall">product</div><div class="b tall">product</div></div><div class="b">paginering</div></div></div><div class="b nav">footer · modellen · onderdelen · service · voorwaarden · privacy · taal</div></div></div>
+  <p class="wfnote">Filters zijn <strong>eigenschappen</strong> en krijgen nooit een eigen URL; producttypen waar mensen op zoeken wél. Aantal instelbaar in de lijst — B2B bestelt 10 tot 40 stuks.</p>
+  <div class="dv">
+<div class="util">
+  <div class="wrap mono">
+    <div>PROFLITE · DOESBURG · SINDS 1987</div>
+    <div class="r">
+      <a href="#">NL ▾</a>
+      <a href="#">ZAKELIJK ACCOUNT</a>
+      <a href="#">INLOGGEN</a>
+    </div>
+  </div>
+</div>
+
+<header class="main">
+  <div class="wrap">
+    <div class="logo"><em>case</em>Builder.com</div>
+    <form class="search" onsubmit="return false">
+      <input placeholder="Zoek op artikelnummer of onderdeel…">
+      <button>⌕</button>
+    </form>
+    <div class="hdr-r">
+      <div class="lnk"><b>Offerte</b><span>Binnen 4 uur</span></div>
+      <div class="lnk"><b>Winkelwagen</b><span>3 artikelen</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="primary">
+  <div class="wrap">
+    <a href="#">Flightcases</a>
+    <a href="#">Wat ga je vervoeren?</a>
+    <a href="#" class="on">Onderdelen</a>
+    <a href="#" class="sec">Service</a>
+    <div class="tel">Direct advies · <b>+31 (0)575 575734</b></div>
+  </div>
+</nav>
+
+<div class="crumbs">
+  <div class="wrap">
+    <a href="#">Onderdelen</a><span class="sep">/</span>
+    <a href="#">Hoeken</a><span class="sep">/</span>
+    <span>Balhoeken</span>
+  </div>
+</div>
+
+<div class="cathead ruit ruit-aanzet">
+  <div class="wrap">
+    <div class="ey ey-dark">// ONDERDELEN — HOEKEN</div>
+    <h1>Balhoeken</h1>
+    <p class="lead">De balhoek beschermt de kwetsbaarste plek van een case: de hoek waar twee zijden en een rand
+      samenkomen. Kies op de dikte van je plaatmateriaal — 30 mm bij 7 mm plaat, 40 mm bij 9 mm,
+      50 mm voor zwaardere constructies.</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="catlay">
+
+    <aside class="filters">
+      <div class="fset">
+        <h4>Maat</h4>
+        <label><span class="bx on"></span>30 mm<span class="num">4</span></label>
+        <label><span class="bx"></span>40 mm<span class="num">7</span></label>
+        <label><span class="bx"></span>50 mm<span class="num">5</span></label>
+      </div>
+      <div class="fset">
+        <h4>Materiaal</h4>
+        <label><span class="bx"></span>Staal<span class="num">9</span></label>
+        <label><span class="bx"></span>Aluminium<span class="num">4</span></label>
+      </div>
+      <div class="fset">
+        <h4>Afwerking</h4>
+        <label><span class="bx"></span>Verzinkt<span class="num">6</span></label>
+        <label><span class="bx"></span>Zwart gepoedercoat<span class="num">5</span></label>
+        <label><span class="bx"></span>Blank<span class="num">3</span></label>
+      </div>
+      <div class="fset">
+        <h4>Voorraad</h4>
+        <label><span class="bx on"></span>Direct leverbaar<span class="num">12</span></label>
+      </div>
+    </aside>
+
+    <div>
+      <div class="toolbar">
+        <span class="cnt"><b>14</b> artikelen</span>
+        <span class="cnt">Prijzen excl. btw</span>
+        <span class="cnt">Vandaag besteld · morgen verstuurd</span>
+        <div class="chips sort"><span class="chip on">Meest besteld</span><span class="chip">Prijs</span><span class="chip">Maat</span></div>
+      </div>
+
+      <div class="parts">
+
+        <article class="part">
+          <div class="im"><svg width="104" height="80" viewBox="0 0 104 80" fill="none"><path d="M8 72V26A16 16 0 0 1 24 10h72" stroke="#8FA3B0" stroke-width="8" stroke-linecap="square"/><path d="M22 72V33a9 9 0 0 1 9-9h65" stroke="#C3D0D8" stroke-width="5"/><circle cx="36" cy="56" r="4" fill="#8FA3B0"/><circle cx="62" cy="36" r="4" fill="#8FA3B0"/></svg><span class="sc"><i></i>30 MM</span></div>
+          <div class="bd">
+            <h4>Balhoek klein</h4>
+            <span class="sku">EG-0100 · staal verzinkt</span>
+            <span class="pr">€ 0,95<i>€ 1,15 incl. btw</i></span>
+            <span class="stk">Op voorraad</span>
+            <div class="buy"><div class="qty"><span>−</span><b>25</b><span>+</span></div><button class="btn btn-pri btn-sm" style="flex:1;justify-content:center">In wagen</button></div>
+          </div>
+        </article>
+
+        <article class="part">
+          <div class="im"><svg width="104" height="80" viewBox="0 0 104 80" fill="none"><path d="M8 72V26A16 16 0 0 1 24 10h72" stroke="#8FA3B0" stroke-width="9" stroke-linecap="square"/><path d="M22 72V33a9 9 0 0 1 9-9h65" stroke="#C3D0D8" stroke-width="6"/><circle cx="36" cy="56" r="4.5" fill="#8FA3B0"/><circle cx="62" cy="36" r="4.5" fill="#8FA3B0"/></svg><span class="sc"><i></i>40 MM</span></div>
+          <div class="bd">
+            <h4>Balhoek medium</h4>
+            <span class="sku">EG-0105 · staal verzinkt</span>
+            <span class="pr">€ 1,45<i>€ 1,75 incl. btw</i></span>
+            <span class="stk">Op voorraad</span>
+            <div class="buy"><div class="qty"><span>−</span><b>25</b><span>+</span></div><button class="btn btn-pri btn-sm" style="flex:1;justify-content:center">In wagen</button></div>
+          </div>
+        </article>
+
+        <article class="part">
+          <div class="im"><svg width="104" height="80" viewBox="0 0 104 80" fill="none"><path d="M8 72V24A18 18 0 0 1 26 6h70" stroke="#8FA3B0" stroke-width="10" stroke-linecap="square"/><path d="M24 72V32a10 10 0 0 1 10-10h62" stroke="#C3D0D8" stroke-width="7"/><circle cx="38" cy="56" r="5" fill="#8FA3B0"/><circle cx="66" cy="34" r="5" fill="#8FA3B0"/></svg><span class="sc"><i></i>50 MM</span></div>
+          <div class="bd">
+            <h4>Balhoek groot</h4>
+            <span class="sku">EG-0110 · staal verzinkt</span>
+            <span class="pr">€ 1,95<i>€ 2,36 incl. btw</i></span>
+            <span class="stk">Op voorraad</span>
+            <div class="buy"><div class="qty"><span>−</span><b>10</b><span>+</span></div><button class="btn btn-pri btn-sm" style="flex:1;justify-content:center">In wagen</button></div>
+          </div>
+        </article>
+
+        <article class="part">
+          <div class="im"><svg width="104" height="80" viewBox="0 0 104 80" fill="none"><path d="M8 72V26A16 16 0 0 1 24 10h72" stroke="#3A4750" stroke-width="9" stroke-linecap="square"/><path d="M22 72V33a9 9 0 0 1 9-9h65" stroke="#7C8A94" stroke-width="6"/><circle cx="36" cy="56" r="4.5" fill="#3A4750"/><circle cx="62" cy="36" r="4.5" fill="#3A4750"/></svg><span class="sc"><i></i>40 MM</span></div>
+          <div class="bd">
+            <h4>Balhoek medium, zwart</h4>
+            <span class="sku">EG-0106 · gepoedercoat</span>
+            <span class="pr">€ 1,65<i>€ 2,00 incl. btw</i></span>
+            <span class="stk">Op voorraad</span>
+            <div class="buy"><div class="qty"><span>−</span><b>25</b><span>+</span></div><button class="btn btn-pri btn-sm" style="flex:1;justify-content:center">In wagen</button></div>
+          </div>
+        </article>
+
+        <article class="part">
+          <div class="im"><svg width="104" height="80" viewBox="0 0 104 80" fill="none"><path d="M8 72V24A18 18 0 0 1 26 6h70" stroke="#3A4750" stroke-width="10" stroke-linecap="square"/><path d="M24 72V32a10 10 0 0 1 10-10h62" stroke="#7C8A94" stroke-width="7"/><circle cx="38" cy="56" r="5" fill="#3A4750"/><circle cx="66" cy="34" r="5" fill="#3A4750"/></svg><span class="sc"><i></i>50 MM</span></div>
+          <div class="bd">
+            <h4>Balhoek groot, zwart</h4>
+            <span class="sku">EG-0111 · gepoedercoat</span>
+            <span class="pr">€ 2,15<i>€ 2,60 incl. btw</i></span>
+            <span class="stk">Op voorraad</span>
+            <div class="buy"><div class="qty"><span>−</span><b>10</b><span>+</span></div><button class="btn btn-pri btn-sm" style="flex:1;justify-content:center">In wagen</button></div>
+          </div>
+        </article>
+
+        <article class="part">
+          <div class="im"><svg width="104" height="80" viewBox="0 0 104 80" fill="none"><path d="M8 72V26A16 16 0 0 1 24 10h72" stroke="#A9B6BE" stroke-width="9" stroke-linecap="square"/><path d="M22 72V33a9 9 0 0 1 9-9h65" stroke="#D2DCE2" stroke-width="6"/><circle cx="36" cy="56" r="4.5" fill="#A9B6BE"/><circle cx="62" cy="36" r="4.5" fill="#A9B6BE"/></svg><span class="sc"><i></i>40 MM</span></div>
+          <div class="bd">
+            <h4>Balhoek medium, aluminium</h4>
+            <span class="sku">EG-0107 · blank</span>
+            <span class="pr">€ 1,55<i>€ 1,88 incl. btw</i></span>
+            <span class="stk">Op voorraad</span>
+            <div class="buy"><div class="qty"><span>−</span><b>40</b><span>+</span></div><button class="btn btn-pri btn-sm" style="flex:1;justify-content:center">In wagen</button></div>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="pager"><a href="#" class="on">1</a><a href="#">2</a><a href="#">→</a></div>
+
+      <div class="crosslink">
+        <div>
+          <h3>Bouw je een complete case?</h3>
+          <p>Balhoeken werken samen met hoekprofiel 30×30 en popnagels 4×10. In het bouwpakket zitten ze al in de juiste aantallen.</p>
+        </div>
+        <a class="btn btn-out" href="#">Bekijk bouwpakketten →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="logo"><em>case</em>Builder.com</div>
+        <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br>+31 (0)575 575734</p>
+      </div>
+      <div><h5>Flightcases</h5><a href="#">Koffer</a><a href="#">Hoedcase</a><a href="#">Trunccase</a><a href="#">Rackcase enkel</a><a href="#">Rackcase dubbel</a></div>
+      <div><h5>Onderdelen</h5><a href="#">Profielen</a><a href="#">Hoeken</a><a href="#">Sluitingen</a><a href="#">Wielen</a><a href="#">Schuimplastic</a></div>
+      <div><h5>Service</h5><a href="#">Levertijden</a><a href="#">Verzending</a><a href="#">Zaagservice</a><a href="#">Zakelijk bestellen</a><a href="#">Contact</a></div>
+    </div>
+    <div class="bot"><span>© 2026 Proflite BV · KVK 09123456</span><span>Algemene voorwaarden · Privacy</span></div>
+  </div>
+</footer>
+      </div>
+</figure>
+<figure class="wf" data-mode="wire" hidden id="wf-content">
+  <figcaption><h3>/service/levertijden</h3><span class="wfmeta">content &middot; 7 pagina&#39;s · service en juridisch</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" disabled>ontwerp volgt</button></span></figcaption>
+  <div class="wfframe"><div class="wfurl">/service/levertijden</div><div class="wfpage"><div class="b nav">header · logo · flightcases · wat ga je vervoeren? · onderdelen · service · ☎ · wagen</div><div class="b">kruimelpad · service › levertijden</div><div class="wfrow"><div class="wfcol w3"><div class="b head">H1 · Levertijden</div><div class="b xtall">tekstkolom · opgebouwd uit blokken uit de Sanity-bibliotheek</div><div class="b tall">inhoudsblok · tabel of opsomming</div></div><div class="wfcol"><div class="b tall">in deze sectie<br>· levertijden<br>· verzending<br>· zaagservice<br>· zakelijk bestellen<br>· contact</div><div class="b cta">hulp nodig? ☎</div></div></div><div class="b nav">footer · modellen · onderdelen · service · voorwaarden · privacy · taal</div></div></div>
+  <p class="wfnote">Eén sjabloon voor zeven pagina&#39;s. De redactie stelt ze samen uit vaste blokken — niveau 2 uit het keuzedocument.</p>
+</figure>
+<figure class="wf" data-mode="wire" hidden id="wf-account">
+  <figcaption><h3>/account/orders</h3><span class="wfmeta">account &middot; 6 pagina&#39;s · het klantportaal in de frontend</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" disabled>ontwerp volgt</button></span></figcaption>
+  <div class="wfframe"><div class="wfurl">/account/orders</div><div class="wfpage"><div class="b nav">header · logo · flightcases · wat ga je vervoeren? · onderdelen · service · ☎ · wagen</div><div class="wfrow"><div class="wfcol"><div class="b tall">overzicht<br>orders<br>herbestellen<br>configuraties<br>offertes<br>gegevens</div></div><div class="wfcol w3"><div class="b head">H1 · Mijn bestellingen</div><div class="b tall">order · 12 maart · rackcase enkel · €—<br>[ opnieuw bestellen ]  [ als basis gebruiken ]</div><div class="b tall">order · 4 februari · 40× balhoek medium<br>[ opnieuw bestellen ]</div><div class="b soft">status · in productie — komt uit de casebuilder api</div><div class="b soft">fase 1: alleen online bestelde cases · CRM-orders later</div></div></div><div class="b nav">footer · modellen · onderdelen · service · voorwaarden · privacy · taal</div></div></div>
+  <p class="wfnote">&quot;Opnieuw bestellen&quot; dekt besteltaak 02 en 13; &quot;als basis gebruiken&quot; opent de bewaarde configuratie en dekt taak 03 en 04.</p>
+</figure>
+<figure class="wf" data-mode="wire" hidden id="wf-casetype">
+  <figcaption><h3>/flightcases/{model}</h3><span class="wfmeta">casetype &middot; 5 pagina&#39;s · de vijf modellen</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" disabled>ontwerp volgt</button></span></figcaption>
+  <div class="wfframe"><div class="wfurl">/flightcases/rackcase-enkel-deksel</div><div class="wfpage"><div class="b nav">header · logo · flightcases · wat ga je vervoeren? · onderdelen · service · ☎ · wagen</div><div class="b">kruimelpad · flightcases › rackcase enkel deksel</div><div class="wfrow"><div class="wfcol w2"><div class="b xtall">productfoto&#39;s · drie stuks, echte case in context</div></div><div class="wfcol"><div class="b head">H1 · Rackcase enkel deksel</div><div class="b">vanaf €229,60 excl. — prijsindicatie vóór configureren</div><div class="b">uitleg · case met voordeksel, voor 19&quot; inbouwapparatuur</div><div class="b cta">▶ start configurator — opent op stap 2, model is al bekend</div><div class="b">verwachtingen · eigen maten · kleur en beslag · tien werkdagen</div><div class="b">bouwpakket of kant-en-klaar — keuze zichtbaar maken</div></div></div><div class="b">specificaties · standaardmaten · materiaal · gewicht</div><div class="b">veelgestelde vragen bij dit type</div><div class="b soft">twijfel je? → laten controleren</div><div class="b nav">footer · modellen · onderdelen · service · voorwaarden · privacy · taal</div></div></div>
+  <p class="wfnote">De modelpagina blijft bestaan omdat hij levert wat de configurator niet toont: vanafprijs, foto&#39;s en verwachtingen. Het gekozen model gaat mee, zodat de <strong>dubbele modelkeuze</strong> vervalt.</p>
+</figure>
+<figure class="wf" data-mode="wire" hidden id="wf-formulier">
+  <figcaption><h3>/laten-controleren</h3><span class="wfmeta">formulier &middot; 3 pagina&#39;s · laten controleren, offerte, contact</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" disabled>ontwerp volgt</button></span></figcaption>
+  <div class="wfframe"><div class="wfurl">/laten-controleren</div><div class="wfpage"><div class="b nav">header · logo · flightcases · wat ga je vervoeren? · onderdelen · service · ☎ · wagen</div><div class="b head">H1 · Laat een specialist meekijken</div><div class="b">uitleg · wat je terugkrijgt en binnen hoeveel tijd</div><div class="wfrow"><div class="wfcol w3"><div class="b tall">meegenomen configuratie — samenvatting van /configurator/{ref}</div><div class="b">velden · naam · bedrijf · e-mail · telefoon</div><div class="b tall">waar twijfel je over? · vrij tekstveld</div><div class="b soft">bijlage · foto of tekening</div><div class="b cta">verzenden</div></div><div class="wfcol"><div class="b tall">wat gebeurt er daarna<br><br>1 wij kijken mee<br>2 je hoort binnen 1 werkdag<br>3 aanpassen of bestellen</div></div></div><div class="b nav">footer · modellen · onderdelen · service · voorwaarden · privacy · taal</div></div></div>
+  
+</figure>
+<figure class="wf" data-mode="wire" hidden id="wf-homepage">
+  <figcaption><h3>/</h3><span class="wfmeta">homepage &middot; 1 pagina &middot; de belangrijkste van de site</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" disabled>ontwerp volgt</button></span></figcaption>
+  <div class="wfframe"><div class="wfurl">/</div><div class="wfpage"><div class="b nav">utility · PROFLITE · DOESBURG · SINDS 1987 &nbsp;&nbsp;&nbsp; NL &middot; zakelijk account &middot; inloggen</div><div class="b nav">header · caseBuilder.com &nbsp;|&nbsp; zoek op case, onderdeel of apparatuur &nbsp;|&nbsp; offerte &middot; winkelwagen</div><div class="b nav">nav · Flightcases &middot; Wat ga je vervoeren? &middot; <i>onderdelen</i> &middot; <i>service</i> &nbsp;&nbsp; direct advies +31 (0)575 575734</div><div class="b head">HERO — één belofte, geen functiebeschrijving</div><div class="wfrow"><div class="wfcol w2"><div class="b head">H1 · Je flightcase staat over tien dagen op de kade</div><div class="b">subkop · configureer online tot op de millimeter, zie meteen wat het kost</div><div class="wfrow"><div class="b cta">▶ start met configureren</div><div class="b soft">wat ga je vervoeren?</div></div><div class="b">specstrip · levertijd 10 werkdagen &middot; prijs direct zichtbaar &middot; bouwpakket of kant-en-klaar &middot; specialist kijkt mee</div></div><div class="wfcol"><div class="b xtall">eindproduct in context — festival, industrie, op transport</div></div></div><div class="b soft">INGELOGD? — snel bijbestellen uit je laatste order</div><div class="b head">DRIE INGANGEN OP INTENTIE</div><div class="wfrow"><div class="b cta">A · ik weet wat ik nodig heb<br><br>model en maten bekend<br>→ direct de configurator in</div><div class="b cta">B · ik weet wat ik moet beschermen<br><br>gitaar, rack, moving head<br>→ fit-finder</div><div class="b cta">C · ik weet het nog niet<br><br>welk type past bij mij?<br>→ vergelijk de vijf modellen</div></div><div class="b head">DE VIJF MODELLEN — met vanafprijs, want die ontbreekt nu volledig</div><div class="wfrow"><div class="b tall">koffer<br>draagbaar<br>vanaf &euro;—</div><div class="b tall">hoedcase<br>afneembaar deksel<br>vanaf &euro;—</div><div class="b tall">trunccase<br>universeel<br>vanaf &euro;—</div><div class="b tall">rackcase enkel deksel<br>19&quot;<br>vanaf &euro;—</div><div class="b tall">rackcase dubbel deksel<br>19&quot;<br>vanaf &euro;—</div></div><div class="b soft">→ vergelijk alle vijf naast elkaar</div><div class="b">HOE HET WERKT — 1 kies of laat kiezen &middot; 2 configureer &middot; 3 laat controleren &middot; 4 tien werkdagen</div><div class="b cta">LATEN CONTROLEREN — een casebouwer kijkt mee vóór je bestelt</div><div class="b">VERTROUWEN — beoordeling &middot; eigen productie in Doesburg sinds 1987 &middot; tien werkdagen &middot; op rekening voor zakelijke klanten</div><div class="b head">ZELF BOUWEN — onderdelen, bouwpakketten en zaagservice</div><div class="wfrow"><div class="b tall">profielen</div><div class="b tall">hoeken</div><div class="b tall">sluitingen</div><div class="b tall">wielen</div><div class="b tall">schuimplastic</div></div><div class="wfrow"><div class="b soft">bouwpakket compleet</div><div class="b soft">zaagservice — plaatmateriaal op maat</div><div class="b soft">zoek op artikelnummer</div></div><div class="b cta">SLOT-CTA · klaar om te beginnen? → open de configurator</div><div class="b nav">footer · flightcases &middot; onderdelen &middot; service &middot; over ons &middot; voorwaarden &middot; privacy &middot; taal</div></div></div>
+  <p class="wfnote">Vier dingen die de mockup van 5 augustus nog niet had: <strong>vanafprijzen per model</strong> (besteltaak 09), <strong>de vergelijking</strong> tussen de vijf modellen (besteltaak 10), een <strong>ingelogde bijbestel-ingang</strong> (besteltaak 02 en 13, de openstaande vraag uit user-flows §F2) en <strong>zaagservice</strong> als zichtbare dienst in plaats van een onvindbare categorie-URL. Onderdelen staat gedempt in de navigatie maar krijgt een volwaardig blok lager op de pagina — degraderen zonder te slopen.</p>
+</figure>
+<figure class="wf" data-mode="wire" hidden id="wf-servicehub">
+  <figcaption><h3>/service</h3><span class="wfmeta">servicehub &middot; 1 pagina &middot; vervangt vier losse CMS-pagina&#39;s</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" disabled>ontwerp volgt</button></span></figcaption>
+  <div class="wfframe"><div class="wfurl">/service</div><div class="wfpage"><div class="b nav">utility · NL · zakelijk account · inloggen</div><div class="b nav">header · caseBuilder.com · zoek · offerte · winkelwagen</div><div class="b nav">nav · Flightcases · Wat ga je vervoeren? · <i>onderdelen</i> · <b>service</b></div><div class="b">kruimelpad · service</div><div class="b head">H1 · Service</div><div class="b">introtekst · wat je hier vindt, en wanneer je beter kunt bellen</div><div class="b cta">zoek in service — vangt vragen op die anders bij contact belanden</div><div class="wfrow"><div class="b tall">levertijden<br>tien werkdagen, en wanneer niet</div><div class="b tall">verzending<br>kosten, landen, gratis vanaf €150</div></div><div class="wfrow"><div class="b tall">zaagservice<br>plaatmateriaal op maat, ook zonder case</div><div class="b tall">zakelijk bestellen<br>op rekening, staffels, series</div></div><div class="b head">VEELGESTELDE VRAGEN — bestaat nu niet, en is wat de vier CMS-pagina’s mist</div><div class="wfrow"><div class="b soft">over levertijd</div><div class="b soft">over maatwerk</div><div class="b soft">over retour</div><div class="b soft">over facturatie</div></div><div class="b cta">CONTACT · direct advies +31 (0)575 575734 · of stuur je vraag</div><div class="b nav">footer</div></div></div>
+  <p class="wfnote">De huidige site heeft vier losse CMS-pagina&#39;s zonder structuur, zonder FAQ en zonder zoek. Twee dingen zijn nieuw: <strong>levertijden als eigen pagina</strong> &mdash; nu de sterkste belofte maar nergens uitgelegd &mdash; en <strong>zaagservice zichtbaar</strong> in plaats van weggestopt op een ID-URL.</p>
+</figure>
+        <figure class="wf" data-mode="wire" hidden id="wf-tool">
+  <figcaption><h3>/configurator</h3><span class="wfmeta">tool &middot; 2 pagina&#39;s · configurator en fit-finder</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" disabled>ontwerp volgt</button></span></figcaption>
+  <div class="wfframe"><div class="wfurl">/configurator</div><div class="wfpage"><div class="b nav">minimale header · logo · stap terug · hulp ☎</div><div class="b head">stappenbalk · 1 model ✓ · 2 afmetingen · 3 uitvoering · 4 hardware · 5 overzicht</div><div class="wfrow"><div class="wfcol w2"><div class="b xtall">live preview van de case</div></div><div class="wfcol"><div class="b tall">invoervelden voor deze stap</div><div class="b">prijs — live bijgewerkt, server-side bepaald</div><div class="b soft">aantal [ 1 ] — ontbreekt nu</div><div class="b cta">bewaren &amp; delen → /configurator/{ref}</div><div class="b soft">past het niet? → laten controleren of offerte</div></div></div><div class="b cta">volgende stap →</div><div class="b nav">footer · modellen · onderdelen · service · voorwaarden · privacy · taal</div></div></div>
+  <p class="wfnote">Variant fit-finder (<code>/case-voor</code>): één vraag — wat ga je vervoeren? — met zoekveld en categorieën, die uitkomt op een resultaatpagina.</p>
+</figure>
+<figure class="wf" data-mode="wire" hidden id="wf-overzicht">
+  <figcaption><h3>/flightcases</h3><span class="wfmeta">overzicht &middot; 1 pagina · /flightcases</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" disabled>ontwerp volgt</button></span></figcaption>
+  <div class="wfframe"><div class="wfurl">/flightcases</div><div class="wfpage"><div class="b nav">header · logo · flightcases · wat ga je vervoeren? · onderdelen · service · ☎ · wagen</div><div class="b">kruimelpad</div><div class="b head">H1 · Flightcases — vijf modellen</div><div class="b">introtekst · welk type waarvoor, in klanttaal</div><div class="wfrow"><div class="b tall">koffer<br>foto · waarvoor · vanaf €—</div><div class="b tall">hoedcase<br>foto · waarvoor · vanaf €—</div><div class="b tall">trunccase<br>foto · waarvoor · vanaf €—</div></div><div class="wfrow"><div class="b tall">rackcase enkel deksel</div><div class="b tall">rackcase dubbel deksel</div><div class="b cta">weet je het niet? → fit-finder</div></div><div class="b head">VERGELIJKINGSTABEL — model × waarvoor × deksel × 19&quot; × vanafprijs</div><div class="b nav">footer · modellen · onderdelen · service · voorwaarden · privacy · taal</div></div></div>
+  <p class="wfnote">De vergelijkingstabel is het antwoord op <strong>besteltaak 10</strong> — nu bestaat er geen enkele plek waar de vijf modellen naast elkaar staan.</p>
+</figure>
+<figure class="wf" data-mode="wire" hidden id="wf-zoekresultaat">
+  <figcaption><h3>/zoeken</h3><span class="wfmeta">zoekresultaat &middot; 1 pagina · /zoeken</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" disabled>ontwerp volgt</button></span></figcaption>
+  <div class="wfframe"><div class="wfurl">/zoeken?q=eg-0105</div><div class="wfpage"><div class="b nav">header · logo · flightcases · wat ga je vervoeren? · onderdelen · service · ☎ · wagen</div><div class="b head">zoekveld met de opdracht · &quot;eg-0105&quot;</div><div class="b cta">directe SKU-treffer bovenaan, met aantal en wagen ernaast</div><div class="wfrow"><div class="wfcol"><div class="b tall">filters · categorie · type</div></div><div class="wfcol w3"><div class="wfrow"><div class="b tall">resultaat</div><div class="b tall">resultaat</div><div class="b tall">resultaat</div></div><div class="b soft">niets gevonden? → zoektermenrapport voedt de navigatie</div></div></div><div class="b nav">footer · modellen · onderdelen · service · voorwaarden · privacy · taal</div></div></div>
+  <p class="wfnote">Voor onderdelen is zoeken het belangrijkste instrument, niet de boom. Een terugkerende koper weet het artikelnummer.</p>
+</figure>
+<figure class="wf" data-mode="wire" hidden id="wf-checkout">
+  <figcaption><h3>/checkout</h3><span class="wfmeta">checkout &middot; 1 pagina · wagen → afrekenen → bevestiging</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" disabled>ontwerp volgt</button></span></figcaption>
+  <div class="wfframe"><div class="wfurl">/checkout</div><div class="wfpage"><div class="b nav">minimale header · logo · veilig afrekenen · ☎</div><div class="b head">stappen · 1 wagen · 2 gegevens · 3 betalen</div><div class="wfrow"><div class="wfcol w2"><div class="b tall">regels · geconfigureerde case met volledige specificatie als metadata</div><div class="b">regel · losse onderdelen met aantal</div><div class="b">regel · zaagservice met zaagmaten als metadata</div><div class="b">adres · levering en facturatie</div><div class="b soft">op rekening — indien zakelijk account</div></div><div class="wfcol"><div class="b tall">samenvatting<br><br>subtotaal excl.<br>BTW<br>verzending<br><br>totaal</div><div class="b cta">iDEAL · afrekenen</div><div class="b">levering in tien werkdagen</div></div></div><div class="b nav">footer · modellen · onderdelen · service · voorwaarden · privacy · taal</div></div></div>
+  <p class="wfnote">Prijzen worden altijd server-side bepaald of geverifieerd — nooit vertrouwen op wat uit de browser komt.</p>
+</figure>
+<figure class="wf" data-mode="wire" hidden id="wf-bevestiging">
+  <figcaption><h3>/laten-controleren/bedankt</h3><span class="wfmeta">bevestiging &middot; 1 pagina · /laten-controleren/bedankt</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" disabled>ontwerp volgt</button></span></figcaption>
+  <div class="wfframe"><div class="wfurl">/laten-controleren/bedankt</div><div class="wfpage"><div class="b nav">header · logo · flightcases · wat ga je vervoeren? · onderdelen · service · ☎ · wagen</div><div class="b head">✓ Je aanvraag staat klaar</div><div class="b">referentie · CB-2026-0842 — ook per mail</div><div class="b">wat er nu gebeurt en wanneer je iets hoort</div><div class="wfrow"><div class="b cta">bekijk je configuratie</div><div class="b soft">verder kijken bij onderdelen</div></div><div class="b nav">footer · modellen · onderdelen · service · voorwaarden · privacy · taal</div></div></div>
+  
+</figure>
+<figure class="wf" data-mode="wire" hidden id="wf-case-voor-resultaat">
+  <figcaption><h3>/case-voor/{apparaat}</h3><span class="wfmeta">case-voor-resultaat &middot; n pagina&#39;s · programmatic per apparatuur</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" disabled>ontwerp volgt</button></span></figcaption>
+  <div class="wfframe"><div class="wfurl">/case-voor/gibson-les-paul</div><div class="wfpage"><div class="b nav">header · logo · flightcases · wat ga je vervoeren? · onderdelen · service · ☎ · wagen</div><div class="b">kruimelpad · wat ga je vervoeren? › gitaar › Gibson Les Paul</div><div class="b head">H1 · Flightcase voor een Gibson Les Paul</div><div class="b">intro · afmetingen van het instrument, waar je op moet letten</div><div class="wfrow"><div class="wfcol w2"><div class="b tall">aanbevolen case — hoedcase, maten voorgevuld</div><div class="b cta">▶ configureer met deze maten</div></div><div class="wfcol"><div class="b tall">alternatief · trunccase</div><div class="b tall">alternatief · koffer</div></div></div><div class="b">waarom deze maten · binnenmaat, schuimdikte, gewicht</div><div class="b">veelgestelde vragen · past een Les Paul Custom hier ook in?</div><div class="b nav">footer · modellen · onderdelen · service · voorwaarden · privacy · taal</div></div></div>
+  <p class="wfnote">Dit sjabloon is de enige die onbeperkt groeit. Elke pagina moet echte inhoud hebben — een lege variant met alleen een andere naam wordt door Google als dunne content gezien.</p>
+</figure>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="tabpanel" id="p5" role="tabpanel" aria-labelledby="t5" hidden>
+
+    <header class="masthead">
+      <span class="eyebrow">CaseBuilder</span>
+      <h1>Contentfase</h1>
+      <p class="lede">Wat er geschreven, gefotografeerd en vertaald moet worden voordat de nieuwe site gevuld is — en wie dat doet.</p>
+      <div class="statwrap">
+        <span class="statcap">Te produceren</span>
+        <div class="stats">
+          <div class="stat"><span class="n">294</span><span class="l">unieke teksten</span><span class="d">exclusief case-voor</span></div>
+          <div class="stat"><span class="n">233</span><span class="l">productteksten</span><span class="d">grootste post</span></div>
+          <div class="stat"><span class="n">5</span><span class="l">talen</span><span class="d">nl · en · de · fr · es</span></div>
+          <div class="stat"><span class="n">1470</span><span class="l">bij volledige vertaling</span><span class="d">294 × 5</span></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="thesis">
+      <span class="eyebrow">De beslissing die alles bepaalt</span>
+      <p><strong>Wordt alles in vijf talen vertaald, of niet?</strong> Bij volledige vertaling is de contentproductie vijf keer zo groot als de site zelf. Dat is geen redactionele keuze maar de grootste kostenpost van het project.</p>
+      <p>Alternatief: <strong>Nederlands volledig, de andere talen alleen waar verkeer zit</strong> — modellen, hoofdcategorieën en de servicepagina's, met de 233 SKU-teksten machinaal vertaald en alleen nagelezen waar ze verkopen.</p>
+    </div>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Per soort</span>
+        <h2>Wat er gemaakt moet worden</h2>
+      </div>
+      <div class="scroller">
+        <table class="tpl fixed2">
+          <thead><tr><th>Soort</th><th>Aantal &amp; bron</th><th>Wat er nodig is</th></tr></thead>
+          <tbody>
+            <tr><td>Productteksten</td><td class="mono">233 · uit Magento / Excel</td><td class="blocks">Nu grotendeels SKU plus specificatie. <em>Namen moeten naar klanttaal</em> — juni's kritiek op vakjargon geldt hier het hardst.</td></tr>
+            <tr><td>Categorie-intro's</td><td class="mono">49 · nieuw</td><td class="blocks">Zonder introtekst is een categoriepagina niet indexeerbaar. Dit is wat de 38 subcategorieën waard maakt — of overbodig.</td></tr>
+            <tr><td>Modelpagina's</td><td class="mono">5 · herschrijven</td><td class="blocks">Vanafprijs, waarvoor geschikt, verwachtingen, bouwpakket of kant-en-klaar.</td></tr>
+            <tr><td>Servicepagina's</td><td class="mono">7 · deels bestaand</td><td class="blocks">Levertijden en zakelijk bestellen zijn nieuw; verzending, zaagservice en contact verhuizen.</td></tr>
+            <tr><td>case-voor-pagina's</td><td class="mono">n · programmatic</td><td class="blocks"><em>Nul bij livegang, groeit onbeperkt.</em> Elke pagina moet echte inhoud hebben — afmetingen, waar je op moet letten — anders leest Google het als dunne content.</td></tr>
+            <tr><td>Blokkenbibliotheek</td><td class="mono">~12 blokken · Sanity</td><td class="blocks">Hero, tekstblok, galerij, CTA, productgrid, specificatietabel, FAQ, testimonial. Eenmalig bouwen, daarna stelt de redactie zelf samen.</td></tr>
+            <tr><td>Fotografie</td><td class="mono">onbekend · nieuw</td><td class="blocks">Lichte achtergrond, 3/4 hoekperspectief, <em>schaalreferentie in beeld</em>. Nu zijn klein, medium en groot niet te onderscheiden.</td></tr>
+            <tr><td>SEO-velden</td><td class="mono">311 × meta</td><td class="blocks">Meta descriptions zijn nu grotendeels leeg of automatisch. Plus Product- en Breadcrumb-schema.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Hoe dan</span>
+        <h2>Waar vertalingen leven</h2>
+        <p>De vertaalvraag splitst in tweeën, en de helft die het meeste volume heeft is niet de helft die is opgelost.</p>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Sanity-kant — opgelost</h3>
+          <p>Het officiële <code>@sanity/document-internationalization</code> geeft één document per taal, aan elkaar gekoppeld. <strong>Sanity AI Assist</strong> kan documenten vertalen met een instructie, ingebouwd op betaalde plannen. Werk je met vertaalbureaus, dan bestaan er connectoren naar Smartling en Phrase.</p>
+        </div>
+        <div class="card">
+          <h3>Medusa-kant — niet opgelost</h3>
+          <p>Meertalige productinhoud is in Medusa geen eersteklas concept. Het kan als metadata of via een eigen vertaaltabel, <strong>maar dan bouw je zelf wat elders bestaat</strong> — en dat botst met het uitgangspunt om de afhankelijkheid van één persoon te minimaliseren.</p>
+        </div>
+      </div>
+
+      <div class="warn">
+        <h3>Dit trekt de PIM naar voren</h3>
+        <p>De 233 productteksten en 49 categorie-intro&#39;s leven niet in Sanity maar in Medusa — dat is <strong>96% van het vertaalvolume</strong>. Een PIM is letterlijk het gereedschap voor meertalige productinformatie die naar meerdere afnemers wordt geduwd. In het architectuurvoorstel staat die in scenario 2 vanwege de marktplaatsen, maar <strong>de vertaalvraag rechtvaardigt hem al in scenario 1</strong>. Dat is een beslissing die nu op tafel hoort, niet later.</p>
+      </div>
+
+      <div class="urgent">
+        <h3>Niet vertalen op renderniveau</h3>
+        <p>Dus geen vertaal-API aanroepen vanuit Next.js op het moment dat de pagina wordt opgebouwd. Geen redactionele controle, geen review, en een slechte vertaling kan niemand corrigeren omdat hij nergens is opgeslagen. <strong>Vertalingen zijn data, geen presentatie.</strong></p>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Wat eerst moet</span>
+        <h2>Volgorde</h2>
+        <p>Content kan pas als de structuur staat — en de structuur kan pas als er cijfers zijn.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><span class="sn">1</span><span class="sb"><strong>Blokkenbibliotheek bouwen.</strong> Zonder blokken kan de redactie niets samenstellen. Dit is de investering die de dev-afhankelijkheid afkoopt.</span></div>
+        <div class="step"><span class="sn">2</span><span class="sb"><strong>Snoeien op GA4-data.</strong> Pas dan weet je of je 49 of 20 categorie-intro's schrijft. Scheelt direct in werk.</span></div>
+        <div class="step"><span class="sn">3</span><span class="sb"><strong>Vertaalbeslissing nemen.</strong> Alles of alleen waar verkeer zit — dit verandert de omvang met een factor vijf. En daarmee samen: <strong>komt de PIM naar voren?</strong></span></div>
+        <div class="step"><span class="sn">4</span><span class="sb"><strong>Productnamen herschrijven.</strong> Van SKU en vakjargon naar wat een koper zoekt. Raakt ook de zoekfunctie en de URL's.</span></div>
+        <div class="step"><span class="sn">5</span><span class="sb"><strong>Fotoshoot inplannen.</strong> Met schaalreferentie. Lange doorlooptijd, dus vroeg beleggen.</span></div>
+        <div class="step"><span class="sn">6</span><span class="sb"><strong>Contentimport.</strong> Staat in de planning voor november &mdash; alles hierboven moet dan klaar zijn.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Open</span>
+        <h2>Wat we niet weten</h2>
+      </div>
+      <div class="cards">
+        <div class="card"><h3>Wie schrijft?</h3><p>294 teksten is geen bijklus. Redactie intern bij CaseBuilder, bij ons, of ingehuurd — en wie beoordeelt de technische juistheid van een producttekst?</p></div>
+        <div class="card"><h3>Zijn de bestaande locales gevuld?</h3><p>Alle vijf geven een 200, maar dat zegt niets over de inhoud. Als <code>fr-fr</code> en <code>es-es</code> half gevuld zijn, is dat eerder een reden om ze te schrappen dan om ze te vertalen.</p></div>
+        <div class="card"><h3>Bestaat er productfotografie?</h3><p>En zo ja, met welke rechten en in welke resolutie? Een shoot van 233 onderdelen is een project op zich.</p></div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="tabpanel" id="p6" role="tabpanel" aria-labelledby="t6" hidden>
+
+    <header class="masthead">
+      <span class="eyebrow">CaseBuilder</span>
+      <h1>Live-gang</h1>
+      <p class="lede">Wat er klaar moet zijn voordat de schakelaar om kan, en wat er nu nog tussen zit.</p>
+    </header>
+
+    <div class="thesis">
+      <span class="eyebrow">De regel</span>
+      <p>De site heeft <strong>386 bereikbare URL's</strong> met posities in Google en links vanaf andere sites. Bij livegang moet elke daarvan een bestemming hebben. Gebeurt dat niet, dan verlies je in één nacht ranking en inkomend verkeer — en dat komt niet vanzelf terug.</p>
+      <p><strong>Redirects staan klaar vóór de switch, niet erna.</strong></p>
+    </div>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Wat in de weg staat</span>
+        <h2>Blockers</h2>
+        <p>Op volgorde van hoeveel er achter vastzit. De eerste vier blokkeren werk dat nu al zou kunnen beginnen.</p>
+      </div>
+      <div class="qlist">
+        <div class="q"><span class="n">01</span><span class="body"><span class="qq">GA4 en Search Console — geen toegang</span><span class="why">Blokkeert het snoeien van de 38 subcategorieën, de prioritering van de redirect-mapping en de keuze tussen /case-voor en redactionele landingspagina's.</span><span class="src">aangevraagd 5 augustus · nog open</span></span></div>
+        <div class="q"><span class="n">02</span><span class="body"><span class="qq">De redirect-mapping staat niet in de planning</span><span class="why">Negen stappen, waarvan de inventaris nu al kan starten. Er is een rij voor migratie en go-live, maar geen blok voor de mapping zelf. Bij 386 URL's is dat geen restpost.</span><span class="src">redirects.md · niet belegd</span></span></div>
+        <div class="q"><span class="n">03</span><span class="body"><span class="qq">De locale-beslissing is niet genomen</span><span class="why">Taalcode of land-taalcode — <em>dit raakt élke redirect</em>. Nemen we de beslissing na de mapping, dan mag de hele tabel opnieuw.</span><span class="src">beslissen vóór de mapping</span></span></div>
+        <div class="q"><span class="n">04</span><span class="body"><span class="qq">Het betaalendpoint is niet dichtgetimmerd</span><span class="why">Heeft de casebuilder api een endpoint dat betaling geslaagd of mislukt afhandelt? Zit dat nu in Magento, dan is het nieuwbouw in onze backend — geen koppeling.</span><span class="src">architectuurvoorstel §4</span></span></div>
+        <div class="q"><span class="n">05</span><span class="body"><span class="qq">Onbekend wat het klantportaal nu kan</span><span class="why">Zonder testaccount weet je niet of herbestellen nieuw gebouwd wordt of verhuisd. Raakt besteltaak 02, 03 en 13.</span><span class="src">portal.casebuilder.com · Basic auth</span></span></div>
+        <div class="q"><span class="n">06</span><span class="body"><span class="qq">Orderhistorie-migratie is niet belegd</span><span class="why">Zonder historie kan een bestaande klant na livegang niets herbestellen wat vóór de overstap is besteld.</span><span class="src">Magento order-export</span></span></div>
+        <div class="q"><span class="n">07</span><span class="body"><span class="qq">Er is geen werkende sitemap.xml</span><span class="why">/sitemap.xml stuurt door naar /nl/sitemap.xml en die geeft een 404. Google is nu volledig op interne links aangewezen. Een correcte sitemap bij livegang is een verbetering op zichzelf.</span><span class="src">bevinding uit de crawl</span></span></div>
+        <div class="q"><span class="n">08</span><span class="body"><span class="qq">Twee planningsblokken hangen op CaseBuilder</span><span class="why">Het Magento-orderendpoint en de watchdog-koppeling met cb_core_v2. Milestone 2b hangt eraan.</span><span class="src">gantt · CB-markering</span></span></div>
+        <div class="q"><span class="n">09</span><span class="body"><span class="qq">De configurator-handoff is nog niet tegen Medusa gebouwd</span><span class="why">Nu een custom option in Magento. Straks een custom line item met de configuratie als metadata — plus server-side prijsverificatie, want een prijs uit de browser is nooit te vertrouwen.</span><span class="src">technisch risicovolste punt</span></span></div>
+        <div class="q"><span class="n">10</span><span class="body"><span class="qq">De productlijst-route is niet vastgelegd</span><span class="why">Handmatige Excel-upload werkt voor livegang, maar dan is de vervolgvraag hoe prijs en voorraad daarna actueel blijven.</span><span class="src">open vraag 1 voor Gert</span></span></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">De volgorde van de switch</span>
+        <h2>Milestones</h2>
+        <p>Elk punt is een go of no-go. Faalt er één, dan gaat de livegang niet door — dit is de laatste plek waar reparatie gratis is.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><span class="sn">M1</span><span class="sb"><strong>Inventaris compleet.</strong> Crawl plus Search Console plus GA4 plus backlinkdata. Een crawl vindt alleen wat gelinkt is.</span></div>
+        <div class="step"><span class="sn">M2</span><span class="sb"><strong>Mapping af.</strong> Zeven patroonregels plus de uitzonderingen, in <code>redirect-map.csv</code>. P4 is de riskantste: die neemt aan dat élke losse .html op rootniveau een onderdeel is — valideren tegen de templatekolom.</span></div>
+        <div class="step"><span class="sn">M3</span><span class="sb"><strong>Top-50 handmatig nagelopen.</strong> Een technisch correcte redirect kan alsnog naar de verkeerde pagina wijzen.</span></div>
+        <div class="step"><span class="sn">M4</span><span class="sb"><strong>Redirecttest groen op preview.</strong> Per rij: 301 (geen 302), Location exact, doel geeft 200, precies één hop.</span></div>
+        <div class="step"><span class="sn">M5</span><span class="sb"><strong>Betaling end-to-end getest.</strong> iDEAL, inclusief de mislukt-route en de terugkoppeling naar de productie.</span></div>
+        <div class="step"><span class="sn">M6</span><span class="sb"><strong>Configurator-handoff getest.</strong> Configureren, in de wagen, afrekenen, en de volledige specificatie komt aan bij de productie.</span></div>
+        <div class="step"><span class="sn">M7</span><span class="sb"><strong>Klantportaal toont echte orders.</strong> Fase 1: alleen online bestelde cases.</span></div>
+        <div class="step"><span class="sn">M8</span><span class="sb"><strong>Redirects staan klaar vóór de switch.</strong> Niet erna.</span></div>
+        <div class="step"><span class="sn">M9</span><span class="sb"><strong>Na de switch: test opnieuw draaien tegen productie</strong>, sitemap.xml publiceren, indienen in Search Console, robots.txt controleren op blokkades van de nieuwe paden.</span></div>
+        <div class="step"><span class="sn">M10</span><span class="sb"><strong>Nazorg.</strong> Dag 1 tot 14 dagelijks het 404-log; drie maanden wekelijks Search Console. Een tijdelijke dip hoort erbij — blijft die na twee maanden, dan mist er een groep URL's.</span></div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="tabpanel" id="p7" role="tabpanel" aria-labelledby="t7" hidden>
+
+    <header class="masthead">
+      <span class="eyebrow">CaseBuilder</span>
+      <h1>Meetings</h1>
+      <p class="lede">Agenda en aantekeningen per overleg.</p>
+    </header>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Eerstvolgende</span>
+        <h2>28 augustus 2026</h2>
+      </div>
+
+      <h3 class="tablabel">1 &middot; Terugblik</h3>
+      <div class="mtiles">
+        <div class="mt deels"><div class="mtop"><span class="mn">test</span><h4>Testresultaten</h4><p>De connection test tussen frontend en casebuilder api is geslaagd — het technisch risicovolste punt is aangetoond. <strong>Nog niet getest:</strong> de stresstest staat niet ingepland, en de configurator-handoff tegen Medusa is nog niet gebouwd.</p></div><span class="tag">deels</span></div>
+        <div class="mt af"><div class="mtop"><span class="mn">stack</span><h4>Medusa</h4><p>Webshop-skeleton staat. Stack bevestigd, Magento valt af — pakket B, schone lei en code-first.</p></div><span class="tag">afgerond</span></div>
+        <div class="mt af"><div class="mtop"><span class="mn">cms</span><h4>Sanity</h4><p>Basisinrichting staat. De blokkenbibliotheek — circa twaalf on-brand blokken — volgt in oktober.</p></div><span class="tag">afgerond</span></div>
+        <div class="mt af"><div class="mtop"><span class="mn">fe</span><h4>Frontend-designs</h4><p>Veertien wireframes, en de categoriepagina volledig uitgewerkt in het merk: DM Sans, Barlow Condensed, cyaan als primaire actie.</p></div><span class="tag">afgerond</span></div>
+        <div class="mt af"><div class="mtop"><span class="mn">ia</span><h4>Sitemap en sitestructuur</h4><p>386 pagina&#39;s worden er 311, verdeeld over veertien sjablonen. Zeventien besteltaken zijn tegen de nieuwe boom getoetst; zes gaten gevonden, drie ervan opgelost in het ontwerp.</p></div><span class="tag">afgerond</span></div>
+        <div class="mt af"><div class="mtop"><span class="mn">tpl</span><h4>Hoe een contentpagina eruitziet</h4><p>Eén sjabloon dekt zeven servicepagina&#39;s: koptekst, tekstkolom uit blokken, sectienavigatie en een contactblok. <strong>Wat daarvoor nodig is:</strong> de blokkenbibliotheek plus de teksten zelf.</p></div><span class="tag">afgerond</span></div>
+      </div>
+
+      <h3 class="tablabel">2 &middot; Vooruitblik</h3>
+      <div class="mtiles">
+        <div class="mt gepland"><div class="mtop"><span class="mn">sep</span><h4>CI/CD en omgevingen</h4><p>Pipelines, dev-acceptance en productie. Plus de beslissing over de 38 subcategorieën, zodra GA4 er is.</p></div><span class="tag">gepland</span></div>
+        <div class="mt gepland"><div class="mtop"><span class="mn">okt</span><h4>Blokkenbibliotheek en Medusa</h4><p>Sanity-templates en de webshop full build. Contentproductie start hier.</p></div><span class="tag">gepland</span></div>
+        <div class="mt gepland"><div class="mtop"><span class="mn">nov</span><h4>Contentimport en prototype</h4><p>Werkend prototype op staging — het eerste moment waarop het geheel te zien is.</p></div><span class="tag">gepland</span></div>
+        <div class="mt gepland"><div class="mtop"><span class="mn">dec</span><h4>Klantportaal</h4><p>Full build, plus de orderstatus-terugstroom uit cb_core_v2.</p></div><span class="tag">gepland</span></div>
+        <div class="mt gepland"><div class="mtop"><span class="mn">jan</span><h4>Betalen en redirects</h4><p>Stripe-integratie. <strong>De redirect-mapping moet hier af zijn</strong> — die staat nu nergens in de planning.</p></div><span class="tag">aandacht</span></div>
+        <div class="mt gepland"><div class="mtop"><span class="mn">feb</span><h4>End-to-end test</h4><p>Volledige keten: configureren, bestellen, betalen, productie, portaal.</p></div><span class="tag">gepland</span></div>
+        <div class="mt gepland"><div class="mtop"><span class="mn">mrt</span><h4>Livegang</h4><p>User acceptance, performance- en securityreview, dan de switch.</p></div><span class="tag">gepland</span></div>
+      </div>
+
+      <h3 class="tablabel">3 &middot; Wat we nog nodig hebben</h3>
+      <div class="mtiles">
+        <div class="mt cb"><div class="mtop"><span class="mn">01</span><h4>Toegang tot GA4, Search Console en GTM</h4><p>Aangevraagd op 5 augustus, nog niet geregeld. GTM is het meest urgent: zonder events op de configuratorstappen bouwt elke week een gat op in de nulmeting.</p></div><span class="tag">van cb</span></div>
+        <div class="mt cb"><div class="mtop"><span class="mn">02</span><h4>Testaccount voor het klantportaal</h4><p>Bepaalt of herbestellen nieuw gebouwd wordt of alleen verhuisd.</p></div><span class="tag">van cb</span></div>
+        <div class="mt cb"><div class="mtop"><span class="mn">03</span><h4>Waar komt de productlijst vandaan?</h4><p>Excel-upload of feed-API. Bij handmatig: hoe blijven prijs en voorraad daarna actueel?</p></div><span class="tag">van cb</span></div>
+        <div class="mt cb"><div class="mtop"><span class="mn">04</span><h4>Endpoint voor geslaagde en mislukte betalingen</h4><p>Heeft de casebuilder api dat? Zo niet, dan is het nieuwbouw in onze backend — geen koppeling.</p></div><span class="tag">van cb</span></div>
+        <div class="mt cb"><div class="mtop"><span class="mn">05</span><h4>Levert CaseBuilder bedrukking en logo&#39;s?</h4><p>Komt in geen enkel document voor, maar is een normale B2B-vraag.</p></div><span class="tag">van cb</span></div>
+        <div class="mt beslissing"><div class="mtop"><span class="mn">06</span><h4>Zijn Bol, Amazon en eBay een echt doel?</h4><p>Bepaalt of de PIM nu een kernlaag is of fase 2, en of Shopify alsnog tegen Medusa moet worden afgewogen.</p></div><span class="tag">beslissen</span></div>
+        <div class="mt beslissing"><div class="mtop"><span class="mn">07</span><h4>Blijft de locale in het pad, en met welke codes?</h4><p>Taalcode of land-taalcode. Raakt élke redirect, dus vóór de mapping beslissen.</p></div><span class="tag">beslissen</span></div>
+        <div class="mt beslissing"><div class="mtop"><span class="mn">08</span><h4>Vertalen we in vijf talen?</h4><p>Bij volledig vertalen wordt de contentproductie vijf keer zo groot. En 96% van dat volume zit in Medusa, niet in Sanity — <strong>dat trekt de PIM naar voren</strong>.</p></div><span class="tag">beslissen</span></div>
+        <div class="mt actie"><div class="mtop"><span class="mn">09</span><h4>Usability-onderzoek plannen</h4><p>Wanneer, met wie en op welk prototype? Staat als milestone 5b maar is nergens belegd. Vraagt deelnemers uit de doelgroep en dus voorbereidingstijd.</p></div><span class="tag">in te plannen</span></div>
+        <div class="mt actie"><div class="mtop"><span class="mn">10</span><h4>Start productcategorieën, content en foto&#39;s</h4><p>De volgorde ligt vast, de startdatum niet. Een fotoshoot van 233 onderdelen met schaalreferentie heeft een lange doorlooptijd — vroeg beleggen.</p></div><span class="tag">in te plannen</span></div>
+      </div>
+    </section>
+
+
+  </div>
+
+
+</div>
+
+<script>
+  (function () {
+    var tabs   = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+    var wfBtns = Array.prototype.slice.call(document.querySelectorAll('.wfitem'));
+    var DEFAULT = 't2';
+
+    function selectTab(tab) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      });
+    }
+    function selectWf(name) {
+      var found = false;
+      wfBtns.forEach(function (btn) {
+        var on = btn.getAttribute('data-wf') === name;
+        if (on) found = true;
+        btn.setAttribute('aria-current', on ? 'true' : 'false');
+        var fig = document.getElementById('wf-' + btn.getAttribute('data-wf'));
+        if (fig) fig.hidden = !on;
+      });
+      if (!found && wfBtns.length) selectWf(wfBtns[0].getAttribute('data-wf'));
+    }
+    function tabByHash(slug) {
+      for (var i = 0; i < tabs.length; i++) {
+        if (tabs[i].getAttribute('data-hash') === slug) return tabs[i];
+      }
+      return null;
+    }
+    function go(hash, push) {
+      if (push && hash !== location.hash.slice(1)) {
+        history.pushState(null, '', '#' + hash);
+      }
+      if (hash.indexOf('wf-') === 0) {
+        selectTab(document.getElementById('t4'));
+        selectWf(hash.slice(3));
+        return;
+      }
+      selectTab(tabByHash(hash) || document.getElementById(DEFAULT));
+      if (hash === 'wireframes' && !document.querySelector('.wfitem[aria-current="true"]')) {
+        selectWf(wfBtns[0].getAttribute('data-wf'));
+      }
+    }
+
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { go(t.getAttribute('data-hash'), true); });
+      t.addEventListener('keydown', function (e) {
+        var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!d) return;
+        e.preventDefault();
+        var next = tabs[(i + d + tabs.length) % tabs.length];
+        next.focus();
+        go(next.getAttribute('data-hash'), true);
+      });
+    });
+
+    wfBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () { go('wf-' + btn.getAttribute('data-wf'), true); });
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll('.wftoggle button[data-mode]'), function (btn) {
+      btn.addEventListener('click', function () {
+        var fig = btn.closest('.wf');
+        fig.setAttribute('data-mode', btn.getAttribute('data-mode'));
+        Array.prototype.forEach.call(fig.querySelectorAll('.wftoggle button[data-mode]'), function (b) {
+          b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+        });
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="#wf-"]');
+      if (!a) return;
+      e.preventDefault();
+      go(a.getAttribute('href').slice(1), true);
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    });
+
+    window.addEventListener('popstate', function () { go(location.hash.slice(1), false); });
+    go(location.hash.slice(1), false);
+  })();
+</script>
+
+</body>
+</html>
