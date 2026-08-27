@@ -113,14 +113,14 @@
   .wfitem:focus-visible { outline:2px solid var(--accent); outline-offset:-2px; }
   .wfstage .wf[hidden] { display:none; }
 
-  .srclink { display:inline-flex; align-items:center; gap:9px; align-self:flex-start;
-    background:var(--surface); border:1px solid var(--line); border-radius:3px;
-    padding:9px 14px; text-decoration:none; color:var(--ink); font-size:14px; }
-  .srclink:hover { border-color:var(--accent); color:var(--accent); }
-  .srclink:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  /* Verwijzingen zijn geen acties: geen kader, geen vlak. Een tekstlink
+     met een klein bronlabel ervoor. */
+  .srclink { display:inline-flex; align-items:baseline; gap:8px; align-self:flex-start;
+    text-decoration:none; color:var(--accent); font-size:14px; }
+  .srclink:hover { color:var(--primary); text-decoration:underline; text-underline-offset:3px; }
+  .srclink:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
   .srclink .tag { font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.1em;
     text-transform:uppercase; color:var(--faint); }
-  .srclink:hover .tag { color:var(--accent); }
 
   /* ---------- schakelaar wireframe / ontwerp ---------- */
   .wftoggle { display:inline-flex; border:1px solid var(--line); border-radius:3px; overflow:hidden; margin-left:auto; }
@@ -173,7 +173,7 @@
   align-items:center;gap:20px;flex-wrap:wrap}.dv[data-page="home"] .compare p{font-size:15px;color:var(--mute);max-width:52ch}.dv[data-page="home"] .assure{background:var(--dark);color:#fff}.dv[data-page="home"] .assure .grid{display:grid;grid-template-columns:1.15fr 1fr;gap:64px;align-items:center}.dv[data-page="home"] .assure h2{font-size:clamp(30px,3.4vw,46px);color:#fff;margin:14px 0 18px}.dv[data-page="home"] .assure p{color:rgba(255,255,255,.8);font-size:17px;max-width:52ch}.dv[data-page="home"] .assure .steps{border-left:1px solid rgba(255,255,255,.2);padding-left:32px}.dv[data-page="home"] .assure .st{display:flex;gap:18px;padding:15px 0}.dv[data-page="home"] .assure .st+.st{border-top:1px solid rgba(255,255,255,.14)}.dv[data-page="home"] .assure .st .i{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--cyan);padding-top:4px;white-space:nowrap}.dv[data-page="home"] .assure .st b{font-family:var(--disp);text-transform:uppercase;font-size:17px;letter-spacing:.03em;font-weight:700;display:block}.dv[data-page="home"] .assure .st span{font-size:14px;color:rgba(255,255,255,.68)}.dv[data-page="home"] .trust{border-top:1px solid var(--rule);background:var(--bg)}.dv[data-page="home"] .trust .row{display:flex;gap:48px;align-items:center;flex-wrap:wrap}.dv[data-page="home"] .trust .it{display:flex;flex-direction:column;gap:4px}.dv[data-page="home"] .trust .it b{font-family:var(--disp);text-transform:uppercase;font-size:22px;letter-spacing:.03em;color:var(--dark)}.dv[data-page="home"] .trust .it span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}.dv[data-page="home"] .build{border-top:1px solid var(--rule)}.dv[data-page="home"] .build .grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}.dv[data-page="home"] .build .cats{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.dv[data-page="home"] .build .cats a{border:1px solid var(--rule);background:#fff;padding:9px 14px;font-family:var(--mono);
   font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}.dv[data-page="home"] .build .cats a:hover{border-color:var(--dark);color:var(--dark)}.dv[data-page="home"] .build .side{border:1px solid var(--rule);padding:28px 30px}.dv[data-page="home"] .build .side h4{font-size:20px;margin-bottom:8px}.dv[data-page="home"] .build .side p{font-size:14.5px;color:var(--mute)}.dv[data-page="home"] .build .side + .side{margin-top:14px}.dv[data-page="home"] .closer{background:var(--void);color:#fff;text-align:center}.dv[data-page="home"] .closer h2{font-size:clamp(30px,3.6vw,50px);color:#fff}.dv[data-page="home"] .closer p{color:rgba(255,255,255,.75);margin:14px auto 30px;max-width:48ch;font-size:17px}@media(max-width:1080px){.dv[data-page="home"] .ingangen{grid-template-columns:1fr}.dv[data-page="home"] .assure .grid,.dv[data-page="home"] .build .grid{grid-template-columns:1fr;gap:36px}}@media(max-width:760px){.dv[data-page="home"] .hero .wrap{padding-top:56px;padding-bottom:52px}.dv[data-page="home"] .hero .specs div{min-width:50%;padding-right:12px}.dv[data-page="home"] .again .btn{margin-left:0}.dv[data-page="home"] .assure .steps{padding-left:20px}}
 
-  .srcrow { display:flex; gap:10px; flex-wrap:wrap; }
+  .srcrow { display:flex; gap:8px 26px; flex-wrap:wrap; }
   .principles { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:12px; }
   .pr { background:var(--surface); border:1px solid var(--line); border-radius:3px; padding:16px 19px;
     display:flex; flex-direction:column; gap:6px; }
@@ -235,6 +235,61 @@
   .mt.actie      { border-color:var(--accent); border-style:dashed; }
   .mt.actie .tag { border-top:1.5px dashed var(--accent); background:var(--accent-bg); color:var(--accent); }
   .mt.actie .mn  { color:var(--accent); }
+
+  /* Fase-etiket per tegel: in welke projectfase hoort dit thuis. Klein en
+     rechtsboven, tegenover het volgnummer — en klikbaar naar dat tabblad,
+     zodat "waar staat dat dan?" één klik is. */
+  .mt { position:relative; }
+  .mt .fase { position:absolute; top:14px; right:15px; text-decoration:none;
+    font-family:"IBM Plex Mono",monospace; font-size:9.5px; letter-spacing:.11em;
+    text-transform:uppercase; color:var(--faint); }
+  .mt .fase:hover { text-decoration:underline; text-underline-offset:3px; }
+  .mt .fase.f-def   { color:var(--muted); }
+  .mt .fase.f-ont   { color:var(--accent); }
+  .mt .fase.f-bouw  { color:var(--primary); }
+  .mt .fase.f-cont  { color:var(--open); }
+  .mt .fase.f-live  { color:var(--keep); }
+  .mt .mtop { padding-right:74px; }
+  .mt .mtop p, .mt .mtop ul, .mt .mtop a.live { padding-right:0; }
+
+  /* ---------- tijdlijn ---------- */
+  .tl { display:flex; flex-direction:column; gap:0; margin-top:4px; }
+  .tl .tlrow { display:grid; grid-template-columns:104px 22px minmax(0,1fr);
+    gap:0 16px; align-items:start; }
+  .tl .tlwhen { font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.06em;
+    color:var(--faint); padding:14px 0 0; text-align:right; }
+  .tl .tlaxis { position:relative; }
+  /* De lijn loopt door de hele rij; de stip zit op de hoogte van de kop. */
+  .tl .tlaxis::before { content:""; position:absolute; left:50%; top:0; bottom:0;
+    width:1px; background:var(--line); transform:translateX(-.5px); }
+  .tl .tlrow:first-child .tlaxis::before { top:19px; }
+  .tl .tlrow:last-child .tlaxis::before { bottom:auto; height:19px; }
+  .tl .tlaxis::after { content:""; position:absolute; left:50%; top:15px; width:9px; height:9px;
+    border-radius:50%; background:var(--surface); border:2px solid var(--line);
+    transform:translate(-50%,0); }
+  .tl .tlbody { padding:11px 0 15px; }
+  .tl h4 { font-family:"Barlow Condensed",sans-serif; font-size:18px; font-weight:600;
+    line-height:1.15; margin:0; color:var(--ink); }
+  .tl p { font-size:13.5px; color:var(--muted); line-height:1.55; margin-top:3px; }
+  .tl .tlfase { font-family:"IBM Plex Mono",monospace; font-size:9.5px; letter-spacing:.11em;
+    text-transform:uppercase; color:var(--faint); margin-left:9px; }
+  /* geweest */
+  .tl .af .tlaxis::after { background:var(--keep); border-color:var(--keep); }
+  .tl .af .tlwhen { color:var(--keep); }
+  /* waar we nu staan */
+  .tl .nu .tlaxis::after { background:var(--accent); border-color:var(--accent);
+    box-shadow:0 0 0 4px var(--accent-bg); }
+  .tl .nu .tlwhen { color:var(--accent); font-weight:600; }
+  .tl .nu h4 { color:var(--accent); }
+  .tl .nu .tlbody { background:var(--accent-bg); margin:0 -14px; padding:11px 14px 15px;
+    border-radius:3px; }
+  /* gepland */
+  .tl .gepland .tlaxis::after { background:var(--surface); border-color:var(--line); }
+  .tl .gepland h4 { color:var(--muted); }
+  @media (max-width:620px) {
+    .tl .tlrow { grid-template-columns:64px 18px minmax(0,1fr); gap:0 10px; }
+    .tl .tlwhen { font-size:10px; }
+  }
 </style>
 <style>
   :root {
@@ -434,7 +489,7 @@
   :root[data-theme="dark"] { --shadow-soft:0 1px 2px rgba(0,0,0,.3), 0 12px 32px -18px rgba(0,0,0,.7); }
 
   .mt, .card, .panel, .stats, .qlist, .track, .steps, .tasklist, .decisions,
-  .thesis, .warn, .urgent, .empty, .srclink, .wfframe, .dv, .wfnav, .stage,
+  .thesis, .warn, .urgent, .empty, .wfframe, .dv, .wfnav, .stage,
   .layer, .pr, .mile, .wftoggle, table.tpl { border-radius:var(--r); }
   .stat, .item, .q, .step, .task, .decision, .wfitem, .wftoggle button, .wffull { border-radius:0; }
 
@@ -471,14 +526,18 @@
     padding:9px 12px 7px; }
   .wfnav .wfgroup:first-child { padding-top:11px; }
 
+  /* Verwijzingen zakken naar de onderkant en staan rechts: de tekst leest
+     van boven af, de uitgangen staan bij elkaar onderin. */
   .mt a.live { display:inline-flex; align-items:center; gap:6px; margin-top:2px;
     font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.05em;
     color:var(--accent); text-decoration:none; border-bottom:1px solid currentColor;
     align-self:flex-start; }
   .mt a.live:hover { color:var(--primary); }
   .mt a.live:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .mt a.live { align-self:flex-end; text-align:right; }
+  .mt .mtop > a.live:first-of-type { margin-top:auto; padding-top:10px; }
 
-  .mt .mtop > a.live + a.live { margin-top:1px; }
+  .mt .mtop > a.live + a.live { margin-top:1px; padding-top:0; }
 
   .mt ul { margin:2px 0 0; padding-left:15px; }
   .mt ul li { font-size:13px; color:var(--muted); line-height:1.5; padding:1.5px 0; }
@@ -656,12 +715,12 @@
     <section>
       <div class="sec-head">
         <span class="eyebrow">Uit het keuzedocument</span>
-        <h2>Vier knoppen</h2>
-        <p>De keuzes zijn los van elkaar te draaien. Knop 3 is een businesskeuze en gaat vóór de rest — die bepaalt namelijk welk CMS past.</p>
+        <h2>Vier keuzes</h2>
+        <p>De vier staan los van elkaar. Keuze 3 is een businesskeuze en gaat vóór de rest — die bepaalt namelijk welk CMS past.</p>
       </div>
       <div class="scroller">
         <table class="tpl fixed2">
-          <thead><tr><th>Knop</th><th>Opties</th><th>Stand</th></tr></thead>
+          <thead><tr><th>Keuze</th><th>Opties</th><th>Stand</th></tr></thead>
           <tbody>
             <tr><td><strong>1</strong> Commerce-backend</td><td class="mono">Magento headless<br>Medusa Cloud<br>Shopify Plus</td><td class="blocks"><em>Medusa &mdash; 95% zeker.</em> Magento blijft niet. Harde voorwaarde: Cloud, niet self-hosted, anders komt de infra- en securitylast terug op ons.</td></tr>
             <tr><td><strong>2</strong> Content-CMS</td><td class="mono">Sanity<br>Storyblok<br>Contentful</td><td class="blocks"><em>Sanity.</em> Schema staat in code en dus in versiebeheer — past bij een code-first opzet. Let op de SSO-klif: SAML is een dure add-on.</td></tr>
@@ -821,13 +880,13 @@
       </div>
       <div class="mtiles">
         <div class="mt af"><div class="mtop"><span class="mn">1</span><h4>Tool set-up klaar</h4><p>Vercel-project, Sanity-basisinrichting en de bevestigde stack: Medusa, Sanity, Next.js.</p></div><span class="tag">afgerond</span></div>
-        <div class="mt loopt"><div class="mtop"><span class="mn">2a</span><h4>Minimale frontend om een geconfigureerd product te bestellen</h4><p>Medusa-skeleton plus de configurator-embed met POST-integratie. Loopt in augustus.</p></div><span class="tag">onderhanden</span></div>
+        <div class="mt loopt"><div class="mtop"><span class="mn">2a</span><h4>Minimale frontend om een geconfigureerd product te bestellen</h4><p>Medusa-skeleton plus de configurator-embed met POST-integratie. Loopt in augustus.</p></div><span class="tag">loopt</span></div>
         <div class="mt cb"><div class="mtop"><span class="mn">2b</span><h4>We zien de order terug in het webshopportaal</h4><p>Hangt op het Magento-orderendpoint en de watchdog-koppeling met cb_core_v2 — beide van CaseBuilder.</p></div><span class="tag">wacht op cb</span></div>
-        <div class="mt loopt"><div class="mtop"><span class="mn">3</span><h4>Stresstest — bugs zijn in beeld</h4><p>Loopt. Getest tot 3.000 producten: Medusa blijft binnen alle grenzen, de frontend niet. De 5.000-meting volgt nog.</p></div><span class="tag">onderhanden</span></div>
+        <div class="mt loopt"><div class="mtop"><span class="mn">3</span><h4>Stresstest — bugs zijn in beeld</h4><p>Loopt. Getest tot 3.000 producten: Medusa blijft binnen alle grenzen, de frontend niet. De 5.000-meting volgt nog.</p></div><span class="tag">loopt</span></div>
         <div class="mt af"><div class="mtop"><span class="mn">4</span><h4>Sitemap, wireframes en user flows uitgestippeld</h4><p>Veertien sjablonen, zeventien besteltaken en de volledige nieuwe boom liggen er.</p></div><span class="tag">afgerond</span></div>
-        <div class="mt loopt"><div class="mtop"><span class="mn">4</span><h4>API en endpoint klaar</h4><p>Casebuilder API skeleton en de API-contracten worden in augustus vastgelegd.</p></div><span class="tag">onderhanden</span></div>
+        <div class="mt loopt"><div class="mtop"><span class="mn">4</span><h4>API en endpoint klaar</h4><p>Casebuilder API skeleton en de API-contracten worden in augustus vastgelegd.</p></div><span class="tag">loopt</span></div>
         <div class="mt gepland"><div class="mtop"><span class="mn">4</span><h4>Hoofdtemplates staan in de CMS</h4><p>Sanity-templates en de blokkenbibliotheek — oktober.</p></div><span class="tag">gepland</span></div>
-        <div class="mt loopt"><div class="mtop"><span class="mn">5a</span><h4>Designprototype klaar</h4><p>Design frontend loopt; categoriepagina is af, de overige dertien volgen.</p></div><span class="tag">onderhanden</span></div>
+        <div class="mt loopt"><div class="mtop"><span class="mn">5a</span><h4>Designprototype klaar</h4><p>Design frontend loopt; categoriepagina is af, de overige dertien volgen.</p></div><span class="tag">loopt</span></div>
         <div class="mt gepland"><div class="mtop"><span class="mn">5b</span><h4>Website usability-test</h4><p>Nog niet belegd. Vraagt een werkend prototype en deelnemers uit de doelgroep.</p></div><span class="tag">te plannen</span></div>
         <div class="mt gepland"><div class="mtop"><span class="mn">6</span><h4>Eerste contentpagina&#39;s live</h4><p>Vraagt de blokkenbibliotheek én de vertaalbeslissing — beide staan nog open.</p></div><span class="tag">gepland</span></div>
       </div>
@@ -953,7 +1012,7 @@
 
   <div class="thesis">
     <span class="eyebrow">Twee besluiten verwerkt</span>
-    <p><strong>Modelnamen blijven zoals ze live staan</strong> — koffer, hoedcase, trunccase, rackcase-enkel-deksel, rackcase-dubbel-deksel. Het augustus-voorstel kortte de laatste twee in; dat is teruggedraaid.</p>
+    <p><strong>Modelnamen blijven zoals ze live staan</strong> — koffer, hoedcase, trunccase, rackcase-enkel-deksel, rackcase-dubbel-deksel.</p>
     <p><strong>De losse B2B-tak vervalt.</strong> De hele site is zakelijk; een aparte ingang zou impliceren dat de rest dat niet is. Functionaliteit gaat naar het account, de voorwaarden naar de servicehub. <code>/case-voor</code> blijft — dat is juist de particuliere instroom vanuit Google.</p>
   </div>
 
@@ -1367,6 +1426,11 @@
       <span class="eyebrow">CaseBuilder · ontwerpfase</span>
       <h1>Wireframes</h1>
       <p class="lede">Veertien sjablonen dekken de hele site. Geen plaatjes maar structuur: wat er op het scherm staat en in welke volgorde. Kies er links één.</p>
+      <div class="srcrow" style="margin-top:16px">
+        <a class="srclink" href="mockups/homepage.html" target="_blank" rel="noopener"><span class="tag">mockup</span>Homepage in het merk &#8599;</a>
+        <a class="srclink" href="mockups/categorie.html" target="_blank" rel="noopener"><span class="tag">mockup</span>Categoriepagina in het merk &#8599;</a>
+        <a class="srclink" href="mockups/header-varianten.html" target="_blank" rel="noopener"><span class="tag">ter beoordeling</span>Headervarianten &mdash; huidig naast drie alternatieven &#8599;</a>
+      </div>
     </header>
 
     <div class="wflayout">
@@ -2044,13 +2108,13 @@
 
       <div class="carhead"><h3 class="tablabel anch" id="m-2026-08-28-terugblik">1 &middot; Terugblik<a class="hash" href="#m-2026-08-28-terugblik" aria-label="Link naar deze sectie">#</a></h3><div class="carbtns"><button class="carbtn" type="button" data-car="car-terugblik" data-dir="-1" aria-label="Vorige">&#8592;</button><button class="carbtn" type="button" data-car="car-terugblik" data-dir="1" aria-label="Volgende">&#8594;</button></div></div>
       <div class="mtiles carousel" id="car-terugblik" tabindex="0" role="group" aria-label="1 &middot; Terugblik">
-        <div class="mt af"><div class="mtop"><span class="mn">01</span><h4>Systeemanalyse en architectuur</h4><p>De live site in kaart: 386 pagina&#39;s over 15 templates, en de scheidslijn bij de casebuilder api vastgelegd. Alles daarachter blijft van CaseBuilder.</p><a class="live" href="https://docs.google.com/document/d/1i-uPzuidKTSGHmeWRdUQ6MksPGPez4vU/edit" target="_blank" rel="noopener noreferrer">architectuurvoorstel &#8599;</a><a class="live" href="https://docs.google.com/document/d/1AGyHei97i9vNrJOAFBLmV5M_f7SBXMgl/edit" target="_blank" rel="noopener noreferrer">scenario&#39;s &amp; keuzes &#8599;</a><a class="live" href="#definitie">samenvatting in dit document &rarr;</a></div><span class="tag">afgerond</span></div>
-        <div class="mt af"><div class="mtop"><span class="mn">02</span><h4>Medusa</h4><p>Webshop-skeleton staat. Stack bevestigd, Magento valt af — pakket B, schone lei en code-first.</p><a class="live" href="https://46.224.236.191.sslip.io/app/login" target="_blank" rel="noopener noreferrer">open de Medusa-admin &#8599;</a></div><span class="tag">afgerond</span></div>
-        <div class="mt af"><div class="mtop"><span class="mn">03</span><h4>Sanity</h4><p>Basisinrichting staat. De blokkenbibliotheek — circa twaalf on-brand blokken — volgt in oktober.</p><a class="live" href="https://casebuilder-web.vercel.app/studio/" target="_blank" rel="noopener noreferrer">open de Sanity Studio &#8599;</a></div><span class="tag">afgerond</span></div>
-        <div class="mt af"><div class="mtop"><span class="mn">04</span><h4>Minimale frontend om de configurator te testen</h4><p>Connection test tussen frontend en casebuilder api geslaagd, plus de iframe-embed met POST-integratie. Het technisch risicovolste punt is aangetoond.</p><a class="live" href="https://casebuilder-web.vercel.app" target="_blank" rel="noopener noreferrer">bekijk de testomgeving &#8599;</a></div><span class="tag">afgerond</span></div>
-        <div class="mt deels"><div class="mtop"><span class="mn">05</span><h4>Sitemap en sitestructuur</h4><p>386 pagina&#39;s worden er 311 over veertien sjablonen. Zeventien besteltaken getoetst tegen de nieuwe boom: zes gaten gevonden, drie opgelost in het ontwerp.</p></div><span class="tag">in review</span></div>
-        <div class="mt deels"><div class="mtop"><span class="mn">06</span><h4>Wireframes — hoe een contentpagina eruitziet</h4><p>Veertien sjablonen uitgetekend. Eén sjabloon dekt zeven servicepagina&#39;s: koptekst, tekstkolom uit blokken, sectienavigatie, contactblok. <strong>Wat daarvoor nodig is:</strong> de blokkenbibliotheek plus de teksten.</p></div><span class="tag">in review</span></div>
-        <div class="mt deels"><div class="mtop"><span class="mn">07</span><h4>Testresultaten</h4><ul><li><strong>Medusa haalt alle grenzen.</strong> Filteren: 82 ms bij 1.000, 164 ms bij 3.000 — grens 500 ms.</li><li>Admin blijft onder 470 ms, tegen een grens van 2 seconden.</li><li>Nul fouten, in elke meting.</li><li><strong>Het knelpunt zit in de frontend:</strong> die haalt álle producten op en filtert in het geheugen.</li><li>27 seconden laadtijd bij 1.000 producten.</li><li>Paginatie en filteren in de database lossen het op — staat al in het categorie-ontwerp.</li></ul><a class="live" href="https://docs.google.com/document/d/1pY7MQxi06DV0y_98nmLTkq7isR0lsShYSuS3cogkq3o/edit" target="_blank" rel="noopener noreferrer">lees het testdocument &#8599;</a></div><span class="tag">in review</span></div>
+        <div class="mt af"><div class="mtop"><a class="fase f-def" href="#definitie" title="Hoort bij de definitiefase">definitie</a><span class="mn">01</span><h4>Systeemanalyse en architectuur</h4><p>De live site in kaart: 386 pagina&#39;s over 15 templates, en de scheidslijn bij de casebuilder api vastgelegd. Alles daarachter blijft van CaseBuilder.</p><a class="live" href="https://docs.google.com/document/d/1i-uPzuidKTSGHmeWRdUQ6MksPGPez4vU/edit" target="_blank" rel="noopener noreferrer">architectuurvoorstel &#8599;</a><a class="live" href="https://docs.google.com/document/d/1AGyHei97i9vNrJOAFBLmV5M_f7SBXMgl/edit" target="_blank" rel="noopener noreferrer">scenario&#39;s &amp; keuzes &#8599;</a><a class="live" href="#definitie">samenvatting in dit document &rarr;</a></div><span class="tag">afgerond</span></div>
+        <div class="mt af"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">02</span><h4>Medusa</h4><p>Webshop-skeleton staat. Stack bevestigd, Magento valt af — pakket B, schone lei en code-first.</p><a class="live" href="https://46.224.236.191.sslip.io/app/login" target="_blank" rel="noopener noreferrer">open de Medusa-admin &#8599;</a></div><span class="tag">afgerond</span></div>
+        <div class="mt af"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">03</span><h4>Sanity</h4><p>Basisinrichting staat. De blokkenbibliotheek — circa twaalf on-brand blokken — volgt in oktober.</p><a class="live" href="https://casebuilder-web.vercel.app/studio/" target="_blank" rel="noopener noreferrer">open de Sanity Studio &#8599;</a></div><span class="tag">afgerond</span></div>
+        <div class="mt af"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">04</span><h4>Minimale frontend om de configurator te testen</h4><p>Connection test tussen frontend en casebuilder api geslaagd, plus de iframe-embed met POST-integratie. Het technisch risicovolste punt is aangetoond.</p><a class="live" href="https://casebuilder-web.vercel.app" target="_blank" rel="noopener noreferrer">bekijk de testomgeving &#8599;</a></div><span class="tag">afgerond</span></div>
+        <div class="mt deels"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">05</span><h4>Sitemap en sitestructuur</h4><p>386 pagina&#39;s worden er 311 over veertien sjablonen. Zeventien besteltaken getoetst tegen de nieuwe boom: zes gaten gevonden, drie opgelost in het ontwerp.</p></div><span class="tag">in review</span></div>
+        <div class="mt deels"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">06</span><h4>Wireframes — hoe een contentpagina eruitziet</h4><p>Veertien sjablonen uitgetekend. Eén sjabloon dekt zeven servicepagina&#39;s: koptekst, tekstkolom uit blokken, sectienavigatie, contactblok. <strong>Wat daarvoor nodig is:</strong> de blokkenbibliotheek plus de teksten.</p></div><span class="tag">in review</span></div>
+        <div class="mt deels"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">07</span><h4>Testresultaten</h4><ul><li><strong>Medusa haalt alle grenzen.</strong> Filteren: 82 ms bij 1.000, 164 ms bij 3.000 — grens 500 ms.</li><li>Admin blijft onder 470 ms, tegen een grens van 2 seconden.</li><li>Nul fouten, in elke meting.</li><li><strong>Het knelpunt zit in de frontend:</strong> die haalt álle producten op en filtert in het geheugen.</li><li>27 seconden laadtijd bij 1.000 producten.</li><li>Paginatie en filteren in de database lossen het op — staat al in het categorie-ontwerp.</li></ul><a class="live" href="https://docs.google.com/document/d/1pY7MQxi06DV0y_98nmLTkq7isR0lsShYSuS3cogkq3o/edit" target="_blank" rel="noopener noreferrer">lees het testdocument &#8599;</a></div><span class="tag">in review</span></div>
       </div>
 
       <div class="carhead"><h3 class="tablabel anch" id="m-2026-08-28-vooruitblik">2 &middot; Vooruitblik<a class="hash" href="#m-2026-08-28-vooruitblik" aria-label="Link naar deze sectie">#</a></h3><div class="carbtns"><button class="carbtn" type="button" data-car="car-vooruitblik" data-dir="-1" aria-label="Vorige">&#8592;</button><button class="carbtn" type="button" data-car="car-vooruitblik" data-dir="1" aria-label="Volgende">&#8594;</button></div></div>
@@ -2059,29 +2123,83 @@
         <a class="srclink" href="#bouw"><span class="tag">in dit document</span> Bouwfase &mdash; milestones en status &rarr;</a>
       </div>
       <div class="mtiles carousel" id="car-vooruitblik" tabindex="0" role="group" aria-label="2 &middot; Vooruitblik">
-        <div class="mt loopt"><div class="mtop"><span class="mn">sep</span><h4>Paginaontwerpen</h4><p>De categoriepagina is af in het merk — DM Sans, Barlow Condensed, cyaan als primaire actie. De overige dertien sjablonen volgen.</p></div><span class="tag">onderhanden</span></div>
-        <div class="mt loopt"><div class="mtop"><span class="mn">sep</span><h4>Bugfixes uit de stresstest</h4><p>Eén oorzaak, drie ingrepen: <strong>paginatie</strong> op de productlijst, <strong>filteren in de database</strong> in plaats van in het geheugen, en <strong>afbeeldingen lazy laden</strong>. Nu haalt de frontend álle producten op in elf verzoeken en sorteert die zelf — 27 seconden bij 1.000 producten. Medusa zelf blijft binnen alle grenzen, dus dit is frontendwerk. De 5.000-meting volgt daarna.</p></div><span class="tag">onderhanden</span></div>
-        <div class="mt gepland"><div class="mtop"><span class="mn">sep</span><h4>CI/CD en omgevingen</h4><p>Pipelines, dev-acceptance en productie. Plus de beslissing over de 38 subcategorieën, zodra GA4 er is.</p></div><span class="tag">gepland</span></div>
-        <div class="mt gepland"><div class="mtop"><span class="mn">okt</span><h4>Blokkenbibliotheek en Medusa</h4><p>Sanity-templates en de webshop full build. Contentproductie start hier.</p></div><span class="tag">gepland</span></div>
-        <div class="mt gepland"><div class="mtop"><span class="mn">nov</span><h4>Contentimport en prototype</h4><p>Werkend prototype op staging — het eerste moment waarop het geheel te zien is.</p></div><span class="tag">gepland</span></div>
-        <div class="mt gepland"><div class="mtop"><span class="mn">dec</span><h4>Klantportaal</h4><p>Full build, plus de orderstatus-terugstroom uit cb_core_v2.</p></div><span class="tag">gepland</span></div>
-        <div class="mt gepland"><div class="mtop"><span class="mn">jan</span><h4>Betalen en redirects</h4><p>Stripe-integratie. <strong>De redirect-mapping moet hier af zijn</strong> — die staat nu nergens in de planning.</p></div><span class="tag">aandacht</span></div>
-        <div class="mt gepland"><div class="mtop"><span class="mn">feb</span><h4>End-to-end test</h4><p>Volledige keten: configureren, bestellen, betalen, productie, portaal.</p></div><span class="tag">gepland</span></div>
-        <div class="mt gepland"><div class="mtop"><span class="mn">mrt</span><h4>Livegang</h4><p>User acceptance, performance- en securityreview, dan de switch.</p></div><span class="tag">gepland</span></div>
+        <div class="mt loopt"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">sep</span><h4>Paginaontwerpen</h4><p>De categoriepagina is af in het merk — DM Sans, Barlow Condensed, cyaan als primaire actie. De overige dertien sjablonen volgen. De header is teruggebracht van drie balken naar twee.</p><a class="live" href="mockups/header-varianten.html" target="_blank" rel="noopener">headervarianten &#8599;</a><a class="live" href="mockups/homepage.html" target="_blank" rel="noopener">homepage-ontwerp &#8599;</a></div><span class="tag">loopt</span></div>
+        <div class="mt loopt"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">sep</span><h4>Bugfixes uit de stresstest</h4><p>Eén oorzaak, drie ingrepen: <strong>paginatie</strong> op de productlijst, <strong>filteren in de database</strong> in plaats van in het geheugen, en <strong>afbeeldingen lazy laden</strong>. Nu haalt de frontend álle producten op in elf verzoeken en sorteert die zelf — 27 seconden bij 1.000 producten. Medusa zelf blijft binnen alle grenzen, dus dit is frontendwerk. De 5.000-meting volgt daarna.</p></div><span class="tag">loopt</span></div>
+        <div class="mt gepland"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">sep</span><h4>CI/CD en omgevingen</h4><p>Pipelines, dev-acceptance en productie. Plus de beslissing over de 38 subcategorieën, zodra GA4 er is.</p></div><span class="tag">gepland</span></div>
+        <div class="mt gepland"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">okt</span><h4>Blokkenbibliotheek en Medusa</h4><p>Sanity-templates en de webshop full build. Contentproductie start hier.</p></div><span class="tag">gepland</span></div>
+        <div class="mt gepland"><div class="mtop"><a class="fase f-cont" href="#content" title="Hoort bij de contentfase">content</a><span class="mn">nov</span><h4>Contentimport en prototype</h4><p>Werkend prototype op staging — het eerste moment waarop het geheel te zien is.</p></div><span class="tag">gepland</span></div>
+        <div class="mt gepland"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">dec</span><h4>Klantportaal</h4><p>Full build, plus de orderstatus-terugstroom uit cb_core_v2.</p></div><span class="tag">gepland</span></div>
+        <div class="mt gepland"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">jan</span><h4>Betalen en redirects</h4><p>Stripe-integratie. <strong>De redirect-mapping moet hier af zijn</strong> — die staat nu nergens in de planning.</p></div><span class="tag">aandacht</span></div>
+        <div class="mt gepland"><div class="mtop"><a class="fase f-live" href="#livegang" title="Hoort bij de live-gangfase">live-gang</a><span class="mn">feb</span><h4>End-to-end test</h4><p>Volledige keten: configureren, bestellen, betalen, productie, portaal.</p></div><span class="tag">gepland</span></div>
+        <div class="mt gepland"><div class="mtop"><a class="fase f-live" href="#livegang" title="Hoort bij de live-gangfase">live-gang</a><span class="mn">mrt</span><h4>Livegang</h4><p>User acceptance, performance- en securityreview, dan de switch.</p></div><span class="tag">gepland</span></div>
       </div>
 
       <div class="carhead"><h3 class="tablabel anch" id="m-2026-08-28-nodig">3 &middot; Wat we nog nodig hebben<a class="hash" href="#m-2026-08-28-nodig" aria-label="Link naar deze sectie">#</a></h3><div class="carbtns"><button class="carbtn" type="button" data-car="car-nodig" data-dir="-1" aria-label="Vorige">&#8592;</button><button class="carbtn" type="button" data-car="car-nodig" data-dir="1" aria-label="Volgende">&#8594;</button></div></div>
       <div class="mtiles carousel" id="car-nodig" tabindex="0" role="group" aria-label="3 &middot; Wat we nog nodig hebben">
-        <div class="mt cb"><div class="mtop"><span class="mn">01</span><h4>Toegang tot GA4, Search Console en GTM</h4><p>Aangevraagd op 5 augustus, nog niet geregeld. GTM is het meest urgent: zonder events op de configuratorstappen bouwt elke week een gat op in de nulmeting.</p></div><span class="tag">van cb</span></div>
-        <div class="mt cb"><div class="mtop"><span class="mn">02</span><h4>Testaccount voor het klantportaal</h4><p>Bepaalt of herbestellen nieuw gebouwd wordt of alleen verhuisd.</p></div><span class="tag">van cb</span></div>
-        <div class="mt cb"><div class="mtop"><span class="mn">03</span><h4>Waar komt de productlijst vandaan?</h4><p>Excel-upload of feed-API. Bij handmatig: hoe blijven prijs en voorraad daarna actueel?</p></div><span class="tag">van cb</span></div>
-        <div class="mt cb"><div class="mtop"><span class="mn">04</span><h4>Endpoint voor geslaagde en mislukte betalingen</h4><p>Heeft de casebuilder api dat? Zo niet, dan is het nieuwbouw in onze backend — geen koppeling.</p></div><span class="tag">van cb</span></div>
-        <div class="mt cb"><div class="mtop"><span class="mn">05</span><h4>Levert CaseBuilder bedrukking en logo&#39;s?</h4><p>Komt in geen enkel document voor, maar is een normale B2B-vraag.</p></div><span class="tag">van cb</span></div>
-        <div class="mt beslissing"><div class="mtop"><span class="mn">06</span><h4>Zijn Bol, Amazon en eBay een echt doel?</h4><p>Bepaalt of de PIM nu een kernlaag is of fase 2, en of Shopify alsnog tegen Medusa moet worden afgewogen.</p></div><span class="tag">beslissen</span></div>
-        <div class="mt beslissing"><div class="mtop"><span class="mn">07</span><h4>Blijft de locale in het pad, en met welke codes?</h4><p>Taalcode of land-taalcode. Raakt élke redirect, dus vóór de mapping beslissen.</p></div><span class="tag">beslissen</span></div>
-        <div class="mt beslissing"><div class="mtop"><span class="mn">08</span><h4>Vertalen we in vijf talen?</h4><p>Bij volledig vertalen wordt de contentproductie vijf keer zo groot. En 96% van dat volume zit in Medusa, niet in Sanity — <strong>dat trekt de PIM naar voren</strong>.</p></div><span class="tag">beslissen</span></div>
-        <div class="mt actie"><div class="mtop"><span class="mn">09</span><h4>Usability-onderzoek plannen</h4><p>Wanneer, met wie en op welk prototype? Staat als milestone 5b maar is nergens belegd. Vraagt deelnemers uit de doelgroep en dus voorbereidingstijd.</p></div><span class="tag">in te plannen</span></div>
-        <div class="mt actie"><div class="mtop"><span class="mn">10</span><h4>Start productcategorieën, content en foto&#39;s</h4><p>De volgorde ligt vast, de startdatum niet. Een fotoshoot van 233 onderdelen met schaalreferentie heeft een lange doorlooptijd — vroeg beleggen.</p></div><span class="tag">in te plannen</span></div>
+        <div class="mt cb"><div class="mtop"><a class="fase f-def" href="#definitie" title="Hoort bij de definitiefase">definitie</a><span class="mn">01</span><h4>Toegang tot GA4, Search Console en GTM</h4><p>Aangevraagd op 5 augustus, nog niet geregeld. GTM is het meest urgent: zonder events op de configuratorstappen bouwt elke week een gat op in de nulmeting.</p></div><span class="tag">van cb</span></div>
+        <div class="mt cb"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">02</span><h4>Testaccount voor het klantportaal</h4><p>Bepaalt of herbestellen nieuw gebouwd wordt of alleen verhuisd.</p></div><span class="tag">van cb</span></div>
+        <div class="mt cb"><div class="mtop"><a class="fase f-cont" href="#content" title="Hoort bij de contentfase">content</a><span class="mn">03</span><h4>Waar komt de productlijst vandaan?</h4><p>Excel-upload of feed-API. Bij handmatig: hoe blijven prijs en voorraad daarna actueel?</p></div><span class="tag">van cb</span></div>
+        <div class="mt cb"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">04</span><h4>Endpoint voor geslaagde en mislukte betalingen</h4><p>Heeft de casebuilder api dat? Zo niet, dan is het nieuwbouw in onze backend — geen koppeling.</p></div><span class="tag">van cb</span></div>
+        <div class="mt cb"><div class="mtop"><a class="fase f-def" href="#definitie" title="Hoort bij de definitiefase">definitie</a><span class="mn">05</span><h4>Levert CaseBuilder bedrukking en logo&#39;s?</h4><p>Komt in geen enkel document voor, maar is een normale B2B-vraag.</p></div><span class="tag">van cb</span></div>
+        <div class="mt beslissing"><div class="mtop"><a class="fase f-def" href="#definitie" title="Hoort bij de definitiefase">definitie</a><span class="mn">06</span><h4>Zijn Bol, Amazon en eBay een echt doel?</h4><p>Bepaalt of de PIM nu een kernlaag is of fase 2, en of Shopify alsnog tegen Medusa moet worden afgewogen.</p></div><span class="tag">beslissen</span></div>
+        <div class="mt beslissing"><div class="mtop"><a class="fase f-def" href="#definitie" title="Hoort bij de definitiefase">definitie</a><span class="mn">07</span><h4>Blijft de locale in het pad, en met welke codes?</h4><p>Taalcode of land-taalcode. Raakt élke redirect, dus vóór de mapping beslissen.</p></div><span class="tag">beslissen</span></div>
+        <div class="mt beslissing"><div class="mtop"><a class="fase f-cont" href="#content" title="Hoort bij de contentfase">content</a><span class="mn">08</span><h4>Vertalen we in vijf talen?</h4><p>Bij volledig vertalen wordt de contentproductie vijf keer zo groot. En 96% van dat volume zit in Medusa, niet in Sanity — <strong>dat trekt de PIM naar voren</strong>.</p></div><span class="tag">beslissen</span></div>
+        <div class="mt actie"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">09</span><h4>Usability-onderzoek plannen</h4><p>Wanneer, met wie en op welk prototype? Staat als milestone 5b maar is nergens belegd. Vraagt deelnemers uit de doelgroep en dus voorbereidingstijd.</p></div><span class="tag">in te plannen</span></div>
+        <div class="mt actie"><div class="mtop"><a class="fase f-cont" href="#content" title="Hoort bij de contentfase">content</a><span class="mn">10</span><h4>Start productcategorieën, content en foto&#39;s</h4><p>De volgorde ligt vast, de startdatum niet. Een fotoshoot van 233 onderdelen met schaalreferentie heeft een lange doorlooptijd — vroeg beleggen.</p></div><span class="tag">in te plannen</span></div>
+      </div>
+
+      <div class="carhead"><h3 class="tablabel anch" id="m-2026-08-28-tijdlijn">4 &middot; Tijdlijn<a class="hash" href="#m-2026-08-28-tijdlijn" aria-label="Link naar deze sectie">#</a></h3></div>
+      <p class="wfnote" style="margin-bottom:14px">Waar we vandaan komen, waar we nu staan en wat er gepland is. De data tot en met november; de maanden daarna staan in de <a href="#bouw">bouwfase</a>.</p>
+      <div class="tl">
+
+        <div class="tlrow af">
+          <div class="tlwhen">t/m aug</div><div class="tlaxis"></div>
+          <div class="tlbody">
+            <h4>Analyse, architectuur en stack<span class="tlfase">definitie</span></h4>
+            <p>De live site in kaart, de scheidslijn bij de casebuilder api vastgelegd, Medusa en Sanity ingericht en de configurator-handoff aangetoond. Sitemap van 386 naar 311 pagina&#39;s over veertien sjablonen.</p>
+          </div>
+        </div>
+
+        <div class="tlrow nu">
+          <div class="tlwhen">nu &middot; 2 weken</div><div class="tlaxis"></div>
+          <div class="tlbody">
+            <h4>Wireframes afronden<span class="tlfase">ontwerp</span></h4>
+            <p>Veertien sjablonen uitgetekend en in review. De komende twee weken gaan ze af, inclusief de gaten die uit de besteltaken kwamen.</p>
+          </div>
+        </div>
+
+        <div class="tlrow gepland">
+          <div class="tlwhen">sep</div><div class="tlaxis"></div>
+          <div class="tlbody">
+            <h4>Paginaontwerpen<span class="tlfase">ontwerp</span></h4>
+            <p>De categoriepagina is af in het merk; de overige dertien sjablonen volgen. Dit is wat er in de usability-test op tafel ligt.</p>
+          </div>
+        </div>
+
+        <div class="tlrow gepland">
+          <div class="tlwhen">half okt</div><div class="tlaxis"></div>
+          <div class="tlbody">
+            <h4>Usability-testresultaten binnen<span class="tlfase">ontwerp</span></h4>
+            <p>Getoetst bij mensen uit de doelgroep. De uitkomsten gaan terug het ontwerp in <strong>vóórdat er gebouwd wordt</strong> — daarna corrigeren kost een veelvoud.</p>
+          </div>
+        </div>
+
+        <div class="tlrow gepland">
+          <div class="tlwhen">okt &ndash; nov</div><div class="tlaxis"></div>
+          <div class="tlbody">
+            <h4>Pagina&#39;s bouwen in Sanity<span class="tlfase">bouw</span></h4>
+            <p>Blokkenbibliotheek — circa twaalf on-brand blokken — en daarmee de sjablonen. De redactie stelt pagina&#39;s samen uit die blokken.</p>
+          </div>
+        </div>
+
+        <div class="tlrow gepland">
+          <div class="tlwhen">eind nov</div><div class="tlaxis"></div>
+          <div class="tlbody">
+            <h4>Alles live op preview<span class="tlfase">bouw</span></h4>
+            <p>Het geheel staat en is te doorlopen op de previewomgeving. <strong>Nadrukkelijk niet op productie</strong> — de live-gang volgt pas na de end-to-end test en de redirect-mapping.</p>
+          </div>
+        </div>
+
       </div>
     </section>
 
