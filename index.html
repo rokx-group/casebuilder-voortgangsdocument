@@ -134,13 +134,19 @@
   .wf[data-mode="design"] .wfframe { display:none; }
   .wf[data-mode="wire"] .dv { display:none; }
 
-  /* ---------- ontwerpweergave — gegenereerd uit mockups/assets/brand.css
-     en mockups/categorie.html; niet met de hand bewerken ---------- */
-  .dv{border:1px solid var(--line);border-radius:3px;overflow:hidden;background:#fff;color:#1A1A1A}
+  /* ---------- ontwerpweergave — gegenereerd uit mockups/; niet met de hand bewerken ---------- */
+  .dv{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff;color:#1A1A1A}
   .dv .wrap{max-width:none;padding:0 26px}
-  .dv section{padding:44px 0}
+  .dv section{padding:46px 0}
+  .dv section.tight{padding:32px 0}
   .dv header.main{position:static}
   .dv .filters{position:static}
+  .dv .hero .wrap{padding-top:60px;padding-bottom:52px}
+  .dv .beslag>.hk{width:18px;height:18px}
+  .dv .beslag>.hk.tl,.dv .beslag>.hk.tr{top:18px}
+  .dv .beslag>.hk.bl,.dv .beslag>.hk.br{bottom:18px}
+  .dv .beslag>.hk.tl,.dv .beslag>.hk.bl{left:18px}
+  .dv .beslag>.hk.tr,.dv .beslag>.hk.br{right:18px}
   .dv{--dark:#003352; --blue:#0066A8; --cyan:#66C4E8; --logo:#0093D1;
   --ink:#1A1A1A; --void:#06121C; --lightblue:#E6EFF6; --bg:#F2F5F9;
   --rule:#D9DEE5; --mute:#6B7480; --white:#fff;
@@ -159,8 +165,13 @@
   font-family:var(--disp);text-transform:uppercase;font-weight:700;letter-spacing:.05em;font-size:15px}.dv .cases{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}.dv .case{border:1px solid var(--rule);background:#fff;display:flex;flex-direction:column;transition:.15s}.dv .case:hover{border-color:var(--dark)}.dv .case .im{background:var(--bg);aspect-ratio:1;display:flex;align-items:center;justify-content:center;padding:14px}.dv .case .bd{padding:18px 18px 22px;border-top:1px solid var(--rule)}.dv .case h4{font-size:18px;font-weight:700;line-height:1.05}.dv .case .d{font-size:13px;color:var(--mute);margin-top:7px;min-height:36px}.dv .case .pr{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--dark);margin-top:12px;text-transform:uppercase}.dv .case .pr b{font-family:var(--disp);font-size:19px;letter-spacing:.02em}.dv .case .pr i{font-style:normal;color:var(--mute);font-size:9.5px;display:block;margin-top:2px}.dv .spec{width:100%;border-collapse:collapse}.dv .spec th,.dv .spec td{text-align:left;padding:11px 0;border-bottom:1px solid var(--rule);font-size:14px}.dv .spec th{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-weight:500;width:42%}.dv .spec td b{font-family:var(--disp);text-transform:uppercase;letter-spacing:.03em;font-size:16px;color:var(--dark)}.dv footer{background:var(--void);color:rgba(255,255,255,.66);padding:64px 0 30px}.dv footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:44px}.dv footer h5{font-size:15px;letter-spacing:.06em;color:#fff;font-weight:700;
   border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:9px;margin-bottom:15px}.dv footer a{display:block;padding:5px 0;font-size:14px}.dv footer a:hover{color:var(--cyan)}.dv footer .adr{font-size:14px;line-height:1.8}.dv footer .bot{border-top:1px solid rgba(255,255,255,.15);margin-top:44px;padding-top:20px;display:flex;
   justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4)}.dv .note{background:#fffbe6;border-left:3px solid #e0b400;padding:12px 18px;font-size:13px;
-  font-family:var(--mono);letter-spacing:.03em;color:#6b5600;line-height:1.6}.dv .note b{color:#4a3b00}@media(max-width:1080px){.dv .cases{grid-template-columns:repeat(3,1fr)}.dv footer .cols{grid-template-columns:1fr 1fr}}@media(max-width:760px){.dv .wrap{padding:0 18px}.dv section{padding:56px 0}.dv .cases{grid-template-columns:repeat(2,1fr)}.dv .search,.dv .hdr-r{display:none}.dv .util .wrap>div:first-child{display:none}.dv .util .r{gap:16px}.dv .util .mono,.dv .util .r a{font-size:9px;letter-spacing:.1em}.dv nav.primary .wrap{overflow-x:auto;gap:22px;-webkit-overflow-scrolling:touch}.dv nav.primary a{white-space:nowrap;font-size:14px}.dv nav.primary .tel{display:none}.dv .topbar{font-size:8.5px;letter-spacing:.1em;left:18px;right:18px}.dv .beslag>.hk{width:16px;height:16px}.dv .beslag>.hk.tl,.dv .beslag>.hk.tr{top:16px}.dv .beslag>.hk.bl,.dv .beslag>.hk.br{bottom:16px}.dv .beslag>.hk.tl,.dv .beslag>.hk.bl{left:16px}.dv .beslag>.hk.tr,.dv .beslag>.hk.br{right:16px}.dv .serie{left:18px}.dv .field{height:54px}.dv .field button{padding:0 18px;font-size:13px}.dv footer .cols{grid-template-columns:1fr;gap:28px}.dv footer .bot{flex-direction:column;gap:8px}}.dv .cathead{background:var(--bg);border-bottom:1px solid var(--rule);padding:38px 0 34px}.dv .cathead h1{font-size:clamp(34px,4.2vw,52px)}.dv .cathead .lead{margin-top:14px}.dv .catlay{display:grid;grid-template-columns:236px minmax(0,1fr);gap:44px;padding:38px 0 80px}.dv .filters{position:sticky;top:96px;align-self:start;display:flex;flex-direction:column;gap:26px}.dv .fset h4{font-size:15px;letter-spacing:.06em;padding-bottom:9px;border-bottom:1px solid var(--rule);margin-bottom:11px}.dv .fset label{display:flex;align-items:center;gap:10px;padding:5px 0;font-size:14px;color:var(--mute);cursor:pointer}.dv .fset label:hover{color:var(--ink)}.dv .bx{width:14px;height:14px;border:1.5px solid var(--rule);flex:none;background:#fff}.dv .bx.on{background:var(--cyan);border-color:var(--cyan)}.dv .fset .num{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--rule)}.dv .toolbar{display:flex;align-items:center;gap:18px;flex-wrap:wrap;border-bottom:1px solid var(--rule);padding-bottom:14px;margin-bottom:24px}.dv .toolbar .cnt{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}.dv .toolbar .cnt b{color:var(--dark)}.dv .toolbar .sort{margin-left:auto}.dv .parts{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.dv .part{border:1px solid var(--rule);background:#fff;display:flex;flex-direction:column;transition:.15s}.dv .part:hover{border-color:var(--dark)}.dv .part .im{background:var(--bg);aspect-ratio:4/3;position:relative;display:flex;align-items:center;justify-content:center}.dv .part .im .sc{position:absolute;left:12px;bottom:11px;display:flex;align-items:center;gap:6px;
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--mute)}.dv .part .im .sc i{display:block;width:30px;height:2px;background:var(--rule)}.dv .part .bd{padding:16px 16px 18px;border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:6px;flex:1}.dv .part h4{font-size:18px;font-weight:700;line-height:1.05}.dv .part .sku{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}.dv .part .pr{font-family:var(--disp);font-size:22px;font-weight:900;color:var(--dark);letter-spacing:.02em;margin-top:2px}.dv .part .pr i{font-style:normal;display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--mute);font-weight:400}.dv .part .stk{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#2F7355}.dv .part .buy{display:flex;gap:8px;margin-top:auto;padding-top:12px}.dv .qty{display:flex;align-items:center;border:1.5px solid var(--rule)}.dv .qty span{padding:0 10px;color:var(--mute);cursor:pointer;user-select:none}.dv .qty b{padding:8px 10px;font-family:var(--mono);font-size:13px;border-left:1.5px solid var(--rule);border-right:1.5px solid var(--rule)}.dv .pager{display:flex;gap:8px;justify-content:center;margin-top:38px}.dv .pager a{border:1px solid var(--rule);padding:9px 15px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--mute)}.dv .pager a.on{background:var(--dark);border-color:var(--dark);color:#fff}.dv .crosslink{border:1px solid var(--rule);padding:26px 30px;margin-top:44px;display:flex;gap:26px;align-items:center;flex-wrap:wrap}.dv .crosslink h3{font-size:22px}.dv .crosslink p{font-size:14px;color:var(--mute);max-width:52ch;margin-top:6px}.dv .crosslink .btn{margin-left:auto}@media(max-width:1080px){.dv .catlay{grid-template-columns:1fr;gap:26px}.dv .filters{position:static}.dv .parts{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.dv .parts{grid-template-columns:1fr}}
+  font-family:var(--mono);letter-spacing:.03em;color:#6b5600;line-height:1.6}.dv .note b{color:#4a3b00}@media(max-width:1080px){.dv .cases{grid-template-columns:repeat(3,1fr)}.dv footer .cols{grid-template-columns:1fr 1fr}}@media(max-width:760px){.dv .wrap{padding:0 18px}.dv section{padding:56px 0}.dv .cases{grid-template-columns:repeat(2,1fr)}.dv .search,.dv .hdr-r{display:none}.dv .util .wrap>div:first-child{display:none}.dv .util .r{gap:16px}.dv .util .mono,.dv .util .r a{font-size:9px;letter-spacing:.1em}.dv nav.primary .wrap{overflow-x:auto;gap:22px;-webkit-overflow-scrolling:touch}.dv nav.primary a{white-space:nowrap;font-size:14px}.dv nav.primary .tel{display:none}.dv .topbar{font-size:8.5px;letter-spacing:.1em;left:18px;right:18px}.dv .beslag>.hk{width:16px;height:16px}.dv .beslag>.hk.tl,.dv .beslag>.hk.tr{top:16px}.dv .beslag>.hk.bl,.dv .beslag>.hk.br{bottom:16px}.dv .beslag>.hk.tl,.dv .beslag>.hk.bl{left:16px}.dv .beslag>.hk.tr,.dv .beslag>.hk.br{right:16px}.dv .serie{left:18px}.dv .field{height:54px}.dv .field button{padding:0 18px;font-size:13px}.dv footer .cols{grid-template-columns:1fr;gap:28px}.dv footer .bot{flex-direction:column;gap:8px}}.dv[data-page="categorie"] .cathead{background:var(--bg);border-bottom:1px solid var(--rule);padding:38px 0 34px}.dv[data-page="categorie"] .cathead h1{font-size:clamp(34px,4.2vw,52px)}.dv[data-page="categorie"] .cathead .lead{margin-top:14px}.dv[data-page="categorie"] .catlay{display:grid;grid-template-columns:236px minmax(0,1fr);gap:44px;padding:38px 0 80px}.dv[data-page="categorie"] .filters{position:sticky;top:96px;align-self:start;display:flex;flex-direction:column;gap:26px}.dv[data-page="categorie"] .fset h4{font-size:15px;letter-spacing:.06em;padding-bottom:9px;border-bottom:1px solid var(--rule);margin-bottom:11px}.dv[data-page="categorie"] .fset label{display:flex;align-items:center;gap:10px;padding:5px 0;font-size:14px;color:var(--mute);cursor:pointer}.dv[data-page="categorie"] .fset label:hover{color:var(--ink)}.dv[data-page="categorie"] .bx{width:14px;height:14px;border:1.5px solid var(--rule);flex:none;background:#fff}.dv[data-page="categorie"] .bx.on{background:var(--cyan);border-color:var(--cyan)}.dv[data-page="categorie"] .fset .num{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--rule)}.dv[data-page="categorie"] .toolbar{display:flex;align-items:center;gap:18px;flex-wrap:wrap;border-bottom:1px solid var(--rule);padding-bottom:14px;margin-bottom:24px}.dv[data-page="categorie"] .toolbar .cnt{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}.dv[data-page="categorie"] .toolbar .cnt b{color:var(--dark)}.dv[data-page="categorie"] .toolbar .sort{margin-left:auto}.dv[data-page="categorie"] .parts{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.dv[data-page="categorie"] .part{border:1px solid var(--rule);background:#fff;display:flex;flex-direction:column;transition:.15s}.dv[data-page="categorie"] .part:hover{border-color:var(--dark)}.dv[data-page="categorie"] .part .im{background:var(--bg);aspect-ratio:4/3;position:relative;display:flex;align-items:center;justify-content:center}.dv[data-page="categorie"] .part .im .sc{position:absolute;left:12px;bottom:11px;display:flex;align-items:center;gap:6px;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--mute)}.dv[data-page="categorie"] .part .im .sc i{display:block;width:30px;height:2px;background:var(--rule)}.dv[data-page="categorie"] .part .bd{padding:16px 16px 18px;border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:6px;flex:1}.dv[data-page="categorie"] .part h4{font-size:18px;font-weight:700;line-height:1.05}.dv[data-page="categorie"] .part .sku{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}.dv[data-page="categorie"] .part .pr{font-family:var(--disp);font-size:22px;font-weight:900;color:var(--dark);letter-spacing:.02em;margin-top:2px}.dv[data-page="categorie"] .part .pr i{font-style:normal;display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--mute);font-weight:400}.dv[data-page="categorie"] .part .stk{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#2F7355}.dv[data-page="categorie"] .part .buy{display:flex;gap:8px;margin-top:auto;padding-top:12px}.dv[data-page="categorie"] .qty{display:flex;align-items:center;border:1.5px solid var(--rule)}.dv[data-page="categorie"] .qty span{padding:0 10px;color:var(--mute);cursor:pointer;user-select:none}.dv[data-page="categorie"] .qty b{padding:8px 10px;font-family:var(--mono);font-size:13px;border-left:1.5px solid var(--rule);border-right:1.5px solid var(--rule)}.dv[data-page="categorie"] .pager{display:flex;gap:8px;justify-content:center;margin-top:38px}.dv[data-page="categorie"] .pager a{border:1px solid var(--rule);padding:9px 15px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--mute)}.dv[data-page="categorie"] .pager a.on{background:var(--dark);border-color:var(--dark);color:#fff}.dv[data-page="categorie"] .crosslink{border:1px solid var(--rule);padding:26px 30px;margin-top:44px;display:flex;gap:26px;align-items:center;flex-wrap:wrap}.dv[data-page="categorie"] .crosslink h3{font-size:22px}.dv[data-page="categorie"] .crosslink p{font-size:14px;color:var(--mute);max-width:52ch;margin-top:6px}.dv[data-page="categorie"] .crosslink .btn{margin-left:auto}@media(max-width:1080px){.dv[data-page="categorie"] .catlay{grid-template-columns:1fr;gap:26px}.dv[data-page="categorie"] .filters{position:static}.dv[data-page="categorie"] .parts{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.dv[data-page="categorie"] .parts{grid-template-columns:1fr}}.dv[data-page="home"] .hero{background:var(--void);color:#fff;position:relative;overflow:hidden}.dv[data-page="home"] .hero .wrap{padding-top:96px;padding-bottom:78px;position:relative;z-index:1}.dv[data-page="home"] .hero h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:.02em;
+  font-size:clamp(46px,6.2vw,86px);line-height:.92;color:#fff;max-width:15ch;margin:18px 0 0}.dv[data-page="home"] .hero h1 .acc{color:var(--cyan)}.dv[data-page="home"] .hero p.sub{margin-top:22px;max-width:56ch;font-size:18px;color:rgba(255,255,255,.78)}.dv[data-page="home"] .hero .cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}.dv[data-page="home"] .hero .specs{display:flex;margin-top:60px;border-top:1px solid rgba(255,255,255,.18);flex-wrap:wrap}.dv[data-page="home"] .hero .specs div{flex:1;min-width:190px;padding:20px 24px 0 0}.dv[data-page="home"] .hero .specs .k{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--cyan);text-transform:uppercase}.dv[data-page="home"] .hero .specs .v{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:19px;letter-spacing:.03em;margin-top:6px;color:#fff}.dv[data-page="home"] .again{background:var(--lightblue);border-bottom:1px solid var(--rule)}.dv[data-page="home"] .again .wrap{display:flex;align-items:center;gap:22px;flex-wrap:wrap;padding-top:16px;padding-bottom:16px}.dv[data-page="home"] .again .who{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}.dv[data-page="home"] .again b{font-family:var(--disp);text-transform:uppercase;font-size:19px;letter-spacing:.03em;color:var(--dark)}.dv[data-page="home"] .again span.d{font-size:14px;color:var(--mute)}.dv[data-page="home"] .again .btn{margin-left:auto}.dv[data-page="home"] .ingangen{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}.dv[data-page="home"] .ing{background:#fff;padding:36px 30px 32px;display:flex;flex-direction:column;min-height:310px;transition:.15s}.dv[data-page="home"] .ing:hover{background:var(--lightblue)}.dv[data-page="home"] .ing .n{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--cyan)}.dv[data-page="home"] .ing h3{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:26px;letter-spacing:.03em;
+  color:var(--dark);margin:16px 0 12px;line-height:1.05}.dv[data-page="home"] .ing p{font-size:15px;color:var(--mute);flex:1}.dv[data-page="home"] .ing .go{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:15px;letter-spacing:.05em;
+  color:var(--blue);margin-top:20px;display:flex;align-items:center;gap:9px}.dv[data-page="home"] .ing:hover .go{color:var(--dark)}.dv[data-page="home"] .models .sec-head{display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap}.dv[data-page="home"] .models .sec-head > div{margin-right:auto}.dv[data-page="home"] .case .pr b{display:block}.dv[data-page="home"] .compare{border-top:1px solid var(--rule);margin-top:24px;padding-top:20px;display:flex;
+  align-items:center;gap:20px;flex-wrap:wrap}.dv[data-page="home"] .compare p{font-size:15px;color:var(--mute);max-width:52ch}.dv[data-page="home"] .assure{background:var(--dark);color:#fff}.dv[data-page="home"] .assure .grid{display:grid;grid-template-columns:1.15fr 1fr;gap:64px;align-items:center}.dv[data-page="home"] .assure h2{font-size:clamp(30px,3.4vw,46px);color:#fff;margin:14px 0 18px}.dv[data-page="home"] .assure p{color:rgba(255,255,255,.8);font-size:17px;max-width:52ch}.dv[data-page="home"] .assure .steps{border-left:1px solid rgba(255,255,255,.2);padding-left:32px}.dv[data-page="home"] .assure .st{display:flex;gap:18px;padding:15px 0}.dv[data-page="home"] .assure .st+.st{border-top:1px solid rgba(255,255,255,.14)}.dv[data-page="home"] .assure .st .i{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--cyan);padding-top:4px;white-space:nowrap}.dv[data-page="home"] .assure .st b{font-family:var(--disp);text-transform:uppercase;font-size:17px;letter-spacing:.03em;font-weight:700;display:block}.dv[data-page="home"] .assure .st span{font-size:14px;color:rgba(255,255,255,.68)}.dv[data-page="home"] .trust{border-top:1px solid var(--rule);background:var(--bg)}.dv[data-page="home"] .trust .row{display:flex;gap:48px;align-items:center;flex-wrap:wrap}.dv[data-page="home"] .trust .it{display:flex;flex-direction:column;gap:4px}.dv[data-page="home"] .trust .it b{font-family:var(--disp);text-transform:uppercase;font-size:22px;letter-spacing:.03em;color:var(--dark)}.dv[data-page="home"] .trust .it span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}.dv[data-page="home"] .build{border-top:1px solid var(--rule)}.dv[data-page="home"] .build .grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}.dv[data-page="home"] .build .cats{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.dv[data-page="home"] .build .cats a{border:1px solid var(--rule);background:#fff;padding:9px 14px;font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}.dv[data-page="home"] .build .cats a:hover{border-color:var(--dark);color:var(--dark)}.dv[data-page="home"] .build .side{border:1px solid var(--rule);padding:28px 30px}.dv[data-page="home"] .build .side h4{font-size:20px;margin-bottom:8px}.dv[data-page="home"] .build .side p{font-size:14.5px;color:var(--mute)}.dv[data-page="home"] .build .side + .side{margin-top:14px}.dv[data-page="home"] .closer{background:var(--void);color:#fff;text-align:center}.dv[data-page="home"] .closer h2{font-size:clamp(30px,3.6vw,50px);color:#fff}.dv[data-page="home"] .closer p{color:rgba(255,255,255,.75);margin:14px auto 30px;max-width:48ch;font-size:17px}@media(max-width:1080px){.dv[data-page="home"] .ingangen{grid-template-columns:1fr}.dv[data-page="home"] .assure .grid,.dv[data-page="home"] .build .grid{grid-template-columns:1fr;gap:36px}}@media(max-width:760px){.dv[data-page="home"] .hero .wrap{padding-top:56px;padding-bottom:52px}.dv[data-page="home"] .hero .specs div{min-width:50%;padding-right:12px}.dv[data-page="home"] .again .btn{margin-left:0}.dv[data-page="home"] .assure .steps{padding-left:20px}}
 
   .srcrow { display:flex; gap:10px; flex-wrap:wrap; }
   .principles { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:12px; }
@@ -1389,7 +1400,7 @@
   <figcaption><h3>/onderdelen/{cat}/{sub}</h3><span class="wfmeta">categorie &middot; 49 pagina&#39;s · /onderdelen en (sub)categorieën</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" data-mode="design" aria-pressed="false">ontwerp</button><a class="wffull" href="mockups/categorie.html" target="_blank" rel="noopener">volledige pagina &#8599;</a></span></figcaption>
   <div class="wfframe"><div class="wfurl">/onderdelen/hoeken/balhoeken</div><div class="wfpage"><div class="b nav">header · logo · flightcases · wat ga je vervoeren? · onderdelen · service · ☎ · wagen</div><div class="b">kruimelpad · onderdelen › hoeken › balhoeken</div><div class="b head">H1 · Balhoeken</div><div class="b">introtekst · waarvoor, welke maten, hoe kiezen — dit maakt de pagina indexeerbaar</div><div class="wfrow"><div class="wfcol"><div class="b xtall">filters<br><br>maat<br>materiaal<br>afwerking<br>merk<br><br>parameter-URL&#39;s → canonical, geen 301</div></div><div class="wfcol w3"><div class="wfrow"><div class="b tall">product · foto met schaalreferentie · naam · prijs excl. · [ 10 ] + wagen</div><div class="b tall">product</div><div class="b tall">product</div></div><div class="wfrow"><div class="b tall">product</div><div class="b tall">product</div><div class="b tall">product</div></div><div class="b">paginering</div></div></div><div class="b nav">footer · modellen · onderdelen · service · voorwaarden · privacy · taal</div></div></div>
   <p class="wfnote">Filters zijn <strong>eigenschappen</strong> en krijgen nooit een eigen URL; producttypen waar mensen op zoeken wél. Aantal instelbaar in de lijst — B2B bestelt 10 tot 40 stuks.</p>
-  <div class="dv">
+  <div class="dv" data-page="categorie">
 <div class="util">
   <div class="wrap mono">
     <div>PROFLITE · DOESBURG · SINDS 1987</div>
@@ -1599,9 +1610,223 @@
   
 </figure>
 <figure class="wf" data-mode="wire" id="wf-homepage">
-  <figcaption><h3>/</h3><span class="wfmeta">homepage &middot; 1 pagina &middot; de belangrijkste van de site</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" disabled>ontwerp volgt</button></span></figcaption>
+  <figcaption><h3>/</h3><span class="wfmeta">homepage &middot; 1 pagina &middot; de belangrijkste van de site</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" data-mode="design" aria-pressed="false">ontwerp</button><a class="wffull" href="mockups/homepage.html" target="_blank" rel="noopener">volledige pagina &#8599;</a></span></figcaption>
   <div class="wfframe"><div class="wfurl">/</div><div class="wfpage"><div class="b nav">utility · PROFLITE · DOESBURG · SINDS 1987 &nbsp;&nbsp;&nbsp; NL &middot; zakelijk account &middot; inloggen</div><div class="b nav">header · caseBuilder.com &nbsp;|&nbsp; zoek op case, onderdeel of apparatuur &nbsp;|&nbsp; offerte &middot; winkelwagen</div><div class="b nav">nav · Flightcases &middot; Wat ga je vervoeren? &middot; <i>onderdelen</i> &middot; <i>service</i> &nbsp;&nbsp; direct advies +31 (0)575 575734</div><div class="b head">HERO — één belofte, geen functiebeschrijving</div><div class="wfrow"><div class="wfcol w2"><div class="b head">H1 · Je flightcase staat over tien dagen op de kade</div><div class="b">subkop · configureer online tot op de millimeter, zie meteen wat het kost</div><div class="wfrow"><div class="b cta">▶ start met configureren</div><div class="b soft">wat ga je vervoeren?</div></div><div class="b">specstrip · levertijd 10 werkdagen &middot; prijs direct zichtbaar &middot; bouwpakket of kant-en-klaar &middot; specialist kijkt mee</div></div><div class="wfcol"><div class="b xtall">eindproduct in context — festival, industrie, op transport</div></div></div><div class="b soft">INGELOGD? — snel bijbestellen uit je laatste order</div><div class="b head">DRIE INGANGEN OP INTENTIE</div><div class="wfrow"><div class="b cta">A · ik weet wat ik nodig heb<br><br>model en maten bekend<br>→ direct de configurator in</div><div class="b cta">B · ik weet wat ik moet beschermen<br><br>gitaar, rack, moving head<br>→ fit-finder</div><div class="b cta">C · ik weet het nog niet<br><br>welk type past bij mij?<br>→ vergelijk de vijf modellen</div></div><div class="b head">DE VIJF MODELLEN — met vanafprijs, want die ontbreekt nu volledig</div><div class="wfrow"><div class="b tall">koffer<br>draagbaar<br>vanaf &euro;—</div><div class="b tall">hoedcase<br>afneembaar deksel<br>vanaf &euro;—</div><div class="b tall">trunccase<br>universeel<br>vanaf &euro;—</div><div class="b tall">rackcase enkel deksel<br>19&quot;<br>vanaf &euro;—</div><div class="b tall">rackcase dubbel deksel<br>19&quot;<br>vanaf &euro;—</div></div><div class="b soft">→ vergelijk alle vijf naast elkaar</div><div class="b">HOE HET WERKT — 1 kies of laat kiezen &middot; 2 configureer &middot; 3 laat controleren &middot; 4 tien werkdagen</div><div class="b cta">LATEN CONTROLEREN — een casebouwer kijkt mee vóór je bestelt</div><div class="b">VERTROUWEN — beoordeling &middot; eigen productie in Doesburg sinds 1987 &middot; tien werkdagen &middot; op rekening voor zakelijke klanten</div><div class="b head">ZELF BOUWEN — onderdelen, bouwpakketten en zaagservice</div><div class="wfrow"><div class="b tall">profielen</div><div class="b tall">hoeken</div><div class="b tall">sluitingen</div><div class="b tall">wielen</div><div class="b tall">schuimplastic</div></div><div class="wfrow"><div class="b soft">bouwpakket compleet</div><div class="b soft">zaagservice — plaatmateriaal op maat</div><div class="b soft">zoek op artikelnummer</div></div><div class="b cta">SLOT-CTA · klaar om te beginnen? → open de configurator</div><div class="b nav">footer · flightcases &middot; onderdelen &middot; service &middot; over ons &middot; voorwaarden &middot; privacy &middot; taal</div></div></div>
   <p class="wfnote">Vier dingen die de mockup van 5 augustus nog niet had: <strong>vanafprijzen per model</strong> (besteltaak 09), <strong>de vergelijking</strong> tussen de vijf modellen (besteltaak 10), een <strong>ingelogde bijbestel-ingang</strong> (besteltaak 02 en 13, de openstaande vraag uit user-flows §F2) en <strong>zaagservice</strong> als zichtbare dienst in plaats van een onvindbare categorie-URL. Onderdelen staat gedempt in de navigatie maar krijgt een volwaardig blok lager op de pagina — degraderen zonder te slopen.</p>
+  <div class="dv" data-page="home">
+<div class="util">
+  <div class="wrap mono">
+    <div>PROFLITE · DOESBURG · SINDS 1987</div>
+    <div class="r"><a href="#">NL ▾</a><a href="#">ZAKELIJK ACCOUNT</a><a href="#">INLOGGEN</a></div>
+  </div>
+</div>
+
+<header class="main">
+  <div class="wrap">
+    <div class="logo"><em>case</em>Builder.com</div>
+    <form class="search" onsubmit="return false">
+      <input placeholder="Zoek op case, onderdeel of artikelnummer…">
+      <button>⌕</button>
+    </form>
+    <div class="hdr-r">
+      <div class="lnk"><b>Offerte</b><span>Binnen 4 uur</span></div>
+      <div class="lnk"><b>Winkelwagen</b><span>0 artikelen</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="primary">
+  <div class="wrap">
+    <a href="#">Flightcases</a>
+    <a href="#">Wat ga je vervoeren?</a>
+    <a href="categorie.html" class="sec">Onderdelen</a>
+    <a href="#" class="sec">Service</a>
+    <div class="tel">Direct advies · <b>+31 (0)575 575734</b></div>
+  </div>
+</nav>
+
+<div class="hero ruit ruit-dark ruit-veld beslag">
+  <span class="hk tl"></span><span class="hk tr"></span><span class="hk bl"></span><span class="hk br"></span>
+  <div class="topbar"><span>// 01 — FLIGHTCASES OP MAAT</span><span>PROFLITE · DOESBURG · 2026</span></div>
+  <div class="wrap">
+    <div class="ey">// GEEN OFFERTETRAJECT · GEEN WACHTTIJD</div>
+    <h1>Je flightcase staat <span class="acc">over tien dagen</span> op de kade</h1>
+    <p class="sub">Configureer online tot op de millimeter, zie meteen wat het kost, en laat je maten
+      gratis controleren door een casebouwer voordat je bestelt.</p>
+    <div class="cta">
+      <a class="btn btn-pri" href="#">Start met configureren →</a>
+      <a class="btn btn-ghost" href="#">Wat ga je vervoeren?</a>
+    </div>
+    <div class="specs">
+      <div><div class="k">// LEVERTIJD</div><div class="v">10 werkdagen</div></div>
+      <div><div class="k">// PRIJS</div><div class="v">Direct zichtbaar</div></div>
+      <div><div class="k">// UITVOERING</div><div class="v">Bouwpakket of kant-en-klaar</div></div>
+      <div><div class="k">// CONTROLE</div><div class="v">Specialist kijkt mee</div></div>
+    </div>
+  </div>
+  <div class="serie">CB-2026-0001</div>
+</div>
+
+<div class="again">
+  <div class="wrap">
+    <div>
+      <div class="who">// WELKOM TERUG, PROFLITE AV</div>
+      <b>Rackcase enkel deksel · 12 maart</b>
+      <span class="d">483 × 600 × 1.334 mm · zwart · 40 stuks balhoek medium</span>
+    </div>
+    <a class="btn btn-out btn-sm" href="#">Opnieuw bestellen →</a>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ey ey-dark">// 02 — WAAR BEGIN JE?</div>
+      <h2>Drie manieren om bij de juiste case te komen</h2>
+      <p class="lead">Je hoeft niet te weten hoe een flightcase heet om er een te bestellen.</p>
+    </div>
+    <div class="ingangen">
+      <div class="ing">
+        <div class="n">// A</div>
+        <h3>Ik weet wat ik nodig heb</h3>
+        <p>Model en maten zijn bekend. Direct de configurator in, prijs meteen in beeld, klaar in vijf stappen.</p>
+        <div class="go">Naar de configurator →</div>
+      </div>
+      <div class="ing">
+        <div class="n">// B</div>
+        <h3>Ik weet wat ik moet beschermen</h3>
+        <p>Een Les Paul, een 19-inch rack van 6 HE, een moving head. Zeg wat erin gaat, wij bepalen de maten.</p>
+        <div class="go">Wat ga je vervoeren? →</div>
+      </div>
+      <div class="ing">
+        <div class="n">// C</div>
+        <h3>Ik weet het nog niet</h3>
+        <p>Koffer, hoedcase, trunccase of rackcase — wat is het verschil, en wat past bij jouw transport?</p>
+        <div class="go">Vergelijk de vijf modellen →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="models tight ruit ruit-aanzet">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="ey ey-dark">// 03 — DE VIJF MODELLEN</div>
+        <h2>Alles op maat, vanaf een vaste basisprijs</h2>
+      </div>
+    </div>
+    <div class="cases">
+      <div class="case"><div class="im"><img src="mockups/assets/flightcase-koffer.jpg" alt="Koffer"></div>
+        <div class="bd"><h4>Koffer</h4><div class="d">Draagbaar aan een opbouwhandgreep</div>
+        <div class="pr"><b>vanaf € 149</b><i>excl. btw · eigen maten</i></div></div></div>
+      <div class="case"><div class="im"><img src="mockups/assets/flightcase-hoedcase.jpg" alt="Hoedcase"></div>
+        <div class="bd"><h4>Hoedcase</h4><div class="d">Lage bodem, volledig afneembaar deksel</div>
+        <div class="pr"><b>vanaf € 179</b><i>excl. btw · eigen maten</i></div></div></div>
+      <div class="case"><div class="im"><img src="mockups/assets/flightcase-trunccase.jpg" alt="Trunccase"></div>
+        <div class="bd"><h4>Trunccase</h4><div class="d">Universele transportkist met bovendeksel</div>
+        <div class="pr"><b>vanaf € 199</b><i>excl. btw · eigen maten</i></div></div></div>
+      <div class="case"><div class="im"><img src="mockups/assets/flightcase-rackcase-enkel-deksel.jpg" alt="Rackcase enkel deksel"></div>
+        <div class="bd"><h4>Rackcase enkel</h4><div class="d">Voordeksel, voor 19-inch apparatuur</div>
+        <div class="pr"><b>vanaf € 229</b><i>excl. btw · eigen maten</i></div></div></div>
+      <div class="case"><div class="im"><img src="mockups/assets/flightcase-rackcase-dubbel-deksel.jpg" alt="Rackcase dubbel deksel"></div>
+        <div class="bd"><h4>Rackcase dubbel</h4><div class="d">Voor- én achterdeksel, 19-inch</div>
+        <div class="pr"><b>vanaf € 259</b><i>excl. btw · eigen maten</i></div></div></div>
+    </div>
+    <div class="compare">
+      <p>Niet zeker welk type past? Zet ze naast elkaar op deksel, toepassing, 19-inch-geschiktheid en prijs.</p>
+      <a class="btn btn-out btn-sm" href="#">Vergelijk alle vijf →</a>
+    </div>
+  </div>
+</section>
+
+<section class="assure">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <div class="ey">// 04 — HOE HET WERKT</div>
+        <h2>Van maat naar kade in vier stappen</h2>
+        <p>Geen offertetraject, geen wachten op een terugbelverzoek. En vóór je bestelt kijkt er
+          altijd nog een casebouwer mee — gratis, want een case die niet past kost ons allebei tijd.</p>
+        <a class="btn btn-pri" href="#" style="margin-top:26px">Laat je maten controleren →</a>
+      </div>
+      <div class="steps">
+        <div class="st"><div class="i">// 01</div><div><b>Kies of laat kiezen</b><span>Model zelf kiezen, of zeg wat je vervoert.</span></div></div>
+        <div class="st"><div class="i">// 02</div><div><b>Configureer online</b><span>Maten, kleur, beslag, wielen. Prijs verandert live mee.</span></div></div>
+        <div class="st"><div class="i">// 03</div><div><b>Laat het controleren</b><span>Een casebouwer kijkt je configuratie na. Binnen één werkdag.</span></div></div>
+        <div class="st"><div class="i">// 04</div><div><b>Tien werkdagen later</b><span>Kant-en-klaar of als bouwpakket, met alle onderdelen op maat.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trust tight">
+  <div class="wrap">
+    <div class="row">
+      <div class="it"><b>Sinds 1987</b><span>Eigen productie in Doesburg</span></div>
+      <div class="it"><b>10 werkdagen</b><span>Ook bij maatwerk</span></div>
+      <div class="it"><b>Op rekening</b><span>Voor zakelijke klanten</span></div>
+      <div class="it"><b>Eigen werkplaats</b><span>Geen tussenhandel</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="build">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <div class="ey ey-dark">// 05 — ZELF BOUWEN</div>
+        <h2>Of bestel alleen de onderdelen</h2>
+        <p class="lead">Profielen, hoeken, sluitingen, wielen en schuim — hetzelfde materiaal
+          waarmee wij bouwen. Vandaag besteld, morgen verstuurd.</p>
+        <div class="cats">
+          <a href="#">Profielen</a><a href="#">Hoeken</a><a href="#">Handgrepen</a>
+          <a href="#">Sluitingen</a><a href="#">Scharnieren</a><a href="#">Wielen</a>
+          <a href="#">Schuimplastic</a><a href="#">19" artikelen</a>
+        </div>
+      </div>
+      <div>
+        <div class="side">
+          <h4>Bouwpakket compleet</h4>
+          <p>Alle onderdelen op maat gezaagd en geteld, plus de handleiding. Je schroeft hem zelf in elkaar.</p>
+        </div>
+        <div class="side">
+          <h4>Zaagservice</h4>
+          <p>Alleen plaatmateriaal op maat, zonder case. Geef je maten door, wij zagen.</p>
+        </div>
+        <div class="side">
+          <h4>Weet je het artikelnummer?</h4>
+          <p>Typ het in de zoekbalk bovenaan en bestel direct, met aantal.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="closer ruit ruit-dark ruit-veld">
+  <div class="wrap">
+    <div class="ey">// KLAAR OM TE BEGINNEN?</div>
+    <h2>Jouw maten. Tien werkdagen.</h2>
+    <p>Begin met configureren en zie binnen een minuut wat je case gaat kosten.</p>
+    <a class="btn btn-pri" href="#">Open de configurator →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="logo"><em>case</em>Builder.com</div>
+        <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br>+31 (0)575 575734</p>
+      </div>
+      <div><h5>Flightcases</h5><a href="#">Koffer</a><a href="#">Hoedcase</a><a href="#">Trunccase</a><a href="#">Rackcase enkel</a><a href="#">Rackcase dubbel</a></div>
+      <div><h5>Onderdelen</h5><a href="#">Profielen</a><a href="#">Hoeken</a><a href="#">Sluitingen</a><a href="#">Wielen</a><a href="#">Schuimplastic</a></div>
+      <div><h5>Service</h5><a href="#">Levertijden</a><a href="#">Verzending</a><a href="#">Zaagservice</a><a href="#">Zakelijk bestellen</a><a href="#">Contact</a></div>
+    </div>
+    <div class="bot"><span>© 2026 Proflite BV · KVK 09123456</span><span>Algemene voorwaarden · Privacy</span></div>
+  </div>
+</footer>
+  </div>
 </figure>
 <figure class="wf" data-mode="wire" hidden id="wf-servicehub">
   <figcaption><h3>/service</h3><span class="wfmeta">servicehub &middot; 1 pagina &middot; vervangt vier losse CMS-pagina&#39;s</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" disabled>ontwerp volgt</button></span></figcaption>
