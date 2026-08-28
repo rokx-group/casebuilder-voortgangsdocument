@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — modelpagina (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ── modelpagina — paginaspecifiek, bovenop brand.css ── */
+.model{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:56px;padding:40px 0 26px}
+.galerij .hoofd{background:var(--bg);border:1px solid var(--rule);aspect-ratio:4/3;overflow:hidden}
+.galerij .hoofd img{width:100%;height:100%;object-fit:cover}
+.galerij .rij{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.galerij .rij div{background:var(--bg);border:1px solid var(--rule);aspect-ratio:4/3;
+  display:flex;align-items:flex-end;padding:12px;font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+
+.kop h1{font-size:clamp(32px,3.8vw,48px);margin:12px 0 0}
+.vanaf{display:flex;align-items:baseline;gap:12px;margin-top:20px;flex-wrap:wrap}
+.vanaf b{font-family:var(--disp);font-size:38px;font-weight:900;color:var(--dark);line-height:1}
+.vanaf span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.kop .uit{font-size:16px;color:var(--mute);margin-top:16px;max-width:48ch}
+.kop .btn{margin-top:26px}
+.kop .naast{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--mute);margin-top:12px}
+
+/* wat je krijgt — de verwachtingen die de configurator zelf niet toont */
+.verwacht{border-top:1px solid var(--rule);margin-top:28px;padding-top:20px;display:grid;
+  grid-template-columns:1fr 1fr;gap:16px 26px}
+.verwacht div .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+.verwacht div .v{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:17px;
+  letter-spacing:.03em;color:var(--dark);margin-top:4px;line-height:1.1}
+
+/* uitvoering: bouwpakket of kant-en-klaar */
+.uitvoering{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:8px}
+.uitvoering .kaart{border:1px solid var(--rule);padding:26px 28px;background:#fff;display:flex;flex-direction:column}
+.uitvoering .kaart.on{border-color:var(--dark)}
+.uitvoering .kaart h3{font-size:22px}
+.uitvoering .kaart p{font-size:14.5px;color:var(--mute);margin-top:8px;flex:1}
+.uitvoering .kaart .pr{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dark);margin-top:16px}
+
+/* faq */
+.faq{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.faq .v{background:#fff;padding:22px 26px}
+.faq .v h4{font-size:18px;line-height:1.15}
+.faq .v p{font-size:14.5px;color:var(--mute);margin-top:8px}
+
+@media(max-width:1080px){
+  .model{grid-template-columns:1fr;gap:34px}
+  .uitvoering,.faq{grid-template-columns:1fr}
+  .cases{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:620px){ .verwacht{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<header class="main">
+  <div class="wrap">
+    <div class="logo"><em>case</em>Builder.com</div>
+    <form class="search" onsubmit="return false">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+      <input placeholder="Zoek op case, onderdeel of artikelnummer…" aria-label="Zoeken">
+    </form>
+    <div class="hdr-r">
+      <a href="#" class="stil">Inloggen</a>
+      <a href="#" class="btn btn-out btn-sm">Offerte</a>
+      <a href="#">Winkelwagen</a>
+    </div>
+  </div>
+</header>
+
+<nav class="primary">
+  <div class="wrap">
+    <a href="#" class="on">Flightcases</a>
+    <a href="#">Wat ga je vervoeren?</a>
+    <a href="categorie.html" class="sec">Onderdelen</a>
+    <a href="#" class="sec">Service</a>
+    <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#">NL ▾</a></div>
+  </div>
+</nav>
+
+<div class="crumbs">
+  <div class="wrap">
+    <a href="#">Flightcases</a><span class="sep">/</span>
+    <span>Rackcase enkel deksel</span>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="model">
+
+    <div class="galerij">
+      <div class="hoofd"><img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt="Rackcase enkel deksel"></div>
+      <div class="rij">
+        <div>in gebruik · op transport</div>
+        <div>detail · sluiting en hoekbeslag</div>
+      </div>
+    </div>
+
+    <div class="kop">
+      <div class="ey ey-dark">// 04 — RACKCASE ENKEL DEKSEL</div>
+      <h1>Rackcase enkel deksel</h1>
+
+      <div class="vanaf">
+        <b>vanaf € 229,60</b>
+        <span>excl. btw · jouw maten</span>
+      </div>
+
+      <p class="uit">Een case met één afneembaar voordeksel, met rackrails voor 19-inch
+        inbouwapparatuur. De standaard voor versterkers, mengtafels en patchpanelen die
+        alleen aan de voorkant bediend worden.</p>
+
+      <a class="btn btn-pri" href="#">Start met configureren →</a>
+      <div class="naast">Je begint bij stap 2 — het model is al bekend</div>
+
+      <div class="verwacht">
+        <div><div class="k">// MATEN</div><div class="v">Tot op de millimeter</div></div>
+        <div><div class="k">// LEVERTIJD</div><div class="v">10 werkdagen</div></div>
+        <div><div class="k">// KLEUR EN BESLAG</div><div class="v">Zeven kleuren</div></div>
+        <div><div class="k">// CONTROLE</div><div class="v">Casebouwer kijkt mee</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<section class="tight">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:24px">
+      <div class="ey ey-dark">// UITVOERING</div>
+      <h2 style="font-size:32px;margin-top:12px">Bouwpakket of kant-en-klaar</h2>
+      <p class="lead" style="margin-top:10px">Hetzelfde materiaal en dezelfde maten. Het verschil
+        is wie hem in elkaar zet.</p>
+    </div>
+    <div class="uitvoering">
+      <div class="kaart on">
+        <h3>Kant-en-klaar</h3>
+        <p>Opgebouwd in onze werkplaats in Doesburg, getest op sluiting en pasvorm. Je pakt hem uit
+          en gebruikt hem.</p>
+        <div class="pr">vanaf € 229,60 excl.</div>
+      </div>
+      <div class="kaart">
+        <h3>Bouwpakket</h3>
+        <p>Alle panelen op maat gezaagd, alle onderdelen geteld, met handleiding. Je hebt een
+          schroevendraaier en een middag nodig.</p>
+        <div class="pr">vanaf € 164,20 excl. · scheelt circa 28%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tight" style="background:var(--bg);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)">
+  <div class="wrap">
+    <div class="ey ey-dark">// SPECIFICATIES</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:20px">
+      <table class="spec">
+        <tr><th>Standaardmaten</th><td><b>19" · 4 t/m 16 HE</b></td></tr>
+        <tr><th>Binnendiepte</th><td><b>300 – 800 mm</b></td></tr>
+        <tr><th>Plaatmateriaal</th><td><b>Berkenmultiplex 7 of 9 mm</b></td></tr>
+        <tr><th>Deksel</th><td><b>Voorzijde, afneembaar</b></td></tr>
+      </table>
+      <table class="spec">
+        <tr><th>Beslag</th><td><b>Penn Elcom</b></td></tr>
+        <tr><th>Wielen</th><td><b>Optioneel · 80 of 100 mm</b></td></tr>
+        <tr><th>Gewicht</th><td><b>Circa 18 kg bij 8 HE</b></td></tr>
+        <tr><th>Kleuren</th><td><b>Zeven standaard</b></td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:24px">
+      <div class="ey ey-dark">// VEELGESTELD</div>
+      <h2 style="font-size:32px;margin-top:12px">Vragen bij dit type</h2>
+    </div>
+    <div class="faq">
+      <div class="v"><h4>Waarom enkel en niet dubbel deksel?</h4><p>Bij apparatuur die je alleen
+        aan de voorkant bedient, is een achterdeksel gewicht en geld zonder functie. Moet je erachter
+        kunnen, kies dan dubbel deksel.</p></div>
+      <div class="v"><h4>Past mijn 19-inch apparatuur er zeker in?</h4><p>Je geeft het aantal HE en de
+        diepte op; de configurator rekent de binnenmaat door. Twijfel je, laat het dan gratis
+        controleren voordat je bestelt.</p></div>
+      <div class="v"><h4>Kan ik wielen later toevoegen?</h4><p>Beter niet: de bodemconstructie wordt
+        erop aangepast. Kies ze meteen mee, ook als je ze pas later gebruikt.</p></div>
+      <div class="v"><h4>Wat als mijn maat buiten het bereik valt?</h4><p>Dan is het maatwerk buiten
+        de configurator om. Vraag een offerte aan — daar zit geen wachttijd op de reactie.</p></div>
+    </div>
+
+    <div style="border:1px solid var(--rule);padding:26px 30px;margin-top:34px;display:flex;gap:26px;align-items:center;flex-wrap:wrap">
+      <div>
+        <h3 style="font-size:22px">Twijfel je over de maten?</h3>
+        <p style="font-size:14px;color:var(--mute);max-width:52ch;margin-top:6px">Een casebouwer kijkt
+          je configuratie na voordat je bestelt. Gratis, binnen één werkdag.</p>
+      </div>
+      <a class="btn btn-out" href="#" style="margin-left:auto">Laat je maten controleren →</a>
+    </div>
+  </div>
+</section>
+
+<section class="tight" style="border-top:1px solid var(--rule)">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:24px">
+      <div class="ey ey-dark">// DE ANDERE VIER</div>
+      <h2 style="font-size:32px;margin-top:12px">Toch een ander model?</h2>
+    </div>
+    <div class="cases" style="grid-template-columns:repeat(4,1fr)">
+      <a class="case" href="#"><div class="im"><img src="assets/flightcase-koffer.jpg" alt="Koffer"></div>
+        <div class="bd"><h4>Koffer</h4><div class="d">Draagbaar aan een opbouwhandgreep</div>
+        <div class="pr"><b>vanaf € 149</b><i>excl. btw</i></div></div></a>
+      <a class="case" href="#"><div class="im"><img src="assets/flightcase-hoedcase.jpg" alt="Hoedcase"></div>
+        <div class="bd"><h4>Hoedcase</h4><div class="d">Volledig afneembaar deksel</div>
+        <div class="pr"><b>vanaf € 179</b><i>excl. btw</i></div></div></a>
+      <a class="case" href="#"><div class="im"><img src="assets/flightcase-trunccase.jpg" alt="Trunccase"></div>
+        <div class="bd"><h4>Trunccase</h4><div class="d">Universeel, met bovendeksel</div>
+        <div class="pr"><b>vanaf € 199</b><i>excl. btw</i></div></div></a>
+      <a class="case" href="#"><div class="im"><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt="Rackcase dubbel deksel"></div>
+        <div class="bd"><h4>Rackcase dubbel</h4><div class="d">Voor- én achterdeksel</div>
+        <div class="pr"><b>vanaf € 259</b><i>excl. btw</i></div></div></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="logo"><em>case</em>Builder.com</div>
+        <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br>+31 (0)575 575734</p>
+      </div>
+      <div><h5>Flightcases</h5><a href="#">Koffer</a><a href="#">Hoedcase</a><a href="#">Trunccase</a><a href="#">Rackcase enkel</a><a href="#">Rackcase dubbel</a></div>
+      <div><h5>Onderdelen</h5><a href="#">Profielen</a><a href="#">Hoeken</a><a href="#">Sluitingen</a><a href="#">Wielen</a><a href="#">Schuimplastic</a></div>
+      <div><h5>Service</h5><a href="#">Levertijden</a><a href="#">Verzending</a><a href="#">Zaagservice</a><a href="#">Zakelijk bestellen</a><a href="#">Contact</a></div>
+    </div>
+    <div class="bot"><span>© 2026 Proflite BV · KVK 09123456</span><span>Algemene voorwaarden · Privacy</span></div>
+  </div>
+</footer>
+<script src="assets/vouw.js"></script>
+</body>
+</html>

@@ -23,6 +23,14 @@ const BRAND = join(wortel, "mockups/assets/brand.css");
 const PAGINAS = [
   { naam: "categorie", bestand: "mockups/categorie.html" },
   { naam: "home", bestand: "mockups/homepage.html" },
+  { naam: "onderdeel", bestand: "mockups/onderdeel.html" },
+  { naam: "casetype", bestand: "mockups/casetype.html" },
+  { naam: "overzicht", bestand: "mockups/flightcases.html" },
+  { naam: "case-voor-categorie", bestand: "mockups/case-voor-gitaar.html" },
+  { naam: "case-voor-resultaat", bestand: "mockups/case-voor-gibson-les-paul.html" },
+  { naam: "servicehub", bestand: "mockups/service.html" },
+  { naam: "content", bestand: "mockups/service-levertijden.html" },
+  { naam: "zoekresultaat", bestand: "mockups/zoeken.html" },
 ];
 
 /** Selectors die geen voorvoegsel krijgen maar een vervanging. */
@@ -57,7 +65,12 @@ function schaalIn(css, wortelSel) {
     if (!kop) continue;
     if (kop.startsWith("@media") || kop.startsWith("@supports")) {
       const binnen = schaalIn(body, wortelSel);
-      if (binnen) uit += `${kop}{${binnen}}`;
+      // Een @media kijkt naar het browservenster, maar de ingesloten
+      // weergave staat in een kolom die veel smaller is. Zuiver op breedte
+      // gebaseerde queries worden daarom container queries, zodat de
+      // mockup zich gedraagt naar de ruimte die hij hier echt krijgt.
+      const alleenBreedte = /^@media\s*\(\s*(?:max|min)-width[^()]*\)\s*$/.test(kop);
+      if (binnen) uit += `${alleenBreedte ? kop.replace(/^@media\s*/, "@container ") : kop}{${binnen}}`;
     } else if (kop.startsWith("@")) {
       uit += `${kop}{${body}}`;
     } else {
@@ -82,7 +95,11 @@ for (const { naam, bestand } of PAGINAS) {
   const bron = readFileSync(join(wortel, bestand), "utf8");
   const wortelSel = `.dv[data-page="${naam}"]`;
   css += schaalIn(tussen(bron, "<style>", "</style>", `stijlblok in ${bestand}`).inhoud, wortelSel);
-  html[naam] = tussen(bron, "<body>", "</body>", `body in ${bestand}`).inhoud.trim();
+  // Het meetlint hoort bij de losse mockup, niet bij de ingesloten kopie:
+  // het pad naar assets/ klopt hier niet en de weergave heeft het niet nodig.
+  html[naam] = tussen(bron, "<body>", "</body>", `body in ${bestand}`).inhoud
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "")
+    .trim();
 }
 
 let doel = readFileSync(DOEL, "utf8");

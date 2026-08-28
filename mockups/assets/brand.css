@@ -157,6 +157,24 @@ section.tight{padding:56px 0}
 .case .pr b{font-family:var(--disp);font-size:19px;letter-spacing:.02em}
 .case .pr i{font-style:normal;color:var(--mute);font-size:9.5px;display:block;margin-top:2px}
 
+/* onderdeelkaart — gebruikt op de categoriepagina en op de PDP */
+.part{border:1px solid var(--rule);background:#fff;display:flex;flex-direction:column;transition:.15s}
+.part:hover{border-color:var(--dark)}
+.part .im{background:var(--bg);aspect-ratio:4/3;position:relative;display:flex;align-items:center;justify-content:center}
+.part .im .sc{position:absolute;left:12px;bottom:11px;display:flex;align-items:center;gap:6px;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--mute)}
+.part .im .sc i{display:block;width:30px;height:2px;background:var(--rule)}
+.part .bd{padding:16px 16px 18px;border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:6px;flex:1}
+.part h4{font-size:18px;font-weight:700;line-height:1.05}
+.part .sku{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.part .pr{font-family:var(--disp);font-size:22px;font-weight:900;color:var(--dark);letter-spacing:.02em;margin-top:2px}
+.part .pr i{font-style:normal;display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--mute);font-weight:400}
+.part .stk{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#2F7355}
+.part .buy{display:flex;gap:8px;margin-top:auto;padding-top:12px}
+.qty{display:flex;align-items:center;border:1.5px solid var(--rule)}
+.qty span{padding:0 10px;color:var(--mute);cursor:pointer;user-select:none}
+.qty b{padding:8px 10px;font-family:var(--mono);font-size:13px;border-left:1.5px solid var(--rule);border-right:1.5px solid var(--rule)}
+
 /* specificatietabel */
 .spec{width:100%;border-collapse:collapse}
 .spec th,.spec td{text-align:left;padding:11px 0;border-bottom:1px solid var(--rule);font-size:14px}
