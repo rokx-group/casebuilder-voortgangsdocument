@@ -22,7 +22,8 @@ const DOEL = join(wortel, "index.html");
 const BRAND = join(wortel, "mockups/assets/brand.css");
 const PAGINAS = [
   { naam: "categorie", bestand: "mockups/categorie.html" },
-  { naam: "home", bestand: "mockups/homepage.html" },
+  // v1 van de homepage is een wireframe, geen ontwerp — die slaan we over.
+  { naam: "home", bestand: "mockups/homepage.html", overslaan: ["v1"] },
   { naam: "onderdeel", bestand: "mockups/onderdeel.html" },
   { naam: "casetype", bestand: "mockups/casetype.html" },
   { naam: "overzicht", bestand: "mockups/flightcases.html" },
@@ -108,8 +109,9 @@ function variantenVan(bestand) {
   return uit;
 }
 
-for (const { naam, bestand } of PAGINAS) {
+for (const { naam, bestand, overslaan = [] } of PAGINAS) {
   for (const variant of variantenVan(bestand)) {
+    if (overslaan.includes(variant.id)) continue;
     const sleutel = variant.id === "v1" ? naam : `${naam}-${variant.id}`;
     const bron = readFileSync(join(wortel, variant.bestand), "utf8");
     const wortelSel = `.dv[data-page="${sleutel}"]`;

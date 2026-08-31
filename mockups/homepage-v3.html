@@ -3,15 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Casebuilder — homepage v2, blueprint (mockup)</title>
+<title>Casebuilder — homepage v3, videoheader (mockup)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/brand.css">
 <style>
 /* ── homepage — paginaspecifiek, bovenop brand.css ── */
-.hero{background:var(--void);color:#fff;position:relative;overflow:hidden}
-.hero .wrap{padding-top:96px;padding-bottom:78px;position:relative;z-index:1}
+/* ── videoheader ──────────────────────────────────────────
+   De video draagt de sfeer, de tekst draagt de belofte. Twee eisen:
+   de tekst moet leesbaar blijven op elk frame (vandaar de scrim), en de
+   pagina mag niet wachten op de video (poster laadt eerst, video daarna). */
+.hero{background:var(--void);color:#fff;position:relative;overflow:hidden;min-height:min(88vh,860px);display:flex;align-items:flex-end}
+.hero .film{position:absolute;inset:0;z-index:0}
+.hero .film video,.hero .film img{width:100%;height:100%;object-fit:cover;display:block}
+/* scrim: donker vanaf links-onder, zodat de kop altijd contrast houdt */
+.hero .film::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(100deg,rgba(6,18,28,.94) 0%,rgba(6,18,28,.82) 38%,rgba(6,18,28,.34) 72%,rgba(6,18,28,.55) 100%)}
+.hero .wrap{padding-top:96px;padding-bottom:64px;position:relative;z-index:1;width:100%}
+/* geluidloos en zonder bediening: dit is decor, geen media om te bekijken */
+.hero .filmnoot{position:absolute;right:32px;bottom:26px;z-index:2;font-family:var(--mono);
+  font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+@media(prefers-reduced-motion:reduce){.hero .film video{display:none}}
+@media(max-width:760px){.hero{min-height:auto}.hero .film::after{background:linear-gradient(180deg,rgba(6,18,28,.72),rgba(6,18,28,.94))}}
 .hero h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:.02em;
   font-size:clamp(46px,6.2vw,86px);line-height:.92;color:#fff;max-width:15ch;margin:18px 0 0}
 .hero h1 .acc{color:var(--cyan)}
@@ -112,9 +126,17 @@
   </div>
 </nav>
 
-<div class="hero ruit ruit-dark ruit-veld beslag">
-  <span class="hk tl"></span><span class="hk tr"></span><span class="hk bl"></span><span class="hk br"></span>
-  <div class="topbar"><span>// 01 — FLIGHTCASES OP MAAT</span><span>PROFLITE · DOESBURG · 2026</span></div>
+<div class="hero">
+  <div class="film">
+    <!-- Bron nog te leveren: 10-15 s, geluidloos, geen snelle snitten.
+         Tot die tijd toont de poster. Suggestie voor de opname: één case
+         die dichtgaat, sluiting op slot, en wegrijdt over de laadklep. -->
+    <video autoplay muted loop playsinline preload="none"
+           poster="assets/flightcase-trunccase.jpg" aria-hidden="true">
+      <source src="assets/hero.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="filmnoot">// PROFLITE · DOESBURG · 2026</div>
   <div class="wrap">
     <div class="ey">// GEEN OFFERTETRAJECT · GEEN WACHTTIJD</div>
     <h1>Je flightcase staat <span class="acc">over tien dagen</span> op de kade</h1>
@@ -131,7 +153,6 @@
       <div><div class="k">// CONTROLE</div><div class="v">Specialist kijkt mee</div></div>
     </div>
   </div>
-  <div class="serie">CB-2026-0001</div>
 </div>
 
 <div class="again">

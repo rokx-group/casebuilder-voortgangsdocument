@@ -9,8 +9,9 @@
 (function () {
   var REEKSEN = {
     homepage: [
-      { id: 'v1', bestand: 'homepage.html', label: 'v1 · blueprint' },
-      { id: 'v2', bestand: 'homepage-v2.html', label: 'v2 · video' }
+      { id: 'v1', bestand: 'homepage.html', label: 'v1 · wireframe' },
+      { id: 'v2', bestand: 'homepage-v2.html', label: 'v2 · blueprint' },
+      { id: 'v3', bestand: 'homepage-v3.html', label: 'v3 · video' }
     ]
   };
 
