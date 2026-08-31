@@ -4997,5 +4997,161 @@
   })();
 </script>
 
+<script>
+  // Features: afvinken en opmerkingen. Alles blijft in de browser van de lezer
+  // (localStorage) — dit document is een statische pagina zonder server, dus er
+  // is niets om naartoe te sturen. Daarom is "kopieer alles" geen extraatje maar
+  // de manier waarop de invoer bij ons terechtkomt.
+  (function () {
+    var paneel = document.getElementById('p8');
+    if (!paneel) return;
+
+    var SLEUTEL   = 'cb-features-v1';
+    var tegels    = Array.prototype.slice.call(paneel.querySelectorAll('.ft'));
+    var vakjes    = Array.prototype.slice.call(paneel.querySelectorAll('.fcheck input[type="checkbox"]'));
+    var velden    = Array.prototype.slice.call(paneel.querySelectorAll('textarea[data-note]'));
+    var teller    = paneel.querySelector('[data-f="tally"]');
+    var kopieerBt = paneel.querySelector('[data-f="copy"]');
+    var wisBt     = paneel.querySelector('[data-f="wis"]');
+    var kanBewaren = true;
+
+    // Een browser in privémodus laat de opslag bestaan maar weigert te schrijven.
+    // Dat mag de pagina niet slopen: hij werkt dan gewoon door, alleen zonder
+    // geheugen — en dat staat er dan ook bij.
+    function lees() {
+      try { return JSON.parse(localStorage.getItem(SLEUTEL)) || {}; }
+      catch (e) { return {}; }
+    }
+    function schrijf() {
+      try { localStorage.setItem(SLEUTEL, JSON.stringify(staat)); return true; }
+      catch (e) { kanBewaren = false; return false; }
+    }
+
+    var staat = lees();
+    if (!staat.vink)    staat.vink = {};
+    if (!staat.notitie) staat.notitie = {};
+
+    function bewaar(tegel) {
+      staat.bijgewerkt = new Date().toISOString();
+      var ok = schrijf();
+      var merk = tegel && tegel.querySelector('[data-f="saved"]');
+      if (!merk) return;
+      merk.textContent = ok ? 'bewaard' : 'niet bewaard';
+      merk.classList.add('on');
+      clearTimeout(merk._t);
+      merk._t = setTimeout(function () { merk.classList.remove('on'); }, 1600);
+    }
+
+    function tel() {
+      var totaal = 0, aan = 0, opmerkingen = 0;
+      tegels.forEach(function (tegel) {
+        var eigen = Array.prototype.slice.call(tegel.querySelectorAll('.fcheck input'));
+        var n = eigen.filter(function (v) { return v.checked; }).length;
+        totaal += eigen.length;
+        aan += n;
+        var voortgang = tegel.querySelector('[data-f="prog"]');
+        if (voortgang) voortgang.textContent = n + '/' + eigen.length;
+        var veld = tegel.querySelector('textarea[data-note]');
+        if (veld && veld.value.trim()) opmerkingen++;
+      });
+      var regel = aan + ' van ' + totaal + ' afgevinkt · ';
+      regel += opmerkingen === 0 ? 'nog geen opmerkingen'
+             : opmerkingen === 1 ? '1 blok met een opmerking'
+             : opmerkingen + ' blokken met een opmerking';
+      if (!kanBewaren) regel += ' · deze browser bewaart niets — kopieer je invoer';
+      teller.textContent = regel;
+    }
+
+    vakjes.forEach(function (vakje) {
+      var id = vakje.getAttribute('data-id');
+      vakje.checked = staat.vink[id] === true;
+      vakje.addEventListener('change', function () {
+        if (vakje.checked) staat.vink[id] = true; else delete staat.vink[id];
+        bewaar(vakje.closest('.ft'));
+        tel();
+      });
+    });
+
+    velden.forEach(function (veld) {
+      var id = veld.getAttribute('data-note');
+      if (staat.notitie[id]) veld.value = staat.notitie[id];
+      var wacht;
+      veld.addEventListener('input', function () {
+        clearTimeout(wacht);
+        wacht = setTimeout(function () {
+          if (veld.value.trim()) staat.notitie[id] = veld.value; else delete staat.notitie[id];
+          bewaar(veld.closest('.ft'));
+          tel();
+        }, 500);
+      });
+    });
+
+    function verslag() {
+      var uit = ['CaseBuilder — features',
+                 'Ingevuld op ' + new Date().toLocaleDateString('nl-NL'), ''];
+      tegels.forEach(function (tegel) {
+        var kop = tegel.getAttribute('data-titel') || tegel.querySelector('h3').textContent;
+        uit.push('## ' + kop.trim());
+        Array.prototype.forEach.call(tegel.querySelectorAll('.fcheck label'), function (regel) {
+          var vakje = regel.querySelector('input');
+          var tekst = regel.querySelector('span').textContent.replace(/\s+/g, ' ').trim();
+          uit.push((vakje.checked ? '[x] ' : '[ ] ') + tekst);
+        });
+        var veld = tegel.querySelector('textarea[data-note]');
+        if (veld && veld.value.trim()) uit.push('', 'Opmerking: ' + veld.value.trim());
+        uit.push('');
+      });
+      return uit.join('\n');
+    }
+
+    function naarKlembord(tekst) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        return navigator.clipboard.writeText(tekst);
+      }
+      return new Promise(function (klaar, mislukt) {
+        var hulp = document.createElement('textarea');
+        hulp.value = tekst;
+        hulp.setAttribute('readonly', '');
+        hulp.style.cssText = 'position:fixed;top:-1000px;opacity:0';
+        document.body.appendChild(hulp);
+        hulp.select();
+        var gelukt = false;
+        try { gelukt = document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(hulp);
+        gelukt ? klaar() : mislukt();
+      });
+    }
+
+    function melding(knop, tekst) {
+      if (knop._t) { clearTimeout(knop._t); } else { knop._oud = knop.textContent; }
+      knop.textContent = tekst;
+      knop.classList.add('on');
+      knop._t = setTimeout(function () {
+        knop.textContent = knop._oud;
+        knop.classList.remove('on');
+        knop._t = null;
+      }, 1900);
+    }
+
+    kopieerBt.addEventListener('click', function () {
+      naarKlembord(verslag()).then(
+        function () { melding(kopieerBt, 'Gekopieerd'); },
+        function () { melding(kopieerBt, 'Kopiëren lukt niet'); }
+      );
+    });
+
+    wisBt.addEventListener('click', function () {
+      if (!window.confirm('Alles wissen wat je hier hebt aangevinkt en geschreven?')) return;
+      staat = { vink: {}, notitie: {} };
+      try { localStorage.removeItem(SLEUTEL); } catch (e) {}
+      vakjes.forEach(function (v) { v.checked = false; });
+      velden.forEach(function (v) { v.value = ''; });
+      tel();
+    });
+
+    tel();
+  })();
+</script>
+
 </body>
 </html>

@@ -16,6 +16,12 @@ body{background:#EDF0F4}
 .kop .nr{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--blue)}
 .kop h3{font-size:24px}
 .kop .hgt{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--mute);margin-left:auto}
+/* de gekozen variant moet je niet hoeven zoeken */
+.kop .gekozen{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  background:var(--cyan);color:var(--void);padding:5px 10px;font-weight:600}
+.demo.gekozen{border:2px solid var(--cyan);box-shadow:0 0 0 6px rgba(102,196,232,.18),0 1px 3px rgba(0,40,70,.07)}
+.demo.afgevallen{opacity:.55}
+.demo.afgevallen:hover{opacity:1;transition:opacity .2s}
 .uitleg{font-size:14px;color:var(--mute);max-width:78ch;margin-bottom:16px;line-height:1.65}
 .uitleg b{color:var(--ink)}
 .demo{background:#fff;border:1px solid var(--rule);box-shadow:0 1px 3px rgba(0,40,70,.07);overflow:hidden}
@@ -42,8 +48,7 @@ body{background:#EDF0F4}
 .h-acties a{display:flex;align-items:center;gap:8px;white-space:nowrap}
 .h-acties a:hover{color:var(--blue)}
 .h-acties .stil{color:var(--mute)}
-.h-badge{display:inline-flex;align-items:center;justify-content:center;min-width:19px;height:19px;padding:0 5px;
-  background:var(--dark);color:#fff;font-family:var(--body);font-weight:700;font-size:11px;line-height:1}
+.h-badge{display:inline-flex;align-items:center;justify-content:center;min-width:17px;height:17px;padding:0 4px;background:var(--dark);color:#fff;font-family:var(--mono);font-weight:600;font-size:10px;line-height:1;letter-spacing:.02em;position:relative;top:-7px;margin-left:1px}
 .h-offerte{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:15px;letter-spacing:.05em;
   border:1.5px solid var(--dark);color:var(--dark);padding:9px 16px}
 .h-offerte:hover{background:var(--dark);color:#fff}
@@ -80,9 +85,9 @@ body{background:#EDF0F4}
 <body>
 <div class="vgl">
 
-  <div class="kop"><span class="nr">// A</span><h3>Twee balken — gekozen</h3><span class="hgt">120 px chrome · −28%</span></div>
+  <div class="kop"><span class="nr">// A</span><h3>Twee balken</h3><span class="gekozen">gekozen &amp; doorgevoerd</span><span class="hgt">120 px chrome · −28%</span></div>
   <p class="uitleg">De utility-balk verdwijnt; taal en inloggen schuiven naar rechts in de hoofdbalk, de merkregel naar de footer. <b>Offerte wordt een knop</b> — het is de belangrijkste actie op de site en verdiende geen dubbeldekkerlabel maar vorm. Winkelwagen krijgt een telbadge in plaats van een tweede regel. De navigatie houdt één gewicht en één actief-signaal (cyaan streep). Alleen het logo blijft 900-condensed; alles rechts is DM Sans en wijkt terug.</p>
-  <div class="demo va">
+  <div class="demo va gekozen">
     <div class="h-bar">
       <div class="wrap">
         <div class="h-logo"><em>case</em>Builder.com</div>
@@ -108,7 +113,7 @@ body{background:#EDF0F4}
 
   <div class="kop"><span class="nr">// B</span><h3>Eén balk — maximaal rustig</h3><span class="hgt">72 px chrome · −57%</span></div>
   <p class="uitleg">Navigatie in de hoofdbalk, zoeken wordt een icoon dat een veld uitklapt. Erg rustig, maar er is een prijs: <b>bij vijf of meer hoofditems loopt dit vast</b>, en zoeken achter een klik verstoppen is riskant voor een site waar mensen op artikelnummer zoeken. Alleen kiezen als het menu écht op vier items blijft.</p>
-  <div class="demo vb">
+  <div class="demo vb afgevallen">
     <div class="h-bar">
       <div class="wrap">
         <div class="h-logo"><em>case</em>Builder.com</div>
@@ -129,7 +134,7 @@ body{background:#EDF0F4}
 
   <div class="kop"><span class="nr">// C</span><h3>Drie balken, rustige typografie</h3><span class="hgt">154 px chrome · −7%</span></div>
   <p class="uitleg">Structuur blijft, alleen de typografie kalmeert. De belangrijkste ingreep: <b>de bovenbalk wordt lichtgrijs in plaats van marineblauw</b>, zodat het gewicht klopt met het belang. Mono verdwijnt uit de header (die blijft voor eyebrows en specs, waar hij thuishoort). Minste impact op de rest van het ontwerp, maar je houdt 154px chrome — op een laptop is dat een vijfde van het scherm voordat er iets te zien is.</p>
-  <div class="demo vc">
+  <div class="demo vc afgevallen">
     <div class="h-util">
       <div class="wrap">
         <a href="#">Zakelijk account</a><a href="#">Inloggen</a><a href="#">NL ▾</a>
