@@ -7,11 +7,21 @@
  * Gebruik: node scripts/bouw-wireframes.mjs
  */
 import { readFileSync, writeFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const wortel = join(dirname(fileURLToPath(import.meta.url)), "..");
 const doc = readFileSync(join(wortel, "index.html"), "utf8");
+
+/* Stempel op de stylesheet, zodat een browser nooit een oude versie blijft
+   tonen na een wijziging. Anders lijkt een correctie niet doorgevoerd. */
+const merk = (pad) =>
+  createHash("sha1").update(readFileSync(join(wortel, "mockups", pad))).digest("hex").slice(0, 8);
+const CSSMERK = merk("assets/wireframe.css");
+
+/** Sjablonen die het achtergrondraster niet krijgen — daar leest het rustiger. */
+const ZONDER_RASTER = ["homepage"];
 
 /** Sjabloon-id → bestandsnaam van de wireframepagina. */
 const NAMEN = {
@@ -47,7 +57,8 @@ for (const [id, bestandsnaam] of Object.entries(NAMEN)) {
 
   // op ware grootte: schaal 1, en de vouwlijnen op elke schermhoogte
   const totaal = [...blok.matchAll(/--h:(\d+)/g)].reduce((s, m) => s + Number(m[1]), 0);
-  blok = blok.replace(/<div class="wfpage"[^>]*>/, '<div class="wfpage">');
+  blok = blok.replace(/<div class="wfpage"[^>]*>/,
+    `<div class="wfpage${ZONDER_RASTER.includes(id) ? " geen-raster" : ""}">`);
   // De vouw wordt in de browser getekend, op de werkelijke vensterhoogte
   // van degene die kijkt — zie mockups/assets/vouwlijn.js.
   blok = blok.replace(/<div class="vouw">[\s\S]*?<\/div>/g, "");
@@ -61,7 +72,7 @@ for (const [id, bestandsnaam] of Object.entries(NAMEN)) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/wireframe.css">
+<link rel="stylesheet" href="assets/wireframe.css?${CSSMERK}">
 </head>
 <body>
 

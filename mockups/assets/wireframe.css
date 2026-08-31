@@ -26,6 +26,9 @@ body{background:#E9EEF2;font-family:var(--body);color:var(--ink);padding:40px 20
 /* het blad zelf — dit is .wfpage, dezelfde klasse als in het document */
 .wfpage{width:1440px;margin:0 auto;position:relative;background:var(--vlak);
   box-shadow:0 2px 6px rgba(11,30,43,.08),0 30px 70px -40px rgba(11,30,43,.5)}
+/* Het millimeterraster helpt bij het inschatten van afstanden, maar legt
+   ook een net over de blokken heen. Per blad uit te zetten met .geen-raster. */
+.wfpage.geen-raster::before{content:none}
 .wfpage::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;
   background-image:linear-gradient(var(--lijn-zacht) 1px,transparent 1px),
     linear-gradient(90deg,var(--lijn-zacht) 1px,transparent 1px);
