@@ -21,17 +21,17 @@ const wortel = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DOEL = join(wortel, "index.html");
 const BRAND = join(wortel, "mockups/assets/brand.css");
 const PAGINAS = [
-  { naam: "categorie", bestand: "mockups/categorie.html", overslaan: ["v1"] },
-  // v1 is overal de wireframe, geen ontwerp — die slaan we over.
-  { naam: "home", bestand: "mockups/homepage.html", overslaan: ["v1"] },
-  { naam: "onderdeel", bestand: "mockups/onderdeel.html", overslaan: ["v1"] },
-  { naam: "casetype", bestand: "mockups/casetype.html", overslaan: ["v1"] },
-  { naam: "overzicht", bestand: "mockups/flightcases.html", overslaan: ["v1"] },
-  { naam: "case-voor-categorie", bestand: "mockups/case-voor-gitaar.html", overslaan: ["v1"] },
-  { naam: "case-voor-resultaat", bestand: "mockups/case-voor-gibson-les-paul.html", overslaan: ["v1"] },
-  { naam: "servicehub", bestand: "mockups/service.html", overslaan: ["v1"] },
-  { naam: "content", bestand: "mockups/service-levertijden.html", overslaan: ["v1"] },
-  { naam: "zoekresultaat", bestand: "mockups/zoeken.html", overslaan: ["v1"] },
+  { naam: "categorie", bestand: "mockups/categorie.html", overslaan: ["wireframe"] },
+  // De wireframe is geen ontwerp; die slaan we hier over.
+  { naam: "home", bestand: "mockups/homepage.html", overslaan: ["wireframe"] },
+  { naam: "onderdeel", bestand: "mockups/onderdeel.html", overslaan: ["wireframe"] },
+  { naam: "casetype", bestand: "mockups/casetype.html", overslaan: ["wireframe"] },
+  { naam: "overzicht", bestand: "mockups/flightcases.html", overslaan: ["wireframe"] },
+  { naam: "case-voor-categorie", bestand: "mockups/case-voor-gitaar.html", overslaan: ["wireframe"] },
+  { naam: "case-voor-resultaat", bestand: "mockups/case-voor-gibson-les-paul.html", overslaan: ["wireframe"] },
+  { naam: "servicehub", bestand: "mockups/service.html", overslaan: ["wireframe"] },
+  { naam: "content", bestand: "mockups/service-levertijden.html", overslaan: ["wireframe"] },
+  { naam: "zoekresultaat", bestand: "mockups/zoeken.html", overslaan: ["wireframe"] },
 ];
 
 /** Selectors die geen voorvoegsel krijgen maar een vervanging. */
@@ -101,10 +101,15 @@ const html = {};
 function variantenVan(bestand) {
   const map = join(wortel, dirname(bestand));
   const stam = basename(bestand, ".html");
-  const uit = [{ id: "v1", bestand }];
+  // X.html is de wireframe; elk bestand X-<iets>.html is een ontwerpversie.
+  // Het achtervoegsel ís de naam: v1, v1-video, v2 — geen genummerde reeks,
+  // want een wireframe is geen versie van een ontwerp.
+  const uit = [{ id: "wireframe", bestand }];
   for (const naam of readdirSync(map).sort()) {
-    const m = naam.match(new RegExp(`^${stam}-v(\\d+)\\.html$`));
-    if (m) uit.push({ id: `v${m[1]}`, bestand: `${dirname(bestand)}/${naam}` });
+    // Alleen achtervoegsels die met v+cijfer beginnen tellen als versie —
+    // anders zou service-levertijden.html een variant van service.html zijn.
+    const m = naam.match(new RegExp(`^${stam}-(v\\d[\\w-]*)\\.html$`));
+    if (m) uit.push({ id: m[1], bestand: `${dirname(bestand)}/${naam}` });
   }
   return uit;
 }
@@ -112,7 +117,7 @@ function variantenVan(bestand) {
 for (const { naam, bestand, overslaan = [] } of PAGINAS) {
   for (const variant of variantenVan(bestand)) {
     if (overslaan.includes(variant.id)) continue;
-    const sleutel = variant.id === "v1" ? naam : `${naam}-${variant.id}`;
+    const sleutel = `${naam}-${variant.id}`;
     const bron = readFileSync(join(wortel, variant.bestand), "utf8");
     const wortelSel = `.dv[data-page="${sleutel}"]`;
     css += schaalIn(tussen(bron, "<style>", "</style>", `stijlblok in ${variant.bestand}`).inhoud, wortelSel);

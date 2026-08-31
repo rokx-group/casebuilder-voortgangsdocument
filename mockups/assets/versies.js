@@ -9,62 +9,65 @@
 (function () {
   var REEKSEN = {
     'homepage': [
-      { id: 'v1', bestand: 'homepage.html', label: 'v1 · wireframe' },
-      { id: 'v2', bestand: 'homepage-v2.html', label: 'v2 · blueprint' },
-      { id: 'v3', bestand: 'homepage-v3.html', label: 'v3 · video' }
+      { id: 'wireframe', bestand: 'homepage.html', label: 'wireframe' },
+      { id: 'v1-video', bestand: 'homepage-v1-video.html', label: 'v1 · video' },
+      { id: 'v1', bestand: 'homepage-v1.html', label: 'v1 · beeld' }
     ],
     'categorie': [
-      { id: 'v1', bestand: 'categorie.html', label: 'v1 · wireframe' },
-      { id: 'v2', bestand: 'categorie-v2.html', label: 'v2 · ontwerp' }
+      { id: 'wireframe', bestand: 'categorie.html', label: 'wireframe' },
+      { id: 'v1', bestand: 'categorie-v1.html', label: 'v1 · beeld' }
     ],
     'onderdeel': [
-      { id: 'v1', bestand: 'onderdeel.html', label: 'v1 · wireframe' },
-      { id: 'v2', bestand: 'onderdeel-v2.html', label: 'v2 · ontwerp' }
+      { id: 'wireframe', bestand: 'onderdeel.html', label: 'wireframe' },
+      { id: 'v1', bestand: 'onderdeel-v1.html', label: 'v1 · beeld' }
     ],
     'casetype': [
-      { id: 'v1', bestand: 'casetype.html', label: 'v1 · wireframe' },
-      { id: 'v2', bestand: 'casetype-v2.html', label: 'v2 · ontwerp' }
+      { id: 'wireframe', bestand: 'casetype.html', label: 'wireframe' },
+      { id: 'v1', bestand: 'casetype-v1.html', label: 'v1 · beeld' }
     ],
     'flightcases': [
-      { id: 'v1', bestand: 'flightcases.html', label: 'v1 · wireframe' },
-      { id: 'v2', bestand: 'flightcases-v2.html', label: 'v2 · ontwerp' }
+      { id: 'wireframe', bestand: 'flightcases.html', label: 'wireframe' },
+      { id: 'v1', bestand: 'flightcases-v1.html', label: 'v1 · beeld' }
     ],
     'case-voor-gitaar': [
-      { id: 'v1', bestand: 'case-voor-gitaar.html', label: 'v1 · wireframe' },
-      { id: 'v2', bestand: 'case-voor-gitaar-v2.html', label: 'v2 · ontwerp' }
+      { id: 'wireframe', bestand: 'case-voor-gitaar.html', label: 'wireframe' },
+      { id: 'v1', bestand: 'case-voor-gitaar-v1.html', label: 'v1 · beeld' }
     ],
     'case-voor-gibson-les-paul': [
-      { id: 'v1', bestand: 'case-voor-gibson-les-paul.html', label: 'v1 · wireframe' },
-      { id: 'v2', bestand: 'case-voor-gibson-les-paul-v2.html', label: 'v2 · ontwerp' }
+      { id: 'wireframe', bestand: 'case-voor-gibson-les-paul.html', label: 'wireframe' },
+      { id: 'v1', bestand: 'case-voor-gibson-les-paul-v1.html', label: 'v1 · beeld' }
     ],
     'service': [
-      { id: 'v1', bestand: 'service.html', label: 'v1 · wireframe' },
-      { id: 'v2', bestand: 'service-v2.html', label: 'v2 · ontwerp' }
+      { id: 'wireframe', bestand: 'service.html', label: 'wireframe' },
+      { id: 'levertijden-v1', bestand: 'service-levertijden-v1.html', label: 'levertijden-v1' },
+      { id: 'levertijden', bestand: 'service-levertijden.html', label: 'levertijden' },
+      { id: 'v1', bestand: 'service-v1.html', label: 'v1 · beeld' }
     ],
     'service-levertijden': [
-      { id: 'v1', bestand: 'service-levertijden.html', label: 'v1 · wireframe' },
-      { id: 'v2', bestand: 'service-levertijden-v2.html', label: 'v2 · ontwerp' }
+      { id: 'wireframe', bestand: 'service-levertijden.html', label: 'wireframe' },
+      { id: 'v1', bestand: 'service-levertijden-v1.html', label: 'v1 · beeld' }
     ],
     'zoeken': [
-      { id: 'v1', bestand: 'zoeken.html', label: 'v1 · wireframe' },
-      { id: 'v2', bestand: 'zoeken-v2.html', label: 'v2 · ontwerp' }
+      { id: 'wireframe', bestand: 'zoeken.html', label: 'wireframe' },
+      { id: 'v1', bestand: 'zoeken-v1.html', label: 'v1 · beeld' }
     ],
     'laten-controleren': [
-      { id: 'v1', bestand: 'laten-controleren.html', label: 'v1 · wireframe' }
+      { id: 'wireframe', bestand: 'laten-controleren.html', label: 'wireframe' }
     ],
     'bedankt': [
-      { id: 'v1', bestand: 'bedankt.html', label: 'v1 · wireframe' }
+      { id: 'wireframe', bestand: 'bedankt.html', label: 'wireframe' }
     ],
     'account': [
-      { id: 'v1', bestand: 'account.html', label: 'v1 · wireframe' }
+      { id: 'wireframe', bestand: 'account.html', label: 'wireframe' }
     ],
     'checkout': [
-      { id: 'v1', bestand: 'checkout.html', label: 'v1 · wireframe' }
+      { id: 'wireframe', bestand: 'checkout.html', label: 'wireframe' }
     ],
     'configurator': [
-      { id: 'v1', bestand: 'configurator.html', label: 'v1 · wireframe' }
+      { id: 'wireframe', bestand: 'configurator.html', label: 'wireframe' }
     ]
   };
+
 
 
   var hier = location.pathname.split('/').pop() || 'homepage.html';
