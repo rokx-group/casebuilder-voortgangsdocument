@@ -4421,8 +4421,12 @@
     function selectTab(tab) {
       tabs.forEach(function (t) {
         var on = t === tab;
-        t.setAttribute('aria-selected', on ? 'true' : 'false');
-        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+        var pnl = document.getElementById(t.getAttribute('aria-controls'));
+        // Een tab zonder paneel mag de rest niet meeslepen: zonder deze check
+        // knalt de lus eruit en blijven de tabs erna ongemoeid — dan is het
+        // hele document leeg in plaats van alleen die ene tab.
+        t.setAttribute('aria-selected', on && pnl ? 'true' : 'false');
+        if (pnl) pnl.hidden = !on;
       });
     }
     function selectWf(name) {

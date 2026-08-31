@@ -1,13 +1,15 @@
 /**
  * Meetlint voor de mockups. Staat uit, tenzij je ?vouw aan de URL hangt.
  *
- * Waarom: de wireframes noemen per sectie een hoogte in echte pixels, en
- * de vouwlijn op 900px is daarop gebaseerd. Die getallen moeten uit de
- * mockup komen en niet uit een schatting, anders vertelt de wireframe
- * iets anders dan het ontwerp.
+ * Waarom: de wireframes noemen per sectie een hoogte in echte pixels. De
+ * vouw hoort te liggen waar hij bij de kijker ligt, en dat is de hoogte van
+ * het browservenster — niet die van het scherm. Een scherm van 900 met een
+ * adresbalk, tabbladen en een dock levert een venster van pakweg 700 op, en
+ * dat verschil bepaalt of een sectie boven of onder de vouw valt.
  *
- * Gebruik:  homepage.html?vouw          → lijnen op 900, 1800, 2700 …
- *           homepage.html?vouw=1080     → andere schermhoogte
+ * Gebruik:  homepage.html?vouw          → volgt je venster, ook bij resizen
+ *           homepage.html?vouw=1080     → pint een hoogte vast, om een
+ *                                         ander venster na te bootsen
  * De lijst met secties en hun hoogtes komt in de console én rechtsonder
  * in beeld, zodat je hem kunt overnemen in de wireframe.
  */
@@ -15,7 +17,9 @@
   var q = new URLSearchParams(location.search);
   if (!q.has('vouw')) return;
 
-  var hoogte = parseInt(q.get('vouw'), 10) || 900;
+  // Zonder waarde volgt de vouw het echte venster; een waarde pint hem vast.
+  var vast = parseInt(q.get('vouw'), 10) || 0;
+  function vouwhoogte() { return vast || window.innerHeight; }
 
   var stijl = document.createElement('style');
   stijl.textContent = [
@@ -57,17 +61,19 @@
 
   function teken() {
     document.querySelectorAll('.vouwlijn,.vouwmeet').forEach(function (n) { n.remove(); });
+    var hoogte = vouwhoogte();
     var totaal = document.documentElement.scrollHeight;
     for (var y = hoogte; y < totaal; y += hoogte) {
       var l = document.createElement('div');
       l.className = 'vouwlijn';
       l.style.top = y + 'px';
-      l.innerHTML = '<span>' + y + ' px &middot; scherm ' + (y / hoogte) + '</span>';
+      l.innerHTML = '<span>' + y + ' px &middot; vouw ' + (y / hoogte) + '</span>';
       document.body.appendChild(l);
     }
     var m = document.createElement('div');
     m.className = 'vouwmeet';
-    m.innerHTML = '<h6>Hoogtes &middot; schermhoogte ' + hoogte + '</h6>' +
+    m.innerHTML = '<h6>Hoogtes &middot; vensterhoogte ' + hoogte +
+      (vast ? ' (vast)' : ' (volgt venster)') + '</h6>' +
       secties().map(function (s) {
         var boven = s.top < hoogte && s.top + s.h > hoogte;
         return (boven ? '<i>' : '') + '--h:' + s.h + (boven ? '</i>' : '') +
@@ -79,5 +85,12 @@
 
   document.body.style.position = 'relative';
   addEventListener('load', teken);
-  addEventListener('resize', teken);
+
+  // Resize vuurt tientallen keren per seconde en teken() bouwt de lijnen
+  // opnieuw op; even wachten tot het slepen klaar is scheelt gehak.
+  var wacht;
+  addEventListener('resize', function () {
+    clearTimeout(wacht);
+    wacht = setTimeout(teken, 120);
+  });
 })();
