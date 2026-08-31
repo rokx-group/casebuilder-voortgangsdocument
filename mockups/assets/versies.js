@@ -87,8 +87,6 @@
     '  text-decoration:none;padding:11px 14px;border-left:1px solid rgba(255,255,255,.14)}',
     '.versiebalk a:hover{color:#66C4E8}',
     '.versiebalk a.on{background:#66C4E8;color:#06121C}',
-    '.versiebalk a.vol{color:#66C4E8}',
-    '.versiebalk a.vol:hover{background:rgba(102,196,232,.16)}',
     '@media(max-width:760px){.versiebalk{right:10px;bottom:10px}.versiebalk .lab{display:none}}'
   ].join('');
   document.head.appendChild(stijl);
@@ -97,7 +95,6 @@
   balk.className = 'versiebalk';
   balk.innerHTML = '<span class="lab">Versie</span>' + reeks.map(function (v) {
     return '<a href="' + v.bestand + '"' + (v.bestand === hier ? ' class="on"' : '') + '>' + v.label + '</a>';
-  }).join('') + '<a class="vol" href="' + hier + '" target="_blank" rel="noopener" ' +
-    'title="Open in een nieuw tabblad">volledig scherm \u2197</a>';
+  }).join('');
   addEventListener('DOMContentLoaded', function () { document.body.appendChild(balk); });
 })();

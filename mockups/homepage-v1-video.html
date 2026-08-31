@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Casebuilder — homepage v3, videoheader (mockup)</title>
+<title>Casebuilder — homepage v1, video (mockup)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -17,17 +17,23 @@
 .hero{background:var(--void);color:#fff;position:relative;overflow:hidden;min-height:min(88vh,860px);display:flex;align-items:flex-end}
 .hero .film{position:absolute;inset:0;z-index:0}
 .hero .film video,.hero .film img{width:100%;height:100%;object-fit:cover;display:block}
-/* scrim: donker vanaf links-onder, zodat de kop altijd contrast houdt */
+/* Scrim in twee lagen in één achtergrond: verticaal draagt het contrast
+   onderin waar de kop staat, horizontaal houdt links wat extra dekking.
+   Bewust lichter dan een vlakke donkere laag — het beeld moet leesbaar
+   blijven, anders kun je net zo goed een egale kleur nemen. */
 .hero .film::after{content:"";position:absolute;inset:0;
-  background:linear-gradient(100deg,rgba(6,18,28,.94) 0%,rgba(6,18,28,.82) 38%,rgba(6,18,28,.34) 72%,rgba(6,18,28,.55) 100%)}
+  background:
+    linear-gradient(180deg,rgba(6,18,28,.42) 0%,transparent 30%,transparent 46%,rgba(6,18,28,.78) 100%),
+    linear-gradient(100deg,rgba(6,18,28,.66) 0%,rgba(6,18,28,.40) 44%,rgba(6,18,28,.08) 78%,rgba(6,18,28,.20) 100%)}
 .hero .wrap{padding-top:96px;padding-bottom:64px;position:relative;z-index:1;width:100%}
 /* geluidloos en zonder bediening: dit is decor, geen media om te bekijken */
 .hero .filmnoot{position:absolute;right:32px;bottom:26px;z-index:2;font-family:var(--mono);
   font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4)}
-@media(prefers-reduced-motion:reduce){.hero .film video{display:none}}
+.hero .film img{display:none}
+@media(prefers-reduced-motion:reduce){.hero .film video{display:none}.hero .film img{display:block}}
 @media(max-width:760px){.hero{min-height:auto}.hero .film::after{background:linear-gradient(180deg,rgba(6,18,28,.72),rgba(6,18,28,.94))}}
 .hero h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:.02em;
-  font-size:clamp(46px,6.2vw,86px);line-height:.92;color:#fff;max-width:15ch;margin:18px 0 0}
+  font-size:clamp(52px,7vw,96px);line-height:.92;color:#fff;max-width:12ch;margin:18px 0 0}
 .hero h1 .acc{color:var(--cyan)}
 .hero p.sub{margin-top:22px;max-width:56ch;font-size:18px;color:rgba(255,255,255,.78)}
 .hero .cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
@@ -128,20 +134,22 @@
 
 <div class="hero">
   <div class="film">
-    <!-- Bron nog te leveren: 10-15 s, geluidloos, geen snelle snitten.
-         Tot die tijd toont de poster. Suggestie voor de opname: één case
-         die dichtgaat, sluiting op slot, en wegrijdt over de laadklep. -->
+    <!-- Montage uit vrij gelicenseerde stock (Mixkit): 11,7 s, naadloos
+         loopend, geluidloos. Zes shots, exterieur als opening en afsluiting,
+         zodat de naad lucht-op-lucht valt. Nog een tussenoplossing: zodra er
+         eigen opnamen zijn, wisselen alleen deze twee bronbestanden. -->
     <video autoplay muted loop playsinline preload="none"
-           poster="assets/flightcase-trunccase.jpg" aria-hidden="true">
-      <source src="assets/hero.mp4" type="video/mp4">
+           poster="assets/hero-poster.jpg" aria-hidden="true" tabindex="-1">
+      <source src="assets/hero-loop.webm" type="video/webm">
+      <source src="assets/hero-loop.mp4" type="video/mp4">
     </video>
+    <img src="assets/hero-poster.jpg" alt="" aria-hidden="true">
   </div>
   <div class="filmnoot">// PROFLITE · DOESBURG · 2026</div>
   <div class="wrap">
     <div class="ey">// GEEN OFFERTETRAJECT · GEEN WACHTTIJD</div>
-    <h1>Je flightcase staat <span class="acc">over tien dagen</span> op de kade</h1>
-    <p class="sub">Configureer online tot op de millimeter, zie meteen wat het kost, en laat je maten
-      gratis controleren door een casebouwer voordat je bestelt.</p>
+    <h1>Millimeterwerk,<br><span class="acc">in tien werkdagen</span></h1>
+    <p class="sub">Online configureren, gecontroleerd door een casebouwer, op maat gebouwd.</p>
     <div class="cta">
       <a class="btn btn-pri" href="#">Start met configureren →</a>
       <a class="btn btn-ghost" href="#">Wat ga je vervoeren?</a>

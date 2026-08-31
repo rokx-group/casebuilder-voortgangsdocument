@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Casebuilder — homepage v2, blueprint (mockup)</title>
+<title>Casebuilder — homepage v1, beeld (mockup)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
    De ruit tekent op .ruit::before (z-index -1), dus video en verloop
    gaan daar met -3 en -2 onder. Tekst en hoekbeslag houden z-index 1/2. */
 .hero{min-height:clamp(600px,86vh,800px);display:flex;flex-direction:column;justify-content:center}
-.hero video.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-3}
+.hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-3}
 .hero .scrim{position:absolute;inset:0;z-index:-2;pointer-events:none;
   background:linear-gradient(90deg,rgba(6,18,28,.72) 0%,rgba(6,18,28,.36) 48%,rgba(6,18,28,.05) 100%)}
 .hero .scrim-v{position:absolute;inset:0;z-index:-2;pointer-events:none;
@@ -35,7 +35,7 @@
 .hero h1{max-width:12ch;font-size:clamp(52px,7vw,96px)}
 .hero p.sub{max-width:44ch}
 @media(prefers-reduced-motion:reduce){
-  .hero video.bg{display:none}
+  .hero .bg{display:none}
   .hero{background:var(--void) url(assets/hero-poster.jpg) center/cover}
 }
 
@@ -130,11 +130,9 @@
 </nav>
 
 <div class="hero ruit ruit-dark ruit-veld beslag">
-  <video class="bg" autoplay muted loop playsinline preload="metadata"
-         poster="assets/hero-poster.jpg" aria-hidden="true" tabindex="-1">
-    <source src="assets/hero-loop.webm" type="video/webm">
-    <source src="assets/hero-loop.mp4" type="video/mp4">
-  </video>
+  <!-- v1 is de stilstaande variant: dezelfde compositie, één beeld.
+       De bewegende versie staat in homepage-v1-video.html. -->
+  <img class="bg" src="assets/hero-poster.jpg" alt="" aria-hidden="true">
   <div class="scrim"></div>
   <div class="scrim-v"></div>
   <span class="hk tl"></span><span class="hk tr"></span><span class="hk bl"></span><span class="hk br"></span>
