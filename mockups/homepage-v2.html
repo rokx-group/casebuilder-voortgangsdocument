@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — homepage v2, lichte videoheader (voorstel)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ── homepage — paginaspecifiek, bovenop brand.css ── */
+/* ── videoheader ──────────────────────────────────────────
+   De video draagt de sfeer, de tekst draagt de belofte. Twee eisen:
+   de tekst moet leesbaar blijven op elk frame (vandaar de scrim), en de
+   pagina mag niet wachten op de video (poster laadt eerst, video daarna). */
+.hero{background:var(--void);color:#fff;position:relative;overflow:hidden;min-height:min(88vh,860px);display:flex;align-items:flex-end}
+.hero .film{position:absolute;inset:0;z-index:0}
+.hero .film video,.hero .film img{width:100%;height:100%;object-fit:cover;display:block}
+/* Scrim in twee lagen in één achtergrond: verticaal draagt het contrast
+   onderin waar de kop staat, horizontaal houdt links wat extra dekking.
+   Bewust lichter dan een vlakke donkere laag — het beeld moet leesbaar
+   blijven, anders kun je net zo goed een egale kleur nemen. */
+.hero .film::after{content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(180deg,rgba(6,18,28,.42) 0%,transparent 30%,transparent 46%,rgba(6,18,28,.78) 100%),
+    linear-gradient(100deg,rgba(6,18,28,.66) 0%,rgba(6,18,28,.40) 44%,rgba(6,18,28,.08) 78%,rgba(6,18,28,.20) 100%)}
+.hero .wrap{padding-top:96px;padding-bottom:64px;position:relative;z-index:1;width:100%}
+/* geluidloos en zonder bediening: dit is decor, geen media om te bekijken */
+.hero .filmnoot{position:absolute;right:32px;bottom:26px;z-index:2;font-family:var(--mono);
+  font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.hero .film img{display:none}
+@media(prefers-reduced-motion:reduce){.hero .film video{display:none}.hero .film img{display:block}}
+@media(max-width:760px){.hero{min-height:auto}.hero .film::after{background:linear-gradient(180deg,rgba(6,18,28,.72),rgba(6,18,28,.94))}}
+.hero h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:.02em;
+  font-size:clamp(52px,7vw,96px);line-height:.92;color:#fff;max-width:12ch;margin:18px 0 0}
+.hero h1 .acc{color:var(--cyan)}
+.hero p.sub{margin-top:22px;max-width:56ch;font-size:18px;color:rgba(255,255,255,.78)}
+.hero .cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+.hero .specs{display:flex;margin-top:60px;border-top:1px solid rgba(255,255,255,.18);flex-wrap:wrap}
+.hero .specs div{flex:1;min-width:190px;padding:20px 24px 0 0}
+.hero .specs .k{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--cyan);text-transform:uppercase}
+.hero .specs .v{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:19px;letter-spacing:.03em;margin-top:6px;color:#fff}
+
+/* ingelogde bijbestel-strip */
+.again{background:var(--lightblue);border-bottom:1px solid var(--rule)}
+.again .wrap{display:flex;align-items:center;gap:22px;flex-wrap:wrap;padding-top:16px;padding-bottom:16px}
+.again .who{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+.again b{font-family:var(--disp);text-transform:uppercase;font-size:19px;letter-spacing:.03em;color:var(--dark)}
+.again span.d{font-size:14px;color:var(--mute)}
+.again .btn{margin-left:auto}
+
+.ingangen{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.ing{background:#fff;padding:36px 30px 32px;display:flex;flex-direction:column;min-height:310px;transition:.15s}
+.ing:hover{background:var(--lightblue)}
+.ing .n{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--cyan)}
+.ing h3{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:26px;letter-spacing:.03em;
+  color:var(--dark);margin:16px 0 12px;line-height:1.05}
+.ing p{font-size:15px;color:var(--mute);flex:1}
+.ing .go{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:15px;letter-spacing:.05em;
+  color:var(--blue);margin-top:20px;display:flex;align-items:center;gap:9px}
+.ing:hover .go{color:var(--dark)}
+
+.models .sec-head{display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.models .sec-head > div{margin-right:auto}
+.case .pr b{display:block}
+.compare{border-top:1px solid var(--rule);margin-top:24px;padding-top:20px;display:flex;
+  align-items:center;gap:20px;flex-wrap:wrap}
+.compare p{font-size:15px;color:var(--mute);max-width:52ch}
+
+.assure{background:var(--dark);color:#fff}
+.assure .grid{display:grid;grid-template-columns:1.15fr 1fr;gap:64px;align-items:center}
+.assure h2{font-size:clamp(30px,3.4vw,46px);color:#fff;margin:14px 0 18px}
+.assure p{color:rgba(255,255,255,.8);font-size:17px;max-width:52ch}
+.assure .steps{border-left:1px solid rgba(255,255,255,.2);padding-left:32px}
+.assure .st{display:flex;gap:18px;padding:15px 0}
+.assure .st+.st{border-top:1px solid rgba(255,255,255,.14)}
+.assure .st .i{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--cyan);padding-top:4px;white-space:nowrap}
+.assure .st b{font-family:var(--disp);text-transform:uppercase;font-size:17px;letter-spacing:.03em;font-weight:700;display:block}
+.assure .st span{font-size:14px;color:rgba(255,255,255,.68)}
+
+.trust{border-top:1px solid var(--rule);background:var(--bg)}
+.trust .row{display:flex;gap:48px;align-items:center;flex-wrap:wrap}
+.trust .it{display:flex;flex-direction:column;gap:4px}
+.trust .it b{font-family:var(--disp);text-transform:uppercase;font-size:22px;letter-spacing:.03em;color:var(--dark)}
+.trust .it span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+
+.build{border-top:1px solid var(--rule)}
+.build .grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.build .cats{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.build .cats a{border:1px solid var(--rule);background:#fff;padding:9px 14px;font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.build .cats a:hover{border-color:var(--dark);color:var(--dark)}
+.build .side{border:1px solid var(--rule);padding:28px 30px}
+.build .side h4{font-size:20px;margin-bottom:8px}
+.build .side p{font-size:14.5px;color:var(--mute)}
+.build .side + .side{margin-top:14px}
+
+.closer{background:var(--void);color:#fff;text-align:center}
+.closer h2{font-size:clamp(30px,3.6vw,50px);color:#fff}
+.closer p{color:rgba(255,255,255,.75);margin:14px auto 30px;max-width:48ch;font-size:17px}
+
+@media(max-width:1080px){.ingangen{grid-template-columns:1fr}.assure .grid,.build .grid{grid-template-columns:1fr;gap:36px}}
+@media(max-width:760px){.hero .wrap{padding-top:56px;padding-bottom:52px}.hero .specs div{min-width:50%;padding-right:12px}
+  .again .btn{margin-left:0}.assure .steps{padding-left:20px}}
+</style>
+</head>
+<body>
+<div class="note" style="margin:0;border-radius:0;border-left:0;border-bottom:3px solid #e0b400">
+  <b>VOORSTEL v2 — nog niet gefilmd.</b> Het beeld hieronder is nog de oude, donkere opname.
+  Wat er moet komen: licht, daglicht, mensen die iets kunnen. Zes shots van 2 à 3 seconden —
+  <b>1</b> drone binnenkomend over de hal · <b>2</b> iemand aan de zaag, zaagsel in het licht ·
+  <b>3</b> ontwerpen op scherm, maten en tekening · <b>4</b> aan de telefoon met een tekening erbij
+  (het &quot;specialist kijkt mee&quot;-beeld) · <b>5</b> beslag monteren, handen en gereedschap ·
+  <b>6</b> afgemonteerde case gaat dicht en rijdt weg.
+  Tien tot veertien seconden, naadloos loopend, geluidloos, geen snelle montage.
+  <b>Linker 45% relatief leeg houden</b> — daar staat de kop overheen. Warm graden, niet koel:
+  het blauw zit al in de tekst. Onder de 800 KB (nu 1,8 MB).
+  De volledige brief staat in <b>hero-video-brief.md</b>.
+</div>
+
+<header class="main">
+  <div class="wrap">
+    <div class="logo"><em>case</em>Builder.com</div>
+    <form class="search" onsubmit="return false">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+      <input placeholder="Zoek op case, onderdeel of artikelnummer…" aria-label="Zoeken">
+    </form>
+    <div class="hdr-r">
+      <a href="#" class="stil">Inloggen</a>
+      <a href="#">Winkelwagen</a>
+    </div>
+  </div>
+</header>
+
+<nav class="primary">
+  <div class="wrap">
+    <a href="#">Flightcases</a>
+    <a href="#">Wat ga je vervoeren?</a>
+    <a href="categorie-v1.html" class="sec">Onderdelen</a>
+    <a href="#" class="sec">Service</a>
+    <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#">NL ▾</a></div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="film">
+    <!-- Montage uit vrij gelicenseerde stock (Mixkit): 11,7 s, naadloos
+         loopend, geluidloos. Zes shots, exterieur als opening en afsluiting,
+         zodat de naad lucht-op-lucht valt. Nog een tussenoplossing: zodra er
+         eigen opnamen zijn, wisselen alleen deze twee bronbestanden. -->
+    <video autoplay muted loop playsinline preload="none"
+           poster="assets/hero-poster.jpg" aria-hidden="true" tabindex="-1">
+      <source src="assets/hero-loop.webm" type="video/webm">
+      <source src="assets/hero-loop.mp4" type="video/mp4">
+    </video>
+    <img src="assets/hero-poster.jpg" alt="" aria-hidden="true">
+  </div>
+  <div class="wrap">
+    <div class="ey">// PRIJS DIRECT ZICHTBAAR · GEEN WACHTTIJD</div>
+    <h1>Millimeterwerk,<br><span class="acc">in tien werkdagen</span></h1>
+    <p class="sub">Online configureren, gecontroleerd door een casebouwer, op maat gebouwd.</p>
+    <div class="cta">
+      <a class="btn btn-pri" href="#">Start met configureren →</a>
+      <a class="btn btn-ghost" href="#">Wat ga je vervoeren?</a>
+    </div>
+    <div class="specs">
+      <div><div class="k">// LEVERTIJD</div><div class="v">10 werkdagen</div></div>
+      <div><div class="k">// PRIJS</div><div class="v">Direct zichtbaar</div></div>
+      <div><div class="k">// UITVOERING</div><div class="v">Bouwpakket of kant-en-klaar</div></div>
+      <div><div class="k">// CONTROLE</div><div class="v">Specialist kijkt mee</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="again">
+  <div class="wrap">
+    <div>
+      <div class="who">// WELKOM TERUG, PROFLITE AV</div>
+      <b>Rackcase enkel deksel · 12 maart</b>
+      <span class="d">483 × 600 × 1.334 mm · zwart · 40 stuks balhoek medium</span>
+    </div>
+    <a class="btn btn-out btn-sm" href="#">Opnieuw bestellen →</a>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ey ey-dark">// 02 — WAAR BEGIN JE?</div>
+      <h2>Drie manieren om bij de juiste case te komen</h2>
+      <p class="lead">Je hoeft niet te weten hoe een flightcase heet om er een te bestellen.</p>
+    </div>
+    <div class="ingangen">
+      <div class="ing">
+        <div class="n">// A</div>
+        <h3>Ik weet wat ik nodig heb</h3>
+        <p>Model en maten zijn bekend. Direct de configurator in, prijs meteen in beeld, klaar in vijf stappen.</p>
+        <div class="go">Naar de configurator →</div>
+      </div>
+      <div class="ing">
+        <div class="n">// B</div>
+        <h3>Ik weet wat ik moet beschermen</h3>
+        <p>Een Les Paul, een 19-inch rack van 6 HE, een moving head. Zeg wat erin gaat, wij bepalen de maten.</p>
+        <div class="go">Wat ga je vervoeren? →</div>
+      </div>
+      <div class="ing">
+        <div class="n">// C</div>
+        <h3>Ik weet het nog niet</h3>
+        <p>Koffer, hoedcase, trunccase of rackcase — wat is het verschil, en wat past bij jouw transport?</p>
+        <div class="go">Vergelijk de vijf modellen →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="models tight ruit ruit-aanzet">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="ey ey-dark">// 03 — DE VIJF MODELLEN</div>
+        <h2>Alles op maat, vanaf een vaste basisprijs</h2>
+      </div>
+    </div>
+    <div class="cases">
+      <div class="case"><div class="im"><img src="assets/flightcase-koffer.jpg" alt="Koffer"></div>
+        <div class="bd"><h4>Koffer</h4><div class="d">Draagbaar aan een opbouwhandgreep</div>
+        <div class="pr"><b>vanaf € 149</b><i>excl. btw · eigen maten</i></div></div></div>
+      <div class="case"><div class="im"><img src="assets/flightcase-hoedcase.jpg" alt="Hoedcase"></div>
+        <div class="bd"><h4>Hoedcase</h4><div class="d">Lage bodem, volledig afneembaar deksel</div>
+        <div class="pr"><b>vanaf € 179</b><i>excl. btw · eigen maten</i></div></div></div>
+      <div class="case"><div class="im"><img src="assets/flightcase-trunccase.jpg" alt="Trunccase"></div>
+        <div class="bd"><h4>Trunccase</h4><div class="d">Universele transportkist met bovendeksel</div>
+        <div class="pr"><b>vanaf € 199</b><i>excl. btw · eigen maten</i></div></div></div>
+      <div class="case"><div class="im"><img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt="Rackcase enkel deksel"></div>
+        <div class="bd"><h4>Rackcase enkel</h4><div class="d">Voordeksel, voor 19-inch apparatuur</div>
+        <div class="pr"><b>vanaf € 229</b><i>excl. btw · eigen maten</i></div></div></div>
+      <div class="case"><div class="im"><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt="Rackcase dubbel deksel"></div>
+        <div class="bd"><h4>Rackcase dubbel</h4><div class="d">Voor- én achterdeksel, 19-inch</div>
+        <div class="pr"><b>vanaf € 259</b><i>excl. btw · eigen maten</i></div></div></div>
+    </div>
+    <div class="compare">
+      <p>Niet zeker welk type past? Zet ze naast elkaar op deksel, toepassing, 19-inch-geschiktheid en prijs.</p>
+      <a class="btn btn-out btn-sm" href="#">Vergelijk alle vijf →</a>
+    </div>
+  </div>
+</section>
+
+<section class="assure">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <div class="ey">// 04 — HOE HET WERKT</div>
+        <h2>Van maat naar kade in vier stappen</h2>
+        <p>Je wacht niet op een prijs en niet op een terugbelverzoek. En vóór je bestelt kijkt er
+          altijd nog een casebouwer mee — gratis, want een case die niet past kost ons allebei tijd.</p>
+        <a class="btn btn-pri" href="#" style="margin-top:26px">Laat je maten controleren →</a>
+      </div>
+      <div class="steps">
+        <div class="st"><div class="i">// 01</div><div><b>Kies of laat kiezen</b><span>Model zelf kiezen, of zeg wat je vervoert.</span></div></div>
+        <div class="st"><div class="i">// 02</div><div><b>Configureer online</b><span>Maten, kleur, beslag, wielen. Prijs verandert live mee.</span></div></div>
+        <div class="st"><div class="i">// 03</div><div><b>Laat het controleren</b><span>Een casebouwer kijkt je configuratie na. Binnen één werkdag.</span></div></div>
+        <div class="st"><div class="i">// 04</div><div><b>Tien werkdagen later</b><span>Kant-en-klaar of als bouwpakket, met alle onderdelen op maat.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trust tight">
+  <div class="wrap">
+    <div class="row">
+      <div class="it"><b>Sinds 1987</b><span>Eigen productie in Doesburg</span></div>
+      <div class="it"><b>10 werkdagen</b><span>Ook bij maatwerk</span></div>
+      <div class="it"><b>Op rekening</b><span>Voor zakelijke klanten</span></div>
+      <div class="it"><b>Eigen werkplaats</b><span>Geen tussenhandel</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="build">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <div class="ey ey-dark">// 05 — ZELF BOUWEN</div>
+        <h2>Of bestel alleen de onderdelen</h2>
+        <p class="lead">Profielen, hoeken, sluitingen, wielen en schuim — hetzelfde materiaal
+          waarmee wij bouwen. Vandaag besteld, morgen verstuurd.</p>
+        <div class="cats">
+          <a href="#">Profielen</a><a href="#">Hoeken</a><a href="#">Handgrepen</a>
+          <a href="#">Sluitingen</a><a href="#">Scharnieren</a><a href="#">Wielen</a>
+          <a href="#">Schuimplastic</a><a href="#">19" artikelen</a>
+        </div>
+      </div>
+      <div>
+        <div class="side">
+          <h4>Bouwpakket compleet</h4>
+          <p>Alle onderdelen op maat gezaagd en geteld, plus de handleiding. Je schroeft hem zelf in elkaar.</p>
+        </div>
+        <div class="side">
+          <h4>Zaagservice</h4>
+          <p>Alleen plaatmateriaal op maat, zonder case. Geef je maten door, wij zagen.</p>
+        </div>
+        <div class="side">
+          <h4>Weet je het artikelnummer?</h4>
+          <p>Typ het in de zoekbalk bovenaan en bestel direct, met aantal.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="closer ruit ruit-dark ruit-veld">
+  <div class="wrap">
+    <div class="ey">// KLAAR OM TE BEGINNEN?</div>
+    <h2>Jouw maten. Tien werkdagen.</h2>
+    <p>Begin met configureren en zie binnen een minuut wat je case gaat kosten.</p>
+    <a class="btn btn-pri" href="#">Open de configurator →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="logo"><em>case</em>Builder.com</div>
+        <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br>+31 (0)575 575734</p>
+      </div>
+      <div><h5>Flightcases</h5><a href="#">Koffer</a><a href="#">Hoedcase</a><a href="#">Trunccase</a><a href="#">Rackcase enkel</a><a href="#">Rackcase dubbel</a></div>
+      <div><h5>Onderdelen</h5><a href="#">Profielen</a><a href="#">Hoeken</a><a href="#">Sluitingen</a><a href="#">Wielen</a><a href="#">Schuimplastic</a></div>
+      <div><h5>Service</h5><a href="#">Levertijden</a><a href="#">Verzending</a><a href="#">Zaagservice</a><a href="#">Zakelijk bestellen</a><a href="#">Contact</a></div>
+    </div>
+    <div class="bot"><span>© 2026 Proflite BV · KVK 09123456</span><span>Algemene voorwaarden · Privacy</span></div>
+  </div>
+</footer>
+
+<script src="assets/vouw.js"></script>
+<script src="assets/versies.js"></script>
+</body>
+</html>

@@ -11,6 +11,7 @@
     'homepage': [
       { id: 'wireframe', bestand: 'homepage.html', label: 'wireframe' },
       { id: 'v1-video', bestand: 'homepage-v1-video.html', label: 'v1 · video' },
+      { id: 'v2', bestand: 'homepage-v2.html', label: 'v2 · voorstel' },
       { id: 'v1', bestand: 'homepage-v1.html', label: 'v1 · beeld' }
     ],
     'categorie': [
