@@ -1,0 +1,75 @@
+/* ══════════════════════════════════════════════════════════════
+   Wireframes op ware grootte — gedeeld stylesheet.
+
+   1440 px breed, elke sectie precies zo hoog als het ontwerp
+   werkelijk is (gemeten met scripts/meet-hoogtes.mjs). Geen schaal,
+   dus de vouwlijn op 900 px klopt: wat daarboven staat is wat
+   iemand ziet zonder te scrollen.
+
+   De klassen zijn dezelfde als in het voortgangsdocument, zodat de
+   wireframe daar en hier uit één bron komt.
+   ══════════════════════════════════════════════════════════════ */
+:root{
+  --ink:#0B1E2B; --mute:#5A6B77; --faint:#8B9BA6;
+  --lijn:#C8D4DC; --lijn-zacht:#E1E8ED; --vlak:#fff; --vlak-2:#F4F7F9;
+  --accent:#0277A8; --accent-vlak:#E2F1F9; --diep:#0B2030; --vouwkleur:#E8663C;
+  --disp:'Barlow Condensed',sans-serif; --body:'DM Sans',sans-serif; --mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#E9EEF2;font-family:var(--body);color:var(--ink);padding:40px 20px 80px}
+
+.blad-kop{width:1440px;margin:0 auto 12px;display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.blad-kop b{color:var(--ink);font-weight:600}
+.blad-kop .rechts{margin-left:auto}
+
+/* het blad zelf — dit is .wfpage, dezelfde klasse als in het document */
+.wfpage{width:1440px;margin:0 auto;position:relative;background:var(--vlak);
+  box-shadow:0 2px 6px rgba(11,30,43,.08),0 30px 70px -40px rgba(11,30,43,.5)}
+.wfpage::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;
+  background-image:linear-gradient(var(--lijn-zacht) 1px,transparent 1px),
+    linear-gradient(90deg,var(--lijn-zacht) 1px,transparent 1px);
+  background-size:80px 80px;opacity:.5}
+
+/* ── sectie ── */
+.wsec{position:relative;border-bottom:1px solid var(--lijn);padding:26px 40px 22px;
+  display:flex;flex-direction:column;gap:12px;min-height:calc(var(--h,200) * 1px)}
+.wsec:last-child{border-bottom:0}
+.wsec > .lbl{position:absolute;top:0;left:0;z-index:2;padding:4px 12px 4px 14px;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--faint);background:var(--vlak-2);border-right:1px solid var(--lijn);
+  border-bottom:1px solid var(--lijn)}
+.wsec.band{background:var(--vlak-2)}
+.wsec.diep{background:var(--diep)}
+.wsec.diep > .lbl{background:transparent;color:rgba(255,255,255,.5);border-color:rgba(255,255,255,.18)}
+
+/* ── blok ── */
+.b{border:1px solid var(--lijn);background:var(--vlak);border-radius:2px;padding:12px 15px;
+  font-family:var(--mono);font-size:12px;line-height:1.5;color:var(--mute);
+  display:flex;align-items:center;min-width:0;flex:0 0 auto}
+.wfrow > .b{flex:1 1 0}
+.groei,.wfcol.groei,.wfrow.groei,.wfcol > .b.groei{flex:1 1 auto}
+.b.head{font-family:var(--disp);font-size:26px;font-weight:700;color:var(--ink);letter-spacing:.01em;line-height:1.1}
+.b.cta{border-color:var(--accent);color:var(--accent);background:var(--accent-vlak);font-weight:500}
+.b.soft{border-style:dashed}
+.b.nav{color:var(--faint);background:var(--vlak-2)}
+.wsec.diep .b{background:transparent;border-color:rgba(255,255,255,.24);color:#AFC6D4}
+.wsec.diep .b.head{color:#fff}
+.wsec.diep .b.cta{border-color:#66C4E8;color:#66C4E8;background:rgba(102,196,232,.12)}
+
+.wfrow{display:flex;gap:12px;align-items:stretch}
+.wfcol{display:flex;flex-direction:column;gap:12px;flex:1 1 0;min-width:0}
+.wfcol.w2{flex-grow:2}.wfcol.w3{flex-grow:3}
+.b.w2{flex-grow:2}.b.w3{flex-grow:3}
+
+/* ── de vouw ── */
+.vouw{position:absolute;left:0;right:0;z-index:4;border-top:2px dashed var(--vouwkleur);pointer-events:none}
+.vouw > span{position:absolute;right:0;top:-11px;background:var(--vouwkleur);color:#fff;
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px}
+.vouw.stil{border-top-color:rgba(232,102,60,.35)}
+.vouw.stil > span{background:rgba(232,102,60,.6)}
+
+@media(max-width:1520px){
+  body{padding:20px 0 60px}
+  .wfpage,.blad-kop{width:100%;max-width:1440px}
+}

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — contentpagina (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+.artlay{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:56px;padding:40px 0 70px}
+.art h1{font-size:clamp(30px,3.6vw,44px)}
+.art .lead{margin-top:14px}
+.art h2{font-size:26px;margin:34px 0 12px}
+.art p{font-size:16px;color:var(--mute);margin-top:12px;max-width:68ch}
+.art ul{margin:12px 0 0 20px;color:var(--mute);font-size:16px}
+.art li{padding:3px 0}
+.art .blok{border-left:3px solid var(--cyan);padding:4px 0 4px 20px;margin-top:22px}
+.art .blok p{color:var(--ink);margin-top:0}
+.zij{position:sticky;top:96px;align-self:start}
+.zij h4{font-size:15px;letter-spacing:.06em;padding-bottom:9px;border-bottom:1px solid var(--rule);margin-bottom:6px}
+.zij a{display:block;padding:7px 0;font-size:14px;color:var(--mute);border-bottom:1px solid var(--rule)}
+.zij a:hover,.zij a.on{color:var(--dark)}
+.zij .hulp{border:1px solid var(--rule);background:var(--bg);padding:20px;margin-top:24px}
+.zij .hulp p{font-size:13.5px;color:var(--mute);margin-top:6px}
+@media(max-width:1080px){.artlay{grid-template-columns:1fr;gap:30px}.zij{position:static}}
+</style>
+</head>
+<body>
+<header class="main">
+  <div class="wrap">
+    <div class="logo"><em>case</em>Builder.com</div>
+    <form class="search" onsubmit="return false">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+      <input placeholder="Zoek op case, onderdeel of artikelnummer…" aria-label="Zoeken">
+    </form>
+    <div class="hdr-r">
+      <a href="#" class="stil">Inloggen</a>
+      <a href="#" class="btn btn-out btn-sm">Offerte</a>
+      <a href="#">Winkelwagen</a>
+    </div>
+  </div>
+</header>
+<nav class="primary">
+  <div class="wrap">
+    <a href="flightcases-v2.html">Flightcases</a>
+    <a href="case-voor-gitaar-v2.html">Wat ga je vervoeren?</a>
+    <a href="categorie-v2.html" class="sec">Onderdelen</a>
+    <a href="service-v2.html" class="on">Service</a>
+    <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#">NL ▾</a></div>
+  </div>
+</nav>
+<div class="crumbs">
+  <div class="wrap">
+    <a href="service-v2.html">Service</a><span class="sep">/</span><span>Levertijden</span>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="artlay">
+    <div class="art">
+      <div class="ey ey-dark">// SERVICE — LEVERTIJDEN</div>
+      <h1>Levertijden</h1>
+      <p class="lead">Tien werkdagen op een case op maat. Dat is geen streven maar de afspraak —
+        en hieronder staat wat er in die tien dagen gebeurt, en wanneer het anders loopt.</p>
+
+      <h2>Wat er in tien werkdagen gebeurt</h2>
+      <p>Je configuratie gaat direct naar de werkplaats. Dag één en twee is het zagen van het
+        plaatmateriaal, daarna wordt er beslagen en gemonteerd. De laatste dag is controle:
+        sluiten alle sloten, past het deksel, rolt hij recht.</p>
+      <ul>
+        <li>Dag 1–2 · plaatmateriaal zagen op jouw maten</li>
+        <li>Dag 3–7 · beslag, hoeken, sluitingen en wielen monteren</li>
+        <li>Dag 8–9 · afwerking en schuim op maat</li>
+        <li>Dag 10 · controle en verzending</li>
+      </ul>
+
+      <h2>Wanneer het sneller kan</h2>
+      <p>Een bouwpakket gaat meestal in vijf werkdagen de deur uit — daar valt de montage weg.
+        Losse onderdelen uit voorraad die je vóór 15:00 bestelt, gaan dezelfde dag mee.</p>
+
+      <h2>Wanneer het langer duurt</h2>
+      <p>Bij een kleur buiten de zeven standaardkleuren wachten we op materiaal. Bij series van
+        meer dan tien cases plannen we in overleg. In beide gevallen hoor je het vóór je bestelt,
+        niet erna.</p>
+
+      <div class="blok">
+        <p><strong>Levertijd gaat in na akkoord op je configuratie</strong>, niet na de bestelling.
+          Laat je de maten controleren, dan zit daar één werkdag tussen.</p>
+      </div>
+    </div>
+
+    <aside class="zij">
+      <h4>In deze sectie</h4>
+      <a class="on" href="service-levertijden-v2.html">Levertijden</a>
+      <a href="#">Verzending</a>
+      <a href="#">Zaagservice</a>
+      <a href="#">Zakelijk bestellen</a>
+      <a href="#">Contact</a>
+      <div class="hulp">
+        <div class="ey ey-dark">// HULP NODIG?</div>
+        <p>Bel met de werkplaats — daar weten ze wat er op de zaagbank ligt.</p>
+        <a class="btn btn-out btn-sm" href="#" style="margin-top:12px">+31 (0)575 575734</a>
+      </div>
+    </aside>
+  </div>
+</div>
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="logo"><em>case</em>Builder.com</div>
+        <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br>+31 (0)575 575734</p>
+      </div>
+      <div><h5>Flightcases</h5><a href="#">Koffer</a><a href="#">Hoedcase</a><a href="#">Trunccase</a><a href="#">Rackcase enkel</a><a href="#">Rackcase dubbel</a></div>
+      <div><h5>Onderdelen</h5><a href="#">Profielen</a><a href="#">Hoeken</a><a href="#">Sluitingen</a><a href="#">Wielen</a><a href="#">Schuimplastic</a></div>
+      <div><h5>Service</h5><a href="#">Levertijden</a><a href="#">Verzending</a><a href="#">Zaagservice</a><a href="#">Zakelijk bestellen</a><a href="#">Contact</a></div>
+    </div>
+    <div class="bot"><span>© 2026 Proflite BV · KVK 09123456</span><span>Algemene voorwaarden · Privacy</span></div>
+  </div>
+</footer>
+<script src="assets/vouw.js"></script>
+<script src="assets/versies.js"></script>
+</body>
+</html>

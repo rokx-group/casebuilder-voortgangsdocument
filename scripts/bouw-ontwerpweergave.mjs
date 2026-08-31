@@ -21,17 +21,17 @@ const wortel = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DOEL = join(wortel, "index.html");
 const BRAND = join(wortel, "mockups/assets/brand.css");
 const PAGINAS = [
-  { naam: "categorie", bestand: "mockups/categorie.html" },
-  // v1 van de homepage is een wireframe, geen ontwerp — die slaan we over.
+  { naam: "categorie", bestand: "mockups/categorie.html", overslaan: ["v1"] },
+  // v1 is overal de wireframe, geen ontwerp — die slaan we over.
   { naam: "home", bestand: "mockups/homepage.html", overslaan: ["v1"] },
-  { naam: "onderdeel", bestand: "mockups/onderdeel.html" },
-  { naam: "casetype", bestand: "mockups/casetype.html" },
-  { naam: "overzicht", bestand: "mockups/flightcases.html" },
-  { naam: "case-voor-categorie", bestand: "mockups/case-voor-gitaar.html" },
-  { naam: "case-voor-resultaat", bestand: "mockups/case-voor-gibson-les-paul.html" },
-  { naam: "servicehub", bestand: "mockups/service.html" },
-  { naam: "content", bestand: "mockups/service-levertijden.html" },
-  { naam: "zoekresultaat", bestand: "mockups/zoeken.html" },
+  { naam: "onderdeel", bestand: "mockups/onderdeel.html", overslaan: ["v1"] },
+  { naam: "casetype", bestand: "mockups/casetype.html", overslaan: ["v1"] },
+  { naam: "overzicht", bestand: "mockups/flightcases.html", overslaan: ["v1"] },
+  { naam: "case-voor-categorie", bestand: "mockups/case-voor-gitaar.html", overslaan: ["v1"] },
+  { naam: "case-voor-resultaat", bestand: "mockups/case-voor-gibson-les-paul.html", overslaan: ["v1"] },
+  { naam: "servicehub", bestand: "mockups/service.html", overslaan: ["v1"] },
+  { naam: "content", bestand: "mockups/service-levertijden.html", overslaan: ["v1"] },
+  { naam: "zoekresultaat", bestand: "mockups/zoeken.html", overslaan: ["v1"] },
 ];
 
 /** Selectors die geen voorvoegsel krijgen maar een vervanging. */

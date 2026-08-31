@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — zoekresultaat (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+.zkop{background:var(--bg);border-bottom:1px solid var(--rule);padding:30px 0 26px}
+.zkop .field{max-width:720px}
+.zkop .cnt{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-top:14px}
+.zkop .cnt b{color:var(--dark)}
+.treffer{border:1.5px solid var(--dark);background:#fff;display:flex;gap:24px;align-items:center;
+  padding:20px 24px;margin:26px 0 0;flex-wrap:wrap}
+.treffer .im{width:88px;aspect-ratio:1;background:var(--bg);border:1px solid var(--rule);flex:none}
+.treffer h3{font-size:22px}
+.treffer .sku{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-top:5px}
+.treffer .pr{font-family:var(--disp);font-size:24px;font-weight:900;color:var(--dark);margin-left:auto}
+.treffer .buy{display:flex;gap:10px;align-items:center}
+.zlay{display:grid;grid-template-columns:236px minmax(0,1fr);gap:44px;padding:30px 0 80px}
+.leeg{border:1px dashed var(--rule);background:var(--bg);padding:22px 24px;margin-top:22px;font-size:14.5px;color:var(--mute)}
+@media(max-width:1080px){.zlay{grid-template-columns:1fr;gap:26px}.parts{grid-template-columns:repeat(2,1fr)}}
+.parts{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+</style>
+</head>
+<body>
+<header class="main">
+  <div class="wrap">
+    <div class="logo"><em>case</em>Builder.com</div>
+    <form class="search" onsubmit="return false">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+      <input placeholder="Zoek op artikelnummer of onderdeel…" aria-label="Zoeken">
+    </form>
+    <div class="hdr-r">
+      <a href="#" class="stil">Inloggen</a>
+      <a href="#" class="btn btn-out btn-sm">Offerte</a>
+      <a href="#">Winkelwagen <span class="telbadge">3</span></a>
+    </div>
+  </div>
+</header>
+<nav class="primary">
+  <div class="wrap">
+    <a href="flightcases-v2.html">Flightcases</a>
+    <a href="case-voor-gitaar-v2.html">Wat ga je vervoeren?</a>
+    <a href="categorie-v2.html" class="sec">Onderdelen</a>
+    <a href="service-v2.html" class="sec">Service</a>
+    <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#">NL ▾</a></div>
+  </div>
+</nav>
+
+<div class="zkop">
+  <div class="wrap">
+    <form class="field" onsubmit="return false">
+      <input value="eg-0105" aria-label="Zoekopdracht">
+      <button>Zoeken</button>
+    </form>
+    <div class="cnt"><b>1</b> exacte treffer · <b>7</b> gerelateerde artikelen</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="treffer">
+    <div class="im"></div>
+    <div>
+      <h3>Balhoek medium, verzinkt</h3>
+      <div class="sku">EG-0105 · exacte treffer op artikelnummer</div>
+    </div>
+    <div class="pr">€ 1,45</div>
+    <div class="buy">
+      <div class="qty"><span>−</span><b>25</b><span>+</span></div>
+      <a class="btn btn-dark btn-sm" href="#">In winkelwagen</a>
+    </div>
+  </div>
+
+  <div class="zlay">
+    <aside class="filters" style="position:static;display:flex;flex-direction:column;gap:26px">
+      <div class="fset">
+        <h4>Categorie</h4>
+        <label><span class="bx on"></span>Hoeken<span class="num">4</span></label>
+        <label><span class="bx"></span>Profielen<span class="num">2</span></label>
+        <label><span class="bx"></span>Popnagels<span class="num">1</span></label>
+      </div>
+      <div class="fset">
+        <h4>Voorraad</h4>
+        <label><span class="bx on"></span>Direct leverbaar<span class="num">7</span></label>
+      </div>
+    </aside>
+
+    <div>
+      <div class="ey ey-dark" style="margin-bottom:14px">// GERELATEERD</div>
+      <div class="parts">
+        <a class="part" href="onderdeel-v2.html"><div class="im"><div class="sc"><i></i> 30 mm</div></div>
+          <div class="bd"><h4>Balhoek klein</h4><div class="sku">EG-0104</div>
+          <div class="pr">€ 1,20<i>per stuk · excl. btw</i></div><div class="stk">● op voorraad</div>
+          <div class="buy"><div class="qty"><span>−</span><b>10</b><span>+</span></div><span class="btn btn-out btn-sm">Wagen</span></div></div></a>
+        <a class="part" href="onderdeel-v2.html"><div class="im"><div class="sc"><i></i> 50 mm</div></div>
+          <div class="bd"><h4>Balhoek groot</h4><div class="sku">EG-0106</div>
+          <div class="pr">€ 1,80<i>per stuk · excl. btw</i></div><div class="stk">● op voorraad</div>
+          <div class="buy"><div class="qty"><span>−</span><b>10</b><span>+</span></div><span class="btn btn-out btn-sm">Wagen</span></div></div></a>
+        <a class="part" href="onderdeel-v2.html"><div class="im"><div class="sc"><i></i> 8 mm</div></div>
+          <div class="bd"><h4>Popnagel 4 × 8 mm</h4><div class="sku">EG-7042</div>
+          <div class="pr">€ 0,06<i>per stuk · excl. btw</i></div><div class="stk">● op voorraad</div>
+          <div class="buy"><div class="qty"><span>−</span><b>100</b><span>+</span></div><span class="btn btn-out btn-sm">Wagen</span></div></div></a>
+      </div>
+
+      <div class="leeg">Niets van je gading? Elke zoekopdracht zonder resultaat komt in het
+        <strong>zoektermenrapport</strong> — daarmee groeit de navigatie mee met wat mensen echt zoeken.</div>
+    </div>
+  </div>
+</div>
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="logo"><em>case</em>Builder.com</div>
+        <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br>+31 (0)575 575734</p>
+      </div>
+      <div><h5>Flightcases</h5><a href="#">Koffer</a><a href="#">Hoedcase</a><a href="#">Trunccase</a><a href="#">Rackcase enkel</a><a href="#">Rackcase dubbel</a></div>
+      <div><h5>Onderdelen</h5><a href="#">Profielen</a><a href="#">Hoeken</a><a href="#">Sluitingen</a><a href="#">Wielen</a><a href="#">Schuimplastic</a></div>
+      <div><h5>Service</h5><a href="#">Levertijden</a><a href="#">Verzending</a><a href="#">Zaagservice</a><a href="#">Zakelijk bestellen</a><a href="#">Contact</a></div>
+    </div>
+    <div class="bot"><span>© 2026 Proflite BV · KVK 09123456</span><span>Algemene voorwaarden · Privacy</span></div>
+  </div>
+</footer>
+<script src="assets/vouw.js"></script>
+<script src="assets/versies.js"></script>
+</body>
+</html>

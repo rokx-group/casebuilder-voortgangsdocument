@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — case-voor apparaat (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ── case-voor apparaat — paginaspecifiek ── */
+.reskop{padding:40px 0 8px}
+.reskop h1{font-size:clamp(30px,3.8vw,46px);max-width:20ch}
+.reskop .lead{margin-top:14px}
+.advies{display:grid;grid-template-columns:1.4fr 1fr;gap:26px;padding:26px 0 0}
+.advies .top{border:1.5px solid var(--dark);background:#fff;display:flex;flex-direction:column}
+.advies .top .lab{background:var(--dark);color:#fff;font-family:var(--mono);font-size:10px;
+  letter-spacing:.16em;text-transform:uppercase;padding:9px 20px}
+.advies .top .bd{padding:26px 28px 28px;display:flex;flex-direction:column;flex:1}
+.advies .top h2{font-size:28px}
+.advies .top .maten{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--mute);margin-top:10px}
+.advies .top p{font-size:15px;color:var(--mute);margin-top:12px;flex:1}
+.advies .top .pr{font-family:var(--disp);font-size:30px;font-weight:900;color:var(--dark);margin-top:16px}
+.advies .top .pr i{font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.12em;
+  color:var(--mute);display:block;margin-top:3px;font-weight:400}
+.advies .alt{display:flex;flex-direction:column;gap:16px}
+.advies .alt .k{border:1px solid var(--rule);background:#fff;padding:20px 22px;flex:1;display:flex;flex-direction:column}
+.advies .alt .k h3{font-size:19px}
+.advies .alt .k p{font-size:14px;color:var(--mute);margin-top:7px;flex:1}
+.advies .alt .k .pr{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dark);margin-top:12px}
+.waarom{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
+  border:1px solid var(--rule);margin-top:34px}
+.waarom div{background:#fff;padding:22px 24px}
+.waarom .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+.waarom .v{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:20px;letter-spacing:.03em;color:var(--dark);margin-top:6px}
+.waarom p{font-size:13.5px;color:var(--mute);margin-top:6px}
+@media(max-width:1080px){.advies{grid-template-columns:1fr}.waarom{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="main">
+  <div class="wrap">
+    <div class="logo"><em>case</em>Builder.com</div>
+    <form class="search" onsubmit="return false">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+      <input placeholder="Zoek op case, onderdeel of artikelnummer…" aria-label="Zoeken">
+    </form>
+    <div class="hdr-r">
+      <a href="#" class="stil">Inloggen</a>
+      <a href="#" class="btn btn-out btn-sm">Offerte</a>
+      <a href="#">Winkelwagen</a>
+    </div>
+  </div>
+</header>
+<nav class="primary">
+  <div class="wrap">
+    <a href="flightcases-v2.html">Flightcases</a>
+    <a href="case-voor-gitaar-v2.html" class="on">Wat ga je vervoeren?</a>
+    <a href="categorie-v2.html" class="sec">Onderdelen</a>
+    <a href="service-v2.html" class="sec">Service</a>
+    <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#">NL ▾</a></div>
+  </div>
+</nav>
+<div class="crumbs">
+  <div class="wrap">
+    <a href="#">Wat ga je vervoeren?</a><span class="sep">/</span><a href="case-voor-gitaar-v2.html">Gitaar</a><span class="sep">/</span><span>Gibson Les Paul</span>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="reskop">
+    <div class="ey ey-dark">// CASE VOOR EEN APPARAAT</div>
+    <h1>Flightcase voor een Gibson Les Paul</h1>
+    <p class="lead">Een Les Paul is 1.000 mm lang, 350 breed en 90 dik, met een massieve mahonie
+      body van ruim vier kilo. Het gewicht zit in de kast, de kwetsbaarheid in de hals.</p>
+  </div>
+
+  <div class="advies">
+    <div class="top">
+      <div class="lab">// ONS ADVIES</div>
+      <div class="bd">
+        <h2>Hoedcase, 1.060 × 410 × 150 mm</h2>
+        <div class="maten">binnenmaat 1.010 × 360 × 100 · schuim 25 mm rondom</div>
+        <p>Deksel er helemaal af, dus je legt de gitaar erin in plaats van hem erin te wurmen.
+          De uitsparing ondersteunt de hals onder de kopplaat, waar een Les Paul het snelst breekt.</p>
+        <div class="pr">€ 214,80<i>excl. btw · maten staan klaar</i></div>
+        <a class="btn btn-pri" href="#" style="margin-top:18px">Configureer met deze maten →</a>
+      </div>
+    </div>
+    <div class="alt">
+      <div class="k">
+        <h3>Trunccase</h3>
+        <p>Neem je meer dan één gitaar mee? Dan één kist met vakverdeling in plaats van twee koffers.</p>
+        <div class="pr">vanaf € 241,00</div>
+      </div>
+      <div class="k">
+        <h3>Koffer</h3>
+        <p>Goedkoper en lichter, maar je pakt hem liggend uit — lastiger op een vol podium.</p>
+        <div class="pr">vanaf € 186,50</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="waarom">
+    <div>
+      <div class="k">// BINNENMAAT</div>
+      <div class="v">1.010 × 360 × 100</div>
+      <p>Instrument plus 5 mm speling, zodat het schuim het werk doet en niet de kast.</p>
+    </div>
+    <div>
+      <div class="k">// SCHUIMDIKTE</div>
+      <div class="v">25 mm rondom</div>
+      <p>Genoeg voor busvervoer. Ga je vliegen, kies dan 40 mm — dat is één klik in de configurator.</p>
+    </div>
+    <div>
+      <div class="k">// GEWICHT</div>
+      <div class="v">Circa 9 kg leeg</div>
+      <p>Met gitaar rond de 13 kg. Blijft binnen de handbagagegrens van geen enkele maatschappij.</p>
+    </div>
+  </div>
+</div>
+
+<section class="tight">
+  <div class="wrap">
+    <div class="ey ey-dark">// VEELGESTELD</div>
+    <h2 style="font-size:30px;margin:12px 0 18px">Vragen over deze case</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule)">
+      <div style="background:#fff;padding:22px 26px"><h4 style="font-size:18px">Past een Les Paul Custom hier ook in?</h4>
+        <p style="font-size:14.5px;color:var(--mute);margin-top:8px">Ja. De Custom is dezelfde omtrek,
+          alleen zwaarder door het bindingwerk. Dezelfde maten volstaan.</p></div>
+      <div style="background:#fff;padding:22px 26px"><h4 style="font-size:18px">En met een Bigsby erop?</h4>
+        <p style="font-size:14.5px;color:var(--mute);margin-top:8px">Dan 15 mm extra dikte. Zet de
+          binnenmaat op 115 mm — de configurator rekent het door.</p></div>
+      <div style="background:#fff;padding:22px 26px"><h4 style="font-size:18px">Mag hij mee als ruimbagage?</h4>
+        <p style="font-size:14.5px;color:var(--mute);margin-top:8px">Met 40 mm schuim en twee sluitingen
+          extra wel. Laat het even controleren voordat je bestelt.</p></div>
+      <div style="background:#fff;padding:22px 26px"><h4 style="font-size:18px">Kan er een vak bij voor kabels?</h4>
+        <p style="font-size:14.5px;color:var(--mute);margin-top:8px">Ja, een uitsparing naast de body.
+          Dat kost circa 40 mm extra lengte.</p></div>
+    </div>
+
+    <div style="border:1px solid var(--rule);padding:24px 28px;margin-top:30px;display:flex;gap:26px;align-items:center;flex-wrap:wrap">
+      <div>
+        <h3 style="font-size:21px">Weet je het niet zeker?</h3>
+        <p style="font-size:14px;color:var(--mute);max-width:52ch;margin-top:6px">Stuur je maten in en een
+          casebouwer kijkt mee. Gratis, binnen één werkdag antwoord.</p>
+      </div>
+      <a class="btn btn-out" href="laten-controleren.html" style="margin-left:auto">Laat het controleren →</a>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="logo"><em>case</em>Builder.com</div>
+        <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br>+31 (0)575 575734</p>
+      </div>
+      <div><h5>Flightcases</h5><a href="#">Koffer</a><a href="#">Hoedcase</a><a href="#">Trunccase</a><a href="#">Rackcase enkel</a><a href="#">Rackcase dubbel</a></div>
+      <div><h5>Onderdelen</h5><a href="#">Profielen</a><a href="#">Hoeken</a><a href="#">Sluitingen</a><a href="#">Wielen</a><a href="#">Schuimplastic</a></div>
+      <div><h5>Service</h5><a href="#">Levertijden</a><a href="#">Verzending</a><a href="#">Zaagservice</a><a href="#">Zakelijk bestellen</a><a href="#">Contact</a></div>
+    </div>
+    <div class="bot"><span>© 2026 Proflite BV · KVK 09123456</span><span>Algemene voorwaarden · Privacy</span></div>
+  </div>
+</footer>
+<script src="assets/vouw.js"></script>
+<script src="assets/versies.js"></script>
+</body>
+</html>

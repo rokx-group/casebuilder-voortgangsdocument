@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — modeloverzicht (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ── modeloverzicht — paginaspecifiek, bovenop brand.css ── */
+.ovkop{background:var(--bg);border-bottom:1px solid var(--rule);padding:40px 0 36px}
+.ovkop h1{font-size:clamp(34px,4.2vw,54px)}
+.ovkop .lead{margin-top:14px}
+
+/* de vijf, met ruimte voor uitleg in klanttaal */
+.modellen{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;padding:40px 0 0}
+.mod{border:1px solid var(--rule);background:#fff;display:flex;flex-direction:column;transition:.15s}
+.mod:hover{border-color:var(--dark)}
+.mod .im{background:var(--bg);aspect-ratio:1}
+.mod .im img{width:100%;height:100%;object-fit:cover}
+.mod .bd{padding:18px 18px 22px;border-top:1px solid var(--rule);display:flex;flex-direction:column;flex:1}
+.mod h3{font-size:20px;line-height:1.05}
+.mod .waar{font-size:13.5px;color:var(--mute);margin-top:8px;flex:1}
+.mod .pr{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--mute);margin-top:14px}
+.mod .pr b{display:block;font-family:var(--disp);font-size:21px;font-weight:900;color:var(--dark);letter-spacing:.02em}
+
+/* fit-finder als uitweg voor wie het niet weet */
+.geenidee{border:1px solid var(--rule);background:var(--lightblue);padding:26px 30px;margin-top:24px;
+  display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+.geenidee h3{font-size:22px}
+.geenidee p{font-size:14.5px;color:var(--mute);max-width:56ch;margin-top:6px}
+.geenidee .btn{margin-left:auto}
+
+/* de vergelijking — bestaat nu nergens */
+.verg{width:100%;border-collapse:collapse;margin-top:26px}
+.verg th,.verg td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--rule);font-size:14px}
+.verg thead th{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);font-weight:500;border-bottom:1.5px solid var(--dark)}
+.verg tbody th{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:17px;
+  letter-spacing:.03em;color:var(--dark);width:22%}
+.verg td.ja{color:#2F7355;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.verg td.nee{color:var(--mute);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.verg td.prijs{font-family:var(--disp);font-size:19px;font-weight:900;color:var(--dark);letter-spacing:.02em}
+.verg tbody tr:hover{background:var(--bg)}
+.scroller{overflow-x:auto}
+
+@media(max-width:1080px){ .modellen{grid-template-columns:repeat(3,1fr)} }
+@media(max-width:620px){ .modellen{grid-template-columns:1fr 1fr} }
+</style>
+</head>
+<body>
+
+<header class="main">
+  <div class="wrap">
+    <div class="logo"><em>case</em>Builder.com</div>
+    <form class="search" onsubmit="return false">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+      <input placeholder="Zoek op case, onderdeel of artikelnummer…" aria-label="Zoeken">
+    </form>
+    <div class="hdr-r">
+      <a href="#" class="stil">Inloggen</a>
+      <a href="#" class="btn btn-out btn-sm">Offerte</a>
+      <a href="#">Winkelwagen</a>
+    </div>
+  </div>
+</header>
+
+<nav class="primary">
+  <div class="wrap">
+    <a href="#" class="on">Flightcases</a>
+    <a href="#">Wat ga je vervoeren?</a>
+    <a href="categorie-v2.html" class="sec">Onderdelen</a>
+    <a href="#" class="sec">Service</a>
+    <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#">NL ▾</a></div>
+  </div>
+</nav>
+
+<div class="crumbs">
+  <div class="wrap"><span>Flightcases</span></div>
+</div>
+
+<div class="ovkop ruit ruit-aanzet">
+  <div class="wrap">
+    <div class="ey ey-dark">// FLIGHTCASES OP MAAT</div>
+    <h1>Vijf modellen, jouw maten</h1>
+    <p class="lead">Het verschil zit in het deksel en waar je bij moet kunnen. Kies op wat je
+      vervoert, niet op hoe het heet — en zie meteen wat de basisprijs is.</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="modellen">
+    <a class="mod" href="casetype-v2.html">
+      <div class="im"><img src="assets/flightcase-koffer.jpg" alt="Koffer"></div>
+      <div class="bd">
+        <h3>Koffer</h3>
+        <p class="waar">Draag je hem met de hand mee? Gitaar, gereedschap, een set microfoons.</p>
+        <div class="pr">vanaf<b>€ 149</b>excl. btw</div>
+      </div>
+    </a>
+    <a class="mod" href="casetype-v2.html">
+      <div class="im"><img src="assets/flightcase-hoedcase.jpg" alt="Hoedcase"></div>
+      <div class="bd">
+        <h3>Hoedcase</h3>
+        <p class="waar">Deksel er helemaal af, dan sta je er met twee handen bij. Voor opbouwen op locatie.</p>
+        <div class="pr">vanaf<b>€ 179</b>excl. btw</div>
+      </div>
+    </a>
+    <a class="mod" href="casetype-v2.html">
+      <div class="im"><img src="assets/flightcase-trunccase.jpg" alt="Trunccase"></div>
+      <div class="bd">
+        <h3>Trunccase</h3>
+        <p class="waar">De werkkist: bovendeksel, veel volume, rijdt op wielen. Kabels, statieven, losse spullen.</p>
+        <div class="pr">vanaf<b>€ 199</b>excl. btw</div>
+      </div>
+    </a>
+    <a class="mod" href="casetype-v2.html">
+      <div class="im"><img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt="Rackcase enkel deksel"></div>
+      <div class="bd">
+        <h3>Rackcase enkel</h3>
+        <p class="waar">19-inch apparatuur die je alleen aan de voorkant bedient. Eén deksel is genoeg.</p>
+        <div class="pr">vanaf<b>€ 229</b>excl. btw</div>
+      </div>
+    </a>
+    <a class="mod" href="casetype-v2.html">
+      <div class="im"><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt="Rackcase dubbel deksel"></div>
+      <div class="bd">
+        <h3>Rackcase dubbel</h3>
+        <p class="waar">Moet je er ook achter bij, voor bekabeling? Dan voor- én achterdeksel.</p>
+        <div class="pr">vanaf<b>€ 259</b>excl. btw</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="geenidee">
+    <div>
+      <h3>Weet je het nog niet?</h3>
+      <p>Zeg wat erin gaat — een Les Paul, een 19-inch rack van 6 HE, een moving head — en wij
+        bepalen het model en de maten.</p>
+    </div>
+    <a class="btn btn-dark" href="#">Wat ga je vervoeren? →</a>
+  </div>
+</div>
+
+<section class="tight">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:6px">
+      <div class="ey ey-dark">// NAAST ELKAAR</div>
+      <h2 style="font-size:32px;margin-top:12px">De vijf vergeleken</h2>
+      <p class="lead" style="margin-top:10px">Eén tabel, vijf rijen. Zoek de regel die past bij wat
+        jij vervoert.</p>
+    </div>
+    <div class="scroller">
+      <table class="verg">
+        <thead>
+          <tr><th>Model</th><th>Waarvoor</th><th>Deksel</th><th>19-inch</th><th>Wielen</th><th>Vanaf</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Koffer</th><td>Met de hand meenemen</td><td>Scharnierend</td><td class="nee">nee</td><td class="nee">zelden</td><td class="prijs">€ 149</td></tr>
+          <tr><th>Hoedcase</th><td>Opbouwen op locatie</td><td>Volledig afneembaar</td><td class="nee">nee</td><td class="ja">optioneel</td><td class="prijs">€ 179</td></tr>
+          <tr><th>Trunccase</th><td>Veel losse spullen</td><td>Bovendeksel</td><td class="nee">nee</td><td class="ja">standaard</td><td class="prijs">€ 199</td></tr>
+          <tr><th>Rackcase enkel</th><td>Alleen voorkant bedienen</td><td>Voordeksel</td><td class="ja">ja</td><td class="ja">optioneel</td><td class="prijs">€ 229</td></tr>
+          <tr><th>Rackcase dubbel</th><td>Ook bekabeling achterin</td><td>Voor én achter</td><td class="ja">ja</td><td class="ja">optioneel</td><td class="prijs">€ 259</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="navy tight">
+  <div class="wrap" style="display:flex;gap:30px;align-items:center;flex-wrap:wrap">
+    <div>
+      <div class="ey">// KLAAR OM TE BEGINNEN?</div>
+      <h2 style="font-size:clamp(26px,3vw,38px);margin-top:12px">Model gekozen? Dan de maten.</h2>
+      <p style="margin-top:10px;max-width:52ch">De configurator opent op stap 2 — het model neemt hij mee.</p>
+    </div>
+    <a class="btn btn-pri" href="#" style="margin-left:auto">Open de configurator →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="logo"><em>case</em>Builder.com</div>
+        <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br>+31 (0)575 575734</p>
+      </div>
+      <div><h5>Flightcases</h5><a href="#">Koffer</a><a href="#">Hoedcase</a><a href="#">Trunccase</a><a href="#">Rackcase enkel</a><a href="#">Rackcase dubbel</a></div>
+      <div><h5>Onderdelen</h5><a href="#">Profielen</a><a href="#">Hoeken</a><a href="#">Sluitingen</a><a href="#">Wielen</a><a href="#">Schuimplastic</a></div>
+      <div><h5>Service</h5><a href="#">Levertijden</a><a href="#">Verzending</a><a href="#">Zaagservice</a><a href="#">Zakelijk bestellen</a><a href="#">Contact</a></div>
+    </div>
+    <div class="bot"><span>© 2026 Proflite BV · KVK 09123456</span><span>Algemene voorwaarden · Privacy</span></div>
+  </div>
+</footer>
+<script src="assets/vouw.js"></script>
+<script src="assets/versies.js"></script>
+</body>
+</html>

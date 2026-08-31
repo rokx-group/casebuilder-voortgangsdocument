@@ -8,12 +8,64 @@
  */
 (function () {
   var REEKSEN = {
-    homepage: [
+    'homepage': [
       { id: 'v1', bestand: 'homepage.html', label: 'v1 · wireframe' },
       { id: 'v2', bestand: 'homepage-v2.html', label: 'v2 · blueprint' },
       { id: 'v3', bestand: 'homepage-v3.html', label: 'v3 · video' }
+    ],
+    'categorie': [
+      { id: 'v1', bestand: 'categorie.html', label: 'v1 · wireframe' },
+      { id: 'v2', bestand: 'categorie-v2.html', label: 'v2 · ontwerp' }
+    ],
+    'onderdeel': [
+      { id: 'v1', bestand: 'onderdeel.html', label: 'v1 · wireframe' },
+      { id: 'v2', bestand: 'onderdeel-v2.html', label: 'v2 · ontwerp' }
+    ],
+    'casetype': [
+      { id: 'v1', bestand: 'casetype.html', label: 'v1 · wireframe' },
+      { id: 'v2', bestand: 'casetype-v2.html', label: 'v2 · ontwerp' }
+    ],
+    'flightcases': [
+      { id: 'v1', bestand: 'flightcases.html', label: 'v1 · wireframe' },
+      { id: 'v2', bestand: 'flightcases-v2.html', label: 'v2 · ontwerp' }
+    ],
+    'case-voor-gitaar': [
+      { id: 'v1', bestand: 'case-voor-gitaar.html', label: 'v1 · wireframe' },
+      { id: 'v2', bestand: 'case-voor-gitaar-v2.html', label: 'v2 · ontwerp' }
+    ],
+    'case-voor-gibson-les-paul': [
+      { id: 'v1', bestand: 'case-voor-gibson-les-paul.html', label: 'v1 · wireframe' },
+      { id: 'v2', bestand: 'case-voor-gibson-les-paul-v2.html', label: 'v2 · ontwerp' }
+    ],
+    'service': [
+      { id: 'v1', bestand: 'service.html', label: 'v1 · wireframe' },
+      { id: 'v2', bestand: 'service-v2.html', label: 'v2 · ontwerp' }
+    ],
+    'service-levertijden': [
+      { id: 'v1', bestand: 'service-levertijden.html', label: 'v1 · wireframe' },
+      { id: 'v2', bestand: 'service-levertijden-v2.html', label: 'v2 · ontwerp' }
+    ],
+    'zoeken': [
+      { id: 'v1', bestand: 'zoeken.html', label: 'v1 · wireframe' },
+      { id: 'v2', bestand: 'zoeken-v2.html', label: 'v2 · ontwerp' }
+    ],
+    'laten-controleren': [
+      { id: 'v1', bestand: 'laten-controleren.html', label: 'v1 · wireframe' }
+    ],
+    'bedankt': [
+      { id: 'v1', bestand: 'bedankt.html', label: 'v1 · wireframe' }
+    ],
+    'account': [
+      { id: 'v1', bestand: 'account.html', label: 'v1 · wireframe' }
+    ],
+    'checkout': [
+      { id: 'v1', bestand: 'checkout.html', label: 'v1 · wireframe' }
+    ],
+    'configurator': [
+      { id: 'v1', bestand: 'configurator.html', label: 'v1 · wireframe' }
     ]
   };
+
 
   var hier = location.pathname.split('/').pop() || 'homepage.html';
   var reeks = null;

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — servicehub (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+.svkop{background:var(--bg);border-bottom:1px solid var(--rule);padding:40px 0 34px}
+.svkop h1{font-size:clamp(32px,4vw,50px)}
+.svkop .lead{margin-top:14px}
+.svzoek{margin-top:24px;max-width:620px}
+.svgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:38px 0 0}
+.svk{border:1px solid var(--rule);background:#fff;padding:26px 24px 28px;display:flex;flex-direction:column;transition:.15s}
+.svk:hover{border-color:var(--dark);background:var(--bg)}
+.svk .n{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--cyan)}
+.svk h3{font-size:21px;margin:14px 0 10px;line-height:1.05}
+.svk p{font-size:14px;color:var(--mute);flex:1}
+.svk .go{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:14px;letter-spacing:.05em;color:var(--blue);margin-top:18px}
+.vragen{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:22px}
+.vragen div{background:#fff;padding:20px 24px}
+.vragen h4{font-size:17px}
+.vragen p{font-size:14px;color:var(--mute);margin-top:7px}
+@media(max-width:1080px){.svgrid{grid-template-columns:repeat(2,1fr)}.vragen{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="main">
+  <div class="wrap">
+    <div class="logo"><em>case</em>Builder.com</div>
+    <form class="search" onsubmit="return false">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+      <input placeholder="Zoek op case, onderdeel of artikelnummer…" aria-label="Zoeken">
+    </form>
+    <div class="hdr-r">
+      <a href="#" class="stil">Inloggen</a>
+      <a href="#" class="btn btn-out btn-sm">Offerte</a>
+      <a href="#">Winkelwagen</a>
+    </div>
+  </div>
+</header>
+<nav class="primary">
+  <div class="wrap">
+    <a href="flightcases-v2.html">Flightcases</a>
+    <a href="case-voor-gitaar-v2.html">Wat ga je vervoeren?</a>
+    <a href="categorie-v2.html" class="sec">Onderdelen</a>
+    <a href="service-v2.html" class="on">Service</a>
+    <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#">NL ▾</a></div>
+  </div>
+</nav>
+<div class="crumbs">
+  <div class="wrap">
+    <span>Service</span>
+  </div>
+</div>
+
+<div class="svkop ruit ruit-aanzet">
+  <div class="wrap">
+    <div class="ey ey-dark">// SERVICE</div>
+    <h1>Alles over levering, bestellen en zagen</h1>
+    <p class="lead">Vier onderwerpen en de vragen die er het vaakst over binnenkomen. Staat je
+      antwoord er niet bij, bel dan — dat is meestal sneller dan mailen.</p>
+    <form class="field svzoek" onsubmit="return false">
+      <input placeholder="Zoek in service — bijvoorbeeld &quot;levertijd&quot; of &quot;retour&quot;">
+      <button>Zoeken</button>
+    </form>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="svgrid">
+    <a class="svk" href="service-levertijden-v2.html">
+      <div class="n">// 01</div><h3>Levertijden</h3>
+      <p>Tien werkdagen op maatwerk. Wanneer het sneller kan, en wanneer niet.</p>
+      <div class="go">Lees verder →</div>
+    </a>
+    <a class="svk" href="#">
+      <div class="n">// 02</div><h3>Verzending</h3>
+      <p>Kosten per land, afhalen in Doesburg, en gratis vanaf € 150.</p>
+      <div class="go">Lees verder →</div>
+    </a>
+    <a class="svk" href="#">
+      <div class="n">// 03</div><h3>Zaagservice</h3>
+      <p>Plaatmateriaal op maat gezaagd, ook als je geen case bestelt.</p>
+      <div class="go">Lees verder →</div>
+    </a>
+    <a class="svk" href="#">
+      <div class="n">// 04</div><h3>Zakelijk bestellen</h3>
+      <p>Op rekening, staffelprijzen en series. Wat je nodig hebt voor een account.</p>
+      <div class="go">Lees verder →</div>
+    </a>
+  </div>
+</div>
+
+<section class="tight">
+  <div class="wrap">
+    <div class="ey ey-dark">// VEELGESTELD</div>
+    <h2 style="font-size:30px;margin:12px 0 4px">De vragen die het vaakst binnenkomen</h2>
+    <div class="vragen">
+      <div><h4>Hoe lang duurt een case op maat?</h4><p>Tien werkdagen na akkoord op je configuratie.
+        Bouwpakketten gaan sneller, meestal vijf.</p></div>
+      <div><h4>Kan ik iets retour sturen?</h4><p>Onderdelen uit voorraad wel, binnen dertig dagen.
+        Een case op maat niet — die is voor jou gemaakt.</p></div>
+      <div><h4>Krijg ik een factuur op rekening?</h4><p>Met een zakelijk account wel, na de eerste
+        bestelling. Daarvoor hebben we een KVK-nummer nodig.</p></div>
+      <div><h4>Kan ik afhalen in Doesburg?</h4><p>Ja, na bericht dat je bestelling klaarstaat.
+        Broekhuizerweg 3, op werkdagen tot 16:30.</p></div>
+    </div>
+
+    <div style="border:1.5px solid var(--dark);padding:26px 30px;margin-top:30px;display:flex;gap:26px;align-items:center;flex-wrap:wrap">
+      <div>
+        <h3 style="font-size:22px">Staat je vraag er niet bij?</h3>
+        <p style="font-size:14.5px;color:var(--mute);max-width:52ch;margin-top:6px">Direct advies van
+          iemand die de cases zelf bouwt — geen callcenter.</p>
+      </div>
+      <a class="btn btn-dark" href="#" style="margin-left:auto">+31 (0)575 575734</a>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="logo"><em>case</em>Builder.com</div>
+        <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br>+31 (0)575 575734</p>
+      </div>
+      <div><h5>Flightcases</h5><a href="#">Koffer</a><a href="#">Hoedcase</a><a href="#">Trunccase</a><a href="#">Rackcase enkel</a><a href="#">Rackcase dubbel</a></div>
+      <div><h5>Onderdelen</h5><a href="#">Profielen</a><a href="#">Hoeken</a><a href="#">Sluitingen</a><a href="#">Wielen</a><a href="#">Schuimplastic</a></div>
+      <div><h5>Service</h5><a href="#">Levertijden</a><a href="#">Verzending</a><a href="#">Zaagservice</a><a href="#">Zakelijk bestellen</a><a href="#">Contact</a></div>
+    </div>
+    <div class="bot"><span>© 2026 Proflite BV · KVK 09123456</span><span>Algemene voorwaarden · Privacy</span></div>
+  </div>
+</footer>
+<script src="assets/vouw.js"></script>
+<script src="assets/versies.js"></script>
+</body>
+</html>
