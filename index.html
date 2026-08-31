@@ -192,14 +192,6 @@
   .wf[data-mode="design"][data-ver="v1"] .dv[data-ver="v1"] { display:block; }
   .wf[data-mode="design"][data-ver="v2"] .dv[data-ver="v2"] { display:block; }
   .wf[data-mode="design"][data-ver="v3"] .dv[data-ver="v3"] { display:block; }
-  .wfver { display:none; }
-  .wf[data-mode="design"] .wfver { display:inline-flex; border:1px solid var(--line);
-    border-radius:3px; overflow:hidden; margin-left:8px; }
-  .wfver button { appearance:none; background:var(--surface); border:none; cursor:pointer;
-    font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.06em;
-    text-transform:uppercase; color:var(--muted); padding:6px 11px; }
-  .wfver button + button { border-left:1px solid var(--line); }
-  .wfver button[aria-pressed="true"] { background:var(--accent-bg); color:var(--accent); font-weight:600; }
 
   /* ---------- ontwerpweergave — GEGENEREERD uit mockups/ door
      scripts/bouw-ontwerpweergave.mjs. Niet met de hand bewerken:
@@ -1740,8 +1732,8 @@
         <button class="wfitem kind laatst" type="button" data-wf="content"><span class="u"><span class="pfx">/service</span>/levertijden</span><span class="m"><span class="t">content</span><span class="c">7</span></span></button>
         </nav>
       <div class="wfstage">
-<figure class="wf" data-mode="wire" data-ver="v2" hidden id="wf-pdp-onderdeel">
-  <figcaption><h3>/onderdelen/{sku}</h3><span class="wfmeta">pdp-onderdeel &middot; 233 pagina&#39;s · productdetail per SKU</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" data-mode="design" aria-pressed="false">ontwerp</button><a class="wffull" href="mockups/onderdeel.html" target="_blank" rel="noopener" data-wire="mockups/onderdeel.html" data-design="mockups/onderdeel-v2.html">volledige pagina &#8599;</a></span></figcaption>
+<figure class="wf" data-mode="wire" data-ver="v1" hidden id="wf-pdp-onderdeel">
+  <figcaption><h3>/onderdelen/{sku}</h3><span class="wfmeta">pdp-onderdeel &middot; 233 pagina&#39;s · productdetail per SKU</span><span class="wftoggle"><button type="button" data-mode="wire" data-ver="v1" aria-pressed="true">v1 &middot; wireframe</button><button type="button" data-mode="design" data-ver="v2" aria-pressed="false">v2 &middot; ontwerp</button><a class="wffull" href="mockups/onderdeel.html" target="_blank" rel="noopener" data-wire="mockups/onderdeel.html" data-design="mockups/onderdeel-v2.html">volledig scherm &#8599;</a></span></figcaption>
   <div class="wfframe"><div class="wfurl">/onderdelen/eg-0105 &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <div class="wfpage" style="--s:.34">
     <div class="vouw"><span>vouw &middot; 900px</span></div>
@@ -1978,8 +1970,8 @@
 <!-- @einde:ontwerpweergave-html:onderdeel-v2 -->
       </div>
 </figure>
-<figure class="wf" data-mode="wire" data-ver="v2" hidden id="wf-categorie">
-  <figcaption><h3>/onderdelen/{cat}/{sub}</h3><span class="wfmeta">categorie &middot; 49 pagina&#39;s · /onderdelen en (sub)categorieën</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" data-mode="design" aria-pressed="false">ontwerp</button><a class="wffull" href="mockups/categorie.html" target="_blank" rel="noopener" data-wire="mockups/categorie.html" data-design="mockups/categorie-v2.html">volledige pagina &#8599;</a></span></figcaption>
+<figure class="wf" data-mode="wire" data-ver="v1" hidden id="wf-categorie">
+  <figcaption><h3>/onderdelen/{cat}/{sub}</h3><span class="wfmeta">categorie &middot; 49 pagina&#39;s · /onderdelen en (sub)categorieën</span><span class="wftoggle"><button type="button" data-mode="wire" data-ver="v1" aria-pressed="true">v1 &middot; wireframe</button><button type="button" data-mode="design" data-ver="v2" aria-pressed="false">v2 &middot; ontwerp</button><a class="wffull" href="mockups/categorie.html" target="_blank" rel="noopener" data-wire="mockups/categorie.html" data-design="mockups/categorie-v2.html">volledig scherm &#8599;</a></span></figcaption>
   <div class="wfframe"><div class="wfurl">/onderdelen/hoeken/balhoeken &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <div class="wfpage" style="--s:.34">
     <div class="vouw"><span>vouw &middot; 900px</span></div>
@@ -2196,8 +2188,8 @@
 <!-- @einde:ontwerpweergave-html:categorie-v2 -->
 </div>
 </figure>
-<figure class="wf" data-mode="wire" data-ver="v2" hidden id="wf-content">
-  <figcaption><h3>/service/levertijden</h3><span class="wfmeta">content &middot; 7 pagina&#39;s · service en juridisch</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" data-mode="design" aria-pressed="false">ontwerp</button><a class="wffull" href="mockups/service-levertijden.html" target="_blank" rel="noopener" data-wire="mockups/service-levertijden.html" data-design="mockups/service-levertijden-v2.html">volledige pagina &#8599;</a></span></figcaption>
+<figure class="wf" data-mode="wire" data-ver="v1" hidden id="wf-content">
+  <figcaption><h3>/service/levertijden</h3><span class="wfmeta">content &middot; 7 pagina&#39;s · service en juridisch</span><span class="wftoggle"><button type="button" data-mode="wire" data-ver="v1" aria-pressed="true">v1 &middot; wireframe</button><button type="button" data-mode="design" data-ver="v2" aria-pressed="false">v2 &middot; ontwerp</button><a class="wffull" href="mockups/service-levertijden.html" target="_blank" rel="noopener" data-wire="mockups/service-levertijden.html" data-design="mockups/service-levertijden-v2.html">volledig scherm &#8599;</a></span></figcaption>
   <div class="wfframe"><div class="wfurl">/service/levertijden &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <div class="wfpage" style="--s:.34">
     <div class="vouw"><span>vouw &middot; 900px</span></div>
@@ -2327,7 +2319,7 @@
       </div>
 </figure>
 <figure class="wf" data-mode="wire" hidden id="wf-account">
-  <figcaption><h3>/account/orders</h3><span class="wfmeta">account &middot; 6 pagina&#39;s · het klantportaal in de frontend</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" disabled>ontwerp volgt</button><a class="wffull" href="mockups/account.html" target="_blank" rel="noopener" data-wire="mockups/account.html" data-design="mockups/account-v2.html">volledige pagina &#8599;</a></span></figcaption>
+  <figcaption><h3>/account/orders</h3><span class="wfmeta">account &middot; 6 pagina&#39;s · het klantportaal in de frontend</span><span class="wftoggle"><button type="button" data-mode="wire" data-ver="v1" aria-pressed="true">v1 &middot; wireframe</button><button type="button" disabled>v2 &middot; volgt</button><a class="wffull" href="mockups/account.html" target="_blank" rel="noopener" data-wire="mockups/account.html" data-design="mockups/account-v2.html">volledig scherm &#8599;</a></span></figcaption>
   <div class="wfframe"><div class="wfurl">/account/orders &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <div class="wfpage" style="--s:.34">
     <div class="vouw"><span>vouw &middot; 900px</span></div>
@@ -2356,8 +2348,8 @@
   </div></div>
   <p class="wfnote">&quot;Opnieuw bestellen&quot; dekt besteltaak 02 en 13; &quot;als basis gebruiken&quot; opent de bewaarde configuratie en dekt taak 03 en 04.</p>
 </figure>
-<figure class="wf" data-mode="wire" data-ver="v2" hidden id="wf-casetype">
-  <figcaption><h3>/flightcases/{model}</h3><span class="wfmeta">casetype &middot; 5 pagina&#39;s · de vijf modellen</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" data-mode="design" aria-pressed="false">ontwerp</button><a class="wffull" href="mockups/casetype.html" target="_blank" rel="noopener" data-wire="mockups/casetype.html" data-design="mockups/casetype-v2.html">volledige pagina &#8599;</a></span></figcaption>
+<figure class="wf" data-mode="wire" data-ver="v1" hidden id="wf-casetype">
+  <figcaption><h3>/flightcases/{model}</h3><span class="wfmeta">casetype &middot; 5 pagina&#39;s · de vijf modellen</span><span class="wftoggle"><button type="button" data-mode="wire" data-ver="v1" aria-pressed="true">v1 &middot; wireframe</button><button type="button" data-mode="design" data-ver="v2" aria-pressed="false">v2 &middot; ontwerp</button><a class="wffull" href="mockups/casetype.html" target="_blank" rel="noopener" data-wire="mockups/casetype.html" data-design="mockups/casetype-v2.html">volledig scherm &#8599;</a></span></figcaption>
   <div class="wfframe"><div class="wfurl">/flightcases/rackcase-enkel-deksel &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <div class="wfpage" style="--s:.34">
     <div class="vouw"><span>vouw &middot; 900px</span></div>
@@ -2588,7 +2580,7 @@
       </div>
 </figure>
 <figure class="wf" data-mode="wire" hidden id="wf-formulier">
-  <figcaption><h3>/laten-controleren</h3><span class="wfmeta">formulier &middot; 3 pagina&#39;s · laten controleren, offerte, contact</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" disabled>ontwerp volgt</button><a class="wffull" href="mockups/laten-controleren.html" target="_blank" rel="noopener" data-wire="mockups/laten-controleren.html" data-design="mockups/laten-controleren-v2.html">volledige pagina &#8599;</a></span></figcaption>
+  <figcaption><h3>/laten-controleren</h3><span class="wfmeta">formulier &middot; 3 pagina&#39;s · laten controleren, offerte, contact</span><span class="wftoggle"><button type="button" data-mode="wire" data-ver="v1" aria-pressed="true">v1 &middot; wireframe</button><button type="button" disabled>v2 &middot; volgt</button><a class="wffull" href="mockups/laten-controleren.html" target="_blank" rel="noopener" data-wire="mockups/laten-controleren.html" data-design="mockups/laten-controleren-v2.html">volledig scherm &#8599;</a></span></figcaption>
   <div class="wfframe"><div class="wfurl">/laten-controleren &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <div class="wfpage" style="--s:.34">
     <div class="vouw"><span>vouw &middot; 900px</span></div>
@@ -2621,8 +2613,8 @@
   </div></div>
   
 </figure>
-<figure class="wf" data-mode="wire" data-ver="v2" id="wf-homepage">
-  <figcaption><h3>/</h3><span class="wfmeta">homepage &middot; 1 pagina &middot; de belangrijkste van de site</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" data-mode="design" aria-pressed="false">ontwerp</button><a class="wffull" href="mockups/homepage.html" target="_blank" rel="noopener" data-wire="mockups/homepage.html" data-design="mockups/homepage-v2.html">volledige pagina &#8599;</a></span><span class="wfver"><button type="button" data-ver="v2" aria-pressed="true">v2 &middot; blueprint</button><button type="button" data-ver="v3" aria-pressed="false">v3 &middot; video</button></span></figcaption>
+<figure class="wf" data-mode="wire" data-ver="v1" id="wf-homepage">
+  <figcaption><h3>/</h3><span class="wfmeta">homepage &middot; 1 pagina &middot; de belangrijkste van de site</span><span class="wftoggle"><button type="button" data-mode="wire" data-ver="v1" aria-pressed="true">v1 &middot; wireframe</button><button type="button" data-mode="design" data-ver="v2" aria-pressed="false">v2 &middot; blueprint</button><button type="button" data-mode="design" data-ver="v3" aria-pressed="false">v3 &middot; video</button><a class="wffull" href="mockups/homepage.html" target="_blank" rel="noopener" data-wire="mockups/homepage.html" data-design="mockups/homepage-v2.html">volledig scherm &#8599;</a></span></figcaption>
   <div class="wfframe"><div class="wfurl">/ &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes gemeten, schaal 1:3</div>
   <div class="wfpage" style="--s:.34">
     <div class="vouw"><span>vouw &middot; 900px</span></div>
@@ -3169,8 +3161,8 @@
 <!-- @einde:ontwerpweergave-html:home-v3 -->
       </div>
 </figure>
-<figure class="wf" data-mode="wire" data-ver="v2" hidden id="wf-servicehub">
-  <figcaption><h3>/service</h3><span class="wfmeta">servicehub &middot; 1 pagina &middot; vervangt vier losse CMS-pagina&#39;s</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" data-mode="design" aria-pressed="false">ontwerp</button><a class="wffull" href="mockups/service.html" target="_blank" rel="noopener" data-wire="mockups/service.html" data-design="mockups/service-v2.html">volledige pagina &#8599;</a></span></figcaption>
+<figure class="wf" data-mode="wire" data-ver="v1" hidden id="wf-servicehub">
+  <figcaption><h3>/service</h3><span class="wfmeta">servicehub &middot; 1 pagina &middot; vervangt vier losse CMS-pagina&#39;s</span><span class="wftoggle"><button type="button" data-mode="wire" data-ver="v1" aria-pressed="true">v1 &middot; wireframe</button><button type="button" data-mode="design" data-ver="v2" aria-pressed="false">v2 &middot; ontwerp</button><a class="wffull" href="mockups/service.html" target="_blank" rel="noopener" data-wire="mockups/service.html" data-design="mockups/service-v2.html">volledig scherm &#8599;</a></span></figcaption>
   <div class="wfframe"><div class="wfurl">/service &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <div class="wfpage" style="--s:.34">
     <div class="vouw"><span>vouw &middot; 900px</span></div>
@@ -3321,7 +3313,7 @@
       </div>
 </figure>
         <figure class="wf" data-mode="wire" hidden id="wf-tool">
-  <figcaption><h3>/configurator</h3><span class="wfmeta">tool &middot; 2 pagina&#39;s · configurator en fit-finder</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" disabled>ontwerp volgt</button><a class="wffull" href="mockups/configurator.html" target="_blank" rel="noopener" data-wire="mockups/configurator.html" data-design="mockups/configurator-v2.html">volledige pagina &#8599;</a></span></figcaption>
+  <figcaption><h3>/configurator</h3><span class="wfmeta">tool &middot; 2 pagina&#39;s · configurator en fit-finder</span><span class="wftoggle"><button type="button" data-mode="wire" data-ver="v1" aria-pressed="true">v1 &middot; wireframe</button><button type="button" disabled>v2 &middot; volgt</button><a class="wffull" href="mockups/configurator.html" target="_blank" rel="noopener" data-wire="mockups/configurator.html" data-design="mockups/configurator-v2.html">volledig scherm &#8599;</a></span></figcaption>
   <div class="wfframe"><div class="wfurl">/configurator &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <div class="wfpage" style="--s:.34">
     <div class="vouw"><span>vouw &middot; 900px</span></div>
@@ -3353,8 +3345,8 @@
   </div></div>
   <p class="wfnote">Variant fit-finder (<code>/case-voor</code>): één vraag — wat ga je vervoeren? — met zoekveld en categorieën, die uitkomt op een resultaatpagina.</p>
 </figure>
-<figure class="wf" data-mode="wire" data-ver="v2" hidden id="wf-overzicht">
-  <figcaption><h3>/flightcases</h3><span class="wfmeta">overzicht &middot; 1 pagina · /flightcases</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" data-mode="design" aria-pressed="false">ontwerp</button><a class="wffull" href="mockups/flightcases.html" target="_blank" rel="noopener" data-wire="mockups/flightcases.html" data-design="mockups/flightcases-v2.html">volledige pagina &#8599;</a></span></figcaption>
+<figure class="wf" data-mode="wire" data-ver="v1" hidden id="wf-overzicht">
+  <figcaption><h3>/flightcases</h3><span class="wfmeta">overzicht &middot; 1 pagina · /flightcases</span><span class="wftoggle"><button type="button" data-mode="wire" data-ver="v1" aria-pressed="true">v1 &middot; wireframe</button><button type="button" data-mode="design" data-ver="v2" aria-pressed="false">v2 &middot; ontwerp</button><a class="wffull" href="mockups/flightcases.html" target="_blank" rel="noopener" data-wire="mockups/flightcases.html" data-design="mockups/flightcases-v2.html">volledig scherm &#8599;</a></span></figcaption>
   <div class="wfframe"><div class="wfurl">/flightcases &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <div class="wfpage" style="--s:.34">
     <div class="vouw"><span>vouw &middot; 900px</span></div>
@@ -3540,8 +3532,8 @@
 <!-- @einde:ontwerpweergave-html:overzicht-v2 -->
       </div>
 </figure>
-<figure class="wf" data-mode="wire" data-ver="v2" hidden id="wf-zoekresultaat">
-  <figcaption><h3>/zoeken</h3><span class="wfmeta">zoekresultaat &middot; 1 pagina · /zoeken</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" data-mode="design" aria-pressed="false">ontwerp</button><a class="wffull" href="mockups/zoeken.html" target="_blank" rel="noopener" data-wire="mockups/zoeken.html" data-design="mockups/zoeken-v2.html">volledige pagina &#8599;</a></span></figcaption>
+<figure class="wf" data-mode="wire" data-ver="v1" hidden id="wf-zoekresultaat">
+  <figcaption><h3>/zoeken</h3><span class="wfmeta">zoekresultaat &middot; 1 pagina · /zoeken</span><span class="wftoggle"><button type="button" data-mode="wire" data-ver="v1" aria-pressed="true">v1 &middot; wireframe</button><button type="button" data-mode="design" data-ver="v2" aria-pressed="false">v2 &middot; ontwerp</button><a class="wffull" href="mockups/zoeken.html" target="_blank" rel="noopener" data-wire="mockups/zoeken.html" data-design="mockups/zoeken-v2.html">volledig scherm &#8599;</a></span></figcaption>
   <div class="wfframe"><div class="wfurl">/zoeken?q=eg-0105 &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <div class="wfpage" style="--s:.34">
     <div class="vouw"><span>vouw &middot; 900px</span></div>
@@ -3676,7 +3668,7 @@
       </div>
 </figure>
 <figure class="wf" data-mode="wire" hidden id="wf-checkout">
-  <figcaption><h3>/checkout</h3><span class="wfmeta">checkout &middot; 1 pagina · wagen → afrekenen → bevestiging</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" disabled>ontwerp volgt</button><a class="wffull" href="mockups/checkout.html" target="_blank" rel="noopener" data-wire="mockups/checkout.html" data-design="mockups/checkout-v2.html">volledige pagina &#8599;</a></span></figcaption>
+  <figcaption><h3>/checkout</h3><span class="wfmeta">checkout &middot; 1 pagina · wagen → afrekenen → bevestiging</span><span class="wftoggle"><button type="button" data-mode="wire" data-ver="v1" aria-pressed="true">v1 &middot; wireframe</button><button type="button" disabled>v2 &middot; volgt</button><a class="wffull" href="mockups/checkout.html" target="_blank" rel="noopener" data-wire="mockups/checkout.html" data-design="mockups/checkout-v2.html">volledig scherm &#8599;</a></span></figcaption>
   <div class="wfframe"><div class="wfurl">/checkout &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <div class="wfpage" style="--s:.34">
     <div class="vouw"><span>vouw &middot; 900px</span></div>
@@ -3710,7 +3702,7 @@
   <p class="wfnote">Prijzen worden altijd server-side bepaald of geverifieerd — nooit vertrouwen op wat uit de browser komt.</p>
 </figure>
 <figure class="wf" data-mode="wire" hidden id="wf-bevestiging">
-  <figcaption><h3>/laten-controleren/bedankt</h3><span class="wfmeta">bevestiging &middot; 1 pagina · /laten-controleren/bedankt</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" disabled>ontwerp volgt</button><a class="wffull" href="mockups/bedankt.html" target="_blank" rel="noopener" data-wire="mockups/bedankt.html" data-design="mockups/bedankt-v2.html">volledige pagina &#8599;</a></span></figcaption>
+  <figcaption><h3>/laten-controleren/bedankt</h3><span class="wfmeta">bevestiging &middot; 1 pagina · /laten-controleren/bedankt</span><span class="wftoggle"><button type="button" data-mode="wire" data-ver="v1" aria-pressed="true">v1 &middot; wireframe</button><button type="button" disabled>v2 &middot; volgt</button><a class="wffull" href="mockups/bedankt.html" target="_blank" rel="noopener" data-wire="mockups/bedankt.html" data-design="mockups/bedankt-v2.html">volledig scherm &#8599;</a></span></figcaption>
   <div class="wfframe"><div class="wfurl">/laten-controleren/bedankt &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <div class="wfpage" style="--s:.34">
     <div class="vouw"><span>vouw &middot; 900px</span></div>
@@ -3735,8 +3727,8 @@
   </div></div>
   
 </figure>
-<figure class="wf" data-mode="wire" data-ver="v2" hidden id="wf-case-voor-categorie">
-  <figcaption><h3>/case-voor/{categorie}</h3><span class="wfmeta">case-voor-categorie &middot; ~10 pagina&#39;s &middot; redactioneel</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" data-mode="design" aria-pressed="false">ontwerp</button><a class="wffull" href="mockups/case-voor-gitaar.html" target="_blank" rel="noopener" data-wire="mockups/case-voor-gitaar.html" data-design="mockups/case-voor-gitaar-v2.html">volledige pagina &#8599;</a></span></figcaption>
+<figure class="wf" data-mode="wire" data-ver="v1" hidden id="wf-case-voor-categorie">
+  <figcaption><h3>/case-voor/{categorie}</h3><span class="wfmeta">case-voor-categorie &middot; ~10 pagina&#39;s &middot; redactioneel</span><span class="wftoggle"><button type="button" data-mode="wire" data-ver="v1" aria-pressed="true">v1 &middot; wireframe</button><button type="button" data-mode="design" data-ver="v2" aria-pressed="false">v2 &middot; ontwerp</button><a class="wffull" href="mockups/case-voor-gitaar.html" target="_blank" rel="noopener" data-wire="mockups/case-voor-gitaar.html" data-design="mockups/case-voor-gitaar-v2.html">volledig scherm &#8599;</a></span></figcaption>
   <div class="wfframe"><div class="wfurl">/case-voor/gitaar &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <div class="wfpage" style="--s:.34">
     <div class="vouw"><span>vouw &middot; 900px</span></div>
@@ -3939,8 +3931,8 @@
 <!-- @einde:ontwerpweergave-html:case-voor-categorie-v2 -->
       </div>
 </figure>
-<figure class="wf" data-mode="wire" data-ver="v2" hidden id="wf-case-voor-resultaat">
-  <figcaption><h3>/case-voor/{apparaat}</h3><span class="wfmeta">case-voor-resultaat &middot; n pagina&#39;s · programmatic per apparatuur</span><span class="wftoggle"><button type="button" data-mode="wire" aria-pressed="true">wireframe</button><button type="button" data-mode="design" aria-pressed="false">ontwerp</button><a class="wffull" href="mockups/case-voor-gibson-les-paul.html" target="_blank" rel="noopener" data-wire="mockups/case-voor-gibson-les-paul.html" data-design="mockups/case-voor-gibson-les-paul-v2.html">volledige pagina &#8599;</a></span></figcaption>
+<figure class="wf" data-mode="wire" data-ver="v1" hidden id="wf-case-voor-resultaat">
+  <figcaption><h3>/case-voor/{apparaat}</h3><span class="wfmeta">case-voor-resultaat &middot; n pagina&#39;s · programmatic per apparatuur</span><span class="wftoggle"><button type="button" data-mode="wire" data-ver="v1" aria-pressed="true">v1 &middot; wireframe</button><button type="button" data-mode="design" data-ver="v2" aria-pressed="false">v2 &middot; ontwerp</button><a class="wffull" href="mockups/case-voor-gibson-les-paul.html" target="_blank" rel="noopener" data-wire="mockups/case-voor-gibson-les-paul.html" data-design="mockups/case-voor-gibson-les-paul-v2.html">volledig scherm &#8599;</a></span></figcaption>
   <div class="wfframe"><div class="wfurl">/case-voor/gibson-les-paul &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <div class="wfpage" style="--s:.34">
     <div class="vouw"><span>vouw &middot; 900px</span></div>
@@ -4526,25 +4518,15 @@
     }
     Array.prototype.forEach.call(document.querySelectorAll('.wf'), syncVol);
 
-    Array.prototype.forEach.call(document.querySelectorAll('.wfver button[data-ver]'), function (btn) {
-      btn.addEventListener('click', function () {
-        var fig = btn.closest('.wf');
-        fig.setAttribute('data-ver', btn.getAttribute('data-ver'));
-        syncVol(fig);
-        Array.prototype.forEach.call(fig.querySelectorAll('.wfver button[data-ver]'), function (b) {
-          b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
-        });
-      });
-    });
-
     Array.prototype.forEach.call(document.querySelectorAll('.wftoggle button[data-mode]'), function (btn) {
       btn.addEventListener('click', function () {
         var fig = btn.closest('.wf');
         fig.setAttribute('data-mode', btn.getAttribute('data-mode'));
-        syncVol(fig);
+        if (btn.getAttribute('data-ver')) fig.setAttribute('data-ver', btn.getAttribute('data-ver'));
         Array.prototype.forEach.call(fig.querySelectorAll('.wftoggle button[data-mode]'), function (b) {
           b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
         });
+        syncVol(fig);
       });
     });
 
