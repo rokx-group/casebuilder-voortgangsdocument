@@ -48,14 +48,9 @@ for (const [id, bestandsnaam] of Object.entries(NAMEN)) {
   // op ware grootte: schaal 1, en de vouwlijnen op elke schermhoogte
   const totaal = [...blok.matchAll(/--h:(\d+)/g)].reduce((s, m) => s + Number(m[1]), 0);
   blok = blok.replace(/<div class="wfpage"[^>]*>/, '<div class="wfpage">');
-  const vouwen = [];
-  for (let y = 900; y < totaal; y += 900) {
-    vouwen.push(`  <div class="vouw${y === 900 ? "" : " stil"}" style="top:${y}px"><span>${
-      y === 900 ? "vouw &middot; 900 px &middot; één scherm" : y.toLocaleString("nl-NL")
-    }</span></div>`);
-  }
-  blok = blok.replace(/<div class="vouw">[\s\S]*?<\/div>/, "").replace(
-    '<div class="wfpage">', `<div class="wfpage">\n${vouwen.join("\n")}\n`);
+  // De vouw wordt in de browser getekend, op de werkelijke vensterhoogte
+  // van degene die kijkt — zie mockups/assets/vouwlijn.js.
+  blok = blok.replace(/<div class="vouw">[\s\S]*?<\/div>/g, "");
 
   const html = `<!doctype html>
 <html lang="nl">
@@ -73,17 +68,18 @@ for (const [id, bestandsnaam] of Object.entries(NAMEN)) {
 <div class="blad-kop">
   <b>${pad} · wireframe</b>
   <span>${meta}</span>
-  <span class="rechts">1440 × 900 · ware grootte · totaal ${totaal.toLocaleString("nl-NL")} px</span>
+  <span class="rechts">1440 px breed · ware grootte · totaal ${totaal.toLocaleString("nl-NL")} px</span>
 </div>
 
 ${blok}
 
+<script src="assets/vouwlijn.js"></script>
 <script src="assets/versies.js"></script>
 </body>
 </html>
 `;
-  writeFileSync(join(wortel, "mockups", `${bestandsnaam}-wf.html`), html);
-  console.log(`  ${bestandsnaam}-wf.html — ${totaal} px`);
+  writeFileSync(join(wortel, "mockups", `${bestandsnaam}.html`), html);
+  console.log(`  ${bestandsnaam}.html — ${totaal} px`);
   aantal++;
 }
 console.log(`${aantal} wireframepagina's geschreven`);
