@@ -43,12 +43,14 @@
       blad.appendChild(l);
     }
 
-    // referentie, zodat schermafbeeldingen onderling vergelijkbaar blijven
-    if (hoog > 900) {
+    // Eén vaste referentie, zodat een gedeelde schermafbeelding te
+    // vergelijken blijft. 760 px: een 13-inch laptop met een normale
+    // browserbalk — de krapste veelvoorkomende bezoeker.
+    if (hoog > 760 && Math.abs(h - 760) > 30) {
       var r = document.createElement('div');
       r.className = 'vouw-ref';
-      r.style.top = '900px';
-      r.innerHTML = '<span>referentie 900 px</span>';
+      r.style.top = '760px';
+      r.innerHTML = '<span>13-inch laptop &middot; 760 px</span>';
       blad.appendChild(r);
     }
   }

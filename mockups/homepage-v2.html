@@ -22,6 +22,23 @@
 .hero .specs .k{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--cyan);text-transform:uppercase}
 .hero .specs .v{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:19px;letter-spacing:.03em;margin-top:6px;color:#fff}
 
+/* hero-video — brandbook §06: de blueprint-ruit blijft bovenop liggen.
+   De ruit tekent op .ruit::before (z-index -1), dus video en verloop
+   gaan daar met -3 en -2 onder. Tekst en hoekbeslag houden z-index 1/2. */
+.hero{min-height:clamp(600px,86vh,800px);display:flex;flex-direction:column;justify-content:center}
+.hero video.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-3}
+.hero .scrim{position:absolute;inset:0;z-index:-2;pointer-events:none;
+  background:linear-gradient(90deg,rgba(6,18,28,.72) 0%,rgba(6,18,28,.36) 48%,rgba(6,18,28,.05) 100%)}
+.hero .scrim-v{position:absolute;inset:0;z-index:-2;pointer-events:none;
+  background:linear-gradient(180deg,rgba(6,18,28,.52) 0%,transparent 22%,transparent 58%,rgba(6,18,28,.62) 100%)}
+/* kop mag korter: de video draagt nu een deel van het verhaal */
+.hero h1{max-width:12ch;font-size:clamp(52px,7vw,96px)}
+.hero p.sub{max-width:44ch}
+@media(prefers-reduced-motion:reduce){
+  .hero video.bg{display:none}
+  .hero{background:var(--void) url(assets/hero-poster.jpg) center/cover}
+}
+
 /* ingelogde bijbestel-strip */
 .again{background:var(--lightblue);border-bottom:1px solid var(--rule)}
 .again .wrap{display:flex;align-items:center;gap:22px;flex-wrap:wrap;padding-top:16px;padding-bottom:16px}
@@ -113,13 +130,19 @@
 </nav>
 
 <div class="hero ruit ruit-dark ruit-veld beslag">
+  <video class="bg" autoplay muted loop playsinline preload="metadata"
+         poster="assets/hero-poster.jpg" aria-hidden="true" tabindex="-1">
+    <source src="assets/hero-loop.webm" type="video/webm">
+    <source src="assets/hero-loop.mp4" type="video/mp4">
+  </video>
+  <div class="scrim"></div>
+  <div class="scrim-v"></div>
   <span class="hk tl"></span><span class="hk tr"></span><span class="hk bl"></span><span class="hk br"></span>
   <div class="topbar"><span>// 01 — FLIGHTCASES OP MAAT</span><span>PROFLITE · DOESBURG · 2026</span></div>
   <div class="wrap">
     <div class="ey">// GEEN OFFERTETRAJECT · GEEN WACHTTIJD</div>
-    <h1>Je flightcase staat <span class="acc">over tien dagen</span> op de kade</h1>
-    <p class="sub">Configureer online tot op de millimeter, zie meteen wat het kost, en laat je maten
-      gratis controleren door een casebouwer voordat je bestelt.</p>
+    <h1>Millimeterwerk,<br><span class="acc">in tien werkdagen</span></h1>
+    <p class="sub">Online configureren, gecontroleerd door een casebouwer, op maat gebouwd.</p>
     <div class="cta">
       <a class="btn btn-pri" href="#">Start met configureren →</a>
       <a class="btn btn-ghost" href="#">Wat ga je vervoeren?</a>

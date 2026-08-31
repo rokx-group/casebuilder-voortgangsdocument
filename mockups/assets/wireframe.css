@@ -73,3 +73,14 @@ body{background:#E9EEF2;font-family:var(--body);color:var(--ink);padding:40px 20
   body{padding:20px 0 60px}
   .wfpage,.blad-kop{width:100%;max-width:1440px}
 }
+
+/* ── beeldblok ────────────────────────────────────────────
+   Wireframe blijft greybox, maar een enkel blok mag een echte
+   foto tonen waar het beeld zelf de beslissing is. */
+.b.beeld{padding:0;overflow:hidden;position:relative;background:#0B1720;
+  border-color:rgba(255,255,255,.24);display:block}
+.b.beeld img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.b.beeld .bijschrift{position:absolute;left:10px;bottom:9px;
+  font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(255,255,255,.75);
+  background:rgba(6,18,28,.62);padding:4px 8px;border-radius:2px}
