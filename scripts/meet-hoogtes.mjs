@@ -25,7 +25,7 @@ const METEN = `(() => {
   const uit = [];
   for (const el of document.body.children) {
     if (el.tagName === 'SCRIPT' || el.classList.contains('vouwmeet') ||
-        el.classList.contains('vouwlijn')) continue;
+        el.classList.contains('vouwlijn') || el.classList.contains('versiebalk')) continue;
     const r = el.getBoundingClientRect();
     if (!r.height) continue;
     let naam = el.tagName.toLowerCase();

@@ -13,9 +13,9 @@
  *
  * Gebruik: node scripts/bouw-ontwerpweergave.mjs
  */
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { dirname, join } from "node:path";
+import { basename, dirname, join } from "node:path";
 
 const wortel = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DOEL = join(wortel, "index.html");
@@ -91,15 +91,34 @@ function tussen(tekst, start, eind, wat) {
 let css = schaalIn(readFileSync(BRAND, "utf8"), ".dv");
 const html = {};
 
+/**
+ * Varianten: naast `homepage.html` mag `homepage-v2.html` bestaan. Die wordt
+ * automatisch opgepikt en krijgt een eigen blok, zodat twee versies van
+ * hetzelfde sjabloon naast elkaar te bekijken zijn zonder dat de een de ander
+ * overschrijft. Handig als er aan twee versies tegelijk gewerkt wordt.
+ */
+function variantenVan(bestand) {
+  const map = join(wortel, dirname(bestand));
+  const stam = basename(bestand, ".html");
+  const uit = [{ id: "v1", bestand }];
+  for (const naam of readdirSync(map).sort()) {
+    const m = naam.match(new RegExp(`^${stam}-v(\\d+)\\.html$`));
+    if (m) uit.push({ id: `v${m[1]}`, bestand: `${dirname(bestand)}/${naam}` });
+  }
+  return uit;
+}
+
 for (const { naam, bestand } of PAGINAS) {
-  const bron = readFileSync(join(wortel, bestand), "utf8");
-  const wortelSel = `.dv[data-page="${naam}"]`;
-  css += schaalIn(tussen(bron, "<style>", "</style>", `stijlblok in ${bestand}`).inhoud, wortelSel);
-  // Het meetlint hoort bij de losse mockup, niet bij de ingesloten kopie:
-  // het pad naar assets/ klopt hier niet en de weergave heeft het niet nodig.
-  html[naam] = tussen(bron, "<body>", "</body>", `body in ${bestand}`).inhoud
-    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "")
-    .trim();
+  for (const variant of variantenVan(bestand)) {
+    const sleutel = variant.id === "v1" ? naam : `${naam}-${variant.id}`;
+    const bron = readFileSync(join(wortel, variant.bestand), "utf8");
+    const wortelSel = `.dv[data-page="${sleutel}"]`;
+    css += schaalIn(tussen(bron, "<style>", "</style>", `stijlblok in ${variant.bestand}`).inhoud, wortelSel);
+    // Het meetlint hoort bij de losse mockup, niet bij de ingesloten kopie.
+    html[sleutel] = tussen(bron, "<body>", "</body>", `body in ${variant.bestand}`).inhoud
+      .replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "")
+      .trim();
+  }
 }
 
 let doel = readFileSync(DOEL, "utf8");
@@ -110,11 +129,16 @@ doel =
   "\n" + css + "\n  " +
   doel.slice(cssblok.b);
 
-for (const { naam } of PAGINAS) {
-  const start = `<!-- @gegenereerd:ontwerpweergave-html:${naam} -->`;
-  const eind = `<!-- @einde:ontwerpweergave-html:${naam} -->`;
-  const blok = tussen(doel, start, eind, `HTML-markers voor ${naam}`);
-  doel = doel.slice(0, blok.a + start.length) + "\n" + html[naam] + "\n" + doel.slice(blok.b);
+for (const sleutel of Object.keys(html)) {
+  const start = `<!-- @gegenereerd:ontwerpweergave-html:${sleutel} -->`;
+  const eind = `<!-- @einde:ontwerpweergave-html:${sleutel} -->`;
+  // Een variant mag bestaan zonder dat er al een plek voor is in index.html.
+  if (!doel.includes(start)) {
+    console.log(`  overgeslagen: ${sleutel} — nog geen plek in index.html`);
+    continue;
+  }
+  const blok = tussen(doel, start, eind, `HTML-markers voor ${sleutel}`);
+  doel = doel.slice(0, blok.a + start.length) + "\n" + html[sleutel] + "\n" + doel.slice(blok.b);
 }
 
 writeFileSync(DOEL, doel);
