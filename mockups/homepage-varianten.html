@@ -167,12 +167,25 @@ body.focusmodus .demo:not(.aan){cursor:default}
   padding:6px 12px;cursor:pointer}
 #wis-keuze:hover{border-color:var(--dark);color:var(--dark)}
 @media (max-width:760px){ .mixrij{grid-template-columns:1fr} .mixrij .naam{border-right:0;border-bottom:1px solid var(--rule)} }
-.demo .balk .vs{margin-left:auto;opacity:0;transition:opacity .12s;font-size:9px;letter-spacing:.12em}
-.demo .balk .pijl{margin-left:auto}
-.demo .balk .vs + .pijl,.demo .balk .pijl + .vs{margin-left:8px}
+.demo .balk .vs{margin-left:auto;max-width:0;overflow:hidden;white-space:nowrap;opacity:0;
+  transition:opacity .12s,max-width .12s;font-size:9px;letter-spacing:.12em}
+.demo a.balk:hover .vs{opacity:.85;max-width:16ch}
+.demo .balk .pijl{margin-left:8px}
 .demo a.balk:hover{background:var(--blue)!important}
 .demo a.balk:hover .vs{opacity:.85}
 .demo a.balk:focus-visible{outline:2px solid var(--cyan);outline-offset:-2px}
+
+/* Twee rijen in plaats van vijftien tabs op één regel: de tak bovenin, zijn
+   pagina's eronder. Alleen de tak waar je in zit klapt open — anders is het
+   weer een lijst waarin je moet zoeken. */
+.tabs a.tak{color:var(--dark)}
+.subtabs{display:flex;align-items:baseline;gap:0;margin:-22px 0 26px;flex-wrap:wrap}
+.subtabs .pad{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);padding:9px 14px 9px 0}
+.subtabs a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);padding:9px 16px;border-bottom:2px solid transparent}
+.subtabs a:hover{color:var(--dark)}
+.subtabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
 </style>
 </head>
 <body>
