@@ -411,7 +411,8 @@
     font-family:"Inter",sans-serif; font-size:13.5px; line-height:1.55; color:var(--ink); }
   .ft textarea:focus { outline:none; border-color:var(--accent); background:var(--surface); }
   .ft textarea::placeholder { color:var(--faint); }
-  .fbar { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:18px; }
+  .fbar { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:18px;
+    min-height:20px; }
   .fbtn { appearance:none; background:var(--surface); border:1px solid var(--line); border-radius:3px;
     cursor:pointer; font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.06em;
     text-transform:uppercase; color:var(--muted); padding:8px 13px; }
@@ -1910,8 +1911,6 @@
     </div>
 
     <div class="fbar">
-      <button class="fbtn" type="button" data-f="copy">Kopieer alles</button>
-      <button class="fbtn" type="button" data-f="wis">Wis mijn invoer</button>
       <span class="hint" data-f="tally">&nbsp;</span>
     </div>
 
@@ -4875,8 +4874,6 @@
 
     <div data-checklist="features">
     <div class="fbar">
-      <button class="fbtn" type="button" data-f="copy">Kopieer alles</button>
-      <button class="fbtn" type="button" data-f="wis">Wis mijn invoer</button>
       <span class="hint" data-f="tally">&nbsp;</span>
     </div>
 
@@ -5584,8 +5581,6 @@
       var vakjes    = Array.prototype.slice.call(wortel.querySelectorAll('.fcheck input[type="checkbox"]'));
       var velden    = Array.prototype.slice.call(wortel.querySelectorAll('textarea[data-note]'));
       var teller    = wortel.querySelector('[data-f="tally"]');
-      var kopieerBt = wortel.querySelector('[data-f="copy"]');
-      var wisBt     = wortel.querySelector('[data-f="wis"]');
       var kanBewaren = true;
 
       // Een browser in privémodus laat de opslag bestaan maar weigert te
@@ -5705,77 +5700,6 @@
             tel();
           }, 500);
         });
-      });
-
-      function verslag() {
-        var uit = ['CaseBuilder — ' + (wortel.getAttribute('data-titel') || wortel.getAttribute('data-checklist')),
-                   'Ingevuld op ' + new Date().toLocaleDateString('nl-NL'), ''];
-        tegels.forEach(function (tegel) {
-          var kop = tegel.getAttribute('data-titel') || tegel.querySelector('h3').textContent;
-          uit.push('## ' + kop.trim());
-          // Over de regels lopen, niet over de vakjes: een verwijsregel heeft geen
-          // vakje maar hoort wel in het verslag, anders mist de lezer de context.
-          Array.prototype.forEach.call(tegel.querySelectorAll('.fcheck > li'), function (regel) {
-            var vakje = regel.querySelector('input[type="checkbox"]');
-            var bron = vakje ? regel.querySelector('span') : regel;
-            var tekst = bron.textContent.replace(/\s+/g, ' ').trim();
-            uit.push(vakje ? (vakje.checked ? '[x] ' : '[ ] ') + tekst : '  · ' + tekst);
-          });
-          var veld = tegel.querySelector('textarea[data-note]');
-          if (veld && veld.value.trim()) uit.push('', 'Opmerking: ' + veld.value.trim());
-          uit.push('');
-        });
-        return uit.join('\n');
-      }
-
-      function naarKlembord(tekst) {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          return navigator.clipboard.writeText(tekst);
-        }
-        return new Promise(function (klaar, mislukt) {
-          var hulp = document.createElement('textarea');
-          hulp.value = tekst;
-          hulp.setAttribute('readonly', '');
-          hulp.style.cssText = 'position:fixed;top:-1000px;opacity:0';
-          document.body.appendChild(hulp);
-          hulp.select();
-          var gelukt = false;
-          try { gelukt = document.execCommand('copy'); } catch (e) {}
-          document.body.removeChild(hulp);
-          gelukt ? klaar() : mislukt();
-        });
-      }
-
-      function melding(knop, tekst) {
-        if (knop._t) { clearTimeout(knop._t); } else { knop._oud = knop.textContent; }
-        knop.textContent = tekst;
-        knop.classList.add('on');
-        knop._t = setTimeout(function () {
-          knop.textContent = knop._oud;
-          knop.classList.remove('on');
-          knop._t = null;
-        }, 1900);
-      }
-
-      if (kopieerBt) kopieerBt.addEventListener('click', function () {
-        naarKlembord(verslag()).then(
-          function () { melding(kopieerBt, 'Gekopieerd'); },
-          function () { melding(kopieerBt, 'Kopiëren lukt niet'); }
-        );
-      });
-
-      if (wisBt) wisBt.addEventListener('click', function () {
-        // Met een gedeelde stand wist deze knop niet "jouw invoer" maar die
-        // van iedereen. Dan hoort de vraag dat ook te zeggen.
-        var vraag = opServer
-          ? 'Dit wist de vinkjes en opmerkingen van iedereen, niet alleen die van jou. Doorgaan?'
-          : 'Alles wissen wat je hier hebt aangevinkt en geschreven?';
-        if (!window.confirm(vraag)) return;
-        vakjes.forEach(function (v) { if (v.checked) { v.checked = false; stuur('vink', v.getAttribute('data-id'), false); } });
-        velden.forEach(function (v) { if (v.value) { v.value = ''; stuur('notitie', v.getAttribute('data-note'), ''); } });
-        staat = { vink: {}, notitie: {} };
-        try { localStorage.removeItem(SLEUTEL); } catch (e) {}
-        tel();
       });
 
       tel();
