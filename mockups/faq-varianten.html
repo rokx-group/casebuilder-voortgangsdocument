@@ -16,7 +16,6 @@
    ══════════════════════════════════════════════════════════════ */
 body{background:#EDF0F4}
 .vgl{max-width:1440px;margin:0 auto;padding:0 24px 90px}
-.inleiding{max-width:82ch;margin:0 0 10px}
 .inleiding h2{font-size:26px;margin-bottom:8px}
 .inleiding p{font-size:14px;color:var(--mute);line-height:1.65}
 .inleiding p b{color:var(--ink)}
@@ -68,13 +67,9 @@ body{background:#EDF0F4}
    het onderwerp, de notities zijn commentaar. Op 95% past een venster
    van 1440 in 1368 px — vrijwel op maat, en het kader schuift. */
 .beoordeel{display:block}
-.demo{border:1px solid var(--rule);background:#fff;box-shadow:0 1px 3px rgba(0,40,70,.07);
-  overflow:hidden}
 .demo .balk{text-decoration:none;cursor:pointer;transition:background .12s;background:var(--cyan);color:var(--void);font-family:var(--mono);font-size:10px;
   letter-spacing:.18em;text-transform:uppercase;font-weight:600;padding:7px 14px}
 .demo.gekozen{border:2px solid var(--cyan);box-shadow:0 0 0 6px rgba(102,196,232,.18),0 1px 3px rgba(0,40,70,.07)}
-.venster{height:820px;overflow:auto;background:var(--bg)}
-.houder{width:1368px;height:3990px}
 .venster iframe{width:1440px;height:4200px;border:0;display:block;
   transform:scale(.95);transform-origin:top left}
 
@@ -83,35 +78,27 @@ body{background:#EDF0F4}
    besloten is en waarom — dat is waar deze pagina voor bestaat. */
 .notities{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
   border:1px solid var(--rule);margin-top:20px}
-.nt{background:#fff;padding:14px 16px 16px}
-.nt .lb{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--blue);display:block;margin-bottom:6px}
 .nt b{font-family:var(--disp);text-transform:uppercase;font-size:16px;letter-spacing:.03em;
   color:var(--dark);display:block;line-height:1.1}
 .nt p{font-size:13px;color:var(--mute);line-height:1.5;margin-top:6px}
-.nt.open .lb{color:#A34418}
-.notities .vraag{background:#FCF8EE}
 
 /* ── focusmodus ────────────────────────────────────────────── */
 .dim{position:fixed;inset:0;background:rgba(11,26,38,.62);z-index:50;
   opacity:0;pointer-events:none;transition:opacity .14s}
 body.focusmodus .dim{opacity:1;pointer-events:auto}
 .demo.aan{position:relative;z-index:60}
-.demo{cursor:zoom-in}
 .demo.aan{cursor:zoom-out}
 body.focusmodus .demo:not(.aan){cursor:default}
 .demo a,.demo iframe{cursor:auto}
 @media (prefers-reduced-motion: reduce){ .dim{transition:none} }
 
 @media (max-width:1180px){
-  .notities{grid-template-columns:1fr}
 }
 .demo .balk .vs{margin-left:auto;max-width:0;overflow:hidden;white-space:nowrap;opacity:0;
   transition:opacity .12s,max-width .12s;font-size:9px;letter-spacing:.12em}
 .demo a.balk:hover .vs{opacity:.85;max-width:16ch}
 .demo .balk .pijl{margin-left:8px}
 .demo a.balk:hover{background:var(--blue)!important}
-.demo a.balk:hover .vs{opacity:.85}
 .demo a.balk:focus-visible{outline:2px solid var(--cyan);outline-offset:-2px}
 
 /* De twee vormen staan hier náást elkaar, dus krijgen ze allebei hun eigen

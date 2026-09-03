@@ -10,15 +10,10 @@
 .kop h1 .acc{color:var(--cyan)}
 .kop p.lead{color:rgba(255,255,255,.82);font-size:17.5px;max-width:52ch;margin-top:18px}
 .kop .acties{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
-.spelers{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-.sp{border:1px solid var(--rule);background:#fff;display:flex;flex-direction:column;transition:.15s}
-.sp:hover{border-color:var(--dark)}
 .sp .im{background:var(--bg);aspect-ratio:4/3;overflow:hidden}
 .sp .im img{width:100%;height:100%;object-fit:cover}
 .sp .bd{padding:16px 18px 18px;border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:6px;flex:1}
 .sp h3{font-size:19px;line-height:1.05}
-.sp .m{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
-.sp .go{margin-top:auto;padding-top:10px;font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:14px;letter-spacing:.05em;color:var(--blue)}
 /* Carrousel: scroll-snap, geen script. Namen zijn plaatshouders tot er
    toestemming is — dat staat als open vraag in de selectiedoc. */
 .cases{background:var(--dark);color:#fff}
@@ -37,7 +32,7 @@
 .eis .n{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
 .eis b{font-family:var(--disp);text-transform:uppercase;font-size:18px;letter-spacing:.03em;color:var(--dark)}
 .eis p{font-size:13.5px;color:var(--mute);line-height:1.5}
-@media(max-width:1000px){.spelers{grid-template-columns:repeat(2,1fr)}.eisen{grid-template-columns:1fr}}
+@media(max-width:1000px){.eisen{grid-template-columns:1fr}}
 </style></head><body>
 <header class="main"><div class="wrap"><div class="logo"><em>case</em>Builder.com</div>
 <div class="search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="5"></circle><path d="M11 11l4 4"></path></svg><input placeholder="Zoek op artikelnummer of apparaat"></div>

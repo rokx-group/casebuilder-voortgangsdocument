@@ -8,54 +8,25 @@
    Overgenomen uit homepage-v6: dat blok was te goed om alleen op een
    homepagevariant te laten staan, en "Zo werkt het" was een voetlink
    zonder pagina. */
-.kop{background:var(--void);color:#fff;position:relative;overflow:hidden;padding:68px 0 64px}
 .kop h1{font-size:clamp(36px,4.6vw,58px);color:#fff;line-height:.94;max-width:16ch;margin-top:16px}
 .kop h1 .acc{color:var(--cyan)}
 .kop p.lead{color:rgba(255,255,255,.82);font-size:17.5px;max-width:52ch;margin-top:18px}
-.kop .acties{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
-.spelers{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-.sp{border:1px solid var(--rule);background:#fff;display:flex;flex-direction:column;transition:.15s}
-.sp:hover{border-color:var(--dark)}
-.sp .im{background:var(--bg);aspect-ratio:4/3;overflow:hidden}
 .sp .im img{width:100%;height:100%;object-fit:cover}
-.sp .bd{padding:16px 18px 18px;border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:6px;flex:1}
 .sp h3{font-size:19px;line-height:1.05}
-.sp .m{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
-.sp .go{margin-top:auto;padding-top:10px;font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:14px;letter-spacing:.05em;color:var(--blue)}
 /* Carrousel: scroll-snap, geen script. Namen zijn plaatshouders tot er
    toestemming is — dat staat als open vraag in de selectiedoc. */
 .cases{background:var(--dark);color:#fff}
-.rail{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;margin-top:24px}
-.rail::-webkit-scrollbar{height:6px} .rail::-webkit-scrollbar-thumb{background:rgba(255,255,255,.25)}
-.cs{flex:0 0 340px;scroll-snap-align:start;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.04);display:flex;flex-direction:column}
-.cs .im{aspect-ratio:16/10;background:rgba(255,255,255,.06);overflow:hidden}
 .cs .im img{width:100%;height:100%;object-fit:cover;opacity:.55}
-.cs .bd{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px}
-.cs .n{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
 .cs b{font-family:var(--disp);text-transform:uppercase;font-size:19px;letter-spacing:.03em;color:#fff;line-height:1.1}
 .cs p{font-size:13.5px;color:rgba(255,255,255,.74);line-height:1.5}
-.cs .toestemming{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--open,#D9B25E);margin-top:auto;padding-top:8px}
-.eisen{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:24px}
-.eis{background:#fff;padding:20px 22px;display:flex;flex-direction:column;gap:7px}
-.eis .n{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
 .eis b{font-family:var(--disp);text-transform:uppercase;font-size:18px;letter-spacing:.03em;color:var(--dark)}
 .eis p{font-size:13.5px;color:var(--mute);line-height:1.5}
-@media(max-width:1000px){.spelers{grid-template-columns:repeat(2,1fr)}.eisen{grid-template-columns:1fr}}
+@media(max-width:1000px){}
 /* ── van tekening naar kist ─────────────────────────────── */
 .proces .stap{display:grid;grid-template-columns:120px 1fr 1fr;gap:44px;align-items:start;
   padding:34px 0;border-top:1px solid var(--rule)}
-.proces .stap:last-child{border-bottom:1px solid var(--rule)}
-.proces .nr{font-family:var(--disp);font-weight:900;font-size:64px;line-height:.8;
-  color:var(--rule);letter-spacing:.02em}
 .proces h3{font-size:27px;letter-spacing:.03em;line-height:1.05}
-.proces .wat{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--blue);margin-top:10px}
 .proces p{font-size:15.5px;color:var(--mute);max-width:56ch}
-.proces .tol{margin-top:14px;display:inline-flex;align-items:center;gap:10px;border:1px solid var(--rule);
-  padding:8px 14px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--dark);background:var(--bg)}
-
-.kop .lead{max-width:56ch}
 /* ── het paneel ──────────────────────────────────────────── */
 .paneel{background:#fff;color:var(--ink);box-shadow:0 18px 60px rgba(0,0,0,.45)}
 .paneel .pkop{background:var(--dark);color:#fff;padding:16px 28px;display:flex;
@@ -72,7 +43,6 @@
 .vld .inv:focus-within{border-color:var(--dark)}
 .vld input{border:0;outline:0;width:100%;font-family:var(--body);font-size:15px;color:var(--ink);background:transparent}
 .vld input::placeholder{color:#9aa3ae}
-.tweekolom{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 
 /* de sleepzone: het hart van deze versie. Een datasheet of een foto van
    een servetje is genoeg — dat is precies hoe het nu al binnenkomt. */
@@ -144,6 +114,8 @@
               </div>
             </div>
           </div>
+        </div>
+  </div>
 </div></section>
 <footer><div class="wrap"><div class="cols">
 <div><div class="logo"><em>case</em>Builder.com</div><p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734">+31 (0)575 575734</a></p></div>
