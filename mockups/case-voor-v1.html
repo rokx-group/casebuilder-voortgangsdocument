@@ -27,7 +27,7 @@
 /* ── de vraag ────────────────────────────────────────────── */
 /* Krap gehouden: de index eronder is de pagina, deze band is de aanloop.
    Elke pixel hier is een pixel minder categorie boven de vouw. */
-.vraag{background:var(--void);color:#fff;position:relative;overflow:hidden;padding:28px 0 26px}
+.vraag{background:var(--void);color:#fff;position:relative;overflow:hidden}
 .vraag h1{font-size:clamp(36px,4.4vw,58px);color:#fff;line-height:.95;margin-top:14px}
 .vraag h1 .acc{color:var(--cyan)}
 .vraag p.sub{margin-top:14px;font-size:16.5px;color:rgba(255,255,255,.76);max-width:58ch}
@@ -141,8 +141,7 @@
   .index .sec-head{grid-template-columns:1fr;gap:14px}
 }
 @media(max-width:760px){
-  .vraag{padding:28px 0 26px}
-  .vakken{grid-template-columns:1fr}
+    .vakken{grid-template-columns:1fr}
   .dingen{grid-template-columns:1fr}
   .nietbij .grid{grid-template-columns:1fr}
 }
@@ -186,7 +185,7 @@
 <!-- ── DE VRAAG ───────────────────────────────────────────────
      Kort gehouden zodat de eerste rij toepassingen nog boven de vouw
      begint: de index is de pagina, deze band is alleen de aanloop. -->
-<div class="vraag ruit ruit-dark ruit-aanzet">
+<div class="vraag ruit ruit-dark ruit-aanzet kop-laag">
   <div class="wrap">
     <div class="ey">// 533 CASES · 38 CATEGORIEËN · ALLES OOK OP MAAT</div>
     <h1>Wat ga je <span class="acc">vervoeren?</span></h1>

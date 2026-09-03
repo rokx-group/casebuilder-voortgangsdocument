@@ -257,3 +257,24 @@ footer .bot{border-top:1px solid rgba(255,255,255,.15);margin-top:44px;padding-t
   footer .cols{grid-template-columns:1fr;gap:28px}
   footer .bot{flex-direction:column;gap:8px}
 }
+
+/* ── Hero-maten ────────────────────────────────────────────────────────────
+   Drie maten, gekoppeld aan de rol van de pagina. Elke pagina declareerde
+   voorheen zijn eigen hero; dat gaf achttien klassenamen en vijfentwintig
+   hoogtes voor één rol. Een pagina kiest nu een maat, hij verzint er geen.
+
+   hoog   — overzicht dat moet oriënteren én overtuigen
+   midden — een aanbod of een proces uitleggen
+   laag   — taak of routeren; de inhoud moet meteen in beeld
+
+   De homepages staan hier bewust buiten: dat zijn concurrerende concepten
+   waarvan de hero dát concept ís. Die op één maat trekken zou juist het
+   verschil weghalen dat je wilt vergelijken. */
+.kop-hoog   { padding: 88px 0 72px; }
+.kop-midden { padding: 60px 0 52px; }
+.kop-laag   { padding: 32px 0 28px; }
+@media (max-width: 760px) {
+  .kop-hoog   { padding: 56px 0 46px; }
+  .kop-midden { padding: 42px 0 36px; }
+  .kop-laag   { padding: 26px 0 22px; }
+}
