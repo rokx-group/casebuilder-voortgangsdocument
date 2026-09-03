@@ -14,8 +14,22 @@
   if (window.parent === window) return;   /* niet ingesloten */
 
   function meld() {
-    var d = document.documentElement, b = document.body;
-    var h = Math.max(d.scrollHeight, b ? b.scrollHeight : 0, d.offsetHeight);
+    // Niet scrollHeight: die is nooit kleiner dan het iframe zelf, dus een
+    // kader van 4400 px meldde altijd 4400 px terug — en daar kwam het
+    // scherm wit onder de footer vandaan. We meten de onderkant van het
+    // laagste element in de stroom; vaste elementen (versiebalk, filmbalk)
+    // hangen aan het kader en tellen niet mee.
+    var onder = 0;
+    var kinderen = document.body ? document.body.children : [];
+    for (var i = 0; i < kinderen.length; i++) {
+      var el = kinderen[i];
+      if (el.tagName === 'SCRIPT' || el.tagName === 'STYLE') continue;
+      if (getComputedStyle(el).position === 'fixed') continue;
+      var r = el.getBoundingClientRect();
+      if (r.height) onder = Math.max(onder, r.bottom + window.scrollY);
+    }
+    var h = Math.ceil(onder);
+    if (h < 400) return;
     window.parent.postMessage({ soort: 'cb-hoogte', hoogte: h }, '*');
   }
 
