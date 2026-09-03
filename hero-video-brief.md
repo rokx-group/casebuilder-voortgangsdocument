@@ -43,6 +43,6 @@ er staat een machine aan, er ligt materiaal klaar.
 
 ## Wat we ermee doen
 
-- `homepage-v1c.html` — de bewegende versie (heette eerder homepage-v1c.html)
-- `homepage-v1a.html` — dezelfde compositie met alleen de poster
+- `homepage-v2.html` — de bewegende versie (heette eerder homepage-v2.html)
+- `homepage-v1.html` — dezelfde compositie met alleen de poster
 - Beide staan naast elkaar in het voortgangsdocument, zodat er gekozen kan worden

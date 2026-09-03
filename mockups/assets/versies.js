@@ -19,14 +19,13 @@
     // mockup. De afweging per concept staat in concepten-2sept.html.
     'homepage': [
       { id: 'wireframe', bestand: 'homepage.html', label: 'wireframe' },
-      { id: 'v1a', bestand: 'homepage-v1a.html', label: 'v1a · twee knoppen' },
-      { id: 'v1b', bestand: 'homepage-v1b.html', label: 'v1b · video' },
-      { id: 'v2', bestand: 'homepage-v2.html', label: 'v2 · de werkvloer' },
-      { id: 'v3', bestand: 'homepage-v3.html', label: 'v3 · de werkbank' },
-      { id: 'v4a', bestand: 'homepage-v4a.html', label: 'v4a · de vloot, vakgebied' },
-      { id: 'v4b', bestand: 'homepage-v4b.html', label: 'v4b · de vloot, branche' },
-      { id: 'v5', bestand: 'homepage-v5.html', label: 'v5 · drie ingangen' },
-      { id: 'v6', bestand: 'homepage-v6.html', label: 'v6 · de aanvraag' }
+      { id: 'v1', bestand: 'homepage-v1.html', label: 'v1' },
+      { id: 'v2', bestand: 'homepage-v2.html', label: 'v2 (video)' },
+      { id: 'v3', bestand: 'homepage-v3.html', label: 'v3' },
+      { id: 'v4', bestand: 'homepage-v4.html', label: 'v4' },
+      { id: 'v5', bestand: 'homepage-v5.html', label: 'v5' },
+      { id: 'v6', bestand: 'homepage-v6.html', label: 'v6' },
+      { id: 'v7', bestand: 'homepage-v7.html', label: 'v7' }
     ],
     'categorie': [
       { id: 'wireframe', bestand: 'categorie.html', label: 'wireframe' },

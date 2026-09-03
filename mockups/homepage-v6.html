@@ -3,168 +3,151 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Casebuilder — homepage v8, de aanvraag (mockup)</title>
+<title>Casebuilder — homepage v6, drie ingangen (mockup)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/brand.css">
 <style>
-/* ══════════════════════════════════════════════════════════════
-   v8 — de aanvraag
+/* ── homepage — paginaspecifiek, bovenop brand.css ── */
+.hero{background:var(--void);color:#fff;position:relative;overflow:hidden}
+.hero .wrap{padding-top:60px;padding-bottom:52px;position:relative;z-index:1}
+.hero h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:.02em;
+  font-size:clamp(46px,6.2vw,86px);line-height:.92;color:#fff;max-width:15ch;margin:18px 0 0}
+.hero h1 .acc{color:var(--cyan)}
+.hero p.sub{margin-top:22px;max-width:56ch;font-size:18px;color:rgba(255,255,255,.78)}
+.hero .cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+.hero .specs{display:flex;margin-top:60px;border-top:1px solid rgba(255,255,255,.18);flex-wrap:wrap}
+.hero .specs div{flex:1;min-width:190px;padding:20px 24px 0 0}
+.hero .specs .k{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--cyan);text-transform:uppercase}
+.hero .specs .v{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:19px;letter-spacing:.03em;margin-top:6px;color:#fff}
 
-   Deze versie volgt de bezoekersverdeling zoals die is, niet zoals
-   een webshop hem graag zou hebben:
+/* ── drie ingangen in de hero ──────────────────────────────
+   De vorige versie bood twee knoppen: configureren, of zeggen wat je
+   vervoert. Hier komt daar een derde bij, de offerte, en dan houden
+   drie knoppen naast elkaar geen rangorde meer. Ze worden dus blokken:
+   een label, een naam en één regel waarom je hier hoort.
 
-     hoog    weet wat hij heeft, niet wat hij wil  → de aanvraag
-     midden  weet zijn maten                       → de configurator
-     laag    weet zijn artikelnummer               → onderdelen
-     nihil   de particulier                        → geen eigen plek
+   De eerste is dichtgemaakt in cyaan, de andere twee zijn doorzichtig
+   met een rand. Drie deuren, maar niet drie even brede deuren — het
+   overgrote deel van de bezoekers hoort bij de eerste. */
+.deuren{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:34px;max-width:1000px}
+.deur{border:1.5px solid rgba(255,255,255,.3);background:rgba(6,18,28,.42);
+  backdrop-filter:blur(3px);padding:20px 22px 22px;display:flex;flex-direction:column;
+  min-height:172px;transition:.15s}
+.deur:hover{border-color:var(--cyan);background:rgba(6,18,28,.62)}
+.deur .n{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--cyan)}
+.deur h3{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:22px;
+  letter-spacing:.03em;color:#fff;margin:13px 0 9px;line-height:1.05}
+.deur p{font-size:14px;color:rgba(255,255,255,.72);flex:1;line-height:1.5}
+.deur .go{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:14.5px;
+  letter-spacing:.05em;color:var(--cyan);margin-top:16px;display:flex;align-items:center;gap:8px}
+/* de hoofdingang: dicht vlak, donkere letters, geen rand nodig */
+.deur.pri{background:var(--cyan);border-color:var(--cyan)}
+.deur.pri:hover{background:#8ad3ef}
+.deur.pri .n{color:rgba(6,18,28,.6)}
+.deur.pri h3{color:var(--void)}
+.deur.pri p{color:rgba(6,18,28,.78)}
+.deur.pri .go{color:var(--void)}
+/* De offertedeur is de kleinste van de drie in verwachte drukte, maar
+   de grootste in ordergrootte. Vandaar wel een eigen deur, geen link. */
+.deur .bij{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.45);margin-top:9px}
 
-   Zeventig procent van de Nederlandse orders begint met een mail aan
-   Joran: soms een schets, soms alleen een datasheet. Hij tekent en
-   stuurt dezelfde dag terug. Dat is geen omweg naar de webshop maar
-   het product zelf, dus staat het boven de vouw — met de velden erbij,
-   niet als knop naar een contactformulier.
-
-   Onderdelen komt bewust pas onderaan: te weinig omzet om ruimte in
-   het eerste scherm te verdienen, te veel om weg te laten.
-   ══════════════════════════════════════════════════════════════ */
-
-/* ── hero met aanvraagpaneel ─────────────────────────────── */
-.aanvraag{background:var(--void);color:#fff;position:relative;overflow:hidden;padding:44px 0 50px}
-.aanvraag .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-3}
-.aanvraag .scrim{position:absolute;inset:0;z-index:-2;pointer-events:none;
-  background:linear-gradient(90deg,rgba(6,18,28,.9) 0%,rgba(6,18,28,.74) 46%,rgba(6,18,28,.5) 100%)}
-.aanvraag .grid{display:grid;grid-template-columns:1fr 620px;gap:56px;align-items:start}
-.aanvraag h1{font-size:clamp(38px,4.4vw,60px);color:#fff;line-height:.95;margin:16px 0 0;max-width:15ch}
-.aanvraag h1 .acc{color:var(--cyan)}
-.aanvraag p.sub{margin-top:18px;font-size:17.5px;color:rgba(255,255,255,.8);max-width:42ch}
-
-/* wat je kunt sturen — bewust laagdrempelig: een foto telt ook */
-.sturen{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
-.sturen span{border:1px solid rgba(255,255,255,.3);padding:8px 14px;font-family:var(--mono);
-  font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.82)}
-
-/* de belofte die het verschil maakt: dezelfde dag, met een naam erbij */
-.zelfdedag{margin-top:30px;border-top:1px solid rgba(255,255,255,.2);padding-top:22px;
-  display:flex;gap:16px;align-items:center}
-.zelfdedag .foto{width:52px;height:52px;flex:none;background:rgba(255,255,255,.1);
-  border:1px solid rgba(255,255,255,.24);display:flex;align-items:center;justify-content:center;
-  font-family:var(--mono);font-size:8px;letter-spacing:.1em;color:rgba(255,255,255,.35);text-align:center}
-.zelfdedag b{font-family:var(--disp);text-transform:uppercase;font-size:19px;letter-spacing:.03em;
-  color:#fff;display:block;line-height:1.1}
-.zelfdedag span{font-size:14px;color:rgba(255,255,255,.7);display:block;margin-top:4px}
-
-/* ── het paneel ──────────────────────────────────────────── */
-.paneel{background:#fff;color:var(--ink);box-shadow:0 18px 60px rgba(0,0,0,.45)}
-.paneel .pkop{background:var(--dark);color:#fff;padding:16px 28px;display:flex;
-  align-items:baseline;gap:14px}
-.paneel .pkop b{font-family:var(--disp);text-transform:uppercase;font-size:20px;letter-spacing:.03em}
-.paneel .pkop i{font-style:normal;margin-left:auto;font-family:var(--mono);font-size:9.5px;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
-.pbody{padding:24px 28px 26px}
-.vld{margin-bottom:16px}
-.vld label{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--mute);display:block;margin-bottom:7px}
-.vld label em{font-style:normal;color:var(--rule);letter-spacing:.1em}
-.vld .inv{display:flex;align-items:center;border:1.5px solid var(--rule);height:46px;padding:0 14px;background:#fff}
-.vld .inv:focus-within{border-color:var(--dark)}
-.vld input{border:0;outline:0;width:100%;font-family:var(--body);font-size:15px;color:var(--ink);background:transparent}
-.vld input::placeholder{color:#9aa3ae}
-.tweekolom{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-
-/* de sleepzone: het hart van deze versie. Een datasheet of een foto van
-   een servetje is genoeg — dat is precies hoe het nu al binnenkomt. */
-.sleep{border:1.5px dashed var(--rule);background:var(--bg);padding:18px 20px;
-  display:flex;align-items:center;gap:16px;cursor:pointer;transition:.14s}
-.sleep:hover{border-color:var(--blue);background:var(--lightblue)}
-.sleep .ic{width:38px;height:38px;flex:none;border:1.5px solid var(--dark);display:flex;
-  align-items:center;justify-content:center;color:var(--dark);font-family:var(--mono);font-size:17px}
-.sleep b{font-family:var(--disp);text-transform:uppercase;font-size:16px;letter-spacing:.03em;
-  color:var(--dark);display:block;line-height:1.1}
-.sleep span{font-size:13px;color:var(--mute);display:block;margin-top:4px}
-
-.paneel .voet{border-top:1px solid var(--rule);background:var(--bg);padding:18px 28px;
-  display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-.paneel .voet .bel{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--mute);line-height:1.7}
-.paneel .voet .bel b{color:var(--dark);font-weight:600}
-.paneel .voet .btn{margin-left:auto}
-
-/* ── specband ────────────────────────────────────────────── */
+/* De specs stonden in de hero. Met drie deuren erbij past dat niet meer
+   boven de vouw, dus staan ze nu in een eigen band eronder — waar ze
+   nog steeds meteen in beeld komen. */
 .specband{background:var(--dark);border-bottom:1px solid rgba(255,255,255,.14)}
 .specband .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
   background:rgba(255,255,255,.16);max-width:none;padding:0}
 .specband .sp{background:var(--dark);padding:18px 28px 20px}
-.specband .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan)}
+.specband .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--cyan)}
 .specband .v{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:19px;
   letter-spacing:.03em;margin-top:7px;color:#fff}
 
-/* ── zo gaat het ─────────────────────────────────────────── */
-.gang .stap{display:grid;grid-template-columns:96px 1fr 1.1fr;gap:40px;align-items:start;
-  padding:30px 0;border-top:1px solid var(--rule)}
-.gang .stap:last-child{border-bottom:1px solid var(--rule)}
-.gang .nr{font-family:var(--disp);font-weight:900;font-size:54px;line-height:.8;color:var(--rule)}
-.gang h3{font-size:25px;letter-spacing:.03em;line-height:1.05}
-.gang .wanneer{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--blue);margin-top:9px}
-.gang p{font-size:15.5px;color:var(--mute);max-width:54ch}
+/* hero-video — brandbook §06: de blueprint-ruit blijft bovenop liggen.
+   De ruit tekent op .ruit::before (z-index -1), dus video en verloop
+   gaan daar met -3 en -2 onder. Tekst en hoekbeslag houden z-index 1/2. */
+.hero{min-height:clamp(560px,72vh,720px);display:flex;flex-direction:column;justify-content:center}
+.hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-3}
+.hero .scrim{position:absolute;inset:0;z-index:-2;pointer-events:none;
+  background:linear-gradient(90deg,rgba(6,18,28,.72) 0%,rgba(6,18,28,.36) 48%,rgba(6,18,28,.05) 100%)}
+.hero .scrim-v{position:absolute;inset:0;z-index:-2;pointer-events:none;
+  background:linear-gradient(180deg,rgba(6,18,28,.52) 0%,transparent 22%,transparent 58%,rgba(6,18,28,.62) 100%)}
+/* Twee regels in plaats van drie, en een maat kleiner. De kop levert
+   honderdtwintig pixels in zodat de drie deuren er compleet onder passen;
+   op een 13-inch venster is dat het verschil tussen drie ingangen zien en
+   er twee-en-een-half zien. */
+.hero h1{max-width:17ch;font-size:clamp(44px,5.6vw,80px)}
+.hero p.sub{max-width:44ch}
+@media(prefers-reduced-motion:reduce){
+  .hero .bg{display:none}
+  .hero{background:var(--void) url(assets/hero-v2-poster.jpg) center/cover}
+}
 
-/* ── de configurator als tweede ingang ───────────────────── */
-.zelfdoen{background:var(--dark);color:#fff}
-.zelfdoen .grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-.zelfdoen h2{font-size:clamp(28px,3.2vw,42px);color:#fff;margin:14px 0 16px}
-.zelfdoen p{color:rgba(255,255,255,.8);font-size:16.5px;max-width:48ch}
-.zelfdoen .lijst{border-top:1px solid rgba(255,255,255,.2)}
-.zelfdoen .lijst div{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.12);
-  font-size:14.5px;color:rgba(255,255,255,.78)}
-.zelfdoen .lijst .k{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--cyan);
-  text-transform:uppercase;width:96px;flex:none;padding-top:3px}
+/* ingelogde bijbestel-strip */
+.again{background:var(--lightblue);border-bottom:1px solid var(--rule)}
+.again .wrap{display:flex;align-items:center;gap:22px;flex-wrap:wrap;padding-top:16px;padding-bottom:16px}
+.again .who{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+.again b{font-family:var(--disp);text-transform:uppercase;font-size:19px;letter-spacing:.03em;color:var(--dark)}
+.again span.d{font-size:14px;color:var(--mute)}
+.again .btn{margin-left:auto}
 
-/* ── modellen ────────────────────────────────────────────── */
-.mdlrij .sec-head{display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap}
-.mdlrij .sec-head > div{margin-right:auto}
+.ingangen{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.ing{background:#fff;padding:36px 30px 32px;display:flex;flex-direction:column;min-height:310px;transition:.15s}
+.ing:hover{background:var(--lightblue)}
+.ing .n{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--cyan)}
+.ing h3{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:26px;letter-spacing:.03em;
+  color:var(--dark);margin:16px 0 12px;line-height:1.05}
+.ing p{font-size:15px;color:var(--mute);flex:1}
+.ing .go{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:15px;letter-spacing:.05em;
+  color:var(--blue);margin-top:20px;display:flex;align-items:center;gap:9px}
+.ing:hover .go{color:var(--dark)}
+
+.models .sec-head{display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.models .sec-head > div{margin-right:auto}
 .case .pr b{display:block}
+.compare{border-top:1px solid var(--rule);margin-top:24px;padding-top:20px;display:flex;
+  align-items:center;gap:20px;flex-wrap:wrap}
+.compare p{font-size:15px;color:var(--mute);max-width:52ch}
 
-/* ── series en zakelijk ──────────────────────────────────── */
-.zakelijk{background:var(--bg);border-top:1px solid var(--rule)}
-.zakelijk .row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);
-  border:1px solid var(--rule);margin-top:26px}
-.zakelijk .it{background:#fff;padding:24px 24px 26px}
-.zakelijk .it b{font-family:var(--disp);text-transform:uppercase;font-size:20px;letter-spacing:.03em;
-  color:var(--dark);display:block}
-.zakelijk .it span{font-size:14px;color:var(--mute);display:block;margin-top:8px}
+.assure{background:var(--dark);color:#fff}
+.assure .grid{display:grid;grid-template-columns:1.15fr 1fr;gap:64px;align-items:center}
+.assure h2{font-size:clamp(30px,3.4vw,46px);color:#fff;margin:14px 0 18px}
+.assure p{color:rgba(255,255,255,.8);font-size:17px;max-width:52ch}
+.assure .steps{border-left:1px solid rgba(255,255,255,.2);padding-left:32px}
+.assure .st{display:flex;gap:18px;padding:15px 0}
+.assure .st+.st{border-top:1px solid rgba(255,255,255,.14)}
+.assure .st .i{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--cyan);padding-top:4px;white-space:nowrap}
+.assure .st b{font-family:var(--disp);text-transform:uppercase;font-size:17px;letter-spacing:.03em;font-weight:700;display:block}
+.assure .st span{font-size:14px;color:rgba(255,255,255,.68)}
 
-/* ── onderdelen, laag in de pagina ───────────────────────── */
-.onderdelen{border-top:1px solid var(--rule)}
-.onderdelen .grid{display:grid;grid-template-columns:1fr 1.15fr;gap:48px;align-items:center}
-.onderdelen h2{font-size:28px;margin:12px 0 12px}
-.onderdelen p{font-size:15px;color:var(--mute);max-width:46ch}
-.onderdelen .cats{display:flex;gap:8px;flex-wrap:wrap}
-.onderdelen .cats a{border:1px solid var(--rule);background:#fff;padding:9px 14px;font-family:var(--mono);
+.trust{border-top:1px solid var(--rule);background:var(--bg)}
+.trust .row{display:flex;gap:48px;align-items:center;flex-wrap:wrap}
+.trust .it{display:flex;flex-direction:column;gap:4px}
+.trust .it b{font-family:var(--disp);text-transform:uppercase;font-size:22px;letter-spacing:.03em;color:var(--dark)}
+.trust .it span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+
+.build{border-top:1px solid var(--rule)}
+.build .grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.build .cats{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.build .cats a{border:1px solid var(--rule);background:#fff;padding:9px 14px;font-family:var(--mono);
   font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
-.onderdelen .cats a:hover{border-color:var(--dark);color:var(--dark)}
+.build .cats a:hover{border-color:var(--dark);color:var(--dark)}
+.build .side{border:1px solid var(--rule);padding:28px 30px}
+.build .side h4{font-size:20px;margin-bottom:8px}
+.build .side p{font-size:14.5px;color:var(--mute)}
+.build .side + .side{margin-top:14px}
 
 .closer{background:var(--void);color:#fff;text-align:center}
 .closer h2{font-size:clamp(30px,3.6vw,50px);color:#fff}
-.closer p{color:rgba(255,255,255,.75);margin:14px auto 30px;max-width:50ch;font-size:17px}
+.closer p{color:rgba(255,255,255,.75);margin:14px auto 30px;max-width:48ch;font-size:17px}
 
-@media(max-width:1180px){
-  .aanvraag .grid{grid-template-columns:1fr;gap:34px}
-  .zelfdoen .grid,.onderdelen .grid{grid-template-columns:1fr;gap:32px}
-  .zakelijk .row{grid-template-columns:1fr 1fr}
-  .specband .wrap{grid-template-columns:1fr 1fr}
-}
-@media(max-width:760px){
-  .aanvraag{padding:30px 0 36px}
-  .pbody{padding:20px 18px 22px}
-  .paneel .pkop,.paneel .voet{padding-left:18px;padding-right:18px}
-  .paneel .voet .btn{margin-left:0;width:100%;justify-content:center}
-  .tweekolom{grid-template-columns:1fr}
-  .gang .stap{grid-template-columns:56px 1fr;gap:20px}
-  .gang .stap > p{grid-column:2}
-  .zakelijk .row,.specband .wrap{grid-template-columns:1fr}
-}
+@media(max-width:1080px){.deuren{grid-template-columns:1fr 1fr}.specband .wrap{grid-template-columns:1fr 1fr}.ingangen{grid-template-columns:1fr}.assure .grid,.build .grid{grid-template-columns:1fr;gap:36px}}
+@media(max-width:760px){.hero .wrap{padding-top:56px;padding-bottom:52px}.deuren{grid-template-columns:1fr;gap:8px}.deur{min-height:0}.specband .wrap{grid-template-columns:1fr}
+  .again .btn{margin-left:0}.assure .steps{padding-left:20px}}
 </style>
 </head>
 <body>
@@ -174,11 +157,11 @@
     <div class="logo"><em>case</em>Builder.com</div>
     <form class="search" onsubmit="return false">
       <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
-      <input placeholder="Zoek op case, model of artikelnummer…" aria-label="Zoeken">
+      <input placeholder="Zoek op case, onderdeel of artikelnummer…" aria-label="Zoeken">
     </form>
     <div class="hdr-r">
       <a href="#" class="stil">Inloggen</a>
-      <a href="#">Winkelwagen<span class="telbadge">3</span></a>
+      <a href="#">Winkelwagen</a>
     </div>
   </div>
 </header>
@@ -195,212 +178,163 @@
   </div>
 </nav>
 
-<!-- ── DE AANVRAAG ────────────────────────────────────────────
-     Geen knop naar een contactformulier maar de velden zelf. Dit is
-     de weg waarlangs zeventig procent van de orders binnenkomt; die
-     verstoppen achter een klik kost een deel van dat volume.
-
-     De foto en de naam van de tekenaar zijn een plaatshouder — voor
-     publicatie moet iemand bij Proflite bevestigen wie hier staat en
-     of die persoon met naam en beeld in de etalage wil. ────────── -->
-<div class="aanvraag ruit ruit-dark ruit-aanzet">
+<div class="hero ruit ruit-dark ruit-veld beslag">
+  <!-- v7 verschilt van v1 op één punt: drie ingangen in plaats van twee
+       knoppen. De rest van de pagina is bewust gelijk gehouden, zodat je
+       de twee naast elkaar op precies dat verschil kunt beoordelen. -->
   <img class="bg" src="assets/hero-v2-poster.jpg" alt="" aria-hidden="true">
   <div class="scrim"></div>
+  <div class="scrim-v"></div>
+  <span class="hk tl"></span><span class="hk tr"></span><span class="hk bl"></span><span class="hk br"></span>
   <div class="wrap">
-    <div class="grid">
-      <div>
-        <div class="ey">// STUUR WAT JE HEBT · ZELFDE DAG EEN TEKENING</div>
-        <h1>Je weet wat erin moet.<br><span class="acc">Wij weten hoe.</span></h1>
-        <p class="sub">Een schets, een datasheet of een foto van je apparatuur is genoeg. Je krijgt een tekening met prijs terug op dezelfde werkdag.</p>
-        <div class="sturen">
-          <span>Schets op papier</span>
-          <span>Datasheet of PDF</span>
-          <span>Foto van je apparatuur</span>
-          <span>Alleen de afmetingen</span>
-        </div>
-        <div class="zelfdedag">
-          <div class="foto">foto<br>volgt</div>
-          <div>
-            <b>Joran tekent het uit</b>
-            <span>Geen verkoper maar een casebouwer. Reactie op dezelfde werkdag, ook op een half verhaal.</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="paneel">
-        <div class="pkop"><b>Vraag je case aan</b><i>// duurt 1 minuut</i></div>
-        <div class="pbody">
-          <div class="vld">
-            <label>Wat ga je vervoeren?</label>
-            <div class="inv"><input placeholder="Bijvoorbeeld: mengtafel Midas M32, of 4× moving head"></div>
-          </div>
-          <div class="vld">
-            <label>Wat heb je erbij? <em>— optioneel</em></label>
-            <div class="sleep">
-              <div class="ic">+</div>
-              <div>
-                <b>Sleep je schets, foto of datasheet hierheen</b>
-                <span>PDF, JPG, DWG of STEP · meerdere bestanden mag</span>
-              </div>
-            </div>
-          </div>
-          <div class="tweekolom">
-            <div class="vld">
-              <label>Aantal</label>
-              <div class="inv"><input placeholder="1"></div>
-            </div>
-            <div class="vld">
-              <label>Wanneer moet hij er zijn?</label>
-              <div class="inv"><input placeholder="Geen haast"></div>
-            </div>
-          </div>
-          <div class="vld" style="margin-bottom:0">
-            <label>Waar sturen we het naartoe?</label>
-            <div class="inv"><input placeholder="naam@bedrijf.nl"></div>
-          </div>
-        </div>
-        <div class="voet">
-          <div class="bel">Geen account nodig · <b>reactie dezelfde werkdag</b><br>Vrijblijvend — je zit nergens aan vast</div>
-          <a class="btn btn-dark" href="#">Stuur op →</a>
-        </div>
-      </div>
+    <div class="ey">// PRIJS DIRECT ZICHTBAAR · GEEN WACHTTIJD</div>
+    <h1>Millimeterwerk,<br><span class="acc">in tien werkdagen</span></h1>
+    <p class="sub">Online configureren, gecontroleerd door een casebouwer, op maat gebouwd.</p>
+    <div class="deuren">
+      <a class="deur pri" href="#">
+        <div class="n">// 01</div>
+        <h3>Start met configureren</h3>
+        <p>Model en maten zijn bekend. Vijf stappen, prijs meteen in beeld.</p>
+        <div class="go">Naar de configurator →</div>
+      </a>
+      <a class="deur" href="#">
+        <div class="n">// 02</div>
+        <h3>Ik wil een offerte</h3>
+        <p>Dezelfde prijs, op papier. Met je referentienummer, voor je inkoop of je aanbesteding.</p>
+        <div class="bij">// binnen één werkdag · ook voor series</div>
+        <div class="go">Offerte aanvragen →</div>
+      </a>
+      <a class="deur" href="#">
+        <div class="n">// 03</div>
+        <h3>Ik weet alleen wat ik wil vervoeren</h3>
+        <p>Een Les Paul, een 19-inch rack van 6 HE, een moving head. Zeg wat erin gaat, wij bepalen de maten.</p>
+        <div class="go">Wat ga je vervoeren? →</div>
+      </a>
     </div>
   </div>
 </div>
 
 <div class="specband">
   <div class="wrap">
-    <div class="sp"><div class="k">// TEKENING</div><div class="v">Zelfde werkdag</div></div>
     <div class="sp"><div class="k">// LEVERTIJD</div><div class="v">10 werkdagen</div></div>
-    <div class="sp"><div class="k">// PRODUCTIE</div><div class="v">Eigen fabriek, Doesburg</div></div>
-    <div class="sp"><div class="k">// ZAKELIJK</div><div class="v">Op rekening</div></div>
+    <div class="sp"><div class="k">// PRIJS</div><div class="v">Direct zichtbaar</div></div>
+    <div class="sp"><div class="k">// UITVOERING</div><div class="v">Bouwpakket of kant-en-klaar</div></div>
+    <div class="sp"><div class="k">// CONTROLE</div><div class="v">Specialist kijkt mee</div></div>
   </div>
 </div>
 
-<!-- ── ZO GAAT HET ────────────────────────────────────────── -->
-<section class="gang">
+<div class="again">
   <div class="wrap">
-    <div class="sec-head">
-      <div class="ey ey-dark">// 01 — ZO GAAT HET</div>
-      <h2>Van een half verhaal naar een kist</h2>
-      <p class="lead">De meeste mensen die ons mailen weten wat ze hebben, niet wat ze nodig hebben. Daar begint het gesprek, niet bij een productlijst.</p>
+    <div>
+      <div class="who">// WELKOM TERUG, PROFLITE AV</div>
+      <b>Rackcase enkel deksel · 12 maart</b>
+      <span class="d">483 × 600 × 1.334 mm · zwart · 40 stuks balhoek medium</span>
     </div>
-
-    <div class="stap">
-      <div class="nr">01</div>
-      <div><h3>Je stuurt wat je hebt</h3><div class="wanneer">// vandaag</div></div>
-      <div><p>Een schets op ruitjespapier, de datasheet van je versterker, of gewoon een foto met een rolmaat ernaast. Wij halen de maten er wel uit.</p></div>
-    </div>
-
-    <div class="stap">
-      <div class="nr">02</div>
-      <div><h3>Je krijgt een tekening met prijs</h3><div class="wanneer">// dezelfde werkdag</div></div>
-      <div><p>Geen offerte van drie kantjes maar een render van jouw kist, met de maten, de uitvoering en het bedrag eronder. Klopt er iets niet, dan passen we hem aan.</p></div>
-    </div>
-
-    <div class="stap">
-      <div class="nr">03</div>
-      <div><h3>Jij geeft akkoord</h3><div class="wanneer">// wanneer het jou uitkomt</div></div>
-      <div><p>Pas dan gaat er iets in productie. Tot dat moment kost het je niets en zit je nergens aan vast.</p></div>
-    </div>
-
-    <div class="stap">
-      <div class="nr">04</div>
-      <div><h3>Tien werkdagen later staat hij klaar</h3><div class="wanneer">// dag 10</div></div>
-      <div><p>Kant-en-klaar of als bouwpakket. Bij series leveren we op afroep, zodat je niet je hele magazijn vol hebt staan.</p></div>
-    </div>
+    <a class="btn btn-out btn-sm" href="#">Opnieuw bestellen →</a>
   </div>
-</section>
+</div>
 
-<!-- ── ZELF CONFIGUREREN — de tweede ingang ───────────────── -->
-<section class="zelfdoen">
-  <div class="wrap">
-    <div class="grid">
-      <div>
-        <div class="ey">// 02 — WEET JE JE MATEN AL?</div>
-        <h2>Dan hoef je niet op ons te wachten</h2>
-        <p>Kies je model, vul je maten in en zie de prijs meteen. Vijf stappen, en aan het eind kijkt er nog een casebouwer mee voordat er gezaagd wordt.</p>
-        <a class="btn btn-pri" href="#" style="margin-top:26px">Naar de configurator →</a>
-      </div>
-      <div class="lijst">
-        <div><span class="k">// Model</span><span>Koffer, hoedcase, trunccase of rackcase, enkel en dubbel.</span></div>
-        <div><span class="k">// Maten</span><span>Eigen maten in millimeters, of een rackmaat in HE.</span></div>
-        <div><span class="k">// Afwerking</span><span>Negen paneelkleuren, eigen logo op het deksel.</span></div>
-        <div><span class="k">// Prijs</span><span>Verandert live mee. Geen aanvraag, geen wachttijd.</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── DE VIJF MODELLEN ───────────────────────────────────── -->
-<section class="mdlrij">
+<section class="models tight ruit ruit-aanzet">
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <div class="ey ey-dark">// 03 — WAAR WE MEE WERKEN</div>
-        <h2>Vijf modellen, alles op maat</h2>
+        <div class="ey ey-dark">// 02 — DE VIJF MODELLEN</div>
+        <h2>Alles op maat, vanaf een vaste basisprijs</h2>
       </div>
-      <a class="btn btn-out btn-sm" href="#">Vergelijk alle vijf →</a>
     </div>
     <div class="cases">
-      <a class="case" href="#"><div class="im"><img src="assets/flightcase-koffer.jpg" alt="Koffer"></div>
+      <div class="case"><div class="im"><img src="assets/flightcase-koffer.jpg" alt="Koffer"></div>
         <div class="bd"><h4>Koffer</h4><div class="d">Draagbaar aan een opbouwhandgreep</div>
-        <div class="pr"><b>€ 149</b><i>vanaf, excl. btw · eigen maten</i></div></div></a>
-      <a class="case" href="#"><div class="im"><img src="assets/flightcase-hoedcase.jpg" alt="Hoedcase"></div>
+        <div class="pr"><b>vanaf € 149</b><i>excl. btw · eigen maten</i></div></div></div>
+      <div class="case"><div class="im"><img src="assets/flightcase-hoedcase.jpg" alt="Hoedcase"></div>
         <div class="bd"><h4>Hoedcase</h4><div class="d">Lage bodem, volledig afneembaar deksel</div>
-        <div class="pr"><b>€ 179</b><i>vanaf, excl. btw · eigen maten</i></div></div></a>
-      <a class="case" href="#"><div class="im"><img src="assets/flightcase-trunccase.jpg" alt="Trunccase"></div>
+        <div class="pr"><b>vanaf € 179</b><i>excl. btw · eigen maten</i></div></div></div>
+      <div class="case"><div class="im"><img src="assets/flightcase-trunccase.jpg" alt="Trunccase"></div>
         <div class="bd"><h4>Trunccase</h4><div class="d">Universele transportkist met bovendeksel</div>
-        <div class="pr"><b>€ 199</b><i>vanaf, excl. btw · eigen maten</i></div></div></a>
-      <a class="case" href="#"><div class="im"><img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt="Rackcase enkel"></div>
+        <div class="pr"><b>vanaf € 199</b><i>excl. btw · eigen maten</i></div></div></div>
+      <div class="case"><div class="im"><img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt="Rackcase enkel deksel"></div>
         <div class="bd"><h4>Rackcase enkel</h4><div class="d">Voordeksel, voor 19-inch apparatuur</div>
-        <div class="pr"><b>€ 229</b><i>vanaf, excl. btw · eigen maten</i></div></div></a>
-      <a class="case" href="#"><div class="im"><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt="Rackcase dubbel"></div>
+        <div class="pr"><b>vanaf € 229</b><i>excl. btw · eigen maten</i></div></div></div>
+      <div class="case"><div class="im"><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt="Rackcase dubbel deksel"></div>
         <div class="bd"><h4>Rackcase dubbel</h4><div class="d">Voor- én achterdeksel, 19-inch</div>
-        <div class="pr"><b>€ 259</b><i>vanaf, excl. btw · eigen maten</i></div></div></a>
+        <div class="pr"><b>vanaf € 259</b><i>excl. btw · eigen maten</i></div></div></div>
+    </div>
+    <div class="compare">
+      <p>Niet zeker welk type past? Zet ze naast elkaar op deksel, toepassing, 19-inch-geschiktheid en prijs.</p>
+      <a class="btn btn-out btn-sm" href="#">Vergelijk alle vijf →</a>
     </div>
   </div>
 </section>
 
-<!-- ── ZAKELIJK ───────────────────────────────────────────── -->
-<section class="zakelijk tight">
-  <div class="wrap">
-    <div class="ey ey-dark">// 04 — VOOR WIE ER ELKE WEEK EEN NODIG HEEFT</div>
-    <div class="row">
-      <div class="it"><b>Series</b><span>Vanaf tien kisten een staffelprijs, met levering op afroep.</span></div>
-      <div class="it"><b>Herhaalorders</b><span>Je tekening blijft bewaard. Volgend seizoen dezelfde kist, één mail.</span></div>
-      <div class="it"><b>Op rekening</b><span>Voor zakelijke klanten, met je eigen inkoopreferentie op de factuur.</span></div>
-      <div class="it"><b>Eigen huisstijl</b><span>Paneelkleur en logo op het deksel, ook bij één stuk.</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ── ONDERDELEN — bewust laag ───────────────────────────── -->
-<section class="onderdelen tight">
+<section class="assure">
   <div class="wrap">
     <div class="grid">
       <div>
-        <div class="ey ey-dark">// 05 — ZELF BOUWEN</div>
-        <h2>Of bestel alleen de onderdelen</h2>
-        <p>Profielen, hoeken, sluitingen, wielen en schuim — hetzelfde materiaal waarmee wij bouwen. Vandaag besteld, morgen verstuurd.</p>
+        <div class="ey">// 03 — HOE HET WERKT</div>
+        <h2>Van maat naar kade in vier stappen</h2>
+        <p>Je wacht niet op een prijs en niet op een terugbelverzoek. En vóór je bestelt kijkt er
+          altijd nog een casebouwer mee — gratis, want een case die niet past kost ons allebei tijd.</p>
+        <a class="btn btn-pri" href="#" style="margin-top:26px">Laat je maten controleren →</a>
       </div>
-      <div class="cats">
-        <a href="#">Profielen</a><a href="#">Hoeken</a><a href="#">Handgrepen</a>
-        <a href="#">Sluitingen</a><a href="#">Scharnieren</a><a href="#">Wielen</a>
-        <a href="#">Schuimplastic</a><a href="#">19" artikelen</a><a href="#">Zaagservice</a>
+      <div class="steps">
+        <div class="st"><div class="i">// 01</div><div><b>Kies of laat kiezen</b><span>Model zelf kiezen, of zeg wat je vervoert.</span></div></div>
+        <div class="st"><div class="i">// 02</div><div><b>Configureer online</b><span>Maten, kleur, beslag, wielen. Prijs verandert live mee.</span></div></div>
+        <div class="st"><div class="i">// 03</div><div><b>Laat het controleren</b><span>Een casebouwer kijkt je configuratie na. Binnen één werkdag.</span></div></div>
+        <div class="st"><div class="i">// 04</div><div><b>Tien werkdagen later</b><span>Kant-en-klaar of als bouwpakket, met alle onderdelen op maat.</span></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── SLOT ───────────────────────────────────────────────── -->
-<section class="closer ruit ruit-dark ruit-veld beslag">
-  <span class="hk tl"></span><span class="hk tr"></span><span class="hk bl"></span><span class="hk br"></span>
+<section class="trust tight">
   <div class="wrap">
-    <div class="ey">// NOG GEEN MATEN, WEL EEN PROBLEEM</div>
-    <h2 style="margin-top:14px">Stuur het gewoon op</h2>
-    <p>Een foto van je apparatuur is genoeg om te beginnen. Je hebt vandaag nog een tekening, en pas als die klopt praten we over bestellen.</p>
-    <a class="btn btn-pri" href="#">Vraag je case aan →</a>
+    <div class="row">
+      <div class="it"><b>Sinds 1987</b><span>Eigen productie in Doesburg</span></div>
+      <div class="it"><b>10 werkdagen</b><span>Ook bij maatwerk</span></div>
+      <div class="it"><b>Op rekening</b><span>Voor zakelijke klanten</span></div>
+      <div class="it"><b>Eigen werkplaats</b><span>Geen tussenhandel</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="build">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <div class="ey ey-dark">// 04 — ZELF BOUWEN</div>
+        <h2>Of bestel alleen de onderdelen</h2>
+        <p class="lead">Profielen, hoeken, sluitingen, wielen en schuim — hetzelfde materiaal
+          waarmee wij bouwen. Vandaag besteld, morgen verstuurd.</p>
+        <div class="cats">
+          <a href="#">Profielen</a><a href="#">Hoeken</a><a href="#">Handgrepen</a>
+          <a href="#">Sluitingen</a><a href="#">Scharnieren</a><a href="#">Wielen</a>
+          <a href="#">Schuimplastic</a><a href="#">19" artikelen</a>
+        </div>
+      </div>
+      <div>
+        <div class="side">
+          <h4>Bouwpakket compleet</h4>
+          <p>Alle onderdelen op maat gezaagd en geteld, plus de handleiding. Je schroeft hem zelf in elkaar.</p>
+        </div>
+        <div class="side">
+          <h4>Zaagservice</h4>
+          <p>Alleen plaatmateriaal op maat, zonder case. Geef je maten door, wij zagen.</p>
+        </div>
+        <div class="side">
+          <h4>Weet je het artikelnummer?</h4>
+          <p>Typ het in de zoekbalk bovenaan en bestel direct, met aantal.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="closer ruit ruit-dark ruit-veld">
+  <div class="wrap">
+    <div class="ey">// KLAAR OM TE BEGINNEN?</div>
+    <h2>Jouw maten. Tien werkdagen.</h2>
+    <p>Begin met configureren en zie binnen een minuut wat je case gaat kosten.</p>
+    <a class="btn btn-pri" href="#">Open de configurator →</a>
   </div>
 </section>
 
