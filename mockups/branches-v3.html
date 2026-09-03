@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — /branches v3 · kop en belofte als één vlak (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   /branches — het overzicht
+
+   Heet "branches" in navigatie en docs; Faes zegt "sectoren". Beide
+   woorden staan in de kop, en /sectoren wordt een 301 naar /branches
+   zodat wie op dat woord zoekt of typt hier ook uitkomt.
+
+   Deze pagina is geen zoekmachine-instroom. Vier van de vijf
+   concurrenten delen hun site in op product, en dáár zit het
+   verkeer: "19 inch rack case", "kabelkist". De bezoeker komt
+   binnen op /case-voor/{apparaat} en landt hier pas daarna, om te
+   controleren of wij zijn wereld kennen. Vertrouwenslaag dus, geen
+   vangnet voor zoekverkeer — en dat bepaalt de opbouw: bewijs
+   boven belofte, en overal een uitgang naar een van de drie routes.
+
+   De drie grote tegels zijn de drie die CaseBuilder zelf heeft
+   gerangschikt op marge, budget en toekomstvisie. De drie compacte
+   eronder staan wél in het marketingplan maar zijn niet gerangschikt.
+   Dat verschil is echt, dus mag het in de vorm te zien zijn.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── kop ─────────────────────────────────────────────────── */
+/* Achter de kop: de vijf cases als strook, gedempt. Dit zijn de echte
+   productfoto's van de live site — geen stockbeeld van een branche.
+   Er is nog geen beeld per toepassing; zodra dat er is, vervangt het
+   deze strook, maar tot die tijd is dit eerlijk: dit maken ze. */
+.kop{background:var(--void);color:#fff;position:relative;overflow:hidden;padding:78px 0 0}
+.kop .achter{position:absolute;inset:0;z-index:-2;display:grid;grid-template-columns:repeat(5,1fr);
+  gap:0;pointer-events:none}
+/* Op .34 was de strook zo donker dat je de cases niet meer zag — dan
+   betaal je de ruimte van een foto zonder er iets voor terug te krijgen.
+   Op .58 lezen ze als flightcases; de scrim houdt de tekstkant dicht. */
+.kop .achter img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.1) brightness(1.15);
+  opacity:.58;mix-blend-mode:luminosity}
+.kop .scrim{position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(90deg,rgba(6,18,28,.96) 0%,rgba(6,18,28,.86) 38%,rgba(6,18,28,.34) 100%),
+             linear-gradient(180deg,rgba(6,18,28,.3) 0%,transparent 34%,rgba(6,18,28,.72) 100%)}
+.kop .grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:end;padding-bottom:44px}
+.kop h1{font-size:clamp(40px,5vw,68px);color:#fff;line-height:.92;max-width:13ch;margin-top:16px}
+.kop h1 .acc{color:var(--cyan)}
+.kop p.lead{color:rgba(255,255,255,.8);font-size:17.5px;max-width:46ch;margin-top:20px}
+.kop .vak{border-left:1.5px solid rgba(255,255,255,.2);padding-left:26px}
+.kop .vak p{color:rgba(255,255,255,.72);font-size:15.5px;max-width:40ch}
+.kop .vak p+p{margin-top:14px}
+
+/* ── de belofte ──────────────────────────────────────────────
+   Overgenomen van .trust op homepage-v5: lichte band, waarde groot
+   in condensed, kwalificatie klein in mono eronder. Het donkere
+   vier-koloms blok dat hier eerst stond zette vier feiten in even
+   zware vlakken naast de kop — twee donkere vlakken op elkaar, en
+   geen van de vier feiten kwam eruit. Dit ademt, en de cijfers
+   krijgen de ruimte die ze verdienen. */
+/* v3 — kop en belofte als één vlak. De vier feiten stonden als lichte
+   band ónder de donkere kop; nu sluiten ze de kop af, gescheiden door
+   een haarlijn in plaats van een kleurwissel. De fotostrook loopt er
+   achterlangs door, dus het leest als één beeld met een voetregel. */
+.belofte{background:transparent;border-top:1px solid rgba(255,255,255,.16);padding:24px 0 30px}
+.belofte .it b{color:#fff}
+.belofte .it span{color:rgba(255,255,255,.6)}
+/* Verticaal gecentreerd in de band. Op baseline uitgelijnd hingen de
+   blokjes aan de bovenrand van hun eigen hoogte, waardoor de rij als
+   geheel te hoog in het vlak stond. */
+.belofte{display:flex;align-items:center}
+.belofte .row{display:flex;gap:56px;align-items:center;flex-wrap:wrap;width:100%}
+.belofte .it{display:flex;flex-direction:column;gap:5px}
+.belofte .it b{font-family:var(--disp);text-transform:uppercase;font-size:24px;
+  letter-spacing:.03em;color:var(--dark);font-weight:900;line-height:1}
+.belofte .it span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mute)}
+
+/* ── de drie gerangschikte branches ──────────────────────── */
+/* Zes gelijkwaardige tegels. Eerder stonden er drie groot en drie als
+   rij, omdat alleen de eerste drie gerangschikt waren — maar dat las als
+   een tweede garnituur, en dat zijn ze niet. De rangorde staat nu in het
+   nummer, niet in het formaat. */
+.hoofd{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.br{border:1px solid var(--rule);background:#fff;display:flex;flex-direction:column;
+  transition:.15s;position:relative}
+/* De kop ís de link en strekt zich via ::after over de hele kaart uit. Een
+   <a> om de kaart heen kan niet: daar zitten de toepassingen als links in. */
+.br h3 a.hl{color:inherit;text-decoration:none}
+.br h3 a.hl::after{content:"";position:absolute;inset:0;z-index:1}
+.br .toe{position:relative;z-index:2}
+.br:hover{border-color:var(--dark)}
+.br .im{background:var(--bg);aspect-ratio:4/3;position:relative;overflow:hidden}
+.br .tel{position:absolute;top:0;right:0;background:#fff;border-left:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--mute);padding:7px 11px}
+.br .im img{width:100%;height:100%;object-fit:cover}
+.br .rang{position:absolute;top:0;left:0;background:var(--dark);color:#fff;
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;padding:7px 11px}
+.br .bd{padding:22px 24px 26px;border-top:1px solid var(--rule);display:flex;
+  flex-direction:column;gap:12px;flex:1}
+.br h3{font-size:26px;line-height:1}
+.br p{font-size:14.5px;color:var(--mute);line-height:1.5}
+/* De toepassingen zijn geen sier: dit is waar de pagina op afgerekend
+   wordt. Niet "cases voor AV" maar de apparaten zelf, elk een link
+   naar /case-voor/{apparaat}. */
+.br .toe{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.br .toe a{border:1px solid var(--rule);padding:5px 10px;font-family:var(--mono);
+  font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);transition:.12s}
+.br .toe a:hover{border-color:var(--cyan);color:var(--dark)}
+.br .go{margin-top:auto;padding-top:16px;border-top:1px solid var(--rule);
+  font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:15px;
+  letter-spacing:.05em;color:var(--blue);display:flex;align-items:center;gap:9px}
+.br:hover .go{color:var(--dark)}
+
+/* ── de drie overige, compacter ──────────────────────────── */
+.rest{border-top:1px solid var(--rule);margin-top:20px}
+.rest .rij{display:grid;grid-template-columns:210px 1fr auto;gap:34px;align-items:baseline;
+  padding:22px 0;border-bottom:1px solid var(--rule);transition:.12s}
+.rest .rij:hover{background:var(--bg)}
+.rest h3{font-size:21px;line-height:1.05}
+.rest .om{font-size:14.5px;color:var(--mute);max-width:64ch}
+.rest .om b{color:var(--ink);font-weight:500}
+.rest .pijl{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:14px;
+  letter-spacing:.05em;color:var(--blue);white-space:nowrap}
+
+/* ── ook voor ────────────────────────────────────────────── */
+.ook{background:var(--bg);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.ook .in{display:block}
+.ook .sec-head{margin-bottom:26px}
+/* Deze acht staan als rij, niet als tegel: ze zijn genoemd maar niet
+   uitgewerkt, en dat verschil hoort te zien te zijn. Zelfde opmaak als
+   de zes tegels zou beloven dat er evenveel achter zit. */
+.rest{border-top:1px solid var(--rule)}
+.rest .rij{display:grid;grid-template-columns:220px 1fr 120px auto;gap:28px;align-items:baseline;
+  padding:20px 0;border-bottom:1px solid var(--rule);transition:.12s}
+.rest .rij:hover{background:#fff}
+.rest h3{font-size:20px;line-height:1.05}
+.rest .om{font-size:14px;color:var(--mute);line-height:1.5}
+.rest .om b{color:var(--ink);font-weight:500}
+.rest .tel{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--faint,#8B9BA6);text-align:right}
+.rest .pijl{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:14px;
+  letter-spacing:.05em;color:var(--blue);white-space:nowrap}
+@media (max-width:900px){ .rest .rij{grid-template-columns:1fr;gap:6px} }
+.ook h2{font-size:26px}
+.ook p{font-size:14.5px;color:var(--mute);margin-top:10px}
+
+/* ── de drie routes ──────────────────────────────────────── */
+/* De drie tegels stonden in --dark op een --dark grond: alleen een
+   haarlijn hield ze uit elkaar, en daarmee waren het geen objecten meer
+   maar één vlak met scheidingen. Nu staat de sectie in --void en de
+   tegels in --dark, dus zijn ze lichter dan hun ondergrond en lezen ze
+   als drie dingen. Zelfde ingreep als bij de overgang op /case-voor:
+   verschil maak je met waarde, niet met een lijntje. */
+.routes{background:var(--void)}
+.routes .drie{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.routes .rt{background:var(--dark);border:1px solid rgba(255,255,255,.12);
+  padding:28px 26px 30px;display:flex;flex-direction:column;gap:11px}
+.routes .rt .let{font-family:var(--disp);font-weight:900;font-size:40px;line-height:.8;color:var(--cyan)}
+.routes .rt h3{font-size:22px;color:#fff}
+.routes .rt p{font-size:14.5px;color:rgba(255,255,255,.76);line-height:1.55}
+.routes .rt .voor{margin-top:auto;padding-top:14px;border-top:1px solid rgba(255,255,255,.18);
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:rgba(255,255,255,.55);line-height:1.7}
+
+/* ── staat je branche er niet bij ────────────────────────── */
+.mist .in{display:grid;grid-template-columns:1fr 380px;gap:64px;align-items:center}
+.mist h2{font-size:clamp(28px,3.2vw,40px)}
+.mist p{font-size:16.5px;color:var(--mute);max-width:50ch;margin-top:14px}
+.mist .acties{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+/* Een gezicht bij het formulier. Zeventig procent van de orders begint
+   met een mail aan Joran; die naam hoort op de pagina, niet in een
+   contactformulier drie kliks verderop. */
+.joran{border:1px solid var(--rule);background:#fff;padding:24px}
+.joran .rij{display:flex;gap:16px;align-items:center}
+/* Rond, terwijl het merk verder geen ronde hoeken kent. Bewuste
+   uitzondering: een portret is geen vlak maar een persoon, en rond is
+   daar de gangbare vorm. Dezelfde uitzondering maakt Van der Werff. */
+.joran .foto{width:64px;height:64px;flex:none;background:var(--bg);border:1px solid var(--rule);
+  border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:8px;letter-spacing:.1em;color:var(--rule);text-align:center}
+.joran .foto img{width:100%;height:100%;object-fit:cover}
+.joran .lijn a{color:var(--dark);font-weight:600}
+.joran .lijn a:hover{color:var(--blue)}
+.joran b{font-family:var(--disp);text-transform:uppercase;font-size:20px;letter-spacing:.03em;
+  color:var(--dark);display:block;line-height:1.1}
+.joran .fn{font-size:13.5px;color:var(--mute);display:block;margin-top:4px}
+.joran .lijn{margin-top:18px;padding-top:16px;border-top:1px solid var(--rule);
+  font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--mute);line-height:1.9}
+.joran .lijn b{color:var(--dark);font-weight:600}
+
+@media (max-width:1080px){
+  .hoofd{grid-template-columns:1fr 1fr}
+  .kop .grid,.mist .in{grid-template-columns:1fr;gap:36px}
+  .kop .vak{border-left:0;border-top:1.5px solid rgba(255,255,255,.2);padding-left:0;padding-top:24px}
+  .specband .wrap{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  .hoofd,.routes .drie{grid-template-columns:1fr}
+  .ook .in{grid-template-columns:1fr;gap:24px}
+  .rest .rij{grid-template-columns:1fr;gap:8px}
+}
+</style>
+</head>
+<body>
+
+<header class="main">
+  <div class="wrap">
+    <div class="logo"><em>case</em>Builder.com</div>
+    <div class="search">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="5"></circle><path d="M11 11l4 4"></path></svg>
+      <input placeholder="Zoek op artikelnummer of apparaat">
+    </div>
+    <div class="hdr-r">
+        <a href="#" class="stil">Inloggen</a>
+        <a href="#">Winkelwagen</a>
+      </div>
+  </div>
+</header>
+
+<nav class="primary">
+  <div class="wrap">
+    <a href="#">Case aanvragen</a>
+    <a href="case-voor-v1.html">Wat ga je vervoeren?</a>
+    <a href="configurator-v1.html">Zelf configureren</a>
+    <a href="flightcases-v1.html">Flightcases</a>
+    <a href="branches.html" class="on">Branches</a>
+    <a href="service-hub-v1.html">Service</a>
+    <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#">NL &#9662;</a></div>
+  </div>
+</nav>
+
+<div class="crumbs donker">
+  <div class="wrap">
+    <a href="#">Home</a><span class="sep">/</span>
+    <span>Branches</span>
+  </div>
+</div>
+
+<!-- ══ KOP ═══════════════════════════════════════════════════
+     Geen belofte maar een positie: marktleider in Nederland is
+     CaseBuilder al, alleen weet niemand het. Dat is precies wat
+     een branche-overzicht kan rechtzetten. ═════════════════ -->
+<section class="kop ruit ruit-dark ruit-aanzet beslag" style="padding-bottom:0">
+  <div class="achter" aria-hidden="true">
+    <img src="assets/flightcase-koffer.jpg" alt="">
+    <img src="assets/flightcase-hoedcase.jpg" alt="">
+    <img src="assets/flightcase-trunccase.jpg" alt="">
+    <img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt="">
+    <img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt="">
+  </div>
+  <div class="scrim"></div>
+  <span class="hk tl"></span><span class="hk tr"></span>
+  <div class="wrap grid">
+    <div>
+      <span class="ey">Branches &middot; sectoren &middot; markten</span>
+      <h1>Voor wie wij <span class="acc">cases</span> bouwen</h1>
+      <p class="lead">Sinds 1987 bouwen we in Doesburg cases voor apparatuur die niet stuk mag. Wat die apparatuur is, verschilt per markt — en daarmee de eisen, de normen en de manier waarop je bestelt.</p>
+    </div>
+    <div class="vak">
+      <p>Een case voor een spectrumanalyser is iets anders dan een case voor een moving head. Andere schokwaarden, ander schuim, andere keuring — en een andere route naar de bestelling.</p>
+      <p>Daarom staat hieronder per markt wat wij daar tegenkomen, en wat dat betekent voor de case die u nodig heeft.</p>
+    </div>
+  </div>
+  <div class="belofte"><div class="wrap">
+    <div class="row">
+      <div class="it"><b>Sinds 1987</b><span>Eigen productie in Doesburg</span></div>
+      <div class="it"><b>Dezelfde dag</b><span>Tekening retour op uw aanvraag</span></div>
+      <div class="it"><b>Binnen 48 uur</b><span>Offerte, ook bij maatwerk</span></div>
+      <div class="it"><b>300+ modellen</b><span>Standaardmaten uit voorraad</span></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ══ DE ZES BRANCHES ═══════════════════════════════════════
+     Drie groot, drie compact. Dat is geen ontwerpgril: de drie
+     bovenste zijn de markten die CaseBuilder zelf heeft geordend
+     op marge, budget en toekomstvisie. De drie eronder staan wél
+     in het marketingplan maar zijn niet gerangschikt. ═══════ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="ey ey-dark">Zes markten</span>
+      <h2>Waar onze cases terechtkomen</h2>
+      <p class="lead">Per markt de apparatuur die we het vaakst tegenkomen. Klik een apparaat om direct naar de bijbehorende case te gaan.</p>
+    </div>
+
+    <div class="hoofd">
+      <div class="br">
+        <div class="im"><span class="rang">01</span><span class="tel">14 toepassingen</span><img src="assets/foto-industrie-en-machinebouw.jpg" alt=""></div>
+        <div class="bd">
+          <h3><a class="hl" href="branche-industrie-en-machinebouw-v1.html">Industrie en<br>machinebouw</a></h3>
+          <p>Machineonderdelen, prototypes en behuizing voor mobiele opstellingen. Seriematig, met een tekening vooraf en een vaste maatvoering per order.</p>
+          <div class="toe"><a href="#">Machineonderdelen</a><a href="#">Prototypes</a><a href="#">Cleanroom</a><a href="#">Optiek</a><a href="#">Drones</a></div>
+          <span class="go">Bekijk branche <span>&rarr;</span></span>
+        </div>
+      </div>
+      <div class="br">
+        <div class="im"><span class="rang">02</span><span class="tel">22 toepassingen</span><img src="assets/foto-audio-visueel.jpg" alt=""></div>
+        <div class="bd">
+          <h3><a class="hl" href="branche-audio-visueel-v1.html">Audio-visueel</a></h3>
+          <p>De markt waar we mee begonnen zijn. Cases die tien keer per jaar de vrachtwagen in en uit gaan, en dat vijf jaar moeten volhouden.</p>
+          <div class="toe"><a href="#">Moving heads</a><a href="#">Line arrays</a><a href="#">Mengtafels</a><a href="#">19-inch rack</a><a href="#">Backline</a></div>
+          <span class="go">Bekijk branche <span>&rarr;</span></span>
+        </div>
+      </div>
+      <div class="br">
+        <div class="im"><span class="rang">03</span><span class="tel">7 toepassingen</span><img src="assets/foto-defensie.jpg" alt=""></div>
+        <div class="bd">
+          <h3><a class="hl" href="branche-defensie-v1.html">Defensie</a></h3>
+          <p>Transport dat aan specificatie moet voldoen en dat aantoonbaar moet zijn. Materiaalkeuze, documentatie en keuring liggen vooraf vast.</p>
+          <div class="toe"><a href="#">Veldapparatuur</a><a href="#">Optische systemen</a><a href="#">Communicatie</a><a href="#">Munitietransport</a></div>
+          <span class="go">Bekijk branche <span>&rarr;</span></span>
+        </div>
+      </div>
+      <div class="br">
+        <div class="im"><span class="rang">04</span><span class="tel">11 toepassingen</span><img src="assets/foto-meet-en-testapparatuur.jpg" alt=""></div>
+        <div class="bd">
+          <h3><a class="hl" href="#" title="branchepagina nog te bouwen">Meet- en<br>testapparatuur</a></h3>
+          <p>Meetinstrumenten die het veld in gaan: netbeheer, keuring, offshore. Het schuiminterieur is hier het product — gefreesd op het instrument, niet op de kist.</p>
+          <div class="toe"><a href="#">Spectrumanalysers</a><a href="#">Kalibratiesets</a><a href="#">Servicekoffers</a><a href="#">Datalogging</a></div>
+          <span class="go">Bekijk branche <span>&rarr;</span></span>
+        </div>
+      </div>
+      <div class="br">
+        <div class="im"><span class="rang">05</span><span class="tel">9 toepassingen</span><img src="assets/foto-broadcast-en-media.jpg" alt=""></div>
+        <div class="bd">
+          <h3><a class="hl" href="#" title="branchepagina nog te bouwen">Broadcast en media</a></h3>
+          <p>Camera’s, multicam-sets en mobiele regie. Vaak te specifiek voor de configurator — meestal een tekening, soms een herhaalorder op een bestaand model.</p>
+          <div class="toe"><a href="#">Camerabodies</a><a href="#">Optieksets</a><a href="#">Regiekoffers</a><a href="#">Monitoren</a></div>
+          <span class="go">Bekijk branche <span>&rarr;</span></span>
+        </div>
+      </div>
+      <div class="br">
+        <div class="im"><span class="rang">06</span><span class="tel">5 toepassingen</span><img src="assets/foto-schaalmodellen.jpg" alt=""></div>
+        <div class="bd">
+          <h3><a class="hl" href="#" title="branchepagina nog te bouwen">Schaalmodellen en<br>maquettes</a></h3>
+          <p>Maquettes, architectuurmodellen en presentatiestukken. Eenmalig, onvervangbaar en zelden rechthoekig — altijd volledig maatwerk.</p>
+          <div class="toe"><a href="#">Maquettes</a><a href="#">Architectuurmodellen</a><a href="#">Presentatiestukken</a></div>
+          <span class="go">Bekijk branche <span>&rarr;</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ OOK VOOR ══════════════════════════════════════════════
+     De segmenten die wél benoemd worden maar geen eigen pagina
+     krijgen. Ze horen erbij — een klusbus of een beurscase is
+     gewoon werk — maar ze verdienen nog geen eigen verhaal. ══ -->
+<section class="ook tight">
+  <div class="wrap in">
+    <div>
+      <span class="ey ey-dark">Ook voor</span>
+      <h2>Ook voor, maar nog niet uitgewerkt</h2>
+      <p>Acht markten die we net zo goed bedienen, maar die nog geen eigen pagina hebben. Ze staan hier als rij omdat er nog geen verhaal achter zit &mdash; zodra dat er is, worden het tegels.</p>
+    </div>
+    <div class="rest">
+      <a class="rij" href="#">
+        <h3>Winkelinrichting en beurzen</h3>
+        <p class="om">Standmateriaal, banners, displays en cateringkisten. <b>Vaak bestelt een bureau namens de klant</b> — de gebruiker zie je pas op de beursvloer.</p>
+        <span class="tel">33 klanten</span>
+        <span class="pijl">Bekijk branche &rarr;</span>
+      </a>
+      <a class="rij" href="#">
+        <h3>Klusbus, aannemers en zzp</h3>
+        <p class="om">Servicekoffers en gereedschapinrichting voor de bus. <b>Sluit aan op meet- en testapparatuur</b>, alleen dan met een lager prijspunt.</p>
+        <span class="tel">25 klanten</span>
+        <span class="pijl">Bekijk branche &rarr;</span>
+      </a>
+      <a class="rij" href="#">
+        <h3>19-inch rack en IT</h3>
+        <p class="om">Serverracks, switchkoffers en datacentertransport. <b>Rack247 draait hier al op</b> — of dat een eigen merk wordt staat nog open.</p>
+        <span class="tel">31 klanten</span>
+        <span class="pijl">Bekijk branche &rarr;</span>
+      </a>
+      <a class="rij" href="#">
+        <h3>Medisch en laboratorium</h3>
+        <p class="om">Endoscopie, demokoffers met inlay en laboratoriuminstrumenten. <b>Hoogwaardig en kwetsbaar</b> — de strategie noemt het apart om de marge.</p>
+        <span class="tel">premium marge</span>
+        <span class="pijl">Bekijk branche &rarr;</span>
+      </a>
+      <a class="rij" href="#">
+        <h3>Veiligheid en hulpdiensten</h3>
+        <p class="om">Politie, brandweer en ambulance. <b>Andere koper dan defensie</b>: kortere lijnen, kleinere orders, geen aanbesteding.</p>
+        <span class="tel">—</span>
+        <span class="pijl">Bekijk branche &rarr;</span>
+      </a>
+      <a class="rij" href="#">
+        <h3>Automotive en motorsport</h3>
+        <p class="om">Componentcases voor raceteams en diagnoseapparatuur bij dealers. <b>De enige branche die een vergelijkbare concurrent claimt.</b></p>
+        <span class="tel">—</span>
+        <span class="pijl">Bekijk branche &rarr;</span>
+      </a>
+      <a class="rij" href="#">
+        <h3>Kunst- en museumtransport</h3>
+        <p class="om">Tentoonstellingstransport en kunsthandel. <b>Onduidelijk of er klanten zitten</b> — de 71 in kunst en cultuur zijn vermoedelijk podia.</p>
+        <span class="tel">uitzoeken</span>
+        <span class="pijl">Bekijk branche &rarr;</span>
+      </a>
+      <a class="rij" href="#">
+        <h3>Camperbus en verhuizers</h3>
+        <p class="om">Bedrijfswagen- en camperinrichting. <b>Van der Werf doet dit al</b> als eigen specialisme.</p>
+        <span class="tel">—</span>
+        <span class="pijl">Bekijk branche &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DE DRIE ROUTES ════════════════════════════════════════
+     De echte positionering zit niet in sectorkennis maar in
+     snelheid. Die belofte moet hier staan, met de doorlooptijd
+     erbij — anders is het een claim zonder maat. ═══════════ -->
+<section class="routes navy ruit ruit-dark ruit-veld">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="ey">Drie routes</span>
+      <h2>Hoe u bij uw case komt</h2>
+      <p class="lead" style="color:rgba(255,255,255,.78)">Welke route voor u de snelste is, hangt af van wat u al weet. Op elke branchepagina staat de route die daar het vaakst gelopen wordt.</p>
+    </div>
+    <div class="drie">
+      <div class="rt">
+        <span class="let">A</span>
+        <h3>Uit voorraad</h3>
+        <p>U weet welke maat u nodig heeft en die zit tussen onze standaardmaten. Bestellen zoals u alles bestelt.</p>
+        <span class="voor">Vaakst gelopen bij<br><b style="color:#fff">Audio-visueel</b></span>
+      </div>
+      <div class="rt">
+        <span class="let">B</span>
+        <h3>Zelf configureren</h3>
+        <p>U weet uw maten en wilt zelf bepalen hoe de case eruitziet. Direct een prijs, direct in productie.</p>
+        <span class="voor">Vaakst gelopen bij<br><b style="color:#fff">Audio-visueel · Broadcast</b></span>
+      </div>
+      <div class="rt">
+        <span class="let">C</span>
+        <h3>Case aanvragen</h3>
+        <p>U weet wat u heeft, niet wat u nodig heeft. Stuur een datasheet, een schets of een foto — wij tekenen het uit.</p>
+        <span class="voor">Vaakst gelopen bij<br><b style="color:#fff">Industrie · Defensie · Meet en test</b></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STAAT JE BRANCHE ER NIET BIJ ══════════════════════════ -->
+<section class="mist">
+  <div class="wrap in">
+    <div>
+      <span class="ey ey-dark">Geen van bovenstaande</span>
+      <h2>Staat uw markt er niet tussen?</h2>
+      <p>Dat zegt niets over of we het kunnen. De helft van wat we bouwen valt buiten deze zes — een pers in een kist op wielen, een trolley voor een pedicure, een kabelhaspel voor een windpark.</p>
+      <p>Stuur wat u heeft. Een datasheet is genoeg, een foto van een servet ook.</p>
+      <div class="acties">
+        <a class="btn btn-dark" href="#">Case aanvragen</a>
+        <a class="btn btn-out" href="#">Bel ons</a>
+      </div>
+    </div>
+    <div class="joran">
+      <div class="rij">
+        <div class="foto"><img src="assets/joran.svg" alt="Joran" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div>
+          <b>Joran</b>
+          <span class="fn">Tekent uw case uit en stuurt hem dezelfde dag terug</span>
+        </div>
+      </div>
+      <div class="lijn">
+        <a href="tel:+31575575734">+31 (0)575 575734</a><br>
+        <a href="mailto:verkoop@casebuilder.com">verkoop@casebuilder.com</a><br>
+        Ma&ndash;vr · 08:00&ndash;17:00
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="logo"><em>case</em>Builder.com</div>
+        <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734">+31 (0)575 575734</a></p>
+      </div>
+      <div><h5>Offerte aanvragen</h5><a href="#">Case aanvragen</a><a href="#">Maten laten controleren</a><a href="#">Series en staffels</a><a href="#">Zakelijk bestellen</a></div>
+      <div><h5>Zelf configureren</h5><a href="#">Naar de configurator</a><a href="#">Zo werkt het</a><a href="#">Herhaalorder</a><a href="#">Mijn configuraties</a></div>
+      <div><h5>Flightcases</h5><a href="#">Alle flightcases</a><a href="#">Koffer</a><a href="#">Hoedcase</a><a href="#">Trunccase</a><a href="#">Rackcase enkel</a><a href="#">Rackcase dubbel</a></div>
+      <div><h5>Service</h5><a href="#">Levertijden</a><a href="#">Verzending</a><a href="#">Onderdelen</a><a href="#">Zaagservice</a><a href="#">Over Proflite</a><a href="contact-v1.html">Contact</a></div>
+    </div>
+    <div class="bot"><span>KVK 09123456</span><span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span></div>
+  </div>
+</footer>
+
+<script src="assets/versies.js"></script>
+</body>
+</html>

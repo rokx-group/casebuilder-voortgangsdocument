@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — /grote-spelers beoordelen (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   /grote-spelers beoordelen
+
+   Derde tab naast Header en Footer. Anders dan die twee gaat het hier
+   niet om varianten van één onderdeel maar om een hele pagina, en die
+   past niet op ware grootte naast aantekeningen. Daarom staat hij
+   verkleind in een schuifbaar kader, met de notities ernaast — en een
+   knop naar de echte pagina voor wie hem op maat wil zien.
+   ══════════════════════════════════════════════════════════════ */
+body{background:#EDF0F4}
+.vgl{max-width:1440px;margin:0 auto;padding:0 24px 90px}
+.inleiding{max-width:82ch;margin:0 0 10px}
+.inleiding h2{font-size:26px;margin-bottom:8px}
+.inleiding p{font-size:14px;color:var(--mute);line-height:1.65}
+.inleiding p b{color:var(--ink)}
+
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--rule);margin:0 0 26px}
+.tabs a{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mute);padding:16px 20px 13px;border-bottom:3px solid transparent;margin-bottom:-1px}
+.tabs a:hover{color:var(--dark)}
+.tabs a.kind{padding-left:6px;opacity:.9}
+.tabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+/* Configurator hangt onder Flightcases — je kiest eerst een model, dan
+   pas maten. De haak zegt dat, en de tab schuift iets aan. */
+.tabs a.sub{margin-left:-8px;padding-left:12px;color:var(--mute)}
+.tabs a.sub.on{color:var(--dark)}
+/* Header eerst, footer laatst — de volgorde waarin je ze op een pagina
+   tegenkomt. Gewoon als laatste item in de rij; weggeduwd naar de rand
+   las het als een aparte actie in plaats van als onderdeel van dezelfde
+   reeks. */
+
+.kop{margin:44px 0 14px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.kop .nr{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--blue)}
+.kop h3{font-size:24px}
+.kop .gekozen{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  background:var(--cyan);color:var(--void);padding:6px 12px;font-weight:600}
+.kop .rechts{margin-left:auto;display:flex;align-items:center;gap:14px}
+.kop .hgt{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--mute)}
+/* Naar de echte pagina — een mockup beoordeel je uiteindelijk op maat. */
+.volledig{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid var(--rule);background:#fff;color:var(--dark);padding:7px 13px;
+  display:inline-flex;align-items:center;gap:8px}
+.volledig:hover{border-color:var(--cyan);background:var(--lightblue)}
+
+.specdet{margin:0 0 18px;border:1px solid var(--rule);background:#fff}
+.specdet > summary{list-style:none;cursor:pointer;padding:11px 16px;display:flex;
+  align-items:center;gap:12px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mute);user-select:none}
+.specdet > summary::-webkit-details-marker{display:none}
+.specdet > summary:hover{color:var(--dark);background:var(--bg)}
+.specdet > summary .aantal{margin-left:auto;color:var(--rule)}
+.specdet > summary::before{content:"+";font-family:var(--mono);font-size:13px;line-height:1;
+  width:17px;height:17px;flex:none;display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--rule);color:var(--dark)}
+.specdet[open] > summary::before{content:"\2212"}
+.specdet[open] > summary{border-bottom:1px solid var(--rule);color:var(--dark)}
+.specdet .uitleg{padding:15px 16px 16px;margin:0;max-width:80ch}
+.uitleg p{font-size:14px;color:var(--mute);line-height:1.65}
+.uitleg p+p{margin-top:8px}
+.uitleg b{color:var(--ink)}
+
+/* ── de pagina, bijna op maat ────────────────────────────────
+   De aantekeningen stonden hiernaast en namen 380 px af van het
+   ontwerp. Ze staan nu eronder, in een strook van drie: de pagina is
+   het onderwerp, de notities zijn commentaar. Op 95% past een venster
+   van 1440 in 1368 px — vrijwel op maat, en het kader schuift. */
+.beoordeel{display:block}
+.demo{border:1px solid var(--rule);background:#fff;box-shadow:0 1px 3px rgba(0,40,70,.07);
+  overflow:hidden}
+.demo .balk{text-decoration:none;cursor:pointer;transition:background .12s;background:var(--cyan);color:var(--void);font-family:var(--mono);font-size:10px;
+  letter-spacing:.18em;text-transform:uppercase;font-weight:600;padding:7px 14px}
+.demo.gekozen{border:2px solid var(--cyan);box-shadow:0 0 0 6px rgba(102,196,232,.18),0 1px 3px rgba(0,40,70,.07)}
+.venster{height:820px;overflow:auto;background:var(--bg)}
+.houder{width:1368px;height:3990px}
+.venster iframe{width:1440px;height:4200px;border:0;display:block;
+  transform:scale(.95);transform-origin:top left}
+
+/* ── aantekeningen ───────────────────────────────────────────
+   Onder het ontwerp, drie naast elkaar. Elke notitie noemt wat er
+   besloten is en waarom — dat is waar deze pagina voor bestaat. */
+.notities{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
+  border:1px solid var(--rule);margin-top:20px}
+.nt{background:#fff;padding:14px 16px 16px}
+.nt .lb{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--blue);display:block;margin-bottom:6px}
+.nt b{font-family:var(--disp);text-transform:uppercase;font-size:16px;letter-spacing:.03em;
+  color:var(--dark);display:block;line-height:1.1}
+.nt p{font-size:13px;color:var(--mute);line-height:1.5;margin-top:6px}
+.nt.open .lb{color:#A34418}
+.notities .vraag{background:#FCF8EE}
+
+/* ── focusmodus ────────────────────────────────────────────── */
+.dim{position:fixed;inset:0;background:rgba(11,26,38,.62);z-index:50;
+  opacity:0;pointer-events:none;transition:opacity .14s}
+body.focusmodus .dim{opacity:1;pointer-events:auto}
+.demo.aan{position:relative;z-index:60}
+.demo{cursor:zoom-in}
+.demo.aan{cursor:zoom-out}
+body.focusmodus .demo:not(.aan){cursor:default}
+.demo a,.demo iframe{cursor:auto}
+@media (prefers-reduced-motion: reduce){ .dim{transition:none} }
+
+@media (max-width:1180px){
+  .notities{grid-template-columns:1fr}
+}
+.demo .balk .vs{margin-left:auto;opacity:0;transition:opacity .12s;font-size:9px;letter-spacing:.12em}
+.demo .balk .pijl{margin-left:auto}
+.demo .balk .vs + .pijl,.demo .balk .pijl + .vs{margin-left:8px}
+.demo a.balk:hover{background:var(--blue)!important}
+.demo a.balk:hover .vs{opacity:.85}
+.demo a.balk:focus-visible{outline:2px solid var(--cyan);outline-offset:-2px}
+</style>
+</head><body>
+<div class="vgl">
+  <div class="tabs">
+    <a href="header-varianten.html">Header</a>
+    <a href="homepage-varianten.html">Homepage</a>
+    <a href="case-aanvragen-varianten.html">Case aanvragen</a>
+    <a href="case-voor-varianten.html">/case-voor</a>
+    <a href="flightcases-varianten.html">/flightcases</a>
+    <a href="configurator-varianten.html" class="sub">&#8627; /configurator</a>
+    <a href="groot-zakelijk-varianten.html" class="on">/groot-zakelijk</a>
+    <a href="faq-varianten.html">FAQ</a>
+    <a href="footer-varianten.html">Footer</a>
+    <a href="branches-varianten.html">/branches ontwerp</a>
+  </div>
+  <div class="inleiding">
+    <h2>Organisaties die anders inkopen</h2>
+    <p><b>Een derde as naast toepassing (wat) en branche (wie): hóe je koopt.</b> Aanbesteding, raamcontract, een vloot van driehonderd. Vijf manieren, elk met een eigen pagina en een carrousel van soortgelijke organisaties. De namen staan als plaatshouder tot er toestemming is.</p>
+  </div>
+  <div class="kop"><span class="nr">// TWEE OPZETTEN</span><h3>Sectorlijst of drie vragen</h3><span class="rechts"><span class="hgt">/groot-zakelijk &middot; nog geen keuze</span></span></div>
+    <div class="beoordeel" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div class="demo"><a class="balk" href="grote-spelers-v1.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">v1 &middot; vijf sectoren + referenties<span class="pijl" aria-hidden="true">&#8599;</span><span class="vs">volledig scherm</span></a><div class="venster" data-schaal=".46" style="height:640px"><div class="houder" style="width:629px;height:1960px"><iframe src="grote-spelers-v1.html" title="v1 sectoren" loading="lazy" style="transform:scale(.46)"></iframe></div></div></div>
+      <div class="demo"><a class="balk" href="grote-spelers-v2.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">v2 &middot; markt, gebruik, aantal<span class="pijl" aria-hidden="true">&#8599;</span><span class="vs">volledig scherm</span></a><div class="venster" data-schaal=".46" style="height:640px"><div class="houder" style="width:629px;height:1960px"><iframe src="grote-spelers-v2.html" title="v2 drie stappen" loading="lazy" style="transform:scale(.46)"></iframe></div></div></div>
+    </div>
+    <div class="kop" style="margin-top:34px"><span class="nr">// VIJF DETAILPAGINA'S</span><h3>Eén sjabloon, vijf manieren van inkopen</h3></div>
+  <div class="beoordeel" style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px">
+    <div class="demo"><a class="balk" href="speler-defensie-en-overheid-v1.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff;font-size:9px">Defensie en overheid<span class="pijl" aria-hidden="true">&#8599;</span><span class="vs">volledig scherm</span></a><div class="venster" data-schaal=".18" style="height:380px"><div class="houder" style="width:259px;height:900px"><iframe src="speler-defensie-en-overheid-v1.html" title="Defensie en overheid" loading="lazy" style="transform:scale(.18)"></iframe></div></div></div>
+    <div class="demo"><a class="balk" href="speler-oem-en-series-v1.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff;font-size:9px">OEM en series<span class="pijl" aria-hidden="true">&#8599;</span><span class="vs">volledig scherm</span></a><div class="venster" data-schaal=".18" style="height:380px"><div class="houder" style="width:259px;height:900px"><iframe src="speler-oem-en-series-v1.html" title="OEM en series" loading="lazy" style="transform:scale(.18)"></iframe></div></div></div>
+    <div class="demo"><a class="balk" href="speler-verhuur-en-touring-v1.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff;font-size:9px">Verhuur en touring<span class="pijl" aria-hidden="true">&#8599;</span><span class="vs">volledig scherm</span></a><div class="venster" data-schaal=".18" style="height:380px"><div class="houder" style="width:259px;height:900px"><iframe src="speler-verhuur-en-touring-v1.html" title="Verhuur en touring" loading="lazy" style="transform:scale(.18)"></iframe></div></div></div>
+    <div class="demo"><a class="balk" href="speler-omroep-en-studio-v1.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff;font-size:9px">Omroep en studio<span class="pijl" aria-hidden="true">&#8599;</span><span class="vs">volledig scherm</span></a><div class="venster" data-schaal=".18" style="height:380px"><div class="houder" style="width:259px;height:900px"><iframe src="speler-omroep-en-studio-v1.html" title="Omroep en studio" loading="lazy" style="transform:scale(.18)"></iframe></div></div></div>
+    <div class="demo"><a class="balk" href="speler-netbeheer-en-energie-v1.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff;font-size:9px">Netbeheer en energie<span class="pijl" aria-hidden="true">&#8599;</span><span class="vs">volledig scherm</span></a><div class="venster" data-schaal=".18" style="height:380px"><div class="houder" style="width:259px;height:900px"><iframe src="speler-netbeheer-en-energie-v1.html" title="Netbeheer en energie" loading="lazy" style="transform:scale(.18)"></iframe></div></div></div>
+  </div>
+  <div class="kop" style="margin-top:34px"><span class="nr">// AANTEKENINGEN</span><h3>Besloten en open</h3></div>
+  <div class="notities">
+    <div class="nt"><span class="lb">// 01 &middot; besloten</span><b>Geen /zakelijk-tak</b><p>De sitemap schrapte die bewust: de hele site is zakelijk. Dit is geen tweede ingang maar een overzicht van inkoopmanieren, met referenties.</p></div>
+    <div class="nt vraag open"><span class="lb">// 02 &middot; open</span><b>Namen noemen</b><p>NOS, Studio Hilversum, ASML, 3T staan in de docs. Zonder toestemming blijven het plaatshouders &mdash; en zonder namen is de carrousel leeg.</p></div>
+    <div class="nt vraag open"><span class="lb">// 03 &middot; open</span><b>Welke vijf</b><p>Defensie, OEM, verhuur, omroep en netbeheer komen uit de docs. Groothandel (103 klanten) en Rack247 zitten er niet in &mdash; bewust, tot die vragen beantwoord zijn.</p></div>
+  </div>
+</div>
+<script src="assets/focus.js"></script>
+<script src="assets/kaderhoogte.js"></script>
+</body></html>

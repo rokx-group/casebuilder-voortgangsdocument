@@ -1,0 +1,156 @@
+<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — /service/offerte · case aanvragen (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* /service/zo-werkt-het — het productieproces, van tekening naar kist.
+   Overgenomen uit homepage-v6: dat blok was te goed om alleen op een
+   homepagevariant te laten staan, en "Zo werkt het" was een voetlink
+   zonder pagina. */
+.kop{background:var(--void);color:#fff;position:relative;overflow:hidden;padding:68px 0 64px}
+.kop h1{font-size:clamp(36px,4.6vw,58px);color:#fff;line-height:.94;max-width:16ch;margin-top:16px}
+.kop h1 .acc{color:var(--cyan)}
+.kop p.lead{color:rgba(255,255,255,.82);font-size:17.5px;max-width:52ch;margin-top:18px}
+.kop .acties{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+.spelers{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.sp{border:1px solid var(--rule);background:#fff;display:flex;flex-direction:column;transition:.15s}
+.sp:hover{border-color:var(--dark)}
+.sp .im{background:var(--bg);aspect-ratio:4/3;overflow:hidden}
+.sp .im img{width:100%;height:100%;object-fit:cover}
+.sp .bd{padding:16px 18px 18px;border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:6px;flex:1}
+.sp h3{font-size:19px;line-height:1.05}
+.sp .m{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.sp .go{margin-top:auto;padding-top:10px;font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:14px;letter-spacing:.05em;color:var(--blue)}
+/* Carrousel: scroll-snap, geen script. Namen zijn plaatshouders tot er
+   toestemming is — dat staat als open vraag in de selectiedoc. */
+.cases{background:var(--dark);color:#fff}
+.rail{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;margin-top:24px}
+.rail::-webkit-scrollbar{height:6px} .rail::-webkit-scrollbar-thumb{background:rgba(255,255,255,.25)}
+.cs{flex:0 0 340px;scroll-snap-align:start;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.04);display:flex;flex-direction:column}
+.cs .im{aspect-ratio:16/10;background:rgba(255,255,255,.06);overflow:hidden}
+.cs .im img{width:100%;height:100%;object-fit:cover;opacity:.55}
+.cs .bd{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px}
+.cs .n{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
+.cs b{font-family:var(--disp);text-transform:uppercase;font-size:19px;letter-spacing:.03em;color:#fff;line-height:1.1}
+.cs p{font-size:13.5px;color:rgba(255,255,255,.74);line-height:1.5}
+.cs .toestemming{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--open,#D9B25E);margin-top:auto;padding-top:8px}
+.eisen{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:24px}
+.eis{background:#fff;padding:20px 22px;display:flex;flex-direction:column;gap:7px}
+.eis .n{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.eis b{font-family:var(--disp);text-transform:uppercase;font-size:18px;letter-spacing:.03em;color:var(--dark)}
+.eis p{font-size:13.5px;color:var(--mute);line-height:1.5}
+@media(max-width:1000px){.spelers{grid-template-columns:repeat(2,1fr)}.eisen{grid-template-columns:1fr}}
+/* ── van tekening naar kist ─────────────────────────────── */
+.proces .stap{display:grid;grid-template-columns:120px 1fr 1fr;gap:44px;align-items:start;
+  padding:34px 0;border-top:1px solid var(--rule)}
+.proces .stap:last-child{border-bottom:1px solid var(--rule)}
+.proces .nr{font-family:var(--disp);font-weight:900;font-size:64px;line-height:.8;
+  color:var(--rule);letter-spacing:.02em}
+.proces h3{font-size:27px;letter-spacing:.03em;line-height:1.05}
+.proces .wat{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--blue);margin-top:10px}
+.proces p{font-size:15.5px;color:var(--mute);max-width:56ch}
+.proces .tol{margin-top:14px;display:inline-flex;align-items:center;gap:10px;border:1px solid var(--rule);
+  padding:8px 14px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--dark);background:var(--bg)}
+
+.kop .lead{max-width:56ch}
+/* ── het paneel ──────────────────────────────────────────── */
+.paneel{background:#fff;color:var(--ink);box-shadow:0 18px 60px rgba(0,0,0,.45)}
+.paneel .pkop{background:var(--dark);color:#fff;padding:16px 28px;display:flex;
+  align-items:baseline;gap:14px}
+.paneel .pkop b{font-family:var(--disp);text-transform:uppercase;font-size:20px;letter-spacing:.03em}
+.paneel .pkop i{font-style:normal;margin-left:auto;font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
+.pbody{padding:24px 28px 26px}
+.vld{margin-bottom:16px}
+.vld label{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);display:block;margin-bottom:7px}
+.vld label em{font-style:normal;color:var(--rule);letter-spacing:.1em}
+.vld .inv{display:flex;align-items:center;border:1.5px solid var(--rule);height:46px;padding:0 14px;background:#fff}
+.vld .inv:focus-within{border-color:var(--dark)}
+.vld input{border:0;outline:0;width:100%;font-family:var(--body);font-size:15px;color:var(--ink);background:transparent}
+.vld input::placeholder{color:#9aa3ae}
+.tweekolom{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* de sleepzone: het hart van deze versie. Een datasheet of een foto van
+   een servetje is genoeg — dat is precies hoe het nu al binnenkomt. */
+.sleep{border:1.5px dashed var(--rule);background:var(--bg);padding:18px 20px;
+  display:flex;align-items:center;gap:16px;cursor:pointer;transition:.14s}
+.sleep:hover{border-color:var(--blue);background:var(--lightblue)}
+.sleep .ic{width:38px;height:38px;flex:none;border:1.5px solid var(--dark);display:flex;
+  align-items:center;justify-content:center;color:var(--dark);font-family:var(--mono);font-size:17px}
+.sleep b{font-family:var(--disp);text-transform:uppercase;font-size:16px;letter-spacing:.03em;
+  color:var(--dark);display:block;line-height:1.1}
+.sleep span{font-size:13px;color:var(--mute);display:block;margin-top:4px}
+
+.paneel .voet{border-top:1px solid var(--rule);background:var(--bg);padding:18px 28px;
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.paneel .voet .bel{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--mute);line-height:1.7}
+.paneel .voet .bel b{color:var(--dark);font-weight:600}
+.paneel .voet .btn{margin-left:auto}
+
+/* /service/offerte — waar "Case aanvragen" in de navigatie heen gaat.
+   Het aanvraagpaneel van homepage-v8, nu als eigen pagina: dit is de
+   route waarlangs zeventig procent van de orders binnenkomt. */
+.aanvraag{background:var(--void);color:#fff;padding:60px 0 64px}
+.aanvraag .grid{display:grid;grid-template-columns:1fr 620px;gap:56px;align-items:start}
+.aanvraag h1{font-size:clamp(36px,4.4vw,58px);color:#fff;line-height:.95;max-width:15ch;margin-top:16px}
+.aanvraag h1 .acc{color:var(--cyan)}
+.aanvraag p.sub{margin-top:18px;font-size:17px;color:rgba(255,255,255,.8);max-width:42ch}
+.sturen{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.sturen span{border:1px solid rgba(255,255,255,.3);padding:8px 14px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.82)}
+.zelfdedag{margin-top:28px;border-top:1px solid rgba(255,255,255,.2);padding-top:20px;display:flex;gap:16px;align-items:center}
+.zelfdedag .foto{width:52px;height:52px;flex:none;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.24);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:8px;color:rgba(255,255,255,.35)}
+.zelfdedag b{font-family:var(--disp);text-transform:uppercase;font-size:19px;letter-spacing:.03em;color:#fff;display:block}
+.zelfdedag span{font-size:14px;color:rgba(255,255,255,.7);display:block;margin-top:4px}
+@media(max-width:1000px){.aanvraag .grid{grid-template-columns:1fr}}
+</style></head><body>
+<header class="main"><div class="wrap"><div class="logo"><em>case</em>Builder.com</div>
+<div class="search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="5"></circle><path d="M11 11l4 4"></path></svg><input placeholder="Zoek op artikelnummer of apparaat"></div>
+<div class="hdr-r">
+        <a href="#" class="stil">Inloggen</a>
+        <a href="#">Winkelwagen</a>
+      </div></div></header>
+<nav class="primary"><div class="wrap"><a href="case-aanvragen-v1.html" class="on">Case aanvragen</a><a href="case-voor-v1.html">Wat ga je vervoeren?</a><a href="configurator-v1.html">Zelf configureren</a><a href="flightcases-v1.html">Flightcases</a><a href="branches.html">Branches</a><a href="service-hub-v1.html">Service</a>
+<div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#">NL &#9662;</a></div></div></nav>
+<div class="crumbs donker"><div class="wrap"><a href="#">Home</a><span class="sep">/</span><a href="#">Service</a><span class="sep">/</span><span>Case aanvragen</span></div></div>
+
+
+<section class="aanvraag ruit ruit-dark ruit-aanzet"><div class="wrap grid">
+  <div>
+    <span class="ey">Case aanvragen</span>
+    <h1>Je weet wat erin moet. <span class="acc">Wij weten hoe.</span></h1>
+    <p class="sub">Stuur wat je hebt. Een datasheet is genoeg, een foto van een servet ook. Je krijgt dezelfde werkdag een tekening met prijs terug.</p>
+    <div class="sturen"><span>Datasheet</span><span>Schets</span><span>Foto</span><span>Maten in een mail</span><span>Een oude case</span></div>
+    <div class="zelfdedag"><div class="foto"><img src="assets/joran.svg" alt="Joran" style="width:100%;height:100%;object-fit:cover;display:block"></div><div><b>Joran tekent het uit</b><span>Zeventig procent van onze orders begint zo &mdash; dezelfde dag een tekening met prijs.</span></div></div>
+  </div>
+  <div class="paneel">
+        <div class="pkop"><b>Vraag je case aan</b><i>// duurt 1 minuut</i></div>
+        <div class="pbody">
+          <div class="vld">
+            <label>Wat ga je vervoeren?</label>
+            <div class="inv"><input placeholder="Bijvoorbeeld: mengtafel Midas M32, of 4× moving head"></div>
+          </div>
+          <div class="vld">
+            <label>Wat heb je erbij? <em>— optioneel</em></label>
+            <div class="sleep">
+              <div class="ic">+</div>
+              <div>
+                <b>Sleep je schets, foto of datasheet hierheen</b>
+                <span>PDF, JPG, DWG of STEP · meerdere bestanden mag</span>
+              </div>
+            </div>
+          </div>
+</div></section>
+<footer><div class="wrap"><div class="cols">
+<div><div class="logo"><em>case</em>Builder.com</div><p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734">+31 (0)575 575734</a></p></div>
+<div><h5>Offerte aanvragen</h5><a href="#">Case aanvragen</a><a href="#">Maten laten controleren</a><a href="#">Series en staffels</a><a href="#">Zakelijk bestellen</a></div>
+<div><h5>Zelf configureren</h5><a href="configurator-v1.html">Naar de configurator</a><a href="#">Zo werkt het</a><a href="#">Herhaalorder</a><a href="#">Mijn configuraties</a></div>
+<div><h5>Flightcases</h5><a href="flightcases-v1.html">Alle flightcases</a><a href="#">Koffer</a><a href="#">Hoedcase</a><a href="#">Trunccase</a><a href="#">Rackcase enkel</a><a href="#">Rackcase dubbel</a></div>
+<div><h5>Service</h5><a href="#">Levertijden</a><a href="#">Verzending</a><a href="#">Onderdelen</a><a href="#">Zaagservice</a><a href="#">Over Proflite</a><a href="contact-v1.html">Contact</a></div>
+</div><div class="bot"><span>KVK 09123456</span><span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span></div></div></footer>
+<script src="assets/versies.js"></script>
+<script src="assets/hoogtemelder.js"></script></body></html>

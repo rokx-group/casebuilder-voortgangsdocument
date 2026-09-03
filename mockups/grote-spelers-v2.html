@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — groot zakelijk in drie stappen (v2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ── Drie stappen ──────────────────────────────────────────────────────
+   v1 was "wie we bedienen": vijf sectorkaarten. Dat vertelt wie wij kennen,
+   niet wat jij krijgt — en het sluit de kleinere klant uit, terwijl die
+   dezelfde opties heeft.
+
+   Hier bepaalt stap 3 (aantal) de route. Eén case en een vloot van
+   driehonderd lopen door dezelfde drie vragen; alleen de uitkomst verschilt.
+
+   Eerder stonden de drie rijen samengeperst op één scherm. Dat liep stuk:
+   zes kaarten naast elkaar passen niet, dus ze schoven het beeld uit. Nu weer
+   volwaardige secties met een vaste voortgangsbalk, zodat je altijd ziet
+   waar je bent zonder dat er iets afvalt. */
+.kop{background:var(--void);color:#fff;position:relative;overflow:hidden;padding:60px 0 52px}
+.kop .wrap{position:relative;z-index:1}
+.kop h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:.02em;
+  color:#fff;line-height:.92;margin:14px 0 0;font-size:clamp(36px,4.4vw,56px);max-width:15ch}
+.kop h1 .acc{color:var(--cyan)}
+.kop .lead{margin-top:14px;max-width:60ch;font-size:16px;color:rgba(255,255,255,.78)}
+
+/* voortgang: altijd zichtbaar, zodat je weet hoeveel er nog komt */
+.spoor{position:sticky;top:0;z-index:40;background:var(--white);
+  border-bottom:1px solid var(--rule);box-shadow:0 1px 3px rgba(0,40,70,.05)}
+.spoor .wrap{display:flex;gap:0;align-items:stretch}
+.spoor .st{flex:1;padding:13px 18px;border-right:1px solid var(--rule);
+  display:flex;align-items:center;gap:11px;min-width:0}
+.spoor .st:last-child{border-right:0}
+.spoor .nr{width:22px;height:22px;flex:none;border-radius:50%;border:1.5px solid var(--rule);
+  display:grid;place-items:center;font-family:var(--mono);font-size:10px;color:var(--mute)}
+.spoor .tx{min-width:0}
+.spoor .lb{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--mute);display:block}
+.spoor .vl{font-family:var(--disp);font-weight:700;font-size:15px;color:var(--rule);
+  text-transform:uppercase;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.spoor .st.klaar .nr{background:var(--cyan);border-color:var(--cyan);color:var(--void)}
+.spoor .st.klaar .vl{color:var(--dark)}
+.spoor .st.nu .nr{border-color:var(--blue);color:var(--blue)}
+.spoor .st.nu .vl{color:var(--blue)}
+
+.stap{padding:44px 0;border-bottom:1px solid var(--rule);scroll-margin-top:78px}
+.stap:last-of-type{border-bottom:0}
+.stap.dicht{opacity:.34;pointer-events:none}
+.stap .sk{display:flex;align-items:baseline;gap:13px;margin-bottom:22px;flex-wrap:wrap}
+.stap .sk .ey{color:var(--blue)}
+.stap .sk h2{font-size:26px}
+.stap .sk .hint{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:var(--mute)}
+
+.kaarten{display:grid;gap:12px}
+.kaarten.zes{grid-template-columns:repeat(3,1fr)}
+.kaarten.vijf{grid-template-columns:repeat(5,1fr)}
+.kaarten.vier{grid-template-columns:repeat(4,1fr)}
+.kk{background:var(--white);border:1.5px solid var(--rule);padding:18px;text-align:left;
+  cursor:pointer;font:inherit;display:flex;flex-direction:column;gap:7px;transition:border-color .12s}
+.kk:hover{border-color:var(--blue)}
+.kk .t{font-family:var(--disp);font-weight:700;font-size:17px;text-transform:uppercase;
+  letter-spacing:.02em;color:var(--dark);line-height:1.05}
+.kk .d{font-size:13px;color:var(--mute);line-height:1.4}
+.kk .n{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--blue);margin-top:auto}
+.kk[aria-pressed="true"]{border-color:var(--cyan);border-width:2.5px;padding:16.5px;
+  box-shadow:0 0 0 5px rgba(102,196,232,.18)}
+.kk[aria-pressed="true"] .t{color:var(--blue)}
+
+.uit{background:var(--void);color:#fff;padding:52px 0;scroll-margin-top:78px;display:none}
+.uit.aan{display:block}
+.uit .ey{color:var(--cyan)}
+.uit h2{color:#fff;font-size:clamp(28px,3.4vw,42px);font-family:var(--disp);font-weight:900;
+  text-transform:uppercase;letter-spacing:.02em;line-height:.96;margin:12px 0 0;max-width:20ch}
+.uit .sam{margin-top:16px;font-size:15.5px;color:rgba(255,255,255,.78);max-width:62ch}
+.uit .sam b{color:var(--cyan)}
+.uit .vakken{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:30px;
+  background:rgba(255,255,255,.14)}
+.uit .vk{background:var(--void);padding:20px}
+.uit .vk .lb{font-family:var(--mono);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--cyan);display:block;margin-bottom:7px}
+.uit .vk .w{font-family:var(--disp);font-weight:700;font-size:21px;text-transform:uppercase;
+  letter-spacing:.02em;line-height:1.05}
+.uit .vk p{font-size:13px;color:rgba(255,255,255,.62);margin-top:7px;line-height:1.45}
+.uit .acties{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap;align-items:center}
+.opnieuw{background:none;border:0;color:rgba(255,255,255,.5);font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;cursor:pointer;
+  text-decoration:underline;padding:0}
+.opnieuw:hover{color:var(--cyan)}
+
+@media(max-width:900px){
+  .kaarten.zes,.kaarten.vijf,.kaarten.vier{grid-template-columns:repeat(2,1fr)}
+  .uit .vakken{grid-template-columns:1fr}
+  .spoor .lb{display:none}
+  .spoor .st{padding:10px 12px}
+}
+
+/* ── uitkomst in dezelfde stijl als de drie stappen ─────────────
+   Stond als donker vlak onder drie lichte stappen: dat las als een
+   ander soort blok, terwijl het de uitkomst van die stappen is.
+   Zelfde grond, zelfde kopregel, zelfde kaarten — maar géén stapnummer:
+   dit is de uitkomst, je bent er. Alleen de knop is dicht cyaan, want
+   dít is de handeling. */
+.uit{background:transparent;color:var(--ink);padding:44px 0;border-top:1px solid var(--rule)}
+.uit .ey{color:var(--blue)}
+.uit .kopregel{display:flex;align-items:baseline;gap:13px;margin-bottom:22px;flex-wrap:wrap}
+.uit h2{color:var(--dark);font-size:26px;margin:0}
+.uit .sam{color:var(--mute);margin-top:0}
+.uit .sam b{color:var(--dark)}
+.uit .vakken{gap:12px;background:none;border:0}
+.uit .vk{background:#fff;border:1px solid var(--rule);padding:18px 20px}
+.uit .vk .lb{color:var(--mute)}
+.uit .vk .w{color:var(--dark)}
+.uit .vk p{color:var(--mute)}
+.uit .leeg{color:var(--mute)}
+.uit .opnieuw{color:var(--mute);border-color:var(--rule);background:#fff}
+.uit .opnieuw:hover{color:var(--dark);border-color:var(--dark)}
+</style>
+</head>
+<body>
+
+<header class="main"><div class="wrap"><a class="logo" href="#"><b>CASE</b>BUILDER</a></div></header>
+
+<section class="kop ruit ruit-dark ruit-aanzet">
+  <span class="hk tl"></span><span class="hk tr"></span>
+  <div class="wrap">
+    <div class="ey">// DRIE VRAGEN &middot; PRIJS OF GESPREK &middot; GEEN OFFERTETRAJECT</div>
+    <h1>Van één case tot <span class="acc">driehonderd</span></h1>
+    <p class="lead">Dezelfde drie vragen, of je er één nodig hebt of een vloot. Het aantal bepaalt
+      de route &mdash; niet wie je bent.</p>
+  </div>
+</section>
+
+<div class="spoor"><div class="wrap">
+  <div class="st nu" data-sp="1"><span class="nr">1</span><span class="tx"><span class="lb">Markt</span><span class="vl" data-vul="1">Kies</span></span></div>
+  <div class="st" data-sp="2"><span class="nr">2</span><span class="tx"><span class="lb">Gebruik</span><span class="vl" data-vul="2">&mdash;</span></span></div>
+  <div class="st" data-sp="3"><span class="nr">3</span><span class="tx"><span class="lb">Aantal</span><span class="vl" data-vul="3">&mdash;</span></span></div>
+</div></div>
+
+<section class="stap" id="stap1"><div class="wrap">
+  <div class="sk"><span class="ey">// STAP 01</span><h2>Hoeveel heb je nodig?</h2>
+    <span class="hint">dit bepaalt de route, niet wie je bent</span></div>
+  <div class="kaarten vier" data-groep="3">
+    <button class="kk" aria-pressed="false" data-w="één case" data-route="een"><span class="t">Eén case</span><span class="d">Uit voorraad of zelf getekend. Prijs direct in beeld.</span><span class="n">vanaf voorraad</span></button>
+    <button class="kk" aria-pressed="false" data-w="2 tot 10" data-route="klein"><span class="t">2 tot 10</span><span class="d">Zelf configureren, staffelprijs vanaf de tweede.</span><span class="n">staffel</span></button>
+    <button class="kk" aria-pressed="false" data-w="11 tot 50" data-route="raam"><span class="t">11 tot 50</span><span class="d">Vaste prijs per case, afroep wanneer je ze nodig hebt.</span><span class="n">raamcontract</span></button>
+    <button class="kk" aria-pressed="false" data-w="meer dan 50" data-route="serie"><span class="t">Meer dan 50</span><span class="d">Eigen tekening, prototype, en een plek in de planning.</span><span class="n">serieproductie</span></button>
+  </div>
+</div></section>
+
+<section class="stap dicht" id="stap2"><div class="wrap">
+  <div class="sk"><span class="ey">// STAP 02</span><h2>Wat moet de case doen?</h2>
+    <span class="hint">bepaalt schuim, beslag en keuring</span></div>
+  <div class="kaarten vijf" data-groep="2">
+    <button class="kk" aria-pressed="false" data-w="op tour"><span class="t">Op tour</span><span class="d">Wisselende locaties, dagelijks in en uit de bus.</span><span class="n">zwaarste beslag</span></button>
+    <button class="kk" aria-pressed="false" data-w="een vaste route"><span class="t">Vaste route</span><span class="d">Elke dag dezelfde rit, voorspelbare belasting.</span><span class="n">standaard</span></button>
+    <button class="kk" aria-pressed="false" data-w="demo en klantbezoek"><span class="t">Demo &amp; klantbezoek</span><span class="d">Open op tafel, apparatuur moet er goed uitzien.</span><span class="n">inlay op maat</span></button>
+    <button class="kk" aria-pressed="false" data-w="meesturen met je product"><span class="t">Meesturen</span><span class="d">De case gaat mee met je eigen product, jouw kleur en logo.</span><span class="n">oem</span></button>
+    <button class="kk" aria-pressed="false" data-w="keuringsplichtig transport"><span class="t">Keuringsplichtig</span><span class="d">Gecertificeerd transport, vastgelegde schokwaarden.</span><span class="n">met rapport</span></button>
+  </div>
+</div></section>
+
+<section class="stap dicht" id="stap3"><div class="wrap">
+  <div class="sk"><span class="ey">// STAP 03</span><h2>In welke markt zit je?</h2>
+    <span class="hint">533 cases in zes vakgebieden</span></div>
+  <div class="kaarten zes" data-groep="1">
+    <button class="kk" aria-pressed="false" data-w="AV &amp; licht"><span class="t">AV &amp; licht</span><span class="d">Moving heads, wash, dimmerpacks, line-array, truss-hardware.</span><span class="n">142 cases</span></button>
+    <button class="kk" aria-pressed="false" data-w="Backline &amp; muziek"><span class="t">Backline &amp; muziek</span><span class="d">Gitaren, versterkers, drumhardware, keyboards, pedalboards.</span><span class="n">118 cases</span></button>
+    <button class="kk" aria-pressed="false" data-w="Broadcast &amp; camera"><span class="t">Broadcast &amp; camera</span><span class="d">Camerabodies, optiek, statieven, monitoren, regiekoffers.</span><span class="n">86 cases</span></button>
+    <button class="kk" aria-pressed="false" data-w="Industrie &amp; meettechniek"><span class="t">Industrie &amp; meettechniek</span><span class="d">Servicekoffers, kalibratie, sensoren, inspectiedrones.</span><span class="n">73 cases</span></button>
+    <button class="kk" aria-pressed="false" data-w="Medisch &amp; lab"><span class="t">Medisch &amp; lab</span><span class="d">Meetapparatuur, endoscopie, demokoffers met inlay.</span><span class="n">64 cases</span></button>
+    <button class="kk" aria-pressed="false" data-w="Evenement &amp; beursbouw"><span class="t">Evenement &amp; beursbouw</span><span class="d">Standmateriaal, banners, displays, catering en samples.</span><span class="n">50 cases</span></button>
+  </div>
+</div></section>
+
+<section class="uit" id="uitkomst"><div class="wrap">
+  <div class="kopregel"><span class="ey">// JOUW ROUTE</span><h2 data-uit="titel">&mdash;</h2></div>
+  <p class="leeg">Kies hierboven je markt, het gebruik en het aantal &mdash; hier komt dan je route te staan, met prijs, levertijd en de volgende stap.</p>
+  <p class="sam" data-uit="sam">&mdash;</p>
+  <div class="vakken">
+    <div class="vk"><span class="lb">Prijs</span><span class="w" data-uit="prijs">&mdash;</span><p data-uit="prijs-t">&mdash;</p></div>
+    <div class="vk"><span class="lb">Levertijd</span><span class="w" data-uit="tijd">&mdash;</span><p data-uit="tijd-t">&mdash;</p></div>
+    <div class="vk"><span class="lb">Volgende stap</span><span class="w" data-uit="stap">&mdash;</span><p data-uit="stap-t">&mdash;</p></div>
+  </div>
+  <div class="acties">
+    <a class="btn btn-pri" href="#" data-uit="cta">&mdash;</a>
+    <button class="opnieuw" type="button" id="opnieuw">Opnieuw beginnen</button>
+  </div>
+</div></section>
+
+<footer><div class="wrap"><div class="cols">
+<div><div class="logo"><em>case</em>Builder.com</div><p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734">+31 (0)575 575734</a></p></div>
+<div><h5>Offerte aanvragen</h5><a href="#">Case aanvragen</a><a href="#">Maten laten controleren</a><a href="#">Series en staffels</a><a href="#">Zakelijk bestellen</a></div>
+<div><h5>Zelf configureren</h5><a href="configurator-v1.html">Naar de configurator</a><a href="#">Zo werkt het</a><a href="#">Herhaalorder</a><a href="#">Mijn configuraties</a></div>
+<div><h5>Flightcases</h5><a href="flightcases-v1.html">Alle flightcases</a><a href="#">Koffer</a><a href="#">Hoedcase</a><a href="#">Trunccase</a><a href="#">Rackcase enkel</a><a href="#">Rackcase dubbel</a></div>
+<div><h5>Service</h5><a href="#">Levertijden</a><a href="#">Verzending</a><a href="#">Onderdelen</a><a href="#">Zaagservice</a><a href="#">Over Proflite</a><a href="contact-v1.html">Contact</a></div>
+</div><div class="bot"><span>KVK 09123456</span><span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span></div></div></footer>
+
+<script src="assets/versies.js"></script>
+<script>
+(function () {
+  /* Vier routes, bepaald door het aantal. Markt en gebruik komen terug in de
+     samenvatting, zodat de uitkomst niet generiek aanvoelt. */
+  var ROUTES = {
+    een:   { titel:'Uit voorraad of zelf getekend',
+             prijs:'Direct', prijsT:'Je ziet de prijs in de configurator, zonder aanvraag.',
+             tijd:'10 werkdagen', tijdT:'Uit voorraad soms sneller; de configurator zegt het exact.',
+             stap:'Configureren', stapT:'Kies je model, vul de maten in, reken af.',
+             cta:'Start de configurator →' },
+    klein: { titel:'Zelf configureren met staffel',
+             prijs:'Direct', prijsT:'Staffelkorting vanaf de tweede case, meteen zichtbaar.',
+             tijd:'10–15 werkdagen', tijdT:'Iets langer dan één, want ze gaan samen in productie.',
+             stap:'Configureren', stapT:'Eén keer tekenen, aantal invullen, klaar.',
+             cta:'Start de configurator →' },
+    raam:  { titel:'Raamcontract met afroep',
+             prijs:'Vast per case', prijsT:'Eén prijs voor de hele looptijd, ongeacht wanneer je afroept.',
+             tijd:'Op afroep', tijdT:'Wij houden voorraad aan; jij bestelt wanneer het nodig is.',
+             stap:'Gesprek', stapT:'Een half uur om tekening en afroep vast te leggen.',
+             cta:'Plan een gesprek →' },
+    serie: { titel:'Serieproductie op eigen tekening',
+             prijs:'Op tekening', prijsT:'Prijs per case daalt fors bij deze aantallen.',
+             tijd:'Prototype eerst', tijdT:'Eerst één ter goedkeuring, daarna de serie in de planning.',
+             stap:'Prototype', stapT:'Wij tekenen, jij keurt, daarna gaat de serie erin.',
+             cta:'Vraag een prototype aan →' }
+  };
+
+  var keuze = { 1:null, 2:null, 3:null, route:null };
+  var traag = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function vul(sel, tekst) {
+    var el = document.querySelector('[data-uit="' + sel + '"]');
+    if (el) el.textContent = tekst;
+  }
+
+  function naar(el) {
+    /* scroll-margin-top houdt de vaste balk vrij, zodat de volgende stap
+       er niet onder verdwijnt. */
+    el.scrollIntoView({ behavior: traag ? 'auto' : 'smooth', block: 'start' });
+  }
+
+  /* De volgorde op het scherm is leidend, niet het nummer van de groep. De
+     secties zijn een keer omgedraaid; met een vaste nummering betekende de
+     eerste keuze meteen "klaar" en sprong je door naar de uitkomst. */
+  var stappen = Array.prototype.slice.call(document.querySelectorAll('.stap'));
+  function groepVan(stap) { return +stap.querySelector('[data-groep]').dataset.groep; }
+  var volgorde = stappen.map(groepVan);
+
+  function eersteOpen() {
+    for (var i = 0; i < volgorde.length; i++) if (!keuze[volgorde[i]]) return volgorde[i];
+    return null;
+  }
+
+  function spoorBij() {
+    var open = eersteOpen();
+    volgorde.forEach(function (n, i) {
+      var st = document.querySelector('[data-sp="' + n + '"]');
+      st.classList.toggle('klaar', !!keuze[n]);
+      st.classList.toggle('nu', n === open);
+      st.style.order = i;                        // het spoor volgt het scherm
+      st.querySelector('.nr').textContent = i + 1;
+      document.querySelector('[data-vul="' + n + '"]').innerHTML =
+        keuze[n] || (n === open ? 'Kies' : '&mdash;');
+    });
+  }
+
+  function uitkomst() {
+    var r = ROUTES[keuze.route];
+    if (!r) return;
+    vul('titel', r.titel);
+    document.querySelector('[data-uit="sam"]').innerHTML =
+      'Voor <b>' + keuze[1] + '</b>, gebruikt voor <b>' + keuze[2] +
+      '</b>, in een aantal van <b>' + keuze[3] + '</b>.';
+    vul('prijs', r.prijs); vul('prijs-t', r.prijsT);
+    vul('tijd',  r.tijd);  vul('tijd-t',  r.tijdT);
+    vul('stap',  r.stap);  vul('stap-t',  r.stapT);
+    vul('cta',   r.cta);
+    var u = document.getElementById('uitkomst');
+    u.classList.add('aan');
+    naar(u);
+  }
+
+  document.querySelectorAll('[data-groep]').forEach(function (groep) {
+    var n = +groep.dataset.groep;
+    groep.addEventListener('click', function (e) {
+      var knop = e.target.closest('.kk');
+      if (!knop) return;
+      groep.querySelectorAll('.kk').forEach(function (k) { k.setAttribute('aria-pressed', 'false'); });
+      knop.setAttribute('aria-pressed', 'true');
+      keuze[n] = knop.dataset.w;
+      if (knop.dataset.route) keuze.route = knop.dataset.route;
+      spoorBij();
+
+      // Pas als alle drie beantwoord zijn komt de uitkomst; anders naar de
+      // eerstvolgende vraag die nog openstaat.
+      var open = eersteOpen();
+      if (open === null) { uitkomst(); return; }
+      for (var i = 0; i < stappen.length; i++) {
+        if (groepVan(stappen[i]) === open) {
+          stappen[i].classList.remove('dicht');
+          naar(stappen[i]);
+          break;
+        }
+      }
+    });
+  });
+
+  document.getElementById('opnieuw').addEventListener('click', function () {
+    keuze = { 1:null, 2:null, 3:null, route:null };
+    document.querySelectorAll('.kk').forEach(function (k) { k.setAttribute('aria-pressed', 'false'); });
+    stappen.forEach(function (st, i) { st.classList.toggle('dicht', i > 0); });
+    document.getElementById('uitkomst').classList.remove('aan');
+    spoorBij();
+    naar(stappen[0]);
+  });
+
+  spoorBij();
+})();
+</script>
+</body>
+</html>

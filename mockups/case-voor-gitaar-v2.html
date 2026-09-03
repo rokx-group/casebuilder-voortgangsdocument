@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — case-voor categorie (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ── case-voor categorie — paginaspecifiek ── */
+.cvkop{background:var(--void);color:#fff;position:relative;overflow:hidden}
+.cvkop .wrap{padding-top:56px;padding-bottom:52px;display:grid;grid-template-columns:1.3fr 1fr;gap:56px;align-items:center}
+.cvkop h1{font-size:clamp(32px,4vw,52px);color:#fff;max-width:16ch}
+.cvkop p{color:rgba(255,255,255,.78);font-size:16.5px;margin-top:16px;max-width:54ch}
+.cvkop .beeld{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);aspect-ratio:4/3;
+  display:flex;align-items:flex-end;padding:16px;font-family:var(--mono);font-size:10px;
+  letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.apparaten{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:26px}
+.app{border:1px solid var(--rule);background:#fff;padding:22px 22px 24px;display:flex;flex-direction:column;transition:.15s}
+.app:hover{border-color:var(--dark);background:var(--bg)}
+.app h3{font-size:19px;line-height:1.1}
+.app .maat{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-top:8px}
+.app .go{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:14px;letter-spacing:.05em;
+  color:var(--blue);margin-top:18px}
+.app:hover .go{color:var(--dark)}
+.modelrij{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:26px}
+.verwant{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+@media(max-width:1080px){.cvkop .wrap{grid-template-columns:1fr;gap:30px}.apparaten{grid-template-columns:repeat(2,1fr)}.modelrij{grid-template-columns:1fr}}
+
+/* ══════════════════════════════════════════════════════════════
+   /case-voor/gitaar — v2, als productenlijst
+
+   v1 is een kiespagina: vier modellen, dan pas een case. v2 doet wat
+   een webshop doet: alle vijftien gitaarcases in één raster, met
+   filters links en per kaart de twee routes — direct bestellen of
+   configureren. Zelfde kaart als .case in brand.css, één regel erbij.
+   ══════════════════════════════════════════════════════════════ */
+.catkop{background:var(--bg);border-bottom:1px solid var(--rule);padding:34px 0 30px}
+.catkop h1{font-size:clamp(30px,3.6vw,46px);margin-top:10px}
+.catkop p{color:var(--mute);max-width:60ch;margin-top:10px;font-size:15.5px}
+.lijst{display:grid;grid-template-columns:240px 1fr;gap:32px;align-items:start;padding:36px 0 70px}
+.filters{border:1px solid var(--rule);background:#fff;position:sticky;top:134px}
+.fgroep{padding:16px 18px;border-bottom:1px solid var(--rule)}
+.fgroep:last-child{border-bottom:0}
+.fgroep h4{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:10px}
+.fgroep label{display:flex;align-items:center;gap:9px;font-size:14px;padding:4px 0;cursor:pointer}
+.fgroep label input{accent-color:var(--dark);width:15px;height:15px}
+.fgroep label .n{margin-left:auto;font-family:var(--mono);font-size:9.5px;color:var(--faint,#8B9BA6)}
+.balk{display:flex;align-items:baseline;gap:18px;margin-bottom:16px;flex-wrap:wrap}
+.balk .tel{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.balk select{margin-left:auto;font-family:var(--body);font-size:13.5px;border:1px solid var(--rule);background:#fff;padding:8px 12px}
+.raster{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pk{border:1px solid var(--rule);background:#fff;display:flex;flex-direction:column;transition:.15s}
+.pk:hover{border-color:var(--dark)}
+.pk .im{background:var(--bg);aspect-ratio:4/3;overflow:hidden;position:relative}
+.pk .im img{width:100%;height:100%;object-fit:cover}
+.pk .model{position:absolute;top:0;left:0;background:var(--dark);color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:5px 9px}
+.pk .voorraad{position:absolute;top:0;right:0;background:#fff;border-left:1px solid var(--rule);border-bottom:1px solid var(--rule);font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--keep,#2F7355);padding:5px 9px}
+.pk .bd{padding:14px 16px 16px;border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:5px;flex:1}
+.pk h3{font-size:18px;line-height:1.05}
+.pk .maat{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.pk .prijs{font-family:var(--disp);text-transform:uppercase;font-size:20px;letter-spacing:.03em;color:var(--dark);margin-top:6px}
+.pk .prijs small{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--mute);margin-left:6px;text-transform:uppercase}
+/* Elke case op /case-voor is een vaste kist voor één voorwerp: maten
+   liggen vast, alleen kleur en logo zijn te kiezen. Is er nog geen
+   ontwerp voor dat voorwerp, dan tonen we het product wél — maar de
+   enige knop is dan de offerte. Configureren hoort niet op deze pagina;
+   dat is de andere route. */
+.pk .acties{display:flex;gap:8px;margin-top:auto;padding-top:12px}
+.pk .acties .btn{flex:1;justify-content:center;font-size:13px;padding:10px 8px}
+@media(max-width:1000px){.lijst{grid-template-columns:1fr}.filters{position:static}.raster{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.raster{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="main">
+  <div class="wrap">
+    <div class="logo"><em>case</em>Builder.com</div>
+    <form class="search" onsubmit="return false">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+      <input placeholder="Zoek op case, onderdeel of artikelnummer…" aria-label="Zoeken">
+    </form>
+    <div class="hdr-r">
+      <a href="#" class="stil">Inloggen</a>
+      <a href="#">Winkelwagen</a>
+    </div>
+  </div>
+</header>
+<nav class="primary">
+  <div class="wrap">
+    <a href="#">Case aanvragen</a>
+    <a href="case-voor-v1.html" class="on">Wat ga je vervoeren?</a>
+    <a href="configurator-v1.html">Zelf configureren</a>
+    <a href="flightcases-v1.html">Flightcases</a>
+    <a href="branches.html">Branches</a>
+    <a href="service-hub-v1.html">Service</a>
+    <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#">NL &#9662;</a></div>
+  </div>
+</nav>
+<div class="crumbs donker">
+  <div class="wrap">
+    <a href="case-voor-v1.html">Wat ga je vervoeren?</a><span class="sep">/</span><span>Gitaar</span>
+  </div>
+</div>
+
+<div class="cvkop ruit ruit-dark ruit-veld">
+  <div class="wrap">
+    <div>
+      <div class="ey">// WAT GA JE VERVOEREN — GITAAR</div>
+      <h1>Flightcases voor gitaren</h1>
+      <p>Een gitaar breekt op twee plekken: de hals bij de kopplaat, en de rand van de kast.
+        Een case die past houdt het instrument op die twee punten vast — en laat de rest los,
+        zodat trillingen niet in het hout gaan zitten.</p>
+    </div>
+    <div class="beeld">foto — gitaarcase open, met inleg</div>
+  </div>
+</div>
+
+
+<section class="catkop"><div class="wrap">
+  <span class="ey ey-dark">// Backline &amp; muziek &middot; Elektrische gitaren</span>
+  <h1>Flightcases voor gitaren</h1>
+  <p>Vijftien cases, elk gebouwd op een instrument dat we vaker zien. Elke case heeft vaste maten &mdash; je kiest alleen kleur en logo. Staat je model er nog zonder ontwerp bij, dan vraag je een offerte aan.</p>
+</div></section>
+<div class="wrap lijst">
+  <aside class="filters">
+    <div class="fgroep"><h4>Model</h4>
+      <label><input type="checkbox" checked> Koffer<span class="n">10</span></label>
+      <label><input type="checkbox" checked> Hoedcase<span class="n">3</span></label>
+      <label><input type="checkbox" checked> Trunccase<span class="n">2</span></label></div>
+    <div class="fgroep"><h4>Instrument</h4>
+      <label><input type="checkbox" checked> Elektrisch<span class="n">6</span></label>
+      <label><input type="checkbox" checked> Akoestisch<span class="n">2</span></label>
+      <label><input type="checkbox" checked> Bas<span class="n">2</span></label>
+      <label><input type="checkbox" checked> Meerdere<span class="n">2</span></label>
+      <label><input type="checkbox" checked> Pedalboard<span class="n">2</span></label></div>
+    <div class="fgroep"><h4>Beschikbaarheid</h4>
+      <label><input type="checkbox"> Met ontwerp<span class="n">9</span></label>
+      <label><input type="checkbox"> Nog geen ontwerp<span class="n">6</span></label></div>
+    <div class="fgroep"><h4>Prijs</h4>
+      <label><input type="checkbox"> tot &euro; 200<span class="n">7</span></label>
+      <label><input type="checkbox"> &euro; 200 &ndash; 300<span class="n">5</span></label>
+      <label><input type="checkbox"> boven &euro; 300<span class="n">3</span></label></div>
+  </aside>
+  <div>
+    <div class="balk"><span class="tel">15 cases</span><select><option>Meest gekozen</option><option>Prijs oplopend</option><option>Prijs aflopend</option><option>Nieuwste</option></select></div>
+    <div class="raster">
+      <a class="pk" href="case-voor-gibson-les-paul-v1.html">
+        <div class="im"><span class="model">Koffer</span><span class="voorraad">Vaste maat</span><img src="assets/flightcase-koffer.jpg" alt=""></div>
+        <div class="bd"><h3>Case voor Gibson Les Paul</h3><span class="maat">Binnenmaat 1.010 × 400 × 145 mm</span>
+          <span class="prijs">vanaf &euro; 189<small>excl. btw</small></span>
+          <div class="acties"><span class="btn btn-dark btn-sm">Bestellen</span><span class="btn btn-out btn-sm">Kleur en logo</span></div>
+        </div></a>
+      <a class="pk" href="case-voor-gibson-les-paul-v1.html">
+        <div class="im"><span class="model">Koffer</span><span class="voorraad">Vaste maat</span><img src="assets/flightcase-hoedcase.jpg" alt=""></div>
+        <div class="bd"><h3>Case voor Fender Stratocaster</h3><span class="maat">Binnenmaat 1.005 × 380 × 130 mm</span>
+          <span class="prijs">vanaf &euro; 189<small>excl. btw</small></span>
+          <div class="acties"><span class="btn btn-dark btn-sm">Bestellen</span><span class="btn btn-out btn-sm">Kleur en logo</span></div>
+        </div></a>
+      <a class="pk" href="case-voor-gibson-les-paul-v1.html">
+        <div class="im"><span class="model">Koffer</span><span class="voorraad">Vaste maat</span><img src="assets/flightcase-trunccase.jpg" alt=""></div>
+        <div class="bd"><h3>Case voor Fender Telecaster</h3><span class="maat">Binnenmaat 1.000 × 370 × 125 mm</span>
+          <span class="prijs">vanaf &euro; 189<small>excl. btw</small></span>
+          <div class="acties"><span class="btn btn-dark btn-sm">Bestellen</span><span class="btn btn-out btn-sm">Kleur en logo</span></div>
+        </div></a>
+      <a class="pk" href="case-voor-gibson-les-paul-v1.html">
+        <div class="im"><span class="model">Koffer</span><img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt=""></div>
+        <div class="bd"><h3>Case voor Gibson SG</h3><span class="maat">Binnenmaat 990 × 360 × 130 mm</span>
+          <span class="prijs">vanaf &euro; 185<small>excl. btw</small></span>
+          <div class="acties"><span class="btn btn-out btn-sm" style="flex:1">Offerte aanvragen</span></div>
+        </div></a>
+      <a class="pk" href="case-voor-gibson-les-paul-v1.html">
+        <div class="im"><span class="model">Koffer</span><span class="voorraad">Vaste maat</span><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt=""></div>
+        <div class="bd"><h3>Case voor Gibson ES-335</h3><span class="maat">Binnenmaat 1.060 × 440 × 140 mm</span>
+          <span class="prijs">vanaf &euro; 219<small>excl. btw</small></span>
+          <div class="acties"><span class="btn btn-dark btn-sm">Bestellen</span><span class="btn btn-out btn-sm">Kleur en logo</span></div>
+        </div></a>
+      <a class="pk" href="case-voor-gibson-les-paul-v1.html">
+        <div class="im"><span class="model">Koffer</span><img src="assets/flightcase-koffer.jpg" alt=""></div>
+        <div class="bd"><h3>Case voor PRS Custom 24</h3><span class="maat">Binnenmaat 1.000 × 380 × 130 mm</span>
+          <span class="prijs">vanaf &euro; 189<small>excl. btw</small></span>
+          <div class="acties"><span class="btn btn-out btn-sm" style="flex:1">Offerte aanvragen</span></div>
+        </div></a>
+      <a class="pk" href="case-voor-gibson-les-paul-v1.html">
+        <div class="im"><span class="model">Koffer</span><span class="voorraad">Vaste maat</span><img src="assets/flightcase-hoedcase.jpg" alt=""></div>
+        <div class="bd"><h3>Case voor Akoestische dreadnought</h3><span class="maat">Binnenmaat 1.080 × 430 × 150 mm</span>
+          <span class="prijs">vanaf &euro; 209<small>excl. btw</small></span>
+          <div class="acties"><span class="btn btn-dark btn-sm">Bestellen</span><span class="btn btn-out btn-sm">Kleur en logo</span></div>
+        </div></a>
+      <a class="pk" href="case-voor-gibson-les-paul-v1.html">
+        <div class="im"><span class="model">Koffer</span><img src="assets/flightcase-trunccase.jpg" alt=""></div>
+        <div class="bd"><h3>Case voor Klassieke gitaar</h3><span class="maat">Binnenmaat 1.020 × 400 × 140 mm</span>
+          <span class="prijs">vanaf &euro; 199<small>excl. btw</small></span>
+          <div class="acties"><span class="btn btn-out btn-sm" style="flex:1">Offerte aanvragen</span></div>
+        </div></a>
+      <a class="pk" href="case-voor-gibson-les-paul-v1.html">
+        <div class="im"><span class="model">Koffer</span><span class="voorraad">Vaste maat</span><img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt=""></div>
+        <div class="bd"><h3>Case voor Basgitaar 4-snarig</h3><span class="maat">Binnenmaat 1.180 × 380 × 130 mm</span>
+          <span class="prijs">vanaf &euro; 215<small>excl. btw</small></span>
+          <div class="acties"><span class="btn btn-dark btn-sm">Bestellen</span><span class="btn btn-out btn-sm">Kleur en logo</span></div>
+        </div></a>
+      <a class="pk" href="case-voor-gibson-les-paul-v1.html">
+        <div class="im"><span class="model">Koffer</span><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt=""></div>
+        <div class="bd"><h3>Case voor Basgitaar 5-snarig</h3><span class="maat">Binnenmaat 1.190 × 400 × 135 mm</span>
+          <span class="prijs">vanaf &euro; 219<small>excl. btw</small></span>
+          <div class="acties"><span class="btn btn-out btn-sm" style="flex:1">Offerte aanvragen</span></div>
+        </div></a>
+      <a class="pk" href="case-voor-gibson-les-paul-v1.html">
+        <div class="im"><span class="model">Hoedcase</span><span class="voorraad">Vaste maat</span><img src="assets/flightcase-koffer.jpg" alt=""></div>
+        <div class="bd"><h3>Case voor Twee gitaren</h3><span class="maat">Binnenmaat 1.040 × 420 × 260 mm</span>
+          <span class="prijs">vanaf &euro; 289<small>excl. btw</small></span>
+          <div class="acties"><span class="btn btn-dark btn-sm">Bestellen</span><span class="btn btn-out btn-sm">Kleur en logo</span></div>
+        </div></a>
+      <a class="pk" href="case-voor-gibson-les-paul-v1.html">
+        <div class="im"><span class="model">Trunccase</span><img src="assets/flightcase-hoedcase.jpg" alt=""></div>
+        <div class="bd"><h3>Case voor Drie gitaren, staand</h3><span class="maat">Binnenmaat 1.120 × 520 × 480 mm</span>
+          <span class="prijs">vanaf &euro; 389<small>excl. btw</small></span>
+          <div class="acties"><span class="btn btn-out btn-sm" style="flex:1">Offerte aanvragen</span></div>
+        </div></a>
+      <a class="pk" href="case-voor-gibson-les-paul-v1.html">
+        <div class="im"><span class="model">Hoedcase</span><span class="voorraad">Vaste maat</span><img src="assets/flightcase-trunccase.jpg" alt=""></div>
+        <div class="bd"><h3>Case voor Pedalboard 60 cm</h3><span class="maat">Binnenmaat 620 × 320 × 140 mm</span>
+          <span class="prijs">vanaf &euro; 165<small>excl. btw</small></span>
+          <div class="acties"><span class="btn btn-dark btn-sm">Bestellen</span><span class="btn btn-out btn-sm">Kleur en logo</span></div>
+        </div></a>
+      <a class="pk" href="case-voor-gibson-les-paul-v1.html">
+        <div class="im"><span class="model">Hoedcase</span><span class="voorraad">Vaste maat</span><img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt=""></div>
+        <div class="bd"><h3>Case voor Pedalboard 90 cm</h3><span class="maat">Binnenmaat 900 × 400 × 160 mm</span>
+          <span class="prijs">vanaf &euro; 215<small>excl. btw</small></span>
+          <div class="acties"><span class="btn btn-dark btn-sm">Bestellen</span><span class="btn btn-out btn-sm">Kleur en logo</span></div>
+        </div></a>
+      <a class="pk" href="case-voor-gibson-les-paul-v1.html">
+        <div class="im"><span class="model">Trunccase</span><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt=""></div>
+        <div class="bd"><h3>Case voor Gitaar + versterker</h3><span class="maat">Binnenmaat 1.100 × 560 × 640 mm</span>
+          <span class="prijs">vanaf &euro; 445<small>excl. btw</small></span>
+          <div class="acties"><span class="btn btn-out btn-sm" style="flex:1">Offerte aanvragen</span></div>
+        </div></a>
+    </div>
+  </div>
+</div>
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="logo"><em>case</em>Builder.com</div>
+        <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734">+31 (0)575 575734</a></p>
+      </div>
+      <div><h5>Offerte aanvragen</h5><a href="#">Case aanvragen</a><a href="#">Maten laten controleren</a><a href="#">Series en staffels</a><a href="#">Zakelijk bestellen</a></div>
+      <div><h5>Zelf configureren</h5><a href="#">Naar de configurator</a><a href="#">Zo werkt het</a><a href="#">Herhaalorder</a><a href="#">Mijn configuraties</a></div>
+      <div><h5>Flightcases</h5><a href="#">Alle flightcases</a><a href="#">Koffer</a><a href="#">Hoedcase</a><a href="#">Trunccase</a><a href="#">Rackcase enkel</a><a href="#">Rackcase dubbel</a></div>
+      <div><h5>Service</h5><a href="#">Levertijden</a><a href="#">Verzending</a><a href="#">Onderdelen</a><a href="#">Zaagservice</a><a href="#">Over Proflite</a><a href="contact-v1.html">Contact</a></div>
+    </div>
+    <div class="bot"><span>KVK 09123456</span><span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span></div>
+  </div>
+</footer>
+<script src="assets/vouw.js"></script>
+<script src="assets/versies.js"></script>
+</body>
+</html>

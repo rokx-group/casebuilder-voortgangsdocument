@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — hero's, drie maten (voorstel)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+body{background:var(--bg)}
+
+/* ── het voorstel ─────────────────────────────────────────────
+   Eén component, drie maten. De maat volgt de rol van de pagina,
+   niet de smaak van de dag. Dat is het hele punt: nu declareert
+   elke pagina zijn eigen hero, dus verloopt het onvermijdelijk. */
+.nk{background:var(--void);color:#fff;position:relative;overflow:hidden}
+.nk.hoog  {padding:88px 0 72px}   /* overzicht: oriënteren én overtuigen */
+.nk.midden{padding:60px 0 52px}   /* aanbod of proces                   */
+.nk.laag  {padding:32px 0 28px}   /* taak: inhoud moet direct in beeld  */
+.nk .wrap{position:relative;z-index:1}
+.nk h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:.02em;
+  color:#fff;line-height:.92;margin:14px 0 0}
+.nk.hoog h1  {font-size:clamp(40px,5vw,68px);max-width:14ch}
+.nk.midden h1{font-size:clamp(36px,4.4vw,56px);max-width:15ch}
+.nk.laag h1  {font-size:clamp(32px,3.6vw,46px);max-width:17ch}
+.nk h1 .acc{color:var(--cyan)}
+.nk .lead{margin-top:14px;max-width:60ch;font-size:16px;color:rgba(255,255,255,.78)}
+.nk .acties{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+
+/* ── de pagina zelf ── */
+.blad{background:var(--void);color:#fff;padding:26px 32px}
+.blad h1{color:#fff;font-size:26px;line-height:1;margin:8px 0 0}
+.blad .mono{color:var(--cyan);display:block}
+.blad p{font-size:14px;color:rgba(255,255,255,.62);margin-top:10px;max-width:82ch}
+.vel{max-width:var(--wrap);margin:0 auto;padding:30px 32px 60px}
+.kaart{background:var(--white);border:1px solid var(--rule);margin-bottom:28px}
+.kaart>.kop{padding:16px 22px;border-bottom:1px solid var(--rule);display:flex;
+  align-items:baseline;gap:12px;flex-wrap:wrap}
+.kaart>.kop h2{font-size:20px}
+.kaart>.kop .mono{color:var(--blue)}
+.kaart>.kop .maat{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:var(--mute)}
+.strook{padding:12px 22px;background:var(--lightblue);border-bottom:1px solid var(--rule);
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--dark)}
+.strook.nu{background:#F6E9E9;color:#7A2E2E}
+.wat{padding:16px 22px;font-size:14px;color:var(--mute);border-top:1px solid var(--rule)}
+.wat b{color:var(--dark)}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--blue);text-align:left;padding:0 12px 9px 0;border-bottom:1px solid var(--rule)}
+td{padding:9px 12px 9px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+td.m{font-family:var(--mono);font-size:12px;color:var(--mute);white-space:nowrap}
+
+/* ── zo staat het nu, letterlijk overgenomen ── */
+.oud-vraag{background:var(--void);color:#fff;position:relative;overflow:hidden;padding:28px 0 26px}
+.oud-conf {background:var(--void);color:#fff;position:relative;overflow:hidden;padding:66px 0 62px}
+.oud-spel {background:var(--void);color:#fff;position:relative;overflow:hidden;padding:68px 0 64px}
+.oud-bran {background:var(--void);color:#fff;position:relative;overflow:hidden;padding:78px 0 0}
+.oud-bran .grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:end;padding-bottom:64px}
+[class^="oud-"] h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:.02em;
+  color:#fff;line-height:.92;margin:14px 0 0;font-size:clamp(38px,4.8vw,62px);max-width:14ch}
+[class^="oud-"] h1 .acc{color:var(--cyan)}
+[class^="oud-"] .lead,[class^="oud-"] .sub{margin-top:14px;max-width:60ch;font-size:16px;color:rgba(255,255,255,.78)}
+[class^="oud-"] .acties{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+[class^="oud-"] .wrap{position:relative;z-index:1}
+.veld{display:flex;gap:0;margin-top:20px;max-width:640px}
+.veld input{flex:1;padding:13px 15px;border:0;font:inherit;font-size:14px}
+.veld button{padding:13px 22px;border:0;background:var(--cyan);color:var(--void);
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+</style>
+</head>
+<body>
+
+<div class="blad">
+  <span class="mono">// hero's &middot; voorstel, nog niets gewijzigd</span>
+  <h1>Drie maten in plaats van vier toevalligheden</h1>
+  <p>Elke pagina declareert nu zijn eigen hero. Daardoor staan er vier hoogtes waarvan er drie
+    bijna gelijk zijn &mdash; dat leest niet als hiërarchie maar als verloop. Hieronder per pagina
+    eerst hoe het nu is, dan het voorstel. De bestaande pagina&rsquo;s zijn niet aangeraakt.</p>
+</div>
+
+<div class="vel">
+
+  <div class="kaart">
+    <div class="kop"><span class="mono">// 01</span><h2>Wat er nu staat</h2></div>
+    <div style="padding:20px 22px">
+      <table>
+        <tr><th>Pagina</th><th>Klasse</th><th>Hoogte</th><th>Sier</th><th>Aanhef</th></tr>
+        <tr><td>/case-voor</td><td class="m">.vraag</td><td class="m">28 + 26 = 54</td><td>ruit</td><td class="m">je</td></tr>
+        <tr><td>/configurator</td><td class="m">.kop</td><td class="m">66 + 62 = 128</td><td>hoekbeslag</td><td class="m">je</td></tr>
+        <tr><td>/branches &middot; grote spelers</td><td class="m">.kop</td><td class="m">68 + 64 = 132</td><td>ruit</td><td class="m">gemengd</td></tr>
+        <tr><td>/branches &middot; markten</td><td class="m">.kop</td><td class="m">78 + 64 = 142</td><td>hoekbeslag</td><td class="m">u</td></tr>
+      </table>
+      <p style="font-size:14px;color:var(--mute);margin-top:16px">Twee klassenamen voor dezelfde rol,
+        vier hoogtes, en de sier wisselt per pagina zonder regel. Het verschil tussen 128 en 142
+        ziet niemand als bedoeling.</p>
+    </div>
+  </div>
+
+  <div class="kaart">
+    <div class="kop"><span class="mono">// 02</span><h2>Het voorstel: drie maten</h2></div>
+    <div style="padding:20px 22px">
+      <table>
+        <tr><th>Maat</th><th>Hoogte</th><th>Wanneer</th><th>Welke pagina</th></tr>
+        <tr><td class="m">.kop.hoog</td><td class="m">88 + 72 = 160</td><td>Overzicht dat moet oriënteren én overtuigen</td><td>/branches</td></tr>
+        <tr><td class="m">.kop.midden</td><td class="m">60 + 52 = 112</td><td>Een aanbod of een proces uitleggen</td><td>/configurator</td></tr>
+        <tr><td class="m">.kop.laag</td><td class="m">32 + 28 = 60</td><td>Taak of routeren &mdash; inhoud moet meteen in beeld</td><td>/case-voor</td></tr>
+      </table>
+      <p style="font-size:14px;color:var(--mute);margin-top:16px">Eén component, drie modifiers.
+        Een pagina kiest een maat; hij verzint er geen. Daarnaast één vast recept binnenin:
+        <b>eyebrow altijd <code>// KAPITAAL</code> in mono</b>, één accentwoord in de kop,
+        lead op 60 tekens, en ruit én hoekbeslag samen in plaats van per pagina één van de twee.</p>
+    </div>
+  </div>
+
+  <div class="kaart">
+    <div class="kop"><span class="mono">// 03</span><h2>/case-voor</h2><span class="maat">54 &rarr; 60 px &middot; maat: laag</span></div>
+    <div class="strook nu">Nu &middot; .vraag &middot; 54 px</div>
+    <div class="oud-vraag ruit ruit-dark ruit-aanzet"><div class="wrap">
+      <div class="ey">// 533 CASES &middot; 38 CATEGORIE&Euml;N &middot; ALLES OOK OP MAAT</div>
+      <h1>Wat ga je <span class="acc">vervoeren?</span></h1>
+      <p class="sub">Zeg wat erin gaat, dan bepalen wij de maten. Je hoeft niet te weten hoe een flightcase heet.</p>
+      <form class="veld" onsubmit="return false"><input placeholder="Bijvoorbeeld: Gibson Les Paul, 19&quot; rack 6 HE, Midas M32&hellip;" aria-label="Wat ga je vervoeren?"><button type="submit">Zoek</button></form>
+    </div></div>
+    <div class="strook">Voorstel &middot; .kop.laag &middot; 60 px</div>
+    <div class="nk laag ruit ruit-dark ruit-aanzet">
+      <span class="hk tl"></span><span class="hk tr"></span>
+      <div class="wrap">
+        <div class="ey">// 533 CASES &middot; 38 CATEGORIE&Euml;N &middot; ALLES OOK OP MAAT</div>
+        <h1>Wat ga je <span class="acc">vervoeren?</span></h1>
+        <p class="lead">Zeg wat erin gaat, dan bepalen wij de maten. Je hoeft niet te weten hoe een flightcase heet.</p>
+        <form class="veld" onsubmit="return false"><input placeholder="Bijvoorbeeld: Gibson Les Paul, 19&quot; rack 6 HE, Midas M32&hellip;" aria-label="Wat ga je vervoeren?"><button type="submit">Zoek</button></form>
+      </div>
+    </div>
+    <div class="wat"><b>Wat verandert.</b> Vrijwel niets in hoogte &mdash; 54 was al goed voor een
+      routeerpagina, want die zes toepassingen moeten direct in beeld. Wél krijgt hij hoekbeslag,
+      zodat hij bij de rest hoort, en heet de klasse nu <code>.kop.laag</code> in plaats van
+      <code>.vraag</code>. Deze pagina had het eyebrow-formaat al goed; dat wordt de norm.</div>
+  </div>
+
+  <div class="kaart">
+    <div class="kop"><span class="mono">// 04</span><h2>/configurator</h2><span class="maat">128 &rarr; 112 px &middot; maat: midden</span></div>
+    <div class="strook nu">Nu &middot; .kop &middot; 128 px &middot; tweekoloms</div>
+    <div class="oud-conf">
+      <span class="hk tl"></span><span class="hk tr"></span>
+      <div class="wrap">
+        <span class="ey">Zelf configureren</span>
+        <h1>Teken je case <span class="acc">zelf</span></h1>
+        <p class="lead">Vijf modellen, vijf stappen, en aan het eind een prijs &mdash; geen offertetraject. Je hoeft niets te weten van multiplex of hoekprofiel.</p>
+        <div class="acties"><button class="btn btn-pri">Start de configurator</button><a class="btn btn-ghost" href="case-voor-v1.html">Past mijn voorwerp erin?</a></div>
+      </div>
+    </div>
+    <div class="strook">Voorstel &middot; .kop.midden &middot; 112 px</div>
+    <div class="nk midden ruit ruit-dark ruit-aanzet">
+      <span class="hk tl"></span><span class="hk tr"></span>
+      <div class="wrap">
+        <div class="ey">// ZELF CONFIGUREREN &middot; VIJF STAPPEN &middot; PRIJS AAN HET EIND</div>
+        <h1>Teken je case <span class="acc">zelf</span></h1>
+        <p class="lead">Vijf modellen, vijf stappen, en aan het eind een prijs &mdash; geen offertetraject. Je hoeft niets te weten van multiplex of hoekprofiel.</p>
+        <div class="acties"><button class="btn btn-pri">Start de configurator</button><a class="btn btn-ghost" href="case-voor-v1.html">Past mijn voorwerp erin?</a></div>
+      </div>
+    </div>
+    <div class="wat"><b>Wat verandert.</b> Zestien pixel lager, zodat het verschil met /branches
+      een besluit wordt in plaats van ruis. Het eyebrow gaat van <code>Zelf configureren</code>
+      naar het mono-formaat met <code>//</code>, en draagt nu informatie in plaats van de kop te
+      herhalen. De ruit komt erbij naast het hoekbeslag.</div>
+  </div>
+
+  <div class="kaart">
+    <div class="kop"><span class="mono">// 05</span><h2>/branches</h2><span class="maat">132 en 142 &rarr; 160 px &middot; maat: hoog</span></div>
+    <div class="strook nu">Nu &middot; twee ontwerpen, twee hoogtes &middot; 132 en 142 px</div>
+    <div class="oud-spel ruit ruit-dark ruit-aanzet"><div class="wrap">
+      <span class="ey">Voor organisaties</span>
+      <h1>Als je niet <span class="acc">&eacute;&eacute;n</span> case koopt</h1>
+      <p class="lead">Aanbesteding, raamcontract, een vloot van driehonderd: organisaties kopen anders dan een crew met &eacute;&eacute;n moving head.</p>
+      <div class="acties"><a class="btn btn-pri" href="#">Plan een gesprek</a><a class="btn btn-ghost" href="#">Zakelijk bestellen</a></div>
+    </div></div>
+    <div class="oud-bran">
+      <span class="hk tl"></span><span class="hk tr"></span>
+      <div class="wrap grid">
+        <div>
+          <span class="ey">Ons toepassing</span>
+          <h1>Voor wie wij <span class="acc">cases</span> bouwen</h1>
+          <p class="lead">Sinds 1987 bouwen we in Doesburg cases voor apparatuur die niet stuk mag.</p>
+        </div>
+        <div style="border-left:1.5px solid rgba(255,255,255,.2);padding-left:26px">
+          <p style="color:rgba(255,255,255,.7);font-size:14.5px">Een case voor een spectrumanalyser is iets anders dan een case voor een moving head. Andere schokwaarden, ander schuim, andere keuring.</p>
+        </div>
+      </div>
+    </div>
+    <div class="strook">Voorstel &middot; .kop.hoog &middot; 160 px &middot; &eacute;&eacute;n hero voor beide ontwerpen</div>
+    <div class="nk hoog ruit ruit-dark ruit-aanzet">
+      <span class="hk tl"></span><span class="hk tr"></span>
+      <div class="wrap">
+        <div class="ey">// 14 MARKTEN &middot; 6 UITGEWERKT &middot; SINDS 1987 IN DOESBURG</div>
+        <h1>Waar onze cases <span class="acc">terechtkomen</span></h1>
+        <p class="lead">Een case voor een spectrumanalyser is iets anders dan een case voor een moving head:
+          andere schokwaarden, ander schuim, andere keuring. Hieronder per markt wat wij daar tegenkomen &mdash;
+          en wat dat betekent voor de case die je nodig hebt.</p>
+        <div class="acties"><a class="btn btn-pri" href="#">Zoek je markt</a><a class="btn btn-ghost" href="#">Staat die er niet tussen?</a></div>
+      </div>
+    </div>
+    <div class="wat"><b>Wat verandert.</b> De twee ontwerpen hadden elk hun eigen hero op bijna
+      dezelfde hoogte. Nu is er één, en die is bewust de hoogste van de drie: dit is de pagina die
+      iemand moet oriënteren én overtuigen. Het tweede tekstvak uit het rechterkolommetje is de lead
+      geworden &mdash; het stond daar als losse kolom terwijl het gewoon de kern van het verhaal is.
+      Aanhef op <code>je</code>, gelijk aan de rest van de site.</div>
+  </div>
+
+  <div class="kaart">
+    <div class="kop"><span class="mono">// 06</span><h2>Wat dit oplost</h2></div>
+    <div style="padding:20px 22px">
+      <table>
+        <tr><th>Was</th><th>Wordt</th></tr>
+        <tr><td>Vier hoogtes: 54, 128, 132, 142</td><td>Drie maten: 60, 112, 160 &mdash; elk verschil zichtbaar bedoeld</td></tr>
+        <tr><td>Twee klassenamen (<code>.vraag</code>, <code>.kop</code>)</td><td>Eén component met drie modifiers</td></tr>
+        <tr><td>Sier wisselt per pagina zonder regel</td><td>Ruit én hoekbeslag op alle drie</td></tr>
+        <tr><td>Eyebrow soms mono met <code>//</code>, soms niet</td><td>Altijd mono met <code>//</code>, en draagt informatie</td></tr>
+        <tr><td>Aanhef wisselt tussen <code>je</code> en <code>u</code></td><td>Overal <code>je</code></td></tr>
+      </table>
+      <p style="font-size:14px;color:var(--mute);margin-top:16px">De drie maten horen in
+        <code>brand.css</code>, niet in de pagina&rsquo;s. Zolang elke pagina zijn eigen hero
+        declareert, kan dit binnen een maand opnieuw wegdrijven.</p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
