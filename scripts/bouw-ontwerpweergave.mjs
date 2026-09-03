@@ -83,7 +83,16 @@ function schaalIn(css, wortelSel) {
 }
 
 function tussen(tekst, start, eind, wat) {
-  const a = tekst.indexOf(start);
+  // <body> mag attributen dragen (bijv. data-film op de videovarianten);
+  // zoek daarom op de opening en spring naar het sluitende haakje.
+  let a = tekst.indexOf(start);
+  if (a === -1 && start === "<body>") {
+    const m = tekst.match(/<body\b[^>]*>/);
+    if (m) {
+      const b0 = tekst.indexOf(eind, m.index + m[0].length);
+      if (b0 !== -1) return { a: m.index, b: b0, inhoud: tekst.slice(m.index + m[0].length, b0) };
+    }
+  }
   const b = a === -1 ? -1 : tekst.indexOf(eind, a + start.length);
   if (a === -1 || b === -1) throw new Error(`${wat} niet gevonden`);
   return { a, b, inhoud: tekst.slice(a + start.length, b) };
@@ -98,7 +107,14 @@ const html = {};
  * hetzelfde sjabloon naast elkaar te bekijken zijn zonder dat de een de ander
  * overschrijft. Handig als er aan twee versies tegelijk gewerkt wordt.
  */
-function variantenVan(bestand) {
+/* Sommige ontwerpen zijn op een vast raster getekend en breken in de
+   ingesloten weergave, die smaller is dan een venster. Die tonen we
+   niet verkleind maar alleen als wireframe, met de knop naar het
+   volledige scherm — een kapot ontwerp beoordeelt niemand goed. */
+const NIET_RESPONSIEF = ["case-voor-resultaat", "case-voor-categorie"];
+
+function variantenVan(bestand, naam) {
+  if (naam && NIET_RESPONSIEF.includes(naam)) return [{ id: "wireframe", bestand }];
   const map = join(wortel, dirname(bestand));
   const stam = basename(bestand, ".html");
   // X.html is de wireframe; elk bestand X-<iets>.html is een ontwerpversie.
@@ -115,7 +131,7 @@ function variantenVan(bestand) {
 }
 
 for (const { naam, bestand, overslaan = [] } of PAGINAS) {
-  for (const variant of variantenVan(bestand)) {
+  for (const variant of variantenVan(bestand, naam)) {
     if (overslaan.includes(variant.id)) continue;
     const sleutel = `${naam}-${variant.id}`;
     const bron = readFileSync(join(wortel, variant.bestand), "utf8");
