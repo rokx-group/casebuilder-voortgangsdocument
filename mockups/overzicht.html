@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — overzicht van alle mockups</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;900&family=DM+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--rule:#D9DEE5;--bg:#F2F5F9;--dark:#003352;--mute:#6B7480;--cyan:#66C4E8;--void:#06121C}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font:14px/1.5 'DM Sans',sans-serif;color:#1A1A1A}
+header{background:var(--void);color:#fff;padding:26px 28px}
+header h1{font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;
+  font-size:27px;margin:6px 0 0;letter-spacing:.02em}
+header p{color:rgba(255,255,255,.66);margin:9px 0 0;max-width:86ch;font-size:13.5px}
+header .ey{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--cyan)}
+nav{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--rule);
+  padding:0 28px;display:flex;flex-wrap:wrap;box-shadow:0 1px 3px rgba(0,40,70,.05)}
+nav a{font-family:'Barlow Condensed',sans-serif;font-weight:600;text-transform:uppercase;
+  font-size:14px;letter-spacing:.03em;color:var(--mute);text-decoration:none;padding:12px 15px;
+  display:flex;align-items:baseline;gap:6px}
+nav a:hover{color:var(--dark)}
+nav a i{font:500 10px 'IBM Plex Mono',monospace;font-style:normal;color:var(--cyan)}
+section{padding:24px 28px 4px;scroll-margin-top:44px}
+section h2{font-family:'Barlow Condensed',sans-serif;font-weight:600;text-transform:uppercase;
+  font-size:20px;color:var(--dark);letter-spacing:.02em;display:flex;align-items:baseline;gap:13px;
+  border-bottom:1px solid var(--rule);padding-bottom:9px;margin:0 0 15px;flex-wrap:wrap}
+section h2 span{font:400 12px 'DM Sans',sans-serif;color:var(--mute);text-transform:none;letter-spacing:0}
+section h2 b{margin-left:auto;font:500 11px 'IBM Plex Mono',monospace;color:var(--mute)}
+.rooster{display:grid;grid-template-columns:repeat(auto-fill,minmax(288px,1fr));gap:14px}
+figure{margin:0;background:#fff;border:1px solid var(--rule);display:flex;flex-direction:column}
+figure.s-wireframe{border-style:dashed}
+figcaption{font:500 10px 'IBM Plex Mono',monospace;letter-spacing:.05em;color:var(--mute);
+  padding:7px 10px;border-bottom:1px solid var(--rule);display:flex;gap:8px;align-items:center}
+figcaption .n{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+figcaption .maat{margin-left:auto;background:var(--cyan);color:var(--void);padding:1px 6px;
+  border-radius:2px;text-transform:uppercase;font-size:9px;letter-spacing:.1em}
+/* Alleen de bovenkant, verkleind: zo passen er veel naast elkaar en valt een
+   afwijkende hero binnen een groep meteen op. */
+.raam{height:206px;overflow:hidden;background:var(--bg)}
+.raam iframe{width:1400px;height:840px;border:0;transform:scale(.25);transform-origin:0 0}
+.uit{font:500 11px 'DM Sans',sans-serif;color:var(--dark);text-decoration:none;
+  padding:9px 10px;border-top:1px solid var(--rule);margin-top:auto;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.uit:hover{color:var(--cyan);background:var(--void)}
+</style>
+</head>
+<body>
+<header>
+  <span class="ey">// overzicht &middot; gegenereerd, niet met de hand bijgehouden</span>
+  <h1>Alle mockups op één vel</h1>
+  <p>Elke pagina als klein voorbeeld, alleen de bovenkant, op 25%. Gestippelde rand = wireframe.
+    Het blauwe label is de hero-maat, waar die gedeeld is. Klik de titel onderaan een tegel om
+    de pagina op ware grootte te openen.
+    Bijwerken na het toevoegen of hernoemen van een mockup: <code>node scripts/bouw-overzicht.mjs</code></p>
+</header>
+<nav><a href="#homepage">Homepage <i>10</i></a><a href="#case-voor">Wat ga je vervoeren <i>11</i></a><a href="#casetype">Casetypes <i>7</i></a><a href="#branches">Branches <i>10</i></a><a href="#zakelijk">Groot zakelijk <i>7</i></a><a href="#configurator">Configurator <i>3</i></a><a href="#bestellen">Bestellen <i>3</i></a><a href="#catalogus">Catalogus <i>10</i></a><a href="#service">Service en aanvraag <i>14</i></a><a href="#varianten">Vergelijkpagina's <i>5</i></a></nav>
+
+    <section id="homepage">
+      <h2>Homepage <span>Acht concurrerende concepten. Hun hero ís het concept, dus die houden hun eigen maat.</span> <b>10</b></h2>
+      <div class="rooster"><figure class="s-ontwerp">
+        <figcaption><span class="n">homepage-v1.html</span></figcaption>
+        <div class="raam"><iframe src="homepage-v1.html" loading="lazy" title="homepage v1, beeld (mockup)"></iframe></div>
+        <a class="uit" href="homepage-v1.html" target="_blank" rel="noopener">homepage v1, beeld (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">homepage-v2.html</span></figcaption>
+        <div class="raam"><iframe src="homepage-v2.html" loading="lazy" title="homepage v2, video, drone (mockup)"></iframe></div>
+        <a class="uit" href="homepage-v2.html" target="_blank" rel="noopener">homepage v2, video, drone (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">homepage-v3.html</span></figcaption>
+        <div class="raam"><iframe src="homepage-v3.html" loading="lazy" title="homepage v3, video, precisie (mockup)"></iframe></div>
+        <a class="uit" href="homepage-v3.html" target="_blank" rel="noopener">homepage v3, video, precisie (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">homepage-v4.html</span></figcaption>
+        <div class="raam"><iframe src="homepage-v4.html" loading="lazy" title="homepage v4, de werkbank (mockup)"></iframe></div>
+        <a class="uit" href="homepage-v4.html" target="_blank" rel="noopener">homepage v4, de werkbank (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">homepage-v5.html</span></figcaption>
+        <div class="raam"><iframe src="homepage-v5.html" loading="lazy" title="homepage v5, de vloot (mockup)"></iframe></div>
+        <a class="uit" href="homepage-v5.html" target="_blank" rel="noopener">homepage v5, de vloot (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">homepage-v6.html</span></figcaption>
+        <div class="raam"><iframe src="homepage-v6.html" loading="lazy" title="homepage v6, de werkvloer (mockup)"></iframe></div>
+        <a class="uit" href="homepage-v6.html" target="_blank" rel="noopener">homepage v6, de werkvloer (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">homepage-v7.html</span></figcaption>
+        <div class="raam"><iframe src="homepage-v7.html" loading="lazy" title="homepage v7, drie ingangen (mockup)"></iframe></div>
+        <a class="uit" href="homepage-v7.html" target="_blank" rel="noopener">homepage v7, drie ingangen (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">homepage-v8.html</span></figcaption>
+        <div class="raam"><iframe src="homepage-v8.html" loading="lazy" title="homepage v8, de aanvraag (mockup)"></iframe></div>
+        <a class="uit" href="homepage-v8.html" target="_blank" rel="noopener">homepage v8, de aanvraag (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">homepage-varianten.html</span></figcaption>
+        <div class="raam"><iframe src="homepage-varianten.html" loading="lazy" title="homepage beoordelen (mockup)"></iframe></div>
+        <a class="uit" href="homepage-varianten.html" target="_blank" rel="noopener">homepage beoordelen (mockup) &#8599;</a>
+      </figure><figure class="s-wireframe">
+        <figcaption><span class="n">homepage.html</span></figcaption>
+        <div class="raam"><iframe src="homepage.html" loading="lazy" title="/, wireframe op ware grootte"></iframe></div>
+        <a class="uit" href="homepage.html" target="_blank" rel="noopener">/, wireframe op ware grootte &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="case-voor">
+      <h2>Wat ga je vervoeren <span>De objectas: ingang per apparaat.</span> <b>11</b></h2>
+      <div class="rooster"><figure class="s-ontwerp">
+        <figcaption><span class="n">case-voor-backline-v1.html</span><span class="maat">laag</span></figcaption>
+        <div class="raam"><iframe src="case-voor-backline-v1.html" loading="lazy" title="Casebuilder &amp;mdash; case-voor groep, backline (mockup)"></iframe></div>
+        <a class="uit" href="case-voor-backline-v1.html" target="_blank" rel="noopener">Casebuilder &amp;mdash; case-voor groep, backline (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">case-voor-categorie-varianten.html</span></figcaption>
+        <div class="raam"><iframe src="case-voor-categorie-varianten.html" loading="lazy" title="Casebuilder &amp;mdash; Productcategorie (mockup)"></iframe></div>
+        <a class="uit" href="case-voor-categorie-varianten.html" target="_blank" rel="noopener">Casebuilder &amp;mdash; Productcategorie (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">case-voor-detail-varianten.html</span></figcaption>
+        <div class="raam"><iframe src="case-voor-detail-varianten.html" loading="lazy" title="Casebuilder &amp;mdash; Productdetail (mockup)"></iframe></div>
+        <a class="uit" href="case-voor-detail-varianten.html" target="_blank" rel="noopener">Casebuilder &amp;mdash; Productdetail (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">case-voor-gibson-les-paul-v1.html</span><span class="maat">laag</span></figcaption>
+        <div class="raam"><iframe src="case-voor-gibson-les-paul-v1.html" loading="lazy" title="case-voor apparaat (mockup)"></iframe></div>
+        <a class="uit" href="case-voor-gibson-les-paul-v1.html" target="_blank" rel="noopener">case-voor apparaat (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">case-voor-gibson-les-paul-v2.html</span><span class="maat">laag</span></figcaption>
+        <div class="raam"><iframe src="case-voor-gibson-les-paul-v2.html" loading="lazy" title="case-voor apparaat (mockup)"></iframe></div>
+        <a class="uit" href="case-voor-gibson-les-paul-v2.html" target="_blank" rel="noopener">case-voor apparaat (mockup) &#8599;</a>
+      </figure><figure class="s-wireframe">
+        <figcaption><span class="n">case-voor-gibson-les-paul.html</span></figcaption>
+        <div class="raam"><iframe src="case-voor-gibson-les-paul.html" loading="lazy" title="/case-voor/{apparaat}, wireframe op ware grootte"></iframe></div>
+        <a class="uit" href="case-voor-gibson-les-paul.html" target="_blank" rel="noopener">/case-voor/{apparaat}, wireframe op ware grootte &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">case-voor-gitaar-v1.html</span><span class="maat">laag</span></figcaption>
+        <div class="raam"><iframe src="case-voor-gitaar-v1.html" loading="lazy" title="case-voor categorie (mockup)"></iframe></div>
+        <a class="uit" href="case-voor-gitaar-v1.html" target="_blank" rel="noopener">case-voor categorie (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">case-voor-gitaar-v2.html</span><span class="maat">laag</span></figcaption>
+        <div class="raam"><iframe src="case-voor-gitaar-v2.html" loading="lazy" title="case-voor categorie (mockup)"></iframe></div>
+        <a class="uit" href="case-voor-gitaar-v2.html" target="_blank" rel="noopener">case-voor categorie (mockup) &#8599;</a>
+      </figure><figure class="s-wireframe">
+        <figcaption><span class="n">case-voor-gitaar.html</span></figcaption>
+        <div class="raam"><iframe src="case-voor-gitaar.html" loading="lazy" title="/case-voor/{categorie}, wireframe op ware grootte"></iframe></div>
+        <a class="uit" href="case-voor-gitaar.html" target="_blank" rel="noopener">/case-voor/{categorie}, wireframe op ware grootte &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">case-voor-v1.html</span><span class="maat">laag</span></figcaption>
+        <div class="raam"><iframe src="case-voor-v1.html" loading="lazy" title="/case-voor v1 (mockup)"></iframe></div>
+        <a class="uit" href="case-voor-v1.html" target="_blank" rel="noopener">/case-voor v1 (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">case-voor-varianten.html</span></figcaption>
+        <div class="raam"><iframe src="case-voor-varianten.html" loading="lazy" title="/case-voor beoordelen (mockup)"></iframe></div>
+        <a class="uit" href="case-voor-varianten.html" target="_blank" rel="noopener">/case-voor beoordelen (mockup) &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="casetype">
+      <h2>Casetypes <span>Per model, met de maatvoering.</span> <b>7</b></h2>
+      <div class="rooster"><figure class="s-ontwerp">
+        <figcaption><span class="n">casetype-hoedcase-v1.html</span></figcaption>
+        <div class="raam"><iframe src="casetype-hoedcase-v1.html" loading="lazy" title="modelpagina (mockup)"></iframe></div>
+        <a class="uit" href="casetype-hoedcase-v1.html" target="_blank" rel="noopener">modelpagina (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">casetype-koffer-v1.html</span></figcaption>
+        <div class="raam"><iframe src="casetype-koffer-v1.html" loading="lazy" title="modelpagina (mockup)"></iframe></div>
+        <a class="uit" href="casetype-koffer-v1.html" target="_blank" rel="noopener">modelpagina (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">casetype-rackcase-dubbel-deksel-v1.html</span></figcaption>
+        <div class="raam"><iframe src="casetype-rackcase-dubbel-deksel-v1.html" loading="lazy" title="modelpagina (mockup)"></iframe></div>
+        <a class="uit" href="casetype-rackcase-dubbel-deksel-v1.html" target="_blank" rel="noopener">modelpagina (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">casetype-rackcase-enkel-deksel-v1.html</span></figcaption>
+        <div class="raam"><iframe src="casetype-rackcase-enkel-deksel-v1.html" loading="lazy" title="modelpagina (mockup)"></iframe></div>
+        <a class="uit" href="casetype-rackcase-enkel-deksel-v1.html" target="_blank" rel="noopener">modelpagina (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">casetype-trunccase-v1.html</span></figcaption>
+        <div class="raam"><iframe src="casetype-trunccase-v1.html" loading="lazy" title="modelpagina (mockup)"></iframe></div>
+        <a class="uit" href="casetype-trunccase-v1.html" target="_blank" rel="noopener">modelpagina (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">casetype-v1.html</span></figcaption>
+        <div class="raam"><iframe src="casetype-v1.html" loading="lazy" title="modelpagina (mockup)"></iframe></div>
+        <a class="uit" href="casetype-v1.html" target="_blank" rel="noopener">modelpagina (mockup) &#8599;</a>
+      </figure><figure class="s-wireframe">
+        <figcaption><span class="n">casetype.html</span></figcaption>
+        <div class="raam"><iframe src="casetype.html" loading="lazy" title="/flightcases/{model}, wireframe op ware grootte"></iframe></div>
+        <a class="uit" href="casetype.html" target="_blank" rel="noopener">/flightcases/{model}, wireframe op ware grootte &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="branches">
+      <h2>Branches <span>De publieksas: ingang per markt.</span> <b>10</b></h2>
+      <div class="rooster"><figure class="s-ontwerp">
+        <figcaption><span class="n">branche-audio-visueel-v1.html</span><span class="maat">midden</span></figcaption>
+        <div class="raam"><iframe src="branche-audio-visueel-v1.html" loading="lazy" title="/branches/audio-visueel (mockup)"></iframe></div>
+        <a class="uit" href="branche-audio-visueel-v1.html" target="_blank" rel="noopener">/branches/audio-visueel (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">branche-broadcast-en-media-v1.html</span><span class="maat">midden</span></figcaption>
+        <div class="raam"><iframe src="branche-broadcast-en-media-v1.html" loading="lazy" title="/branches/broadcast-en-media (mockup)"></iframe></div>
+        <a class="uit" href="branche-broadcast-en-media-v1.html" target="_blank" rel="noopener">/branches/broadcast-en-media (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">branche-defensie-v1.html</span><span class="maat">midden</span></figcaption>
+        <div class="raam"><iframe src="branche-defensie-v1.html" loading="lazy" title="/branches/defensie (mockup)"></iframe></div>
+        <a class="uit" href="branche-defensie-v1.html" target="_blank" rel="noopener">/branches/defensie (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">branche-industrie-en-machinebouw-v1.html</span><span class="maat">midden</span></figcaption>
+        <div class="raam"><iframe src="branche-industrie-en-machinebouw-v1.html" loading="lazy" title="/branches/industrie-en-machinebouw (mockup)"></iframe></div>
+        <a class="uit" href="branche-industrie-en-machinebouw-v1.html" target="_blank" rel="noopener">/branches/industrie-en-machinebouw (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">branche-meet-en-testapparatuur-v1.html</span><span class="maat">midden</span></figcaption>
+        <div class="raam"><iframe src="branche-meet-en-testapparatuur-v1.html" loading="lazy" title="/branches/meet-en-testapparatuur (mockup)"></iframe></div>
+        <a class="uit" href="branche-meet-en-testapparatuur-v1.html" target="_blank" rel="noopener">/branches/meet-en-testapparatuur (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">branche-schaalmodellen-v1.html</span><span class="maat">midden</span></figcaption>
+        <div class="raam"><iframe src="branche-schaalmodellen-v1.html" loading="lazy" title="/branches/schaalmodellen (mockup)"></iframe></div>
+        <a class="uit" href="branche-schaalmodellen-v1.html" target="_blank" rel="noopener">/branches/schaalmodellen (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">branches-v2.html</span><span class="maat">hoog</span></figcaption>
+        <div class="raam"><iframe src="branches-v2.html" loading="lazy" title="/branches v2 · lichte kop (mockup)"></iframe></div>
+        <a class="uit" href="branches-v2.html" target="_blank" rel="noopener">/branches v2 · lichte kop (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">branches-v3.html</span><span class="maat">hoog</span></figcaption>
+        <div class="raam"><iframe src="branches-v3.html" loading="lazy" title="/branches v3 · kop en belofte als één vlak (mockup)"></iframe></div>
+        <a class="uit" href="branches-v3.html" target="_blank" rel="noopener">/branches v3 · kop en belofte als één vlak (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">branches-varianten.html</span></figcaption>
+        <div class="raam"><iframe src="branches-varianten.html" loading="lazy" title="/branches kopkeuze (mockup)"></iframe></div>
+        <a class="uit" href="branches-varianten.html" target="_blank" rel="noopener">/branches kopkeuze (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">branches.html</span><span class="maat">hoog</span></figcaption>
+        <div class="raam"><iframe src="branches.html" loading="lazy" title="branche-overzicht (mockup)"></iframe></div>
+        <a class="uit" href="branches.html" target="_blank" rel="noopener">branche-overzicht (mockup) &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="zakelijk">
+      <h2>Groot zakelijk <span>Hoe je koopt, niet wie je bent.</span> <b>7</b></h2>
+      <div class="rooster"><figure class="s-ontwerp">
+        <figcaption><span class="n">grote-spelers-v1.html</span><span class="maat">hoog</span></figcaption>
+        <div class="raam"><iframe src="grote-spelers-v1.html" loading="lazy" title="/grote-spelers (mockup)"></iframe></div>
+        <a class="uit" href="grote-spelers-v1.html" target="_blank" rel="noopener">/grote-spelers (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">grote-spelers-v2.html</span><span class="maat">hoog</span></figcaption>
+        <div class="raam"><iframe src="grote-spelers-v2.html" loading="lazy" title="groot zakelijk in drie stappen (v2)"></iframe></div>
+        <a class="uit" href="grote-spelers-v2.html" target="_blank" rel="noopener">groot zakelijk in drie stappen (v2) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">speler-defensie-en-overheid-v1.html</span><span class="maat">midden</span></figcaption>
+        <div class="raam"><iframe src="speler-defensie-en-overheid-v1.html" loading="lazy" title="/grote-spelers/defensie-en-overheid (mockup)"></iframe></div>
+        <a class="uit" href="speler-defensie-en-overheid-v1.html" target="_blank" rel="noopener">/grote-spelers/defensie-en-overheid (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">speler-netbeheer-en-energie-v1.html</span><span class="maat">midden</span></figcaption>
+        <div class="raam"><iframe src="speler-netbeheer-en-energie-v1.html" loading="lazy" title="/grote-spelers/netbeheer-en-energie (mockup)"></iframe></div>
+        <a class="uit" href="speler-netbeheer-en-energie-v1.html" target="_blank" rel="noopener">/grote-spelers/netbeheer-en-energie (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">speler-oem-en-series-v1.html</span><span class="maat">midden</span></figcaption>
+        <div class="raam"><iframe src="speler-oem-en-series-v1.html" loading="lazy" title="/grote-spelers/oem-en-series (mockup)"></iframe></div>
+        <a class="uit" href="speler-oem-en-series-v1.html" target="_blank" rel="noopener">/grote-spelers/oem-en-series (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">speler-omroep-en-studio-v1.html</span><span class="maat">midden</span></figcaption>
+        <div class="raam"><iframe src="speler-omroep-en-studio-v1.html" loading="lazy" title="/grote-spelers/omroep-en-studio (mockup)"></iframe></div>
+        <a class="uit" href="speler-omroep-en-studio-v1.html" target="_blank" rel="noopener">/grote-spelers/omroep-en-studio (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">speler-verhuur-en-touring-v1.html</span><span class="maat">midden</span></figcaption>
+        <div class="raam"><iframe src="speler-verhuur-en-touring-v1.html" loading="lazy" title="/grote-spelers/verhuur-en-touring (mockup)"></iframe></div>
+        <a class="uit" href="speler-verhuur-en-touring-v1.html" target="_blank" rel="noopener">/grote-spelers/verhuur-en-touring (mockup) &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="configurator">
+      <h2>Configurator <span>Zelf tekenen, vijf stappen, prijs aan het eind.</span> <b>3</b></h2>
+      <div class="rooster"><figure class="s-ontwerp">
+        <figcaption><span class="n">configurator-v1.html</span><span class="maat">midden</span></figcaption>
+        <div class="raam"><iframe src="configurator-v1.html" loading="lazy" title="/configurator v1 (mockup)"></iframe></div>
+        <a class="uit" href="configurator-v1.html" target="_blank" rel="noopener">/configurator v1 (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">configurator-varianten.html</span></figcaption>
+        <div class="raam"><iframe src="configurator-varianten.html" loading="lazy" title="/configurator beoordelen (mockup)"></iframe></div>
+        <a class="uit" href="configurator-varianten.html" target="_blank" rel="noopener">/configurator beoordelen (mockup) &#8599;</a>
+      </figure><figure class="s-wireframe">
+        <figcaption><span class="n">configurator.html</span></figcaption>
+        <div class="raam"><iframe src="configurator.html" loading="lazy" title="/configurator, wireframe op ware grootte"></iframe></div>
+        <a class="uit" href="configurator.html" target="_blank" rel="noopener">/configurator, wireframe op ware grootte &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="bestellen">
+      <h2>Bestellen <span>Winkelwagen, afrekenen, bevestiging en account.</span> <b>3</b></h2>
+      <div class="rooster"><figure class="s-wireframe">
+        <figcaption><span class="n">account.html</span></figcaption>
+        <div class="raam"><iframe src="account.html" loading="lazy" title="/account/orders, wireframe op ware grootte"></iframe></div>
+        <a class="uit" href="account.html" target="_blank" rel="noopener">/account/orders, wireframe op ware grootte &#8599;</a>
+      </figure><figure class="s-wireframe">
+        <figcaption><span class="n">bedankt.html</span></figcaption>
+        <div class="raam"><iframe src="bedankt.html" loading="lazy" title="/laten-controleren/bedankt, wireframe op ware grootte"></iframe></div>
+        <a class="uit" href="bedankt.html" target="_blank" rel="noopener">/laten-controleren/bedankt, wireframe op ware grootte &#8599;</a>
+      </figure><figure class="s-wireframe">
+        <figcaption><span class="n">checkout.html</span></figcaption>
+        <div class="raam"><iframe src="checkout.html" loading="lazy" title="/checkout, wireframe op ware grootte"></iframe></div>
+        <a class="uit" href="checkout.html" target="_blank" rel="noopener">/checkout, wireframe op ware grootte &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="catalogus">
+      <h2>Catalogus <span>Overzicht, categorie, onderdeel, zoeken.</span> <b>10</b></h2>
+      <div class="rooster"><figure class="s-ontwerp">
+        <figcaption><span class="n">categorie-v1.html</span><span class="maat">laag</span></figcaption>
+        <div class="raam"><iframe src="categorie-v1.html" loading="lazy" title="categoriepagina mockup"></iframe></div>
+        <a class="uit" href="categorie-v1.html" target="_blank" rel="noopener">categoriepagina mockup &#8599;</a>
+      </figure><figure class="s-wireframe">
+        <figcaption><span class="n">categorie.html</span></figcaption>
+        <div class="raam"><iframe src="categorie.html" loading="lazy" title="/onderdelen/{cat}/{sub}, wireframe op ware grootte"></iframe></div>
+        <a class="uit" href="categorie.html" target="_blank" rel="noopener">/onderdelen/{cat}/{sub}, wireframe op ware grootte &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">flightcases-v1.html</span><span class="maat">laag</span></figcaption>
+        <div class="raam"><iframe src="flightcases-v1.html" loading="lazy" title="modeloverzicht (mockup)"></iframe></div>
+        <a class="uit" href="flightcases-v1.html" target="_blank" rel="noopener">modeloverzicht (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">flightcases-varianten.html</span></figcaption>
+        <div class="raam"><iframe src="flightcases-varianten.html" loading="lazy" title="/flightcases beoordelen (mockup)"></iframe></div>
+        <a class="uit" href="flightcases-varianten.html" target="_blank" rel="noopener">/flightcases beoordelen (mockup) &#8599;</a>
+      </figure><figure class="s-wireframe">
+        <figcaption><span class="n">flightcases.html</span></figcaption>
+        <div class="raam"><iframe src="flightcases.html" loading="lazy" title="/flightcases, wireframe op ware grootte"></iframe></div>
+        <a class="uit" href="flightcases.html" target="_blank" rel="noopener">/flightcases, wireframe op ware grootte &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">onderdeel-v1.html</span><span class="maat">laag</span></figcaption>
+        <div class="raam"><iframe src="onderdeel-v1.html" loading="lazy" title="productpagina onderdeel (mockup)"></iframe></div>
+        <a class="uit" href="onderdeel-v1.html" target="_blank" rel="noopener">productpagina onderdeel (mockup) &#8599;</a>
+      </figure><figure class="s-wireframe">
+        <figcaption><span class="n">onderdeel.html</span></figcaption>
+        <div class="raam"><iframe src="onderdeel.html" loading="lazy" title="/onderdelen/{sku}, wireframe op ware grootte"></iframe></div>
+        <a class="uit" href="onderdeel.html" target="_blank" rel="noopener">/onderdelen/{sku}, wireframe op ware grootte &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">zoeken-v1.html</span><span class="maat">laag</span></figcaption>
+        <div class="raam"><iframe src="zoeken-v1.html" loading="lazy" title="zoekresultaat (mockup)"></iframe></div>
+        <a class="uit" href="zoeken-v1.html" target="_blank" rel="noopener">zoekresultaat (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">zoeken-varianten.html</span></figcaption>
+        <div class="raam"><iframe src="zoeken-varianten.html" loading="lazy" title="Casebuilder &amp;mdash; Zoekresultaat (mockup)"></iframe></div>
+        <a class="uit" href="zoeken-varianten.html" target="_blank" rel="noopener">Casebuilder &amp;mdash; Zoekresultaat (mockup) &#8599;</a>
+      </figure><figure class="s-wireframe">
+        <figcaption><span class="n">zoeken.html</span></figcaption>
+        <div class="raam"><iframe src="zoeken.html" loading="lazy" title="/zoeken, wireframe op ware grootte"></iframe></div>
+        <a class="uit" href="zoeken.html" target="_blank" rel="noopener">/zoeken, wireframe op ware grootte &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="service">
+      <h2>Service en aanvraag <span>Alles rond bestellen, vragen en contact.</span> <b>14</b></h2>
+      <div class="rooster"><figure class="s-ontwerp">
+        <figcaption><span class="n">case-aanvragen-v1.html</span><span class="maat">midden</span></figcaption>
+        <div class="raam"><iframe src="case-aanvragen-v1.html" loading="lazy" title="/service/offerte · case aanvragen (mockup)"></iframe></div>
+        <a class="uit" href="case-aanvragen-v1.html" target="_blank" rel="noopener">/service/offerte · case aanvragen (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">case-aanvragen-varianten.html</span></figcaption>
+        <div class="raam"><iframe src="case-aanvragen-varianten.html" loading="lazy" title="case aanvragen beoordelen (mockup)"></iframe></div>
+        <a class="uit" href="case-aanvragen-varianten.html" target="_blank" rel="noopener">case aanvragen beoordelen (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">contact-v1.html</span><span class="maat">midden</span></figcaption>
+        <div class="raam"><iframe src="contact-v1.html" loading="lazy" title="/service/contact (mockup)"></iframe></div>
+        <a class="uit" href="contact-v1.html" target="_blank" rel="noopener">/service/contact (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">faq-varianten.html</span></figcaption>
+        <div class="raam"><iframe src="faq-varianten.html" loading="lazy" title="Casebuilder &amp;mdash; FAQ-varianten (mockup)"></iframe></div>
+        <a class="uit" href="faq-varianten.html" target="_blank" rel="noopener">Casebuilder &amp;mdash; FAQ-varianten (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">laten-controleren-v1.html</span><span class="maat">midden</span></figcaption>
+        <div class="raam"><iframe src="laten-controleren-v1.html" loading="lazy" title="/laten-controleren (mockup)"></iframe></div>
+        <a class="uit" href="laten-controleren-v1.html" target="_blank" rel="noopener">/laten-controleren (mockup) &#8599;</a>
+      </figure><figure class="s-wireframe">
+        <figcaption><span class="n">laten-controleren.html</span></figcaption>
+        <div class="raam"><iframe src="laten-controleren.html" loading="lazy" title="/laten-controleren, wireframe op ware grootte"></iframe></div>
+        <a class="uit" href="laten-controleren.html" target="_blank" rel="noopener">/laten-controleren, wireframe op ware grootte &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">service-hub-v1.html</span><span class="maat">midden</span></figcaption>
+        <div class="raam"><iframe src="service-hub-v1.html" loading="lazy" title="/service (mockup)"></iframe></div>
+        <a class="uit" href="service-hub-v1.html" target="_blank" rel="noopener">/service (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">service-levertijden-v1.html</span></figcaption>
+        <div class="raam"><iframe src="service-levertijden-v1.html" loading="lazy" title="contentpagina (mockup)"></iframe></div>
+        <a class="uit" href="service-levertijden-v1.html" target="_blank" rel="noopener">contentpagina (mockup) &#8599;</a>
+      </figure><figure class="s-wireframe">
+        <figcaption><span class="n">service-levertijden.html</span></figcaption>
+        <div class="raam"><iframe src="service-levertijden.html" loading="lazy" title="/service/levertijden, wireframe op ware grootte"></iframe></div>
+        <a class="uit" href="service-levertijden.html" target="_blank" rel="noopener">/service/levertijden, wireframe op ware grootte &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">service-v1.html</span><span class="maat">laag</span></figcaption>
+        <div class="raam"><iframe src="service-v1.html" loading="lazy" title="servicehub (mockup)"></iframe></div>
+        <a class="uit" href="service-v1.html" target="_blank" rel="noopener">servicehub (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">service-varianten.html</span></figcaption>
+        <div class="raam"><iframe src="service-varianten.html" loading="lazy" title="Casebuilder &amp;mdash; Service (mockup)"></iframe></div>
+        <a class="uit" href="service-varianten.html" target="_blank" rel="noopener">Casebuilder &amp;mdash; Service (mockup) &#8599;</a>
+      </figure><figure class="s-wireframe">
+        <figcaption><span class="n">service.html</span></figcaption>
+        <div class="raam"><iframe src="service.html" loading="lazy" title="/service, wireframe op ware grootte"></iframe></div>
+        <a class="uit" href="service.html" target="_blank" rel="noopener">/service, wireframe op ware grootte &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">zo-werkt-het-v1.html</span><span class="maat">midden</span></figcaption>
+        <div class="raam"><iframe src="zo-werkt-het-v1.html" loading="lazy" title="/service/zo-werkt-het (mockup)"></iframe></div>
+        <a class="uit" href="zo-werkt-het-v1.html" target="_blank" rel="noopener">/service/zo-werkt-het (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">zo-werkt-het-varianten.html</span></figcaption>
+        <div class="raam"><iframe src="zo-werkt-het-varianten.html" loading="lazy" title="Casebuilder &amp;mdash; Zo werkt het (mockup)"></iframe></div>
+        <a class="uit" href="zo-werkt-het-varianten.html" target="_blank" rel="noopener">Casebuilder &amp;mdash; Zo werkt het (mockup) &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="varianten">
+      <h2>Vergelijkpagina's <span>Varianten naast elkaar, met de afweging erbij.</span> <b>5</b></h2>
+      <div class="rooster"><figure class="s-los">
+        <figcaption><span class="n">concepten-2sept.html</span></figcaption>
+        <div class="raam"><iframe src="concepten-2sept.html" loading="lazy" title="homepage-versies"></iframe></div>
+        <a class="uit" href="concepten-2sept.html" target="_blank" rel="noopener">homepage-versies &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">footer-varianten.html</span></figcaption>
+        <div class="raam"><iframe src="footer-varianten.html" loading="lazy" title="footervarianten (mockup)"></iframe></div>
+        <a class="uit" href="footer-varianten.html" target="_blank" rel="noopener">footervarianten (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">groot-zakelijk-varianten.html</span></figcaption>
+        <div class="raam"><iframe src="groot-zakelijk-varianten.html" loading="lazy" title="/grote-spelers beoordelen (mockup)"></iframe></div>
+        <a class="uit" href="groot-zakelijk-varianten.html" target="_blank" rel="noopener">/grote-spelers beoordelen (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">header-varianten.html</span></figcaption>
+        <div class="raam"><iframe src="header-varianten.html" loading="lazy" title="headervarianten"></iframe></div>
+        <a class="uit" href="header-varianten.html" target="_blank" rel="noopener">headervarianten &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">hero-voorstellen.html</span></figcaption>
+        <div class="raam"><iframe src="hero-voorstellen.html" loading="lazy" title="hero's, drie maten (voorstel)"></iframe></div>
+        <a class="uit" href="hero-voorstellen.html" target="_blank" rel="noopener">hero's, drie maten (voorstel) &#8599;</a>
+      </figure></div>
+    </section>
+</body>
+</html>
