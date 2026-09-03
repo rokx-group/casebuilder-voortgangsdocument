@@ -35,7 +35,7 @@
    productfoto's van de live site — geen stockbeeld van een branche.
    Er is nog geen beeld per toepassing; zodra dat er is, vervangt het
    deze strook, maar tot die tijd is dit eerlijk: dit maken ze. */
-.kop{background:var(--void);color:#fff;position:relative;overflow:hidden;padding:78px 0 0}
+.kop{background:var(--void);color:#fff;position:relative;overflow:hidden}
 .kop .achter{position:absolute;inset:0;z-index:-2;display:grid;grid-template-columns:repeat(5,1fr);
   gap:0;pointer-events:none}
 /* Op .34 was de strook zo donker dat je de cases niet meer zag — dan
@@ -46,7 +46,7 @@
 .kop .scrim{position:absolute;inset:0;z-index:-1;pointer-events:none;
   background:linear-gradient(90deg,rgba(6,18,28,.96) 0%,rgba(6,18,28,.86) 38%,rgba(6,18,28,.34) 100%),
              linear-gradient(180deg,rgba(6,18,28,.3) 0%,transparent 34%,rgba(6,18,28,.72) 100%)}
-.kop .grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:end;padding-bottom:44px}
+.kop .grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:end}
 .kop h1{font-size:clamp(40px,5vw,68px);color:#fff;line-height:.92;max-width:13ch;margin-top:16px}
 .kop h1 .acc{color:var(--cyan)}
 .kop p.lead{color:rgba(255,255,255,.8);font-size:17.5px;max-width:46ch;margin-top:20px}
@@ -223,7 +223,7 @@
 
 <nav class="primary">
   <div class="wrap">
-    <a href="#">Case aanvragen</a>
+    <a href="case-aanvragen-v1.html">Case aanvragen</a>
     <a href="case-voor-v1.html">Wat ga je vervoeren?</a>
     <a href="configurator-v1.html">Zelf configureren</a>
     <a href="flightcases-v1.html">Flightcases</a>
@@ -244,7 +244,7 @@
      Geen belofte maar een positie: marktleider in Nederland is
      CaseBuilder al, alleen weet niemand het. Dat is precies wat
      een branche-overzicht kan rechtzetten. ═════════════════ -->
-<section class="kop ruit ruit-dark ruit-aanzet beslag" style="padding-bottom:0">
+<section class="kop ruit ruit-dark ruit-aanzet beslag kop-hoog" style="padding-bottom:0">
   <div class="achter" aria-hidden="true">
     <img src="assets/flightcase-koffer.jpg" alt="">
     <img src="assets/flightcase-hoedcase.jpg" alt="">
@@ -262,13 +262,13 @@
     </div>
     <div class="vak">
       <p>Een case voor een spectrumanalyser is iets anders dan een case voor een moving head. Andere schokwaarden, ander schuim, andere keuring — en een andere route naar de bestelling.</p>
-      <p>Daarom staat hieronder per markt wat wij daar tegenkomen, en wat dat betekent voor de case die u nodig heeft.</p>
+      <p>Daarom staat hieronder per markt wat wij daar tegenkomen, en wat dat betekent voor de case die je nodig hebt.</p>
     </div>
   </div>
   <div class="belofte"><div class="wrap">
     <div class="row">
       <div class="it"><b>Sinds 1987</b><span>Eigen productie in Doesburg</span></div>
-      <div class="it"><b>Dezelfde dag</b><span>Tekening retour op uw aanvraag</span></div>
+      <div class="it"><b>Dezelfde dag</b><span>Tekening retour op je aanvraag</span></div>
       <div class="it"><b>Binnen 48 uur</b><span>Offerte, ook bij maatwerk</span></div>
       <div class="it"><b>300+ modellen</b><span>Standaardmaten uit voorraad</span></div>
     </div>
@@ -319,7 +319,7 @@
       <div class="br">
         <div class="im"><span class="rang">04</span><span class="tel">11 toepassingen</span><img src="assets/foto-meet-en-testapparatuur.jpg" alt=""></div>
         <div class="bd">
-          <h3><a class="hl" href="#" title="branchepagina nog te bouwen">Meet- en<br>testapparatuur</a></h3>
+          <h3><a class="hl" href="branche-meet-en-testapparatuur-v1.html">Meet- en<br>testapparatuur</a></h3>
           <p>Meetinstrumenten die het veld in gaan: netbeheer, keuring, offshore. Het schuiminterieur is hier het product — gefreesd op het instrument, niet op de kist.</p>
           <div class="toe"><a href="#">Spectrumanalysers</a><a href="#">Kalibratiesets</a><a href="#">Servicekoffers</a><a href="#">Datalogging</a></div>
           <span class="go">Bekijk branche <span>&rarr;</span></span>
@@ -328,7 +328,7 @@
       <div class="br">
         <div class="im"><span class="rang">05</span><span class="tel">9 toepassingen</span><img src="assets/foto-broadcast-en-media.jpg" alt=""></div>
         <div class="bd">
-          <h3><a class="hl" href="#" title="branchepagina nog te bouwen">Broadcast en media</a></h3>
+          <h3><a class="hl" href="branche-broadcast-en-media-v1.html">Broadcast en media</a></h3>
           <p>Camera’s, multicam-sets en mobiele regie. Vaak te specifiek voor de configurator — meestal een tekening, soms een herhaalorder op een bestaand model.</p>
           <div class="toe"><a href="#">Camerabodies</a><a href="#">Optieksets</a><a href="#">Regiekoffers</a><a href="#">Monitoren</a></div>
           <span class="go">Bekijk branche <span>&rarr;</span></span>
@@ -337,7 +337,7 @@
       <div class="br">
         <div class="im"><span class="rang">06</span><span class="tel">5 toepassingen</span><img src="assets/foto-schaalmodellen.jpg" alt=""></div>
         <div class="bd">
-          <h3><a class="hl" href="#" title="branchepagina nog te bouwen">Schaalmodellen en<br>maquettes</a></h3>
+          <h3><a class="hl" href="branche-schaalmodellen-v1.html">Schaalmodellen en<br>maquettes</a></h3>
           <p>Maquettes, architectuurmodellen en presentatiestukken. Eenmalig, onvervangbaar en zelden rechthoekig — altijd volledig maatwerk.</p>
           <div class="toe"><a href="#">Maquettes</a><a href="#">Architectuurmodellen</a><a href="#">Presentatiestukken</a></div>
           <span class="go">Bekijk branche <span>&rarr;</span></span>
@@ -419,26 +419,26 @@
   <div class="wrap">
     <div class="sec-head">
       <span class="ey">Drie routes</span>
-      <h2>Hoe u bij uw case komt</h2>
-      <p class="lead" style="color:rgba(255,255,255,.78)">Welke route voor u de snelste is, hangt af van wat u al weet. Op elke branchepagina staat de route die daar het vaakst gelopen wordt.</p>
+      <h2>Hoe je bij je case komt</h2>
+      <p class="lead" style="color:rgba(255,255,255,.78)">Welke route voor jou de snelste is, hangt af van wat je al weet. Op elke branchepagina staat de route die daar het vaakst gelopen wordt.</p>
     </div>
     <div class="drie">
       <div class="rt">
         <span class="let">A</span>
         <h3>Uit voorraad</h3>
-        <p>U weet welke maat u nodig heeft en die zit tussen onze standaardmaten. Bestellen zoals u alles bestelt.</p>
+        <p>Je weet welke maat je nodig hebt en die zit tussen onze standaardmaten. Bestellen zoals je alles bestelt.</p>
         <span class="voor">Vaakst gelopen bij<br><b style="color:#fff">Audio-visueel</b></span>
       </div>
       <div class="rt">
         <span class="let">B</span>
         <h3>Zelf configureren</h3>
-        <p>U weet uw maten en wilt zelf bepalen hoe de case eruitziet. Direct een prijs, direct in productie.</p>
+        <p>Je weet je maten en wilt zelf bepalen hoe de case eruitziet. Direct een prijs, direct in productie.</p>
         <span class="voor">Vaakst gelopen bij<br><b style="color:#fff">Audio-visueel · Broadcast</b></span>
       </div>
       <div class="rt">
         <span class="let">C</span>
         <h3>Case aanvragen</h3>
-        <p>U weet wat u heeft, niet wat u nodig heeft. Stuur een datasheet, een schets of een foto — wij tekenen het uit.</p>
+        <p>Je weet wat je hebt, niet wat je nodig hebt. Stuur een datasheet, een schets of een foto — wij tekenen het uit.</p>
         <span class="voor">Vaakst gelopen bij<br><b style="color:#fff">Industrie · Defensie · Meet en test</b></span>
       </div>
     </div>
@@ -450,9 +450,9 @@
   <div class="wrap in">
     <div>
       <span class="ey ey-dark">Geen van bovenstaande</span>
-      <h2>Staat uw markt er niet tussen?</h2>
+      <h2>Staat je markt er niet tussen?</h2>
       <p>Dat zegt niets over of we het kunnen. De helft van wat we bouwen valt buiten deze zes — een pers in een kist op wielen, een trolley voor een pedicure, een kabelhaspel voor een windpark.</p>
-      <p>Stuur wat u heeft. Een datasheet is genoeg, een foto van een servet ook.</p>
+      <p>Stuur wat je hebt. Een datasheet is genoeg, een foto van een servet ook.</p>
       <div class="acties">
         <a class="btn btn-dark" href="#">Case aanvragen</a>
         <a class="btn btn-out" href="#">Bel ons</a>
@@ -463,7 +463,7 @@
         <div class="foto"><img src="assets/joran.svg" alt="Joran" style="width:100%;height:100%;object-fit:cover;display:block"></div>
         <div>
           <b>Joran</b>
-          <span class="fn">Tekent uw case uit en stuurt hem dezelfde dag terug</span>
+          <span class="fn">Tekent je case uit en stuurt hem dezelfde dag terug</span>
         </div>
       </div>
       <div class="lijn">
@@ -482,9 +482,9 @@
         <div class="logo"><em>case</em>Builder.com</div>
         <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734">+31 (0)575 575734</a></p>
       </div>
-      <div><h5>Offerte aanvragen</h5><a href="#">Case aanvragen</a><a href="#">Maten laten controleren</a><a href="#">Series en staffels</a><a href="#">Zakelijk bestellen</a></div>
-      <div><h5>Zelf configureren</h5><a href="#">Naar de configurator</a><a href="#">Zo werkt het</a><a href="#">Herhaalorder</a><a href="#">Mijn configuraties</a></div>
-      <div><h5>Flightcases</h5><a href="#">Alle flightcases</a><a href="#">Koffer</a><a href="#">Hoedcase</a><a href="#">Trunccase</a><a href="#">Rackcase enkel</a><a href="#">Rackcase dubbel</a></div>
+      <div><h5>Offerte aanvragen</h5><a href="case-aanvragen-v1.html">Case aanvragen</a><a href="#">Maten laten controleren</a><a href="#">Series en staffels</a><a href="#">Zakelijk bestellen</a></div>
+      <div><h5>Zelf configureren</h5><a href="configurator-v1.html">Naar de configurator</a><a href="#">Zo werkt het</a><a href="#">Herhaalorder</a><a href="#">Mijn configuraties</a></div>
+      <div><h5>Flightcases</h5><a href="flightcases-v1.html">Alle flightcases</a><a href="#">Koffer</a><a href="#">Hoedcase</a><a href="#">Trunccase</a><a href="#">Rackcase enkel</a><a href="#">Rackcase dubbel</a></div>
       <div><h5>Service</h5><a href="#">Levertijden</a><a href="#">Verzending</a><a href="#">Onderdelen</a><a href="#">Zaagservice</a><a href="#">Over Proflite</a><a href="contact-v1.html">Contact</a></div>
     </div>
     <div class="bot"><span>KVK 09123456</span><span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span></div>

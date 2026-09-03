@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — /branches/meet-en-testapparatuur (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   /branches/meet-en-testapparatuur — Meet- en testapparatuur
+
+   Toon: technisch en precies. Het onderscheid zit hier niet in de kist
+   maar in het interieur, dus de tekst gaat over frezen, schuimhardheid
+   en draagpunten. Waar defensie over dossiers praat, praat deze pagina
+   over millimeters.
+
+   Het sjabloon is voor alle branches gelijk; de toon komt uit drie
+   knoppen: hoeveel donker vlak, hoeveel cyaan, en hoe lang de zinnen
+   zijn. Alles blijft binnen brand.css — geen eigen kleuren, geen
+   ronde hoeken, drie fonts.
+   ══════════════════════════════════════════════════════════════ */
+.kop{background:var(--void);color:#fff;position:relative;overflow:hidden}
+.kop .grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center}
+.kop h1{font-size:clamp(36px,4.4vw,56px);color:#fff;line-height:.94;max-width:15ch;margin-top:16px}
+.kop h1 .acc{color:var(--cyan)}
+.kop p.lead{color:rgba(255,255,255,.82);font-size:17px;max-width:46ch;margin-top:18px}
+.kop .acties{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+.kop .beeld{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);
+  aspect-ratio:4/3;overflow:hidden}
+.kop .beeld img{width:100%;height:100%;object-fit:cover;opacity:.5}
+
+.belofte{border-bottom:1px solid var(--rule);background:var(--bg);display:flex;align-items:center}
+.belofte .row{display:flex;gap:56px;align-items:center;flex-wrap:wrap;width:100%}
+.belofte .it{display:flex;flex-direction:column;gap:5px}
+.belofte .it b{font-family:var(--disp);text-transform:uppercase;font-size:24px;
+  letter-spacing:.03em;color:var(--dark);font-weight:900;line-height:1}
+.belofte .it span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mute)}
+
+/* waar het hier om draait — de eisen die in deze markt gelden */
+.eisen .lijst{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--rule);border:1px solid var(--rule);margin-top:24px}
+.eis{background:#fff;padding:20px 22px 22px;display:flex;flex-direction:column;gap:8px}
+.eis .n{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.eis b{font-family:var(--disp);text-transform:uppercase;font-size:19px;letter-spacing:.03em;
+  color:var(--dark);line-height:1.1}
+.eis p{font-size:13.5px;color:var(--mute);line-height:1.5}
+
+/* toepassingen — elk item is een link naar /case-voor/{apparaat} */
+.toep{background:var(--dark);color:#fff}
+.toep .raster{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px}
+.tp{border:1px solid rgba(255,255,255,.24);padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;
+  transition:.14s;background:rgba(255,255,255,.04)}
+.tp:hover{border-color:var(--cyan)}
+.tp b{font-family:var(--disp);text-transform:uppercase;font-size:17px;letter-spacing:.03em;line-height:1.1;color:#fff}
+.tp span{font-size:13px;color:rgba(255,255,255,.72);line-height:1.45}
+.tp .go{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--cyan);margin-top:auto;padding-top:8px}
+
+/* bewijs — klantverhalen of, waar die er niet zijn, normen */
+.bewijs .kolommen{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.bw{border:1px solid var(--rule);background:#fff;display:flex;flex-direction:column}
+.bw .im{background:var(--bg);aspect-ratio:16/10;overflow:hidden}
+.bw .im img{width:100%;height:100%;object-fit:cover}
+.bw .bd{padding:18px 20px 20px;border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:7px}
+.bw .n{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.bw b{font-family:var(--disp);text-transform:uppercase;font-size:18px;letter-spacing:.03em;color:var(--dark);line-height:1.1}
+.bw p{font-size:13.5px;color:var(--mute);line-height:1.5}
+
+/* slot met een naam en een gezicht */
+.slot .in{display:grid;grid-template-columns:1fr 360px;gap:56px;align-items:center}
+.slot p{font-size:16.5px;color:var(--mute);max-width:48ch;margin-top:12px}
+.kaart{border:1px solid var(--rule);background:#fff;padding:22px}
+.kaart .rij{display:flex;gap:15px;align-items:center}
+.kaart .foto{width:60px;height:60px;flex:none;background:var(--bg);border:1px solid var(--rule);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:8px;letter-spacing:.1em;color:var(--rule);text-align:center}
+.kaart b{font-family:var(--disp);text-transform:uppercase;font-size:19px;letter-spacing:.03em;
+  color:var(--dark);display:block;line-height:1.1}
+.kaart .fn{font-size:13px;color:var(--mute);display:block;margin-top:4px}
+.kaart .lijn{margin-top:16px;padding-top:14px;border-top:1px solid var(--rule);
+  font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--mute);line-height:1.9}
+.kaart .lijn a{color:var(--dark);font-weight:600}
+.kaart .lijn a:hover{color:var(--blue)}
+
+@media (max-width:1000px){
+  .kop .grid,.slot .in{grid-template-columns:1fr;gap:34px}
+  .eisen .lijst,.toep .raster,.bewijs .kolommen{grid-template-columns:1fr 1fr}
+}
+@media (max-width:680px){ .eisen .lijst,.toep .raster,.bewijs .kolommen{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<header class="main">
+  <div class="wrap">
+    <div class="logo"><em>case</em>Builder.com</div>
+    <div class="search">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="5"></circle><path d="M11 11l4 4"></path></svg>
+      <input placeholder="Zoek op artikelnummer of apparaat">
+    </div>
+    <div class="hdr-r">
+        <a href="#" class="stil">Inloggen</a>
+        <a href="#">Winkelwagen</a>
+      </div>
+  </div>
+</header>
+
+<nav class="primary">
+  <div class="wrap">
+    <a href="case-aanvragen-v1.html">Case aanvragen</a>
+    <a href="case-voor-v1.html">Wat ga je vervoeren?</a>
+    <a href="configurator-v1.html">Zelf configureren</a>
+    <a href="flightcases-v1.html">Flightcases</a>
+    <a href="branches.html" class="on">Branches</a>
+    <a href="service-hub-v1.html">Service</a>
+    <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#">NL &#9662;</a></div>
+  </div>
+</nav>
+
+<div class="crumbs donker">
+  <div class="wrap">
+    <a href="#">Home</a><span class="sep">/</span>
+    <a href="branches.html">Branches</a><span class="sep">/</span>
+    <span>Meet- en testapparatuur</span>
+  </div>
+</div>
+
+<section class="kop ruit ruit-dark ruit-aanzet beslag kop-midden">
+  <span class="hk tl"></span><span class="hk tr"></span>
+  <div class="wrap grid">
+    <div>
+      <span class="ey">Meet-, test- en kalibratieapparatuur</span>
+      <h1>Het schuim is hier <span class="acc">het product</span></h1>
+      <p class="lead">Meetinstrumenten die het veld in gaan: netbeheer, keuring, offshore. Het interieur wordt gefreesd op het instrument, niet op de kist.</p>
+      <div class="acties">
+        <a class="btn btn-pri" href="#">Offerte aanvragen</a>
+        <a class="btn btn-ghost" href="#">Zo frezen wij schuim</a>
+      </div>
+    </div>
+    <div class="beeld"><img src="assets/foto-meet-en-testapparatuur.jpg" alt=""></div>
+  </div>
+</section>
+
+<section class="belofte tight">
+  <div class="wrap">
+    <div class="row">
+      <div class="it"><b>Sinds 1987</b><span>Eigen productie in Doesburg</span></div>
+      <div class="it"><b>Gefreesd, niet geknipt</b><span>Op de maten van je instrument</span></div>
+      <div class="it"><b>Binnen 48 uur</b><span>Offerte, ook op een datasheet</span></div>
+      <div class="it"><b>Kalibratie blijft</b><span>Draagpunten op de behuizing</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="eisen">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="ey ey-dark">Waar het hier om draait</span>
+      <h2>Vier dingen die het interieur bepalen</h2>
+      <p class="lead">Bij meetapparatuur zit het werk niet in de kist maar erin. Wat hieronder staat bepaalt de uitfrezing — en staat in de offerte.</p>
+    </div>
+    <div class="lijst">
+      <div class="eis"><span class="n">// 01</span><b>Draagpunten op de behuizing</b><p>Nooit op het display of de connectoren. Een instrument dat op zijn front rust, komt ontregeld aan.</p></div>
+      <div class="eis"><span class="n">// 02</span><b>Schokwaarde van het instrument</b><p>Die staat in de datasheet. Schuimdikte en hardheid volgen dat getal, niet andersom.</p></div>
+      <div class="eis"><span class="n">// 03</span><b>Antistatisch waar het moet</b><p>Open elektronica vraagt dissipatief schuim. Standaard PE is dat niet.</p></div>
+      <div class="eis"><span class="n">// 04</span><b>Doorvoer voor kabel en netsnoer</b><p>Meten met de kist dicht: een doorvoer met tule scheelt elke keer opnieuw uitpakken.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="toep ruit ruit-dark ruit-veld">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="ey">Toepassingen</span>
+      <h2 style="color:#fff">Wat er in gaat</h2>
+      <p class="lead" style="color:rgba(255,255,255,.78)">Elk item is een casetype dat we vaker hebben gebouwd. De maatvoering volgt je apparatuur, niet andersom.</p>
+    </div>
+    <div class="raster">
+      <a class="tp" href="case-voor-v1.html"><b>Spectrumanalysers</b><span>Zwaar, topzwaar en gevoelig op de aansluitzijde.</span><span class="go">Naar de case &rarr;</span></a>
+      <a class="tp" href="case-voor-v1.html"><b>Kalibratiesets</b><span>Meerdere instrumenten in één kist, elk met eigen uitsparing.</span><span class="go">Naar de case &rarr;</span></a>
+      <a class="tp" href="case-voor-v1.html"><b>Servicekoffers</b><span>Gereedschap en meetapparatuur in één, met deksel-indeling.</span><span class="go">Naar de case &rarr;</span></a>
+      <a class="tp" href="case-voor-v1.html"><b>Datalogging</b><span>Loggers en sensoren, met vak voor kabelbomen.</span><span class="go">Naar de case &rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="bewijs">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="ey ey-dark">Hoe we het maken</span>
+      <h2>Waar de maatvoering vandaan komt</h2>
+      <p class="lead">Een instrument opmeten is niet hetzelfde als de datasheet overtypen. Dit is wat we doen voordat er schuim in gaat.</p>
+    </div>
+    <div class="kolommen">
+      <div class="bw"><div class="im"><img src="assets/foto-meet-en-testapparatuur.jpg" alt=""></div>
+        <div class="bd"><span class="n">// 01</span><b>Datasheet of het instrument zelf</b><p>Stuur de datasheet, of leg het instrument een dag bij ons neer. Dat tweede levert altijd de betere pasvorm.</p></div></div>
+      <div class="bw"><div class="im"><img src="assets/foto-meet-en-testapparatuur.jpg" alt=""></div>
+        <div class="bd"><span class="n">// 02</span><b>Proeffrezing bij een serie</b><p>Bij meer dan vijf stuks frezen we er eerst één en leggen het instrument erin voordat de rest gaat.</p></div></div>
+      <div class="bw"><div class="im"><img src="assets/foto-meet-en-testapparatuur.jpg" alt=""></div>
+        <div class="bd"><span class="n">// 03</span><b>Uitfrezing blijft bewaard</b><p>De frees­tekening ligt vast bij je ordernummer. Een bijbestelling twee jaar later past nog steeds.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slot">
+  <div class="wrap in">
+    <div>
+      <span class="ey ey-dark">Verder</span>
+      <h2>Stuur de datasheet</h2>
+      <p>Een typenummer is vaak al genoeg — de maten en het gewicht halen we er zelf bij. Twijfel je over de schokwaarde, dan zoeken we die op.</p>
+      <div class="acties" style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap">
+        <a class="btn btn-dark" href="#">Offerte aanvragen</a>
+        <a class="btn btn-out" href="branches.html">Alle branches</a>
+      </div>
+    </div>
+    <div class="kaart">
+      <div class="rij">
+        <div class="foto"><img src="assets/joran.svg" alt="Joran" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div><b>Joran</b><span class="fn">Tekent je case uit en stuurt hem dezelfde dag terug</span></div>
+      </div>
+      <div class="lijn">
+        <a href="tel:+31575575734">+31 (0)575 575734</a><br>
+        <a href="mailto:verkoop@casebuilder.com">verkoop@casebuilder.com</a><br>
+        Ma&ndash;vr &middot; 08:00&ndash;17:00
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="logo"><em>case</em>Builder.com</div>
+        <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734">+31 (0)575 575734</a></p>
+      </div>
+      <div><h5>Offerte aanvragen</h5><a href="case-aanvragen-v1.html">Case aanvragen</a><a href="#">Maten laten controleren</a><a href="#">Series en staffels</a><a href="#">Zakelijk bestellen</a></div>
+      <div><h5>Zelf configureren</h5><a href="configurator-v1.html">Naar de configurator</a><a href="#">Zo werkt het</a><a href="#">Herhaalorder</a><a href="#">Mijn configuraties</a></div>
+      <div><h5>Flightcases</h5><a href="flightcases-v1.html">Alle flightcases</a><a href="#">Koffer</a><a href="#">Hoedcase</a><a href="#">Trunccase</a><a href="#">Rackcase enkel</a><a href="#">Rackcase dubbel</a></div>
+      <div><h5>Service</h5><a href="#">Levertijden</a><a href="#">Verzending</a><a href="#">Onderdelen</a><a href="#">Zaagservice</a><a href="#">Over Proflite</a><a href="contact-v1.html">Contact</a></div>
+    </div>
+    <div class="bot"><span>KVK 09123456</span><span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span></div>
+  </div>
+</footer>
+
+<script src="assets/versies.js"></script>
+<script src="assets/hoogtemelder.js"></script>
+</body>
+</html>
