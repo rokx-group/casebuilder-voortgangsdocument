@@ -98,6 +98,26 @@ function tussen(tekst, start, eind, wat) {
   return { a, b, inhoud: tekst.slice(a + start.length, b) };
 }
 
+/**
+ * De ingesloten kopie komt in index.html te staan (de wortel), de mockup zelf
+ * staat in mockups/. Elk relatief pad wijst daardoor een map te hoog. Zonder
+ * deze herschrijving zijn alle afbeeldingen, video's en links in de
+ * ontwerpweergave stuk — en dat valt niet op, want de pagina rendert gewoon
+ * door: je ziet een gebroken beeld, geen foutmelding.
+ *
+ * Alles met een eigen schema (http:, mailto:, data:), een anker (#) of een
+ * pad vanaf de wortel (/) blijft ongemoeid.
+ */
+function herschrijfPaden(tekst, map) {
+  const laatStaan = /^(?:[a-z][a-z0-9+.-]*:|\/\/|\/|#|$)/i;
+  const voor = (pad) => (laatStaan.test(pad) ? pad : `${map}/${pad}`);
+  return tekst
+    .replace(/\b(href|src|poster)=("|')([^"']*)\2/gi,
+      (_, attr, q, pad) => `${attr}=${q}${voor(pad)}${q}`)
+    .replace(/url\(\s*(['"]?)([^'")]+)\1\s*\)/gi,
+      (_, q, pad) => `url(${q}${voor(pad)}${q})`);
+}
+
 let css = schaalIn(readFileSync(BRAND, "utf8"), ".dv");
 const html = {};
 
@@ -113,6 +133,12 @@ const html = {};
    volledige scherm — een kapot ontwerp beoordeelt niemand goed. */
 const NIET_RESPONSIEF = ["case-voor-resultaat", "case-voor-categorie"];
 
+/* Bestandsnaam → stam waar hij op leek te horen. Pas ná de hele lus weten we
+   of hij elders alsnog is opgepikt: service-levertijden-v1.html lijkt een
+   variant van service.html, maar heeft een eigen ingang in PAGINAS. */
+const MOGELIJK_GEMIST = new Map();
+const OPGEPIKT = new Set();
+
 function variantenVan(bestand, naam) {
   if (naam && NIET_RESPONSIEF.includes(naam)) return [{ id: "wireframe", bestand }];
   const map = join(wortel, dirname(bestand));
@@ -121,12 +147,18 @@ function variantenVan(bestand, naam) {
   // Het achtervoegsel ís de naam: v1, v1-video, v2 — geen genummerde reeks,
   // want een wireframe is geen versie van een ontwerp.
   const uit = [{ id: "wireframe", bestand }];
+  const gemist = [];
   for (const naam of readdirSync(map).sort()) {
     // Alleen achtervoegsels die met v+cijfer beginnen tellen als versie —
     // anders zou service-levertijden.html een variant van service.html zijn.
     const m = naam.match(new RegExp(`^${stam}-(v\\d[\\w-]*)\\.html$`));
-    if (m) uit.push({ id: m[1], bestand: `${dirname(bestand)}/${naam}` });
+    if (m) { uit.push({ id: m[1], bestand: `${dirname(bestand)}/${naam}` }); continue; }
+    // Ziet er wél uit als een ontwerpversie (eindigt op -v<cijfer>.html) maar
+    // valt door het patroon, bijvoorbeeld casetype-hoedcase-v1.html. Dat
+    // verdween tot nu toe geruisloos uit de weergave; nu zegt het script het.
+    if (naam.startsWith(`${stam}-`) && /-v\d[\w-]*\.html$/.test(naam)) gemist.push(naam);
   }
+  for (const naam of gemist) MOGELIJK_GEMIST.set(naam, stam);
   return uit;
 }
 
@@ -134,14 +166,28 @@ for (const { naam, bestand, overslaan = [] } of PAGINAS) {
   for (const variant of variantenVan(bestand, naam)) {
     if (overslaan.includes(variant.id)) continue;
     const sleutel = `${naam}-${variant.id}`;
+    OPGEPIKT.add(basename(variant.bestand));
     const bron = readFileSync(join(wortel, variant.bestand), "utf8");
     const wortelSel = `.dv[data-page="${sleutel}"]`;
-    css += schaalIn(tussen(bron, "<style>", "</style>", `stijlblok in ${variant.bestand}`).inhoud, wortelSel);
+    const map = dirname(variant.bestand);
+    css += schaalIn(
+      herschrijfPaden(tussen(bron, "<style>", "</style>", `stijlblok in ${variant.bestand}`).inhoud, map),
+      wortelSel
+    );
     // Het meetlint hoort bij de losse mockup, niet bij de ingesloten kopie.
-    html[sleutel] = tussen(bron, "<body>", "</body>", `body in ${variant.bestand}`).inhoud
+    html[sleutel] = herschrijfPaden(
+      tussen(bron, "<body>", "</body>", `body in ${variant.bestand}`).inhoud, map
+    )
       .replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "")
       .trim();
   }
+}
+
+/* Een ontwerp dat door het naampatroon valt verdween tot nu toe geruisloos
+   uit de weergave. Nu zegt het script welke, en waarom. */
+for (const [naam, stam] of MOGELIJK_GEMIST) {
+  if (OPGEPIKT.has(naam)) continue;
+  console.warn(`  let op: ${naam} valt buiten de weergave — past niet op ${stam}-v<cijfer>`);
 }
 
 let doel = readFileSync(DOEL, "utf8");
