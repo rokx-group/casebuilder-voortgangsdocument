@@ -3,132 +3,158 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Casebuilder — homepage v4, de vloot (mockup)</title>
+<title>Casebuilder — homepage v4, de werkbank (mockup)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/brand.css">
 <style>
 /* ══════════════════════════════════════════════════════════════
-   Concept B — de vloot
+   Concept A — de werkbank
 
-   Uitgangspunt: niemand zoekt op "hoedcase". Men zoekt op wat er
-   in moet. De homepage is daarom geen verhaal maar een ingang per
-   vakgebied — en elke tegel is een echte landingspagina, geen
-   decoratie.
+   Uitgangspunt: het gereedschap ís de etalage. Geen beeld dat over
+   de belofte praat, maar de belofte zelf, werkend, boven de vouw.
+   Wie hier komt wil een prijs, en die staat binnen één scherm op de
+   pagina. Alles wat daarna komt is voor wie nog niet zover is.
 
-   Eerlijk gehouden: waar geen fotografie is, staat een leeg kader
-   met de reden erin. Anders kies je een concept op een illusie.
-
-   Kleur en logo komen hier bewust NIET voor. Dit concept gaat over
-   vinden; afwerking is een gesprek voor later in de trechter.
+   Kleur en logo staan hier bewust als stap in het paneel, niet als
+   eigen sectie: in dit concept is elke belofte een veld.
    ══════════════════════════════════════════════════════════════ */
 
-/* ── zoekband ────────────────────────────────────────────── */
-.zoekband{background:var(--void);color:#fff;position:relative;overflow:hidden;padding:34px 0 30px}
-.zoekband h1{font-size:clamp(38px,4.8vw,62px);color:#fff;line-height:.95;max-width:18ch;margin-top:16px}
-.zoekband h1 .acc{color:var(--cyan)}
-.zoekband p.sub{margin-top:16px;font-size:17px;color:rgba(255,255,255,.76);max-width:56ch}
-.zoekband .field{margin-top:28px;max-width:720px;border-color:var(--cyan);height:64px;background:#fff}
-.zoekband .field input{font-size:16px}
-.zoekband .field button{background:var(--cyan);color:var(--void)}
-.veelgezocht{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;align-items:center}
-.veelgezocht .lb{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;
-  text-transform:uppercase;color:rgba(255,255,255,.45);margin-right:6px}
-.veelgezocht a{border:1px solid rgba(255,255,255,.28);padding:6px 12px;font-size:13px;color:rgba(255,255,255,.86)}
-.veelgezocht a:hover{border-color:var(--cyan);color:var(--cyan)}
+/* ── de werkbank ─────────────────────────────────────────── */
+.werkbank{background:var(--void);color:#fff;position:relative;overflow:hidden;
+  padding:44px 0 52px}
+.werkbank .grid{display:grid;grid-template-columns:1fr 660px;gap:56px;align-items:start}
+.werkbank h1{font-size:clamp(38px,4.4vw,58px);color:#fff;line-height:.94;margin:16px 0 0;max-width:13ch}
+.werkbank h1 .acc{color:var(--cyan)}
+.werkbank p.sub{margin-top:18px;font-size:17px;color:rgba(255,255,255,.76);max-width:38ch}
+.wb-specs{margin-top:34px;border-top:1px solid rgba(255,255,255,.18)}
+.wb-specs div{display:flex;gap:16px;align-items:baseline;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.wb-specs .k{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--cyan);
+  text-transform:uppercase;width:106px;flex:none}
+.wb-specs .v{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:18px;letter-spacing:.03em}
+.wb-hulp{margin-top:26px;font-size:14px;color:rgba(255,255,255,.6)}
+.wb-hulp a{color:var(--cyan);border-bottom:1px solid rgba(102,196,232,.4)}
 
-/* ── vakgebieden — de kern van dit concept ───────────────── */
-.velden{padding-top:32px}
-/* De kop van deze sectie staat op twee kolommen en niet gestapeld: dat
-   scheelt tachtig pixels, en die zijn nodig om het raster nog boven de
-   vouw te laten beginnen. Bij dit concept ís het raster de boodschap. */
-.velden .sec-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:26px}
-.velden .sec-head h2{margin:10px 0 0}
-.veldgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
-  border:1px solid var(--rule)}
-.veld{background:#fff;display:flex;flex-direction:column;transition:.15s}
-.veld:hover{background:var(--lightblue)}
-.veld .im{aspect-ratio:16/9;background:var(--bg);border-bottom:1px solid var(--rule);
-  display:flex;align-items:center;justify-content:center;position:relative}
-.veld .im img{width:100%;height:100%;object-fit:cover}
-.veld .im.leeg::after{content:"foto ontbreekt";font-family:var(--mono);font-size:9.5px;
-  letter-spacing:.16em;text-transform:uppercase;color:var(--rule)}
-.veld .im .tel{position:absolute;left:0;top:0;background:var(--dark);color:#fff;
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;padding:6px 11px}
-.veld .bd{padding:22px 24px 26px;display:flex;flex-direction:column;flex:1}
-.veld h3{font-size:24px;letter-spacing:.03em;line-height:1.05}
-.veld .sub{font-size:14px;color:var(--mute);margin-top:9px;flex:1}
-.veld .vb{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--mute);margin-top:14px;line-height:1.7}
-.veld .vb b{color:var(--dark);font-weight:600}
-.veld .go{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:14.5px;
-  letter-spacing:.05em;color:var(--blue);margin-top:16px}
-.veld:hover .go{color:var(--dark)}
+/* ── het paneel ──────────────────────────────────────────── */
+.paneel{background:#fff;color:var(--ink);box-shadow:0 18px 60px rgba(0,0,0,.4)}
+.stapper{display:flex;border-bottom:1px solid var(--rule);background:var(--bg)}
+.stapper div{flex:1;padding:13px 12px;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--mute);border-right:1px solid var(--rule);
+  display:flex;align-items:center;gap:8px}
+.stapper div:last-child{border-right:0}
+.stapper div.nu{background:var(--dark);color:#fff}
+.stapper div.nu b{color:var(--cyan)}
+.stapper b{font-weight:600}
+.pbody{padding:28px 30px 0}
+.pbody h2{font-size:23px;margin-bottom:4px}
+.pbody .uitleg{font-size:13.5px;color:var(--mute);margin-bottom:20px}
 
-/* ── één ding, één case — de particulier ─────────────────── */
-.enkel{background:var(--bg);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
-.enkel .sec-head{display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap}
-.enkel .sec-head > div{margin-right:auto}
-.dingen{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
-.ding{background:#fff;border:1px solid var(--rule);display:flex;flex-direction:column;transition:.12s}
-.ding:hover{border-color:var(--dark)}
-.ding .im{aspect-ratio:1;background:var(--bg);display:flex;align-items:center;justify-content:center}
-.ding .im::after{content:"—";font-family:var(--mono);font-size:15px;color:var(--rule)}
-.ding .bd{padding:11px 12px 13px;border-top:1px solid var(--rule)}
-.ding b{font-size:13.5px;font-weight:700;color:var(--dark);display:block;line-height:1.25}
-.ding span{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--mute);display:block;margin-top:5px}
+.modellen{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}
+.mdl{border:1.5px solid var(--rule);background:#fff;padding:10px 8px 11px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:8px;transition:.12s}
+.mdl:hover{border-color:var(--blue)}
+.mdl.on{border-color:var(--dark);background:var(--lightblue)}
+.mdl img{height:44px;width:auto;object-fit:contain;mix-blend-mode:multiply}
+.mdl span{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--mute);text-align:center;line-height:1.35}
+.mdl.on span{color:var(--dark)}
 
-/* ── niets gevonden → configurator ───────────────────────── */
-.geenmatch{background:var(--dark);color:#fff}
-.geenmatch .grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center}
-.geenmatch h2{font-size:clamp(30px,3.4vw,46px);color:#fff;margin:14px 0 16px}
-.geenmatch p{color:rgba(255,255,255,.8);font-size:17px;max-width:50ch}
-.geenmatch .stappen{border-left:1px solid rgba(255,255,255,.2);padding-left:32px}
-.geenmatch .st{display:flex;gap:18px;padding:14px 0}
-.geenmatch .st+.st{border-top:1px solid rgba(255,255,255,.14)}
-.geenmatch .st .i{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--cyan);
-  padding-top:4px;white-space:nowrap}
-.geenmatch .st b{font-family:var(--disp);text-transform:uppercase;font-size:17px;letter-spacing:.03em;
-  font-weight:700;display:block;color:#fff}
-.geenmatch .st span{font-size:14px;color:rgba(255,255,255,.68)}
+.maten{display:grid;grid-template-columns:repeat(3,1fr) 1.1fr;gap:10px;margin-top:22px}
+.maat label{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);display:block;margin-bottom:6px}
+.maat .inv{display:flex;align-items:center;border:1.5px solid var(--rule);height:46px;padding:0 12px;background:#fff}
+.maat .inv:focus-within{border-color:var(--dark)}
+.maat input{border:0;outline:0;width:100%;font-family:var(--mono);font-size:15px;color:var(--ink);background:transparent}
+.maat .eh{font-family:var(--mono);font-size:10px;color:var(--mute);letter-spacing:.1em}
+.maat.vast .inv{background:var(--bg);border-style:dashed}
 
-/* ── de vijf modellen als naslag, niet als etalage ───────── */
-.naslag{border-top:1px solid var(--rule)}
-.naslag .rij{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--rule);
-  border:1px solid var(--rule);margin-top:26px}
-.naslag a{background:#fff;padding:18px 18px 20px;display:flex;gap:14px;align-items:center;transition:.12s}
-.naslag a:hover{background:var(--lightblue)}
-.naslag a img{width:52px;height:52px;object-fit:contain;flex:none;mix-blend-mode:multiply}
-.naslag a b{font-family:var(--disp);text-transform:uppercase;font-size:16px;letter-spacing:.03em;
-  color:var(--dark);display:block;line-height:1.1}
-.naslag a i{font-style:normal;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--mute);display:block;margin-top:5px}
+/* kleur en logo — de twee dingen die een kist van een klant maken */
+.afwerking{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:22px;
+  border-top:1px solid var(--rule);padding-top:20px}
+.afwerking > div > label{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mute);display:block;margin-bottom:9px}
+.kleuren{display:flex;gap:7px;flex-wrap:wrap}
+.kl{width:30px;height:30px;border:1.5px solid var(--rule);cursor:pointer;position:relative}
+.kl.on{border-color:var(--dark);box-shadow:inset 0 0 0 2px #fff}
+.logovak{border:1.5px dashed var(--rule);height:66px;display:flex;align-items:center;
+  justify-content:center;gap:10px;background:var(--bg);cursor:pointer}
+.logovak .lg{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:15px;
+  letter-spacing:.03em;color:var(--dark);border:1.5px solid var(--dark);padding:5px 11px}
+.logovak span{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--mute)}
 
-/* ── vertrouwen ─────────────────────────────────────────── */
-.trust{border-top:1px solid var(--rule);background:var(--bg)}
-.trust .row{display:flex;gap:48px;align-items:center;flex-wrap:wrap}
-.trust .it{display:flex;flex-direction:column;gap:4px}
-.trust .it b{font-family:var(--disp);text-transform:uppercase;font-size:22px;letter-spacing:.03em;color:var(--dark)}
-.trust .it span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.prijsbalk{margin-top:26px;border-top:1px solid var(--rule);padding:20px 30px;background:var(--bg);
+  display:flex;align-items:center;gap:24px;margin-left:-30px;margin-right:-30px}
+.prijsbalk .pr{display:flex;flex-direction:column}
+.prijsbalk .pr .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mute)}
+.prijsbalk .pr b{font-family:var(--disp);font-weight:900;font-size:34px;letter-spacing:.02em;
+  color:var(--dark);line-height:1}
+.prijsbalk .pr i{font-style:normal;font-family:var(--mono);font-size:9.5px;color:var(--mute);letter-spacing:.1em}
+.prijsbalk .lv{border-left:1px solid var(--rule);padding-left:24px;display:flex;flex-direction:column}
+.prijsbalk .lv .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mute)}
+.prijsbalk .lv b{font-family:var(--disp);text-transform:uppercase;font-size:19px;
+  letter-spacing:.03em;color:var(--dark)}
+.prijsbalk .btn{margin-left:auto}
+
+/* ── de omweg voor wie het model niet weet ───────────────── */
+.omweg{background:var(--lightblue);border-bottom:1px solid var(--rule)}
+.omweg .wrap{display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding-top:18px;padding-bottom:18px}
+.omweg b{font-family:var(--disp);text-transform:uppercase;font-size:19px;letter-spacing:.03em;
+  color:var(--dark);white-space:nowrap}
+.omweg .obj{display:flex;gap:7px;flex-wrap:wrap}
+.omweg .obj a{background:#fff;border:1px solid var(--rule);padding:7px 13px;font-size:13px;color:var(--dark)}
+.omweg .obj a:hover{border-color:var(--dark)}
+.omweg .meer{margin-left:auto;font-family:var(--disp);text-transform:uppercase;font-weight:700;
+  font-size:14px;letter-spacing:.05em;color:var(--blue);white-space:nowrap}
+
+/* ── bewijs ──────────────────────────────────────────────── */
+.bewijs{background:var(--dark);color:#fff}
+.bewijs .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.16)}
+.bewijs .bw{background:var(--dark);padding:30px 26px 32px}
+.bewijs .bw .n{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--cyan)}
+.bewijs .bw b{font-family:var(--disp);text-transform:uppercase;font-size:21px;letter-spacing:.03em;
+  display:block;margin:14px 0 9px}
+.bewijs .bw p{font-size:14px;color:rgba(255,255,255,.72)}
+
+/* ── vijf modellen, compact ──────────────────────────────── */
+.mdlrij .sec-head{display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.mdlrij .sec-head > div{margin-right:auto}
+.case .pr b{display:block}
+
+/* ── wie er al mee rijdt ─────────────────────────────────── */
+.klanten{background:var(--bg);border-top:1px solid var(--rule)}
+.klanten .row{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px}
+.klanten .lg{flex:1;min-width:150px;height:66px;border:1px solid var(--rule);background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--rule)}
+.klanten .cit{margin-top:34px;border-left:3px solid var(--cyan);padding-left:26px;max-width:70ch}
+.klanten .cit p{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:24px;
+  letter-spacing:.02em;color:var(--dark);line-height:1.2}
+.klanten .cit span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mute);display:block;margin-top:12px}
 
 .closer{background:var(--void);color:#fff;text-align:center}
 .closer h2{font-size:clamp(30px,3.6vw,50px);color:#fff}
 .closer p{color:rgba(255,255,255,.75);margin:14px auto 30px;max-width:48ch;font-size:17px}
 
-@media(max-width:1080px){
-  .veldgrid{grid-template-columns:1fr 1fr}
-  .dingen{grid-template-columns:repeat(3,1fr)}
-  .naslag .rij{grid-template-columns:1fr 1fr}
-  .geenmatch .grid{grid-template-columns:1fr;gap:34px}
+@media(max-width:1180px){
+  .werkbank .grid{grid-template-columns:1fr;gap:34px}
+  .bewijs .grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:760px){
-  .zoekband{padding:36px 0 34px}
-  .veldgrid{grid-template-columns:1fr}
-  .dingen{grid-template-columns:repeat(2,1fr)}
-  .naslag .rij{grid-template-columns:1fr}
-  .geenmatch .stappen{padding-left:20px}
+  .werkbank{padding:32px 0 40px}
+  .modellen{grid-template-columns:repeat(3,1fr)}
+  .maten{grid-template-columns:1fr 1fr}
+  .afwerking{grid-template-columns:1fr}
+  .pbody{padding:22px 20px 0}
+  .prijsbalk{margin-left:-20px;margin-right:-20px;padding:18px 20px;flex-wrap:wrap}
+  .prijsbalk .btn{margin-left:0;width:100%;justify-content:center}
+  .bewijs .grid{grid-template-columns:1fr}
+  .omweg .meer{margin-left:0}
 }
 </style>
 </head>
@@ -139,7 +165,7 @@
     <div class="logo"><em>case</em>Builder.com</div>
     <form class="search" onsubmit="return false">
       <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
-      <input placeholder="Zoek op wat je vervoert…" aria-label="Zoeken">
+      <input placeholder="Zoek op case, model of artikelnummer…" aria-label="Zoeken">
     </form>
     <div class="hdr-r">
       <a href="#" class="stil">Inloggen</a>
@@ -160,167 +186,184 @@
   </div>
 </nav>
 
-<!-- ── ZOEKBAND ───────────────────────────────────────────────
-     Kort gehouden (±330px) zodat het eerste vakgebied nog boven de
-     vouw begint. De pagina moet zich meteen als ingang tonen, niet
-     als merkverhaal. ────────────────────────────────────────── -->
-<div class="zoekband ruit ruit-dark ruit-aanzet">
+<!-- ── DE WERKBANK ────────────────────────────────────────────
+     Boven de vouw staat geen plaatje maar stap 1. De maten zijn
+     ingevuld en de prijs staat er al: de bezoeker ziet het systeem
+     werken voordat hij zelf iets doet. ────────────────────────── -->
+<div class="werkbank ruit ruit-dark ruit-aanzet">
   <div class="wrap">
-    <div class="ey">// 533 CASES · 38 VAKGEBIEDEN · ALLES OOK OP MAAT</div>
-    <h1>Wat ga je <span class="acc">vervoeren?</span></h1>
-    <p class="sub">Zeg wat erin gaat, dan bepalen wij de maten. Geen kennis van casetypes nodig.</p>
-    <form class="field" onsubmit="return false">
-      <input placeholder="Bijvoorbeeld: Gibson Les Paul, 19&quot; rack 6 HE, moving head…" aria-label="Wat ga je vervoeren?">
-      <button type="submit">Zoek</button>
-    </form>
-    <div class="veelgezocht">
-      <span class="lb">Veelgezocht</span>
-      <a href="#">19" rack</a><a href="#">Moving head</a><a href="#">Mengtafel</a>
-      <a href="#">Les Paul</a><a href="#">Camera</a><a href="#">Drone</a>
+    <div class="grid">
+      <div>
+        <div class="ey">// PRIJS TERWIJL JE TYPT · GEEN OFFERTE</div>
+        <h1>Jouw maten,<br><span class="acc">nu een prijs</span></h1>
+        <p class="sub">Vijf stappen, geen wachttijd. Een casebouwer controleert je tekening voordat er gezaagd wordt.</p>
+        <div class="wb-specs">
+          <div><span class="k">// Levertijd</span><span class="v">10 werkdagen</span></div>
+          <div><span class="k">// Uitvoering</span><span class="v">Bouwpakket of kant-en-klaar</span></div>
+          <div><span class="k">// Afwerking</span><span class="v">9 kleuren · eigen logo</span></div>
+          <div><span class="k">// Controle</span><span class="v">Specialist kijkt mee</span></div>
+        </div>
+        <p class="wb-hulp">Weet je het model niet? <a href="#">Zoek op wat je vervoert →</a></p>
+      </div>
+
+      <div class="paneel">
+        <div class="stapper">
+          <div class="nu"><b>01</b> Model</div>
+          <div><b>02</b> Maten</div>
+          <div><b>03</b> Afwerking</div>
+          <div><b>04</b> Opties</div>
+          <div><b>05</b> Controle</div>
+        </div>
+        <div class="pbody">
+          <h2>Kies je model en vul je maten in</h2>
+          <p class="uitleg">Binnenmaten van de ruimte die je nodig hebt — wij rekenen de wanddikte erbij.</p>
+
+          <div class="modellen">
+            <div class="mdl"><img src="assets/flightcase-koffer.jpg" alt=""><span>Koffer</span></div>
+            <div class="mdl"><img src="assets/flightcase-hoedcase.jpg" alt=""><span>Hoed&shy;case</span></div>
+            <div class="mdl"><img src="assets/flightcase-trunccase.jpg" alt=""><span>Trunc&shy;case</span></div>
+            <div class="mdl on"><img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt=""><span>Rack enkel</span></div>
+            <div class="mdl"><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt=""><span>Rack dubbel</span></div>
+          </div>
+
+          <div class="maten">
+            <div class="maat"><label>Lengte</label><div class="inv"><input value="483" aria-label="Lengte"><span class="eh">mm</span></div></div>
+            <div class="maat"><label>Breedte</label><div class="inv"><input value="600" aria-label="Breedte"><span class="eh">mm</span></div></div>
+            <div class="maat"><label>Hoogte</label><div class="inv"><input value="1334" aria-label="Hoogte"><span class="eh">mm</span></div></div>
+            <div class="maat vast"><label>Ofwel</label><div class="inv"><input value="19&quot; · 24 HE" aria-label="Rackmaat"><span class="eh">rack</span></div></div>
+          </div>
+
+          <div class="afwerking">
+            <div>
+              <label>Kleur paneel</label>
+              <div class="kleuren">
+                <span class="kl on" style="background:#1A1A1A"></span>
+                <span class="kl" style="background:#003352"></span>
+                <span class="kl" style="background:#8C1A1A"></span>
+                <span class="kl" style="background:#1F5133"></span>
+                <span class="kl" style="background:#B8B8B8"></span>
+                <span class="kl" style="background:#E8E4DC"></span>
+                <span class="kl" style="background:#C8781A"></span>
+                <span class="kl" style="background:#4A3B6B"></span>
+                <span class="kl" style="background:#F2F5F9"></span>
+              </div>
+            </div>
+            <div>
+              <label>Eigen logo op het deksel</label>
+              <div class="logovak">
+                <span class="lg">jouw logo</span>
+                <span>zeefdruk vanaf 1 stuk</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="prijsbalk">
+            <div class="pr"><span class="k">// Prijs nu</span><b>€ 412,50</b><i>excl. btw · bouwpakket</i></div>
+            <div class="lv"><span class="k">// Verzendklaar</span><b>16 sept</b></div>
+            <a class="btn btn-dark" href="#">Volgende stap →</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ── VAKGEBIEDEN ────────────────────────────────────────────
-     Zes ingangen, elk een bestaande categoriepagina. De aantallen
-     zijn de aantallen uit de sitemap — die telling moet nog kloppen
-     gemaakt worden, zie het punt "de subcategorieën tellen niet op".
-     ────────────────────────────────────────────────────────── -->
-<section class="velden">
+<!-- ── DE OMWEG ──────────────────────────────────────────────
+     Eén regel voor wie geen maten heeft. Bewust smal: dit concept
+     kiest voor de vakman, maar laat de particulier niet vallen. ── -->
+<div class="omweg">
+  <div class="wrap">
+    <b>Geen maten bij de hand?</b>
+    <div class="obj">
+      <a href="#">Gibson Les Paul</a>
+      <a href="#">19" rack 6 HE</a>
+      <a href="#">Moving head</a>
+      <a href="#">Mengtafel</a>
+      <a href="#">Camera + optiek</a>
+      <a href="#">DJ-controller</a>
+    </div>
+    <a class="meer" href="#">Alle 38 →</a>
+  </div>
+</div>
+
+<!-- ── BEWIJS ─────────────────────────────────────────────── -->
+<section class="bewijs">
   <div class="wrap">
     <div class="sec-head">
-      <div>
-        <div class="ey ey-dark">// 01 — PER VAKGEBIED</div>
-        <h2>Kies je branche</h2>
-      </div>
-      <p class="lead">Per branche weten we welke eisen er gelden, welke keuringen erbij horen en wat er meestal naast in de bus gaat — en welke cases daar het vaakst uit komen.</p>
+      <div class="ey">// 02 — WAAROM DIT KAN</div>
+      <h2>Een prijs zonder offerte is geen gok</h2>
+      <p class="lead" style="color:rgba(255,255,255,.78)">De configurator rekent met dezelfde staat als de werkvloer. Wat je op het scherm ziet, is wat de zaag krijgt.</p>
     </div>
-    <div class="veldgrid">
-      <a class="veld" href="branches.html">
-        <div class="im"><img src="assets/placeholder-industrie-en-machinebouw.svg" alt=""><span class="tel">14 toepassingen</span></div>
-        <div class="bd">
-          <h3>Industrie en machinebouw</h3>
-          <div class="sub">Machineonderdelen, prototypes, cleanroom, optiek en drones.</div>
-          <div class="vb"><b>Vaak gevraagd:</b> coördinatenmeetmachine · prefab component</div>
-          <div class="go">Naar industrie en machinebouw &rarr;</div>
-        </div>
-      </a>
-      <a class="veld" href="branches.html">
-        <div class="im"><img src="assets/placeholder-audio-visueel.svg" alt=""><span class="tel">22 toepassingen</span></div>
-        <div class="bd">
-          <h3>Audio-visueel</h3>
-          <div class="sub">Verhuur, podium en touring. Cases die tien keer per jaar de bus in en uit gaan.</div>
-          <div class="vb"><b>Vaak gevraagd:</b> moving head dubbel · line-array set</div>
-          <div class="go">Naar audio-visueel &rarr;</div>
-        </div>
-      </a>
-      <a class="veld" href="branches.html">
-        <div class="im"><img src="assets/placeholder-meet-en-testapparatuur.svg" alt=""><span class="tel">11 toepassingen</span></div>
-        <div class="bd">
-          <h3>Meet- en testapparatuur</h3>
-          <div class="sub">Netbeheer, keuring, installatie en offshore. Het schuim is hier het product.</div>
-          <div class="vb"><b>Vaak gevraagd:</b> spectrumanalyser · kalibratieset</div>
-          <div class="go">Naar meet- en testapparatuur &rarr;</div>
-        </div>
-      </a>
-      <a class="veld" href="branches.html">
-        <div class="im"><img src="assets/placeholder-broadcast-en-media.svg" alt=""><span class="tel">9 toepassingen</span></div>
-        <div class="bd">
-          <h3>Broadcast en media</h3>
-          <div class="sub">Camera, multicam en mobiele regie. NOS en Studio Hilversum als buren.</div>
-          <div class="vb"><b>Vaak gevraagd:</b> camerabody met optiek · regiekoffer</div>
-          <div class="go">Naar broadcast en media &rarr;</div>
-        </div>
-      </a>
-      <a class="veld" href="branches.html">
-        <div class="im"><img src="assets/placeholder-defensie.svg" alt=""><span class="tel">7 toepassingen</span></div>
-        <div class="bd">
-          <h3>Defensie</h3>
-          <div class="sub">Veldapparatuur, optische systemen en communicatie. Aantoonbaar volgens specificatie.</div>
-          <div class="vb"><b>Let op:</b> normen en keuring liggen vooraf vast</div>
-          <div class="go">Naar defensie &rarr;</div>
-        </div>
-      </a>
-      <a class="veld" href="branches.html">
-        <div class="im"><img src="assets/placeholder-schaalmodellen.svg" alt=""><span class="tel">5 toepassingen</span></div>
-        <div class="bd">
-          <h3>Schaalmodellen en maquettes</h3>
-          <div class="sub">Maquettes, architectuurmodellen en presentatiestukken. Eenmalig en onvervangbaar.</div>
-          <div class="vb"><b>Let op:</b> zelden rechthoekig — altijd een tekening</div>
-          <div class="go">Naar schaalmodellen en maquettes &rarr;</div>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ── ÉÉN DING, ÉÉN CASE ─────────────────────────────────────
-     De particulier: één instrument, één koffer, klaar. Bewust ná de
-     vakgebieden, want de omzet zit bij de vakman. ─────────────── -->
-<section class="enkel tight">
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <div class="ey ey-dark">// 02 — ÉÉN DING, ÉÉN CASE</div>
-        <h2>Precies één instrument te beschermen?</h2>
-      </div>
-      <a class="btn btn-out btn-sm" href="#">Alle 38 objecten →</a>
-    </div>
-    <div class="dingen">
-      <a class="ding" href="#"><div class="im"></div><div class="bd"><b>Gibson Les Paul</b><span>vanaf € 189</span></div></a>
-      <a class="ding" href="#"><div class="im"></div><div class="bd"><b>Fender Stratocaster</b><span>vanaf € 189</span></div></a>
-      <a class="ding" href="#"><div class="im"></div><div class="bd"><b>DJ-controller</b><span>vanaf € 219</span></div></a>
-      <a class="ding" href="#"><div class="im"></div><div class="bd"><b>Draagbare drone</b><span>vanaf € 165</span></div></a>
-      <a class="ding" href="#"><div class="im"></div><div class="bd"><b>Viool of altviool</b><span>vanaf € 175</span></div></a>
-      <a class="ding" href="#"><div class="im"></div><div class="bd"><b>Trompet</b><span>vanaf € 159</span></div></a>
-    </div>
-  </div>
-</section>
-
-<!-- ── NIETS GEVONDEN ─────────────────────────────────────── -->
-<section class="geenmatch">
-  <div class="wrap">
     <div class="grid">
+      <div class="bw">
+        <div class="n">// 01</div>
+        <b>Eigen fabriek</b>
+        <p>Doesburg, sinds 1987. Geen tussenhandel, dus geen marge op een marge en geen wachten op een leverancier.</p>
+      </div>
+      <div class="bw">
+        <div class="n">// 02</div>
+        <b>Elke tekening gezien</b>
+        <p>Voor productie kijkt een casebouwer je configuratie na op scharnierruimte, gewicht en zwaartepunt.</p>
+      </div>
+      <div class="bw">
+        <div class="n">// 03</div>
+        <b>Bouwpakket of klaar</b>
+        <p>Zelf monteren scheelt in prijs en in verzendkosten. Gefreesd, geboord, compleet met beslag.</p>
+      </div>
+      <div class="bw">
+        <div class="n">// 04</div>
+        <b>Bijbestellen blijft kloppen</b>
+        <p>Je configuratie blijft bewaard. Volgend seizoen dezelfde kist, dezelfde maat, één klik.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── VIJF MODELLEN ──────────────────────────────────────── -->
+<section class="mdlrij">
+  <div class="wrap">
+    <div class="sec-head">
       <div>
-        <div class="ey">// 03 — STAAT JOUW OBJECT ER NIET BIJ?</div>
-        <h2>Dan meten we het gewoon in</h2>
-        <p>Alles wat we maken is toch al maatwerk. De 533 cases hierboven zijn voorgevulde configuraties — jouw afwijkende maat is geen uitzondering, alleen een ander getal.</p>
-        <a class="btn btn-pri" href="#" style="margin-top:26px">Zelf configureren →</a>
+        <div class="ey ey-dark">// 03 — DE VIJF MODELLEN</div>
+        <h2>Alles op maat, vanaf een vaste basisprijs</h2>
       </div>
-      <div class="stappen">
-        <div class="st"><span class="i">// 01</span><div><b>Model kiezen</b><span>Koffer, hoedcase, trunccase of rack.</span></div></div>
-        <div class="st"><span class="i">// 02</span><div><b>Maten invullen</b><span>Prijs verschijnt terwijl je typt.</span></div></div>
-        <div class="st"><span class="i">// 03</span><div><b>Afwerking en opties</b><span>Wielen, sluitingen, schuim.</span></div></div>
-        <div class="st"><span class="i">// 04</span><div><b>Controle</b><span>Een casebouwer kijkt je tekening na.</span></div></div>
-        <div class="st"><span class="i">// 05</span><div><b>Bestellen</b><span>Tien werkdagen later staat hij op de kade.</span></div></div>
-      </div>
+      <a class="btn btn-out btn-sm" href="#">Vergelijk alle vijf →</a>
+    </div>
+    <div class="cases">
+      <a class="case" href="#"><div class="im"><img src="assets/flightcase-koffer.jpg" alt="Koffer"></div>
+        <div class="bd"><h4>Koffer</h4><div class="d">Draagbaar aan een opbouwhandgreep</div>
+        <div class="pr"><b>€ 149</b><i>vanaf, excl. btw · eigen maten</i></div></div></a>
+      <a class="case" href="#"><div class="im"><img src="assets/flightcase-hoedcase.jpg" alt="Hoedcase"></div>
+        <div class="bd"><h4>Hoedcase</h4><div class="d">Lage bodem, volledig afneembaar deksel</div>
+        <div class="pr"><b>€ 179</b><i>vanaf, excl. btw · eigen maten</i></div></div></a>
+      <a class="case" href="#"><div class="im"><img src="assets/flightcase-trunccase.jpg" alt="Trunccase"></div>
+        <div class="bd"><h4>Trunccase</h4><div class="d">Universele transportkist met bovendeksel</div>
+        <div class="pr"><b>€ 199</b><i>vanaf, excl. btw · eigen maten</i></div></div></a>
+      <a class="case" href="#"><div class="im"><img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt="Rackcase enkel"></div>
+        <div class="bd"><h4>Rackcase enkel</h4><div class="d">Voordeksel, voor 19-inch apparatuur</div>
+        <div class="pr"><b>€ 229</b><i>vanaf, excl. btw · eigen maten</i></div></div></a>
+      <a class="case" href="#"><div class="im"><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt="Rackcase dubbel"></div>
+        <div class="bd"><h4>Rackcase dubbel</h4><div class="d">Voor- én achterdeksel, 19-inch</div>
+        <div class="pr"><b>€ 259</b><i>vanaf, excl. btw · eigen maten</i></div></div></a>
     </div>
   </div>
 </section>
 
-<!-- ── NASLAG ─────────────────────────────────────────────── -->
-<section class="naslag tight">
+<!-- ── KLANTEN ────────────────────────────────────────────── -->
+<section class="klanten tight">
   <div class="wrap">
-    <div class="ey ey-dark">// 04 — DE VIJF MODELLEN</div>
-    <h2 style="font-size:30px;margin-top:12px">Weet je liever eerst hoe ze heten</h2>
-    <div class="rij">
-      <a href="#"><img src="assets/flightcase-koffer.jpg" alt=""><span><b>Koffer</b><i>vanaf € 149</i></span></a>
-      <a href="#"><img src="assets/flightcase-hoedcase.jpg" alt=""><span><b>Hoedcase</b><i>vanaf € 179</i></span></a>
-      <a href="#"><img src="assets/flightcase-trunccase.jpg" alt=""><span><b>Trunccase</b><i>vanaf € 199</i></span></a>
-      <a href="#"><img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt=""><span><b>Rack enkel</b><i>vanaf € 229</i></span></a>
-      <a href="#"><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt=""><span><b>Rack dubbel</b><i>vanaf € 259</i></span></a>
-    </div>
-  </div>
-</section>
-
-<!-- ── VERTROUWEN ─────────────────────────────────────────── -->
-<section class="trust tight">
-  <div class="wrap">
+    <div class="ey ey-dark">// 04 — WIE ER MEE OP TOUR IS</div>
     <div class="row">
-      <div class="it"><b>10 werkdagen</b><span>// standaard levertijd</span></div>
-      <div class="it"><b>Sinds 1987</b><span>// eigen fabriek in Doesburg</span></div>
-      <div class="it"><b>Prijs direct</b><span>// geen offertetraject</span></div>
-      <div class="it"><b>Specialist kijkt mee</b><span>// voor elke productie</span></div>
+      <div class="lg">logo ontbreekt</div>
+      <div class="lg">logo ontbreekt</div>
+      <div class="lg">logo ontbreekt</div>
+      <div class="lg">logo ontbreekt</div>
+      <div class="lg">logo ontbreekt</div>
+      <div class="lg">logo ontbreekt</div>
+    </div>
+    <div class="cit">
+      <p>&ldquo;Wij bestellen per seizoen zeventig kisten. Dat het bedrag er meteen staat, scheelt ons een week heen-en-weer per bestelling.&rdquo;</p>
+      <span>// citaat nog op te halen · plaatsvervangende tekst</span>
     </div>
   </div>
 </section>
@@ -329,10 +372,10 @@
 <section class="closer ruit ruit-dark ruit-veld beslag">
   <span class="hk tl"></span><span class="hk tr"></span><span class="hk bl"></span><span class="hk br"></span>
   <div class="wrap">
-    <div class="ey">// NOG NIET GEVONDEN?</div>
-    <h2 style="margin-top:14px">Bel een casebouwer</h2>
-    <p>Twijfel je tussen twee modellen of heb je een raar formaat? Eén telefoontje is sneller dan een uur zoeken.</p>
-    <a class="btn btn-pri" href="tel:+31575575734">+31 (0)575 575734</a>
+    <div class="ey">// KLAAR OM TE BEGINNEN</div>
+    <h2 style="margin-top:14px">Vul je maten in</h2>
+    <p>Vijf stappen. De prijs staat er vanaf stap twee, en je zit nergens aan vast tot je bestelt.</p>
+    <a class="btn btn-pri" href="#">Start met configureren →</a>
   </div>
 </section>
 

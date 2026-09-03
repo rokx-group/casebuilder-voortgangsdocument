@@ -21,11 +21,12 @@
       { id: 'wireframe', bestand: 'homepage.html', label: 'wireframe' },
       { id: 'v1', bestand: 'homepage-v1.html', label: 'v1' },
       { id: 'v2', bestand: 'homepage-v2.html', label: 'v2 (video)' },
-      { id: 'v3', bestand: 'homepage-v3.html', label: 'v3' },
+      { id: 'v3', bestand: 'homepage-v3.html', label: 'v3 (video)' },
       { id: 'v4', bestand: 'homepage-v4.html', label: 'v4' },
       { id: 'v5', bestand: 'homepage-v5.html', label: 'v5' },
       { id: 'v6', bestand: 'homepage-v6.html', label: 'v6' },
-      { id: 'v7', bestand: 'homepage-v7.html', label: 'v7' }
+      { id: 'v7', bestand: 'homepage-v7.html', label: 'v7' },
+      { id: 'v8', bestand: 'homepage-v8.html', label: 'v8' }
     ],
     'categorie': [
       { id: 'wireframe', bestand: 'categorie.html', label: 'wireframe' },

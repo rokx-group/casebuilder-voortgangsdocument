@@ -3,25 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Casebuilder — /vakgebied/audio-visueel (mockup)</title>
+<title>Casebuilder — /branches/industrie-en-machinebouw (mockup)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/brand.css">
 <style>
 /* ══════════════════════════════════════════════════════════════
-   /vakgebied/audio-visueel — Audio-visueel
+   /branches/industrie-en-machinebouw — Industrie en machinebouw
 
-   Toon: energiek en toegankelijk. Kortere zinnen, je in plaats van u,
-   meer cyaan en een lichtblauw toepassingenvlak. Dit is de thuismarkt —
-   die mag klinken alsof we er zelf rondlopen.
+   Toon: technisch maar toegankelijk. Navy kop, daarna veel wit; de
+   eisen als raster, de toepassingen op lichte grond. Geen jargon zonder
+   uitleg — de koper is ingenieur, niet inkoper van cases.
 
    Het sjabloon is voor alle branches gelijk; de toon komt uit drie
    knoppen: hoeveel donker vlak, hoeveel cyaan, en hoe lang de zinnen
    zijn. Alles blijft binnen brand.css — geen eigen kleuren, geen
    ronde hoeken, drie fonts.
    ══════════════════════════════════════════════════════════════ */
-.kop{background:var(--void);color:#fff;position:relative;overflow:hidden;padding:64px 0 60px}
+.kop{background:var(--dark);color:#fff;position:relative;overflow:hidden;padding:64px 0 60px}
 .kop .grid{display:grid;grid-template-columns:1.15fr 1fr;gap:56px;align-items:center}
 .kop h1{font-size:clamp(36px,4.4vw,54px);color:#fff;line-height:.94;max-width:15ch;margin-top:16px}
 .kop h1 .acc{color:var(--cyan)}
@@ -29,7 +29,7 @@
 .kop .acties{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
 .kop .beeld{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);
   aspect-ratio:4/3;overflow:hidden}
-.kop .beeld img{width:100%;height:100%;object-fit:cover;opacity:.9}
+.kop .beeld img{width:100%;height:100%;object-fit:cover;opacity:.85}
 
 .belofte{border-bottom:1px solid var(--rule);background:var(--bg);display:flex;align-items:center}
 .belofte .row{display:flex;gap:56px;align-items:center;flex-wrap:wrap;width:100%}
@@ -49,7 +49,7 @@
 .eis p{font-size:13.5px;color:var(--mute);line-height:1.5}
 
 /* toepassingen — elk item is een link naar /case-voor/{apparaat} */
-.toep{background:var(--lightblue);}
+.toep{background:var(--bg);}
 .toep .raster{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px}
 .tp{border:1px solid var(--rule);padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;
   transition:.14s;background:#fff}
@@ -126,32 +126,32 @@
   <div class="wrap">
     <a href="#">Home</a><span class="sep">/</span>
     <a href="branches.html">Branches</a><span class="sep">/</span>
-    <span>Audio-visueel</span>
+    <span>Industrie en machinebouw</span>
   </div>
 </div>
 
 <section class="kop ruit ruit-dark ruit-aanzet">
   <div class="wrap grid">
     <div>
-      <span class="ey">AV, verhuur en touring</span>
-      <h1>Tien keer per jaar de <span class="acc">bus</span> in en uit</h1>
-      <p class="lead">De markt waar we mee begonnen zijn. Cases die het seizoen doorkomen, en het seizoen daarna ook. Je kent je maten, wij kennen je apparatuur.</p>
+      <span class="ey">Industrie en machinebouw</span>
+      <h1>Een kist die de <span class="acc">machine</span> aankan</h1>
+      <p class="lead">Machineonderdelen, prototypes en behuizing voor mobiele opstellingen. Seriematig, met een tekening vooraf en dezelfde maatvoering bij elke herhaalorder.</p>
       <div class="acties">
-        <a class="btn btn-pri" href="#">Zelf configureren</a>
-        <a class="btn btn-ghost" href="#">Wat ga je vervoeren?</a>
+        <a class="btn btn-pri" href="#">Case aanvragen</a>
+        <a class="btn btn-ghost" href="#">Bekijk de toepassingen</a>
       </div>
     </div>
-    <div class="beeld"><img src="assets/placeholder-audio-visueel.svg" alt=""></div>
+    <div class="beeld"><img src="assets/placeholder-industrie-en-machinebouw.svg" alt=""></div>
   </div>
 </section>
 
 <section class="belofte tight">
   <div class="wrap">
     <div class="row">
-      <div class="it"><b>10 werkdagen</b><span>Ook bij maatwerk</span></div>
-      <div class="it"><b>Direct een prijs</b><span>In de configurator</span></div>
-      <div class="it"><b>Op voorraad</b><span>300+ standaardmaten</span></div>
       <div class="it"><b>Sinds 1987</b><span>Eigen productie in Doesburg</span></div>
+      <div class="it"><b>10 werkdagen</b><span>Ook bij maatwerk</span></div>
+      <div class="it"><b>Herhaalbaar</b><span>Zelfde tekening, zelfde maat</span></div>
+      <div class="it"><b>Op rekening</b><span>Voor zakelijke klanten</span></div>
     </div>
   </div>
 </section>
@@ -160,14 +160,14 @@
   <div class="wrap">
     <div class="sec-head">
       <span class="ey ey-dark">Waar het hier om draait</span>
-      <h2>Wat een tourcase moet overleven</h2>
-      <p class="lead">Het verschil met een gewone kist zit niet in één zware klap, maar in duizend kleine. Laden, lossen, stapelen, weer laden.</p>
+      <h2>Wat een industriële case anders maakt</h2>
+      <p class="lead">Het verschil zit zelden in de buitenmaat. Het zit in wat eromheen moet kloppen als de kist elke maand opnieuw de deur uit gaat.</p>
     </div>
     <div class="lijst">
-      <div class="eis"><span class="n">// 01</span><b>Wielen die blijven</b><p>Zwenkwielen met rem op een verstevigde bodem — de plek waar een case als eerste stukgaat.</p></div>
-      <div class="eis"><span class="n">// 02</span><b>Beslag op gebruik</b><p>Wat wekelijks mee gaat krijgt zwaardere sluitingen dan wat twee keer per jaar naar een beurs rijdt.</p></div>
-      <div class="eis"><span class="n">// 03</span><b>Stapelbaar</b><p>Stapelrand rondom, zodat de vrachtwagen vol kan zonder dat je Tetris speelt.</p></div>
-      <div class="eis"><span class="n">// 04</span><b>Schuim op gewicht</b><p>Een moving head van veertig kilo vraagt een andere dichtheid dan een gitaar.</p></div>
+      <div class="eis"><span class="n">// 01</span><b>Gewicht en zwaartepunt</b><p>Boven de vijftig kilo bepaalt het zwaartepunt de indeling: waar de wielen komen, waar je tilt.</p></div>
+      <div class="eis"><span class="n">// 02</span><b>Herhaalbaarheid</b><p>Uw tekening blijft bij ons. Een nabestelling over twee jaar is dezelfde kist, niet een nieuwe.</p></div>
+      <div class="eis"><span class="n">// 03</span><b>Cleanroom en ESD</b><p>Antistatisch schuim, afwasbare afwerking en verpakken in een gecontroleerde ruimte.</p></div>
+      <div class="eis"><span class="n">// 04</span><b>Stapelen en heffen</b><p>Stapelrand, vorkopeningen en hijsogen — zodat de kist in uw logistiek past.</p></div>
     </div>
   </div>
 </section>
@@ -176,15 +176,15 @@
   <div class="wrap">
     <div class="sec-head">
       <span class="ey ey-dark">Toepassingen</span>
-      <h2>Wat er bij ons de deur uit gaat</h2>
-      <p class="lead">De vijf die het vaakst besteld worden. Klik door voor maten, prijzen en wat er standaard in zit.</p>
+      <h2>Wat we hier het vaakst bouwen</h2>
+      <p class="lead">Vijf toepassingen die telkens terugkomen. Klik door voor de maatvoering en wat er standaard in zit.</p>
     </div>
     <div class="raster">
-      <a class="tp" href="case-voor-v1.html"><b>Moving heads</b><span>Enkel of dubbel, met schuim op het armatuur en ruimte voor de clamp.</span><span class="go">Naar de case &rarr;</span></a>
-      <a class="tp" href="case-voor-v1.html"><b>Line arrays</b><span>Per element of per set, met hoezen tegen krassen op de rooster.</span><span class="go">Naar de case &rarr;</span></a>
-      <a class="tp" href="case-voor-v1.html"><b>Mengtafels</b><span>Deksel eraf en spelen. Kabelvak achter, doorvoer aan de zijkant.</span><span class="go">Naar de case &rarr;</span></a>
-      <a class="tp" href="case-voor-v1.html"><b>19-inch rack</b><span>Van 4 tot 20 HE, enkel of dubbel deksel, met of zonder shockmount.</span><span class="go">Naar de case &rarr;</span></a>
-      <a class="tp" href="case-voor-v1.html"><b>Backline</b><span>Gitaren, bassen, pedalboards — uitgefreesd op het instrument.</span><span class="go">Naar de case &rarr;</span></a>
+      <a class="tp" href="case-voor-v1.html"><b>Machineonderdelen</b><span>Assen, frames en modules die tussen vestigingen reizen.</span><span class="go">Naar de case &rarr;</span></a>
+      <a class="tp" href="case-voor-v1.html"><b>Prototypes</b><span>Eén exemplaar, onvervangbaar, meestal met een presentatiemoment aan het eind.</span><span class="go">Naar de case &rarr;</span></a>
+      <a class="tp" href="case-voor-v1.html"><b>Cleanroom</b><span>Verpakt en gereinigd geleverd, met antistatisch interieur.</span><span class="go">Naar de case &rarr;</span></a>
+      <a class="tp" href="case-voor-v1.html"><b>Optische instrumenten</b><span>Uitgefreesd schuim, trillingsdemping en een vaste plek per onderdeel.</span><span class="go">Naar de case &rarr;</span></a>
+      <a class="tp" href="case-voor-v1.html"><b>Drones en inspectie</b><span>Accu's gescheiden, propellers vast, klaar voor transport over de weg.</span><span class="go">Naar de case &rarr;</span></a>
     </div>
   </div>
 </section>
@@ -193,16 +193,16 @@
   <div class="wrap">
     <div class="sec-head">
       <span class="ey ey-dark">Zo lossen we het op</span>
-      <h2>Drie cases uit het veld</h2>
-      <p class="lead">Gebouwd voor verhuurbedrijven en touringcrews die er het hele jaar mee rijden.</p>
+      <h2>Drie kisten die we eerder maakten</h2>
+      <p class="lead">Zonder namen waar dat niet mag, met de maatvoering waar dat wél kan.</p>
     </div>
     <div class="kolommen">
-      <div class="bw"><div class="im"><img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt=""></div>
-        <div class="bd"><span class="n">// 01</span><b>Dimmerrack, 12 kanalen</b><p>Shockmount, kabelvak achter en een deksel dat als werkblad dienstdoet.</p></div></div>
-      <div class="bw"><div class="im"><img src="assets/flightcase-hoedcase.jpg" alt=""></div>
-        <div class="bd"><span class="n">// 02</span><b>Moving head dubbel</b><p>Twee armaturen in één kist, met vaste clampopbergruimte in het deksel.</p></div></div>
       <div class="bw"><div class="im"><img src="assets/flightcase-trunccase.jpg" alt=""></div>
-        <div class="bd"><span class="n">// 03</span><b>Kabelkist op wielen</b><p>Diep, open en met een stapelrand. Het werkpaard van elke productie.</p></div></div>
+        <div class="bd"><span class="n">// 01</span><b>Meetmachine, 240 kg</b><p>Zwaartepunt links achter, dus vier zwenkwielen met rem en een hijsframe in het deksel.</p></div></div>
+      <div class="bw"><div class="im"><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt=""></div>
+        <div class="bd"><span class="n">// 02</span><b>Prefab module, 2,4 m</b><p>Te lang voor één kist: uitgevoerd als twee gekoppelde delen met dezelfde binnenmaat.</p></div></div>
+      <div class="bw"><div class="im"><img src="assets/flightcase-koffer.jpg" alt=""></div>
+        <div class="bd"><span class="n">// 03</span><b>Optiekset, cleanroom</b><p>Antistatisch schuim, dubbel verpakt, en gereinigd afgeleverd op de productielijn.</p></div></div>
     </div>
   </div>
 </section>
@@ -211,17 +211,17 @@
   <div class="wrap in">
     <div>
       <span class="ey ey-dark">Verder</span>
-      <h2>Weet je je maten?</h2>
-      <p>Dan ben je in vijf stappen klaar, met de prijs meteen in beeld. En zo niet: stuur een foto van wat erin moet.</p>
+      <h2>Stuur uw tekening</h2>
+      <p>Een datasheet, een schets of een foto van wat er nu omheen zit. Wij tekenen het uit en sturen dezelfde werkdag een prijs terug.</p>
       <div class="acties" style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap">
-        <a class="btn btn-dark" href="#">Zelf configureren</a>
+        <a class="btn btn-dark" href="#">Case aanvragen</a>
         <a class="btn btn-out" href="branches.html">Alle branches</a>
       </div>
     </div>
     <div class="kaart">
       <div class="rij">
         <div class="foto">FOTO<br>Joran</div>
-        <div><b>Joran</b><span class="fn">Tekent je case uit en stuurt hem dezelfde dag terug</span></div>
+        <div><b>Joran</b><span class="fn">Tekent uw case uit en stuurt hem dezelfde dag terug</span></div>
       </div>
       <div class="lijn">
         <a href="tel:+31575575734">+31 (0)575 575734</a><br>

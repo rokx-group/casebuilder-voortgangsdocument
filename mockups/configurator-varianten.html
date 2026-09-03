@@ -70,16 +70,16 @@ body{background:#EDF0F4}
    vergelijken vraagt gelijke breedte — maar het verschil tussen dicht
    en open zit in de eerste schermhoogte, en dat is precies wat je op
    45% niet meer leest. Zelfde maat als /case-voor. */
-.beoordeel{display:flex;flex-direction:column;gap:26px}
+.beoordeel{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
 .demo{border:1px solid var(--rule);background:#fff;box-shadow:0 1px 3px rgba(0,40,70,.07);
   overflow:hidden}
 .demo .balk{background:var(--cyan);color:var(--void);font-family:var(--mono);font-size:10px;
   letter-spacing:.18em;text-transform:uppercase;font-weight:600;padding:7px 14px}
 .demo.gekozen{border:2px solid var(--cyan);box-shadow:0 0 0 6px rgba(102,196,232,.18),0 1px 3px rgba(0,40,70,.07)}
 .venster{height:820px;overflow:auto;background:var(--bg)}
-.houder{width:1368px;height:3705px}
+.houder{width:677px;height:1833px}
 .venster iframe{width:1440px;height:3900px;border:0;display:block;
-  transform:scale(.95);transform-origin:top left}
+  transform:scale(.47);transform-origin:top left}
 
 /* ── aantekeningen ───────────────────────────────────────────
    Rechts, op dezelfde hoogte als het kader. Elke notitie noemt wat er
@@ -130,7 +130,7 @@ body.focusmodus .demo:not(.aan){cursor:default}
 
   <div class="inleiding">
     <h2>Twee ingangen, dezelfde pagina</h2>
-    <p><b>Dit is geen keuze tussen twee ontwerpen maar tussen twee toestanden.</b> Op de live site is de configurator een popup zonder eigen URL: geen weg terug, geen deelbare link, niets vindbaar. Deze pagina zet er een adres omheen &mdash; en dan is de vraag wanneer de tool opengaat. Beide staan hier op 95%, onder elkaar: het verschil zit in de eerste schermhoogte, en dat lees je niet als je ze naast elkaar verkleint.</p>
+    <p><b>Dit is geen keuze tussen twee ontwerpen maar tussen twee toestanden.</b> Op de live site is de configurator een popup zonder eigen URL: geen weg terug, geen deelbare link, niets vindbaar. Deze pagina zet er een adres omheen &mdash; en dan is de vraag wanneer de tool opengaat. Beide staan hier naast elkaar op 47%; het kader schuift.</p>
   </div>
 
   <div class="kop">
@@ -155,7 +155,7 @@ body.focusmodus .demo:not(.aan){cursor:default}
   <div class="beoordeel">
     <div class="demo gekozen">
       <div class="balk">A &mdash; via de navigatie &middot; tool dicht</div>
-      <div class="venster" data-schaal=".95">
+      <div class="venster" data-schaal=".47">
         <div class="houder">
           <iframe src="configurator-v1.html" title="/configurator met gesloten tool" loading="lazy"></iframe>
         </div>
@@ -164,7 +164,7 @@ body.focusmodus .demo:not(.aan){cursor:default}
 
     <div class="demo">
       <div class="balk" style="background:var(--dark);color:#fff">B &mdash; vanaf de homepage &middot; tool open</div>
-      <div class="venster" data-schaal=".95">
+      <div class="venster" data-schaal=".47">
         <div class="houder">
           <iframe src="configurator-v1.html?start=1" title="/configurator met geopende tool" loading="lazy"></iframe>
         </div>

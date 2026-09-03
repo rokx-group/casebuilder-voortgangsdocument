@@ -68,9 +68,13 @@
 
   addEventListener('DOMContentLoaded', function () {
     document.body.appendChild(balk);
-    var vorige;
-    try { vorige = localStorage.getItem(BEWAARD); } catch (e) {}
-    var start = FILMS.filter(function (f) { return f.id === vorige; })[0]
+    // Een pagina mag zijn eigen film opgeven (v2 opent op drone, v3 op
+    // precisie). Die keuze gaat vóór wat de bezoeker eerder koos, anders
+    // tonen twee versies na één klik dezelfde film.
+    var eigen = document.body.dataset.film, vorige;
+    if (!eigen) { try { vorige = localStorage.getItem(BEWAARD); } catch (e) {} }
+    var start = FILMS.filter(function (f) { return f.id === eigen; })[0]
+             || FILMS.filter(function (f) { return f.id === vorige; })[0]
              || FILMS.filter(function (f) { return f.id === STANDAARD; })[0];
     toon(start || FILMS[0]);
   });
