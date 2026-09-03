@@ -14,6 +14,12 @@
     var venster = frame.closest('.venster');
     var houder = frame.parentElement;
     var schaal = parseFloat(venster && venster.dataset.schaal) || 0.95;
+    /* Een kader met data-hoogte toont expres maar een stuk van de pagina —
+       bij een kopkeuze is alles onder de vouw in alle varianten hetzelfde,
+       en drie identieke pagina's onder elkaar leest als drie keer scrollen
+       naar hetzelfde. Dan wint de gemelde hoogte niet van de uitsnede. */
+    var uitsnede = parseInt(venster && venster.dataset.hoogte, 10);
+    if (uitsnede) hoogte = uitsnede;
     if (!hoogte || hoogte < 400) return;
     frame.style.height = hoogte + 'px';
     houder.style.height = Math.ceil(hoogte * schaal) + 'px';

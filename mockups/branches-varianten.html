@@ -1,5 +1,5 @@
 <!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Casebuilder — /branches beoordelen (mockup)</title>
+<title>Casebuilder — /branches kopkeuze (mockup)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/brand.css">
@@ -77,6 +77,11 @@ body{background:#EDF0F4}
   letter-spacing:.18em;text-transform:uppercase;font-weight:600;padding:7px 14px}
 .demo.gekozen{border:2px solid var(--cyan);box-shadow:0 0 0 6px rgba(102,196,232,.18),0 1px 3px rgba(0,40,70,.07)}
 .venster{height:820px;overflow:auto;background:var(--bg)}
+/* Een kader met een vaste uitsnede hoeft niet te schuiven: het is precies
+   zo hoog als wat het laat zien. 745 × .95 = 708. */
+.venster[data-hoogte]{height:auto;overflow:hidden}
+.venster[data-hoogte] .houder{height:708px}
+.venster[data-hoogte] iframe{height:745px}
 .houder{width:1368px;height:3990px}
 .venster iframe{width:1440px;height:4200px;border:0;display:block;
   transform:scale(.95);transform-origin:top left}
@@ -112,6 +117,7 @@ body.focusmodus .demo:not(.aan){cursor:default}
 </style></head><body><div class="vgl">
   <div class="tabs">
     <a href="header-varianten.html">Header</a>
+    <a href="hero-voorstellen.html">Hero</a>
     <a href="homepage-varianten.html">Homepage</a>
     <a href="case-aanvragen-varianten.html">Case aanvragen</a>
     <a href="case-voor-varianten.html">/case-voor</a>
@@ -120,16 +126,16 @@ body.focusmodus .demo:not(.aan){cursor:default}
     <a href="groot-zakelijk-varianten.html">/groot-zakelijk</a>
     <a href="faq-varianten.html">FAQ</a>
     <a href="footer-varianten.html">Footer</a>
-    <a href="branches-varianten.html" class="on">/branches ontwerp</a>
+    <a href="branches-varianten.html" class="on">/branches kopkeuze</a>
   </div>
   <div class="inleiding"><h2>Drie koppen voor dezelfde pagina</h2>
-    <p><b>Het verschil zit alleen boven de vouw.</b> v1 donker met de fotostrook, v2 wit zonder beeld, v3 donker waarbij de vier feiten de kop afsluiten in plaats van er als lichte band onder te staan. De rest van de pagina is identiek.</p></div>
+    <p><b>Het verschil zit alleen boven de vouw.</b> v1 donker met de fotostrook, v2 wit zonder beeld, v3 donker waarbij de vier feiten de kop afsluiten in plaats van er als lichte band onder te staan. De rest van de pagina is identiek, dus de kaders hieronder tonen <b>alleen de kop</b> — drie keer dezelfde pagina eronder leest als drie keer scrollen naar hetzelfde. <a href="branches.html" target="_blank" rel="noopener">De hele pagina staat een klik verderop.</a></p></div>
   <div class="kop"><span class="nr">// V1</span><h3>Donkere kop met fotostrook</h3><span class="gekozen">&#10003; geselecteerd voor nu</span><span class="rechts"><a class="volledig" href="branches.html" target="_blank" rel="noopener">Volledig scherm &#8599;</a></span></div>
-  <div class="beoordeel"><div class="demo gekozen"><div class="balk">v1 &middot; donkere kop met fotostrook</div><div class="venster" data-schaal=".95"><div class="houder"><iframe src="branches.html" title="v1" loading="lazy"></iframe></div></div></div></div>
+  <div class="beoordeel"><div class="demo gekozen"><div class="balk">v1 &middot; donkere kop met fotostrook</div><div class="venster" data-schaal=".95" data-hoogte="745"><div class="houder"><iframe src="branches.html" title="v1" loading="lazy"></iframe></div></div></div></div>
   <div class="kop" style="margin-top:34px"><span class="nr">// V2</span><h3>Witte kop, geen beeld</h3><span class="rechts"><a class="volledig" href="branches-v2.html" target="_blank" rel="noopener">Volledig scherm &#8599;</a></span></div>
-  <div class="beoordeel"><div class="demo"><div class="balk" style="background:var(--dark);color:#fff">v2 &middot; witte kop, geen beeld</div><div class="venster" data-schaal=".95"><div class="houder"><iframe src="branches-v2.html" title="v2" loading="lazy"></iframe></div></div></div></div>
+  <div class="beoordeel"><div class="demo"><div class="balk" style="background:var(--dark);color:#fff">v2 &middot; witte kop, geen beeld</div><div class="venster" data-schaal=".95" data-hoogte="745"><div class="houder"><iframe src="branches-v2.html" title="v2" loading="lazy"></iframe></div></div></div></div>
   <div class="kop" style="margin-top:34px"><span class="nr">// V3</span><h3>Kop en belofte als één vlak</h3><span class="rechts"><a class="volledig" href="branches-v3.html" target="_blank" rel="noopener">Volledig scherm &#8599;</a></span></div>
-  <div class="beoordeel"><div class="demo"><div class="balk" style="background:var(--dark);color:#fff">v3 &middot; kop en belofte als één vlak</div><div class="venster" data-schaal=".95"><div class="houder"><iframe src="branches-v3.html" title="v3" loading="lazy"></iframe></div></div></div></div>
+  <div class="beoordeel"><div class="demo"><div class="balk" style="background:var(--dark);color:#fff">v3 &middot; kop en belofte als één vlak</div><div class="venster" data-schaal=".95" data-hoogte="745"><div class="houder"><iframe src="branches-v3.html" title="v3" loading="lazy"></iframe></div></div></div></div>
   <div class="kop" style="margin-top:34px"><span class="nr">// AANTEKENINGEN</span><h3>De afweging</h3></div>
   <div class="notities">
     <div class="nt"><span class="lb">// 01 &middot; advies</span><b>Donker</b><p>De foto's zijn zwarte flightcases; die werken alleen op een donkere grond. Op wit moesten ze weg en houd je een lege kop over. Het brandbook is bovendien donker-voorwaarts.</p></div>
