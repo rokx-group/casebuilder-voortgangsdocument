@@ -21,7 +21,12 @@ body{background:#EDF0F4}
 .tabs a{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--mute);padding:16px 20px 13px;border-bottom:3px solid transparent;margin-bottom:-1px}
 .tabs a:hover{color:var(--dark)}
+.tabs a.kind{padding-left:6px;opacity:.9}
 .tabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+/* Configurator hangt onder Flightcases — je kiest eerst een model, dan
+   pas maten. De haak zegt dat, en de tab schuift iets aan. */
+.tabs a.sub{margin-left:-8px;padding-left:12px;color:var(--mute)}
+.tabs a.sub.on{color:var(--dark)}
 /* Header eerst, footer laatst — de volgorde waarin je ze op een pagina
    tegenkomt. Gewoon als laatste item in de rij; weggeduwd naar de rand
    las het als een aparte actie in plaats van als onderdeel van dezelfde
@@ -163,11 +168,16 @@ body.focusmodus .demo:not(.aan){cursor:default}
 
   <div class="tabs">
     <a href="header-varianten.html" class="on">Header</a>
+    <a href="hero-voorstellen.html">Hero</a>
     <a href="homepage-varianten.html">Homepage</a>
+    <a href="case-aanvragen-varianten.html">Case aanvragen</a>
     <a href="case-voor-varianten.html">/case-voor</a>
-    <a href="configurator-varianten.html">/configurator</a>
     <a href="flightcases-varianten.html">/flightcases</a>
+    <a href="configurator-varianten.html" class="sub">&#8627; /configurator</a>
+    <a href="groot-zakelijk-varianten.html">/groot-zakelijk</a>
+    <a href="faq-varianten.html">FAQ</a>
     <a href="footer-varianten.html">Footer</a>
+    <a href="branches-varianten.html">/branches ontwerp</a>
   </div>
 
   <div class="inleiding">
@@ -196,7 +206,7 @@ body.focusmodus .demo:not(.aan){cursor:default}
         <div class="h-nav-inline">
           <a href="#">Case aanvragen</a><a href="case-voor-v1.html">Wat ga je vervoeren?</a>
           <a href="configurator-v1.html">Zelf configureren</a><a href="flightcases-v1.html">Flightcases</a>
-          <a href="branches.html" class="sec">Branches</a><a href="#" class="sec">Service</a>
+          <a href="branches.html">Branches</a><a href="service-hub-v1.html">Service</a>
         </div>
         <div class="h-acties">
           <a href="#" class="h-icoon stil"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg> Zoeken</a>
@@ -244,7 +254,7 @@ body.focusmodus .demo:not(.aan){cursor:default}
       <div class="wrap">
         <a href="#">Case aanvragen</a><a href="case-voor-v1.html">Wat ga je vervoeren?</a>
         <a href="configurator-v1.html">Zelf configureren</a><a href="flightcases-v1.html">Flightcases</a>
-        <a href="branches.html" class="sec">Branches</a><a href="#" class="sec">Service</a>
+        <a href="branches.html">Branches</a><a href="service-hub-v1.html">Service</a>
         <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#" class="stil">NL ▾</a></div>
       </div>
     </nav>
@@ -287,7 +297,7 @@ body.focusmodus .demo:not(.aan){cursor:default}
       <div class="wrap">
         <a href="#">Case aanvragen</a><a href="case-voor-v1.html">Wat ga je vervoeren?</a>
         <a href="configurator-v1.html">Zelf configureren</a><a href="flightcases-v1.html">Flightcases</a>
-        <a href="branches.html" class="sec">Branches</a><a href="#" class="sec">Service</a>
+        <a href="branches.html">Branches</a><a href="service-hub-v1.html">Service</a>
         <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span></div>
       </div>
     </nav>

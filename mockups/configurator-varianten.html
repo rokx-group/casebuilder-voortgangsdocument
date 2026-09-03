@@ -29,7 +29,12 @@ body{background:#EDF0F4}
 .tabs a{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--mute);padding:16px 20px 13px;border-bottom:3px solid transparent;margin-bottom:-1px}
 .tabs a:hover{color:var(--dark)}
+.tabs a.kind{padding-left:6px;opacity:.9}
 .tabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+/* Configurator hangt onder Flightcases — je kiest eerst een model, dan
+   pas maten. De haak zegt dat, en de tab schuift iets aan. */
+.tabs a.sub{margin-left:-8px;padding-left:12px;color:var(--mute)}
+.tabs a.sub.on{color:var(--dark)}
 /* Header eerst, footer laatst — de volgorde waarin je ze op een pagina
    tegenkomt. Gewoon als laatste item in de rij; weggeduwd naar de rand
    las het als een aparte actie in plaats van als onderdeel van dezelfde
@@ -121,11 +126,16 @@ body.focusmodus .demo:not(.aan){cursor:default}
 
   <div class="tabs">
     <a href="header-varianten.html">Header</a>
+    <a href="hero-voorstellen.html">Hero</a>
     <a href="homepage-varianten.html">Homepage</a>
+    <a href="case-aanvragen-varianten.html">Case aanvragen</a>
     <a href="case-voor-varianten.html">/case-voor</a>
-    <a href="configurator-varianten.html" class="on">/configurator</a>
     <a href="flightcases-varianten.html">/flightcases</a>
+    <a href="configurator-varianten.html" class="on">&#8627; /configurator</a>
+    <a href="groot-zakelijk-varianten.html">/groot-zakelijk</a>
+    <a href="faq-varianten.html">FAQ</a>
     <a href="footer-varianten.html">Footer</a>
+    <a href="branches-varianten.html">/branches ontwerp</a>
   </div>
 
   <div class="inleiding">

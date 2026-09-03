@@ -12,6 +12,10 @@
 /* ══════════════════════════════════════════════════════════════
    /branches — het overzicht
 
+   Heet "branches" in navigatie en docs; Faes zegt "sectoren". Beide
+   woorden staan in de kop, en /sectoren wordt een 301 naar /branches
+   zodat wie op dat woord zoekt of typt hier ook uitkomt.
+
    Deze pagina is geen zoekmachine-instroom. Vier van de vijf
    concurrenten delen hun site in op product, en dáár zit het
    verkeer: "19 inch rack case", "kabelkist". De bezoeker komt
@@ -27,18 +31,21 @@
    ══════════════════════════════════════════════════════════════ */
 
 /* ── kop ─────────────────────────────────────────────────── */
-/* Achter de kop: de vijf cases als strook, gedempt. Dit zijn de echte
-   productfoto's van de live site — geen stockbeeld van een branche.
-   Er is nog geen beeld per vakgebied; zodra dat er is, vervangt het
-   deze strook, maar tot die tijd is dit eerlijk: dit maken ze. */
+/* Achter de kop: vijf disciplines als strook, gedempt. Dezelfde foto's
+   van de live site die ook op de tegels en vakgebiedpagina's staan —
+   geen stockbeeld, en geen losse productfoto's op wit. */
 .kop{background:var(--void);color:#fff;position:relative;overflow:hidden;padding:78px 0 0}
 .kop .achter{position:absolute;inset:0;z-index:-2;display:grid;grid-template-columns:repeat(5,1fr);
   gap:0;pointer-events:none}
+/* Vijf disciplines naast elkaar, dezelfde foto's als op de tegels en de
+   vakgebiedpagina's: machinebouw, backstage, broadcast, meetapparatuur,
+   motorsport. Echte foto's zijn al donker, dus geen brightness-boost meer;
+   grayscale + luminosity houdt ze rustig achter de tekst. */
 .kop .achter img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15);
-  opacity:.34;mix-blend-mode:luminosity}
+  opacity:.5;mix-blend-mode:luminosity}
 .kop .scrim{position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background:linear-gradient(90deg,rgba(6,18,28,.94) 0%,rgba(6,18,28,.78) 46%,rgba(6,18,28,.52) 100%),
-             linear-gradient(180deg,rgba(6,18,28,.35) 0%,transparent 30%,rgba(6,18,28,.8) 100%)}
+  background:linear-gradient(90deg,rgba(6,18,28,.96) 0%,rgba(6,18,28,.86) 38%,rgba(6,18,28,.34) 100%),
+             linear-gradient(180deg,rgba(6,18,28,.3) 0%,transparent 34%,rgba(6,18,28,.72) 100%)}
 .kop .grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:end;padding-bottom:64px}
 .kop h1{font-size:clamp(40px,5vw,68px);color:#fff;line-height:.92;max-width:13ch;margin-top:16px}
 .kop h1 .acc{color:var(--cyan)}
@@ -72,7 +79,13 @@
    een tweede garnituur, en dat zijn ze niet. De rangorde staat nu in het
    nummer, niet in het formaat. */
 .hoofd{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.br{border:1px solid var(--rule);background:#fff;display:flex;flex-direction:column;transition:.15s}
+.br{border:1px solid var(--rule);background:#fff;display:flex;flex-direction:column;
+  transition:.15s;position:relative}
+/* De kop ís de link en strekt zich via ::after over de hele kaart uit. Een
+   <a> om de kaart heen kan niet: daar zitten de toepassingen als links in. */
+.br h3 a.hl{color:inherit;text-decoration:none}
+.br h3 a.hl::after{content:"";position:absolute;inset:0;z-index:1}
+.br .toe{position:relative;z-index:2}
 .br:hover{border-color:var(--dark)}
 .br .im{background:var(--bg);aspect-ratio:4/3;position:relative;overflow:hidden}
 .br .tel{position:absolute;top:0;right:0;background:#fff;border-left:1px solid var(--rule);
@@ -175,13 +188,6 @@
   color:var(--mute);line-height:1.9}
 .joran .lijn b{color:var(--dark);font-weight:600}
 
-/* Gekozen-markering — zelfde taal als header-varianten.html: een balk,
-   niet een accent. Een besluit hoort te lezen als een besluit. */
-.gekozenbalk{background:var(--cyan);color:var(--void);font-family:var(--mono);
-  font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
-  padding:9px 32px;display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
-.gekozenbalk .bij{color:rgba(6,18,28,.6);letter-spacing:.14em}
-
 @media (max-width:1080px){
   .hoofd{grid-template-columns:1fr 1fr}
   .kop .grid,.mist .in{grid-template-columns:1fr;gap:36px}
@@ -197,11 +203,6 @@
 </head>
 <body>
 
-<div class="gekozenbalk">
-  <span>&#10003; geselecteerd voor nu</span>
-  <span class="bij">Branche-overzicht &middot; /branches &middot; eigen item in de hoofdnavigatie</span>
-</div>
-
 <header class="main">
   <div class="wrap">
     <div class="logo"><em>case</em>Builder.com</div>
@@ -210,10 +211,9 @@
       <input placeholder="Zoek op artikelnummer of apparaat">
     </div>
     <div class="hdr-r">
-      <a class="stil" href="#">Inloggen</a>
-      <a href="#">Winkelwagen<span class="telbadge">3</span></a>
-      <a class="btn btn-out btn-sm" href="#">Case aanvragen</a>
-    </div>
+        <a href="#" class="stil">Inloggen</a>
+        <a href="#">Winkelwagen</a>
+      </div>
   </div>
 </header>
 
@@ -224,12 +224,12 @@
     <a href="configurator-v1.html">Zelf configureren</a>
     <a href="flightcases-v1.html">Flightcases</a>
     <a href="branches.html" class="on">Branches</a>
-    <a href="#" class="sec">Service</a>
+    <a href="service-hub-v1.html">Service</a>
     <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#">NL &#9662;</a></div>
   </div>
 </nav>
 
-<div class="crumbs">
+<div class="crumbs donker">
   <div class="wrap">
     <a href="#">Home</a><span class="sep">/</span>
     <span>Branches</span>
@@ -242,17 +242,17 @@
      een branche-overzicht kan rechtzetten. ═════════════════ -->
 <section class="kop ruit ruit-dark ruit-aanzet beslag" style="padding-bottom:0">
   <div class="achter" aria-hidden="true">
-    <img src="assets/flightcase-koffer.jpg" alt="">
-    <img src="assets/flightcase-hoedcase.jpg" alt="">
-    <img src="assets/flightcase-trunccase.jpg" alt="">
-    <img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt="">
-    <img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt="">
+    <img src="assets/foto-industrie-en-machinebouw.jpg" alt="">
+    <img src="assets/foto-audio-visueel.jpg" alt="">
+    <img src="assets/foto-broadcast-en-media.jpg" alt="">
+    <img src="assets/foto-meet-en-testapparatuur.jpg" alt="">
+    <img src="assets/foto-dakar-pitstop.jpg" alt="">
   </div>
   <div class="scrim"></div>
   <span class="hk tl"></span><span class="hk tr"></span>
   <div class="wrap grid">
     <div>
-      <span class="ey">Ons vakgebied</span>
+      <span class="ey">Branches &middot; sectoren &middot; markten</span>
       <h1>Voor wie wij <span class="acc">cases</span> bouwen</h1>
       <p class="lead">Sinds 1987 bouwen we in Doesburg cases voor apparatuur die niet stuk mag. Wat die apparatuur is, verschilt per markt — en daarmee de eisen, de normen en de manier waarop je bestelt.</p>
     </div>
@@ -288,60 +288,60 @@
     </div>
 
     <div class="hoofd">
-      <a class="br" href="branche-industrie-en-machinebouw-v1.html">
-        <div class="im"><span class="rang">01</span><span class="tel">14 toepassingen</span><img src="assets/placeholder-industrie-en-machinebouw.svg" alt=""></div>
+      <div class="br">
+        <div class="im"><span class="rang">01</span><span class="tel">14 toepassingen</span><img src="assets/foto-industrie-en-machinebouw.jpg" alt=""></div>
         <div class="bd">
-          <h3>Industrie en<br>machinebouw</h3>
+          <h3><a class="hl" href="branche-industrie-en-machinebouw-v1.html">Industrie en<br>machinebouw</a></h3>
           <p>Machineonderdelen, prototypes en behuizing voor mobiele opstellingen. Seriematig, met een tekening vooraf en een vaste maatvoering per order.</p>
           <div class="toe"><a href="#">Machineonderdelen</a><a href="#">Prototypes</a><a href="#">Cleanroom</a><a href="#">Optiek</a><a href="#">Drones</a></div>
           <span class="go">Bekijk branche <span>&rarr;</span></span>
         </div>
-      </a>
-      <a class="br" href="branche-audio-visueel-v1.html">
-        <div class="im"><span class="rang">02</span><span class="tel">22 toepassingen</span><img src="assets/placeholder-audio-visueel.svg" alt=""></div>
+      </div>
+      <div class="br">
+        <div class="im"><span class="rang">02</span><span class="tel">22 toepassingen</span><img src="assets/foto-audio-visueel.jpg" alt=""></div>
         <div class="bd">
-          <h3>Audio-visueel</h3>
+          <h3><a class="hl" href="branche-audio-visueel-v1.html">Audio-visueel</a></h3>
           <p>De markt waar we mee begonnen zijn. Cases die tien keer per jaar de vrachtwagen in en uit gaan, en dat vijf jaar moeten volhouden.</p>
           <div class="toe"><a href="#">Moving heads</a><a href="#">Line arrays</a><a href="#">Mengtafels</a><a href="#">19-inch rack</a><a href="#">Backline</a></div>
           <span class="go">Bekijk branche <span>&rarr;</span></span>
         </div>
-      </a>
-      <a class="br" href="branche-defensie-v1.html">
-        <div class="im"><span class="rang">03</span><span class="tel">7 toepassingen</span><img src="assets/placeholder-defensie.svg" alt=""></div>
+      </div>
+      <div class="br">
+        <div class="im"><span class="rang">03</span><span class="tel">7 toepassingen</span><img src="assets/foto-defensie.jpg" alt=""></div>
         <div class="bd">
-          <h3>Defensie</h3>
+          <h3><a class="hl" href="branche-defensie-v1.html">Defensie</a></h3>
           <p>Transport dat aan specificatie moet voldoen en dat aantoonbaar moet zijn. Materiaalkeuze, documentatie en keuring liggen vooraf vast.</p>
           <div class="toe"><a href="#">Veldapparatuur</a><a href="#">Optische systemen</a><a href="#">Communicatie</a><a href="#">Munitietransport</a></div>
           <span class="go">Bekijk branche <span>&rarr;</span></span>
         </div>
-      </a>
-      <a class="br" href="branche-meet-en-testapparatuur-v1.html">
-        <div class="im"><span class="rang">04</span><span class="tel">11 toepassingen</span><img src="assets/placeholder-meet-en-testapparatuur.svg" alt=""></div>
+      </div>
+      <div class="br">
+        <div class="im"><span class="rang">04</span><span class="tel">11 toepassingen</span><img src="assets/foto-meet-en-testapparatuur.jpg" alt=""></div>
         <div class="bd">
-          <h3>Meet- en<br>testapparatuur</h3>
+          <h3><a class="hl" href="#" title="branchepagina nog te bouwen">Meet- en<br>testapparatuur</a></h3>
           <p>Meetinstrumenten die het veld in gaan: netbeheer, keuring, offshore. Het schuiminterieur is hier het product — gefreesd op het instrument, niet op de kist.</p>
           <div class="toe"><a href="#">Spectrumanalysers</a><a href="#">Kalibratiesets</a><a href="#">Servicekoffers</a><a href="#">Datalogging</a></div>
           <span class="go">Bekijk branche <span>&rarr;</span></span>
         </div>
-      </a>
-      <a class="br" href="branche-broadcast-en-media-v1.html">
-        <div class="im"><span class="rang">05</span><span class="tel">9 toepassingen</span><img src="assets/placeholder-broadcast-en-media.svg" alt=""></div>
+      </div>
+      <div class="br">
+        <div class="im"><span class="rang">05</span><span class="tel">9 toepassingen</span><img src="assets/foto-broadcast-en-media.jpg" alt=""></div>
         <div class="bd">
-          <h3>Broadcast en media</h3>
+          <h3><a class="hl" href="#" title="branchepagina nog te bouwen">Broadcast en media</a></h3>
           <p>Camera’s, multicam-sets en mobiele regie. Vaak te specifiek voor de configurator — meestal een tekening, soms een herhaalorder op een bestaand model.</p>
           <div class="toe"><a href="#">Camerabodies</a><a href="#">Optieksets</a><a href="#">Regiekoffers</a><a href="#">Monitoren</a></div>
           <span class="go">Bekijk branche <span>&rarr;</span></span>
         </div>
-      </a>
-      <a class="br" href="branche-schaalmodellen-v1.html">
-        <div class="im"><span class="rang">06</span><span class="tel">5 toepassingen</span><img src="assets/placeholder-schaalmodellen.svg" alt=""></div>
+      </div>
+      <div class="br">
+        <div class="im"><span class="rang">06</span><span class="tel">5 toepassingen</span><img src="assets/foto-schaalmodellen.jpg" alt=""></div>
         <div class="bd">
-          <h3>Schaalmodellen en<br>maquettes</h3>
+          <h3><a class="hl" href="#" title="branchepagina nog te bouwen">Schaalmodellen en<br>maquettes</a></h3>
           <p>Maquettes, architectuurmodellen en presentatiestukken. Eenmalig, onvervangbaar en zelden rechthoekig — altijd volledig maatwerk.</p>
           <div class="toe"><a href="#">Maquettes</a><a href="#">Architectuurmodellen</a><a href="#">Presentatiestukken</a></div>
           <span class="go">Bekijk branche <span>&rarr;</span></span>
         </div>
-      </a>
+      </div>
     </div>
   </div>
 </section>
@@ -459,7 +459,7 @@
     </div>
     <div class="joran">
       <div class="rij">
-        <div class="foto">FOTO<br>JORAN</div>
+        <div class="foto"><img src="assets/joran.svg" alt="Joran" style="width:100%;height:100%;object-fit:cover;display:block"></div>
         <div>
           <b>Joran</b>
           <span class="fn">Tekent uw case uit en stuurt hem dezelfde dag terug</span>
@@ -484,11 +484,12 @@
       <div><h5>Offerte aanvragen</h5><a href="#">Case aanvragen</a><a href="#">Maten laten controleren</a><a href="#">Series en staffels</a><a href="#">Zakelijk bestellen</a></div>
       <div><h5>Zelf configureren</h5><a href="#">Naar de configurator</a><a href="#">Zo werkt het</a><a href="#">Herhaalorder</a><a href="#">Mijn configuraties</a></div>
       <div><h5>Flightcases</h5><a href="#">Alle flightcases</a><a href="#">Koffer</a><a href="#">Hoedcase</a><a href="#">Trunccase</a><a href="#">Rackcase enkel</a><a href="#">Rackcase dubbel</a></div>
-      <div><h5>Service</h5><a href="#">Levertijden</a><a href="#">Verzending</a><a href="#">Onderdelen</a><a href="#">Zaagservice</a><a href="#">Over Proflite</a><a href="#">Contact</a></div>
+      <div><h5>Service</h5><a href="#">Levertijden</a><a href="#">Verzending</a><a href="#">Onderdelen</a><a href="#">Zaagservice</a><a href="#">Over Proflite</a><a href="contact-v1.html">Contact</a></div>
     </div>
     <div class="bot"><span>KVK 09123456</span><span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span></div>
   </div>
 </footer>
 
+<script src="assets/versies.js"></script>
 </body>
 </html>

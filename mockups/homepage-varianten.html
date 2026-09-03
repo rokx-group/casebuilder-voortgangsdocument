@@ -28,7 +28,12 @@ body{background:#EDF0F4}
 .tabs a{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--mute);padding:16px 20px 13px;border-bottom:3px solid transparent;margin-bottom:-1px}
 .tabs a:hover{color:var(--dark)}
+.tabs a.kind{padding-left:6px;opacity:.9}
 .tabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+/* Configurator hangt onder Flightcases — je kiest eerst een model, dan
+   pas maten. De haak zegt dat, en de tab schuift iets aan. */
+.tabs a.sub{margin-left:-8px;padding-left:12px;color:var(--mute)}
+.tabs a.sub.on{color:var(--dark)}
 /* Header eerst, footer laatst — de volgorde waarin je ze op een pagina
    tegenkomt. Gewoon als laatste item in de rij; weggeduwd naar de rand
    las het als een aparte actie in plaats van als onderdeel van dezelfde
@@ -69,7 +74,7 @@ body{background:#EDF0F4}
    blijft de vouwlijn per versie vergelijkbaar. Klein, maar het gaat om
    de compositie boven de vouw — niet om de tekst. */
 .beoordeel{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-items:start}
-.beoordeel .demo .balk{padding:6px 11px;font-size:9px;letter-spacing:.12em;
+.beoordeel .demo .balk{text-decoration:none;cursor:pointer;transition:background .12s;padding:6px 11px;font-size:9px;letter-spacing:.12em;
   display:flex;align-items:center;gap:8px}
 .beoordeel .demo .balk a{margin-left:auto;color:inherit;opacity:.7;font-size:11px}
 .beoordeel .demo .balk a:hover{opacity:1}
@@ -162,6 +167,12 @@ body.focusmodus .demo:not(.aan){cursor:default}
   padding:6px 12px;cursor:pointer}
 #wis-keuze:hover{border-color:var(--dark);color:var(--dark)}
 @media (max-width:760px){ .mixrij{grid-template-columns:1fr} .mixrij .naam{border-right:0;border-bottom:1px solid var(--rule)} }
+.demo .balk .vs{margin-left:auto;opacity:0;transition:opacity .12s;font-size:9px;letter-spacing:.12em}
+.demo .balk .pijl{margin-left:auto}
+.demo .balk .vs + .pijl,.demo .balk .pijl + .vs{margin-left:8px}
+.demo a.balk:hover{background:var(--blue)!important}
+.demo a.balk:hover .vs{opacity:.85}
+.demo a.balk:focus-visible{outline:2px solid var(--cyan);outline-offset:-2px}
 </style>
 </head>
 <body>
@@ -170,12 +181,16 @@ body.focusmodus .demo:not(.aan){cursor:default}
 
   <div class="tabs">
     <a href="header-varianten.html">Header</a>
+    <a href="hero-voorstellen.html">Hero</a>
     <a href="homepage-varianten.html" class="on">Homepage</a>
+    <a href="case-aanvragen-varianten.html">Case aanvragen</a>
     <a href="case-voor-varianten.html">/case-voor</a>
-    <a href="configurator-varianten.html">/configurator</a>
     <a href="flightcases-varianten.html">/flightcases</a>
-    <a href="grote-spelers-varianten.html">/grote-spelers</a>
+    <a href="configurator-varianten.html" class="sub">&#8627; /configurator</a>
+    <a href="groot-zakelijk-varianten.html">/groot-zakelijk</a>
+    <a href="faq-varianten.html">FAQ</a>
     <a href="footer-varianten.html">Footer</a>
+    <a href="branches-varianten.html">/branches ontwerp</a>
   </div>
 
   <div class="inleiding">
@@ -201,49 +216,49 @@ body.focusmodus .demo:not(.aan){cursor:default}
 
   <div class="beoordeel">
     <div class="demo">
-      <div class="balk" style="background:var(--dark);color:#fff">v1 &middot; Millimeterwerk,  in tien werkdagen<a href="homepage-v1.html" target="_blank" rel="noopener" title="Volledig scherm">&#8599;</a></div>
+      <a class="balk" href="homepage-v1.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">v1 &middot; Millimeterwerk,  in tien werkdagen<span class="pijl" aria-hidden="true">&#8599;</span><span class="vs">volledig scherm</span></a>
       <div class="venster" data-schaal=".30"><div class="houder">
         <iframe src="homepage-v1.html" title="Homepage v1" loading="lazy"></iframe>
       </div></div>
     </div>
     <div class="demo">
-      <div class="balk" style="background:var(--dark);color:#fff">v2 (video) &middot; Millimeterwerk,  in tien werkdagen<a href="homepage-v2.html" target="_blank" rel="noopener" title="Volledig scherm">&#8599;</a></div>
+      <a class="balk" href="homepage-v2.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">v2 (video) &middot; Millimeterwerk,  in tien werkdagen<span class="pijl" aria-hidden="true">&#8599;</span><span class="vs">volledig scherm</span></a>
       <div class="venster" data-schaal=".30"><div class="houder">
         <iframe src="homepage-v2.html" title="Homepage v2 (video)" loading="lazy"></iframe>
       </div></div>
     </div>
     <div class="demo">
-      <div class="balk" style="background:var(--dark);color:#fff">v3 (video) &middot; Millimeterwerk,  in tien werkdagen<a href="homepage-v3.html" target="_blank" rel="noopener" title="Volledig scherm">&#8599;</a></div>
+      <a class="balk" href="homepage-v3.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">v3 (video) &middot; Millimeterwerk,  in tien werkdagen<span class="pijl" aria-hidden="true">&#8599;</span><span class="vs">volledig scherm</span></a>
       <div class="venster" data-schaal=".30"><div class="houder">
         <iframe src="homepage-v3.html" title="Homepage v3 (video)" loading="lazy"></iframe>
       </div></div>
     </div>
     <div class="demo">
-      <div class="balk" style="background:var(--dark);color:#fff">v4 &middot; Jouw maten,  nu een prijs<a href="homepage-v4.html" target="_blank" rel="noopener" title="Volledig scherm">&#8599;</a></div>
+      <a class="balk" href="homepage-v4.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">v4 &middot; Jouw maten,  nu een prijs<span class="pijl" aria-hidden="true">&#8599;</span><span class="vs">volledig scherm</span></a>
       <div class="venster" data-schaal=".30"><div class="houder">
         <iframe src="homepage-v4.html" title="Homepage v4" loading="lazy"></iframe>
       </div></div>
     </div>
     <div class="demo">
-      <div class="balk" style="background:var(--dark);color:#fff">v5 &middot; Wat ga je  vervoeren?<a href="homepage-v5.html" target="_blank" rel="noopener" title="Volledig scherm">&#8599;</a></div>
+      <a class="balk" href="homepage-v5.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">v5 &middot; Wat ga je  vervoeren?<span class="pijl" aria-hidden="true">&#8599;</span><span class="vs">volledig scherm</span></a>
       <div class="venster" data-schaal=".30"><div class="houder">
         <iframe src="homepage-v5.html" title="Homepage v5" loading="lazy"></iframe>
       </div></div>
     </div>
     <div class="demo">
-      <div class="balk" style="background:var(--dark);color:#fff">v6 &middot; Wij bouwen ze  zelf<a href="homepage-v6.html" target="_blank" rel="noopener" title="Volledig scherm">&#8599;</a></div>
+      <a class="balk" href="homepage-v6.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">v6 &middot; Wij bouwen ze  zelf<span class="pijl" aria-hidden="true">&#8599;</span><span class="vs">volledig scherm</span></a>
       <div class="venster" data-schaal=".30"><div class="houder">
         <iframe src="homepage-v6.html" title="Homepage v6" loading="lazy"></iframe>
       </div></div>
     </div>
     <div class="demo">
-      <div class="balk" style="background:var(--dark);color:#fff">v7 &middot; Millimeterwerk,  in tien werkdagen<a href="homepage-v7.html" target="_blank" rel="noopener" title="Volledig scherm">&#8599;</a></div>
+      <a class="balk" href="homepage-v7.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">v7 &middot; Millimeterwerk,  in tien werkdagen<span class="pijl" aria-hidden="true">&#8599;</span><span class="vs">volledig scherm</span></a>
       <div class="venster" data-schaal=".30"><div class="houder">
         <iframe src="homepage-v7.html" title="Homepage v7" loading="lazy"></iframe>
       </div></div>
     </div>
     <div class="demo">
-      <div class="balk" style="background:var(--dark);color:#fff">v8 &middot; Je weet wat erin moet.  Wij weten hoe.<a href="homepage-v8.html" target="_blank" rel="noopener" title="Volledig scherm">&#8599;</a></div>
+      <a class="balk" href="homepage-v8.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">v8 &middot; Je weet wat erin moet.  Wij weten hoe.<span class="pijl" aria-hidden="true">&#8599;</span><span class="vs">volledig scherm</span></a>
       <div class="venster" data-schaal=".30"><div class="houder">
         <iframe src="homepage-v8.html" title="Homepage v8" loading="lazy"></iframe>
       </div></div>
@@ -273,8 +288,8 @@ body.focusmodus .demo:not(.aan){cursor:default}
     </div>
     <div class="nt">
       <span class="lb">// 04 &middot; het assortiment</span>
-      <b>Modellen, vakgebieden of branches</b>
-      <p>Precies het verschil tussen v4a en v4b. Modellen tonen wat wij maken, vakgebieden wat erin gaat, branches wie je bent. Wie niets van cases weet heeft aan &ldquo;trunccase&rdquo; niets &mdash; en dat is de meest waardevolle bezoeker.</p>
+      <b>Modellen, toepassingen of branches</b>
+      <p>Precies het verschil tussen v4a en v4b. Modellen tonen wat wij maken, toepassingen wat erin gaat, branches wie je bent. Wie niets van cases weet heeft aan &ldquo;trunccase&rdquo; niets &mdash; en dat is de meest waardevolle bezoeker.</p>
     </div>
     <div class="nt">
       <span class="lb">// 05 &middot; het bewijs</span>
@@ -342,7 +357,7 @@ body.focusmodus .demo:not(.aan){cursor:default}
         <button class="optie" data-id="driemanieren" data-kort="Drie manieren"><b>Drie manieren om bij de juiste case te komen</b><span class="bron">bron nog te koppelen</span></button>
         <button class="optie" data-id="nabestellen" data-kort="Nadat je bestelt"><b>Wat er gebeurt nadat je op bestellen drukt</b><span class="bron">bron nog te koppelen</span></button>
         <button class="optie" data-id="kiesmodel" data-kort="Kies je model"><b>Kies je model en vul je maten in</b><span class="bron">bron nog te koppelen</span></button>
-        <button class="optie" data-id="vakgebied" data-kort="Kies je vakgebied"><b>Kies je vakgebied</b><span class="bron">bron nog te koppelen</span></button>
+        <button class="optie" data-id="toepassing" data-kort="Kies je toepassing"><b>Kies je toepassing</b><span class="bron">bron nog te koppelen</span></button>
         <button class="optie" data-id="branche" data-kort="Kies je branche"><b>Kies je branche</b><span class="bron">bron nog te koppelen</span></button>
         <button class="optie" data-id="halfverhaal" data-kort="Half verhaal"><b>Van een half verhaal naar een kist</b><span class="bron">bron nog te koppelen</span></button>
         </div>

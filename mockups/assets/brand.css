@@ -112,7 +112,6 @@ nav.primary a{font-family:var(--disp);text-transform:uppercase;font-weight:700;f
   color:var(--dark);height:100%;display:flex;align-items:center;border-bottom:3px solid transparent}
 nav.primary a:hover{border-bottom-color:var(--rule)}
 nav.primary a.on{border-bottom-color:var(--cyan)}
-nav.primary a.sec{color:var(--mute)}
 nav.primary .rechts{margin-left:auto;display:flex;align-items:center;gap:22px;font-size:14px;color:var(--mute)}
 nav.primary .rechts b{color:var(--dark);font-weight:500}
 nav.primary .rechts a:hover{color:var(--dark)}
@@ -123,6 +122,17 @@ nav.primary .rechts a:hover{color:var(--dark)}
    achtergrond. Nu: de stappen zijn links en dus blauw, het scheidingsteken is
    echt te zien, en de pagina waar je staat is de donkerste van de rij. */
 .crumbs{border-bottom:1px solid var(--rule);background:var(--bg)}
+/* Het kruimelpad neemt de grond over van de kop eronder: een grijze
+   strook tussen een witte header en een donkere of witte hero las als
+   een derde balk. Zelfde tekst, alleen de grond wisselt mee. */
+/* Geen onderrand als de kop eronder dezelfde grond heeft: die lijn
+   sneed een vlak doormidden dat juist één geheel moet zijn. */
+.crumbs.wit{background:#fff;border-bottom:0}
+.crumbs.donker{background:var(--void);border-bottom:0}
+.crumbs.donker .wrap{color:rgba(255,255,255,.55)}
+.crumbs.donker a{color:rgba(255,255,255,.75)}
+.crumbs.donker a:hover{color:#fff}
+.crumbs.donker .sep{color:rgba(255,255,255,.25)}
 .crumbs .wrap{display:flex;gap:9px;align-items:center;height:44px;font-family:var(--mono);
   font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--dark)}
 .crumbs a{color:var(--blue)}

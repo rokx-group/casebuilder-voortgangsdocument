@@ -35,7 +35,12 @@ body{background:#EDF0F4}
 .tabs a{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--mute);padding:16px 20px 13px;border-bottom:3px solid transparent;margin-bottom:-1px}
 .tabs a:hover{color:var(--dark)}
+.tabs a.kind{padding-left:6px;opacity:.9}
 .tabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+/* Configurator hangt onder Flightcases — je kiest eerst een model, dan
+   pas maten. De haak zegt dat, en de tab schuift iets aan. */
+.tabs a.sub{margin-left:-8px;padding-left:12px;color:var(--mute)}
+.tabs a.sub.on{color:var(--dark)}
 /* Header eerst, footer laatst — de volgorde waarin je ze op een pagina
    tegenkomt. Gewoon als laatste item in de rij; weggeduwd naar de rand
    las het als een aparte actie in plaats van als onderdeel van dezelfde
@@ -154,11 +159,16 @@ body.focusmodus .demo:not(.aan){cursor:default}
 
   <div class="tabs">
     <a href="header-varianten.html">Header</a>
+    <a href="hero-voorstellen.html">Hero</a>
     <a href="homepage-varianten.html">Homepage</a>
+    <a href="case-aanvragen-varianten.html">Case aanvragen</a>
     <a href="case-voor-varianten.html">/case-voor</a>
-    <a href="configurator-varianten.html">/configurator</a>
     <a href="flightcases-varianten.html">/flightcases</a>
-    <a href="footer-varianten.html" class="on" class="on">Footer</a>
+    <a href="configurator-varianten.html" class="sub">&#8627; /configurator</a>
+    <a href="groot-zakelijk-varianten.html">/groot-zakelijk</a>
+    <a href="faq-varianten.html">FAQ</a>
+    <a href="footer-varianten.html" class="on">Footer</a>
+    <a href="branches-varianten.html">/branches ontwerp</a>
   </div>
 
   <div class="inleiding">
@@ -188,7 +198,7 @@ body.focusmodus .demo:not(.aan){cursor:default}
             <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734" data-pad="tel:+31575575734">+31 (0)575 575734</a></p>
           </div>
           <div><h5>Offerte aanvragen</h5><a href="#" data-pad="/service/offerte">Case aanvragen</a><a href="#" data-pad="/laten-controleren">Maten laten controleren</a><a href="#" data-pad="/service/zakelijk-bestellen">Series en staffels</a><a href="#" data-pad="/service/zakelijk-bestellen">Zakelijk bestellen</a></div>
-          <div><h5>Zelf configureren</h5><a href="#" data-pad="/configurator">Naar de configurator</a><a href="#" data-pad="✗ geen pagina">Zo werkt het</a><a href="#" data-pad="/account/herbestellen">Herhaalorder</a><a href="#" data-pad="/account/configuraties">Mijn configuraties</a></div>
+          <div><h5>Zelf configureren</h5><a href="#" data-pad="/configurator">Naar de configurator</a><a href="#" data-pad="/service/zo-werkt-het">Zo werkt het</a><a href="#" data-pad="/account/herbestellen">Herhaalorder</a><a href="#" data-pad="/account/configuraties">Mijn configuraties</a></div>
           <div><h5>Flightcases</h5><a href="#" data-pad="/flightcases">Alle flightcases</a><a href="#" data-pad="/flightcases/koffer">Koffer</a><a href="#" data-pad="/flightcases/hoedcase">Hoedcase</a><a href="#" data-pad="/flightcases/trunccase">Trunccase</a><a href="#" data-pad="/flightcases/rackcase-enkel-deksel">Rackcase enkel</a><a href="#" data-pad="/flightcases/rackcase-dubbel-deksel">Rackcase dubbel</a></div>
           <div><h5>Service</h5><a href="#" data-pad="/service/levertijden">Levertijden</a><a href="#" data-pad="/service/verzending">Verzending</a><a href="#" data-pad="/onderdelen">Onderdelen</a><a href="#" data-pad="/service/zaagservice">Zaagservice</a><a href="#" data-pad="/over-casebuilder">Over Proflite</a><a href="#" data-pad="/service/contact">Contact</a></div>
         </div>
@@ -250,7 +260,7 @@ body.focusmodus .demo:not(.aan){cursor:default}
         <tr class="let"><td>Zakelijk bestellen</td><td class="pad">/service/zakelijk-bestellen</td><td><span class="st st-dubbel">dubbel</span></td><td>Zie hierboven</td></tr>
 
         <tr><td class="groep" rowspan="4">Zelf<br>configureren</td><td>Naar de configurator</td><td class="pad">/configurator</td><td><span class="st st-mock">mockup bestaat</span></td><td>Klantreis B</td></tr>
-        <tr class="let"><td>Zo werkt het</td><td class="pad">&mdash;</td><td><span class="st st-geen">geen pagina</span></td><td><b>Bestaat niet in de sitemap.</b> Of schrappen, of als anker op /configurator</td></tr>
+        <tr><td>Zo werkt het</td><td class="pad">/service/zo-werkt-het</td><td><span class="st st-mock">mockup bestaat</span></td><td>Het productieproces uit homepage-v6, nu als eigen pagina</td></tr>
         <tr><td>Herhaalorder</td><td class="pad">/account/herbestellen</td><td><span class="st st-ok">in sitemap</span></td><td>Achter inlog</td></tr>
         <tr><td>Mijn configuraties</td><td class="pad">/account/configuraties</td><td><span class="st st-ok">in sitemap</span></td><td>Achter inlog</td></tr>
 

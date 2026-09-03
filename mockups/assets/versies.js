@@ -49,18 +49,21 @@
     ],
     'case-voor-gitaar': [
       { id: 'wireframe', bestand: 'case-voor-gitaar.html', label: 'wireframe' },
-      { id: 'v1', bestand: 'case-voor-gitaar-v1.html', label: 'v1 · beeld' }
+      { id: 'v1', bestand: 'case-voor-gitaar-v1.html', label: 'v1 · kiezen' },
+      { id: 'v2', bestand: 'case-voor-gitaar-v2.html', label: 'v2 · productenlijst' }
     ],
     'case-voor-gibson-les-paul': [
       { id: 'wireframe', bestand: 'case-voor-gibson-les-paul.html', label: 'wireframe' },
-      { id: 'v1', bestand: 'case-voor-gibson-les-paul-v1.html', label: 'v1 · beeld' }
+      { id: 'v1', bestand: 'case-voor-gibson-les-paul-v1.html', label: 'v1 · advies' },
+      { id: 'v2', bestand: 'case-voor-gibson-les-paul-v2.html', label: 'v2 · vaste case' }
     ],
     // De servicehub en levertijden stonden door elkaar in deze reeks: vier
     // knoppen voor twee verschillende pagina's, waarvan levertijden ook nog
     // eens zijn eigen reeks had. Een reeks is één pagina, in versies.
     'service': [
       { id: 'wireframe', bestand: 'service.html', label: 'wireframe' },
-      { id: 'v1', bestand: 'service-v1.html', label: 'v1 · beeld' }
+      { id: 'v1', bestand: 'service-v1.html', label: 'v1 · beeld' },
+      { id: 'v2', bestand: 'service-hub-v1.html', label: 'v2 · servicehub' }
     ],
     'service-levertijden': [
       { id: 'wireframe', bestand: 'service-levertijden.html', label: 'wireframe' },
@@ -71,7 +74,8 @@
       { id: 'v1', bestand: 'zoeken-v1.html', label: 'v1 · beeld' }
     ],
     'laten-controleren': [
-      { id: 'wireframe', bestand: 'laten-controleren.html', label: 'wireframe' }
+      { id: 'wireframe', bestand: 'laten-controleren.html', label: 'wireframe' },
+      { id: 'v1', bestand: 'laten-controleren-v1.html', label: 'v1 · de controle' }
     ],
     'bedankt': [
       { id: 'wireframe', bestand: 'bedankt.html', label: 'wireframe' }
@@ -88,8 +92,61 @@
     ],
     // Nieuw: het branche-overzicht heeft nog geen wireframe, alleen een
     // ontwerp. De reeks staat er vast in zodat de knop meegroeit.
+    'zo-werkt-het': [
+      { id: 'v1', bestand: 'zo-werkt-het-v1.html', label: 'v1 · het proces' }
+    ],
+    // Groot zakelijk staat los van het branche-overzicht: branche is wíe je
+    // bent, dit is hóe je koopt. Twee vragen, twee pagina's.
+    'grote-spelers': [
+      { id: 'v1', bestand: 'grote-spelers-v1.html', label: 'v1 · sectoren' },
+      { id: 'v2', bestand: 'grote-spelers-v2.html', label: 'v2 · drie stappen' }
+    ],
+    'branche-audio-visueel': [
+      { id: 'v1', bestand: 'branche-audio-visueel-v1.html', label: 'v1' }
+    ],
+    'branche-defensie': [
+      { id: 'v1', bestand: 'branche-defensie-v1.html', label: 'v1' }
+    ],
+    'branche-industrie-en-machinebouw': [
+      { id: 'v1', bestand: 'branche-industrie-en-machinebouw-v1.html', label: 'v1' }
+    ],
+    'casetype-hoedcase': [
+      { id: 'v1', bestand: 'casetype-hoedcase-v1.html', label: 'v1' }
+    ],
+    'casetype-koffer': [
+      { id: 'v1', bestand: 'casetype-koffer-v1.html', label: 'v1' }
+    ],
+    'casetype-rackcase-dubbel-deksel': [
+      { id: 'v1', bestand: 'casetype-rackcase-dubbel-deksel-v1.html', label: 'v1' }
+    ],
+    'casetype-trunccase': [
+      { id: 'v1', bestand: 'casetype-trunccase-v1.html', label: 'v1' }
+    ],
+    'speler-defensie-en-overheid': [
+      { id: 'v1', bestand: 'speler-defensie-en-overheid-v1.html', label: 'v1' }
+    ],
+    'speler-netbeheer-en-energie': [
+      { id: 'v1', bestand: 'speler-netbeheer-en-energie-v1.html', label: 'v1' }
+    ],
+    'speler-oem-en-series': [
+      { id: 'v1', bestand: 'speler-oem-en-series-v1.html', label: 'v1' }
+    ],
+    'speler-omroep-en-studio': [
+      { id: 'v1', bestand: 'speler-omroep-en-studio-v1.html', label: 'v1' }
+    ],
+    'speler-verhuur-en-touring': [
+      { id: 'v1', bestand: 'speler-verhuur-en-touring-v1.html', label: 'v1' }
+    ],
+    'case-aanvragen': [
+      { id: 'v1', bestand: 'case-aanvragen-v1.html', label: 'v1 · de aanvraag' }
+    ],
+    'contact': [
+      { id: 'v1', bestand: 'contact-v1.html', label: 'v1' }
+    ],
     'branches': [
-      { id: 'v1', bestand: 'branches.html', label: 'v1 · overzicht' }
+      { id: 'v1', bestand: 'branches.html', label: 'v1 · donkere kop' },
+      { id: 'v2', bestand: 'branches-v2.html', label: 'v2 · lichte kop' },
+      { id: 'v3', bestand: 'branches-v3.html', label: 'v3 · kop + belofte één vlak' }
     ]
   };
 

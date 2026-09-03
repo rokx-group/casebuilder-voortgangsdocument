@@ -68,9 +68,31 @@ td.m{font-family:var(--mono);font-size:12px;color:var(--mute);white-space:nowrap
 .veld input{flex:1;padding:13px 15px;border:0;font:inherit;font-size:14px}
 .veld button{padding:13px 22px;border:0;background:var(--cyan);color:var(--void);
   font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--rule);margin:0 0 26px}
+.tabs a{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mute);padding:16px 20px 13px;border-bottom:3px solid transparent;margin-bottom:-1px}
+.tabs a:hover{color:var(--dark)}
+.tabs a.kind{padding-left:6px;opacity:.9}
+.tabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+.tabs{margin:0 0 26px;padding:0 24px}
 </style>
 </head>
 <body>
+
+<div class="tabs">
+    <a href="header-varianten.html">Header</a>
+    <a href="hero-voorstellen.html" class="on">Hero</a>
+    <a href="homepage-varianten.html">Homepage</a>
+    <a href="case-aanvragen-varianten.html">Case aanvragen</a>
+    <a href="case-voor-varianten.html">/case-voor</a>
+    <a href="flightcases-varianten.html">/flightcases</a>
+    <a href="configurator-varianten.html" class="sub">&#8627; /configurator</a>
+    <a href="groot-zakelijk-varianten.html">/groot-zakelijk</a>
+    <a href="faq-varianten.html">FAQ</a>
+    <a href="footer-varianten.html">Footer</a>
+    <a href="branches-varianten.html">/branches ontwerp</a>
+  </div>
+
 
 <div class="blad">
   <span class="mono">// hero's &middot; voorstel, nog niets gewijzigd</span>

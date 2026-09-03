@@ -29,7 +29,12 @@ body{background:#EDF0F4}
 .tabs a{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--mute);padding:16px 20px 13px;border-bottom:3px solid transparent;margin-bottom:-1px}
 .tabs a:hover{color:var(--dark)}
+.tabs a.kind{padding-left:6px;opacity:.9}
 .tabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+/* Configurator hangt onder Flightcases — je kiest eerst een model, dan
+   pas maten. De haak zegt dat, en de tab schuift iets aan. */
+.tabs a.sub{margin-left:-8px;padding-left:12px;color:var(--mute)}
+.tabs a.sub.on{color:var(--dark)}
 /* Header eerst, footer laatst — de volgorde waarin je ze op een pagina
    tegenkomt. Gewoon als laatste item in de rij; weggeduwd naar de rand
    las het als een aparte actie in plaats van als onderdeel van dezelfde
@@ -117,11 +122,16 @@ body.focusmodus .demo:not(.aan){cursor:default}
 
   <div class="tabs">
     <a href="header-varianten.html">Header</a>
+    <a href="hero-voorstellen.html">Hero</a>
     <a href="homepage-varianten.html">Homepage</a>
+    <a href="case-aanvragen-varianten.html">Case aanvragen</a>
     <a href="case-voor-varianten.html" class="on">/case-voor</a>
-    <a href="configurator-varianten.html">/configurator</a>
     <a href="flightcases-varianten.html">/flightcases</a>
+    <a href="configurator-varianten.html" class="sub">&#8627; /configurator</a>
+    <a href="groot-zakelijk-varianten.html">/groot-zakelijk</a>
+    <a href="faq-varianten.html">FAQ</a>
     <a href="footer-varianten.html">Footer</a>
+    <a href="branches-varianten.html">/branches ontwerp</a>
   </div>
 
   <div class="inleiding">
@@ -134,7 +144,7 @@ body.focusmodus .demo:not(.aan){cursor:default}
     <h3>Wat ga je vervoeren?</h3>
     <span class="gekozen">&#10003; geselecteerd voor nu</span>
     <span>
-      <span class="hgt">533 cases · 38 categorieën · 6 vakgebieden</span>
+      <span class="hgt">533 cases · 38 categorieën · 6 toepassingen</span>
       <a class="volledig" href="case-voor-v1.html" target="_blank" rel="noopener">Volledig scherm &#8599;</a>
     </span>
   </div>
@@ -143,7 +153,7 @@ body.focusmodus .demo:not(.aan){cursor:default}
     <summary>Details<span class="aantal">6 punten</span></summary>
     <div class="uitleg">
       <p><b>Een index, geen etalage.</b> Wie hier komt wil er zo snel mogelijk weer uit, dus staan alle achtendertig categorieën uitgeschreven in plaats van achter zes tegels. Fotografie zou hier ruimte kosten en niets toevoegen: je zoekt een woord, geen sfeer.</p>
-      <p><b>Zes vakgebieden, geen zes branches.</b> Dit zijn de twee assen die niet samenvallen: een vakgebied is wát je vervoert, een branche is wíé je bent. AV &amp; licht en Backline &amp; muziek zijn samen één branche; Industrie &amp; meettechniek is er juist twéé.</p>
+      <p><b>Zes toepassingen, geen zes branches.</b> Dit zijn de twee assen die niet samenvallen: een toepassing is wát je vervoert, een branche is wíé je bent. AV &amp; licht en Backline &amp; muziek zijn samen één branche; Industrie &amp; meettechniek is er juist twéé.</p>
       <p><b>Aanvragen is de hoofdingang.</b> De linkerkaart onderaan staat in dicht cyaan, hetzelfde patroon als <code>.deur.pri</code> op de homepage. Zeventig procent van de orders begint zo, en het is de enige route die werkt als je je maten niet weet.</p>
       <p><b>De hero gaat direct over in wit.</b> Er is geprobeerd die overgang te verzachten met een tussenband &mdash; eerst navy, daarna licht &mdash; maar beide lazen als een losse streep. Teruggedraaid naar het origineel.</p>
       <p><b>Drie blokken met beeld onderaan.</b> &ldquo;Een categorie is meer dan een maat&rdquo; stond als drie tekstvakken in één raster met haarlijnvoegen; dat leest als een tabel terwijl het drie losse observaties zijn. Nu drie objecten met ruimte ertussen.</p>
@@ -191,13 +201,13 @@ body.focusmodus .demo:not(.aan){cursor:default}
     </div>
     <div class="nt vraag open">
       <span class="lb">// 05 &middot; open</span>
-      <b>Twee vakgebieden zonder branche</b>
+      <b>Twee toepassingen zonder branche</b>
       <p>Medisch &amp; lab (64 cases) en Evenement &amp; beursbouw (50) hebben geen branchepagina die naar ze verwijst. Omgekeerd hebben Defensie en Schaalmodellen nul cases.</p>
     </div>
     <div class="nt vraag open">
       <span class="lb">// 06 &middot; open</span>
       <b>Backline &amp; muziek</b>
-      <p>118 cases, het op &eacute;&eacute;n na grootste vakgebied &mdash; en in de branchelijst staat het als &ldquo;flightcase dj, geen eigen branche&rdquo;. Dat is te groot om zo weg te zetten.</p>
+      <p>118 cases, het op &eacute;&eacute;n na grootste toepassing &mdash; en in de branchelijst staat het als &ldquo;flightcase dj, geen eigen branche&rdquo;. Dat is te groot om zo weg te zetten.</p>
     </div>
   </div>
 

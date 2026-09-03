@@ -28,7 +28,12 @@ body{background:#EDF0F4}
 .tabs a{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--mute);padding:16px 20px 13px;border-bottom:3px solid transparent;margin-bottom:-1px}
 .tabs a:hover{color:var(--dark)}
+.tabs a.kind{padding-left:6px;opacity:.9}
 .tabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+/* Configurator hangt onder Flightcases — je kiest eerst een model, dan
+   pas maten. De haak zegt dat, en de tab schuift iets aan. */
+.tabs a.sub{margin-left:-8px;padding-left:12px;color:var(--mute)}
+.tabs a.sub.on{color:var(--dark)}
 /* Header eerst, footer laatst — de volgorde waarin je ze op een pagina
    tegenkomt. Gewoon als laatste item in de rij; weggeduwd naar de rand
    las het als een aparte actie in plaats van als onderdeel van dezelfde
@@ -72,7 +77,7 @@ body{background:#EDF0F4}
 /* De vijf modellen naast elkaar op 32%: klein, maar groot genoeg om te
    zien dat ze hetzelfde sjabloon delen en waar de inhoud afwijkt. */
 .vijf{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:20px}
-.vijf .demo .balk{padding:6px 10px;font-size:9px;letter-spacing:.12em}
+.vijf .demo .balk{text-decoration:none;cursor:pointer;transition:background .12s;padding:6px 10px;font-size:9px;letter-spacing:.12em}
 .vijf .venster{height:420px}
 .vijf .houder{width:461px;height:1408px}
 .vijf .venster iframe{transform:scale(.32)}
@@ -118,6 +123,11 @@ body.focusmodus .demo:not(.aan){cursor:default}
   .notities{grid-template-columns:1fr}
   .vijf{grid-template-columns:repeat(2,1fr)}
 }
+.demo .balk .vs{margin-left:auto;opacity:0;transition:opacity .12s;font-size:9px;letter-spacing:.12em}
+.demo .balk .pijl{margin-left:8px}
+.demo a.balk:hover{background:var(--blue)!important;color:#fff!important}
+.demo a.balk:hover .vs{opacity:.85}
+.demo a.balk:focus-visible{outline:2px solid var(--cyan);outline-offset:-2px}
 </style>
 </head>
 <body>
@@ -126,11 +136,16 @@ body.focusmodus .demo:not(.aan){cursor:default}
 
   <div class="tabs">
     <a href="header-varianten.html">Header</a>
+    <a href="hero-voorstellen.html">Hero</a>
     <a href="homepage-varianten.html">Homepage</a>
+    <a href="case-aanvragen-varianten.html">Case aanvragen</a>
     <a href="case-voor-varianten.html">/case-voor</a>
-    <a href="configurator-varianten.html">/configurator</a>
     <a href="flightcases-varianten.html" class="on">/flightcases</a>
+    <a href="configurator-varianten.html" class="sub">&#8627; /configurator</a>
+    <a href="groot-zakelijk-varianten.html">/groot-zakelijk</a>
+    <a href="faq-varianten.html">FAQ</a>
     <a href="footer-varianten.html">Footer</a>
+    <a href="branches-varianten.html">/branches ontwerp</a>
   </div>
 
   <div class="inleiding">
@@ -209,31 +224,31 @@ body.focusmodus .demo:not(.aan){cursor:default}
 
   <div class="vijf">
     <div class="demo">
-      <div class="balk" style="background:var(--dark);color:#fff">01 · Koffer</div>
+      <a class="balk" href="casetype-koffer-v1.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">01 · Koffer<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
       <div class="venster" data-schaal=".32"><div class="houder">
         <iframe src="casetype-koffer-v1.html" title="01 · Koffer" loading="lazy"></iframe>
       </div></div>
     </div>
     <div class="demo">
-      <div class="balk" style="background:var(--dark);color:#fff">02 · Hoedcase</div>
+      <a class="balk" href="casetype-hoedcase-v1.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">02 · Hoedcase<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
       <div class="venster" data-schaal=".32"><div class="houder">
         <iframe src="casetype-hoedcase-v1.html" title="02 · Hoedcase" loading="lazy"></iframe>
       </div></div>
     </div>
     <div class="demo">
-      <div class="balk" style="background:var(--dark);color:#fff">03 · Trunccase</div>
+      <a class="balk" href="casetype-trunccase-v1.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">03 · Trunccase<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
       <div class="venster" data-schaal=".32"><div class="houder">
         <iframe src="casetype-trunccase-v1.html" title="03 · Trunccase" loading="lazy"></iframe>
       </div></div>
     </div>
     <div class="demo">
-      <div class="balk" style="background:var(--dark);color:#fff">04 · Rackcase enkel</div>
+      <a class="balk" href="casetype-v1.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">04 · Rackcase enkel<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
       <div class="venster" data-schaal=".32"><div class="houder">
         <iframe src="casetype-v1.html" title="04 · Rackcase enkel" loading="lazy"></iframe>
       </div></div>
     </div>
     <div class="demo">
-      <div class="balk" style="background:var(--dark);color:#fff">05 · Rackcase dubbel</div>
+      <a class="balk" href="casetype-rackcase-dubbel-deksel-v1.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">05 · Rackcase dubbel<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
       <div class="venster" data-schaal=".32"><div class="houder">
         <iframe src="casetype-rackcase-dubbel-deksel-v1.html" title="05 · Rackcase dubbel" loading="lazy"></iframe>
       </div></div>
