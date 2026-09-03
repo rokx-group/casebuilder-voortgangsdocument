@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — footervarianten (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   Footervarianten — zelfde opzet als header-varianten.html
+
+   Twee manieren om dezelfde ~22 links te ordenen. Het verschil zit
+   niet in wat erin staat maar in waaróp gegroepeerd wordt: op wat je
+   wilt doen (A) of op waar het in de site staat (B).
+
+   De linkinventaris onderaan is het belangrijkste deel van deze
+   pagina. Een footer is de enige plek waar élke link zichtbaar wordt,
+   en daarmee ook elke link die nog nergens heen gaat.
+   ══════════════════════════════════════════════════════════════ */
+body{background:#EDF0F4}
+.vgl{max-width:1440px;margin:0 auto;padding:0 24px 90px}
+.inleiding{max-width:82ch;margin:0 0 10px}
+.inleiding h2{font-size:26px;margin-bottom:8px}
+.inleiding p{font-size:14px;color:var(--mute);line-height:1.65}
+.inleiding p b{color:var(--ink)}
+
+/* Tabs — header en footer zijn twee stukken van dezelfde vraag, dus
+   staan ze naast elkaar in plaats van in twee losse bestanden die je
+   uit elkaar moet houden. Mono, want het is een schakelaar en geen
+   navigatie; de actieve krijgt de cyaan streep die de site ook gebruikt. */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--rule);margin:0 0 26px}
+.tabs a{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mute);padding:16px 20px 13px;border-bottom:3px solid transparent;margin-bottom:-1px}
+.tabs a:hover{color:var(--dark)}
+.tabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+/* Header eerst, footer laatst — de volgorde waarin je ze op een pagina
+   tegenkomt. Gewoon als laatste item in de rij; weggeduwd naar de rand
+   las het als een aparte actie in plaats van als onderdeel van dezelfde
+   reeks. */
+
+.kop{margin:44px 0 14px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.kop .nr{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--blue)}
+.kop h3{font-size:24px}
+.kop .hgt{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--mute);margin-left:auto}
+/* Kiezen is een besluit, geen accent — zelfde taal als bij de headers. */
+.kop .gekozen{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  background:var(--cyan);color:var(--void);padding:6px 12px;font-weight:600}
+
+.demo{border:1px solid var(--rule);background:var(--void);margin-bottom:8px}
+.demo.gekozen{border:2px solid var(--cyan);box-shadow:0 0 0 6px rgba(102,196,232,.18)}
+.demo .balk{background:var(--cyan);color:var(--void);font-family:var(--mono);font-size:10px;
+  letter-spacing:.18em;text-transform:uppercase;font-weight:600;padding:7px 14px}
+/* De footer staat hier in zijn eigen vlak, dus geen sticky en geen
+   marge eromheen — je beoordeelt de verhoudingen, niet de plek. */
+.demo footer{padding:44px 0 26px}
+/* Twee handelingen als knop: een klantreis is geen categorie om in te
+   bladeren. Verticaal gestapeld zodat ze even breed zijn als hun label. */
+.voetknoppen{display:flex;flex-direction:column;gap:10px;margin-top:22px;align-items:stretch;max-width:250px}
+/* Even breed én gecentreerd. Met de pijl rechts vastgepind stond er bij
+   "Case aanvragen" een groot gat en bij "Zelf configureren" bijna geen —
+   het verschil in labellengte werd zo een uitlijnfout in plaats van een
+   verschil in woorden. De pijlen zijn eruit: op twee gestapelde blokken
+   voegen ze niets toe wat de knopvorm niet al zegt, en ze waren precies
+   de oorzaak van het gat.
+   De ghost-rand gaat van 35% naar 55% wit: naast een dicht cyaan vlak
+   verdween een hairline van 35%, waardoor het paar uiteenviel in "knop"
+   en "kader" in plaats van in twee knoppen. */
+.voetknoppen .btn{justify-content:center}
+.voetknoppen .btn-ghost{border-color:rgba(255,255,255,.55)}
+.voetknoppen .btn-ghost:hover{border-color:var(--cyan)}
+
+/* ── bestemming bij aanwijzen ────────────────────────────────
+   Een voet beoordeel je niet op de labels maar op waar ze heen gaan.
+   Bij aanwijzen verschijnt het pad in mono — dezelfde stem als het
+   kruimelpad en de specs. Links zonder pagina zeggen dat met zoveel
+   woorden, in de vervalkleur, zodat een gat niet als pad leest. */
+[data-pad]{position:relative}
+[data-pad]::after{content:attr(data-pad);position:absolute;left:0;top:calc(100% + 4px);
+  z-index:20;background:var(--cyan);color:var(--void);font-family:var(--mono);font-size:10px;
+  letter-spacing:.08em;padding:4px 8px;white-space:nowrap;opacity:0;pointer-events:none;
+  transition:opacity .1s;text-transform:none}
+[data-pad]:hover::after,[data-pad]:focus-visible::after{opacity:1}
+[data-pad^="\2717"]::after{background:#A34418;color:#fff}
+/* De onderregel zit onderaan het vlak; daar klapt de tip omhoog. */
+.bot [data-pad]::after{top:auto;bottom:calc(100% + 4px)}
+.bot span:last-child [data-pad]::after{left:auto;right:0}
+
+/* Uitklap — zelfde patroon als op de headerpagina. De afweging hoort
+   erbij maar hoeft niet open te staan: je beoordeelt eerst de vorm. */
+.specdet{margin:0 0 18px;border:1px solid var(--rule);background:#fff}
+.specdet > summary{list-style:none;cursor:pointer;padding:11px 16px;display:flex;
+  align-items:center;gap:12px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mute);user-select:none}
+.specdet > summary::-webkit-details-marker{display:none}
+.specdet > summary:hover{color:var(--dark);background:var(--bg)}
+.specdet > summary .aantal{margin-left:auto;color:var(--rule)}
+.specdet > summary::before{content:"+";font-family:var(--mono);font-size:13px;line-height:1;
+  width:17px;height:17px;flex:none;display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--rule);color:var(--dark)}
+.specdet[open] > summary::before{content:"\2212"}
+.specdet[open] > summary{border-bottom:1px solid var(--rule);color:var(--dark)}
+.specdet .uitleg{padding:15px 16px 16px;margin:0;max-width:80ch}
+
+.uitleg{max-width:78ch;margin-bottom:16px}
+.uitleg p{font-size:14px;color:var(--mute);line-height:1.65}
+.uitleg p+p{margin-top:8px}
+.uitleg b{color:var(--ink)}
+
+/* ── linkinventaris ──────────────────────────────────────── */
+.inv{background:#fff;border:1px solid var(--rule);overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:10px 16px;border-bottom:1px solid var(--rule);vertical-align:top}
+thead th{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);font-weight:500;background:var(--bg);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+td.pad{font-family:var(--mono);font-size:12.5px;color:var(--dark);white-space:nowrap}
+td.groep{font-family:var(--disp);text-transform:uppercase;font-weight:700;letter-spacing:.03em;
+  color:var(--dark);font-size:15px;white-space:nowrap}
+.st{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  padding:3px 8px;white-space:nowrap;display:inline-block}
+.st-ok{background:#E4F0EA;color:#2F7355}
+.st-mock{background:var(--lightblue);color:var(--blue)}
+.st-geen{background:#FBEBE3;color:#A34418}
+.st-dubbel{background:#F7EFDC;color:#7A5B10}
+tr.let td{background:#FCF8EE}
+
+/* ── focusmodus ──────────────────────────────────────────────
+   Klik een variant om de rest te dimmen; klik ernaast of Esc om terug
+   te gaan. Bewust géén standaardgedrag: deze pagina bestaat om te
+   vergelijken, en dimmen haalt weg waartegen je vergelijkt. Het is een
+   modus voor als je één variant echt wilt beoordelen. */
+.dim{position:fixed;inset:0;background:rgba(11,26,38,.62);z-index:50;
+  opacity:0;pointer-events:none;transition:opacity .14s}
+body.focusmodus .dim{opacity:1;pointer-events:auto}
+/* Alleen het ontwerp komt naar voren, niet zijn kop: die is een label
+   en hoort bij de pagina, niet bij wat je beoordeelt. Hem meelichten
+   maakte er een tweede vlak van dat om aandacht vroeg. */
+.demo.aan{position:relative;z-index:60}
+.demo{cursor:zoom-in}
+.demo.aan{cursor:zoom-out}
+body.focusmodus .demo:not(.aan){cursor:default}
+/* Links binnen een demo houden hun eigen aanwijzer: daar zitten de
+   hover-paden op, en die moeten bereikbaar blijven. */
+.demo a{cursor:pointer}
+@media (prefers-reduced-motion: reduce){ .dim{transition:none} }
+</style>
+</head>
+<body>
+
+<div class="vgl">
+
+  <div class="tabs">
+    <a href="header-varianten.html">Header</a>
+    <a href="homepage-varianten.html">Homepage</a>
+    <a href="case-voor-varianten.html">/case-voor</a>
+    <a href="configurator-varianten.html">/configurator</a>
+    <a href="flightcases-varianten.html">/flightcases</a>
+    <a href="footer-varianten.html" class="on" class="on">Footer</a>
+  </div>
+
+  <div class="inleiding">
+    <h2>Twee footers, op ware grootte</h2>
+    <p><b>Variant A is voor nu geselecteerd en staat in alle mockups.</b> Dezelfde tweeëntwintig links, twee manieren om ze te groeperen: A op wat je wilt doen, B op waar je doorheen bladert &mdash; met de twee klantreizen als knop. Wijs een link aan om te zien waar hij heen gaat; onderaan staat dat ook als tabel, inclusief de links die nog nergens heen gaan.</p>
+  </div>
+
+  <!-- ══ VARIANT A ══════════════════════════════════════════ -->
+  <div class="kop">
+    <span class="nr">// VARIANT A</span>
+    <h3>Op taak</h3>
+    <span class="gekozen">&#10003; geselecteerd voor nu</span>
+    <span class="hgt">5 kolommen · 22 links</span>
+  </div>
+  <details class="specdet">
+    <summary>Details<span class="aantal">2 punten</span></summary>
+    <div class="uitleg">    <p><b>Groepeert op wat de bezoeker wil doen.</b> De twee eerste kolommen zijn letterlijk twee van de drie klantreizen uit vraag 14: offerte aanvragen en zelf configureren. Wie in de voet belandt is meestal vastgelopen boven aan de pagina, en dan is &ldquo;wat wil ik doen&rdquo; een betere ingang dan &ldquo;waar staat het&rdquo;.</p>
+    <p><b>Nadeel:</b> Branches en Onderdelen ontbreken als kop, terwijl ze wél in de hoofdnavigatie staan. Onderdelen hangt nu onder Service, wat verdedigbaar is maar niet vanzelfsprekend.</p></div>
+  </details>
+  <div class="demo gekozen">
+    <div class="balk">Geselecteerd voor nu &mdash; doorgevoerd in alle mockups</div>
+    <footer>
+      <div class="wrap">
+        <div class="cols">
+          <div>
+            <div class="logo"><em>case</em>Builder.com</div>
+            <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734" data-pad="tel:+31575575734">+31 (0)575 575734</a></p>
+          </div>
+          <div><h5>Offerte aanvragen</h5><a href="#" data-pad="/service/offerte">Case aanvragen</a><a href="#" data-pad="/laten-controleren">Maten laten controleren</a><a href="#" data-pad="/service/zakelijk-bestellen">Series en staffels</a><a href="#" data-pad="/service/zakelijk-bestellen">Zakelijk bestellen</a></div>
+          <div><h5>Zelf configureren</h5><a href="#" data-pad="/configurator">Naar de configurator</a><a href="#" data-pad="✗ geen pagina">Zo werkt het</a><a href="#" data-pad="/account/herbestellen">Herhaalorder</a><a href="#" data-pad="/account/configuraties">Mijn configuraties</a></div>
+          <div><h5>Flightcases</h5><a href="#" data-pad="/flightcases">Alle flightcases</a><a href="#" data-pad="/flightcases/koffer">Koffer</a><a href="#" data-pad="/flightcases/hoedcase">Hoedcase</a><a href="#" data-pad="/flightcases/trunccase">Trunccase</a><a href="#" data-pad="/flightcases/rackcase-enkel-deksel">Rackcase enkel</a><a href="#" data-pad="/flightcases/rackcase-dubbel-deksel">Rackcase dubbel</a></div>
+          <div><h5>Service</h5><a href="#" data-pad="/service/levertijden">Levertijden</a><a href="#" data-pad="/service/verzending">Verzending</a><a href="#" data-pad="/onderdelen">Onderdelen</a><a href="#" data-pad="/service/zaagservice">Zaagservice</a><a href="#" data-pad="/over-casebuilder">Over Proflite</a><a href="#" data-pad="/service/contact">Contact</a></div>
+        </div>
+        <div class="bot"><span>KVK 09123456</span><span><a href="#" data-pad="/algemene-voorwaarden">Algemene voorwaarden</a> &middot; <a href="#" data-pad="/privacy">Privacy</a> &middot; <a href="#" data-pad="✗ geen pagina">Disclaimer</a> &middot; <a href="#" data-pad="/copyright">Copyright</a> &middot; &copy; 2026 Proflite BV</span></div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ══ VARIANT B ══════════════════════════════════════════ -->
+  <div class="kop">
+    <span class="nr">// VARIANT B</span>
+    <h3>Op bladeren, met knoppen</h3>
+    <span class="hgt">3 kolommen · 2 knoppen · 19 links</span>
+  </div>
+  <details class="specdet">
+    <summary>Details<span class="aantal">2 punten</span></summary>
+    <div class="uitleg">    <p><b>Drie kolommen, en de twee klantreizen worden knoppen.</b> Case aanvragen en zelf configureren zijn geen categorie&euml;n om in te bladeren maar handelingen &mdash; die horen als knop, niet als lijstje links. Wat overblijft is waar je wél doorheen bladert: Flightcases, Branches, Service.</p>
+    <p><b>Winst:</b> veel rustiger, en de twee belangrijkste acties staan niet meer weggestopt tussen twintig linkjes. <b>Kost:</b> Series en staffels, Herhaalorder en Mijn configuraties verliezen hun plek in de voet &mdash; die moeten dan elders vindbaar zijn, in het account of op /service.</p></div>
+  </details>
+  <div class="demo">
+    <footer>
+      <div class="wrap">
+        <div class="cols" style="grid-template-columns:1.5fr 1fr 1fr 1fr">
+          <div>
+            <div class="logo"><em>case</em>Builder.com</div>
+            <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734" data-pad="tel:+31575575734">+31 (0)575 575734</a></p>
+            <div class="voetknoppen">
+              <a class="btn btn-pri btn-sm" href="#" data-pad="/service/offerte">Case aanvragen</a>
+              <a class="btn btn-ghost btn-sm" href="#" data-pad="/configurator">Zelf configureren</a>
+            </div>
+          </div>
+          <div><h5>Flightcases</h5><a href="#" data-pad="/flightcases">Alle flightcases</a><a href="#" data-pad="/flightcases/koffer">Koffer</a><a href="#" data-pad="/flightcases/hoedcase">Hoedcase</a><a href="#" data-pad="/flightcases/trunccase">Trunccase</a><a href="#" data-pad="/flightcases/rackcase-enkel-deksel">Rackcase enkel</a><a href="#" data-pad="/flightcases/rackcase-dubbel-deksel">Rackcase dubbel</a></div>
+          <div><h5>Branches</h5><a href="#" data-pad="/branches/industrie-en-machinebouw">Industrie en machinebouw</a><a href="#" data-pad="/branches/audio-visueel">Audio-visueel</a><a href="#" data-pad="/branches/defensie">Defensie</a><a href="#" data-pad="/branches/broadcast-en-media">Broadcast en media</a><a href="#" data-pad="/branches/meet-en-testapparatuur">Meet- en testapparatuur</a><a href="#" data-pad="/branches/schaalmodellen">Schaalmodellen</a></div>
+          <div><h5>Service</h5><a href="#" data-pad="/service/levertijden">Levertijden</a><a href="#" data-pad="/service/verzending">Verzending</a><a href="#" data-pad="/onderdelen">Onderdelen</a><a href="#" data-pad="/service/zaagservice">Zaagservice</a><a href="#" data-pad="/service/zakelijk-bestellen">Zakelijk bestellen</a><a href="#" data-pad="/over-casebuilder">Over Proflite</a><a href="#" data-pad="/service/contact">Contact</a></div>
+        </div>
+        <div class="bot"><span>KVK 09123456</span><span><a href="#" data-pad="/algemene-voorwaarden">Algemene voorwaarden</a> &middot; <a href="#" data-pad="/privacy">Privacy</a> &middot; <a href="#" data-pad="✗ geen pagina">Disclaimer</a> &middot; <a href="#" data-pad="/copyright">Copyright</a> &middot; &copy; 2026 Proflite BV</span></div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ══ LINKINVENTARIS ═════════════════════════════════════ -->
+  <div class="kop" style="margin-top:52px">
+    <span class="nr">// DATA</span>
+    <h3>Waar gaat elke link heen?</h3>
+    <span class="hgt">variant A · getoetst aan de sitemap</span>
+  </div>
+  <div class="uitleg">
+    <p>Elke link uit de gekozen footer, met zijn bestemming volgens de sitemap. <b>Drie regels vragen een besluit</b> &mdash; die staan gemarkeerd.</p>
+  </div>
+  <div class="inv">
+    <table>
+      <thead>
+        <tr><th>Kolom</th><th>Label</th><th>Gaat naar</th><th>Status</th><th>Opmerking</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="groep" rowspan="4">Offerte<br>aanvragen</td><td>Case aanvragen</td><td class="pad">/service/offerte</td><td><span class="st st-ok">in sitemap</span></td><td>De RFQ-route, klantreis C</td></tr>
+        <tr><td>Maten laten controleren</td><td class="pad">/laten-controleren</td><td><span class="st st-mock">mockup bestaat</span></td><td>Eigen sjabloon <em>formulier</em></td></tr>
+        <tr class="let"><td>Series en staffels</td><td class="pad">/service/zakelijk-bestellen</td><td><span class="st st-dubbel">dubbel</span></td><td><b>Zelfde bestemming als de regel eronder.</b> Of samenvoegen, of series een eigen pagina geven</td></tr>
+        <tr class="let"><td>Zakelijk bestellen</td><td class="pad">/service/zakelijk-bestellen</td><td><span class="st st-dubbel">dubbel</span></td><td>Zie hierboven</td></tr>
+
+        <tr><td class="groep" rowspan="4">Zelf<br>configureren</td><td>Naar de configurator</td><td class="pad">/configurator</td><td><span class="st st-mock">mockup bestaat</span></td><td>Klantreis B</td></tr>
+        <tr class="let"><td>Zo werkt het</td><td class="pad">&mdash;</td><td><span class="st st-geen">geen pagina</span></td><td><b>Bestaat niet in de sitemap.</b> Of schrappen, of als anker op /configurator</td></tr>
+        <tr><td>Herhaalorder</td><td class="pad">/account/herbestellen</td><td><span class="st st-ok">in sitemap</span></td><td>Achter inlog</td></tr>
+        <tr><td>Mijn configuraties</td><td class="pad">/account/configuraties</td><td><span class="st st-ok">in sitemap</span></td><td>Achter inlog</td></tr>
+
+        <tr><td class="groep" rowspan="6">Flightcases</td><td>Alle flightcases</td><td class="pad">/flightcases</td><td><span class="st st-mock">mockup bestaat</span></td><td>Sjabloon <em>overzicht</em></td></tr>
+        <tr><td>Koffer</td><td class="pad">/flightcases/koffer</td><td><span class="st st-mock">mockup bestaat</span></td><td rowspan="5">Vijf modelpagina's op sjabloon <em>casetype</em></td></tr>
+        <tr><td>Hoedcase</td><td class="pad">/flightcases/hoedcase</td><td><span class="st st-ok">in sitemap</span></td></tr>
+        <tr><td>Trunccase</td><td class="pad">/flightcases/trunccase</td><td><span class="st st-ok">in sitemap</span></td></tr>
+        <tr><td>Rackcase enkel</td><td class="pad">/flightcases/rackcase-enkel-deksel</td><td><span class="st st-ok">in sitemap</span></td></tr>
+        <tr><td>Rackcase dubbel</td><td class="pad">/flightcases/rackcase-dubbel-deksel</td><td><span class="st st-ok">in sitemap</span></td></tr>
+
+        <tr><td class="groep" rowspan="6">Service</td><td>Contact</td><td class="pad">/service/contact</td><td><span class="st st-ok">in sitemap</span></td><td>Sjabloon <em>formulier</em></td></tr>
+        <tr><td>Levertijden</td><td class="pad">/service/levertijden</td><td><span class="st st-mock">mockup bestaat</span></td><td></td></tr>
+        <tr><td>Verzending</td><td class="pad">/service/verzending</td><td><span class="st st-ok">in sitemap</span></td><td></td></tr>
+        <tr><td>Onderdelen</td><td class="pad">/onderdelen</td><td><span class="st st-mock">mockup bestaat</span></td><td>Staat op rootniveau, niet onder /service</td></tr>
+        <tr><td>Zaagservice</td><td class="pad">/service/zaagservice</td><td><span class="st st-ok">in sitemap</span></td><td>Dienst of product? Staat open</td></tr>
+        <tr><td>Over Proflite</td><td class="pad">/over-casebuilder</td><td><span class="st st-ok">in sitemap</span></td><td>Label en slug lopen uiteen &mdash; merk versus bedrijf</td></tr>
+
+        <tr><td class="groep" rowspan="5">Onderregel</td><td>+31 (0)575 575734</td><td class="pad">tel:+31575575734</td><td><span class="st st-ok">werkt</span></td><td>Klikbaar op mobiel</td></tr>
+        <tr><td>Algemene voorwaarden</td><td class="pad">/algemene-voorwaarden</td><td><span class="st st-ok">in sitemap</span></td><td></td></tr>
+        <tr><td>Privacy</td><td class="pad">/privacy</td><td><span class="st st-ok">in sitemap</span></td><td></td></tr>
+        <tr class="let"><td>Copyright</td><td class="pad">&mdash;</td><td><span class="st st-geen">geen pagina</span></td><td><b>Bestaat niet in de sitemap.</b> Meestal onderdeel van de voorwaarden &mdash; toevoegen of schrappen</td></tr>
+        <tr class="let"><td>Disclaimer</td><td class="pad">&mdash;</td><td><span class="st st-geen">geen pagina</span></td><td><b>Bestaat niet in de sitemap.</b> Juridisch vaak onderdeel van de voorwaarden &mdash; toevoegen of schrappen</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="uitleg" style="margin-top:10px;margin-bottom:60px">
+    <p><b>Drie besluiten uit deze tabel.</b> &ldquo;Series en staffels&rdquo; en &ldquo;Zakelijk bestellen&rdquo; wijzen naar dezelfde pagina &mdash; twee labels voor één bestemming is een belofte die de pagina moet waarmaken. &ldquo;Zo werkt het&rdquo; en &ldquo;Disclaimer&rdquo; bestaan niet in de sitemap; beide moeten een pagina krijgen of uit de voet.</p>
+    <p>Verder valt op dat <b>Onderdelen onder Service hangt</b> terwijl het op rootniveau staat en een eigen item in de hoofdnavigatie heeft. Dat is de zwakste plek van variant A, en precies waar variant B beter scoort.</p>
+  </div>
+
+</div>
+
+<script src="assets/focus.js"></script>
+<script src="assets/kaderhoogte.js"></script>
+</body>
+</html>

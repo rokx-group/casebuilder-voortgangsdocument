@@ -1,7 +1,11 @@
-# Statische site — geen buildstap nodig.
+# Statische site — geen buildstap nodig. De functie eronder wordt door Netlify
+# zelf gebundeld; de pagina blijft één bestand dat je zo kunt openen.
 [build]
   publish = "."
   command = ""
+
+[functions]
+  directory = "netlify/functions"
 
 [[headers]]
   for = "/*"

@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — /flightcases beoordelen (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   /flightcases beoordelen
+
+   Zes pagina's op één sjabloonpaar: het overzicht (sjabloon overzicht)
+   en vijf modelpagina's (sjabloon casetype). Het overzicht staat groot;
+   de vijf modellen staan als strook eronder, want daar gaat het juist om
+   de vraag of ze op één sjabloon kunnen blijven.
+   ══════════════════════════════════════════════════════════════ */
+body{background:#EDF0F4}
+.vgl{max-width:1440px;margin:0 auto;padding:0 24px 90px}
+.inleiding{max-width:82ch;margin:0 0 10px}
+.inleiding h2{font-size:26px;margin-bottom:8px}
+.inleiding p{font-size:14px;color:var(--mute);line-height:1.65}
+.inleiding p b{color:var(--ink)}
+
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--rule);margin:0 0 26px}
+.tabs a{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mute);padding:16px 20px 13px;border-bottom:3px solid transparent;margin-bottom:-1px}
+.tabs a:hover{color:var(--dark)}
+.tabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+/* Header eerst, footer laatst — de volgorde waarin je ze op een pagina
+   tegenkomt. Gewoon als laatste item in de rij; weggeduwd naar de rand
+   las het als een aparte actie in plaats van als onderdeel van dezelfde
+   reeks. */
+
+.kop{margin:44px 0 14px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.kop .nr{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--blue)}
+.kop h3{font-size:24px}
+.kop .gekozen{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  background:var(--cyan);color:var(--void);padding:6px 12px;font-weight:600}
+.kop .rechts{margin-left:auto;display:flex;align-items:center;gap:14px}
+.kop .hgt{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--mute)}
+/* Naar de echte pagina — een mockup beoordeel je uiteindelijk op maat. */
+.volledig{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid var(--rule);background:#fff;color:var(--dark);padding:7px 13px;
+  display:inline-flex;align-items:center;gap:8px}
+.volledig:hover{border-color:var(--cyan);background:var(--lightblue)}
+
+.specdet{margin:0 0 18px;border:1px solid var(--rule);background:#fff}
+.specdet > summary{list-style:none;cursor:pointer;padding:11px 16px;display:flex;
+  align-items:center;gap:12px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mute);user-select:none}
+.specdet > summary::-webkit-details-marker{display:none}
+.specdet > summary:hover{color:var(--dark);background:var(--bg)}
+.specdet > summary .aantal{margin-left:auto;color:var(--rule)}
+.specdet > summary::before{content:"+";font-family:var(--mono);font-size:13px;line-height:1;
+  width:17px;height:17px;flex:none;display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--rule);color:var(--dark)}
+.specdet[open] > summary::before{content:"\2212"}
+.specdet[open] > summary{border-bottom:1px solid var(--rule);color:var(--dark)}
+.specdet .uitleg{padding:15px 16px 16px;margin:0;max-width:80ch}
+.uitleg p{font-size:14px;color:var(--mute);line-height:1.65}
+.uitleg p+p{margin-top:8px}
+.uitleg b{color:var(--ink)}
+
+/* ── de pagina, verkleind ────────────────────────────────────
+   Op 60% past een venster van 1440 in 864 px, zodat er 380 px
+   overblijft voor de aantekeningen. Het kader schuift; de pagina zelf
+   staat op ware breedte in de iframe, dus de verhoudingen kloppen. */
+.beoordeel{display:block}
+/* De vijf modellen naast elkaar op 32%: klein, maar groot genoeg om te
+   zien dat ze hetzelfde sjabloon delen en waar de inhoud afwijkt. */
+.vijf{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:20px}
+.vijf .demo .balk{padding:6px 10px;font-size:9px;letter-spacing:.12em}
+.vijf .venster{height:420px}
+.vijf .houder{width:461px;height:1408px}
+.vijf .venster iframe{transform:scale(.32)}
+.demo{border:1px solid var(--rule);background:#fff;box-shadow:0 1px 3px rgba(0,40,70,.07);
+  overflow:hidden}
+.demo .balk{background:var(--cyan);color:var(--void);font-family:var(--mono);font-size:10px;
+  letter-spacing:.18em;text-transform:uppercase;font-weight:600;padding:7px 14px}
+.demo.gekozen{border:2px solid var(--cyan);box-shadow:0 0 0 6px rgba(102,196,232,.18),0 1px 3px rgba(0,40,70,.07)}
+.venster{height:820px;overflow:auto;background:var(--bg)}
+.houder{width:1368px;height:4180px}
+.venster iframe{width:1440px;height:4400px;border:0;display:block;
+  transform:scale(.95);transform-origin:top left}
+
+/* ── aantekeningen ───────────────────────────────────────────
+   Rechts, op dezelfde hoogte als het kader. Elke notitie noemt wat er
+   besloten is en waarom — dat is waar deze pagina voor bestaat. */
+/* Onder het ontwerp, drie naast elkaar: het ontwerp is het onderwerp,
+   de notities zijn commentaar. Naast elkaar kostte het commentaar
+   380 px van het ding waar je naar wilt kijken. */
+.notities{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
+  border:1px solid var(--rule);margin-top:20px}
+.nt{background:#fff;padding:14px 16px 16px}
+.nt .lb{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--blue);display:block;margin-bottom:6px}
+.nt b{font-family:var(--disp);text-transform:uppercase;font-size:16px;letter-spacing:.03em;
+  color:var(--dark);display:block;line-height:1.1}
+.nt p{font-size:13px;color:var(--mute);line-height:1.5;margin-top:6px}
+.nt.open .lb{color:#A34418}
+.notities .vraag{background:#FCF8EE}
+
+/* ── focusmodus ────────────────────────────────────────────── */
+.dim{position:fixed;inset:0;background:rgba(11,26,38,.62);z-index:50;
+  opacity:0;pointer-events:none;transition:opacity .14s}
+body.focusmodus .dim{opacity:1;pointer-events:auto}
+.demo.aan{position:relative;z-index:60}
+.demo{cursor:zoom-in}
+.demo.aan{cursor:zoom-out}
+body.focusmodus .demo:not(.aan){cursor:default}
+.demo a,.demo iframe{cursor:auto}
+@media (prefers-reduced-motion: reduce){ .dim{transition:none} }
+
+@media (max-width:1180px){
+  .notities{grid-template-columns:1fr}
+  .vijf{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<div class="vgl">
+
+  <div class="tabs">
+    <a href="header-varianten.html">Header</a>
+    <a href="homepage-varianten.html">Homepage</a>
+    <a href="case-voor-varianten.html">/case-voor</a>
+    <a href="configurator-varianten.html">/configurator</a>
+    <a href="flightcases-varianten.html" class="on">/flightcases</a>
+    <a href="footer-varianten.html">Footer</a>
+  </div>
+
+  <div class="inleiding">
+    <h2>Eén overzicht, vijf modellen</h2>
+    <p><b>Zes pagina's op twee sjablonen.</b> Het overzicht is sjabloon <em>overzicht</em>, de vijf modelpagina's zijn allemaal sjabloon <em>casetype</em> — dezelfde opbouw, andere inhoud. Het overzicht staat op volle breedte, de vijf modellen als strook eronder &mdash; juist om te toetsen of dat sjabloon houdbaar is: als één model iets nodig heeft wat de rest niet heeft, breekt het sjabloon.</p>
+  </div>
+
+  <div class="kop">
+    <span class="nr">// OVERZICHT</span>
+    <h3>Vijf modellen, jouw maten</h3>
+    <span class="gekozen">&#10003; geselecteerd voor nu</span>
+    <span>
+      <span class="hgt">/flightcases · sjabloon overzicht</span>
+      <a class="volledig" href="flightcases-v1.html" target="_blank" rel="noopener">Volledig scherm &#8599;</a>
+    </span>
+  </div>
+
+  <details class="specdet">
+    <summary>Details<span class="aantal">4 punten</span></summary>
+    <div class="uitleg">
+      <p><b>De vergelijkingstabel is de pagina.</b> Vijf modellen die op het oog op elkaar lijken, met per rij het enige wat er echt toe doet: waarvoor, welk deksel, 19-inch of niet, wielen, vanafprijs. Dat is wat de configurator niet toont en de modelpagina te laat.</p>
+      <p><b>Elke modelpagina begint bij stap 2.</b> Wie vanaf hier configureert heeft het model al gekozen, dus slaat de eerste stap over. Dat staat er ook zo bij.</p>
+      <p><b>De namen blijven zoals ze live staan</b> &mdash; koffer, hoedcase, trunccase, rackcase enkel deksel, rackcase dubbel deksel. Dat is een van de twee besluiten uit het sitemapoverleg.</p>
+      <p><b>Vanafprijzen lopen uiteen tussen de mockups.</b> Op het overzicht staat de koffer op € 149, in de configurator op € 189. Eén van de twee klopt niet.</p>
+    </div>
+  </details>
+
+  <div class="beoordeel">
+    <div class="demo gekozen">
+      <div class="balk">Geselecteerd voor nu &mdash; op 95% · het kader schuift</div>
+      <div class="venster" data-schaal=".95"><div class="houder">
+        <iframe src="flightcases-v1.html" title="/flightcases overzicht" loading="lazy"></iframe>
+      </div></div>
+    </div>
+
+  </div>
+
+  <div class="kop" style="margin-top:34px">
+    <span class="nr">// AANTEKENINGEN</span>
+    <h3>Besloten en open</h3>
+  </div>
+
+  <div class="notities">
+    <div class="nt">
+      <span class="lb">// 01 &middot; besloten</span>
+      <b>Twee sjablonen, zes pagina's</b>
+      <p>Overzicht plus vijf keer casetype. Groeit het assortiment, dan is een zesde model redactiewerk en geen ontwikkeling.</p>
+    </div>
+    <div class="nt">
+      <span class="lb">// 02 &middot; besloten</span>
+      <b>Modelnamen ongewijzigd</b>
+      <p>Zoals ze live staan. Scheelt 301's en houdt de bestaande posities in Google intact.</p>
+    </div>
+    <div class="nt vraag open">
+      <span class="lb">// 03 &middot; open</span>
+      <b>Vanafprijzen kloppen niet</b>
+      <p>Koffer staat op € 149 in het overzicht en € 189 in de configurator. Trunccase op € 199 tegen € 245. Eén bron kiezen.</p>
+    </div>
+    <div class="nt vraag open">
+      <span class="lb">// 04 &middot; open</span>
+      <b>Bouwpakket of kant-en-klaar</b>
+      <p>Staat op de modelpagina als keuze, maar zit niet in de vijf stappen van de configurator. Waar valt die beslissing?</p>
+    </div>
+    <div class="nt vraag open">
+      <span class="lb">// 05 &middot; open</span>
+      <b>Wielen bij de trunccase</b>
+      <p>De tabel zegt &ldquo;standaard&rdquo;, de andere vier &ldquo;optioneel&rdquo; of &ldquo;zelden&rdquo;. Zit dat ook zo in de configurator en in de vanafprijs?</p>
+    </div>
+  </div>
+
+  <div class="kop" style="margin-top:34px">
+    <span class="nr">// VIJF MODELPAGINA'S</span>
+    <h3>Hetzelfde sjabloon, andere inhoud</h3>
+    <span><span class="hgt">/flightcases/{model} · sjabloon casetype · op 32%</span></span>
+  </div>
+
+  <div class="vijf">
+    <div class="demo">
+      <div class="balk" style="background:var(--dark);color:#fff">01 · Koffer</div>
+      <div class="venster" data-schaal=".32"><div class="houder">
+        <iframe src="casetype-koffer-v1.html" title="01 · Koffer" loading="lazy"></iframe>
+      </div></div>
+    </div>
+    <div class="demo">
+      <div class="balk" style="background:var(--dark);color:#fff">02 · Hoedcase</div>
+      <div class="venster" data-schaal=".32"><div class="houder">
+        <iframe src="casetype-hoedcase-v1.html" title="02 · Hoedcase" loading="lazy"></iframe>
+      </div></div>
+    </div>
+    <div class="demo">
+      <div class="balk" style="background:var(--dark);color:#fff">03 · Trunccase</div>
+      <div class="venster" data-schaal=".32"><div class="houder">
+        <iframe src="casetype-trunccase-v1.html" title="03 · Trunccase" loading="lazy"></iframe>
+      </div></div>
+    </div>
+    <div class="demo">
+      <div class="balk" style="background:var(--dark);color:#fff">04 · Rackcase enkel</div>
+      <div class="venster" data-schaal=".32"><div class="houder">
+        <iframe src="casetype-v1.html" title="04 · Rackcase enkel" loading="lazy"></iframe>
+      </div></div>
+    </div>
+    <div class="demo">
+      <div class="balk" style="background:var(--dark);color:#fff">05 · Rackcase dubbel</div>
+      <div class="venster" data-schaal=".32"><div class="houder">
+        <iframe src="casetype-rackcase-dubbel-deksel-v1.html" title="05 · Rackcase dubbel" loading="lazy"></iframe>
+      </div></div>
+    </div>
+  </div>
+
+</div>
+
+<script src="assets/focus.js"></script>
+<script src="assets/kaderhoogte.js"></script>
+</body>
+</html>

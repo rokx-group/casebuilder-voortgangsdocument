@@ -93,7 +93,7 @@ let css = schaalIn(readFileSync(BRAND, "utf8"), ".dv");
 const html = {};
 
 /**
- * Varianten: naast `homepage.html` mag `homepage-v2.html` bestaan. Die wordt
+ * Varianten: naast `homepage.html` mag `homepage-v6.html` bestaan. Die wordt
  * automatisch opgepikt en krijgt een eigen blok, zodat twee versies van
  * hetzelfde sjabloon naast elkaar te bekijken zijn zonder dat de een de ander
  * overschrijft. Handig als er aan twee versies tegelijk gewerkt wordt.

@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — /case-voor beoordelen (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   /case-voor beoordelen
+
+   Derde tab naast Header en Footer. Anders dan die twee gaat het hier
+   niet om varianten van één onderdeel maar om een hele pagina, en die
+   past niet op ware grootte naast aantekeningen. Daarom staat hij
+   verkleind in een schuifbaar kader, met de notities ernaast — en een
+   knop naar de echte pagina voor wie hem op maat wil zien.
+   ══════════════════════════════════════════════════════════════ */
+body{background:#EDF0F4}
+.vgl{max-width:1440px;margin:0 auto;padding:0 24px 90px}
+.inleiding{max-width:82ch;margin:0 0 10px}
+.inleiding h2{font-size:26px;margin-bottom:8px}
+.inleiding p{font-size:14px;color:var(--mute);line-height:1.65}
+.inleiding p b{color:var(--ink)}
+
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--rule);margin:0 0 26px}
+.tabs a{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mute);padding:16px 20px 13px;border-bottom:3px solid transparent;margin-bottom:-1px}
+.tabs a:hover{color:var(--dark)}
+.tabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+/* Header eerst, footer laatst — de volgorde waarin je ze op een pagina
+   tegenkomt. Gewoon als laatste item in de rij; weggeduwd naar de rand
+   las het als een aparte actie in plaats van als onderdeel van dezelfde
+   reeks. */
+
+.kop{margin:44px 0 14px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.kop .nr{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--blue)}
+.kop h3{font-size:24px}
+.kop .gekozen{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  background:var(--cyan);color:var(--void);padding:6px 12px;font-weight:600}
+.kop .rechts{margin-left:auto;display:flex;align-items:center;gap:14px}
+.kop .hgt{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--mute)}
+/* Naar de echte pagina — een mockup beoordeel je uiteindelijk op maat. */
+.volledig{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid var(--rule);background:#fff;color:var(--dark);padding:7px 13px;
+  display:inline-flex;align-items:center;gap:8px}
+.volledig:hover{border-color:var(--cyan);background:var(--lightblue)}
+
+.specdet{margin:0 0 18px;border:1px solid var(--rule);background:#fff}
+.specdet > summary{list-style:none;cursor:pointer;padding:11px 16px;display:flex;
+  align-items:center;gap:12px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mute);user-select:none}
+.specdet > summary::-webkit-details-marker{display:none}
+.specdet > summary:hover{color:var(--dark);background:var(--bg)}
+.specdet > summary .aantal{margin-left:auto;color:var(--rule)}
+.specdet > summary::before{content:"+";font-family:var(--mono);font-size:13px;line-height:1;
+  width:17px;height:17px;flex:none;display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--rule);color:var(--dark)}
+.specdet[open] > summary::before{content:"\2212"}
+.specdet[open] > summary{border-bottom:1px solid var(--rule);color:var(--dark)}
+.specdet .uitleg{padding:15px 16px 16px;margin:0;max-width:80ch}
+.uitleg p{font-size:14px;color:var(--mute);line-height:1.65}
+.uitleg p+p{margin-top:8px}
+.uitleg b{color:var(--ink)}
+
+/* ── de pagina, bijna op maat ────────────────────────────────
+   De aantekeningen stonden hiernaast en namen 380 px af van het
+   ontwerp. Ze staan nu eronder, in een strook van drie: de pagina is
+   het onderwerp, de notities zijn commentaar. Op 95% past een venster
+   van 1440 in 1368 px — vrijwel op maat, en het kader schuift. */
+.beoordeel{display:block}
+.demo{border:1px solid var(--rule);background:#fff;box-shadow:0 1px 3px rgba(0,40,70,.07);
+  overflow:hidden}
+.demo .balk{background:var(--cyan);color:var(--void);font-family:var(--mono);font-size:10px;
+  letter-spacing:.18em;text-transform:uppercase;font-weight:600;padding:7px 14px}
+.demo.gekozen{border:2px solid var(--cyan);box-shadow:0 0 0 6px rgba(102,196,232,.18),0 1px 3px rgba(0,40,70,.07)}
+.venster{height:820px;overflow:auto;background:var(--bg)}
+.houder{width:1368px;height:3990px}
+.venster iframe{width:1440px;height:4200px;border:0;display:block;
+  transform:scale(.95);transform-origin:top left}
+
+/* ── aantekeningen ───────────────────────────────────────────
+   Onder het ontwerp, drie naast elkaar. Elke notitie noemt wat er
+   besloten is en waarom — dat is waar deze pagina voor bestaat. */
+.notities{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
+  border:1px solid var(--rule);margin-top:20px}
+.nt{background:#fff;padding:14px 16px 16px}
+.nt .lb{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--blue);display:block;margin-bottom:6px}
+.nt b{font-family:var(--disp);text-transform:uppercase;font-size:16px;letter-spacing:.03em;
+  color:var(--dark);display:block;line-height:1.1}
+.nt p{font-size:13px;color:var(--mute);line-height:1.5;margin-top:6px}
+.nt.open .lb{color:#A34418}
+.notities .vraag{background:#FCF8EE}
+
+/* ── focusmodus ────────────────────────────────────────────── */
+.dim{position:fixed;inset:0;background:rgba(11,26,38,.62);z-index:50;
+  opacity:0;pointer-events:none;transition:opacity .14s}
+body.focusmodus .dim{opacity:1;pointer-events:auto}
+.demo.aan{position:relative;z-index:60}
+.demo{cursor:zoom-in}
+.demo.aan{cursor:zoom-out}
+body.focusmodus .demo:not(.aan){cursor:default}
+.demo a,.demo iframe{cursor:auto}
+@media (prefers-reduced-motion: reduce){ .dim{transition:none} }
+
+@media (max-width:1180px){
+  .notities{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="vgl">
+
+  <div class="tabs">
+    <a href="header-varianten.html">Header</a>
+    <a href="homepage-varianten.html">Homepage</a>
+    <a href="case-voor-varianten.html" class="on">/case-voor</a>
+    <a href="configurator-varianten.html">/configurator</a>
+    <a href="flightcases-varianten.html">/flightcases</a>
+    <a href="footer-varianten.html">Footer</a>
+  </div>
+
+  <div class="inleiding">
+    <h2>De catalogusingang, verkleind</h2>
+    <p><b>Eén versie, geen varianten &mdash; nog niet.</b> Deze pagina staat hier op 95% &mdash; vrijwel op maat. Het kader schuift, en de pagina zit er op ware breedte in. De aantekeningen staan eronder in plaats van ernaast, zodat het ontwerp de volle breedte krijgt. Wil je hem op ware grootte beoordelen, gebruik dan de knop rechtsboven.</p>
+  </div>
+
+  <div class="kop">
+    <span class="nr">// V1</span>
+    <h3>Wat ga je vervoeren?</h3>
+    <span class="gekozen">&#10003; geselecteerd voor nu</span>
+    <span>
+      <span class="hgt">533 cases · 38 categorieën · 6 vakgebieden</span>
+      <a class="volledig" href="case-voor-v1.html" target="_blank" rel="noopener">Volledig scherm &#8599;</a>
+    </span>
+  </div>
+
+  <details class="specdet">
+    <summary>Details<span class="aantal">6 punten</span></summary>
+    <div class="uitleg">
+      <p><b>Een index, geen etalage.</b> Wie hier komt wil er zo snel mogelijk weer uit, dus staan alle achtendertig categorieën uitgeschreven in plaats van achter zes tegels. Fotografie zou hier ruimte kosten en niets toevoegen: je zoekt een woord, geen sfeer.</p>
+      <p><b>Zes vakgebieden, geen zes branches.</b> Dit zijn de twee assen die niet samenvallen: een vakgebied is wát je vervoert, een branche is wíé je bent. AV &amp; licht en Backline &amp; muziek zijn samen één branche; Industrie &amp; meettechniek is er juist twéé.</p>
+      <p><b>Aanvragen is de hoofdingang.</b> De linkerkaart onderaan staat in dicht cyaan, hetzelfde patroon als <code>.deur.pri</code> op de homepage. Zeventig procent van de orders begint zo, en het is de enige route die werkt als je je maten niet weet.</p>
+      <p><b>De hero gaat direct over in wit.</b> Er is geprobeerd die overgang te verzachten met een tussenband &mdash; eerst navy, daarna licht &mdash; maar beide lazen als een losse streep. Teruggedraaid naar het origineel.</p>
+      <p><b>Drie blokken met beeld onderaan.</b> &ldquo;Een categorie is meer dan een maat&rdquo; stond als drie tekstvakken in één raster met haarlijnvoegen; dat leest als een tabel terwijl het drie losse observaties zijn. Nu drie objecten met ruimte ertussen.</p>
+      <p><b>Twee gaten in de routering.</b> De knop &ldquo;Alle apparaten A&ndash;Z&rdquo; gaat nergens heen, en die pagina bestaat niet in de sitemap. Zie de aantekeningen hiernaast.</p>
+    </div>
+  </details>
+
+  <div class="beoordeel">
+    <div class="demo gekozen">
+      <div class="balk">Geselecteerd voor nu &mdash; op 60% · het kader schuift</div>
+      <div class="venster" data-schaal=".95">
+        <div class="houder">
+          <iframe src="case-voor-v1.html" title="/case-voor v1 op ware breedte, verkleind weergegeven" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="kop" style="margin-top:34px">
+    <span class="nr">// AANTEKENINGEN</span>
+    <h3>Besloten en open</h3>
+  </div>
+
+  <div class="notities">
+    <div class="nt">
+      <span class="lb">// 01 &middot; besloten</span>
+      <b>Aanvragen in cyaan</b>
+      <p>De linkerkaart bij &ldquo;Dan is het gewoon nog geen pagina&rdquo; is de hoofdingang. Transparant wit kon niet: dat is al de hover-toestand van de kaart ernaast.</p>
+    </div>
+    <div class="nt">
+      <span class="lb">// 02 &middot; besloten</span>
+      <b>Kopregel herschreven</b>
+      <p>&ldquo;Achtendertig ingangen&rdquo; werd &ldquo;achtendertig categorie&euml;n&rdquo;, en de uitweg staat niet meer in mono-kapitalen. Mono is hier voor labels en specs, niet voor hele zinnen.</p>
+    </div>
+    <div class="nt">
+      <span class="lb">// 03 &middot; besloten</span>
+      <b>Foto's in de maatwerkblokken</b>
+      <p>Drie losse objecten met beeld in plaats van &eacute;&eacute;n raster met tekstvakken. De hero-overgang is teruggedraaid naar het origineel.</p>
+    </div>
+    <div class="nt vraag open">
+      <span class="lb">// 04 &middot; open</span>
+      <b>Alle apparaten A&ndash;Z</b>
+      <p>De knop gaat naar <code>#</code> en die pagina staat niet in de sitemap. Voorstel: g&eacute;&eacute;n nieuwe pagina, maar een anker naar een A&ndash;Z-blok onderaan deze pagina. Alle ~300 productpagina's krijgen dan een crawlbare link zonder een zeventiende sjabloon.</p>
+    </div>
+    <div class="nt vraag open">
+      <span class="lb">// 05 &middot; open</span>
+      <b>Twee vakgebieden zonder branche</b>
+      <p>Medisch &amp; lab (64 cases) en Evenement &amp; beursbouw (50) hebben geen branchepagina die naar ze verwijst. Omgekeerd hebben Defensie en Schaalmodellen nul cases.</p>
+    </div>
+    <div class="nt vraag open">
+      <span class="lb">// 06 &middot; open</span>
+      <b>Backline &amp; muziek</b>
+      <p>118 cases, het op &eacute;&eacute;n na grootste vakgebied &mdash; en in de branchelijst staat het als &ldquo;flightcase dj, geen eigen branche&rdquo;. Dat is te groot om zo weg te zetten.</p>
+    </div>
+  </div>
+
+</div>
+
+<script src="assets/focus.js"></script>
+<script src="assets/kaderhoogte.js"></script>
+</body>
+</html>

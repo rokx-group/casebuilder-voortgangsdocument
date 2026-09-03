@@ -1,0 +1,9 @@
+{
+  "name": "casebuilder-voortgangsdocument",
+  "private": true,
+  "type": "module",
+  "description": "Alleen voor de Netlify-functie die de afvinklijsten bewaart. De site zelf heeft geen buildstap.",
+  "dependencies": {
+    "@netlify/blobs": "^11.0.3"
+  }
+}

@@ -117,12 +117,18 @@ nav.primary .rechts{margin-left:auto;display:flex;align-items:center;gap:22px;fo
 nav.primary .rechts b{color:var(--dark);font-weight:500}
 nav.primary .rechts a:hover{color:var(--dark)}
 
-/* kruimelpad */
+/* kruimelpad — moet te lezen zijn zonder te turen. Mono op 10px, in hoofdletters
+   en met .14em spatiëring, is zo'n beetje de minst leesbare combinatie die er
+   is; het scheidingsteken stond bovendien in --rule en viel weg tegen de
+   achtergrond. Nu: de stappen zijn links en dus blauw, het scheidingsteken is
+   echt te zien, en de pagina waar je staat is de donkerste van de rij. */
 .crumbs{border-bottom:1px solid var(--rule);background:var(--bg)}
-.crumbs .wrap{display:flex;gap:10px;align-items:center;height:44px;font-family:var(--mono);
-  font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
-.crumbs a:hover{color:var(--dark)}
-.crumbs .sep{color:var(--rule)}
+.crumbs .wrap{display:flex;gap:9px;align-items:center;height:44px;font-family:var(--mono);
+  font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--dark)}
+.crumbs a{color:var(--blue)}
+.crumbs a:hover{color:var(--dark);text-decoration:underline;text-underline-offset:3px}
+.crumbs .sep{color:var(--mute)}
+.crumbs .wrap > span:last-child{color:var(--dark);font-weight:600}
 
 /* ── secties ─────────────────────────────────────────────── */
 section{padding:88px 0}
@@ -188,12 +194,18 @@ section.tight{padding:56px 0}
 
 /* footer */
 footer{background:var(--void);color:rgba(255,255,255,.66);padding:64px 0 30px}
-footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:44px}
+footer .cols{display:grid;grid-template-columns:1.3fr repeat(4,1fr);gap:36px}
 footer h5{font-size:15px;letter-spacing:.06em;color:#fff;font-weight:700;
   border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:9px;margin-bottom:15px}
 footer a{display:block;padding:5px 0;font-size:14px}
 footer a:hover{color:var(--cyan)}
 footer .adr{font-size:14px;line-height:1.8}
+footer .adr a,footer .bot a{display:inline;padding:0}
+/* De onderregel is mono 10px; zonder dit erven de links de 14px van
+   footer a en staan er twee tekengroottes in één regel. */
+footer .bot a{font-size:inherit;letter-spacing:inherit}
+footer .bot a:hover{color:var(--cyan)}
+footer .adr a:hover{color:var(--cyan)}
 footer .bot{border-top:1px solid rgba(255,255,255,.15);margin-top:44px;padding-top:20px;display:flex;
   justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4)}
 

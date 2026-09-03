@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — /configurator v1 (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   /configurator — zelf configureren
+
+   Op de live site is de configurator een popup zonder eigen URL: je
+   klikt hem open vanaf een modelpagina en er is geen weg terug, geen
+   deelbare link, en niets te vinden voor Google. Deze pagina zet er
+   een adres omheen.
+
+   Twee ingangen, bewust verschillend:
+
+     /configurator          de navigatie-ingang. Tool blijft dicht.
+                            Eerst uitleggen wat je krijgt en waar hij
+                            ophoudt — anders begint iemand aan vijf
+                            stappen die op stap vier stuklopen.
+     /configurator?start=1  de hero-ingang. Wie op de homepage al op
+                            "zelf configureren" klikt, heeft de keuze
+                            gemaakt; die hoort niet nóg een keer op
+                            een knop te moeten drukken.
+
+   Vraag 9 uit de vragenlijst is hier leidend: de configurator is voor
+   wie tijd én kennis heeft. Wie meer wil dan er technisch in kan, moet
+   naar de RFQ. Dat staat daarom óp de pagina en niet pas op stap vier.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── kop ─────────────────────────────────────────────────── */
+.kop{background:var(--void);color:#fff;position:relative;overflow:hidden;padding:66px 0 62px}
+.kop .grid{display:grid;grid-template-columns:1.15fr 1fr;gap:64px;align-items:center}
+.kop h1{font-size:clamp(38px,4.8vw,62px);color:#fff;line-height:.94;max-width:14ch;margin-top:16px}
+.kop h1 .acc{color:var(--cyan)}
+.kop p.lead{color:rgba(255,255,255,.8);font-size:17.5px;max-width:48ch;margin-top:20px}
+.kop .acties{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+/* De stappen staan al in de kop, niet pas verderop: wie ziet dat het
+   er vijf zijn en welke, weet of hij eraan moet beginnen. */
+.stappenlijst{border-left:1.5px solid rgba(255,255,255,.2);padding-left:26px;
+  display:flex;flex-direction:column;gap:1px}
+.stappenlijst div{display:flex;gap:16px;padding:12px 0;align-items:baseline}
+.stappenlijst div+div{border-top:1px solid rgba(255,255,255,.12)}
+.stappenlijst .n{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--cyan);white-space:nowrap}
+.stappenlijst b{font-family:var(--disp);text-transform:uppercase;font-size:17px;
+  letter-spacing:.03em;color:#fff;display:block;line-height:1.1}
+.stappenlijst span{font-size:13.5px;color:rgba(255,255,255,.68);display:block;margin-top:3px}
+
+/* ── belofte ─────────────────────────────────────────────────
+   Zelfde band als op /branches: waarde groot in condensed, de
+   nuancering klein in mono eronder. */
+.belofte{border-bottom:1px solid var(--rule);background:var(--bg)}
+/* Verticaal gecentreerd in de band. Op baseline uitgelijnd hingen de
+   blokjes aan de bovenrand van hun eigen hoogte, waardoor de rij als
+   geheel te hoog in het vlak stond. */
+.belofte{display:flex;align-items:center}
+.belofte .row{display:flex;gap:56px;align-items:center;flex-wrap:wrap;width:100%}
+.belofte .it{display:flex;flex-direction:column;gap:5px}
+.belofte .it b{font-family:var(--disp);text-transform:uppercase;font-size:24px;
+  letter-spacing:.03em;color:var(--dark);font-weight:900;line-height:1}
+.belofte .it span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mute)}
+
+/* ── de vijf modellen ────────────────────────────────────── */
+.modellen{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.model{border:1px solid var(--rule);background:#fff;display:flex;flex-direction:column;
+  transition:.15s;text-align:left;padding:0;font:inherit;cursor:pointer}
+.model:hover{border-color:var(--dark)}
+.model:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+.model .im{background:var(--bg);aspect-ratio:4/3;overflow:hidden}
+.model .im img{width:100%;height:100%;object-fit:cover}
+.model .bd{padding:16px 18px 20px;border-top:1px solid var(--rule);flex:1;
+  display:flex;flex-direction:column;gap:6px}
+.model h3{font-size:19px;line-height:1.05}
+.model p{font-size:13px;color:var(--mute);line-height:1.45;flex:1}
+.model .van{font-family:var(--disp);text-transform:uppercase;font-size:17px;
+  letter-spacing:.03em;color:var(--dark);margin-top:4px}
+
+/* ── waar de configurator ophoudt ────────────────────────────
+   Het eerlijkste blok van de pagina, en het bespaart het meeste werk:
+   wie hier leest dat zijn vorm er niet in past, begint niet aan vijf
+   stappen die stuklopen. Daarom staat het vóór de knop, niet erna. */
+.grens{background:var(--dark);color:#fff}
+.grens .twee{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:26px}
+.kolom{border:1.5px solid rgba(255,255,255,.28);padding:26px 28px 28px;
+  display:flex;flex-direction:column}
+.kolom.wel{background:var(--cyan);border-color:var(--cyan)}
+.kolom .n{font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--cyan)}
+.kolom.wel .n{color:rgba(6,18,28,.6)}
+.kolom h3{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:23px;
+  letter-spacing:.03em;color:#fff;margin:12px 0 14px;line-height:1.05}
+.kolom.wel h3{color:var(--void)}
+.kolom ul{list-style:none;display:flex;flex-direction:column;gap:1px;flex:1}
+.kolom li{padding:9px 0;font-size:14.5px;color:rgba(255,255,255,.78);
+  border-top:1px solid rgba(255,255,255,.14)}
+.kolom li:first-child{border-top:0}
+.kolom.wel li{color:rgba(6,18,28,.8);border-top-color:rgba(6,18,28,.16)}
+.kolom .go{margin-top:20px;font-family:var(--disp);text-transform:uppercase;
+  font-weight:700;font-size:15px;letter-spacing:.05em;color:var(--cyan)}
+.kolom.wel .go{color:var(--void)}
+
+/* ── deelbare configuratie ───────────────────────────────── */
+.deel .in{display:grid;grid-template-columns:1fr 420px;gap:56px;align-items:center}
+.deel p{font-size:16.5px;color:var(--mute);max-width:52ch;margin-top:14px}
+.ref{border:1px solid var(--rule);background:var(--bg);padding:20px 22px}
+.ref .lb{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mute);display:block;margin-bottom:9px}
+.ref .url{font-family:var(--mono);font-size:14px;color:var(--dark);word-break:break-all}
+.ref .url b{color:var(--blue)}
+.ref .uitleg{font-size:13px;color:var(--mute);margin-top:12px;padding-top:12px;
+  border-top:1px solid var(--rule);line-height:1.5}
+
+/* ── de configurator zelf ────────────────────────────────────
+   Een overlay met een eigen adres: openen zet ?start=1 in de URL en
+   sluiten haalt hem er weer uit, zodat terug in de browser doet wat
+   je verwacht en de link deelbaar blijft. */
+.tool{position:fixed;inset:0;z-index:80;display:none}
+.tool[open]{display:block}
+.tool .waas{position:absolute;inset:0;background:rgba(6,18,28,.72)}
+.tool .venster{position:relative;background:#fff;max-width:1180px;margin:38px auto;
+  max-height:calc(100vh - 76px);display:flex;flex-direction:column;
+  box-shadow:0 24px 80px rgba(0,0,0,.5)}
+.tool .tkop{background:var(--dark);color:#fff;padding:16px 24px;display:flex;
+  align-items:center;gap:18px;flex:none}
+.tool .tkop b{font-family:var(--disp);text-transform:uppercase;font-size:19px;letter-spacing:.03em}
+.tool .tkop .ref{background:none;border:0;padding:0;margin-left:auto;
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--cyan)}
+.tool .sluit{background:none;border:1px solid rgba(255,255,255,.3);color:#fff;
+  width:32px;height:32px;flex:none;cursor:pointer;font-size:17px;line-height:1;
+  display:flex;align-items:center;justify-content:center}
+.tool .sluit:hover{border-color:var(--cyan);color:var(--cyan)}
+/* Stappenbalk — de vijf stappen van de echte tool, in het merk gezet.
+   Rond, want dit is de enige plek waar het merk een cirkel kent: een
+   stapnummer is een teller, geen vlak. */
+.stappen{display:flex;align-items:center;gap:0;padding:22px 24px;
+  border-bottom:1px solid var(--rule);flex:none;overflow-x:auto}
+.stap{display:flex;align-items:center;gap:11px;flex:none}
+.stap .bol{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--rule);
+  display:flex;align-items:center;justify-content:center;font-family:var(--mono);
+  font-size:12px;color:var(--mute);background:#fff}
+.stap.nu .bol{background:var(--dark);border-color:var(--dark);color:#fff}
+.stap .lb{font-family:var(--disp);text-transform:uppercase;font-size:15px;
+  letter-spacing:.04em;color:var(--mute)}
+.stap.nu .lb{color:var(--dark)}
+.stap .lijn{width:56px;height:1px;background:var(--rule);margin:0 14px;flex:none}
+.tbody{padding:30px 24px 34px;overflow-y:auto}
+.tbody > .ey{display:block;margin-bottom:6px}
+.tbody h4{font-size:26px;margin-bottom:22px}
+.tvoet{border-top:1px solid var(--rule);background:var(--bg);padding:16px 24px;
+  display:flex;align-items:center;gap:16px;flex:none}
+.tvoet .hint{font-family:var(--mono);font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--mute)}
+.tvoet .btn{margin-left:auto}
+
+@media (max-width:1080px){
+  .modellen{grid-template-columns:repeat(3,1fr)}
+  .kop .grid,.deel .in{grid-template-columns:1fr;gap:36px}
+  .stappenlijst{border-left:0;border-top:1.5px solid rgba(255,255,255,.2);padding-left:0;padding-top:22px}
+}
+@media (max-width:760px){
+  .modellen{grid-template-columns:1fr 1fr}
+  .grens .twee{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="main">
+  <div class="wrap">
+    <div class="logo"><em>case</em>Builder.com</div>
+    <div class="search">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="5"></circle><path d="M11 11l4 4"></path></svg>
+      <input placeholder="Zoek op artikelnummer of apparaat">
+    </div>
+    <div class="hdr-r">
+      <a class="stil" href="#">Inloggen</a>
+      <a href="#">Winkelwagen<span class="telbadge">3</span></a>
+      <a class="btn btn-out btn-sm" href="#">Case aanvragen</a>
+    </div>
+  </div>
+</header>
+
+<nav class="primary">
+  <div class="wrap">
+    <a href="#">Case aanvragen</a>
+    <a href="case-voor-v1.html">Wat ga je vervoeren?</a>
+    <a href="configurator-v1.html" class="on">Zelf configureren</a>
+    <a href="flightcases-v1.html">Flightcases</a>
+    <a href="branches.html" class="sec">Branches</a>
+    <a href="#" class="sec">Service</a>
+    <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#">NL &#9662;</a></div>
+  </div>
+</nav>
+
+<div class="crumbs">
+  <div class="wrap">
+    <a href="#">Home</a><span class="sep">/</span>
+    <span>Zelf configureren</span>
+  </div>
+</div>
+
+<!-- ══ KOP ═══════════════════════════════════════════════════
+     De tool gaat hier bewust níét vanzelf open. Wie via de
+     navigatie komt oriënteert zich nog; die krijgt eerst te zien
+     wat de vijf stappen zijn en waar ze ophouden. ═══════════ -->
+<section class="kop ruit ruit-dark ruit-aanzet beslag" style="padding-bottom:62px">
+  <span class="hk tl"></span><span class="hk tr"></span>
+  <div class="wrap grid">
+    <div>
+      <span class="ey">Zelf configureren</span>
+      <h1>Teken je case <span class="acc">zelf</span></h1>
+      <p class="lead">Vijf modellen, vijf stappen, en aan het eind een prijs — geen offertetraject. Je hoeft niets te weten van multiplex of hoekprofiel: geef de binnenmaat op, de rest rekenen wij erbij.</p>
+      <div class="acties">
+        <button class="btn btn-pri" data-open-tool>Start de configurator</button>
+        <a class="btn btn-ghost" href="#grens">Past mijn case erin?</a>
+      </div>
+    </div>
+    <div class="stappenlijst">
+      <div><span class="n">// 01</span><div><b>Model</b><span>Koffer, hoedcase, trunccase of rackcase</span></div></div>
+      <div><span class="n">// 02</span><div><b>Afmetingen</b><span>Binnenmaat in millimeters, geen buitenmaat</span></div></div>
+      <div><span class="n">// 03</span><div><b>Uitvoering</b><span>Plaatmateriaal, kleur, schuim</span></div></div>
+      <div><span class="n">// 04</span><div><b>Hardware</b><span>Sluitingen, hoeken, wielen, handgrepen</span></div></div>
+      <div><span class="n">// 05</span><div><b>Overzicht</b><span>Tekening, stuklijst en prijs</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="belofte tight">
+  <div class="wrap">
+    <div class="row">
+      <div class="it"><b>Direct een prijs</b><span>Geen offerte, geen wachttijd</span></div>
+      <div class="it"><b>10 werkdagen</b><span>Ook bij maatwerk</span></div>
+      <div class="it"><b>Gratis nagekeken</b><span>Een casebouwer kijkt mee vóór productie</span></div>
+      <div class="it"><b>Deelbare link</b><span>Stuur je ontwerp door naar inkoop</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DE VIJF MODELLEN ══════════════════════════════════════
+     Elk model opent de tool op stap 1 met dat model al gekozen.
+     Dat scheelt een stap voor wie al weet wat hij wil. ══════ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="ey ey-dark">Stap 1</span>
+      <h2>Begin bij het model</h2>
+      <p class="lead">Vijf basisvormen. Kies er een om de configurator te openen met dat model al ingevuld.</p>
+    </div>
+    <div class="modellen">
+      <button class="model" data-open-tool data-model="Koffer">
+        <div class="im"><img src="assets/flightcase-koffer.jpg" alt="Koffer"></div>
+        <div class="bd"><h3>Koffer</h3><p>Draagbare transportkoffer</p><span class="van">vanaf € 189</span></div>
+      </button>
+      <button class="model" data-open-tool data-model="Hoedcase">
+        <div class="im"><img src="assets/flightcase-hoedcase.jpg" alt="Hoedcase"></div>
+        <div class="bd"><h3>Hoedcase</h3><p>Case met afneembaar deksel</p><span class="van">vanaf € 215</span></div>
+      </button>
+      <button class="model" data-open-tool data-model="Trunccase">
+        <div class="im"><img src="assets/flightcase-trunccase.jpg" alt="Trunccase"></div>
+        <div class="bd"><h3>Trunccase</h3><p>Universele kist met bovendeksel</p><span class="van">vanaf € 245</span></div>
+      </button>
+      <button class="model" data-open-tool data-model="Rackcase enkel deksel">
+        <div class="im"><img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt="Rackcase enkel deksel"></div>
+        <div class="bd"><h3>Rackcase enkel</h3><p>Afneembaar voordeksel, 19-inch</p><span class="van">vanaf € 229</span></div>
+      </button>
+      <button class="model" data-open-tool data-model="Rackcase dubbel deksel">
+        <div class="im"><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt="Rackcase dubbel deksel"></div>
+        <div class="bd"><h3>Rackcase dubbel</h3><p>Voor- én achterdeksel, 19-inch</p><span class="van">vanaf € 259</span></div>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WAAR HIJ OPHOUDT ══════════════════════════════════════
+     Vraag 8 en 9 uit de vragenlijst, zichtbaar gemaakt. Wie hier
+     leest dat zijn vorm er niet in past, begint niet aan vijf
+     stappen die op stap vier stuklopen. ════════════════════ -->
+<section class="grens ruit ruit-dark ruit-veld" id="grens">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="ey">Eerlijk vooraf</span>
+      <h2 style="color:#fff">Waar de configurator ophoudt</h2>
+      <p class="lead" style="color:rgba(255,255,255,.78)">De tool kan veel, maar niet alles. Wat er niet in past doen we wél — alleen via een tekening in plaats van via het scherm.</p>
+    </div>
+    <div class="twee">
+      <div class="kolom wel">
+        <span class="n">// Dit kan in de configurator</span>
+        <h3>Rechthoekig, op maat</h3>
+        <ul>
+          <li>Elke binnenmaat binnen de vijf basisvormen</li>
+          <li>Plaatdikte, kleur en schuimdichtheid</li>
+          <li>Sluitingen, hoeken, wielen en handgrepen</li>
+          <li>19-inch indeling in hoogte-eenheden</li>
+          <li>Series van hetzelfde ontwerp</li>
+        </ul>
+        <span class="go">Start de configurator &rarr;</span>
+      </div>
+      <div class="kolom">
+        <span class="n">// Hiervoor tekenen we</span>
+        <h3>Alles wat niet recht is</h3>
+        <ul>
+          <li>Afwijkende vormen &mdash; schuin, rond, in delen</li>
+          <li>Uitgefreesd schuim op een specifiek instrument</li>
+          <li>Ingebouwde racks, voeding of bekabeling</li>
+          <li>Bedrukking en logo's <span class="ey" style="color:var(--open);font-size:9px">nog te bevestigen</span></li>
+          <li>Certificering of een keuringseis</li>
+        </ul>
+        <span class="go">Stuur wat je hebt &rarr;</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DEELBARE CONFIGURATIE ═════════════════════════════════ -->
+<section class="deel">
+  <div class="wrap in">
+    <div>
+      <span class="ey ey-dark">Nieuw</span>
+      <h2>Je ontwerp krijgt een adres</h2>
+      <p>Op de huidige site leeft een configuratie alleen in je browservenster: sluit je hem, dan is hij weg. Straks krijgt elk ontwerp een eigen link — door te sturen naar je inkoop, terug te vinden in je account, en te openen door een casebouwer die met je meekijkt.</p>
+    </div>
+    <div class="ref">
+      <span class="lb">Zo ziet zo'n link eruit</span>
+      <span class="url">casebuilder.com/configurator/<b>7K2M-4813</b></span>
+      <p class="uitleg">De referentie komt uit cb_core_v2, dezelfde die de werkvloer gebruikt. Wie de link opent ziet het ontwerp precies zoals jij het achterliet — inclusief prijs op dat moment.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLOT ══════════════════════════════════════════════════ -->
+<section class="navy tight ruit ruit-dark ruit-aanzet">
+  <div class="wrap" style="display:flex;align-items:center;gap:32px;flex-wrap:wrap">
+    <div style="flex:1;min-width:280px">
+      <h2 style="color:#fff;font-size:clamp(26px,3vw,38px)">Weet je je maten al?</h2>
+      <p style="color:rgba(255,255,255,.8);margin-top:12px;max-width:46ch">Dan ben je in vijf stappen klaar. Zo niet — stuur een datasheet, een schets of een foto, dan tekenen wij het uit.</p>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <button class="btn btn-pri" data-open-tool>Start de configurator</button>
+      <a class="btn btn-ghost" href="#">Case aanvragen</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="logo"><em>case</em>Builder.com</div>
+        <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734">+31 (0)575 575734</a></p>
+      </div>
+      <div><h5>Offerte aanvragen</h5><a href="#">Case aanvragen</a><a href="#">Maten laten controleren</a><a href="#">Series en staffels</a><a href="#">Zakelijk bestellen</a></div>
+      <div><h5>Zelf configureren</h5><a href="#">Naar de configurator</a><a href="#">Zo werkt het</a><a href="#">Herhaalorder</a><a href="#">Mijn configuraties</a></div>
+      <div><h5>Flightcases</h5><a href="#">Alle flightcases</a><a href="#">Koffer</a><a href="#">Hoedcase</a><a href="#">Trunccase</a><a href="#">Rackcase enkel</a><a href="#">Rackcase dubbel</a></div>
+      <div><h5>Service</h5><a href="#">Levertijden</a><a href="#">Verzending</a><a href="#">Onderdelen</a><a href="#">Zaagservice</a><a href="#">Over Proflite</a><a href="#">Contact</a></div>
+    </div>
+    <div class="bot"><span>KVK 09123456</span><span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span></div>
+  </div>
+</footer>
+
+<!-- ══ DE TOOL ═══════════════════════════════════════════════
+     Ingesloten, met een eigen adres. Openen zet ?start=1 in de URL,
+     sluiten haalt hem eruit — zodat de terugknop doet wat je
+     verwacht en de link deelbaar is. ═══════════════════════ -->
+<div class="tool" id="tool" role="dialog" aria-modal="true" aria-label="Configurator">
+  <div class="waas" data-close-tool></div>
+  <div class="venster">
+    <div class="tkop">
+      <b>Configurator</b>
+      <span class="ref">// concept 7K2M-4813 &middot; automatisch bewaard</span>
+      <button class="sluit" data-close-tool aria-label="Configurator sluiten">&times;</button>
+    </div>
+    <div class="stappen">
+      <div class="stap nu"><span class="bol">1</span><span class="lb">Model</span></div><span class="lijn"></span>
+      <div class="stap"><span class="bol">2</span><span class="lb">Afmetingen</span></div><span class="lijn"></span>
+      <div class="stap"><span class="bol">3</span><span class="lb">Uitvoering</span></div><span class="lijn"></span>
+      <div class="stap"><span class="bol">4</span><span class="lb">Hardware</span></div><span class="lijn"></span>
+      <div class="stap"><span class="bol">5</span><span class="lb">Overzicht</span></div>
+    </div>
+    <div class="tbody">
+      <span class="ey ey-dark">// Stap 1 van 5</span>
+      <h4 id="toolkop">Welk model wordt het?</h4>
+      <div class="modellen">
+        <button class="model"><div class="im"><img src="assets/flightcase-koffer.jpg" alt="Koffer"></div><div class="bd"><h3>Koffer</h3><p>Draagbare transportkoffer</p></div></button>
+        <button class="model"><div class="im"><img src="assets/flightcase-hoedcase.jpg" alt="Hoedcase"></div><div class="bd"><h3>Hoedcase</h3><p>Case met afneembaar deksel</p></div></button>
+        <button class="model"><div class="im"><img src="assets/flightcase-trunccase.jpg" alt="Trunccase"></div><div class="bd"><h3>Trunccase</h3><p>Universele kist met bovendeksel</p></div></button>
+        <button class="model"><div class="im"><img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt="Rackcase enkel deksel"></div><div class="bd"><h3>Rackcase enkel</h3><p>Afneembaar voordeksel</p></div></button>
+        <button class="model"><div class="im"><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt="Rackcase dubbel deksel"></div><div class="bd"><h3>Rackcase dubbel</h3><p>Voor- én achterdeksel</p></div></button>
+      </div>
+    </div>
+    <div class="tvoet">
+      <span class="hint">Esc sluit &middot; je ontwerp blijft bewaard</span>
+      <button class="btn btn-dark btn-sm" disabled style="opacity:.45">Volgende: afmetingen &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* De tool is een toestand van de pagina, geen aparte pagina — maar hij
+   hoort wél in de URL. ?start=1 opent hem; sluiten haalt hem eruit.
+   Zo werkt de terugknop, is de link deelbaar, en kan de hero op de
+   homepage rechtstreeks naar de open tool linken. */
+(function () {
+  var tool = document.getElementById('tool');
+  var kop = document.getElementById('toolkop');
+  var laatsteFocus = null;
+
+  function open(model) {
+    laatsteFocus = document.activeElement;
+    tool.setAttribute('open', '');
+    document.body.style.overflow = 'hidden';
+    kop.textContent = model ? model + ' — klopt dat?' : 'Welk model wordt het?';
+    var u = new URL(location);
+    u.searchParams.set('start', '1');
+    if (model) u.searchParams.set('model', model); else u.searchParams.delete('model');
+    history.pushState({ tool: true }, '', u);
+    tool.querySelector('.sluit').focus();
+  }
+
+  function sluit() {
+    tool.removeAttribute('open');
+    document.body.style.overflow = '';
+    var u = new URL(location);
+    u.searchParams.delete('start');
+    u.searchParams.delete('model');
+    history.replaceState({}, '', u.pathname + (u.search || '') + u.hash);
+    if (laatsteFocus) laatsteFocus.focus();
+  }
+
+  document.querySelectorAll('[data-open-tool]').forEach(function (el) {
+    el.addEventListener('click', function () { open(el.dataset.model || null); });
+  });
+  document.querySelectorAll('[data-close-tool]').forEach(function (el) {
+    el.addEventListener('click', sluit);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && tool.hasAttribute('open')) sluit();
+  });
+
+  /* De hero-ingang: /configurator?start=1 opent meteen. */
+  var q = new URLSearchParams(location.search);
+  if (q.get('start')) {
+    tool.setAttribute('open', '');
+    document.body.style.overflow = 'hidden';
+    if (q.get('model')) kop.textContent = q.get('model') + ' — klopt dat?';
+  }
+})();
+</script>
+<script src="assets/hoogtemelder.js"></script>
+</body>
+</html>

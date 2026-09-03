@@ -11,17 +11,73 @@
 <style>
 /* ── vergelijkpagina — alleen voor deze mockup, niet voor het merk ── */
 body{background:#EDF0F4}
-.vgl{max-width:1440px;margin:0 auto;padding:34px 24px 90px}
+.vgl{max-width:1440px;margin:0 auto;padding:0 24px 90px}
+.tabs{margin-top:0}
+/* Tabs — header en footer zijn twee stukken van dezelfde vraag, dus
+   staan ze naast elkaar in plaats van in twee losse bestanden die je
+   uit elkaar moet houden. Mono, want het is een schakelaar en geen
+   navigatie; de actieve krijgt de cyaan streep die de site ook gebruikt. */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--rule);margin:0 0 26px}
+.tabs a{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mute);padding:16px 20px 13px;border-bottom:3px solid transparent;margin-bottom:-1px}
+.tabs a:hover{color:var(--dark)}
+.tabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+/* Header eerst, footer laatst — de volgorde waarin je ze op een pagina
+   tegenkomt. Gewoon als laatste item in de rij; weggeduwd naar de rand
+   las het als een aparte actie in plaats van als onderdeel van dezelfde
+   reeks. */
 .kop{margin:44px 0 14px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
 .kop .nr{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--blue)}
 .kop h3{font-size:24px}
 .kop .hgt{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--mute);margin-left:auto}
-/* de gekozen variant moet je niet hoeven zoeken */
-.kop .gekozen{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
-  background:var(--cyan);color:var(--void);padding:5px 10px;font-weight:600}
+/* Kiezen is een besluit, geen accent. De geselecteerde variant zegt het
+   met een label, een kader en een balk erboven; de andere krijgen geen
+   tegenlabel — niets zeggen is hier waar, "afgevallen" was dat niet. */
+.kop .gekozen{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  background:var(--cyan);color:var(--void);padding:6px 12px;font-weight:600}
+.kop.gekozen h3{color:var(--dark)}
 .demo.gekozen{border:2px solid var(--cyan);box-shadow:0 0 0 6px rgba(102,196,232,.18),0 1px 3px rgba(0,40,70,.07)}
-.demo.afgevallen{opacity:.55}
-.demo.afgevallen:hover{opacity:1;transition:opacity .2s}
+.demo.gekozen .balk{background:var(--cyan);color:var(--void);font-family:var(--mono);font-size:10px;
+  letter-spacing:.18em;text-transform:uppercase;font-weight:600;padding:7px 14px}
+/* De andere varianten worden niet gedempt. Ze zijn even echt en even goed
+   getekend als A; dat A geselecteerd is, zegt het cyaan kader en het label
+   in de kop al. Een header half doorzichtig tonen maakt hem moeilijker te
+   beoordelen, en beoordelen is precies waarvoor ze hier staan. */
+
+/* Specs: wat je krijgt en wat het kost, in dezelfde rijen per variant, zodat
+   je ze van boven naar beneden naast elkaar kunt leggen. Gemeten in de
+   browser op 1440 × 760 — niet geschat. */
+/* De cijfers staan standaard dicht. Op deze pagina gaat het eerst om wat je
+   ziet; de onderbouwing haal je erbij als je erover doorpraat. Native
+   <details>, dus geen script en toetsenbord- en schermlezerklaar. */
+.specdet{margin:0 0 18px;border:1px solid var(--rule);background:#fff}
+.specdet > summary{list-style:none;cursor:pointer;padding:11px 16px;display:flex;
+  align-items:center;gap:12px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mute);user-select:none}
+.specdet > summary::-webkit-details-marker{display:none}
+.specdet > summary:hover{color:var(--dark);background:var(--bg)}
+.specdet > summary .aantal{margin-left:auto;color:var(--rule)}
+.specdet > summary::before{content:"+";font-family:var(--mono);font-size:13px;line-height:1;
+  width:17px;height:17px;flex:none;display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--rule);color:var(--dark)}
+.specdet[open] > summary::before{content:"\2212"}
+.specdet[open] > summary{border-bottom:1px solid var(--rule);color:var(--dark)}
+.specdet .uitleg{padding:15px 16px 0;margin:0;max-width:80ch}
+.specdet .uitleg + .spec{padding-top:14px}
+.specdet .spec{padding:14px 16px 16px;margin:0}
+.spec{display:grid;grid-template-columns:max-content 1fr;gap:1px 20px;margin:0 0 18px;
+  max-width:82ch;font-size:13.5px;line-height:1.6}
+.spec dt{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);padding-top:5px;white-space:nowrap}
+.spec dd{margin:0;color:var(--ink)}
+.spec dd b{font-weight:600}
+.spec dd .let{color:var(--blue);font-weight:600}
+.spec dd .eis{color:var(--mute)}
+
+.inleiding{max-width:82ch;margin:0 0 10px}
+.inleiding h2{font-size:26px;margin-bottom:8px}
+.inleiding p{font-size:14px;color:var(--mute);line-height:1.65}
+.inleiding p b{color:var(--ink)}
 .uitleg{font-size:14px;color:var(--mute);max-width:78ch;margin-bottom:16px;line-height:1.65}
 .uitleg b{color:var(--ink)}
 .demo{background:#fff;border:1px solid var(--rule);box-shadow:0 1px 3px rgba(0,40,70,.07);overflow:hidden}
@@ -80,14 +136,97 @@ body{background:#EDF0F4}
   font-size:13px;color:var(--mute)}
 .vc .h-util a:hover{color:var(--dark)}
 .vc .h-bar .wrap{height:76px}
+
+/* ── focusmodus ──────────────────────────────────────────────
+   Klik een variant om de rest te dimmen; klik ernaast of Esc om terug
+   te gaan. Bewust géén standaardgedrag: deze pagina bestaat om te
+   vergelijken, en dimmen haalt weg waartegen je vergelijkt. Het is een
+   modus voor als je één variant echt wilt beoordelen. */
+.dim{position:fixed;inset:0;background:rgba(11,26,38,.62);z-index:50;
+  opacity:0;pointer-events:none;transition:opacity .14s}
+body.focusmodus .dim{opacity:1;pointer-events:auto}
+/* Alleen het ontwerp komt naar voren, niet zijn kop: die is een label
+   en hoort bij de pagina, niet bij wat je beoordeelt. Hem meelichten
+   maakte er een tweede vlak van dat om aandacht vroeg. */
+.demo.aan{position:relative;z-index:60}
+.demo{cursor:zoom-in}
+.demo.aan{cursor:zoom-out}
+body.focusmodus .demo:not(.aan){cursor:default}
+/* Links binnen een demo houden hun eigen aanwijzer: daar zitten de
+   hover-paden op, en die moeten bereikbaar blijven. */
+.demo a{cursor:pointer}
+@media (prefers-reduced-motion: reduce){ .dim{transition:none} }
 </style>
 </head>
 <body>
 <div class="vgl">
 
-  <div class="kop"><span class="nr">// A</span><h3>Twee balken</h3><span class="gekozen">gekozen &amp; doorgevoerd</span><span class="hgt">120 px chrome · −28%</span></div>
-  <p class="uitleg">De utility-balk verdwijnt; taal en inloggen schuiven naar rechts in de hoofdbalk, de merkregel naar de footer. <b>Offerte wordt een knop</b> — het is de belangrijkste actie op de site en verdiende geen dubbeldekkerlabel maar vorm. Winkelwagen krijgt een telbadge in plaats van een tweede regel. De navigatie houdt één gewicht en één actief-signaal (cyaan streep). Alleen het logo blijft 900-condensed; alles rechts is DM Sans en wijkt terug.</p>
+  <div class="tabs">
+    <a href="header-varianten.html" class="on">Header</a>
+    <a href="homepage-varianten.html">Homepage</a>
+    <a href="case-voor-varianten.html">/case-voor</a>
+    <a href="configurator-varianten.html">/configurator</a>
+    <a href="flightcases-varianten.html">/flightcases</a>
+    <a href="footer-varianten.html">Footer</a>
+  </div>
+
+  <div class="inleiding">
+    <h2>Drie headers, op ware grootte</h2>
+    <p><b>Twee balken is gekozen en zit in alle homepage-mockups.</b> Hieronder staan ze op volgorde van hoeveel balken ze innemen: &eacute;&eacute;n, twee, drie. De gekozen variant staat dus in het midden, met het cyaan kader eromheen. Alle maten zijn gemeten in de browser op een venster van 1440 &times; 760 &mdash; de maat van een 13-inch scherm &mdash; en tellen alles mee tot aan de eerste pagina-inhoud.</p>
+  </div>
+
+  <div class="kop"><span class="nr">// 1 BALK</span><h3>Eén balk — maximaal rustig</h3><span class="hgt">73 px chrome · −57%</span></div>
+  <details class="specdet">
+    <summary>Details<span class="aantal">7 punten</span></summary>
+    <p class="uitleg">Navigatie in de hoofdbalk, zoeken wordt een icoon dat een veld uitklapt. Erg rustig, maar er is een prijs: <b>bij vijf of meer hoofditems loopt dit vast</b>, en zoeken achter een klik verstoppen is riskant voor een site waar mensen op artikelnummer zoeken. Alleen kiezen als het menu écht op vier items blijft.</p>
+    <dl class="spec">
+    <dt>Hoogte</dt><dd><b>73 px</b> in &eacute;&eacute;n balk &mdash; <span class="let">687 px</span> voor de pagina, 49 px meer dan A</dd>
+    <dt>Zoeken</dt><dd>Achter een icoon, het veld klapt uit. <span class="eis">Eis als dit doorgaat: het veld krijgt focus bij openen, Esc sluit het, en de ingetypte term blijft staan</span></dd>
+    <dt>Navigatie</dt><dd>Vier items inline naast logo en acties. <b>Bij een vijfde loopt de balk vast</b> tegen de rechterkant</dd>
+    <dt>Taal</dt><dd><b>Ontbreekt.</b> Met 13 landen en 6 talen moet die er alsnog in &mdash; en dan is de balk niet meer leeg</dd>
+    <dt>Telefoon</dt><dd>Niet zichtbaar. Voor een site waar het meeste werk telefonisch binnenkomt is dat een verlies</dd>
+    <dt>Offerte</dt><dd>Knop in de balk &mdash; bij twee balken juist vervallen; hier zou dat opnieuw moeten</dd>
+    <dt>Kosten</dt><dd>Wie op artikelnummer zoekt, betaalt een klik per zoekopdracht</dd>
+  </dl>
+  </details>
+  <div class="demo vb">
+    <div class="h-bar">
+      <div class="wrap">
+        <div class="h-logo"><em>case</em>Builder.com</div>
+        <div class="h-nav-inline">
+          <a href="#">Case aanvragen</a><a href="case-voor-v1.html">Wat ga je vervoeren?</a>
+          <a href="configurator-v1.html">Zelf configureren</a><a href="flightcases-v1.html">Flightcases</a>
+          <a href="branches.html" class="sec">Branches</a><a href="#" class="sec">Service</a>
+        </div>
+        <div class="h-acties">
+          <a href="#" class="h-icoon stil"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg> Zoeken</a>
+          <a href="#" class="stil">Inloggen</a>
+          <a href="#" class="h-offerte">Offerte</a>
+          <a href="#">Winkelwagen <span class="h-badge">3</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="vulling">PAGINA-INHOUD</div>
+  </div>
+
+  <div class="kop gekozen"><span class="nr">// 2 BALKEN</span><h3>Twee balken</h3><span class="gekozen">&#10003; geselecteerd voor nu</span><span class="hgt">122 px chrome · −28%</span></div>
+  <details class="specdet">
+    <summary>Details<span class="aantal">9 punten</span></summary>
+    <p class="uitleg">De utility-balk verdwijnt; taal en inloggen schuiven naar rechts in de hoofdbalk, de merkregel naar de footer. <b>De offerteknop is er later uit gehaald</b> — een header vol acties maakt geen van alle belangrijk, en de belofte staat nu in de pagina zelf, bij &quot;laten controleren&quot;. Winkelwagen krijgt een telbadge in plaats van een tweede regel. De navigatie houdt één gewicht en één actief-signaal (cyaan streep). Alleen het logo blijft 900-condensed; alles rechts is DM Sans en wijkt terug.</p>
+    <dl class="spec">
+    <dt>Hoogte</dt><dd><b>122 px</b> in twee balken &mdash; er blijft <span class="let">638 px</span> over voor de pagina</dd>
+    <dt>Zoeken</dt><dd>Veld altijd zichtbaar, tot 460 px breed. Wie een artikelnummer heeft, typt het meteen</dd>
+    <dt>Navigatie</dt><dd>Vier items in een eigen balk; er is ruimte tot ongeveer zes</dd>
+    <dt>Actief item</dt><dd>Cyaan streep van 3 px onder het label &mdash; &eacute;&eacute;n signaal, geen tweede kleur</dd>
+    <dt>Rechtsboven</dt><dd>Inloggen en winkelwagen met telbadge, in DM Sans zodat ze terugwijken</dd>
+    <dt>Taal</dt><dd>NL &#9662; rechts in de navigatiebalk &mdash; zichtbaar zonder klik</dd>
+    <dt>Telefoon</dt><dd>&quot;Direct advies&quot; met nummer, rechts in de navigatiebalk</dd>
+    <dt>Offerte</dt><dd>Geen knop; die staat in de pagina</dd>
+    <dt>Toetsbediening</dt><dd>Alles staat open, niets achter een uitklap &mdash; tabvolgorde is de leesvolgorde</dd>
+  </dl>
+  </details>
   <div class="demo va gekozen">
+    <div class="balk">Geselecteerd voor nu &mdash; doorgevoerd in de homepage-mockups</div>
     <div class="h-bar">
       <div class="wrap">
         <div class="h-logo"><em>case</em>Builder.com</div>
@@ -103,38 +242,29 @@ body{background:#EDF0F4}
     </div>
     <nav class="h-nav">
       <div class="wrap">
-        <a href="#">Flightcases</a><a href="#">Wat ga je vervoeren?</a>
-        <a href="#" class="on">Onderdelen</a><a href="#">Service</a>
+        <a href="#">Case aanvragen</a><a href="case-voor-v1.html">Wat ga je vervoeren?</a>
+        <a href="configurator-v1.html">Zelf configureren</a><a href="flightcases-v1.html">Flightcases</a>
+        <a href="branches.html" class="sec">Branches</a><a href="#" class="sec">Service</a>
         <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#" class="stil">NL ▾</a></div>
       </div>
     </nav>
     <div class="vulling">PAGINA-INHOUD</div>
   </div>
 
-  <div class="kop"><span class="nr">// B</span><h3>Eén balk — maximaal rustig</h3><span class="hgt">72 px chrome · −57%</span></div>
-  <p class="uitleg">Navigatie in de hoofdbalk, zoeken wordt een icoon dat een veld uitklapt. Erg rustig, maar er is een prijs: <b>bij vijf of meer hoofditems loopt dit vast</b>, en zoeken achter een klik verstoppen is riskant voor een site waar mensen op artikelnummer zoeken. Alleen kiezen als het menu écht op vier items blijft.</p>
-  <div class="demo vb afgevallen">
-    <div class="h-bar">
-      <div class="wrap">
-        <div class="h-logo"><em>case</em>Builder.com</div>
-        <div class="h-nav-inline">
-          <a href="#">Flightcases</a><a href="#">Wat ga je vervoeren?</a>
-          <a href="#" class="on">Onderdelen</a><a href="#">Service</a>
-        </div>
-        <div class="h-acties">
-          <a href="#" class="h-icoon stil"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg> Zoeken</a>
-          <a href="#" class="stil">Inloggen</a>
-          <a href="#" class="h-offerte">Offerte</a>
-          <a href="#">Winkelwagen <span class="h-badge">3</span></a>
-        </div>
-      </div>
-    </div>
-    <div class="vulling">PAGINA-INHOUD</div>
-  </div>
-
-  <div class="kop"><span class="nr">// C</span><h3>Drie balken, rustige typografie</h3><span class="hgt">154 px chrome · −7%</span></div>
-  <p class="uitleg">Structuur blijft, alleen de typografie kalmeert. De belangrijkste ingreep: <b>de bovenbalk wordt lichtgrijs in plaats van marineblauw</b>, zodat het gewicht klopt met het belang. Mono verdwijnt uit de header (die blijft voor eyebrows en specs, waar hij thuishoort). Minste impact op de rest van het ontwerp, maar je houdt 154px chrome — op een laptop is dat een vijfde van het scherm voordat er iets te zien is.</p>
-  <div class="demo vc afgevallen">
+  <div class="kop"><span class="nr">// 3 BALKEN</span><h3>Drie balken, rustige typografie</h3><span class="hgt">157 px chrome · −7%</span></div>
+  <details class="specdet">
+    <summary>Details<span class="aantal">6 punten</span></summary>
+    <p class="uitleg">Structuur blijft, alleen de typografie kalmeert. De belangrijkste ingreep: <b>de bovenbalk wordt lichtgrijs in plaats van marineblauw</b>, zodat het gewicht klopt met het belang. Mono verdwijnt uit de header (die blijft voor eyebrows en specs, waar hij thuishoort). Minste impact op de rest van het ontwerp, maar je houdt 157 px chrome — op een laptop is dat een vijfde van het scherm voordat er iets te zien is.</p>
+    <dl class="spec">
+    <dt>Hoogte</dt><dd><b>157 px</b> in drie balken &mdash; <span class="let">603 px</span> voor de pagina, 35 px minder dan A</dd>
+    <dt>Zoeken</dt><dd>Veld altijd zichtbaar, net als in A</dd>
+    <dt>Navigatie</dt><dd>Vier items in een eigen balk, met ruimte over</dd>
+    <dt>Taal en telefoon</dt><dd>Allebei in de utility-balk bovenaan &mdash; zichtbaar, maar op de plek waar mensen het minst kijken</dd>
+    <dt>Offerte</dt><dd>Knop in de hoofdbalk &mdash; bij twee balken vervallen</dd>
+    <dt>Kosten</dt><dd><b>21% van een venster van 760 px</b> is op voordat er iets van de pagina te zien is. Dat is de reden dat deze het niet werd, niet de typografie</dd>
+  </dl>
+  </details>
+  <div class="demo vc">
     <div class="h-util">
       <div class="wrap">
         <a href="#">Zakelijk account</a><a href="#">Inloggen</a><a href="#">NL ▾</a>
@@ -155,8 +285,9 @@ body{background:#EDF0F4}
     </div>
     <nav class="h-nav">
       <div class="wrap">
-        <a href="#">Flightcases</a><a href="#">Wat ga je vervoeren?</a>
-        <a href="#" class="on">Onderdelen</a><a href="#">Service</a>
+        <a href="#">Case aanvragen</a><a href="case-voor-v1.html">Wat ga je vervoeren?</a>
+        <a href="configurator-v1.html">Zelf configureren</a><a href="flightcases-v1.html">Flightcases</a>
+        <a href="branches.html" class="sec">Branches</a><a href="#" class="sec">Service</a>
         <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span></div>
       </div>
     </nav>
@@ -164,5 +295,7 @@ body{background:#EDF0F4}
   </div>
 
 </div>
+<script src="assets/focus.js"></script>
+<script src="assets/kaderhoogte.js"></script>
 </body>
 </html>

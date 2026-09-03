@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — homepage beoordelen (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   Homepage beoordelen
+
+   Acht ontwerpen, en anders dan bij de andere tabs is hier nog niets
+   gekozen. Daarom staan ze allemaal even groot in een strook op 30%
+   in plaats van één groot: je vergelijkt richtingen, je leest geen
+   pagina. Wie er één echt wil bekijken klikt hem volledig open.
+   ══════════════════════════════════════════════════════════════ */
+body{background:#EDF0F4}
+.vgl{max-width:1440px;margin:0 auto;padding:0 24px 90px}
+.inleiding{max-width:82ch;margin:0 0 10px}
+.inleiding h2{font-size:26px;margin-bottom:8px}
+.inleiding p{font-size:14px;color:var(--mute);line-height:1.65}
+.inleiding p b{color:var(--ink)}
+
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--rule);margin:0 0 26px}
+.tabs a{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mute);padding:16px 20px 13px;border-bottom:3px solid transparent;margin-bottom:-1px}
+.tabs a:hover{color:var(--dark)}
+.tabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+/* Header eerst, footer laatst — de volgorde waarin je ze op een pagina
+   tegenkomt. Gewoon als laatste item in de rij; weggeduwd naar de rand
+   las het als een aparte actie in plaats van als onderdeel van dezelfde
+   reeks. */
+
+.kop{margin:44px 0 14px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.kop .nr{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--blue)}
+.kop h3{font-size:24px}
+.kop .gekozen{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  background:var(--cyan);color:var(--void);padding:6px 12px;font-weight:600}
+.kop .rechts{margin-left:auto;display:flex;align-items:center;gap:14px}
+.kop .hgt{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--mute)}
+/* Naar de echte pagina — een mockup beoordeel je uiteindelijk op maat. */
+.volledig{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid var(--rule);background:#fff;color:var(--dark);padding:7px 13px;
+  display:inline-flex;align-items:center;gap:8px}
+.volledig:hover{border-color:var(--cyan);background:var(--lightblue)}
+
+.specdet{margin:0 0 18px;border:1px solid var(--rule);background:#fff}
+.specdet > summary{list-style:none;cursor:pointer;padding:11px 16px;display:flex;
+  align-items:center;gap:12px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mute);user-select:none}
+.specdet > summary::-webkit-details-marker{display:none}
+.specdet > summary:hover{color:var(--dark);background:var(--bg)}
+.specdet > summary .aantal{margin-left:auto;color:var(--rule)}
+.specdet > summary::before{content:"+";font-family:var(--mono);font-size:13px;line-height:1;
+  width:17px;height:17px;flex:none;display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--rule);color:var(--dark)}
+.specdet[open] > summary::before{content:"\2212"}
+.specdet[open] > summary{border-bottom:1px solid var(--rule);color:var(--dark)}
+.specdet .uitleg{padding:15px 16px 16px;margin:0;max-width:80ch}
+.uitleg p{font-size:14px;color:var(--mute);line-height:1.65}
+.uitleg p+p{margin-top:8px}
+.uitleg b{color:var(--ink)}
+
+/* ── zeven versies naast elkaar ──────────────────────────────
+   Op 30% past een venster van 1440 in 432 px; met vier op een rij
+   blijft de vouwlijn per versie vergelijkbaar. Klein, maar het gaat om
+   de compositie boven de vouw — niet om de tekst. */
+.beoordeel{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-items:start}
+.beoordeel .demo .balk{padding:6px 11px;font-size:9px;letter-spacing:.12em;
+  display:flex;align-items:center;gap:8px}
+.beoordeel .demo .balk a{margin-left:auto;color:inherit;opacity:.7;font-size:11px}
+.beoordeel .demo .balk a:hover{opacity:1}
+.demo{border:1px solid var(--rule);background:#fff;box-shadow:0 1px 3px rgba(0,40,70,.07);
+  overflow:hidden}
+.demo .balk{background:var(--cyan);color:var(--void);font-family:var(--mono);font-size:10px;
+  letter-spacing:.18em;text-transform:uppercase;font-weight:600;padding:7px 14px}
+.demo.gekozen{border:2px solid var(--cyan);box-shadow:0 0 0 6px rgba(102,196,232,.18),0 1px 3px rgba(0,40,70,.07)}
+.venster{height:560px;overflow:auto;background:var(--bg)}
+.houder{width:432px;height:1260px}
+.venster iframe{width:1440px;height:4200px;border:0;display:block;
+  transform:scale(.30);transform-origin:top left}
+
+/* ── aantekeningen ───────────────────────────────────────────
+   Onder het ontwerp, drie naast elkaar. Elke notitie noemt wat er
+   besloten is en waarom — dat is waar deze pagina voor bestaat. */
+.notities{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
+  border:1px solid var(--rule);margin-top:20px}
+.nt{background:#fff;padding:14px 16px 16px}
+.nt .lb{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--blue);display:block;margin-bottom:6px}
+.nt b{font-family:var(--disp);text-transform:uppercase;font-size:16px;letter-spacing:.03em;
+  color:var(--dark);display:block;line-height:1.1}
+.nt p{font-size:13px;color:var(--mute);line-height:1.5;margin-top:6px}
+.nt.open .lb{color:#A34418}
+.notities .vraag{background:#FCF8EE}
+
+/* ── focusmodus ────────────────────────────────────────────── */
+.dim{position:fixed;inset:0;background:rgba(11,26,38,.62);z-index:50;
+  opacity:0;pointer-events:none;transition:opacity .14s}
+body.focusmodus .dim{opacity:1;pointer-events:auto}
+.demo.aan{position:relative;z-index:60}
+.demo{cursor:zoom-in}
+.demo.aan{cursor:zoom-out}
+body.focusmodus .demo:not(.aan){cursor:default}
+.demo a,.demo iframe{cursor:auto}
+@media (prefers-reduced-motion: reduce){ .dim{transition:none} }
+
+@media (max-width:1180px){
+  .notities{grid-template-columns:1fr}
+  .beoordeel{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ── mix en match ────────────────────────────────────────────
+   De acht versies zijn complete pagina's, maar de keuze valt zelden op
+   één versie in zijn geheel. Deze balken halen de pagina uit elkaar in
+   bouwstenen: één keuze per rij, met dezelfde markering als een gekozen
+   variant — cyaan kader en een vinkje, geen aparte taal erbij. */
+.mix{display:flex;flex-direction:column;gap:1px;background:var(--rule);
+  border:1px solid var(--rule)}
+.mixrij{background:#fff;display:grid;grid-template-columns:150px 1fr;gap:0;align-items:stretch}
+.mixrij .naam{padding:16px 16px 16px 18px;border-right:1px solid var(--rule);
+  background:var(--bg);display:flex;flex-direction:column;gap:4px;justify-content:center}
+.mixrij .naam b{font-family:var(--disp);text-transform:uppercase;font-size:16px;
+  letter-spacing:.03em;color:var(--dark);line-height:1.1}
+.mixrij .naam span{font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--faint,#8B9BA6)}
+.opties{display:flex;gap:10px;padding:12px 14px;overflow-x:auto}
+.optie{flex:0 0 auto;min-width:158px;max-width:220px;border:1.5px solid var(--rule);
+  background:#fff;padding:11px 13px 12px;cursor:pointer;text-align:left;font:inherit;
+  display:flex;flex-direction:column;gap:5px;transition:.12s;position:relative}
+.optie:hover{border-color:var(--dark)}
+.optie:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+.optie b{font-size:13.5px;font-weight:600;color:var(--dark);line-height:1.25}
+.optie .bron{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--mute);margin-top:auto}
+/* Gekozen zegt het met een kader en een vinkje — zelfde taal als de
+   geselecteerde variant boven op deze pagina. */
+.optie.gekozen{border-color:var(--cyan);box-shadow:0 0 0 4px rgba(102,196,232,.2)}
+.optie.gekozen::after{content:"\2713";position:absolute;top:-1px;right:-1px;
+  background:var(--cyan);color:var(--void);font-family:var(--mono);font-size:10px;
+  line-height:1;padding:4px 6px;font-weight:600}
+
+.mixkop{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+#samenvatting{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--rule);
+  background:#fff;margin-bottom:10px;min-height:44px;align-items:stretch}
+#samenvatting span{display:flex;align-items:center;gap:9px;padding:11px 15px;
+  font-size:13px;color:var(--ink);border-right:1px solid var(--rule)}
+#samenvatting span:last-child{border-right:0}
+#samenvatting i{font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--blue);font-style:normal}
+#samenvatting .leeg{color:var(--mute);font-family:var(--mono);font-size:10px;
+  letter-spacing:.1em;text-transform:uppercase}
+#wis-keuze{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;border:1px solid var(--rule);background:#fff;color:var(--mute);
+  padding:6px 12px;cursor:pointer}
+#wis-keuze:hover{border-color:var(--dark);color:var(--dark)}
+@media (max-width:760px){ .mixrij{grid-template-columns:1fr} .mixrij .naam{border-right:0;border-bottom:1px solid var(--rule)} }
+</style>
+</head>
+<body>
+
+<div class="vgl">
+
+  <div class="tabs">
+    <a href="header-varianten.html">Header</a>
+    <a href="homepage-varianten.html" class="on">Homepage</a>
+    <a href="case-voor-varianten.html">/case-voor</a>
+    <a href="configurator-varianten.html">/configurator</a>
+    <a href="flightcases-varianten.html">/flightcases</a>
+    <a href="footer-varianten.html">Footer</a>
+  </div>
+
+  <div class="inleiding">
+    <h2>Acht richtingen, nog geen keuze</h2>
+    <p><b>Anders dan bij de andere tabs is hier nog niets geselecteerd.</b> Daarom staan ze allemaal even groot: je vergelijkt composities boven de vouw, je leest geen pagina&rsquo;s. Elk kader schuift, en het pijltje in de balk opent die versie volledig. De afweging per versie staat in <a href="concepten-2sept.html" target="_blank" rel="noopener">het versie-overzicht</a>.</p>
+  </div>
+
+  <div class="kop">
+    <span class="nr">// ACHT VERSIES</span>
+    <h3>De belangrijkste pagina van de site</h3>
+    <span><span class="hgt">/ &middot; eigen sjabloon &middot; op 30%</span></span>
+  </div>
+
+  <details class="specdet">
+    <summary>Details<span class="aantal">4 punten</span></summary>
+    <div class="uitleg">
+      <p><b>De bezoekersverdeling bepaalt de opzet, niet de webshoplogica.</b> Hoog: weet wat hij heeft, niet wat hij wil &rarr; de aanvraag. Midden: weet zijn maten &rarr; de configurator. Laag: weet zijn artikelnummer &rarr; onderdelen. Nihil: de particulier.</p>
+      <p><b>Zeventig procent van de Nederlandse orders begint met een mail.</b> Soms een schets, soms alleen een datasheet; er wordt dezelfde dag getekend en teruggestuurd. Dat is geen omweg naar de webshop maar het product zelf &mdash; de vraag is of het bovenaan hoort te staan.</p>
+      <p><b>Snel converteren of de leek opvangen.</b> Versies die snel naar een prijs sturen laten de bezoeker die het vak niet kent in de kou staan; versies die hem opvangen stellen de prijs uit. Dat is de eigenlijke keuze.</p>
+      <p><b>v1c heeft video.</b> Dat verandert wat je krijgt te zien en niet alleen hoe het eruitziet &mdash; vandaar dat het in het label staat.</p>
+    </div>
+  </details>
+
+  <div class="beoordeel">
+    <div class="demo">
+      <div class="balk" style="background:var(--dark);color:#fff">v1a &middot; twee knoppen<a href="homepage-v1a.html" target="_blank" rel="noopener" title="Volledig scherm">&#8599;</a></div>
+      <div class="venster" data-schaal=".30"><div class="houder">
+        <iframe src="homepage-v1a.html" title="Homepage v1a" loading="lazy"></iframe>
+      </div></div>
+    </div>
+    <div class="demo">
+      <div class="balk" style="background:var(--dark);color:#fff">v1b &middot; video<a href="homepage-v1b.html" target="_blank" rel="noopener" title="Volledig scherm">&#8599;</a></div>
+      <div class="venster" data-schaal=".30"><div class="houder">
+        <iframe src="homepage-v1b.html" title="Homepage v1b" loading="lazy"></iframe>
+      </div></div>
+    </div>
+    <div class="demo">
+      <div class="balk" style="background:var(--dark);color:#fff">v2 &middot; de werkvloer<a href="homepage-v2.html" target="_blank" rel="noopener" title="Volledig scherm">&#8599;</a></div>
+      <div class="venster" data-schaal=".30"><div class="houder">
+        <iframe src="homepage-v2.html" title="Homepage v2" loading="lazy"></iframe>
+      </div></div>
+    </div>
+    <div class="demo">
+      <div class="balk" style="background:var(--dark);color:#fff">v3 &middot; de werkbank<a href="homepage-v3.html" target="_blank" rel="noopener" title="Volledig scherm">&#8599;</a></div>
+      <div class="venster" data-schaal=".30"><div class="houder">
+        <iframe src="homepage-v3.html" title="Homepage v3" loading="lazy"></iframe>
+      </div></div>
+    </div>
+    <div class="demo">
+      <div class="balk" style="background:var(--dark);color:#fff">v4a &middot; de vloot · vakgebied<a href="homepage-v4a.html" target="_blank" rel="noopener" title="Volledig scherm">&#8599;</a></div>
+      <div class="venster" data-schaal=".30"><div class="houder">
+        <iframe src="homepage-v4a.html" title="Homepage v4a" loading="lazy"></iframe>
+      </div></div>
+    </div>
+    <div class="demo">
+      <div class="balk" style="background:var(--dark);color:#fff">v4b &middot; de vloot · branche<a href="homepage-v4b.html" target="_blank" rel="noopener" title="Volledig scherm">&#8599;</a></div>
+      <div class="venster" data-schaal=".30"><div class="houder">
+        <iframe src="homepage-v4b.html" title="Homepage v4b" loading="lazy"></iframe>
+      </div></div>
+    </div>
+    <div class="demo">
+      <div class="balk" style="background:var(--dark);color:#fff">v5 &middot; drie ingangen<a href="homepage-v5.html" target="_blank" rel="noopener" title="Volledig scherm">&#8599;</a></div>
+      <div class="venster" data-schaal=".30"><div class="houder">
+        <iframe src="homepage-v5.html" title="Homepage v5" loading="lazy"></iframe>
+      </div></div>
+    </div>
+    <div class="demo">
+      <div class="balk" style="background:var(--dark);color:#fff">v6 &middot; de aanvraag<a href="homepage-v6.html" target="_blank" rel="noopener" title="Volledig scherm">&#8599;</a></div>
+      <div class="venster" data-schaal=".30"><div class="houder">
+        <iframe src="homepage-v6.html" title="Homepage v6" loading="lazy"></iframe>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="kop" style="margin-top:34px">
+    <span class="nr">// AANTEKENINGEN</span>
+    <h3>Waar je per band op let</h3>
+  </div>
+
+  <div class="notities">
+    <div class="nt">
+      <span class="lb">// 01 &middot; de hero</span>
+      <b>Eén belofte, niet drie</b>
+      <p>De bezoeker met de hoogste orderwaarde weet wát hij heeft, niet wat hij wil. Een hero die om maten vraagt sluit hem uit; een hero die om zijn apparaat vraagt niet. Toets: kan iemand die het woord &ldquo;hoedcase&rdquo; niet kent hier verder?</p>
+    </div>
+    <div class="nt">
+      <span class="lb">// 02 &middot; direct onder de hero</span>
+      <b>Maak de belofte een getal</b>
+      <p>&ldquo;Snel geleverd&rdquo; zegt elke concurrent. Tien werkdagen, tekening dezelfde dag, offerte binnen 48 uur zijn controleerbaar. Vier feiten in een lichte band, waarde groot en de nuancering klein eronder &mdash; dat patroon staat al in v3 en op /branches.</p>
+    </div>
+    <div class="nt">
+      <span class="lb">// 03 &middot; de eerste sectie</span>
+      <b>De drie routes, niet even zwaar</b>
+      <p>Webshop, configurator, aanvraag. Zeventig procent van de orders begint als aanvraag, dus die hoort het dichte cyaan vlak te krijgen en de andere twee een rand. Drie gelijke deuren is geen keuze maar uitstel.</p>
+    </div>
+    <div class="nt">
+      <span class="lb">// 04 &middot; het assortiment</span>
+      <b>Modellen, vakgebieden of branches</b>
+      <p>Precies het verschil tussen v4a en v4b. Modellen tonen wat wij maken, vakgebieden wat erin gaat, branches wie je bent. Wie niets van cases weet heeft aan &ldquo;trunccase&rdquo; niets &mdash; en dat is de meest waardevolle bezoeker.</p>
+    </div>
+    <div class="nt">
+      <span class="lb">// 05 &middot; het bewijs</span>
+      <b>Marktleider is een lege claim</b>
+      <p>Ze zijn het al, maar niemand weet het. Zo'n uitspraak werkt alleen met iets ernaast: aantallen, namen, jaartallen. Mond-tot-mond is het enige kanaal dat aantoonbaar werkt; referenties zijn daar de online vertaling van.</p>
+    </div>
+    <div class="nt">
+      <span class="lb">// 06 &middot; de afsluiting</span>
+      <b>Eindig bij een mens</b>
+      <p>Eén binnendienst, één reactieve verkoper, geen koude acquisitie. De pagina moet het kwalificatiewerk doen dat een accountmanager anders doet. Een naam en een gezicht kosten niets en zijn het verschil met een formulier.</p>
+    </div>
+  </div>
+
+  <div class="kop" style="margin-top:40px">
+    <span class="nr">// MIX EN MATCH</span>
+    <h3>Stel je eigen homepage samen</h3>
+    <span class="rechts"><span class="hgt">één keuze per rij &middot; nogmaals klikken maakt hem leeg</span></span>
+  </div>
+
+  <div class="mixkop">
+    <div id="samenvatting"></div>
+    <button id="wis-keuze" type="button">Wis alles</button>
+  </div>
+
+  <div class="mix">
+      <div class="mixrij" data-rij="hero-kop" data-naam="Hero-kop">
+        <div class="naam"><b>Hero-kop</b><span>wat er als eerste staat</span></div>
+        <div class="opties">
+        <button class="optie" data-id="millimeterwerk" data-kort="Millimeterwerk"><b>Millimeterwerk, in tien werkdagen</b><span class="bron">v1a · v1b · v5</span></button>
+        <button class="optie" data-id="zelf" data-kort="Wij bouwen ze zelf"><b>Wij bouwen ze zelf</b><span class="bron">v2</span></button>
+        <button class="optie" data-id="prijs" data-kort="Jouw maten, nu een prijs"><b>Jouw maten, nu een prijs</b><span class="bron">v3</span></button>
+        <button class="optie" data-id="vervoeren" data-kort="Wat ga je vervoeren?"><b>Wat ga je vervoeren?</b><span class="bron">v4a · v4b</span></button>
+        <button class="optie" data-id="jeweet" data-kort="Je weet wat erin moet"><b>Je weet wat erin moet. Wij weten hoe.</b><span class="bron">v6</span></button>
+        </div>
+      </div>
+      <div class="mixrij" data-rij="hero-grond" data-naam="Hero-achtergrond">
+        <div class="naam"><b>Hero-achtergrond</b><span>waar de kop op staat</span></div>
+        <div class="opties">
+        <button class="optie" data-id="foto" data-kort="Foto werkvloer"><b>Foto van de werkvloer, met scrim</b><span class="bron">v1a · v5</span></button>
+        <button class="optie" data-id="video" data-kort="Video"><b>Doorlopende video</b><span class="bron">v1b</span></button>
+        <button class="optie" data-id="ruit" data-kort="Blueprint-ruit"><b>Donker vlak met blueprint-ruit</b><span class="bron">v3</span></button>
+        <button class="optie" data-id="paneel" data-kort="Vlak met paneel"><b>Donker vlak met paneel ernaast</b><span class="bron">v3 · v6</span></button>
+        </div>
+      </div>
+      <div class="mixrij" data-rij="hero-actie" data-naam="Hero-actie">
+        <div class="naam"><b>Hero-actie</b><span>waar hij op klikt</span></div>
+        <div class="opties">
+        <button class="optie" data-id="knoppen" data-kort="Twee knoppen"><b>Twee knoppen naast elkaar</b><span class="bron">v1a · v1b</span></button>
+        <button class="optie" data-id="zoek" data-kort="Zoekveld"><b>Zoekveld: wat ga je vervoeren</b><span class="bron">v4a · v4b</span></button>
+        <button class="optie" data-id="config" data-kort="Configuratorpaneel"><b>Configuratorpaneel meteen zichtbaar</b><span class="bron">v3</span></button>
+        <button class="optie" data-id="aanvraag" data-kort="Aanvraagformulier"><b>Aanvraagformulier met velden</b><span class="bron">v6</span></button>
+        </div>
+      </div>
+      <div class="mixrij" data-rij="belofte" data-naam="Belofte-band">
+        <div class="naam"><b>Belofte-band</b><span>direct onder de hero</span></div>
+        <div class="opties">
+        <button class="optie" data-id="donker" data-kort="Mono op donker"><b>Vier feiten in mono op donker</b><span class="bron">v3</span></button>
+        <button class="optie" data-id="licht" data-kort="Lichte band"><b>Vier feiten op lichte band, waarde groot</b><span class="bron">v2 · /branches</span></button>
+        <button class="optie" data-id="geen" data-kort="Geen band"><b>Geen band &mdash; meteen door</b><span class="bron">v4a · v4b</span></button>
+        </div>
+      </div>
+      <div class="mixrij" data-rij="onderhero" data-naam="Sectie onder de hero">
+        <div class="naam"><b>Sectie onder de hero</b><span>de eerste echte sectie</span></div>
+        <div class="opties">
+        <button class="optie" data-id="driemanieren" data-kort="Drie manieren"><b>Drie manieren om bij de juiste case te komen</b><span class="bron">v1a · v1b</span></button>
+        <button class="optie" data-id="nabestellen" data-kort="Nadat je bestelt"><b>Wat er gebeurt nadat je op bestellen drukt</b><span class="bron">v2</span></button>
+        <button class="optie" data-id="kiesmodel" data-kort="Kies je model"><b>Kies je model en vul je maten in</b><span class="bron">v3</span></button>
+        <button class="optie" data-id="vakgebied" data-kort="Kies je vakgebied"><b>Kies je vakgebied</b><span class="bron">v4a</span></button>
+        <button class="optie" data-id="branche" data-kort="Kies je branche"><b>Kies je branche</b><span class="bron">v4b</span></button>
+        <button class="optie" data-id="halfverhaal" data-kort="Half verhaal"><b>Van een half verhaal naar een kist</b><span class="bron">v6</span></button>
+        </div>
+      </div>
+      <div class="mixrij" data-rij="assortiment" data-naam="Assortiment">
+        <div class="naam"><b>Assortiment</b><span>wat je kunt kopen</span></div>
+        <div class="opties">
+        <button class="optie" data-id="basisprijs" data-kort="Vaste basisprijs"><b>Alles op maat, vanaf een vaste basisprijs</b><span class="bron">v1a · v2 · v3</span></button>
+        <button class="optie" data-id="vijfmodellen" data-kort="Vijf modellen"><b>Vijf modellen, alles op maat</b><span class="bron">v6</span></button>
+        <button class="optie" data-id="onderdelen" data-kort="Alleen onderdelen"><b>Of bestel alleen de onderdelen</b><span class="bron">v1a · v5 · v6</span></button>
+        </div>
+      </div>
+      <div class="mixrij" data-rij="afsluiting" data-naam="Afsluiting">
+        <div class="naam"><b>Afsluiting</b><span>waar de pagina eindigt</span></div>
+        <div class="opties">
+        <button class="optie" data-id="vierstappen" data-kort="Vier stappen"><b>Van maat naar kade in vier stappen</b><span class="bron">v1a · v5</span></button>
+        <button class="optie" data-id="geengok" data-kort="Geen gok"><b>Een prijs zonder offerte is geen gok</b><span class="bron">v3</span></button>
+        <button class="optie" data-id="gezicht" data-kort="Naam en gezicht"><b>Aanvraag met naam en gezicht</b><span class="bron">v6</span></button>
+        </div>
+      </div>
+  </div>
+
+</div>
+
+<script src="assets/focus.js"></script>
+<script src="assets/kaderhoogte.js"></script>
+<script src="assets/mixmatch.js"></script>
+</body>
+</html>

@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — homepage-versies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   Presentatieschil voor de homepage-versies.
+
+   Deze pagina hoort bij de bespreking, niet bij het merk. Ze toont
+   alle homepage-versies in een venster van 1440 × 760 — de maat van
+   een 13-inch scherm — zodat wat je ziet ook is wat een bezoeker ziet.
+   De onderbouwing zit achter één zwevende knop: in een gesprek wil
+   je eerst het ontwerp laten zien en pas daarna uitleggen waarom.
+   ══════════════════════════════════════════════════════════════ */
+:root{
+  --dark:#003352; --blue:#0066A8; --cyan:#66C4E8; --logo:#0093D1;
+  --ink:#1A1A1A; --void:#06121C; --lightblue:#E6EFF6; --bg:#F2F5F9;
+  --rule:#D9DEE5; --mute:#6B7480;
+  --disp:'Barlow Condensed',sans-serif;
+  --body:'DM Sans',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+  --paneel:0px;              /* wordt gezet als het waaromvenster opent */
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--body);background:var(--void);color:#fff;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+/* ── kop ─────────────────────────────────────────────────── */
+.kop{position:sticky;top:0;z-index:30;background:var(--void);
+  border-bottom:1px solid rgba(255,255,255,.16);
+  padding-right:calc(0px + var(--paneel));transition:padding-right .28s ease}
+.kop .regel{padding:0 28px;height:60px;display:flex;align-items:center;gap:24px}
+.merk{font-family:var(--disp);font-weight:900;font-size:22px;letter-spacing:.01em;
+  color:#fff;white-space:nowrap}
+.merk em{font-style:normal;color:var(--cyan)}
+.kop .wat{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.45);border-left:1px solid rgba(255,255,255,.2);padding-left:22px}
+.kop .rechts{margin-left:auto;display:flex;align-items:center;gap:20px}
+
+/* Zeven versies passen niet naast de rest op één regel, dus krijgen ze een
+   eigen balk. Nummer groot, naam klein eronder: het nummer is het adres,
+   de naam is waar het over gaat. */
+.tabs{display:flex;border-top:1px solid rgba(255,255,255,.14);overflow-x:auto}
+.tabs button{background:none;border:0;border-right:1px solid rgba(255,255,255,.14);cursor:pointer;
+  padding:11px 20px 12px;text-align:left;white-space:nowrap;transition:.14s;flex:none}
+.tabs button:hover{background:rgba(255,255,255,.06)}
+.tabs button b{display:block;font-family:var(--disp);text-transform:uppercase;font-weight:700;
+  font-size:17px;letter-spacing:.05em;color:#fff;line-height:1}
+.tabs button i{display:block;font-style:normal;font-family:var(--mono);font-size:9px;
+  letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:5px}
+.tabs button.on{background:var(--cyan)}
+.tabs button.on b{color:var(--void)}
+.tabs button.on i{color:rgba(6,18,28,.62)}
+
+/* venster of hele pagina */
+.modus{display:flex;border:1px solid rgba(255,255,255,.2)}
+.modus button{background:none;border:0;border-right:1px solid rgba(255,255,255,.2);cursor:pointer;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.6);padding:12px 14px;transition:.14s}
+.modus button:last-child{border-right:0}
+.modus button:hover{color:#fff}
+.modus button.on{background:rgba(255,255,255,.14);color:#fff}
+.groot{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--cyan);white-space:nowrap}
+.groot:hover{text-decoration:underline}
+
+/* ── podium ──────────────────────────────────────────────── */
+.podium{padding:26px 28px 120px;padding-right:calc(28px + var(--paneel));
+  transition:padding-right .28s ease}
+.titel{display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:18px;margin-inline:auto;width:100%}
+.titel h1{font-family:var(--disp);text-transform:uppercase;font-weight:900;font-size:34px;
+  letter-spacing:.02em;line-height:1;color:#fff}
+.titel .een{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--cyan)}
+.titel .cijfers{margin-left:auto;display:flex;gap:26px}
+.titel .cijfers div{display:flex;flex-direction:column;gap:3px}
+.titel .cijfers b{font-family:var(--disp);text-transform:uppercase;font-size:19px;letter-spacing:.03em;color:#fff}
+.titel .cijfers span{font-family:var(--mono);font-size:9px;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(255,255,255,.45)}
+
+/* het venster: 1440 × 760, geschaald tot het past. De verhouding blijft
+   kloppen, dus de vouw op het scherm is de vouw in het echt. */
+.scherm{position:relative;background:#000;border:1px solid rgba(255,255,255,.22);
+  box-shadow:0 24px 70px rgba(0,0,0,.5);overflow:hidden;margin:0 auto}
+.scherm iframe{border:0;display:block;transform-origin:0 0;background:#fff}
+.vouwstreep{position:absolute;left:0;right:0;height:0;border-top:1px dashed var(--cyan);
+  z-index:3;pointer-events:none;display:none}
+.vouwstreep span{position:absolute;right:0;top:-19px;background:var(--cyan);color:var(--void);
+  font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:3px 8px}
+body[data-modus="heel"] .vouwstreep{display:block}
+.onder{margin-top:12px;margin-inline:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:rgba(255,255,255,.4);display:flex;gap:22px;flex-wrap:wrap}
+
+/* ── de zwevende knop ────────────────────────────────────── */
+.waarom{position:fixed;right:22px;bottom:22px;z-index:60;
+  display:flex;align-items:center;gap:11px;background:var(--cyan);color:var(--void);
+  border:0;cursor:pointer;padding:15px 22px;
+  font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:16px;letter-spacing:.05em;
+  box-shadow:0 10px 34px rgba(0,0,0,.45);transition:right .28s ease,background .14s}
+.waarom:hover{background:#8ad3ef}
+.waarom .p{font-family:var(--mono);font-size:16px;line-height:1;font-weight:600}
+body.open .waarom{right:calc(22px + var(--paneel))}
+
+/* ── het waaromvenster ───────────────────────────────────── */
+.lade{position:fixed;top:0;right:0;bottom:0;width:480px;max-width:92vw;z-index:55;
+  background:#0B1A26;border-left:1px solid rgba(255,255,255,.18);
+  transform:translateX(100%);transition:transform .28s ease;overflow-y:auto;
+  box-shadow:-18px 0 50px rgba(0,0,0,.45)}
+body.open .lade{transform:translateX(0)}
+.lade .lkop{position:sticky;top:0;background:#0B1A26;border-bottom:1px solid rgba(255,255,255,.16);
+  padding:22px 28px 18px;display:flex;align-items:flex-start;gap:16px;z-index:2}
+.lade .lkop .ey{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan)}
+.lade .lkop h2{font-family:var(--disp);text-transform:uppercase;font-weight:900;font-size:26px;
+  letter-spacing:.02em;line-height:1.02;color:#fff;margin-top:9px}
+.dicht{margin-left:auto;background:none;border:1px solid rgba(255,255,255,.28);color:rgba(255,255,255,.7);
+  cursor:pointer;width:32px;height:32px;font-size:15px;line-height:1;flex:none;font-family:var(--mono)}
+.dicht:hover{border-color:var(--cyan);color:var(--cyan)}
+.lade .body{padding:8px 28px 46px}
+.blok{padding:22px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.blok:last-child{border-bottom:0}
+.blok .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:11px}
+.blok p{font-size:14.5px;line-height:1.62;color:rgba(255,255,255,.8)}
+.blok p + p{margin-top:11px}
+.blok.kost .k{color:#E8A33D}
+.blok.risico .k{color:#E87D6B}
+.blok ul{list-style:none;margin-top:4px}
+.blok li{font-size:14px;line-height:1.55;color:rgba(255,255,255,.8);
+  padding-left:20px;position:relative;margin-top:9px}
+.blok li::before{content:"—";position:absolute;left:0;color:rgba(255,255,255,.32)}
+.meting{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.16);margin-top:4px}
+.meting div{background:#0B1A26;padding:13px 15px 14px}
+.meting b{font-family:var(--disp);text-transform:uppercase;font-size:18px;letter-spacing:.03em;
+  color:#fff;display:block;line-height:1.05}
+.meting span{font-family:var(--mono);font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:rgba(255,255,255,.45);display:block;margin-top:6px;line-height:1.5}
+.vlag{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(232,163,61,.5);
+  background:rgba(232,163,61,.1);padding:9px 13px;margin-top:12px;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#E8A33D}
+
+@media(max-width:900px){
+  .kop{height:auto;flex-wrap:wrap;padding:12px 16px;gap:12px}
+  .tabs{margin-left:0;width:100%}
+  .tabs button{flex:1;justify-content:center;padding:10px 8px;font-size:13px}
+  .tabs button i{display:none}
+  .podium{padding:18px 16px 110px}
+  body.open .waarom{right:22px}
+  .lade{width:100%}
+}
+</style>
+</head>
+<body data-modus="venster">
+
+<div class="kop">
+  <div class="regel">
+    <div class="merk"><em>case</em>Builder.com</div>
+    <div class="wat">Homepage-versies &middot; ontwerpfase</div>
+    <div class="rechts">
+      <div class="modus" id="modus">
+        <button data-m="venster" class="on">Venster 1440 &times; 760</button>
+        <button data-m="heel">Hele pagina</button>
+      </div>
+      <a class="groot" id="groot" href="homepage-v1a.html" target="_blank">Los openen &#8599;</a>
+    </div>
+  </div>
+  <div class="tabs" id="tabs"></div>
+</div>
+
+<div class="podium">
+  <div class="titel">
+    <div>
+      <div class="een" id="t-ey">// V1</div>
+      <h1 id="t-naam">Twee knoppen</h1>
+    </div>
+    <div class="cijfers" id="t-cijfers"></div>
+  </div>
+
+  <div class="scherm" id="scherm">
+    <div class="vouwstreep" id="vouwstreep"><span>de vouw &middot; 760 px</span></div>
+    <iframe id="doek" src="homepage-v1a.html?kaal" title="v1 — twee knoppen"></iframe>
+  </div>
+
+  <div class="onder" id="onder"></div>
+</div>
+
+<button class="waarom" id="knop"><span class="p">?</span> Waarom deze versie</button>
+
+<aside class="lade" id="lade" aria-hidden="true">
+  <div class="lkop">
+    <div>
+      <div class="ey" id="l-ey">// V1 · DE BEREDENERING</div>
+      <h2 id="l-naam">Twee knoppen</h2>
+    </div>
+    <button class="dicht" id="dicht" aria-label="Sluiten">✕</button>
+  </div>
+  <div class="body" id="l-body"></div>
+</aside>
+
+<script>
+/* De hoogtes komen uit scripts/meet-hoogtes.mjs op 1440 x 900 — gemeten in
+   een echte browser, niet geschat. Verandert een ontwerp, meet dan opnieuw:
+   node scripts/meet-hoogtes.mjs mockups/homepage-v6.html
+
+   De nummering is doorlopend en zegt niets over de inhoud: v1 is de oudste,
+   v7 de nieuwste. Wat een versie probeert, staat hier in de lade.          */
+var VERSIES = [
+  { id:'v1a', naam:'Twee knoppen', bestand:'homepage-v1a.html', hoogte:4410,
+    cijfers:[['4.410 px','paginahoogte'],['2 ingangen','in de hero'],['Beeld','hero']],
+    onder:['// stilstaande hero','// de drie manieren staan pas in sectie 02','// basis voor v2, v3 en v7'],
+    blokken:[
+      {k:'Het uitgangspunt', p:[
+        'De hero doet een belofte en biedt twee knoppen: configureren, of zeggen wat je vervoert. Wie nog niet weet wat hij zoekt, vindt de drie ingangen als eigen sectie lager op de pagina.',
+        'Dit is de versie waar alle andere van afstammen. De secties eronder — vijf modellen, vier stappen, vertrouwen, onderdelen — zijn in v2, v3 en v7 ongewijzigd gebleven, zodat je de hero op zichzelf kunt beoordelen.']},
+      {k:'Wat het wint', l:[
+        'Eén duidelijke hoofdactie. Geen keuzestress boven de vouw.',
+        'Snelst van allemaal: geen video, alleen een poster.',
+        'Vier dingen die de mockup van 5 augustus niet had: vanafprijzen per model, de vergelijking tussen de vijf modellen, een ingelogde bijbestel-ingang en zaagservice als zichtbare dienst.']},
+      {k:'Wat het kost', kl:'kost', l:[
+        'De hero is 844 px hoog. Op een 13-inch venster valt alles eronder buiten beeld, inclusief de bijbestel-strip.',
+        'Onderdelen staat gedempt in de navigatie en krijgt lager een volwaardig blok — degraderen zonder te slopen, maar het blijft een compromis.']},
+      {k:'Waar het misgaat', kl:'risico', l:[
+        '"Wat ga je vervoeren?" is een omlijnde knop naast een dichte. Juist de bezoeker die het vak niet kent, krijgt zo de zwakste van de twee.',
+        'De drie manieren staan in sectie 02, ver onder de vouw. Wie niet scrollt, ziet ze nooit.']}
+    ]},
+
+  { id:'v1c', naam:'Lichtere video', bestand:'homepage-v6.html', hoogte:4358, video:true,
+    cijfers:[['4.358 px','paginahoogte'],['765 KB','videobestand'],['Video','hero']],
+    onder:['// zelfde compositie als v1','// lichtere, warmere grade met dronebeeld','// gemaakt in een parallelle sessie'],
+    blokken:[
+      {k:'Het uitgangspunt', p:[
+        'Hetzelfde als v2, met de video die je vroeg: lichter, warmer, een dronebeeld over de fabriek en mensen aan het werk in plaats van lege gangen.']},
+      {k:'Wat het wint', l:[
+        'Vijf keer kleiner dan v2 — 765 KB tegen 4,2 MB — en toch een langere loop.',
+        'Mensen in beeld. Dat is precies wat de andere versies missen: een kist bouwt zichzelf niet.']},
+      {k:'Wat het kost', kl:'kost', l:[
+        'Nog steeds media, dus nog steeds laadtijd en krediet.',
+        'De opnamebrief (hero-video-brief.md) beschrijft zes shots; wat er nu ligt is één daarvan, gegenereerd. Echt fabrieksmateriaal moet nog geschoten worden.']},
+      {k:'Waar het misgaat', kl:'risico', l:[
+        'v2 en v3 zijn nooit naast elkaar op één scherm vergeleken. Dat is precies waar deze pagina voor is.']}
+    ]},
+
+  { id:'v2', naam:'De werkbank', bestand:'homepage-v6.html', hoogte:3296, vouwPunt:743,
+    cijfers:[['3.296 px','paginahoogte'],['743 px','prijs staat hier'],['Ja','kleur en logo']],
+    onder:['// 9 secties','// prijsbalk eindigt op 743 px — boven de vouw van 760','// kleur en logo als stap in het paneel'],
+    blokken:[
+      {k:'Het uitgangspunt', p:[
+        'Het gereedschap is de etalage. Geen beeld dat over de belofte praat, maar de belofte zelf — werkend, boven de vouw.',
+        'Wie hier komt wil een prijs. Die staat binnen een scherm op de pagina, met de maten al ingevuld, zodat je het systeem ziet werken voordat je zelf iets doet.']},
+      {k:'Wat het wint', l:[
+        'Hun enige echte voorsprong is prijs zonder wachten. Concurrenten offreren, zij niet — dit zet die belofte niet in een zin maar in een veld.',
+        'Perfect voor de terugkerende vakman. Wie elk kwartaal rackcases bijbestelt wil geen merkverhaal, die wil stap 1.',
+        'Kleur en logo staan hier als invoerveld, passend bij een versie waarin elke belofte een veld is.']},
+      {k:'Wat het kost', kl:'kost', l:[
+        'De configurator moet embedbaar zijn en snel laden. Stap 5, de overdracht naar productie, is nog niet dichtgetimmerd.',
+        'Daarmee hangt de homepage aan precies het onderdeel met de meeste onzekerheid.']},
+      {k:'Waar het misgaat', kl:'risico', l:[
+        'Vijandig voor wie niet weet wat een hoedcase is. De particulier krijgt een regel en verder niets.',
+        'Een homepage zonder tekst is een homepage zonder ranking. Met 533 productpagina’s eronder te dragen, maar op het merkwoord verlies je terrein.']}
+    ]},
+
+  { id:'v3', naam:'De vloot', bestand:'homepage-v6.html', hoogte:3915, vouwPunt:650,
+    cijfers:[['3.915 px','paginahoogte'],['650 px','raster begint hier'],['Nee','kleur en logo']],
+    onder:['// 10 secties','// bovenste tegelrij begint op 650 px — 110 px boven de vouw','// zes lege fotokaders: dat is opzet'],
+    blokken:[
+      {k:'Het uitgangspunt', p:[
+        'Niemand zoekt op "hoedcase". Men zoekt op wat erin moet. De homepage is daarom geen verhaal maar een ingang per vakgebied.',
+        'Elke tegel is een echte landingspagina — de sitemap die er al ligt gaat aan het werk in plaats van verstopt te zitten.']},
+      {k:'Wat het wint', l:[
+        'Het enige dat het vocabulaireprobleem bij de wortel pakt in plaats van het weg te leggen achter deur B.',
+        'SEO-sterkst: zes vakgebieden, 38 subcategorieën, 533 producten — allemaal echte URL’s met eigen zoekvolume.',
+        'Professioneel geordend. De particulier komt daarna, want daar zit de omzet niet.']},
+      {k:'Wat het kost', kl:'kost', l:[
+        'Staat of valt met de PIM, en die is nog niet gekozen.',
+        '38 subcategorieën betekent 38 stuks fotografie in één stijl.',
+        'De telling moet eerst kloppen: de subcategorieën tellen nu niet op.']},
+      {k:'Waar het misgaat', kl:'risico', l:[
+        'Het maatwerkverhaal verdwijnt naar sectie 3. De pagina leest als webshop, terwijl de marge in het op maat bouwen zit.']},
+      {k:'Waarom er lege kaders staan', kl:'kost', p:[
+        'De zes tegels tonen "foto ontbreekt" in plaats van stockbeeld. Dat is een keuze, geen onaf werk.',
+        'Dit is de versie die volledig van fotografie afhangt. Met mooie plaatjes erin kies je op een illusie en komt de rekening later.']}
+    ]},
+
+  { id:'v1b', naam:'De werkvloer', bestand:'homepage-v6.html', hoogte:4861, vouwPunt:640,
+    cijfers:[['4.861 px','paginahoogte'],['640 px','meetlat begint hier'],['Volledig','kleur en logo']],
+    onder:['// 11 secties','// hero op 66vh zodat de vier cijfers de vouw halen','// eigen sectie voor kleur en logo, met stalenkaart'],
+    blokken:[
+      {k:'Het uitgangspunt', p:[
+        'Een kist van negenhonderd euro online kopen zonder hem gezien te hebben is een sprong.',
+        'Deze versie besteedt de vouw niet aan snelheid maar aan het wegnemen van twijfel: eigen fabriek, eigen mensen, eigen tolerantie. Daarna pas de prijs.']},
+      {k:'Wat het wint', l:[
+        'Ze concurreren aan de onderkant met importcases en aan de bovenkant met de lokale kistenbouwer die je kent. Dit is de enige versie die dat gevecht aangaat.',
+        'De enige waarin "bouwpakket of kant-en-klaar" tot z’n recht komt — een uitlegbehoeftig aanbod dat elders vier woorden in een specrijtje is.',
+        'Kleur en logo krijgen een eigen sectie. Voor een verhuurbedrijf is een kist met eigen logo geen extraatje maar rijdende reclame.']},
+      {k:'Wat het kost', kl:'kost', l:[
+        'Zwaar in media. Een echt fabrieksverhaal wil meer dan de tien seconden die er nu liggen.',
+        'Dat kost laadtijd, en op Netlify kost het krediet.']},
+      {k:'Waar het misgaat', kl:'risico', l:[
+        'Traagste route naar conversie: de prijs komt pas in sectie 5.',
+        'Het is ook wat iedere maakbedrijf-site doet. Je wint vertrouwen en verliest onderscheid.']},
+      {k:'Ongeverifieerd', kl:'kost', p:[
+        'Kleur en logo staan nergens op de live site. Ik heb dat gecontroleerd: geen bedrukking, geen kleurkeuze, geen offerte.',
+        'De negen HPL-kleuren, zeefdruk vanaf 1 stuk, print vanaf 25 en de opmaakproef zijn dus aangenomen. Iemand bij Proflite moet bevestigen wat er echt kan.']}
+    ]},
+
+  { id:'v4', naam:'Drie ingangen', bestand:'homepage-v6.html', hoogte:3719, vouwPunt:757,
+    cijfers:[['3.719 px','paginahoogte'],['3 ingangen','in de hero'],['757 px','derde deur eindigt hier']],
+    onder:['// v1 met drie deuren in plaats van twee knoppen','// sectie 02 "waar begin je" vervalt — de hero doet dat nu','// specs verhuisd naar een eigen band onder de hero'],
+    blokken:[
+      {k:'Het uitgangspunt', p:[
+        'De drie manieren die in v1 als sectie 02 onder de vouw staan, zijn naar de hero gehaald. Daar is een derde deur bij gekomen: de offerte.',
+        'De rest van de pagina is bewust gelijk aan v1, zodat je de twee naast elkaar op precies dat verschil kunt beoordelen.']},
+      {k:'Wat het wint', l:[
+        'Elke bezoeker ziet meteen zijn eigen deur, niet pas na scrollen. Alle drie staan compleet boven de vouw — de laatste actieregel eindigt op 757 px.',
+        'De offerte is een echte behoefte. Inkoop, aanbestedingen en series vragen om een document met een referentienummer, ook als de prijs al bekend is.',
+        'De kop is teruggebracht van drie regels naar twee en van 96 naar 80 px. Dat levert de honderdtwintig pixels op die de derde deur nodig had.']},
+      {k:'Wat het kost', kl:'kost', l:[
+        'Drie deuren betekent geen enkele dichte hoofdactie meer. De rangorde zit nu in kleur — één cyaan vlak tegen twee doorzichtige — en dat is een zachter signaal dan één knop.',
+        'Sectie 02 vervalt, dus de vierde ingang uit v1 ("ik weet het nog niet") is weg. Die leunt nu op de vergelijking bij de vijf modellen.']},
+      {k:'Waar het misgaat', kl:'risico', p:[
+        'Dit is de spanning waar je op moet letten: de eyebrow zegt "prijs direct zichtbaar, geen wachttijd", en om diezelfde reden hebben we de offerteknop uit de header gehaald. Een offertedeur kan gelezen worden als "toch wachten op een prijs".',
+        'De formulering is daarom alles. Hier staat er niet "vraag een prijs aan" maar "dezelfde prijs, op papier" — de offerte is een document, geen wachtkamer. Wijkt de tekst daarvan af, dan trek je de belofte van de hele site in twijfel.']}
+    ]},
+
+  { id:'v5', naam:'De aanvraag', bestand:'homepage-v6.html', hoogte:4171, vouwPunt:726,
+    cijfers:[['4.171 px','paginahoogte'],['726 px','verstuurknop staat hier'],['Sectie 05','onderdelen']],
+    onder:['// aanvraagformulier boven de vouw, velden en al','// configurator als tweede ingang, onderdelen als vijfde','// geen eigen plek voor de particulier'],
+    blokken:[
+      {k:'Het uitgangspunt', p:[
+        'Deze versie volgt de bezoekersverdeling zoals die is: hoog volume weet wat hij hééft en niet wat hij wil, midden weet zijn maten, laag zoekt een artikelnummer, en de particulier bestaat als groep niet.',
+        'Zeventig procent van de Nederlandse orders begint met een mail: soms een schets, soms alleen een datasheet. Joran tekent en stuurt dezelfde dag terug. Dat is niet de omweg naar de webshop, dat ís het product — dus staat het boven de vouw, met de velden erbij in plaats van een knop naar een contactformulier.']},
+      {k:'Wat het wint', l:[
+        'De grootste bezoekersgroep krijgt eindelijk de grootste ingang. In v1 tot en met v7 stond die groep op zijn best op de tweede plaats.',
+        'De USP wordt hier concreet. "Snel" is een woord; "zelfde werkdag een tekening, tien werkdagen een kist" is een afspraak.',
+        'De drempel ligt expres laag: een foto van je apparatuur telt ook. Dat is precies hoe het nu al binnenkomt, dus het formulier vraagt niet om meer dan de mail nu doet.',
+        'Onderdelen staat in sectie 05 en gedempt in de navigatie — te weinig omzet voor het eerste scherm, te veel om weg te laten.']},
+      {k:'Wat het kost', kl:'kost', l:[
+        'De aanvraag is mensenwerk. Elke aanvraag kost een tekenaar tijd, en dit ontwerp maakt dat kanaal groter. Zonder afspraak over wie er tekent bij verdubbeling breekt de belofte van dezelfde dag als eerste.',
+        'De configurator zakt naar de tweede plaats, terwijl daar juist de schaalbaarheid zit. Dat is een bewuste keuze voor omzet vandaag boven marge morgen.',
+        'Bestandsuploads (PDF, DWG, STEP) vragen opslag, virusscanning en een plek in het orderproces. Dat is meer dan een formulier.']},
+      {k:'Waar het misgaat', kl:'risico', l:[
+        'Dit werkt alleen als de reactie echt dezelfde dag komt. Eén week vakantie zonder vervanging en de belofte in de eyebrow is een leugen op je eigen homepage.',
+        'De naam en foto van de tekenaar staan er als plaatshouder. Iemand bij Proflite moet bevestigen wie daar staat, en of die persoon met naam en beeld in de etalage wil.']},
+      {k:'Wat we nog niet weten', kl:'kost', p:[
+        'De verhouding 70/30 in Nederland en 50/50 in Duitsland is mondeling; de cijfers van Joran volgen volgende week. Dat verschil is groot genoeg om per land een andere homepage te rechtvaardigen.',
+        'Ook onbekend: hoeveel aanvragen er nu per week binnenkomen, en hoeveel daarvan order worden. Zonder dat getal is niet te zeggen of dit kanaal groter mág worden.']}
+    ]}
+];
+
+var TOON = 760;                              /* venstermodus: 13-inch hoogte */
+var huidig = 'v1';
+var doek = document.getElementById('doek');
+var scherm = document.getElementById('scherm');
+var streep = document.getElementById('vouwstreep');
+
+function vind(id) {
+  for (var i = 0; i < VERSIES.length; i++) if (VERSIES[i].id === id) return VERSIES[i];
+  return VERSIES[0];
+}
+
+function schaal() {
+  var c = vind(huidig);
+  var heel = document.body.dataset.modus === 'heel';
+  var h = heel ? c.hoogte : TOON;
+  // clientWidth telt de padding mee, dus die moet eraf — anders krimpt het
+  // venster niet wanneer de lade openschuift en valt het ontwerp erachter.
+  var pod = scherm.parentElement, st = getComputedStyle(pod);
+  var beschikbaar = pod.clientWidth - parseFloat(st.paddingLeft) - parseFloat(st.paddingRight);
+  var f = Math.min(1, beschikbaar / 1440);
+  // In "hele pagina" past de hele pagina in beeld: alleen dan zegt de
+  // vouwstreep iets, want dan zie je in een oogopslag hoeveel eronder valt.
+  if (heel) {
+    var ruimte = innerHeight - scherm.getBoundingClientRect().top - pageYOffset - 96;
+    f = Math.min(f, Math.max(0.08, ruimte / h));
+  }
+  doek.style.width = '1440px';
+  doek.style.height = h + 'px';
+  doek.style.transform = 'scale(' + f + ')';
+  scherm.style.width = Math.round(1440 * f) + 'px';
+  scherm.style.height = Math.round(h * f) + 'px';
+  streep.style.top = Math.round(TOON * f) + 'px';
+  // De kopregel volgt de breedte van het venster, maar krimpt niet mee tot
+  // onleesbaar wanneer de hele pagina sterk verkleind in beeld staat.
+  var b = Math.max(760, Math.round(1440 * f)) + 'px';
+  document.querySelector('.titel').style.maxWidth = b;
+  document.getElementById('onder').style.maxWidth = b;
+}
+
+function vulOnder() {
+  var c = vind(huidig);
+  var heel = document.body.dataset.modus === 'heel';
+  var eerst = heel ? '// de streep is de vouw op 760 px'
+                   : '// de onderkant van dit kader is de vouw';
+  document.getElementById('onder').innerHTML = [eerst].concat(c.onder).map(function (r) {
+    return '<span>' + r + '</span>';
+  }).join('');
+}
+
+function toon(id) {
+  var c = vind(id);
+  huidig = c.id;
+  // ?kaal houdt de versiebalk van de mockup zelf weg — die zit hier in de kop.
+  doek.src = c.bestand + '?kaal';
+  doek.title = c.id + ' — ' + c.naam;
+  var stempel = '// ' + c.id.toUpperCase() + (c.video ? ' (VIDEO)' : '');
+  document.getElementById('t-ey').textContent = stempel;
+  document.getElementById('t-naam').textContent = c.naam;
+  document.getElementById('l-ey').textContent = stempel + ' · DE BEREDENERING';
+  document.getElementById('l-naam').textContent = c.naam;
+  document.getElementById('groot').href = c.bestand;
+
+  document.getElementById('t-cijfers').innerHTML = c.cijfers.map(function (r) {
+    return '<div><b>' + r[0] + '</b><span>// ' + r[1] + '</span></div>';
+  }).join('');
+  vulOnder();
+
+  document.getElementById('l-body').innerHTML = c.blokken.map(function (b) {
+    var inhoud = b.p ? b.p.map(function (t) { return '<p>' + t + '</p>'; }).join('')
+                     : '<ul>' + b.l.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul>';
+    return '<div class="blok ' + (b.kl || '') + '"><div class="k">' + b.k + '</div>' + inhoud + '</div>';
+  }).join('');
+
+  [].forEach.call(document.querySelectorAll('#tabs button'), function (k) {
+    k.classList.toggle('on', k.dataset.c === c.id);
+  });
+  schaal();
+}
+
+document.getElementById('tabs').innerHTML = VERSIES.map(function (v) {
+  return '<button data-c="' + v.id + '"><b>' + v.id + (v.video ? ' (video)' : '') +
+         '</b><i>' + v.naam + '</i></button>';
+}).join('');
+
+document.getElementById('tabs').addEventListener('click', function (e) {
+  var k = e.target.closest('button'); if (k) toon(k.dataset.c);
+});
+document.getElementById('modus').addEventListener('click', function (e) {
+  var k = e.target.closest('button'); if (!k) return;
+  document.body.dataset.modus = k.dataset.m;
+  [].forEach.call(document.querySelectorAll('#modus button'), function (b) {
+    b.classList.toggle('on', b === k);
+  });
+  vulOnder();
+  schaal();
+});
+
+/* De lade duwt de pagina op zodat het ontwerp naast de uitleg blijft staan
+   en niet erachter verdwijnt — je wilt in een gesprek allebei kunnen zien. */
+function lade(open) {
+  document.body.classList.toggle('open', open);
+  document.getElementById('lade').setAttribute('aria-hidden', open ? 'false' : 'true');
+  document.documentElement.style.setProperty('--paneel', open && innerWidth > 900 ? '480px' : '0px');
+  setTimeout(schaal, 300);
+}
+document.getElementById('knop').addEventListener('click', function () {
+  lade(!document.body.classList.contains('open'));
+});
+document.getElementById('dicht').addEventListener('click', function () { lade(false); });
+addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') lade(false);
+  var n = parseInt(e.key, 10);
+  if (n >= 1 && n <= VERSIES.length) toon(VERSIES[n - 1].id);
+});
+addEventListener('resize', schaal);
+toon('v1');
+</script>
+</body>
+</html>
