@@ -43,6 +43,7 @@
 .vld .inv:focus-within{border-color:var(--dark)}
 .vld input{border:0;outline:0;width:100%;font-family:var(--body);font-size:15px;color:var(--ink);background:transparent}
 .vld input::placeholder{color:#9aa3ae}
+.tweekolom{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 
 /* de sleepzone: het hart van deze versie. Een datasheet of een foto van
    een servetje is genoeg — dat is precies hoe het nu al binnenkomt. */
@@ -73,14 +74,20 @@
 .sturen{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
 .sturen span{border:1px solid rgba(255,255,255,.3);padding:8px 14px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.82)}
 .zelfdedag{margin-top:28px;border-top:1px solid rgba(255,255,255,.2);padding-top:20px;display:flex;gap:16px;align-items:center}
-.zelfdedag .foto{width:52px;height:52px;flex:none;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.24);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:8px;color:rgba(255,255,255,.35)}
+.zelfdedag .foto{width:52px;height:52px;flex:none;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.24);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:8px;color:rgba(255,255,255,.35)}
 .zelfdedag b{font-family:var(--disp);text-transform:uppercase;font-size:19px;letter-spacing:.03em;color:#fff;display:block}
 .zelfdedag span{font-size:14px;color:rgba(255,255,255,.7);display:block;margin-top:4px}
 @media(max-width:1000px){.aanvraag .grid{grid-template-columns:1fr}}
+@media(max-width:760px){
+  .pbody{padding:20px 18px 22px}
+  .paneel .pkop,.paneel .voet{padding-left:18px;padding-right:18px}
+  .paneel .voet .btn{margin-left:0;width:100%;justify-content:center}
+  .tweekolom{grid-template-columns:1fr}
+}
 </style></head><body>
 <header class="main">
   <div class="wrap">
-    <div class="logo"><em>case</em>Builder.com</div>
+    <div class="merk"><img src="assets/woordmerk.svg" alt="Casebuilder.com"></div>
     <form class="search" onsubmit="return false">
       <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
       <input placeholder="Zoek op case, onderdeel of artikelnummer…" aria-label="Zoeken">
@@ -130,6 +137,31 @@
               </div>
             </div>
           </div>
+          <div class="tweekolom">
+            <div class="vld">
+              <label>Aantal</label>
+              <div class="inv"><input placeholder="1"></div>
+            </div>
+            <div class="vld">
+              <label>Wanneer moet hij er zijn?</label>
+              <div class="inv"><input placeholder="Geen haast"></div>
+            </div>
+          </div>
+          <!-- Budget erbij: zonder bedrag tekent Joran een case die drie keer
+               te duur kan zijn, en dan begint het gesprek opnieuw. Optioneel,
+               want wie het niet weet moet niet afhaken. -->
+          <div class="vld">
+            <label>Wat mag hij ongeveer kosten? <em>&mdash; optioneel, maar het scheelt een ronde</em></label>
+            <div class="inv"><input placeholder="Bijvoorbeeld: rond de &euro; 400 per stuk, of &euro; 5.000 voor de hele serie"></div>
+          </div>
+          <div class="vld" style="margin-bottom:0">
+            <label>Waar sturen we het naartoe?</label>
+            <div class="inv"><input placeholder="naam@bedrijf.nl"></div>
+          </div>
+        </div>
+        <div class="voet">
+          <div class="bel">Geen account nodig &middot; <b>reactie dezelfde werkdag</b><br>Vrijblijvend &mdash; je zit nergens aan vast</div>
+          <a class="btn btn-dark" href="#">Stuur op &rarr;</a>
         </div>
   </div>
 </div></section>
@@ -137,7 +169,7 @@
   <div class="wrap">
     <div class="cols">
       <div>
-        <div class="logo"><em>case</em>Builder.com</div>
+        <div class="merk"><img src="assets/woordmerk-wit.svg" alt="Casebuilder.com"></div>
         <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734">+31 (0)575 575734</a></p>
       </div>
       <div><h5>Offerte aanvragen</h5><a href="case-aanvragen-v1.html">Case aanvragen</a><a href="laten-controleren-v1.html">Maten laten controleren</a><a href="#">Series en staffels</a><a href="#">Zakelijk bestellen</a></div>

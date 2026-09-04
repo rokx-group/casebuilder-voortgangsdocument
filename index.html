@@ -539,6 +539,20 @@
   .fcheck input:checked + span { color:var(--faint); }
   .fcheck input:checked + span strong,
   .fcheck input:checked + span code { color:inherit; font-weight:400; }
+  /* Een regel is te herschrijven: klik op de tekst en typ. Het vakje blijft
+     het vakje — dáár vink je op af. Vandaar een tekstcursor op de tekst en
+     een pijl op het vakje: twee dingen om te doen, twee aanwijzers. */
+  .fcheck span[data-tekst] { cursor:text; border-radius:2px; }
+  .fcheck label:hover span[data-tekst] { box-shadow:inset 0 -1px 0 var(--line); }
+  .fcheck span[data-tekst][contenteditable] { box-shadow:none; outline:2px solid var(--accent);
+    outline-offset:3px; cursor:text; color:var(--ink); background:var(--surface); }
+  .fcheck input:checked + span[data-tekst][contenteditable] { color:var(--ink); }
+  /* Herschreven regels verliezen hun opmaak — dat is expres, zie het script.
+     Een klein merkje zodat het geen verrassing is. */
+  .fcheck span[data-tekst].eigen::after { content:" ·  bewerkt"; font-family:var(--mono,monospace);
+    font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:var(--faint); }
+  .fcheck span[data-tekst][contenteditable]::after { content:none; }
+
   /* Een regel die verwijst in plaats van afvinkt: hetzelfde ritme, maar zonder
      vakje — één besluit hoort op één plek te staan. */
   .fcheck li.fverwijs { font-size:12.5px; line-height:1.5; color:var(--faint);
@@ -4671,6 +4685,7 @@
             <li><label><input type="checkbox" data-id="web-nav"><span>Nieuwe navigatie: onderdelen blijven, maar niet meer als grootste tak</span></label></li>
             <li><label><input type="checkbox" data-id="web-zoek"><span>Zoeken op case, onderdeel &eacute;n apparatuur, met facetten die ertoe doen</span></label></li>
             <li><label><input type="checkbox" data-id="web-casevoor"><span><code>/case-voor</code> als productcatalogus: categorie plus een pagina per apparaat, met een directe bestelroute</span></label></li>
+            <li><label><input type="checkbox" data-id="web-levertijd"><span><strong>Levertijd dynamisch in de configurator</strong> &mdash; nu staat overal tien werkdagen als vast getal. Wordt de kop &quot;de snelste van Nederland&quot;, dan moet de configurator per configuratie zeggen wat het &eacute;cht wordt: druk in de werkplaats, materiaal op voorraad, aantal. <em>Voor later</em>, maar het raakt de belofte in de kop.</span></label></li>
             <li><label><input type="checkbox" data-id="web-controleren"><span>&quot;Laten controleren&quot; &mdash; maten insturen, antwoord binnen een werkdag</span></label></li>
             <li><label><input type="checkbox" data-id="web-talen"><span>Taalstructuur: blijft de locale in het pad, of gaat NL naar de root?</span></label></li>
             <li><label><input type="checkbox" data-id="web-redirects"><span>Redirect-mapping voor alle 386 adressen, plus een nette 410 voor wat vervalt</span></label></li>
@@ -4860,7 +4875,7 @@
             <span class="flab">Akkoord, of niet?</span>
             <ul class="fcheck">
               <li><label><input type="checkbox" data-id="hp-hero-richting"><span><strong>De richting: twee knoppen &middot; de werkvloer &middot; de aanvraag</strong> &mdash; hier hangt de rest van de pagina aan</span></label></li>
-              <li><label><input type="checkbox" data-id="hp-hero-kop"><span>De kop in <em>twee knoppen</em>: <strong>&quot;Millimeterwerk, in tien werkdagen&quot;</strong></span></label></li>
+              <li><label><input type="checkbox" data-id="hp-hero-kop"><span>De kop belooft nu <strong>&quot;Millimeterwerk, de snelste van Nederland&quot;</strong> in plaats van &quot;in tien werkdagen&quot;. Een claim in plaats van een getal &mdash; kunnen we hem waarmaken, en wie controleert dat? Terugnemen kan niet meer zodra hij er staat.</span></label></li>
               <li><label><input type="checkbox" data-id="hp-hero-sub"><span>Eronder: online configureren, gecontroleerd door een casebouwer, op maat gebouwd</span></label></li>
               <li><label><input type="checkbox" data-id="hp-hero-specs"><span>De vier regels onderaan: 10 werkdagen &middot; prijs direct zichtbaar &middot; bouwpakket of kant-en-klaar &middot; specialist kijkt mee</span></label></li>
               <li><label><input type="checkbox" data-id="hp-hero-video"><span>Bij <em>de werkvloer</em>: een fabrieksverhaal vraagt echte beelden &mdash; wie draait die, en wanneer? De opnamebrief ligt klaar</span></label></li>
@@ -5527,6 +5542,94 @@
             tel();
           }, 500);
         });
+      });
+
+      // ── regels herschrijven ────────────────────────────────
+      // Een afvinklijst is nooit meteen goed: tijdens het gesprek blijkt een
+      // regel te vaag of net verkeerd geformuleerd. Dan moet je hem daar
+      // kunnen bijschrijven, niet onthouden dat je hem later moet aanpassen.
+      //
+      // De tekst gaat als platte tekst over de lijn en komt met textContent
+      // terug in beeld, nooit met innerHTML. Deze pagina staat open op een
+      // URL zonder slot: wie hem kent kan schrijven. Zou opgeslagen HTML
+      // teruggezet worden, dan is één regel genoeg om script bij iedereen
+      // binnen te krijgen. Dat weegt zwaarder dan de vetjes in één regel.
+      //
+      // Daarom ook: een herschreven regel is plat. De oorspronkelijke opmaak
+      // staat er weer zodra je hem leegmaakt.
+      var spannen = Array.prototype.slice.call(wortel.querySelectorAll('.fcheck input[data-id] + span'));
+      var origineel = new Map();
+
+      function veldnaam(span) { return 'tekst-' + span.previousElementSibling.getAttribute('data-id'); }
+
+      function zetTekst(span, tekst) {
+        if (tekst) {
+          span.textContent = tekst;
+          span.classList.add('eigen');
+        } else {
+          span.innerHTML = origineel.get(span);
+          span.classList.remove('eigen');
+        }
+      }
+
+      spannen.forEach(function (span) {
+        span.setAttribute('data-tekst', '');
+        origineel.set(span, span.innerHTML);
+        var voor = null;
+
+        function open() {
+          if (span.isContentEditable) return;
+          voor = staat.notitie[veldnaam(span)] || '';
+          // plaintext-only houdt opmaak er bij plakken al uit; waar dat niet
+          // bestaat vangt de commit het af, die leest alleen textContent.
+          span.setAttribute('contenteditable', 'plaintext-only');
+          if (!span.isContentEditable) span.setAttribute('contenteditable', 'true');
+          span.focus();
+        }
+
+        function sluit(bewaren) {
+          if (!span.isContentEditable) return;
+          var nieuw = bewaren ? span.textContent.replace(/\s+/g, ' ').trim() : voor;
+          span.removeAttribute('contenteditable');
+          // Terug naar de oorspronkelijke regel als hij leeg is of ongewijzigd
+          // hetzelfde zegt: dan is er niets eigens en mag de opmaak terug.
+          if (nieuw === origineel.get(span).replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim()) nieuw = '';
+          zetTekst(span, nieuw);
+          if (!bewaren || nieuw === (voor || '')) return;
+          var veld = veldnaam(span);
+          if (nieuw) staat.notitie[veld] = nieuw; else delete staat.notitie[veld];
+          bewaar(span.closest('.ft'));
+          stuur('notitie', veld, nieuw);
+        }
+
+        // Klik op de tekst opent de regel; het label mag dan niet ook het
+        // vakje omzetten, want dan vink je af terwijl je wilde typen.
+        span.addEventListener('mousedown', function (e) {
+          if (span.isContentEditable) return;
+          e.preventDefault();
+          open();
+        });
+        span.addEventListener('click', function (e) { e.preventDefault(); });
+        span.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') { e.preventDefault(); sluit(true); }
+          else if (e.key === 'Escape') { e.preventDefault(); sluit(false); }
+        });
+        span.addEventListener('blur', function () { sluit(true); });
+      });
+
+      // Wat een ander herschreef moet ook hier verschijnen. toon() regelt de
+      // vinkjes en de opmerkingen; de regels hangen we er hier achter.
+      var toonVakjes = toon;
+      toon = function (stand) {
+        toonVakjes(stand);
+        spannen.forEach(function (span) {
+          if (span.isContentEditable) return;   // niet onder iemands handen vandaan
+          zetTekst(span, (staat.notitie || {})[veldnaam(span)] || '');
+        });
+      };
+
+      spannen.forEach(function (span) {
+        zetTekst(span, staat.notitie[veldnaam(span)] || '');
       });
 
       tel();
