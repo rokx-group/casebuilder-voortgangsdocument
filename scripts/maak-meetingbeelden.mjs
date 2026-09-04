@@ -27,6 +27,9 @@ const BREEDTE = 1440, HOOGTE = 900;
 const SCHAAL = 0.5; // 720px breed is ruim genoeg voor een tegel, ook op retina
 
 const BRON = "mockups/homepage-v1.html";
+/* Een enkele tegel gaat over een band die v1 niet heeft; die halen we uit
+   de versie die hem wel heeft. */
+const ANDERE_BRON = { "usps": "mockups/homepage-v7.html" };
 const MAP = "mockups/assets/meeting-4sep";
 
 /** Per meetingtegel: welk stuk pagina hoort erbij. `heel` = de hele pagina. */
@@ -37,6 +40,7 @@ const TEGELS = [
   { naam: "04-modellen",   selectors: ["section.models"] },
   { naam: "05-vertrouwen", selectors: ["section.assure", "section.trust"] },
   { naam: "06-onderdelen", selectors: ["section.build", "section.closer"] },
+  { naam: "usps",          selectors: ['[data-band="belofte"]'] },
   // Tegel 07 gaat over wat in geen enkel blok past. Daar hoort geen uitsnede bij:
   // de hele pagina als tegelbeeld is even hoog als de rest van de tab samen.
 ];
@@ -94,23 +98,29 @@ try {
   await stuur(ws, ++id, "Page.enable");
   await stuur(ws, ++id, "Emulation.setDeviceMetricsOverride",
     { width: BREEDTE, height: HOOGTE, deviceScaleFactor: 1, mobile: false });
-  await stuur(ws, ++id, "Page.navigate", { url: "file://" + resolve(wortel, BRON) });
+  var huidigeBron = null;
+  async function open(bron) {
+    if (bron === huidigeBron) return;
+    huidigeBron = bron;
+    await stuur(ws, ++id, "Page.navigate", { url: "file://" + resolve(wortel, bron) });
 
-  // wachten op de weblettertypen: die bepalen de regelafbreking en dus de hoogtes
-  for (let i = 0; i < 60; i++) {
-    await new Promise((r) => setTimeout(r, 250));
-    const { result } = await stuur(ws, ++id, "Runtime.evaluate",
-      { expression: "document.readyState === 'complete' && document.fonts.status === 'loaded'", returnByValue: true });
-    if (result.value) break;
+    // wachten op de weblettertypen: die bepalen de regelafbreking en dus de hoogtes
+    for (let i = 0; i < 60; i++) {
+      await new Promise((r) => setTimeout(r, 250));
+      const { result } = await stuur(ws, ++id, "Runtime.evaluate",
+        { expression: "document.readyState === 'complete' && document.fonts.status === 'loaded'", returnByValue: true });
+      if (result.value) break;
+    }
+    // de versiebalk hoort bij de mockup, niet bij het ontwerp
+    await stuur(ws, ++id, "Runtime.evaluate", {
+      expression: "document.querySelectorAll('.versiebalk,.vouwlijn,.vouwmeet').forEach(el => el.remove())",
+    });
   }
-  // de versiebalk hoort bij de mockup, niet bij het ontwerp
-  await stuur(ws, ++id, "Runtime.evaluate", {
-    expression: "document.querySelectorAll('.versiebalk,.vouwlijn,.vouwmeet').forEach(el => el.remove())",
-  });
 
   mkdirSync(join(wortel, MAP), { recursive: true });
 
   for (const tegel of TEGELS) {
+    await open(ANDERE_BRON[tegel.naam] || BRON);
     const { result } = await stuur(ws, ++id, "Runtime.evaluate",
       { expression: METEN(tegel.selectors), returnByValue: true });
     if (result.value.fout) throw new Error(`${tegel.naam}: ${result.value.fout}`);
