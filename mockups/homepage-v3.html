@@ -100,6 +100,69 @@
 @media(max-width:1080px){.ingangen{grid-template-columns:1fr}.assure .grid,.build .grid{grid-template-columns:1fr;gap:36px}}
 @media(max-width:760px){.hero .wrap{padding-top:56px;padding-bottom:52px}.hero .specs div{min-width:50%;padding-right:12px}
   .again .btn{margin-left:0}.assure .steps{padding-left:20px}}
+
+/* ── de tweede knop is een veld ───────────────────────────────
+   Overgenomen uit v12. Wie zijn case niet bij naam kent kon alleen
+   een overzicht doorbladeren; hier begint hij met het enige wat hij
+   zeker weet — wat hij bij zich draagt. Kennen we het, dan de
+   categoriepagina; kennen we het niet, dan gaat zijn tekst mee naar
+   de aanvraag. Lijst en gedrag: assets/toepassingen.js en
+   assets/vervoeren.js. */
+/* ── het veld in de hero ─────────────────────────────────────
+   De knop blijft staan en het veld groeit er rechts uit; daardoor
+   verspringt de knop niet en blijft de hero rustig terwijl je typt.
+   Openklappen gebeurt op hover én op focus, want met de muis erheen
+   gaan en met tab erheen gaan moeten hetzelfde doen. */
+.vervoer{position:relative;display:flex;align-items:stretch}
+.vervoer-knop{font-family:var(--disp);text-transform:uppercase;letter-spacing:.05em;font-weight:700;
+  font-size:16px;padding:15px 26px;border:1.5px solid rgba(255,255,255,.35);background:transparent;
+  color:#fff;cursor:pointer;transition:.15s;white-space:nowrap}
+.vervoer:hover .vervoer-knop,.vervoer.is-open .vervoer-knop{border-color:var(--cyan);color:var(--cyan)}
+.vervoer.is-open .vervoer-knop{border-right-color:transparent}
+.vervoer-veld{display:flex;align-items:stretch;width:0;overflow:hidden;
+  transition:width .28s cubic-bezier(.2,.7,.2,1)}
+.vervoer.is-open .vervoer-veld{width:min(380px,44vw)}
+.vervoer-veld input{width:100%;min-width:0;border:1.5px solid var(--cyan);border-left:0;border-right:0;
+  background:rgba(255,255,255,.09);color:#fff;font-family:var(--body);font-size:16px;padding:0 16px;outline:0}
+.vervoer-veld input::placeholder{color:rgba(255,255,255,.5)}
+.vervoer-veld input:focus{background:rgba(255,255,255,.15)}
+.vervoer-ga{border:1.5px solid var(--cyan);border-left:0;background:var(--cyan);color:var(--void);
+  font-size:18px;line-height:1;padding:0 18px;cursor:pointer;transition:.15s}
+.vervoer-ga:hover{background:#8ad3ef}
+
+.vervoer-lijst{position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:40;margin:0;padding:6px;
+  list-style:none;background:#fff;border:1px solid var(--rule);box-shadow:0 16px 34px rgba(0,40,70,.22)}
+.vervoer-lijst li{display:flex;align-items:baseline;gap:12px;padding:9px 12px;cursor:pointer}
+.vervoer-lijst li.aan,.vervoer-lijst li:hover{background:var(--lightblue)}
+.vervoer-lijst .nm{font-size:15px;color:var(--ink)}
+.vervoer-lijst .gr{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--blue)}
+/* De regel onder het veld zegt wat er gebeurt als we het niet kennen.
+   Zonder die regel voelt typen als een gok. */
+.vervoer-uitleg{margin-top:14px;font-size:13.5px;color:rgba(255,255,255,.62)}
+.vervoer-uitleg b{color:rgba(255,255,255,.85);font-weight:500}
+
+@media(prefers-reduced-motion:reduce){
+  .vervoer-veld{transition:none}
+  .megamenu{transition:none}
+}
+@media(max-width:760px){
+  /* Geen hover op een telefoon: het veld staat daar meteen open, want
+     een knop die alleen op tap opengaat kost een handeling extra. */
+  .vervoer{flex-wrap:wrap;width:100%}
+  .vervoer-knop{display:none}
+  .vervoer-veld{width:100%}
+  .vervoer-veld input{border-left:1.5px solid var(--cyan)}
+@media(max-width:760px){
+  /* Geen hover op een telefoon: het veld staat daar meteen open, want
+     een knop die alleen op tap opengaat kost een handeling extra. */
+  .vervoer{flex-wrap:wrap;width:100%}
+  .vervoer-knop{display:none}
+  .vervoer-veld{width:100%}
+  .vervoer-veld input{border-left:1.5px solid var(--cyan)}
+  
+  .megamenu .wrap{grid-template-columns:1fr;gap:24px}
+}
 </style>
 </head>
 <body data-film="precisie">
@@ -149,8 +212,19 @@
     <p class="sub">Online configureren, gecontroleerd door een casebouwer, op maat gebouwd.</p>
     <div class="cta">
       <a class="btn btn-pri" href="#">Start met configureren →</a>
-      <a class="btn btn-ghost" href="case-voor-v1.html">Wat ga je vervoeren?</a>
+      <div class="vervoer" data-vervoer>
+        <button type="button" class="vervoer-knop" aria-expanded="false" aria-controls="vervoer-veld">Wat ga je vervoeren?</button>
+        <div class="vervoer-veld" id="vervoer-veld">
+          <input type="text" autocomplete="off" spellcheck="false"
+                 role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="vervoer-lijst"
+                 aria-label="Wat ga je vervoeren?"
+                 placeholder="Bijvoorbeeld: mengtafel Midas M32">
+          <button type="button" class="vervoer-ga" aria-label="Zoeken">&rarr;</button>
+        </div>
+        <ul class="vervoer-lijst" id="vervoer-lijst" role="listbox" aria-label="Toepassingen" hidden></ul>
+      </div>
     </div>
+      <p class="vervoer-uitleg">Kennen we het? Dan zie je meteen de cases ervoor. <b>Kennen we het niet, dan gaat je tekst mee naar de aanvraag.</b></p>
     <div class="specs">
       <div><div class="k">// LEVERTIJD</div><div class="v">De snelste van Nederland</div></div>
       <div><div class="k">// PRIJS</div><div class="v">Direct zichtbaar</div></div>
@@ -259,6 +333,7 @@
   </div>
 </footer>
 
+<script src="assets/navzoek.js"></script>
 <script src="assets/vouw.js"></script>
 <script src="assets/versies.js"></script>
 <script src="assets/uitsnede.js"></script>
