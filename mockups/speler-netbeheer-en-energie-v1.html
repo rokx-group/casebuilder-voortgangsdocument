@@ -36,7 +36,7 @@
 </style></head><body>
 <header class="main">
   <div class="wrap">
-    <div class="merk"><img src="assets/woordmerk.svg" alt="Casebuilder.com"></div>
+    <div class="logo"><em>case</em>Builder.com</div>
     <form class="search" onsubmit="return false">
       <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
       <input placeholder="Zoek op case, onderdeel of artikelnummer…" aria-label="Zoeken">
@@ -51,10 +51,53 @@
   <div class="wrap">
     <a href="case-aanvragen-v1.html">Case aanvragen</a>
     <a href="case-voor-v1.html">Wat ga je vervoeren?</a>
-    <a href="configurator-v1.html">Zelf configureren</a>
-    <a href="flightcases-v1.html">Flightcases</a>
+
+    <!-- Flightcases draagt nu drie ingangen tegelijk: waarvoor, welk
+         model, en zelf bouwen. Zelf configureren stond hiervoor los in
+         de balk; als top-level item concurreerde het met Flightcases
+         terwijl het er een onderdeel van is. -->
+    <span class="heeft-menu">
+      <a href="flightcases-v1.html">Flightcases</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// WAAR GEBRUIK JE HEM VOOR</h4>
+            <ul>
+              <li><a href="branche-audio-visueel-v1.html">Audio-visueel en podium<span class="n">22</span></a></li>
+              <li><a href="branche-broadcast-en-media-v1.html">Broadcast en media<span class="n">9</span></a></li>
+              <li><a href="branche-industrie-en-machinebouw-v1.html">Industrie en machinebouw<span class="n">14</span></a></li>
+              <li><a href="branche-meet-en-testapparatuur-v1.html">Meet- en testapparatuur<span class="n">11</span></a></li>
+              <li><a href="branche-defensie-v1.html">Defensie<span class="n">7</span></a></li>
+              <li><a href="branche-schaalmodellen-v1.html">Schaalmodellen<span class="n">5</span></a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// MODELLEN</h4>
+            <ul>
+              <li><a href="casetype-rackcase-enkel-deksel-v1.html">Rackcase enkel deksel</a></li>
+              <li><a href="casetype-rackcase-dubbel-deksel-v1.html">Rackcase dubbel deksel</a></li>
+              <li><a href="casetype-trunccase-v1.html">Trunccase</a></li>
+              <li><a href="casetype-hoedcase-v1.html">Hoedcase</a></li>
+              <li><a href="casetype-koffer-v1.html">Koffer</a></li>
+              <li><a href="flightcases-v1.html">Alle modellen &rarr;</a></li>
+            </ul>
+          </div>
+          <div class="zelf">
+            <b>Zelf configureren</b>
+            <p>Jouw maten invullen en de prijs zien terwijl je typt. Een casebouwer kijkt je opgave na voordat we zagen.</p>
+            <a class="btn btn-dark" href="configurator-v1.html">Start met configureren &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </span>
+
     <a href="branches.html">Branches</a>
     <a href="service-hub-v1.html">Service</a>
+    <!-- Shop staat achteraan: wie het assortiment zoekt weet dat al, en
+         de drie ingangen ervoor zijn voor wie dat niet weet. -->
+    <!-- Shop wijst voorlopig naar /case-voor: de webshop zelf bestaat nog
+         niet als eigen ingang, en een dode link is erger dan een omweg. -->
+    <a href="case-voor-v1.html">Shop</a>
     <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#">NL &#9662;</a></div>
   </div>
 </nav>
@@ -83,7 +126,7 @@
   <div class="wrap">
     <div class="cols">
       <div>
-        <div class="merk"><img src="assets/woordmerk-wit.svg" alt="Casebuilder.com"></div>
+        <div class="logo"><em>case</em>Builder.com</div>
         <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734">+31 (0)575 575734</a></p>
       </div>
       <div><h5>Offerte aanvragen</h5><a href="case-aanvragen-v1.html">Case aanvragen</a><a href="laten-controleren-v1.html">Maten laten controleren</a><a href="#">Series en staffels</a><a href="#">Zakelijk bestellen</a></div>
