@@ -80,11 +80,62 @@ header.main.gekrompen .merk .bm{max-width:70px;opacity:1;transition-delay:0s,.16
 .hero{background:var(--white);color:var(--ink);position:relative;overflow:hidden;
   border-bottom:1px solid var(--rule)}
 .hero .wrap{padding-top:74px;padding-bottom:0;position:relative;z-index:1}
-/* Geen kist naast de kop meer: een foto van één trunccase belooft één
-   product, terwijl deze pagina er 533 verkoopt. Zonder foto is de kop
-   het enige dat er staat, dus die krijgt de volle breedte en de
-   specband eronder doet het bewijs. */
+/* Kop links, de draaiende kist rechts. Geen productfoto: die belooft
+   één product terwijl deze pagina er 533 verkoopt. Een kist die draait
+   én van maat verandert laat juist zien dat je hem zelf bepaalt. */
+.hero .grid{display:grid;grid-template-columns:1.02fr .98fr;gap:48px;align-items:center}
 .hero .kop{padding-bottom:8px}
+
+/* ── de draaiende kist ────────────────────────────────────────
+   Een flightcase is een balk, dus een balk in CSS-3D is geen namaak van
+   het product maar het product zelf. Twee dingen die een fotospin niet
+   heeft: hij draait op élke hoek, en zijn afmetingen zijn getallen —
+   de kist wordt breder omdat de breedte verandert, niet omdat er een
+   andere foto laadt. De maten komen uit assets/draaikist.js. */
+.kistvak{display:flex;flex-direction:column;align-items:center;gap:18px}
+.kist3d{position:relative;width:100%;height:330px;perspective:1400px;cursor:grab;
+  touch-action:none;user-select:none}
+.kist3d.pakt{cursor:grabbing}
+.kubus{position:absolute;left:50%;top:47%;width:0;height:0;transform-style:preserve-3d}
+
+/* Elk vlak: zwart paneel met een aluminium profiel eromheen en balhoeken
+   op de vier punten — dat profiel en die hoeken zijn wat een flightcase
+   een flightcase maakt. */
+.zij{position:absolute;left:50%;top:50%;box-sizing:border-box;
+  background:
+    radial-gradient(circle at 8px 8px, #cfd5d9 3.5px, transparent 4px),
+    radial-gradient(circle at calc(100% - 8px) 8px, #cfd5d9 3.5px, transparent 4px),
+    radial-gradient(circle at 8px calc(100% - 8px), #cfd5d9 3.5px, transparent 4px),
+    radial-gradient(circle at calc(100% - 8px) calc(100% - 8px), #cfd5d9 3.5px, transparent 4px),
+    linear-gradient(125deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 42%),
+    #15191c;
+  border:3px solid #b2babf;
+  box-shadow:inset 0 0 34px rgba(0,0,0,.62);
+  transition:width .75s cubic-bezier(.4,0,.2,1), height .75s cubic-bezier(.4,0,.2,1),
+             transform .75s cubic-bezier(.4,0,.2,1)}
+.voor  {width:var(--b);height:var(--h);transform:translate(-50%,-50%) translateZ(calc(var(--d) / 2))}
+.achter{width:var(--b);height:var(--h);transform:translate(-50%,-50%) rotateY(180deg) translateZ(calc(var(--d) / 2))}
+.links {width:var(--d);height:var(--h);transform:translate(-50%,-50%) rotateY(-90deg) translateZ(calc(var(--b) / 2))}
+.rechts{width:var(--d);height:var(--h);transform:translate(-50%,-50%) rotateY(90deg) translateZ(calc(var(--b) / 2))}
+.boven {width:var(--b);height:var(--d);transform:translate(-50%,-50%) rotateX(90deg) translateZ(calc(var(--h) / 2))}
+.onder {width:var(--b);height:var(--d);transform:translate(-50%,-50%) rotateX(-90deg) translateZ(calc(var(--h) / 2))}
+/* De greep op het voorpaneel: zonder dat leest de balk als een doos. */
+.voor::after{content:"";position:absolute;left:50%;top:50%;width:78px;height:19px;
+  transform:translate(-50%,-50%);background:#9aa3a9;
+  box-shadow:inset 0 2px 3px rgba(255,255,255,.35), inset 0 -2px 4px rgba(0,0,0,.5)}
+/* Schaduw op de vloer, plat gedraaid zodat hij met de kist meedraait. */
+.grond{position:absolute;left:50%;top:76%;width:300px;height:70px;transform:translate(-50%,-50%);
+  background:radial-gradient(ellipse at center, rgba(0,51,82,.26) 0%, rgba(0,51,82,0) 68%);
+  pointer-events:none}
+.kmaat{position:absolute;left:50%;bottom:0;transform:translateX(-50%);background:var(--dark);color:#fff;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;
+  padding:7px 12px;white-space:nowrap}
+.maatknoppen{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.maatknoppen button{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  padding:7px 12px;border:1px solid var(--rule);background:#fff;color:var(--mute);cursor:pointer}
+.maatknoppen button:hover{border-color:var(--dark);color:var(--dark)}
+.maatknoppen button.aan{background:var(--dark);border-color:var(--dark);color:#fff}
+@media(max-width:900px){.hero .grid{grid-template-columns:1fr}.kist3d{height:270px}}
 .hero h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:.02em;
   font-size:clamp(46px,6.4vw,92px);line-height:.94;color:var(--dark);max-width:16ch;margin:18px 0 0}
 .hero h1 .acc{color:var(--blue)}
@@ -377,6 +428,7 @@ header.main.gekrompen .merk .bm{max-width:70px;opacity:1;transition-delay:0s,.16
      bezoeker met een aanvraag wil. -->
 <div class="hero ruit ruit-aanzet" data-band="hero">
   <div class="wrap">
+    <div class="grid">
     <div class="kop">
       <div class="ey ey-dark">// PRIJS DIRECT ZICHTBAAR &middot; GEEN WACHTTIJD</div>
       <h1>Millimeterwerk,<br><span class="acc">de snelste van Nederland</span></h1>
@@ -385,6 +437,28 @@ header.main.gekrompen .merk .bm{max-width:70px;opacity:1;transition-delay:0s,.16
         <a class="btn btn-dark" href="configurator-v1.html">Start met configureren &rarr;</a>
         <a class="btn btn-out" href="case-voor-v1.html">Wat ga je vervoeren?</a>
       </div>
+    </div>
+
+    <div class="kistvak">
+      <div class="kist3d" data-draaikist title="Sleep om te draaien">
+        <div class="kubus">
+          <div class="zij achter"></div>
+          <div class="zij links"></div>
+          <div class="zij rechts"></div>
+          <div class="zij boven"></div>
+          <div class="zij onder"></div>
+          <div class="zij voor"></div>
+        </div>
+        <div class="grond"></div>
+        <span class="kmaat"></span>
+      </div>
+      <div class="maatknoppen">
+        <button type="button" data-maat class="aan">Trunccase</button>
+        <button type="button" data-maat>Rackcase 6 HE</button>
+        <button type="button" data-maat>Hoedcase</button>
+        <button type="button" data-maat>Koffer</button>
+      </div>
+    </div>
     </div>
 
     <div class="specs">
@@ -704,6 +778,7 @@ header.main.gekrompen .merk .bm{max-width:70px;opacity:1;transition-delay:0s,.16
 <script src="assets/merkkrimp.js"></script>
 <script src="assets/wisselkop.js"></script>
 <script src="assets/vouw.js"></script>
+<script src="assets/draaikist.js"></script>
 <script src="assets/versies.js"></script>
 <script src="assets/uitsnede.js"></script>
 </body>
