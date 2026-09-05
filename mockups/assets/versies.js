@@ -48,6 +48,9 @@
       { id: 'wireframe', bestand: 'flightcases.html', label: 'wireframe' },
       { id: 'v1', bestand: 'flightcases-v1.html', label: 'v1 · beeld' }
     ],
+    'over-ons': [
+      { id: 'v1', bestand: 'over-ons-v1.html', label: 'v1' }
+    ],
     'case-voor': [
       { id: 'v1', bestand: 'case-voor-v1.html', label: 'v1' },
       { id: 'v2', bestand: 'case-voor-v2.html', label: 'v2 · index' },
