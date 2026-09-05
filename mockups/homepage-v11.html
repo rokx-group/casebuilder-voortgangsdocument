@@ -19,8 +19,8 @@
    openen met een donker beeld en een kop eroverheen. Dat werkt — maar
    het is ook precies wat elke concurrent doet, en het maakt van de
    eerste seconde een sfeerbeeld in plaats van een aanbod. Wit draait
-   dat om: de kist staat er, de belofte staat ernaast, en er is niets
-   om doorheen te kijken.
+   dat om: de belofte staat er kaal, en er is niets om doorheen te
+   kijken. Ook geen productfoto &mdash; zie de hero hieronder.
 
    Het merk kan het hebben. Het brandbook zet koppen in Casebuilder
    Donker en houdt wit voor donkere pagina's, dus een lichte pagina is
@@ -60,9 +60,14 @@ header.main.gekrompen .merk .bm{max-width:70px;opacity:1;transition-delay:0s,.16
 }
 
 /* ── hero — licht ───────────────────────────────────────────
-   Wit met de blueprint-ruit eronder, kop links, kist rechts. Geen scrim,
-   geen overlay, geen tekst-op-beeld: het beeld staat naast de belofte in
-   plaats van eronder, en dat is het hele idee van deze versie.
+   Wit met de blueprint-ruit eronder, en verder alleen de kop. Geen
+   scrim, geen overlay, geen tekst-op-beeld.
+
+   Hier stond een trunccase naast de kop. Die is eruit: één foto van één
+   kist belooft één product, terwijl deze pagina er 533 verkoopt &mdash; en
+   welke kist je ook kiest, hij is de verkeerde voor de bezoeker die iets
+   anders vervoert. De specband eronder doet het bewijs nu, met feiten in
+   plaats van een plaatje.
 
    De kop is Casebuilder Donker en niet zwart — brandbook §04, en het is
    ook waarom dit werkt: donkerblauw op wit heeft genoeg contrast om
@@ -75,24 +80,16 @@ header.main.gekrompen .merk .bm{max-width:70px;opacity:1;transition-delay:0s,.16
 .hero{background:var(--white);color:var(--ink);position:relative;overflow:hidden;
   border-bottom:1px solid var(--rule)}
 .hero .wrap{padding-top:74px;padding-bottom:0;position:relative;z-index:1}
-.hero .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+/* Geen kist naast de kop meer: een foto van één trunccase belooft één
+   product, terwijl deze pagina er 533 verkoopt. Zonder foto is de kop
+   het enige dat er staat, dus die krijgt de volle breedte en de
+   specband eronder doet het bewijs. */
+.hero .kop{padding-bottom:8px}
 .hero h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:.02em;
-  font-size:clamp(46px,6vw,86px);line-height:.94;color:var(--dark);max-width:12ch;margin:18px 0 0}
+  font-size:clamp(46px,6.4vw,92px);line-height:.94;color:var(--dark);max-width:16ch;margin:18px 0 0}
 .hero h1 .acc{color:var(--blue)}
-.hero p.sub{margin-top:20px;max-width:46ch;font-size:18px;color:var(--mute)}
+.hero p.sub{margin-top:20px;max-width:52ch;font-size:18px;color:var(--mute)}
 .hero .cta{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap}
-
-/* De kist staat op wit en niet in een kader: een rand eromheen maakt er
-   een productfoto van, en dit moet lezen als het ding zelf. De schaduw
-   houdt hem van de achtergrond af zonder hem in te lijsten. */
-.hero .kist{position:relative;align-self:end}
-.hero .kist img{width:100%;height:auto;display:block;
-  filter:drop-shadow(0 30px 50px rgba(0,51,82,.22))}
-/* Het maatlabel: mono, want het is een getal — en het zegt in één regel
-   waar deze hele site over gaat. */
-.hero .maat{position:absolute;left:0;bottom:14px;background:var(--dark);color:#fff;
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
-  padding:7px 12px}
 
 /* Specband onderaan de hero, nog op wit: de vier feiten van v10 plus de
    ervaring, als voet van de hero in plaats van een eigen donkere balk.
@@ -380,19 +377,13 @@ header.main.gekrompen .merk .bm{max-width:70px;opacity:1;transition-delay:0s,.16
      bezoeker met een aanvraag wil. -->
 <div class="hero ruit ruit-aanzet" data-band="hero">
   <div class="wrap">
-    <div class="grid">
-      <div>
-        <div class="ey ey-dark">// PRIJS DIRECT ZICHTBAAR &middot; GEEN WACHTTIJD</div>
-        <h1>Millimeterwerk,<br><span class="acc">de snelste van Nederland</span></h1>
-        <p class="sub">Online configureren, gecontroleerd door een casebouwer, gebouwd in onze eigen werkplaats in Doesburg.</p>
-        <div class="cta">
-          <a class="btn btn-dark" href="configurator-v1.html">Start met configureren &rarr;</a>
-          <a class="btn btn-out" href="case-voor-v1.html">Wat ga je vervoeren?</a>
-        </div>
-      </div>
-      <div class="kist">
-        <img src="assets/flightcase-trunccase.jpg" alt="Trunccase met bovendeksel en wielen">
-        <span class="maat">600 &times; 400 &times; 400 mm &middot; op maat</span>
+    <div class="kop">
+      <div class="ey ey-dark">// PRIJS DIRECT ZICHTBAAR &middot; GEEN WACHTTIJD</div>
+      <h1>Millimeterwerk,<br><span class="acc">de snelste van Nederland</span></h1>
+      <p class="sub">Online configureren, gecontroleerd door een casebouwer, gebouwd in onze eigen werkplaats in Doesburg.</p>
+      <div class="cta">
+        <a class="btn btn-dark" href="configurator-v1.html">Start met configureren &rarr;</a>
+        <a class="btn btn-out" href="case-voor-v1.html">Wat ga je vervoeren?</a>
       </div>
     </div>
 
