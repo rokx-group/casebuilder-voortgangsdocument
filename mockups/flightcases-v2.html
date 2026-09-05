@@ -59,6 +59,10 @@
    De afmetingen per model zijn voorbeeldmaten tot er productdata is;
    ze staan in de markup, op de knoppen. */
 .ovkop .grid{display:grid;grid-template-columns:1.02fr .98fr;gap:48px;align-items:center}
+/* De knoppen stonden tegen de lopende tekst aan: .cta bestond hier nog
+   niet, dus er was geen ruimte boven. */
+.ovkop .cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+.ovkop .lead{max-width:52ch}
 /* ── de draaiende kist ────────────────────────────────────────
    Een flightcase is een balk, dus een balk in CSS-3D is geen namaak van
    het product maar het product zelf. Twee dingen die een fotospin niet
@@ -109,6 +113,28 @@
 .maatknoppen button:hover{border-color:var(--dark);color:var(--dark)}
 .maatknoppen button.aan{background:var(--dark);border-color:var(--dark);color:#fff}
 @media(max-width:900px){.ovkop .grid{grid-template-columns:1fr}.kist3d{height:270px}}
+/* ── in het veld ──────────────────────────────────────────────
+   Tussen de kop en de vijf modellen. Wie hier binnenkomt weet wat hij
+   vervoert, niet hoe een flightcase heet — en die vertaalslag maakt de
+   modellenrij eronder niet. Deze strook doet dat wel: per foto staat er
+   wat erin gaat en welk model dat werd, met een link naar de branche.
+
+   Foto's over de volle breedte, geen kaders: dit is bewijs dat de
+   kisten bestaan, geen tweede productoverzicht. */
+.veld{padding:52px 0 8px}
+.veld .rij{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:26px}
+.veld a{display:flex;flex-direction:column;text-decoration:none}
+.veld .im{aspect-ratio:4/3;overflow:hidden;background:var(--bg)}
+.veld .im img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.veld a:hover .im img{transform:scale(1.045)}
+.veld .wat{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:18px;
+  letter-spacing:.03em;color:var(--dark);margin-top:14px;line-height:1.1}
+.veld .mdl{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--blue);margin-top:7px}
+.veld p{font-size:13.5px;color:var(--mute);margin-top:8px;line-height:1.5}
+.veld a:hover .wat{color:var(--blue)}
+@media(max-width:1080px){.veld .rij{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.veld .rij{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -182,6 +208,44 @@
     </div>
   </div>
 </div>
+
+
+<section class="veld">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ey ey-dark">// IN HET VELD</div>
+      <h2 style="font-size:32px;margin-top:12px">Waar deze modellen terechtkomen</h2>
+      <p class="lead" style="margin-top:10px;max-width:60ch">Je weet wat je vervoert, niet hoe een
+        flightcase heet. Dit is wat er bij anderen in ging, en welk model dat werd.</p>
+    </div>
+    <div class="rij">
+      <a href="branche-audio-visueel-v1.html">
+        <div class="im"><img src="assets/foto-audio-visueel.jpg" alt="Moving heads op tour" loading="lazy"></div>
+        <span class="wat">Moving heads op tour</span>
+        <span class="mdl">// Trunccase &middot; op wielen</span>
+        <p>Vier armaturen in &eacute;&eacute;n kist met vakverdeling. Tien keer per jaar de vrachtwagen in en uit.</p>
+      </a>
+      <a href="case-voor-v1.html">
+        <div class="im"><img src="assets/foto-broadcast-en-media.jpg" alt="Drone met accu&#39;s en controller in een koffer" loading="lazy"></div>
+        <span class="wat">Drone, accu&#39;s en controller</span>
+        <span class="mdl">// Koffer &middot; uitgefreesd schuim</span>
+        <p>Elk onderdeel in een eigen uitsparing, ook de propellers. Open de koffer en je vliegt.</p>
+      </a>
+      <a href="branche-meet-en-testapparatuur-v1.html">
+        <div class="im"><img src="assets/foto-meet-en-testapparatuur.jpg" alt="Meetopstelling in een trunccase in bedrijfskleur" loading="lazy"></div>
+        <span class="wat">Meetopstelling het terrein op</span>
+        <span class="mdl">// Trunccase &middot; in eigen kleur</span>
+        <p>Draagpunten op de behuizing, nooit op het display. Zeven kleuren, dus je ziet van ver wiens kist het is.</p>
+      </a>
+      <a href="casetype-rackcase-dubbel-deksel-v1.html">
+        <div class="im"><img src="assets/foto-industrie-en-machinebouw.jpg" alt="19-inch apparatuur met bekabeling achterin" loading="lazy"></div>
+        <span class="wat">19-inch tussen twee locaties</span>
+        <span class="mdl">// Rackcase dubbel &middot; bekabeling achterin</span>
+        <p>Voor- &eacute;n achterdeksel, want de kabels zitten achter. Aansluiten zonder de kist te draaien.</p>
+      </a>
+    </div>
+  </div>
+</section>
 
 <div class="wrap">
   <div class="modellen">
@@ -288,6 +352,7 @@
     <div class="bot"><span>KVK 09123456</span><span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span></div>
   </div>
 </footer>
+<script src="assets/navzoek.js"></script>
 <script src="assets/vouw.js"></script>
 <script src="assets/draaikist.js"></script>
 <script src="assets/versies.js"></script>
