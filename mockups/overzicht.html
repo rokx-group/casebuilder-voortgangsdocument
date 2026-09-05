@@ -35,7 +35,7 @@ figcaption{font:500 10px 'IBM Plex Mono',monospace;letter-spacing:.05em;color:va
   padding:7px 10px;border-bottom:1px solid var(--rule);display:flex;gap:8px;align-items:center}
 figcaption .n{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 figcaption .maat{margin-left:auto;background:var(--cyan);color:var(--void);padding:1px 6px;
-  border-radius:2px;text-transform:uppercase;font-size:9px;letter-spacing:.1em}
+  text-transform:uppercase;font-size:9px;letter-spacing:.1em}
 /* Alleen de bovenkant, verkleind: zo passen er veel naast elkaar en valt een
    afwijkende hero binnen een groep meteen op. */
 .raam{height:206px;overflow:hidden;background:var(--bg)}
@@ -44,25 +44,75 @@ figcaption .maat{margin-left:auto;background:var(--cyan);color:var(--void);paddi
   padding:9px 10px;border-top:1px solid var(--rule);margin-top:auto;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .uit:hover{color:var(--cyan);background:var(--void)}
+
+/* ── tabbladen ────────────────────────────────────────────────
+   Twee vragen die je aan dit vel stelt: "welke pagina's zijn er" en
+   "welke bouwstenen zijn er". Dat zijn twee overzichten, geen twee
+   groepen in hetzelfde overzicht — vandaar tabbladen en geen kop erbij.
+   De keuze staat in de hash, zodat een tabblad deelbaar is. */
+.tabbladen{display:flex;background:var(--void);padding:0 28px;gap:0}
+.tabbladen a{font-family:'Barlow Condensed',sans-serif;font-weight:600;text-transform:uppercase;
+  font-size:16px;letter-spacing:.04em;color:rgba(255,255,255,.5);text-decoration:none;
+  padding:13px 22px;border-bottom:3px solid transparent;display:flex;align-items:baseline;gap:9px}
+.tabbladen a:hover{color:#fff}
+.tabbladen a.on{color:#fff;border-bottom-color:var(--cyan)}
+.tabbladen a i{font:500 10px 'IBM Plex Mono',monospace;font-style:normal;color:var(--cyan)}
+.blad{display:none}
+.blad.on{display:block}
+
+/* ── componenttegel ───────────────────────────────────────────
+   Anders dan een paginategel: een band heeft geen vaste hoogte. De
+   uitsnede meldt zijn eigen hoogte terug en het kader groeit mee, zodat
+   een specband van 100px geen scherm wit krijgt en een hero niet wordt
+   afgekapt. Tot die melding binnen is staat er een lage plaatshouder. */
+figure.comp .venster{height:120px;overflow:hidden;background:var(--bg);
+  transition:height .18s ease;position:relative}
+figure.comp .venster::after{content:"laden…";position:absolute;inset:0;display:flex;
+  align-items:center;justify-content:center;font:500 10px 'IBM Plex Mono',monospace;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--rule)}
+figure.comp .venster.geladen::after{display:none}
+figure.comp .houder{width:1440px}
+figure.comp .venster iframe{width:1440px;height:600px;border:0;display:block;
+  pointer-events:none;transform:scale(.25);transform-origin:top left}
 </style>
 </head>
 <body>
 <header>
   <span class="ey">// overzicht &middot; gegenereerd, niet met de hand bijgehouden</span>
-  <h1>Alle mockups op één vel</h1>
-  <p>Elke pagina als klein voorbeeld, alleen de bovenkant, op 25%. Gestippelde rand = wireframe.
-    Het blauwe label is de hero-maat, waar die gedeeld is. Klik de titel onderaan een tegel om
-    de pagina op ware grootte te openen.
-    Bijwerken na het toevoegen of hernoemen van een mockup: <code>node scripts/bouw-overzicht.mjs</code></p>
+  <h1>Alles op één vel</h1>
+  <p>Twee tabbladen: <b>Pagina's</b> is elke mockup als klein voorbeeld, alleen de bovenkant.
+    <b>Componenten</b> is elke band die ergens in een mockup staat, gegroepeerd per soort &mdash;
+    alle hero's bij elkaar, alle slotsecties bij elkaar. Die banden zijn geen kopie: ze worden
+    uit de versie zelf gehaald, dus wat je hier ziet is wat daar staat.
+    Bijwerken: <code>node scripts/bouw-overzicht.mjs</code></p>
 </header>
-<nav><a href="#homepage">Homepage <i>10</i></a><a href="#case-voor">Wat ga je vervoeren <i>11</i></a><a href="#casetype">Casetypes <i>7</i></a><a href="#branches">Branches <i>10</i></a><a href="#zakelijk">Groot zakelijk <i>7</i></a><a href="#configurator">Configurator <i>3</i></a><a href="#bestellen">Bestellen <i>3</i></a><a href="#catalogus">Catalogus <i>10</i></a><a href="#service">Service en aanvraag <i>14</i></a><a href="#varianten">Vergelijkpagina's <i>5</i></a></nav>
 
+<div class="tabbladen">
+  <a href="#paginas" data-blad="paginas" class="on">Pagina&rsquo;s <i>85</i></a>
+  <a href="#componenten" data-blad="componenten">Componenten <i>68</i></a>
+</div>
+
+<div class="blad on" id="blad-paginas">
+  <nav><a href="#homepage">Homepage <i>14</i></a><a href="#case-voor">Wat ga je vervoeren <i>12</i></a><a href="#casetype">Casetypes <i>7</i></a><a href="#branches">Branches <i>10</i></a><a href="#zakelijk">Groot zakelijk <i>7</i></a><a href="#configurator">Configurator <i>3</i></a><a href="#bestellen">Bestellen <i>3</i></a><a href="#catalogus">Catalogus <i>10</i></a><a href="#service">Service en aanvraag <i>14</i></a><a href="#varianten">Vergelijkpagina's <i>5</i></a></nav>
+  
     <section id="homepage">
-      <h2>Homepage <span>Acht concurrerende concepten. Hun hero ís het concept, dus die houden hun eigen maat.</span> <b>10</b></h2>
+      <h2>Homepage <span>Negen concurrerende concepten. Hun hero ís het concept, dus die houden hun eigen maat.</span> <b>14</b></h2>
       <div class="rooster"><figure class="s-ontwerp">
+        <figcaption><span class="n">homepage-samenstellen.html</span></figcaption>
+        <div class="raam"><iframe src="homepage-samenstellen.html" loading="lazy" title="Casebuilder — homepage samenstellen (mockup)"></iframe></div>
+        <a class="uit" href="homepage-samenstellen.html" target="_blank" rel="noopener">Casebuilder — homepage samenstellen (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
         <figcaption><span class="n">homepage-v1.html</span></figcaption>
         <div class="raam"><iframe src="homepage-v1.html" loading="lazy" title="homepage v1, beeld (mockup)"></iframe></div>
         <a class="uit" href="homepage-v1.html" target="_blank" rel="noopener">homepage v1, beeld (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">homepage-v10.html</span></figcaption>
+        <div class="raam"><iframe src="homepage-v10.html" loading="lazy" title="homepage v10, de samenstelling (mockup)"></iframe></div>
+        <a class="uit" href="homepage-v10.html" target="_blank" rel="noopener">homepage v10, de samenstelling (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">homepage-v11.html</span></figcaption>
+        <div class="raam"><iframe src="homepage-v11.html" loading="lazy" title="homepage v11, lichte hero (mockup)"></iframe></div>
+        <a class="uit" href="homepage-v11.html" target="_blank" rel="noopener">homepage v11, lichte hero (mockup) &#8599;</a>
       </figure><figure class="s-ontwerp">
         <figcaption><span class="n">homepage-v2.html</span></figcaption>
         <div class="raam"><iframe src="homepage-v2.html" loading="lazy" title="homepage v2, video, drone (mockup)"></iframe></div>
@@ -92,6 +142,10 @@ figcaption .maat{margin-left:auto;background:var(--cyan);color:var(--void);paddi
         <div class="raam"><iframe src="homepage-v8.html" loading="lazy" title="homepage v8, de aanvraag (mockup)"></iframe></div>
         <a class="uit" href="homepage-v8.html" target="_blank" rel="noopener">homepage v8, de aanvraag (mockup) &#8599;</a>
       </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">homepage-v9.html</span></figcaption>
+        <div class="raam"><iframe src="homepage-v9.html" loading="lazy" title="homepage v9, de aanvraag in beeld (mockup)"></iframe></div>
+        <a class="uit" href="homepage-v9.html" target="_blank" rel="noopener">homepage v9, de aanvraag in beeld (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
         <figcaption><span class="n">homepage-varianten.html</span></figcaption>
         <div class="raam"><iframe src="homepage-varianten.html" loading="lazy" title="homepage beoordelen (mockup)"></iframe></div>
         <a class="uit" href="homepage-varianten.html" target="_blank" rel="noopener">homepage beoordelen (mockup) &#8599;</a>
@@ -102,19 +156,19 @@ figcaption .maat{margin-left:auto;background:var(--cyan);color:var(--void);paddi
       </figure></div>
     </section>
     <section id="case-voor">
-      <h2>Wat ga je vervoeren <span>De objectas: ingang per apparaat.</span> <b>11</b></h2>
+      <h2>Wat ga je vervoeren <span>De objectas: ingang per apparaat.</span> <b>12</b></h2>
       <div class="rooster"><figure class="s-ontwerp">
         <figcaption><span class="n">case-voor-backline-v1.html</span><span class="maat">laag</span></figcaption>
-        <div class="raam"><iframe src="case-voor-backline-v1.html" loading="lazy" title="Casebuilder &amp;mdash; case-voor groep, backline (mockup)"></iframe></div>
-        <a class="uit" href="case-voor-backline-v1.html" target="_blank" rel="noopener">Casebuilder &amp;mdash; case-voor groep, backline (mockup) &#8599;</a>
+        <div class="raam"><iframe src="case-voor-backline-v1.html" loading="lazy" title="Casebuilder — case-voor groep, backline (mockup)"></iframe></div>
+        <a class="uit" href="case-voor-backline-v1.html" target="_blank" rel="noopener">Casebuilder — case-voor groep, backline (mockup) &#8599;</a>
       </figure><figure class="s-ontwerp">
         <figcaption><span class="n">case-voor-categorie-varianten.html</span></figcaption>
-        <div class="raam"><iframe src="case-voor-categorie-varianten.html" loading="lazy" title="Casebuilder &amp;mdash; Productcategorie (mockup)"></iframe></div>
-        <a class="uit" href="case-voor-categorie-varianten.html" target="_blank" rel="noopener">Casebuilder &amp;mdash; Productcategorie (mockup) &#8599;</a>
+        <div class="raam"><iframe src="case-voor-categorie-varianten.html" loading="lazy" title="Casebuilder — Productcategorie (mockup)"></iframe></div>
+        <a class="uit" href="case-voor-categorie-varianten.html" target="_blank" rel="noopener">Casebuilder — Productcategorie (mockup) &#8599;</a>
       </figure><figure class="s-ontwerp">
         <figcaption><span class="n">case-voor-detail-varianten.html</span></figcaption>
-        <div class="raam"><iframe src="case-voor-detail-varianten.html" loading="lazy" title="Casebuilder &amp;mdash; Productdetail (mockup)"></iframe></div>
-        <a class="uit" href="case-voor-detail-varianten.html" target="_blank" rel="noopener">Casebuilder &amp;mdash; Productdetail (mockup) &#8599;</a>
+        <div class="raam"><iframe src="case-voor-detail-varianten.html" loading="lazy" title="Casebuilder — Productdetail (mockup)"></iframe></div>
+        <a class="uit" href="case-voor-detail-varianten.html" target="_blank" rel="noopener">Casebuilder — Productdetail (mockup) &#8599;</a>
       </figure><figure class="s-ontwerp">
         <figcaption><span class="n">case-voor-gibson-les-paul-v1.html</span><span class="maat">laag</span></figcaption>
         <div class="raam"><iframe src="case-voor-gibson-les-paul-v1.html" loading="lazy" title="case-voor apparaat (mockup)"></iframe></div>
@@ -143,6 +197,10 @@ figcaption .maat{margin-left:auto;background:var(--cyan);color:var(--void);paddi
         <figcaption><span class="n">case-voor-v1.html</span><span class="maat">laag</span></figcaption>
         <div class="raam"><iframe src="case-voor-v1.html" loading="lazy" title="/case-voor v1 (mockup)"></iframe></div>
         <a class="uit" href="case-voor-v1.html" target="_blank" rel="noopener">/case-voor v1 (mockup) &#8599;</a>
+      </figure><figure class="s-ontwerp">
+        <figcaption><span class="n">case-voor-v2.html</span><span class="maat">laag</span></figcaption>
+        <div class="raam"><iframe src="case-voor-v2.html" loading="lazy" title="/case-voor v1 (mockup)"></iframe></div>
+        <a class="uit" href="case-voor-v2.html" target="_blank" rel="noopener">/case-voor v1 (mockup) &#8599;</a>
       </figure><figure class="s-ontwerp">
         <figcaption><span class="n">case-voor-varianten.html</span></figcaption>
         <div class="raam"><iframe src="case-voor-varianten.html" loading="lazy" title="/case-voor beoordelen (mockup)"></iframe></div>
@@ -325,8 +383,8 @@ figcaption .maat{margin-left:auto;background:var(--cyan);color:var(--void);paddi
         <a class="uit" href="zoeken-v1.html" target="_blank" rel="noopener">zoekresultaat (mockup) &#8599;</a>
       </figure><figure class="s-ontwerp">
         <figcaption><span class="n">zoeken-varianten.html</span></figcaption>
-        <div class="raam"><iframe src="zoeken-varianten.html" loading="lazy" title="Casebuilder &amp;mdash; Zoekresultaat (mockup)"></iframe></div>
-        <a class="uit" href="zoeken-varianten.html" target="_blank" rel="noopener">Casebuilder &amp;mdash; Zoekresultaat (mockup) &#8599;</a>
+        <div class="raam"><iframe src="zoeken-varianten.html" loading="lazy" title="Casebuilder — Zoekresultaat (mockup)"></iframe></div>
+        <a class="uit" href="zoeken-varianten.html" target="_blank" rel="noopener">Casebuilder — Zoekresultaat (mockup) &#8599;</a>
       </figure><figure class="s-wireframe">
         <figcaption><span class="n">zoeken.html</span></figcaption>
         <div class="raam"><iframe src="zoeken.html" loading="lazy" title="/zoeken, wireframe op ware grootte"></iframe></div>
@@ -349,8 +407,8 @@ figcaption .maat{margin-left:auto;background:var(--cyan);color:var(--void);paddi
         <a class="uit" href="contact-v1.html" target="_blank" rel="noopener">/service/contact (mockup) &#8599;</a>
       </figure><figure class="s-ontwerp">
         <figcaption><span class="n">faq-varianten.html</span></figcaption>
-        <div class="raam"><iframe src="faq-varianten.html" loading="lazy" title="Casebuilder &amp;mdash; FAQ-varianten (mockup)"></iframe></div>
-        <a class="uit" href="faq-varianten.html" target="_blank" rel="noopener">Casebuilder &amp;mdash; FAQ-varianten (mockup) &#8599;</a>
+        <div class="raam"><iframe src="faq-varianten.html" loading="lazy" title="Casebuilder — FAQ-varianten (mockup)"></iframe></div>
+        <a class="uit" href="faq-varianten.html" target="_blank" rel="noopener">Casebuilder — FAQ-varianten (mockup) &#8599;</a>
       </figure><figure class="s-ontwerp">
         <figcaption><span class="n">laten-controleren-v1.html</span><span class="maat">midden</span></figcaption>
         <div class="raam"><iframe src="laten-controleren-v1.html" loading="lazy" title="/laten-controleren (mockup)"></iframe></div>
@@ -377,8 +435,8 @@ figcaption .maat{margin-left:auto;background:var(--cyan);color:var(--void);paddi
         <a class="uit" href="service-v1.html" target="_blank" rel="noopener">servicehub (mockup) &#8599;</a>
       </figure><figure class="s-ontwerp">
         <figcaption><span class="n">service-varianten.html</span></figcaption>
-        <div class="raam"><iframe src="service-varianten.html" loading="lazy" title="Casebuilder &amp;mdash; Service (mockup)"></iframe></div>
-        <a class="uit" href="service-varianten.html" target="_blank" rel="noopener">Casebuilder &amp;mdash; Service (mockup) &#8599;</a>
+        <div class="raam"><iframe src="service-varianten.html" loading="lazy" title="Casebuilder — Service (mockup)"></iframe></div>
+        <a class="uit" href="service-varianten.html" target="_blank" rel="noopener">Casebuilder — Service (mockup) &#8599;</a>
       </figure><figure class="s-wireframe">
         <figcaption><span class="n">service.html</span></figcaption>
         <div class="raam"><iframe src="service.html" loading="lazy" title="/service, wireframe op ware grootte"></iframe></div>
@@ -389,8 +447,8 @@ figcaption .maat{margin-left:auto;background:var(--cyan);color:var(--void);paddi
         <a class="uit" href="zo-werkt-het-v1.html" target="_blank" rel="noopener">/service/zo-werkt-het (mockup) &#8599;</a>
       </figure><figure class="s-ontwerp">
         <figcaption><span class="n">zo-werkt-het-varianten.html</span></figcaption>
-        <div class="raam"><iframe src="zo-werkt-het-varianten.html" loading="lazy" title="Casebuilder &amp;mdash; Zo werkt het (mockup)"></iframe></div>
-        <a class="uit" href="zo-werkt-het-varianten.html" target="_blank" rel="noopener">Casebuilder &amp;mdash; Zo werkt het (mockup) &#8599;</a>
+        <div class="raam"><iframe src="zo-werkt-het-varianten.html" loading="lazy" title="Casebuilder — Zo werkt het (mockup)"></iframe></div>
+        <a class="uit" href="zo-werkt-het-varianten.html" target="_blank" rel="noopener">Casebuilder — Zo werkt het (mockup) &#8599;</a>
       </figure></div>
     </section>
     <section id="varianten">
@@ -417,5 +475,532 @@ figcaption .maat{margin-left:auto;background:var(--cyan);color:var(--void);paddi
         <a class="uit" href="hero-voorstellen.html" target="_blank" rel="noopener">hero's, drie maten (voorstel) &#8599;</a>
       </figure></div>
     </section>
+</div>
+
+<div class="blad" id="blad-componenten">
+  <nav><a href="#b-hero">Hero <i>11</i></a><a href="#b-belofte">Belofte-band <i>4</i></a><a href="#b-routes">Drie ingangen <i>3</i></a><a href="#b-klanten">Klanten <i>4</i></a><a href="#b-bewijs">Bewijs <i>1</i></a><a href="#b-branches">Branches <i>3</i></a><a href="#b-proces">Proces <i>6</i></a><a href="#b-prijsopbouw">Prijs uitgesplitst <i>3</i></a><a href="#b-eencase">Ook één case <i>4</i></a><a href="#b-zelfdoen">Zelf configureren <i>2</i></a><a href="#b-huisstijl">Kleur en logo <i>1</i></a><a href="#b-aanvraag">Offertepaneel <i>2</i></a><a href="#b-zakelijk">Zakelijk <i>2</i></a><a href="#b-herhaalorder">Bijbestellen <i>2</i></a><a href="#b-vertrouwen">Vertrouwen <i>3</i></a><a href="#b-omweg">De omweg <i>1</i></a><a href="#b-geenmatch">Niets gevonden <i>1</i></a><a href="#b-onderdelen">Onderdelen <i>6</i></a><a href="#b-slot">Afsluiting <i>9</i></a></nav>
+  
+    <section id="b-hero">
+      <h2>Hero <span>De kop met beeld. Het concept van een versie zit hier in.</span> <b>11</b></h2>
+      <div class="rooster"><figure class="comp">
+        <figcaption><span class="n">homepage-v1</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v1.html?uitsnede=hero" loading="lazy" title="hero uit homepage-v1.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v1.html?uitsnede=hero" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v10</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v10.html?uitsnede=hero" loading="lazy" title="hero uit homepage-v10.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v10.html?uitsnede=hero" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v11</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v11.html?uitsnede=hero" loading="lazy" title="hero uit homepage-v11.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v11.html?uitsnede=hero" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v2</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v2.html?uitsnede=hero" loading="lazy" title="hero uit homepage-v2.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v2.html?uitsnede=hero" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v3</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v3.html?uitsnede=hero" loading="lazy" title="hero uit homepage-v3.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v3.html?uitsnede=hero" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v4</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v4.html?uitsnede=hero" loading="lazy" title="hero uit homepage-v4.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v4.html?uitsnede=hero" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v5</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v5.html?uitsnede=hero" loading="lazy" title="hero uit homepage-v5.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v5.html?uitsnede=hero" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v6</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v6.html?uitsnede=hero" loading="lazy" title="hero uit homepage-v6.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v6.html?uitsnede=hero" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v7</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v7.html?uitsnede=hero" loading="lazy" title="hero uit homepage-v7.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v7.html?uitsnede=hero" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v8</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v8.html?uitsnede=hero" loading="lazy" title="hero uit homepage-v8.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v8.html?uitsnede=hero" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v9</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v9.html?uitsnede=hero" loading="lazy" title="hero uit homepage-v9.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v9.html?uitsnede=hero" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="b-belofte">
+      <h2>Belofte-band <span>De strook met feiten direct onder de hero.</span> <b>4</b></h2>
+      <div class="rooster"><figure class="comp">
+        <figcaption><span class="n">homepage-v6</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v6.html?uitsnede=belofte" loading="lazy" title="belofte uit homepage-v6.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v6.html?uitsnede=belofte" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v7</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v7.html?uitsnede=belofte" loading="lazy" title="belofte uit homepage-v7.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v7.html?uitsnede=belofte" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v8</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v8.html?uitsnede=belofte" loading="lazy" title="belofte uit homepage-v8.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v8.html?uitsnede=belofte" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v9</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v9.html?uitsnede=belofte" loading="lazy" title="belofte uit homepage-v9.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v9.html?uitsnede=belofte" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="b-routes">
+      <h2>Drie ingangen <span>Waar begin je — configureren, zeggen wat je vervoert, of kijken.</span> <b>3</b></h2>
+      <div class="rooster"><figure class="comp">
+        <figcaption><span class="n">homepage-v1</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v1.html?uitsnede=routes" loading="lazy" title="routes uit homepage-v1.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v1.html?uitsnede=routes" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v10</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v10.html?uitsnede=routes" loading="lazy" title="routes uit homepage-v10.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v10.html?uitsnede=routes" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v11</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v11.html?uitsnede=routes" loading="lazy" title="routes uit homepage-v11.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v11.html?uitsnede=routes" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="b-klanten">
+      <h2>Klanten <span>Logo's en een citaat. Namen in plaats van bijvoeglijke naamwoorden.</span> <b>4</b></h2>
+      <div class="rooster"><figure class="comp">
+        <figcaption><span class="n">homepage-v10</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v10.html?uitsnede=klanten" loading="lazy" title="klanten uit homepage-v10.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v10.html?uitsnede=klanten" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v11</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v11.html?uitsnede=klanten" loading="lazy" title="klanten uit homepage-v11.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v11.html?uitsnede=klanten" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v4</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v4.html?uitsnede=klanten" loading="lazy" title="klanten uit homepage-v4.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v4.html?uitsnede=klanten" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v9</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v9.html?uitsnede=klanten" loading="lazy" title="klanten uit homepage-v9.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v9.html?uitsnede=klanten" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="b-bewijs">
+      <h2>Bewijs <span>Waarom de prijs klopt zonder offerte.</span> <b>1</b></h2>
+      <div class="rooster"><figure class="comp">
+        <figcaption><span class="n">homepage-v4</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v4.html?uitsnede=bewijs" loading="lazy" title="bewijs uit homepage-v4.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v4.html?uitsnede=bewijs" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="b-branches">
+      <h2>Branches <span>De markten waar de cases terechtkomen.</span> <b>3</b></h2>
+      <div class="rooster"><figure class="comp">
+        <figcaption><span class="n">homepage-v10</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v10.html?uitsnede=branches" loading="lazy" title="branches uit homepage-v10.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v10.html?uitsnede=branches" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v11</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v11.html?uitsnede=branches" loading="lazy" title="branches uit homepage-v11.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v11.html?uitsnede=branches" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v5</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v5.html?uitsnede=branches" loading="lazy" title="branches uit homepage-v5.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v5.html?uitsnede=branches" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="b-proces">
+      <h2>Proces <span>Van maat naar kade, of van mail naar kist.</span> <b>6</b></h2>
+      <div class="rooster"><figure class="comp">
+        <figcaption><span class="n">homepage-v1</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v1.html?uitsnede=proces" loading="lazy" title="proces uit homepage-v1.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v1.html?uitsnede=proces" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v10</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v10.html?uitsnede=proces" loading="lazy" title="proces uit homepage-v10.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v10.html?uitsnede=proces" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v11</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v11.html?uitsnede=proces" loading="lazy" title="proces uit homepage-v11.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v11.html?uitsnede=proces" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v6</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v6.html?uitsnede=proces" loading="lazy" title="proces uit homepage-v6.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v6.html?uitsnede=proces" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v7</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v7.html?uitsnede=proces" loading="lazy" title="proces uit homepage-v7.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v7.html?uitsnede=proces" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v8</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v8.html?uitsnede=proces" loading="lazy" title="proces uit homepage-v8.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v8.html?uitsnede=proces" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="b-prijsopbouw">
+      <h2>Prijs uitgesplitst <span>Eén voorbeeldkist helemaal uitgerekend.</span> <b>3</b></h2>
+      <div class="rooster"><figure class="comp">
+        <figcaption><span class="n">homepage-v10</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v10.html?uitsnede=prijsopbouw" loading="lazy" title="prijsopbouw uit homepage-v10.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v10.html?uitsnede=prijsopbouw" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v11</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v11.html?uitsnede=prijsopbouw" loading="lazy" title="prijsopbouw uit homepage-v11.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v11.html?uitsnede=prijsopbouw" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v6</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v6.html?uitsnede=prijsopbouw" loading="lazy" title="prijsopbouw uit homepage-v6.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v6.html?uitsnede=prijsopbouw" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="b-eencase">
+      <h2>Ook één case <span>De kleine koper, expliciet welkom geheten.</span> <b>4</b></h2>
+      <div class="rooster"><figure class="comp">
+        <figcaption><span class="n">homepage-v10</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v10.html?uitsnede=eencase" loading="lazy" title="eencase uit homepage-v10.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v10.html?uitsnede=eencase" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v11</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v11.html?uitsnede=eencase" loading="lazy" title="eencase uit homepage-v11.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v11.html?uitsnede=eencase" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v5</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v5.html?uitsnede=eencase" loading="lazy" title="eencase uit homepage-v5.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v5.html?uitsnede=eencase" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v6</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v6.html?uitsnede=eencase" loading="lazy" title="eencase uit homepage-v6.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v6.html?uitsnede=eencase" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="b-zelfdoen">
+      <h2>Zelf configureren <span>De configurator als tweede ingang.</span> <b>2</b></h2>
+      <div class="rooster"><figure class="comp">
+        <figcaption><span class="n">homepage-v8</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v8.html?uitsnede=zelfdoen" loading="lazy" title="zelfdoen uit homepage-v8.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v8.html?uitsnede=zelfdoen" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v9</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v9.html?uitsnede=zelfdoen" loading="lazy" title="zelfdoen uit homepage-v9.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v9.html?uitsnede=zelfdoen" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="b-huisstijl">
+      <h2>Kleur en logo <span>Paneelkleuren en opdruk op het deksel.</span> <b>1</b></h2>
+      <div class="rooster"><figure class="comp">
+        <figcaption><span class="n">homepage-v6</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v6.html?uitsnede=huisstijl" loading="lazy" title="huisstijl uit homepage-v6.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v6.html?uitsnede=huisstijl" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="b-aanvraag">
+      <h2>Offertepaneel <span>Het aanvraagformulier met sleepzone.</span> <b>2</b></h2>
+      <div class="rooster"><figure class="comp">
+        <figcaption><span class="n">homepage-v10</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v10.html?uitsnede=aanvraag" loading="lazy" title="aanvraag uit homepage-v10.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v10.html?uitsnede=aanvraag" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v11</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v11.html?uitsnede=aanvraag" loading="lazy" title="aanvraag uit homepage-v11.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v11.html?uitsnede=aanvraag" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="b-zakelijk">
+      <h2>Zakelijk <span>Series, staffels, op rekening, herhaalorders.</span> <b>2</b></h2>
+      <div class="rooster"><figure class="comp">
+        <figcaption><span class="n">homepage-v8</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v8.html?uitsnede=zakelijk" loading="lazy" title="zakelijk uit homepage-v8.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v8.html?uitsnede=zakelijk" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v9</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v9.html?uitsnede=zakelijk" loading="lazy" title="zakelijk uit homepage-v9.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v9.html?uitsnede=zakelijk" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="b-herhaalorder">
+      <h2>Bijbestellen <span>De strook voor wie ingelogd terugkomt.</span> <b>2</b></h2>
+      <div class="rooster"><figure class="comp">
+        <figcaption><span class="n">homepage-v1</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v1.html?uitsnede=herhaalorder" loading="lazy" title="herhaalorder uit homepage-v1.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v1.html?uitsnede=herhaalorder" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v7</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v7.html?uitsnede=herhaalorder" loading="lazy" title="herhaalorder uit homepage-v7.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v7.html?uitsnede=herhaalorder" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="b-vertrouwen">
+      <h2>Vertrouwen <span>Sinds 1987, eigen werkplaats, geen tussenhandel.</span> <b>3</b></h2>
+      <div class="rooster"><figure class="comp">
+        <figcaption><span class="n">homepage-v1</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v1.html?uitsnede=vertrouwen" loading="lazy" title="vertrouwen uit homepage-v1.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v1.html?uitsnede=vertrouwen" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v5</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v5.html?uitsnede=vertrouwen" loading="lazy" title="vertrouwen uit homepage-v5.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v5.html?uitsnede=vertrouwen" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v7</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v7.html?uitsnede=vertrouwen" loading="lazy" title="vertrouwen uit homepage-v7.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v7.html?uitsnede=vertrouwen" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="b-omweg">
+      <h2>De omweg <span>Waarom het zonder offerte sneller gaat.</span> <b>1</b></h2>
+      <div class="rooster"><figure class="comp">
+        <figcaption><span class="n">homepage-v4</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v4.html?uitsnede=omweg" loading="lazy" title="omweg uit homepage-v4.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v4.html?uitsnede=omweg" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="b-geenmatch">
+      <h2>Niets gevonden <span>Wat er gebeurt als je object er niet bij staat.</span> <b>1</b></h2>
+      <div class="rooster"><figure class="comp">
+        <figcaption><span class="n">homepage-v5</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v5.html?uitsnede=geenmatch" loading="lazy" title="geenmatch uit homepage-v5.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v5.html?uitsnede=geenmatch" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="b-onderdelen">
+      <h2>Onderdelen <span>Zelf bouwen: profielen, hoeken, zaagservice.</span> <b>6</b></h2>
+      <div class="rooster"><figure class="comp">
+        <figcaption><span class="n">homepage-v1</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v1.html?uitsnede=onderdelen" loading="lazy" title="onderdelen uit homepage-v1.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v1.html?uitsnede=onderdelen" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v10</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v10.html?uitsnede=onderdelen" loading="lazy" title="onderdelen uit homepage-v10.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v10.html?uitsnede=onderdelen" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v11</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v11.html?uitsnede=onderdelen" loading="lazy" title="onderdelen uit homepage-v11.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v11.html?uitsnede=onderdelen" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v7</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v7.html?uitsnede=onderdelen" loading="lazy" title="onderdelen uit homepage-v7.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v7.html?uitsnede=onderdelen" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v8</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v8.html?uitsnede=onderdelen" loading="lazy" title="onderdelen uit homepage-v8.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v8.html?uitsnede=onderdelen" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v9</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v9.html?uitsnede=onderdelen" loading="lazy" title="onderdelen uit homepage-v9.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v9.html?uitsnede=onderdelen" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure></div>
+    </section>
+    <section id="b-slot">
+      <h2>Afsluiting <span>De laatste zet naar de configurator of de aanvraag.</span> <b>9</b></h2>
+      <div class="rooster"><figure class="comp">
+        <figcaption><span class="n">homepage-v1</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v1.html?uitsnede=slot" loading="lazy" title="slot uit homepage-v1.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v1.html?uitsnede=slot" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v10</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v10.html?uitsnede=slot" loading="lazy" title="slot uit homepage-v10.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v10.html?uitsnede=slot" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v11</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v11.html?uitsnede=slot" loading="lazy" title="slot uit homepage-v11.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v11.html?uitsnede=slot" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v4</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v4.html?uitsnede=slot" loading="lazy" title="slot uit homepage-v4.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v4.html?uitsnede=slot" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v5</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v5.html?uitsnede=slot" loading="lazy" title="slot uit homepage-v5.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v5.html?uitsnede=slot" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v6</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v6.html?uitsnede=slot" loading="lazy" title="slot uit homepage-v6.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v6.html?uitsnede=slot" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v7</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v7.html?uitsnede=slot" loading="lazy" title="slot uit homepage-v7.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v7.html?uitsnede=slot" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v8</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v8.html?uitsnede=slot" loading="lazy" title="slot uit homepage-v8.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v8.html?uitsnede=slot" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure><figure class="comp">
+        <figcaption><span class="n">homepage-v9</span></figcaption>
+        <div class="venster" data-schaal=".25"><div class="houder">
+          <iframe src="homepage-v9.html?uitsnede=slot" loading="lazy" title="slot uit homepage-v9.html"></iframe>
+        </div></div>
+        <a class="uit" href="homepage-v9.html?uitsnede=slot" target="_blank" rel="noopener">Los bekijken &#8599;</a>
+      </figure></div>
+    </section>
+</div>
+
+<script>
+/* Tabbladen. De hash bepaalt welk blad open staat, zodat je een tabblad kunt
+   delen en de terugknop werkt. Een sprong naar een sectie (#b-hero) hoort bij
+   het componentenblad; die openen we dus mee, anders klik je op een link die
+   niets lijkt te doen. */
+(function () {
+  var bladen = document.querySelectorAll('.blad');
+  var tabs = document.querySelectorAll('.tabbladen a');
+  function kies(naam) {
+    bladen.forEach(function (b) { b.classList.toggle('on', b.id === 'blad-' + naam); });
+    tabs.forEach(function (t) { t.classList.toggle('on', t.dataset.blad === naam); });
+  }
+  function uitHash() {
+    var h = location.hash.slice(1);
+    if (h === 'componenten' || h.indexOf('b-') === 0) return kies('componenten');
+    kies('paginas');
+  }
+  addEventListener('hashchange', uitHash);
+  uitHash();
+})();
+
+/* Hoogte van een uitsnede. De band meet zichzelf en meldt het terug
+   (assets/uitsnede.js); van buitenaf meten kan niet zodra de browser file://
+   als aparte oorsprong ziet, en dat doet Chrome. */
+addEventListener('message', function (e) {
+  if (!e.data || e.data.soort !== 'cb-uitsnede') return;
+  document.querySelectorAll('figure.comp iframe').forEach(function (frame) {
+    if (frame.contentWindow !== e.source) return;
+    var venster = frame.closest('.venster');
+    var schaal = parseFloat(venster.dataset.schaal) || 0.25;
+    frame.style.height = e.data.hoogte + 'px';
+    venster.style.height = Math.ceil(e.data.hoogte * schaal) + 'px';
+    venster.classList.add('geladen');
+  });
+});
+</script>
 </body>
 </html>

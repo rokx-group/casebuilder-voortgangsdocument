@@ -3,50 +3,37 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Casebuilder — homepage v10, de samenstelling (mockup)</title>
+<title>Casebuilder — homepage v11, lichte hero (mockup)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/brand.css">
 <style>
 /* ══════════════════════════════════════════════════════════════
-   v10 — de samenstelling
+   v11 — lichte hero
 
-   Niet opnieuw bedacht maar samengesteld: per band de variant die op
-   homepage-samenstellen.html gekozen is.
+   Dezelfde pagina als v10, met één verschil dat alles bepaalt: de hero
+   is wit in plaats van een donkere film.
 
-     hero          v2 · video
-     belofte       — · geen band
-     01 ingang     v1 · drie manieren (A/B/C)
-     02 bewijs     v4 · klantlogo's en citaat
-     03 branches   /branches · zes markten als rail
-     04 proces     v1 · van maat naar kade
-     05 assortiment v4/v6 · vijf kaarten, prijs groot
-     06 prijs      v6 · uitgesplitst voorbeeld
-     07 één case   v6 · ook één case, ook goed
-     08 offerte    v8 · aanvraagpaneel met sleepzone
-     09 onderdelen v1 · uitgebreid
-     slot          v1 · naar de configurator, met wisselende kop
+   Waarom dat de moeite waard is om naast elkaar te zien. Tien versies
+   openen met een donker beeld en een kop eroverheen. Dat werkt — maar
+   het is ook precies wat elke concurrent doet, en het maakt van de
+   eerste seconde een sfeerbeeld in plaats van een aanbod. Wit draait
+   dat om: de kist staat er, de belofte staat ernaast, en er is niets
+   om doorheen te kijken.
 
-   Het bewijs staat vlak achter de drie ingangen en niet halverwege de
-   pagina. Wie net gekozen heeft welke deur hij neemt, weegt precies dan
-   af of dit de juiste werkplaats is; namen werken daar, en vier secties
-   lager niet meer. Het proces komt erachteraan: eerst of je ons
-   vertrouwt, dan pas hoe het loopt.
+   Het merk kan het hebben. Het brandbook zet koppen in Casebuilder
+   Donker en houdt wit voor donkere pagina's, dus een lichte pagina is
+   de standaard en niet de uitzondering — de blueprint-ruit onder de
+   content is er letterlijk voor bedoeld ("het technische papier waarop
+   alles staat", §06).
 
-   Met de hand geschreven en niet door genereer.js uitgespuugd. Die
-   knop schermt de CSS van elke bron af achter een eigen wortelklasse —
-   prima om een combinatie te bekíjken, maar je houdt er vier keer
-   dezelfde .hero aan over. Een versie waar nog aan getekend wordt (en
-   hier komen twee eigen bewegingen bij) hoort één samenhangend blad te
-   zijn. De samenstelpagina bepaalt wát erin zit, dit bestand hoe.
+   Wat dat kost: de film verdwijnt uit de eerste indruk. Het bewegende
+   beeld is niet weg, maar het staat lager en kleiner. Wie de werkplaats
+   het sterkste argument vindt, kiest v10.
 
-   Twee dingen die alleen deze versie doet:
-
-     1. Het woordmerk in de balk krimpt bij het scrollen tot het
-        cB-monogram. Zie .merk hieronder en assets/merkkrimp.js.
-     2. De slotkop wisselt door vijf regels, en begint pas als je bij
-        die sectie bent. Zie .closer en assets/wisselkop.js.
+   Alles onder de hero is gelijk aan v10, zodat de vergelijking over de
+   hero gaat en niet over de rest.
    ══════════════════════════════════════════════════════════════ */
 
 /* ── het krimpende woordmerk ─────────────────────────────────
@@ -72,37 +59,55 @@ header.main.gekrompen .merk .bm{max-width:70px;opacity:1;transition-delay:0s,.16
   header.main .merk .wm,header.main .merk .bm{transition:none}
 }
 
-/* ── hero — v2, video ────────────────────────────────────────
-   De video draagt de sfeer, de tekst draagt de belofte. Twee eisen: de
-   tekst moet leesbaar blijven op elk frame (vandaar de scrim), en de
-   pagina mag niet wachten op de video (poster laadt eerst). */
-.hero{background:var(--void);color:#fff;position:relative;overflow:hidden;
-  min-height:min(88vh,860px);display:flex;align-items:flex-end}
-.hero .film{position:absolute;inset:0;z-index:0}
-.hero .film video,.hero .film img{width:100%;height:100%;object-fit:cover;display:block}
-.hero .film img{display:none}
-@media (prefers-reduced-motion: reduce){.hero .film video{display:none}.hero .film img{display:block}}
-/* Scrim in twee lagen: verticaal draagt het contrast onderin waar de kop
-   staat, horizontaal houdt links wat extra dekking. Bewust lichter dan
-   een vlakke donkere laag — anders kun je net zo goed een egale kleur
-   nemen en de film weglaten. */
-.hero .film::after{content:"";position:absolute;inset:0;
-  background:
-    linear-gradient(180deg,rgba(6,18,28,.42) 0%,transparent 30%,transparent 46%,rgba(6,18,28,.78) 100%),
-    linear-gradient(100deg,rgba(6,18,28,.66) 0%,rgba(6,18,28,.40) 44%,rgba(6,18,28,.08) 78%,rgba(6,18,28,.20) 100%)}
-.hero .wrap{padding-top:96px;padding-bottom:64px;position:relative;z-index:1;width:100%}
+/* ── hero — licht ───────────────────────────────────────────
+   Wit met de blueprint-ruit eronder, kop links, kist rechts. Geen scrim,
+   geen overlay, geen tekst-op-beeld: het beeld staat naast de belofte in
+   plaats van eronder, en dat is het hele idee van deze versie.
+
+   De kop is Casebuilder Donker en niet zwart — brandbook §04, en het is
+   ook waarom dit werkt: donkerblauw op wit heeft genoeg contrast om
+   groot te mogen staan zonder hard te worden.
+
+   Het accentwoord is hier Casebuilder Blauw en niet cyaan. Cyaan is het
+   accent op donkere vlakken; op wit is het te licht om een woord te
+   dragen dat de kop moet afmaken. Cyaan blijft wat het is — de mono-
+   labels, de streep, de knop. */
+.hero{background:var(--white);color:var(--ink);position:relative;overflow:hidden;
+  border-bottom:1px solid var(--rule)}
+.hero .wrap{padding-top:74px;padding-bottom:0;position:relative;z-index:1}
+.hero .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
 .hero h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:.02em;
-  font-size:clamp(52px,7vw,96px);line-height:.92;color:#fff;max-width:12ch;margin:18px 0 0}
-.hero h1 .acc{color:var(--cyan)}
-.hero p.sub{margin-top:22px;max-width:56ch;font-size:18px;color:rgba(255,255,255,.78)}
-.hero .cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
-/* Specs op volle wrapbreedte, zodat ze dezelfde linker- en rechterkant
-   delen als de kop erboven. */
-.hero .specs{display:flex;margin-top:60px;border-top:1px solid rgba(255,255,255,.18);flex-wrap:wrap}
-.hero .specs div{flex:1;min-width:190px;padding:20px 24px 0 0}
-.hero .specs .k{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--cyan);text-transform:uppercase}
-.hero .specs .v{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:19px;
-  letter-spacing:.03em;margin-top:6px;color:#fff}
+  font-size:clamp(46px,6vw,86px);line-height:.94;color:var(--dark);max-width:12ch;margin:18px 0 0}
+.hero h1 .acc{color:var(--blue)}
+.hero p.sub{margin-top:20px;max-width:46ch;font-size:18px;color:var(--mute)}
+.hero .cta{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap}
+
+/* De kist staat op wit en niet in een kader: een rand eromheen maakt er
+   een productfoto van, en dit moet lezen als het ding zelf. De schaduw
+   houdt hem van de achtergrond af zonder hem in te lijsten. */
+.hero .kist{position:relative;align-self:end}
+.hero .kist img{width:100%;height:auto;display:block;
+  filter:drop-shadow(0 30px 50px rgba(0,51,82,.22))}
+/* Het maatlabel: mono, want het is een getal — en het zegt in één regel
+   waar deze hele site over gaat. */
+.hero .maat{position:absolute;left:0;bottom:14px;background:var(--dark);color:#fff;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+  padding:7px 12px}
+
+/* Specband onderaan de hero, nog op wit: de vier feiten van v10 plus de
+   ervaring, als voet van de hero in plaats van een eigen donkere balk.
+
+   Vijf kolommen in plaats van vier, en daarom is de cel krapper en de
+   waarde een paar punten kleiner: "Bouwpakket of kant-en-klaar" moet op
+   twee regels blijven passen. Op drie regels wordt die ene cel hoger dan
+   de rest en trekt hij aandacht die hij niet verdient. */
+.hero .specs{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--rule);
+  border-top:1px solid var(--rule);margin-top:54px}
+.hero .specs div{background:var(--white);padding:20px 18px 22px}
+.hero .specs .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;
+  color:var(--blue);text-transform:uppercase}
+.hero .specs .v{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:17px;
+  letter-spacing:.03em;margin-top:7px;color:var(--dark)}
 
 /* ── 01 · drie manieren — v1 ─────────────────────────────────
    A, B en C, niet 01/02/03: dit zijn geen stappen maar routes. Wie er
@@ -313,12 +318,20 @@ header.main.gekrompen .merk .bm{max-width:70px;opacity:1;transition-delay:0s,.16
   .assure .grid,.uitnodiging .grid,.eencase .grid,.build .grid{grid-template-columns:1fr;gap:36px}
   .eencase .obj{grid-template-columns:repeat(2,1fr)}
 }
+@media (max-width:1080px){
+  .hero .grid{grid-template-columns:1fr;gap:34px}
+  .hero .specs{grid-template-columns:1fr 1fr}
+  /* Vijf op twee kolommen laat de laatste alleen in een halve rij
+     staan; die maakt hij zelf af. */
+  .hero .specs div:last-child{grid-column:1/-1}
+}
 @media (max-width:760px){
+  .hero .wrap{padding-top:44px}
+  .hero .specs{grid-template-columns:1fr}
   .pbody{padding:20px 18px 22px}
   .paneel .pkop,.paneel .voet{padding-left:18px;padding-right:18px}
   .paneel .voet .btn{margin-left:0;width:100%;justify-content:center}
   .tweekolom{grid-template-columns:1fr}
-  .hero .wrap{padding-top:56px;padding-bottom:52px}
   .hero .specs div{min-width:50%;padding-right:12px}
   .assure .steps{padding-left:20px}
   .eencase .obj{grid-template-columns:1fr}
@@ -360,32 +373,35 @@ header.main.gekrompen .merk .bm{max-width:70px;opacity:1;transition-delay:0s,.16
   </div>
 </nav>
 
-<!-- ── HERO — v2, video ───────────────────────────────────────
-     Geen belofte-band eronder: die keuze staat in de samenstelling.
-     De vier feiten staan al in de hero zelf, en ze een tweede keer in
-     een balk herhalen maakt ze niet waarder. -->
-<div class="hero" data-band="hero">
-  <div class="film">
-    <video autoplay muted loop playsinline preload="none"
-           poster="assets/hero-v2-poster.jpg" aria-hidden="true" tabindex="-1">
-      <source src="assets/hero-v2.webm" type="video/webm">
-      <source src="assets/hero-v2.mp4" type="video/mp4">
-    </video>
-    <img src="assets/hero-v2-poster.jpg" alt="" aria-hidden="true">
-  </div>
+<!-- ── HERO — LICHT ─────────────────────────────────────────
+     Geen tekst op beeld maar tekst náást beeld. De kist draagt hier wat
+     de film in v10 draagt: dat het een echt ding is dat echt gemaakt
+     wordt. Alleen kun je er nu omheen kijken, en dat is precies wat een
+     bezoeker met een aanvraag wil. -->
+<div class="hero ruit ruit-aanzet" data-band="hero">
   <div class="wrap">
-    <div class="ey">// PRIJS DIRECT ZICHTBAAR &middot; GEEN WACHTTIJD</div>
-    <h1>Millimeterwerk,<br><span class="acc">de snelste van Nederland</span></h1>
-    <p class="sub">Online configureren, gecontroleerd door een casebouwer, op maat gebouwd.</p>
-    <div class="cta">
-      <a class="btn btn-pri" href="configurator-v1.html">Start met configureren &rarr;</a>
-      <a class="btn btn-ghost" href="case-voor-v1.html">Wat ga je vervoeren?</a>
+    <div class="grid">
+      <div>
+        <div class="ey ey-dark">// PRIJS DIRECT ZICHTBAAR &middot; GEEN WACHTTIJD</div>
+        <h1>Millimeterwerk,<br><span class="acc">de snelste van Nederland</span></h1>
+        <p class="sub">Online configureren, gecontroleerd door een casebouwer, gebouwd in onze eigen werkplaats in Doesburg.</p>
+        <div class="cta">
+          <a class="btn btn-dark" href="configurator-v1.html">Start met configureren &rarr;</a>
+          <a class="btn btn-out" href="case-voor-v1.html">Wat ga je vervoeren?</a>
+        </div>
+      </div>
+      <div class="kist">
+        <img src="assets/flightcase-trunccase.jpg" alt="Trunccase met bovendeksel en wielen">
+        <span class="maat">600 &times; 400 &times; 400 mm &middot; op maat</span>
+      </div>
     </div>
+
     <div class="specs">
       <div><div class="k">// LEVERTIJD</div><div class="v">De snelste van Nederland</div></div>
       <div><div class="k">// PRIJS</div><div class="v">Direct zichtbaar</div></div>
       <div><div class="k">// UITVOERING</div><div class="v">Bouwpakket of kant-en-klaar</div></div>
       <div><div class="k">// CONTROLE</div><div class="v">Specialist kijkt mee</div></div>
+      <div><div class="k">// ERVARING</div><div class="v">20+ jaar</div></div>
     </div>
   </div>
 </div>

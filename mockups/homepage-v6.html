@@ -79,8 +79,8 @@
 .st span{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;
   background:rgba(6,18,28,.72);color:#fff;padding:4px 8px}
 .st.licht span{background:rgba(255,255,255,.82);color:var(--void)}
-.st.merk{display:flex;align-items:center;justify-content:center;background:#1A1A1A}
-.st.merk .lg{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:20px;
+.st.eigenlogo{display:flex;align-items:center;justify-content:center;background:#1A1A1A}
+.st.eigenlogo .lg{font-family:var(--disp);font-weight:900;text-transform:uppercase;font-size:20px;
   letter-spacing:.04em;color:#fff;border:2px solid var(--cyan);padding:8px 16px}
 
 /* ── ook één case ───────────────────────────────────────── */
@@ -140,7 +140,7 @@
 
 <header class="main">
   <div class="wrap">
-    <div class="logo"><em>case</em>Builder.com</div>
+    <div class="merk"><img src="assets/woordmerk.svg" alt="Casebuilder.com"></div>
     <form class="search" onsubmit="return false">
       <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
       <input placeholder="Zoek op case, onderdeel of artikelnummer…" aria-label="Zoeken">
@@ -167,7 +167,7 @@
 <!-- ── DE WERKVLOER ───────────────────────────────────────────
      Tekst onderin, niet op de middellijn: het beeld krijgt de
      bovenkant en draagt daar het verhaal. ───────────────────── -->
-<div class="vloer ruit ruit-dark ruit-veld beslag">
+<div class="vloer ruit ruit-dark ruit-veld beslag" data-band="hero">
   <img class="bg" src="assets/hero-v2-poster.jpg" alt="" aria-hidden="true">
   <div class="scrim"></div>
   <span class="hk tl"></span><span class="hk tr"></span><span class="hk bl"></span><span class="hk br"></span>
@@ -183,7 +183,7 @@
   </div>
 </div>
 
-<div class="meetlat">
+<div class="meetlat" data-band="belofte">
   <div class="wrap">
     <div class="m"><b>1987</b><span>// eerste kist</span><i>Ononderbroken in eigen beheer geproduceerd.</i></div>
     <div class="m"><b>± 1 mm</b><span>// werktolerantie</span><i>Waarmee de CNC freest, en waarop je case past.</i></div>
@@ -193,7 +193,7 @@
 </div>
 
 <!-- ── VAN TEKENING NAAR KIST ─────────────────────────────── -->
-<section class="proces">
+<section class="proces" data-band="proces">
   <div class="wrap">
     <div class="sec-head">
       <div class="ey ey-dark">// 01 — VAN TEKENING NAAR KIST</div>
@@ -255,7 +255,7 @@
      Alleen dit concept geeft de afwerking een eigen sectie. Voor
      een verhuurbedrijf is dit geen extraatje: een kist met het
      eigen logo staat elk weekend op een podium. ─────────────── -->
-<section class="huisstijl">
+<section class="huisstijl" data-band="huisstijl">
   <div class="wrap">
     <div class="grid">
       <div>
@@ -275,7 +275,7 @@
         <div class="st" style="background:#003352"><span>Blauw</span></div>
         <div class="st" style="background:#8C1A1A"><span>Rood</span></div>
         <div class="st" style="background:#1F5133"><span>Groen</span></div>
-        <div class="st merk"><span class="lg">jouw logo</span></div>
+        <div class="st eigenlogo"><span class="lg">jouw logo</span></div>
         <div class="st" style="background:#C8781A"><span>Oranje</span></div>
         <div class="st licht" style="background:#B8B8B8"><span>Grijs</span></div>
         <div class="st licht" style="background:#E8E4DC"><span>Ivoor</span></div>
@@ -285,43 +285,13 @@
   </div>
 </section>
 
-<!-- ── DE VIJF MODELLEN ───────────────────────────────────── -->
-<section class="mdlrij">
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <div class="ey ey-dark">// 03 — DE VIJF MODELLEN</div>
-        <h2>Alles op maat, vanaf een vaste basisprijs</h2>
-      </div>
-      <a class="btn btn-out btn-sm" href="#">Vergelijk alle vijf →</a>
-    </div>
-    <div class="cases">
-      <a class="case" href="casetype-koffer-v1.html"><div class="im"><img src="assets/flightcase-koffer.jpg" alt="Koffer"></div>
-        <div class="bd"><h4>Koffer</h4><div class="d">Draagbaar aan een opbouwhandgreep</div>
-        <div class="pr"><b>€ 149</b><i>vanaf, excl. btw · eigen maten</i></div></div></a>
-      <a class="case" href="casetype-hoedcase-v1.html"><div class="im"><img src="assets/flightcase-hoedcase.jpg" alt="Hoedcase"></div>
-        <div class="bd"><h4>Hoedcase</h4><div class="d">Lage bodem, volledig afneembaar deksel</div>
-        <div class="pr"><b>€ 179</b><i>vanaf, excl. btw · eigen maten</i></div></div></a>
-      <a class="case" href="casetype-trunccase-v1.html"><div class="im"><img src="assets/flightcase-trunccase.jpg" alt="Trunccase"></div>
-        <div class="bd"><h4>Trunccase</h4><div class="d">Universele transportkist met bovendeksel</div>
-        <div class="pr"><b>€ 199</b><i>vanaf, excl. btw · eigen maten</i></div></div></a>
-      <a class="case" href="casetype-rackcase-enkel-deksel-v1.html"><div class="im"><img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt="Rackcase enkel"></div>
-        <div class="bd"><h4>Rackcase enkel</h4><div class="d">Voordeksel, voor 19-inch apparatuur</div>
-        <div class="pr"><b>€ 229</b><i>vanaf, excl. btw · eigen maten</i></div></div></a>
-      <a class="case" href="casetype-rackcase-dubbel-deksel-v1.html"><div class="im"><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt="Rackcase dubbel"></div>
-        <div class="bd"><h4>Rackcase dubbel</h4><div class="d">Voor- én achterdeksel, 19-inch</div>
-        <div class="pr"><b>€ 259</b><i>vanaf, excl. btw · eigen maten</i></div></div></a>
-    </div>
-  </div>
-</section>
-
 <!-- ── OOK ÉÉN CASE ───────────────────────────────────────── -->
-<section class="eencase tight">
+<section class="eencase tight" data-band="eencase">
   <div class="wrap">
     <div class="grid">
       <div>
-        <div class="ey ey-dark">// 04 — OOK VOOR ÉÉN INSTRUMENT</div>
-        <h2>Ook één case? Ook goed.</h2>
+        <div class="ey ey-dark">// 03 — OOK VOOR ÉÉN INSTRUMENT</div>
+        <h2>Één case? Ook goed.</h2>
         <p>Wij bouwen voor verhuurbedrijven met zeventig kisten per seizoen, en voor de gitarist met één Les Paul. Dezelfde fabriek, dezelfde tolerantie.</p>
       </div>
       <div class="obj">
@@ -337,11 +307,11 @@
 </section>
 
 <!-- ── UITNODIGING ────────────────────────────────────────── -->
-<section class="uitnodiging">
+<section class="uitnodiging" data-band="prijsopbouw">
   <div class="wrap">
     <div class="grid">
       <div>
-        <div class="ey ey-dark">// 05 — EN DE PRIJS DAN</div>
+        <div class="ey ey-dark">// 04 — EN DE PRIJS DAN</div>
         <h2>Geen offerte, geen wachttijd</h2>
         <p>Wat je in de configurator ziet, is de prijs. Geen aanvraagformulier, geen terugbelverzoek, geen drie werkdagen stilte.</p>
         <a class="btn btn-dark" href="#" style="margin-top:26px">Start met configureren →</a>
@@ -362,7 +332,7 @@
 </section>
 
 <!-- ── SLOT ───────────────────────────────────────────────── -->
-<section class="closer ruit ruit-dark ruit-veld beslag">
+<section class="closer ruit ruit-dark ruit-veld beslag" data-band="slot">
   <span class="hk tl"></span><span class="hk tr"></span><span class="hk bl"></span><span class="hk br"></span>
   <div class="wrap">
     <div class="ey">// DOESBURG, GELDERLAND</div>
@@ -376,7 +346,7 @@
   <div class="wrap">
     <div class="cols">
       <div>
-        <div class="logo"><em>case</em>Builder.com</div>
+        <div class="merk"><img src="assets/woordmerk-wit.svg" alt="Casebuilder.com"></div>
         <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734">+31 (0)575 575734</a></p>
       </div>
       <div><h5>Offerte aanvragen</h5><a href="case-aanvragen-v1.html">Case aanvragen</a><a href="laten-controleren-v1.html">Maten laten controleren</a><a href="#">Series en staffels</a><a href="#">Zakelijk bestellen</a></div>
@@ -390,5 +360,6 @@
 
 <script src="assets/vouw.js"></script>
 <script src="assets/versies.js"></script>
+<script src="assets/uitsnede.js"></script>
 </body>
 </html>

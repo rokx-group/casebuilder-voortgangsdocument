@@ -5,7 +5,7 @@
 
 :root{
   /* kleuren — brandbook §03 */
-  --dark:#003352; --blue:#0066A8; --cyan:#66C4E8; --logo:#0093D1;
+  --dark:#003352; --blue:#0066A8; --cyan:#66C4E8; --logo:#0094D1;
   --ink:#1A1A1A; --void:#06121C; --lightblue:#E6EFF6; --bg:#F2F5F9;
   --rule:#D9DEE5; --mute:#6B7480; --white:#fff;
   /* fonts — brandbook §01: drie, geen vervangers */
@@ -19,6 +19,11 @@ html{scroll-behavior:smooth}
 body{font-family:var(--body);color:var(--ink);background:var(--white);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
+/* brandbook §10: geen schuingedrukte tekst. <i> en <em> worden in deze
+   mockups als betekenislaag gebruikt (een bijregel, een nadruk), niet als
+   vormkeuze — dus zetten we ze hier één keer recht in plaats van per geval,
+   waar het telkens vergeten werd. */
+i,em{font-style:normal}
 
 /* ── primitieven ─────────────────────────────────────────── */
 .wrap{max-width:var(--wrap);margin:0 auto;padding:0 32px}
@@ -71,12 +76,23 @@ h1,h2,h3,h4,h5{font-family:var(--disp);text-transform:uppercase;letter-spacing:.
    voor eyebrows, specs en kruimelpad. */
 header.main{border-bottom:1px solid var(--rule);background:#fff;position:sticky;top:0;z-index:40}
 header.main .wrap{display:flex;align-items:center;gap:32px;height:74px}
-/* wordmark — brandbook §09: "case" cyaan/logoblauw, "Builder.com" zwart.
-   Op donker: volledig uitgekeerd naar wit. */
-.logo{font-family:var(--disp);font-weight:900;font-size:26px;letter-spacing:.01em;color:#000;white-space:nowrap}
-.logo em{font-style:normal;color:var(--logo)}
-.dark .logo,.navy .logo,footer .logo{color:#fff}
-.dark .logo em,.navy .logo em,footer .logo em{color:var(--cyan)}
+/* wordmerk — brandbook §09. Het echte merk als vector, niet nagetekend.
+   Hier stond .logo: het woordmerk nagezet in Barlow Condensed 900, met
+   "case" in logoblauw en "Builder.com" in zwart. Dat was altijd een
+   benadering — de letters van het merk zijn eigen tekeningen en geen
+   Barlow, en dat zie je aan de a, de e en de punten.
+
+   Twee bestanden in plaats van twee kleurregels, omdat een <img> geen
+   currentColor kent. Ze houden dezelfde regel aan als de CSS die ze
+   vervangen: op licht "case" in logoblauw en "Builder.com" in zwart,
+   op donker uitgekeerd naar cyaan en wit. Je wisselt dus het bestand,
+   niet de kleur — woordmerk.svg op licht, woordmerk-wit.svg op donker.
+
+   In de voet iets groter: daar staat hij alleen in een kolom en niet
+   naast een zoekveld, en op 24px leest hij daar als een voetnoot. */
+.merk{display:block;flex:none;line-height:0}
+.merk img{height:24px;width:auto}
+footer .merk img{height:28px}
 /* zoeken — vlak veld met icoon. Het donkere knopblok van eerder trok
    evenveel aandacht als het woordmerk, terwijl zoeken een gereedschap is
    en geen bestemming. */
@@ -237,7 +253,7 @@ footer .bot{border-top:1px solid rgba(255,255,255,.15);margin-top:44px;padding-t
      naast logo en acties. Offerte en winkelwagen blijven staan — dat zijn
      de twee dingen waarvoor iemand op zijn telefoon terugkomt. */
   header.main .wrap{height:64px;gap:16px}
-  .logo{font-size:22px}
+  .merk img{height:20px}
   .search{display:none}
   .hdr-r{gap:14px;font-size:13px}
   .hdr-r .stil{display:none}

@@ -40,6 +40,9 @@
   color:var(--mute);display:block;margin-bottom:7px}
 .vld label em{font-style:normal;color:var(--rule);letter-spacing:.1em}
 .vld .inv{display:flex;align-items:center;border:1.5px solid var(--rule);height:46px;padding:0 14px;background:#fff}
+/* Meegekomen vanaf de homepage: even aanzetten dat dit niet leeg was toen
+   je aankwam, anders lees je over je eigen tekst heen. */
+.vld .inv:has(.is-meegekomen){border-color:var(--cyan);background:var(--lightblue)}
 .vld .inv:focus-within{border-color:var(--dark)}
 .vld input{border:0;outline:0;width:100%;font-family:var(--body);font-size:15px;color:var(--ink);background:transparent}
 .vld input::placeholder{color:#9aa3ae}
@@ -125,7 +128,7 @@
         <div class="pbody">
           <div class="vld">
             <label>Wat ga je vervoeren?</label>
-            <div class="inv"><input placeholder="Bijvoorbeeld: mengtafel Midas M32, of 4× moving head"></div>
+            <div class="inv"><input data-vervoeren placeholder="Bijvoorbeeld: mengtafel Midas M32, of 4× moving head"></div>
           </div>
           <div class="vld">
             <label>Wat heb je erbij? <em>— optioneel</em></label>
@@ -180,5 +183,7 @@
     <div class="bot"><span>KVK 09123456</span><span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span></div>
   </div>
 </footer>
+<script src="assets/toepassingen.js"></script>
+<script src="assets/vervoeren.js"></script>
 <script src="assets/versies.js"></script>
 <script src="assets/hoogtemelder.js"></script></body></html>

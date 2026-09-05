@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — homepage v9, de aanvraag in beeld (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   v9 — drie ingangen op film
+
+   Niet de aanvraagpagina met een filmpje erachter. Het aanvraagpaneel
+   dat hier eerst stond is verhuisd naar case-aanvragen-v1.html, waar
+   het thuishoort: een formulier boven de vouw maakt van een homepage
+   een offertepagina.
+
+   Wat er overblijft is wat een homepage wél moet doen — de bezoeker
+   naar de juiste route sturen:
+
+     1. De film draagt de kop. Dat is hero-v3 ("precisie"): het
+        dichtbije werk aan de zaag en het beslag. Wie negenhonderd euro
+        uitgeeft aan een kist die hij niet gezien heeft, wil zien dat
+        er handen aan zitten. Een lege hal doet dat niet.
+
+     2. Drie deuren uit v7, met de aanvraag als dichte cyaan deur in
+        plaats van de configurator. Zie .deuren hieronder.
+
+     3. Het woordmerk is het echte merk uit het brandbook, geen tekst
+        in Barlow Condensed meer.
+
+   Onder de hero stond het stappenplan van v8 ("zo gaat het"): vier
+   stappen van mail naar kist. Dat is precies goed op de offertepagina en
+   precies verkeerd hier — het legt uit hoe je bestelt aan iemand die nog
+   moet besluiten of wij zijn volume aankunnen.
+
+   De volgorde is nu op de grote partij gezet, met de kleine koper
+   eronder in plaats van ertussenuit:
+
+     meetlat    vier cijfers: 1987, 300, 10, 533
+     01 schaal  series, herhaalorders, op rekening, eigen huisstijl
+     02 bewijs  namen en een citaat — geen bijvoeglijke naamwoorden
+     03 ook één de configurator en /case-voor, licht en laag
+     04 modellen   05 onderdelen   slot
+
+   De kleine koper mag niet het gevoel krijgen dat hij hier niet hoort,
+   maar hij mag de pagina ook niet dragen. Vandaar wel een eigen sectie
+   met twee echte deuren, maar ná het bewijs.
+
+   De filmkeuzebalk van v2/v3 zit hier bewust niet op: daar wérd nog
+   gekozen, hier is gekozen. De markup is wel dezelfde .film-vorm, dus
+   terugzetten is één selector.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ══════════════════════════════════════════════════════════════
+   overgenomen uit v8 — de aanvraag
+
+   Deze versie volgt de bezoekersverdeling zoals die is, niet zoals
+   een webshop hem graag zou hebben:
+
+     hoog    weet wat hij heeft, niet wat hij wil  → de aanvraag
+     midden  weet zijn maten                       → de configurator
+     laag    weet zijn artikelnummer               → onderdelen
+     nihil   de particulier                        → geen eigen plek
+
+   Zeventig procent van de Nederlandse orders begint met een mail aan
+   Joran: soms een schets, soms alleen een datasheet. Hij tekent en
+   stuurt dezelfde dag terug. Dat is geen omweg naar de webshop maar
+   het product zelf, dus staat het boven de vouw — met de velden erbij,
+   niet als knop naar een contactformulier.
+
+   Onderdelen komt bewust pas onderaan: te weinig omzet om ruimte in
+   het eerste scherm te verdienen, te veel om weg te laten.
+   ══════════════════════════════════════════════════════════════ */
+
+/* het beeldmerk als losse merkvorm — alleen op vlakken die een
+   afsluiting zijn, niet als tweede logo naast het woordmerk */
+.beeldmerk{height:54px;width:auto;margin:0 auto 4px}
+
+/* ── hero met drie ingangen ──────────────────────────────── */
+.aanvraag{background:var(--void);color:#fff;position:relative;overflow:hidden;padding:76px 0 66px}
+/* De film ligt onder de scrim, in dezelfde vorm als v2/v3: <video> met
+   een <img> ernaast die alleen verschijnt als de bezoeker beweging heeft
+   uitgezet. De poster laadt eerst, dus de kop staat er ook als de film
+   nog niet binnen is. */
+.aanvraag .film{position:absolute;inset:0;z-index:-3}
+.aanvraag .film video,.aanvraag .film img{width:100%;height:100%;object-fit:cover;display:block}
+.aanvraag .film img{display:none}
+@media(prefers-reduced-motion:reduce){.aanvraag .film video{display:none}.aanvraag .film img{display:block}}
+/* De scrim liep van donker links naar licht rechts, want daar stond het
+   paneel overheen. Nu draagt hij tekst over de volle breedte: donker onder
+   de deuren, donker genoeg bovenin voor de kop, en in het midden zo licht
+   mogelijk zodat er nog film te zien is. */
+.aanvraag .scrim{position:absolute;inset:0;z-index:-2;pointer-events:none;
+  background:linear-gradient(180deg,rgba(6,18,28,.72) 0%,rgba(6,18,28,.46) 34%,rgba(6,18,28,.58) 62%,rgba(6,18,28,.90) 100%)}
+.aanvraag h1{font-size:clamp(38px,4.4vw,60px);color:#fff;line-height:.95;margin:16px 0 0;max-width:15ch}
+.aanvraag h1 .acc{color:var(--cyan)}
+.aanvraag p.sub{margin-top:18px;font-size:17.5px;color:rgba(255,255,255,.82);max-width:56ch}
+
+/* ── drie ingangen in de hero ──────────────────────────────
+   Overgenomen uit v7. Daar staan ze op een stilstaand beeld, hier op de
+   film — dat is precies het verschil dat deze versie te bieden heeft.
+
+   Eén afwijking van v7: daar is "configureren" de dichte cyaan deur, hier
+   is dat de aanvraag. Dat volgt aantekening 03 op de beoordeelpagina —
+   zeventig procent van de orders begint als aanvraag, dus die hoort het
+   dichte vlak te krijgen en de andere twee een rand. Drie even brede
+   deuren is geen keuze maar uitstel. */
+/* Volle wrapbreedte, geen max-width: met 1060px in een wrap van 1280
+   stopten de deuren 220px voor de rand terwijl de kop erboven wel
+   doorliep. Dat leest als scheef, niet als gecentreerd. Nu delen kop,
+   subkop en deuren dezelfde linker- en rechterkant. */
+.deuren{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:34px}
+.deur{border:1.5px solid rgba(255,255,255,.3);background:rgba(6,18,28,.42);
+  backdrop-filter:blur(3px);padding:20px 22px 22px;display:flex;flex-direction:column;
+  min-height:186px;transition:.15s}
+.deur:hover{border-color:var(--cyan);background:rgba(6,18,28,.62)}
+.deur .n{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--cyan)}
+.deur h3{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:22px;
+  letter-spacing:.03em;color:#fff;margin:13px 0 9px;line-height:1.05}
+.deur p{font-size:14px;color:rgba(255,255,255,.72);flex:1;line-height:1.5}
+.deur .bij{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.45);margin-top:9px}
+.deur .go{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:14.5px;
+  letter-spacing:.05em;color:var(--cyan);margin-top:16px;display:flex;align-items:center;gap:8px}
+/* de hoofdingang: dicht vlak, donkere letters, geen rand nodig */
+.deur.pri{background:var(--cyan);border-color:var(--cyan)}
+.deur.pri:hover{background:#8ad3ef}
+.deur.pri .n{color:rgba(6,18,28,.6)}
+.deur.pri h3{color:var(--void)}
+.deur.pri p{color:rgba(6,18,28,.78)}
+.deur.pri .bij{color:rgba(6,18,28,.55)}
+.deur.pri .go{color:var(--void)}
+
+/* ── meetlat ─────────────────────────────────────────────────
+   De dunne specband van v8 zei vier ware dingen in 19px. Voor een partij
+   die driehonderd kisten per jaar koopt is dat te bescheiden: die moet in
+   één blik zien dat dit geen zolderbedrijf is. Dus cijfers, groot, met het
+   label eronder — zelfde patroon als de meetlat op v6.
+
+   De getallen zijn plaatshouders zolang Proflite ze niet bevestigd heeft;
+   ze komen wel allemaal ergens anders in deze mockups al voor. */
+.meetlat{background:var(--dark);border-top:1px solid rgba(255,255,255,.14)}
+.meetlat .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:rgba(255,255,255,.14);padding-left:0;padding-right:0;max-width:none}
+.meetlat .m{background:var(--dark);padding:24px 32px 26px}
+.meetlat .m b{font-family:var(--disp);font-weight:900;font-size:36px;letter-spacing:.02em;
+  color:#fff;display:block;line-height:1}
+.meetlat .m span{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--cyan);display:block;margin-top:9px}
+.meetlat .m i{font-size:13.5px;color:rgba(255,255,255,.62);display:block;margin-top:7px}
+
+/* ── de schaal ───────────────────────────────────────────────
+   Dit is waar de grote partij op afhaakt of blijft. Niet "wij zijn
+   marktleider" — dat is een lege claim — maar de vier dingen die een
+   inkoper werkelijk moet weten voordat hij een serie durft te plaatsen.
+   Op donker, want dit is de zwaarste band van de pagina. */
+.schaal{background:var(--void);color:#fff}
+.schaal .grid{display:grid;grid-template-columns:1fr 1.25fr;gap:56px;align-items:start}
+.schaal h2{font-size:clamp(30px,3.4vw,46px);color:#fff;margin:14px 0 16px}
+.schaal p.lead{color:rgba(255,255,255,.8);font-size:17px;max-width:46ch}
+.schaal .vier{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.16)}
+.schaal .it{background:var(--void);padding:22px 24px 24px}
+.schaal .it b{font-family:var(--disp);text-transform:uppercase;font-size:19px;letter-spacing:.03em;
+  color:#fff;display:block;line-height:1.1}
+.schaal .it span{font-size:14px;color:rgba(255,255,255,.7);display:block;margin-top:8px;line-height:1.5}
+.schaal .it .k{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--cyan);display:block;margin-bottom:9px}
+
+/* ── het bewijs ──────────────────────────────────────────────
+   Namen, geen bijvoeglijke naamwoorden. Overgenomen uit v4. De logo's en
+   het citaat zijn plaatshouders tot iemand bij Proflite toestemming heeft
+   gevraagd — dat staat als open vraag in de selectiedoc. */
+.klanten{background:var(--bg);border-top:1px solid var(--rule)}
+.klanten .row{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px}
+.klanten .lg{flex:1;min-width:150px;height:66px;border:1px solid var(--rule);background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--rule)}
+.klanten .cit{margin-top:34px;border-left:3px solid var(--cyan);padding-left:26px;max-width:70ch}
+.klanten .cit p{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:24px;
+  letter-spacing:.02em;color:var(--dark);line-height:1.2}
+.klanten .cit span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mute);display:block;margin-top:12px}
+
+/* ── ook één case ────────────────────────────────────────────
+   De kleine koper mag niet het gevoel krijgen dat hij hier niet hoort,
+   maar hij mag de pagina ook niet dragen. Vandaar: wel een eigen sectie,
+   wel twee echte deuren, maar licht en laag — na het bewijs, niet ervoor. */
+.klein{border-top:1px solid var(--rule)}
+.klein .grid{display:grid;grid-template-columns:1fr 1.1fr;gap:52px;align-items:center}
+.klein h2{font-size:clamp(26px,2.9vw,38px);margin:12px 0 14px}
+.klein p.lead{font-size:16px;max-width:44ch}
+.klein .twee{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.klein .dr{border:1.5px solid var(--rule);background:#fff;padding:22px 22px 24px;
+  display:flex;flex-direction:column;min-height:172px;transition:.14s}
+.klein .dr:hover{border-color:var(--dark);background:var(--lightblue)}
+.klein .dr .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--blue)}
+.klein .dr b{font-family:var(--disp);text-transform:uppercase;font-size:21px;letter-spacing:.03em;
+  color:var(--dark);display:block;margin:12px 0 8px;line-height:1.05}
+.klein .dr span{font-size:14px;color:var(--mute);flex:1;line-height:1.5}
+.klein .dr .go{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:14.5px;
+  letter-spacing:.05em;color:var(--blue);margin-top:16px}
+.klein .dr:hover .go{color:var(--dark)}
+
+/* ── modellen ────────────────────────────────────────────── */
+.mdlrij .sec-head{display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.mdlrij .sec-head > div{margin-right:auto}
+.case .pr b{display:block}
+
+/* ── onderdelen, laag in de pagina ───────────────────────── */
+.onderdelen{border-top:1px solid var(--rule)}
+.onderdelen .grid{display:grid;grid-template-columns:1fr 1.15fr;gap:48px;align-items:center}
+.onderdelen h2{font-size:28px;margin:12px 0 12px}
+.onderdelen p{font-size:15px;color:var(--mute);max-width:46ch}
+.onderdelen .cats{display:flex;gap:8px;flex-wrap:wrap}
+.onderdelen .cats a{border:1px solid var(--rule);background:#fff;padding:9px 14px;font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.onderdelen .cats a:hover{border-color:var(--dark);color:var(--dark)}
+
+.closer{background:var(--void);color:#fff;text-align:center}
+.closer h2{font-size:clamp(30px,3.6vw,50px);color:#fff}
+.closer p{color:rgba(255,255,255,.75);margin:14px auto 30px;max-width:50ch;font-size:17px}
+
+@media(max-width:1180px){
+  .deuren{grid-template-columns:1fr;max-width:520px}
+  .zelfdoen .grid,.onderdelen .grid{grid-template-columns:1fr;gap:32px}
+  .zakelijk .row{grid-template-columns:1fr 1fr}
+  .specband .wrap{grid-template-columns:1fr 1fr}
+}
+@media(max-width:760px){
+  .aanvraag{padding:44px 0 40px}
+  .deur{min-height:auto}
+  .gang .stap{grid-template-columns:56px 1fr;gap:20px}
+  .gang .stap > p{grid-column:2}
+  .zakelijk .row,.specband .wrap{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="main">
+  <div class="wrap">
+    <div class="merk"><img src="assets/woordmerk.svg" alt="Casebuilder.com"></div>
+    <form class="search" onsubmit="return false">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+      <input placeholder="Zoek op case, onderdeel of artikelnummer…" aria-label="Zoeken">
+    </form>
+    <div class="hdr-r">
+      <a href="#" class="stil">Inloggen</a>
+      <a href="#">Winkelwagen</a>
+    </div>
+  </div>
+</header>
+
+<nav class="primary">
+  <div class="wrap">
+    <a href="case-aanvragen-v1.html">Case aanvragen</a>
+    <a href="case-voor-v1.html">Wat ga je vervoeren?</a>
+    <a href="configurator-v1.html">Zelf configureren</a>
+    <a href="flightcases-v1.html">Flightcases</a>
+    <a href="branches.html">Branches</a>
+    <a href="service-hub-v1.html">Service</a>
+    <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#">NL &#9662;</a></div>
+  </div>
+</nav>
+
+<!-- ── DE AANVRAAG ────────────────────────────────────────────
+     Geen knop naar een contactformulier maar de velden zelf. Dit is
+     de weg waarlangs zeventig procent van de orders binnenkomt; die
+     verstoppen achter een klik kost een deel van dat volume.
+
+     De foto en de naam van de tekenaar zijn een plaatshouder — voor
+     publicatie moet iemand bij Proflite bevestigen wie hier staat en
+     of die persoon met naam en beeld in de etalage wil. ────────── -->
+<div class="aanvraag ruit ruit-dark ruit-aanzet" data-band="hero">
+  <div class="film">
+    <video autoplay muted loop playsinline poster="assets/hero-v3-poster.jpg">
+      <source src="assets/hero-v3.webm" type="video/webm">
+      <source src="assets/hero-v3.mp4" type="video/mp4">
+    </video>
+    <img src="assets/hero-v3-poster.jpg" alt="" aria-hidden="true">
+  </div>
+  <div class="scrim"></div>
+  <div class="wrap">
+    <div class="ey">// DRIE INGANGEN &middot; &Eacute;&Eacute;N WERKPLAATS IN DOESBURG</div>
+    <h1>Je weet wat erin moet.<br><span class="acc">Wij weten hoe.</span></h1>
+    <p class="sub">Configureren, een offerte, of alleen zeggen wat je vervoert. Welke deur je ook neemt, er kijkt een casebouwer naar voordat er gezaagd wordt.</p>
+
+    <div class="deuren">
+      <a class="deur pri" href="case-aanvragen-v1.html">
+        <div class="n">// 01</div>
+        <h3>Stuur wat je hebt</h3>
+        <p>Een schets, een datasheet of een foto van je apparatuur. Je krijgt dezelfde werkdag een tekening met prijs terug.</p>
+        <div class="bij">// zo begint zeventig procent van de orders</div>
+        <div class="go">Case aanvragen &rarr;</div>
+      </a>
+      <a class="deur" href="configurator-v1.html">
+        <div class="n">// 02</div>
+        <h3>Start met configureren</h3>
+        <p>Model en maten zijn bekend. Vijf stappen, prijs meteen in beeld, geen wachttijd.</p>
+        <div class="bij">// ook op rekening, ook bij &eacute;&eacute;n stuk</div>
+        <div class="go">Naar de configurator &rarr;</div>
+      </a>
+      <a class="deur" href="case-voor-v1.html">
+        <div class="n">// 03</div>
+        <h3>Ik weet alleen wat ik wil vervoeren</h3>
+        <p>Een Les Paul, een 19-inch rack van 6 HE, een moving head. Zeg wat erin gaat, wij bepalen de maten.</p>
+        <div class="bij">// 533 cases &middot; 38 toepassingen</div>
+        <div class="go">Wat ga je vervoeren? &rarr;</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="meetlat" data-band="belofte">
+  <div class="wrap">
+    <div class="m"><b>1987</b><span>// eerste kist</span><i>Ononderbroken in eigen beheer geproduceerd, in Doesburg.</i></div>
+    <div class="m"><b>300</b><span>// grootste serie</span><i>In &eacute;&eacute;n order geleverd, op afroep afgenomen.</i></div>
+    <div class="m"><b>10</b><span>// werkdagen</span><i>Ook bij maatwerk. Bij series in overleg op afroep.</i></div>
+    <div class="m"><b>533</b><span>// cases in de catalogus</span><i>38 toepassingen. Alles daarbuiten maken we op maat.</i></div>
+  </div>
+</div>
+
+<!-- ── DE SCHAAL ──────────────────────────────────────────────
+     De zwaarste band van de pagina, en bewust de eerste na de hero.
+     Wie hier komt met een vloot moet niet eerst door een uitleg over
+     hoe bestellen werkt; die moet weten of wij zijn volume aankunnen. -->
+<section class="schaal" data-band="zakelijk">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <div class="ey">// 01 &mdash; VOOR WIE ER ELKE WEEK EEN NODIG HEEFT</div>
+        <h2>Van &eacute;&eacute;n case tot driehonderd</h2>
+        <p class="lead">Dezelfde werkplaats, dezelfde tolerantie, of je er nu &eacute;&eacute;n bestelt of een seizoen vooruit inkoopt. Wat er verandert is de prijs per stuk en het moment van leveren &mdash; niet de kist.</p>
+      </div>
+      <div class="vier">
+        <div class="it"><span class="k">// 01</span><b>Series en staffels</b><span>Vanaf tien kisten een staffelprijs, met levering op afroep. Je magazijn blijft leeg tot je ze nodig hebt.</span></div>
+        <div class="it"><span class="k">// 02</span><b>Herhaalorders</b><span>Je tekening blijft bewaard. Volgend seizoen dezelfde kist, in &eacute;&eacute;n mail, zonder opnieuw opmeten.</span></div>
+        <div class="it"><span class="k">// 03</span><b>Op rekening</b><span>Voor zakelijke klanten, met je eigen inkoopreferentie op de factuur. Geen creditcard aan de kassa.</span></div>
+        <div class="it"><span class="k">// 04</span><b>Eigen huisstijl</b><span>Paneelkleur en logo op het deksel. Een kist die de hele tour in beeld staat, is rijdende reclame.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HET BEWIJS ─────────────────────────────────────────────
+     Overgenomen uit v4. "Marktleider" is een lege claim; namen en een
+     citaat zijn dat niet. Beide zijn plaatshouders tot er toestemming is. -->
+<section class="klanten tight" data-band="klanten">
+  <div class="wrap">
+    <div class="ey ey-dark">// 02 &mdash; WIE ER MEE OP TOUR IS</div>
+    <div class="row">
+      <div class="lg">logo ontbreekt</div>
+      <div class="lg">logo ontbreekt</div>
+      <div class="lg">logo ontbreekt</div>
+      <div class="lg">logo ontbreekt</div>
+      <div class="lg">logo ontbreekt</div>
+      <div class="lg">logo ontbreekt</div>
+    </div>
+    <div class="cit">
+      <p>&ldquo;Wij bestellen per seizoen zeventig kisten. Dat het bedrag er meteen staat, scheelt ons een week heen-en-weer per bestelling.&rdquo;</p>
+      <span>// citaat nog op te halen &middot; plaatsvervangende tekst</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── OOK ÉÉN CASE ───────────────────────────────────────────
+     De kleine koper, na het bewijs en niet ervoor. Twee deuren: zelf
+     rekenen, of laten opzoeken wat er bij zijn apparaat past. -->
+<section class="klein tight" data-band="zelfdoen">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <div class="ey ey-dark">// 03 &mdash; OOK &Eacute;&Eacute;N CASE</div>
+        <h2>Ook als je er maar &eacute;&eacute;n nodig hebt</h2>
+        <p class="lead">Geen minimum, geen account, geen offertetraject. Dezelfde kist als die driehonderd, alleen dan &eacute;&eacute;n keer.</p>
+      </div>
+      <div class="twee">
+        <a class="dr" href="configurator-v1.html">
+          <div class="k">// je weet je maten</div>
+          <b>Stel hem zelf samen</b>
+          <span>Model, maten in millimeters, negen paneelkleuren. De prijs verandert live mee.</span>
+          <div class="go">Naar de configurator &rarr;</div>
+        </a>
+        <a class="dr" href="case-voor-v1.html">
+          <div class="k">// je weet je apparaat</div>
+          <b>Zoek op wat erin gaat</b>
+          <span>Een Les Paul, een 19-inch rack, een moving head. 533 cases met de maten al ingevuld.</span>
+          <div class="go">Wat ga je vervoeren? &rarr;</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ZAKELIJK ───────────────────────────────────────────── -->
+<section class="onderdelen tight" data-band="onderdelen">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <div class="ey ey-dark">// 04 — ZELF BOUWEN</div>
+        <h2>Of bestel alleen de onderdelen</h2>
+        <p>Profielen, hoeken, sluitingen, wielen en schuim — hetzelfde materiaal waarmee wij bouwen. Vandaag besteld, morgen verstuurd.</p>
+      </div>
+      <div class="cats">
+        <a href="#">Profielen</a><a href="#">Hoeken</a><a href="#">Handgrepen</a>
+        <a href="#">Sluitingen</a><a href="#">Scharnieren</a><a href="#">Wielen</a>
+        <a href="#">Schuimplastic</a><a href="#">19" artikelen</a><a href="#">Zaagservice</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SLOT ───────────────────────────────────────────────── -->
+<section class="closer ruit ruit-dark ruit-veld beslag" data-band="slot">
+  <span class="hk tl"></span><span class="hk tr"></span><span class="hk bl"></span><span class="hk br"></span>
+  <div class="wrap">
+    <img class="beeldmerk" src="assets/beeldmerk-wit.svg" alt="" aria-hidden="true">
+    <div class="ey">// NOG GEEN MATEN, WEL EEN PROBLEEM</div>
+    <h2 style="margin-top:14px">Stuur het gewoon op</h2>
+    <p>Een foto van je apparatuur is genoeg om te beginnen. Je hebt vandaag nog een tekening, en pas als die klopt praten we over bestellen.</p>
+    <a class="btn btn-pri" href="#">Vraag je case aan →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="merk"><img src="assets/woordmerk-wit.svg" alt="Casebuilder.com"></div>
+        <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734">+31 (0)575 575734</a></p>
+      </div>
+      <div><h5>Offerte aanvragen</h5><a href="case-aanvragen-v1.html">Case aanvragen</a><a href="laten-controleren-v1.html">Maten laten controleren</a><a href="#">Series en staffels</a><a href="#">Zakelijk bestellen</a></div>
+      <div><h5>Zelf configureren</h5><a href="configurator-v1.html">Naar de configurator</a><a href="zo-werkt-het-v1.html">Zo werkt het</a><a href="#">Herhaalorder</a><a href="#">Mijn configuraties</a></div>
+      <div><h5>Flightcases</h5><a href="flightcases-v1.html">Alle flightcases</a><a href="casetype-koffer-v1.html">Koffer</a><a href="casetype-hoedcase-v1.html">Hoedcase</a><a href="casetype-trunccase-v1.html">Trunccase</a><a href="casetype-rackcase-enkel-deksel-v1.html">Rackcase enkel</a><a href="casetype-rackcase-dubbel-deksel-v1.html">Rackcase dubbel</a></div>
+      <div><h5>Service</h5><a href="service-levertijden-v1.html">Levertijden</a><a href="#">Verzending</a><a href="categorie-v1.html">Onderdelen</a><a href="#">Zaagservice</a><a href="#">Over Proflite</a><a href="contact-v1.html">Contact</a></div>
+    </div>
+    <div class="bot"><span>KVK 09123456</span><span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span></div>
+  </div>
+</footer>
+
+<script src="assets/vouw.js"></script>
+<script src="assets/versies.js"></script>
+<script src="assets/uitsnede.js"></script>
+</body>
+</html>

@@ -12,15 +12,15 @@
 /* ══════════════════════════════════════════════════════════════
    Homepage beoordelen
 
-   Acht ontwerpen in drie rijen, één opzij gezet. Anders dan bij de
+   Zes ontwerpen in twee rijen, vijf opzij gezet. Anders dan bij de
    andere tabs is hier nog niets gekozen, dus staan ze even groot: je
    vergelijkt richtingen, je leest geen pagina.
 
    De indeling ís de vergelijking. Elke rij stelt een andere vraag, en
    binnen een rij zijn de versies elkaars alternatief:
 
-     rij 1  v1, v2, v3   één ontwerp, stilstaand of met film
-     rij 2  v9, v10      op film, de pagina eronder uitgewerkt
+     rij 1  v1, v2, v3     één ontwerp, stilstaand of met film
+     rij 2  v9, v10, v11   de pagina uitgewerkt, drie soorten hero
 
    In één bak van acht vergelijk je v1 met v8, en dat gaat nergens over:
    die twee beantwoorden niet dezelfde vraag.
@@ -113,9 +113,9 @@ body{background:#EDF0F4}
    vragen. Zonder die kopregels is het één bak van acht en vergelijk je
    v1 met v8, wat nergens over gaat.
 
-   Rij 2 heeft er twee en blijft toch op drie kolommen staan: alle
-   kaders even breed houden weegt zwaarder dan de rij vol maken. Een
-   kader dat anderhalf keer zo groot is leest als een voorkeur. */
+   Beide rijen staan op drie kolommen. Alle kaders even breed houden
+   weegt zwaarder dan een rij precies vol krijgen: een kader dat
+   anderhalf keer zo groot is leest als een voorkeur. */
 .groepkop{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:30px 0 12px}
 .groepkop .gn{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--blue);flex:none}
 .groepkop b{font-family:var(--disp);text-transform:uppercase;font-size:20px;letter-spacing:.03em;
@@ -232,12 +232,12 @@ body.focusmodus .demo:not(.aan){cursor:default}
   </div>
 
   <div class="inleiding">
-    <h2>Vijf in beeld, vijf opzij</h2>
-    <p><b>Anders dan bij de andere tabs is hier nog niets geselecteerd.</b> Daarom staan ze even groot: je vergelijkt composities boven de vouw, je leest geen pagina&rsquo;s. Elk kader schuift, en het pijltje in de balk opent die versie volledig. Ze staan per rij bij elkaar: <b>rij&nbsp;1</b> is &eacute;&eacute;n ontwerp met drie soorten beeld, <b>rij&nbsp;2</b> zijn de twee nieuwste &mdash; allebei film, allebei volledig uitgewerkt. Binnen een rij kies je; tussen de rijen beantwoord je een andere vraag. De vijf die afvielen staan eronder als link, met de reden erbij. De afweging per versie staat in <a href="concepten-2sept.html" target="_blank" rel="noopener">het versie-overzicht</a>.</p>
+    <h2>Zes in beeld, vijf opzij</h2>
+    <p><b>Anders dan bij de andere tabs is hier nog niets geselecteerd.</b> Daarom staan ze even groot: je vergelijkt composities boven de vouw, je leest geen pagina&rsquo;s. Elk kader schuift, en het pijltje in de balk opent die versie volledig. Ze staan per rij bij elkaar: <b>rij&nbsp;1</b> is &eacute;&eacute;n ontwerp met drie soorten beeld, <b>rij&nbsp;2</b> zijn de drie nieuwste &mdash; alle drie volledig uitgewerkt, met het verschil boven de vouw: twee op film, &eacute;&eacute;n op wit. Binnen een rij kies je; tussen de rijen beantwoord je een andere vraag. De vijf die afvielen staan eronder als link, met de reden erbij. De afweging per versie staat in <a href="concepten-2sept.html" target="_blank" rel="noopener">het versie-overzicht</a>.</p>
   </div>
 
   <div class="kop">
-    <span class="nr">// VIJF VERSIES</span>
+    <span class="nr">// ZES VERSIES</span>
     <h3>De belangrijkste pagina van de site</h3>
     <span><span class="hgt">/ &middot; eigen sjabloon &middot; op 31%</span></span>
   </div>
@@ -280,8 +280,8 @@ body.focusmodus .demo:not(.aan){cursor:default}
 
   <div class="groepkop">
     <span class="gn">// RIJ 2</span>
-    <b>Op film, met de pagina eronder uitgewerkt</b>
-    <span class="gu">De twee nieuwste. Allebei een filmhero met het echte woordmerk, en allebei een volledig uitgewerkte pagina eronder &mdash; bewijs, branches, prijs, offerte. Het verschil zit in de hero: v9 zet er drie deuren in, v10 houdt hem leeg en zet de drie manieren als eerste sectie eronder. v10 is bovendien de <a href="homepage-samenstellen.html">samenstelling</a>: per band de variant die daar gekozen is, met twee eigen bewegingen &mdash; het woordmerk krimpt bij het scrollen tot het cB-monogram, en de slotkop wisselt door vijf regels zodra je er bent.</span>
+    <b>De pagina uitgewerkt, drie soorten hero</b>
+    <span class="gu">De drie nieuwste, alle drie met een volledig uitgewerkte pagina eronder &mdash; bewijs, branches, prijs, offerte. Het verschil zit boven de vouw. v9 zet drie deuren in de filmhero, v10 houdt die hero leeg en zet de drie manieren als eerste sectie eronder, en v11 laat de film los: wit, kop links, de kist rechts, geen tekst over beeld. v10 is bovendien de <a href="homepage-samenstellen.html">samenstelling</a>: per band de variant die daar gekozen is, met twee eigen bewegingen &mdash; het woordmerk krimpt bij het scrollen tot het cB-monogram, en de slotkop wisselt door vijf regels zodra je er bent.</span>
   </div>
   <div class="beoordeel">
     <div class="demo">
@@ -294,6 +294,12 @@ body.focusmodus .demo:not(.aan){cursor:default}
       <a class="balk" href="homepage-v10.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">v10 (video) &middot; Millimeterwerk, de snelste van Nederland<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
       <div class="venster" data-schaal=".31"><div class="houder">
         <iframe src="homepage-v10.html" title="Homepage v10 (video)" loading="lazy"></iframe>
+      </div></div>
+    </div>
+    <div class="demo">
+      <a class="balk" href="homepage-v11.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">v11 (lichte hero) &middot; Millimeterwerk, in tien werkdagen<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
+      <div class="venster" data-schaal=".31"><div class="houder">
+        <iframe src="homepage-v11.html" title="Homepage v11 (lichte hero)" loading="lazy"></iframe>
       </div></div>
     </div>
   </div>

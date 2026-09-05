@@ -95,8 +95,8 @@ body{background:#EDF0F4}
 /* ═══ gedeelde, rustiger headerbouwstenen ═══ */
 .h-bar{background:#fff;border-bottom:1px solid var(--rule)}
 .h-bar .wrap{display:flex;align-items:center;gap:32px}
-.h-logo{font-family:var(--disp);font-weight:900;font-size:26px;letter-spacing:.01em;color:#000;white-space:nowrap}
-.h-logo em{font-style:normal;color:var(--logo)}
+.h-logo{display:block;flex:none;line-height:0}
+.h-logo img{height:24px;width:auto}
 /* zoekveld — rustiger: geen donker blok, alleen een icoon */
 .h-zoek{flex:1;max-width:460px;display:flex;align-items:center;gap:10px;height:42px;
   border:1px solid var(--rule);background:var(--bg);padding:0 14px}
@@ -215,7 +215,7 @@ body.focusmodus .demo:not(.aan){cursor:default}
   <div class="demo vb">
     <div class="h-bar">
       <div class="wrap">
-        <div class="h-logo"><em>case</em>Builder.com</div>
+        <div class="h-logo"><img src="assets/woordmerk.svg" alt="Casebuilder.com"></div>
         <div class="h-nav-inline">
           <a href="case-aanvragen-v1.html">Case aanvragen</a><a href="case-voor-v1.html">Wat ga je vervoeren?</a>
           <a href="configurator-v1.html">Zelf configureren</a><a href="flightcases-v1.html">Flightcases</a>
@@ -252,7 +252,7 @@ body.focusmodus .demo:not(.aan){cursor:default}
     <div class="balk">Geselecteerd voor nu &mdash; doorgevoerd in de homepage-mockups</div>
     <div class="h-bar">
       <div class="wrap">
-        <div class="h-logo"><em>case</em>Builder.com</div>
+        <div class="h-logo"><img src="assets/woordmerk.svg" alt="Casebuilder.com"></div>
         <form class="h-zoek" onsubmit="return false">
           <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
           <input placeholder="Zoek op artikelnummer of onderdeel…">
@@ -295,7 +295,7 @@ body.focusmodus .demo:not(.aan){cursor:default}
     </div>
     <div class="h-bar">
       <div class="wrap">
-        <div class="h-logo"><em>case</em>Builder.com</div>
+        <div class="h-logo"><img src="assets/woordmerk.svg" alt="Casebuilder.com"></div>
         <form class="h-zoek" onsubmit="return false">
           <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
           <input placeholder="Zoek op artikelnummer of onderdeel…">

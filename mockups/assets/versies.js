@@ -26,7 +26,11 @@
       { id: 'v5', bestand: 'homepage-v5.html', label: 'v5' },
       { id: 'v6', bestand: 'homepage-v6.html', label: 'v6' },
       { id: 'v7', bestand: 'homepage-v7.html', label: 'v7' },
-      { id: 'v8', bestand: 'homepage-v8.html', label: 'v8' }
+      { id: 'v8', bestand: 'homepage-v8.html', label: 'v8' },
+      { id: 'v9', bestand: 'homepage-v9.html', label: 'v9 (video)' },
+      { id: 'v10', bestand: 'homepage-v10.html', label: 'v10 (video)' },
+      { id: 'v11', bestand: 'homepage-v11.html', label: 'v11 (licht)' },
+      { id: 'v12', bestand: 'homepage-v12.html', label: 'v12 (zoekbalk)' }
     ],
     'categorie': [
       { id: 'wireframe', bestand: 'categorie.html', label: 'wireframe' },
