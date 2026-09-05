@@ -102,16 +102,16 @@ nav.primary{position:sticky;top:0;z-index:40}
 nav.primary .navzoek{position:relative;display:flex;align-items:center;flex:none;
   opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity .16s ease,transform .16s ease}
 nav.primary.zoekbij .navzoek{opacity:1;visibility:visible;transform:none}
-/* Geen vergrootglas maar de toets waarmee je het opent. Er staat er al
-   een in de header, en dezelfde loep twee keer met een ander bereik leest
-   als één ding dat dubbel staat. De mono-streep hoort bovendien bij de
-   // -labels die overal de technische kant markeren. */
+/* Een loep, maar niet dezelfde als in de header: die staat op 1.6 met
+   vierkante uiteinden en oogt op 14 px slap. Deze is iets zwaarder, heeft
+   ronde uiteinden en een steel die de cirkel raakt in plaats van er los
+   naast te liggen — op deze maat is dat het verschil tussen een icoon en
+   een vlekje. */
 .navzoek .knop{width:34px;height:34px;display:flex;align-items:center;justify-content:center;
   border:1px solid var(--rule);background:#fff;color:var(--mute);cursor:pointer;padding:0;
-  font-family:var(--mono);font-size:15px;line-height:1;font-weight:500;
   transition:border-color .12s,color .12s,background .12s}
 .navzoek .knop:hover{border-color:var(--dark);color:var(--dark);background:var(--bg)}
-.navzoek .teken{flex:none;font-family:var(--mono);font-size:13px;color:var(--rule)}
+.navzoek .veld svg{flex:none;color:var(--mute)}
 .navzoek .veld{position:absolute;right:0;top:50%;transform:translateY(-50%);
   display:flex;align-items:center;gap:9px;height:34px;background:#fff;
   border:1px solid var(--cyan);box-shadow:0 8px 22px rgba(0,40,70,.16);
@@ -126,6 +126,26 @@ nav.primary.zoekbij .navzoek{opacity:1;visibility:visible;transform:none}
   nav.primary .navzoek,.navzoek .veld{transition:none}
 }
 @media(max-width:900px){nav.primary .navzoek{display:none}}
+
+/* ── optie A: het merk in de balk ───────────────────────────
+   Het cB verschijnt links op hetzelfde moment als het zoekveld rechts.
+   Daarmee is de balk de balk van de site — merk, ingangen, zoeken — en
+   niet alleen een menu.
+
+   Het schuift van breedte nul open in plaats van te verschijnen: zo
+   bewegen de ingangen mee en verspringt de balk niet.
+
+   De ruil staat eronder. Op 1280 px is er zo'n 74 px over en monogram
+   plus zoekveld vragen er samen ongeveer 100, dus "Direct advies" valt
+   weg zodra je scrolt. Het nummer blijft — dat is de handeling, het
+   label was de toelichting. */
+nav.primary .merkje{display:flex;align-items:center;flex:none;
+  width:0;overflow:hidden;opacity:0;
+  transition:width .18s cubic-bezier(.2,.7,.2,1),opacity .14s,margin .18s}
+nav.primary.zoekbij .merkje{width:30px;opacity:1;margin-right:26px}
+nav.primary .merkje img{height:22px;display:block}
+nav.primary.zoekbij .rechts .label{display:none}
+@media(max-width:900px){nav.primary .merkje{display:none}}
 header.main .wrap{display:flex;align-items:center;gap:32px;height:74px}
 /* wordmerk — brandbook §09. Het echte merk als vector, niet nagetekend.
    Hier stond .logo: het woordmerk nagezet in Barlow Condensed 900, met

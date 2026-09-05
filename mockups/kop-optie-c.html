@@ -1,0 +1,104 @@
+<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — kop optie C (monogram als terug-naar-boven)</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ── OPTIE C — monogram als terug-naar-boven ────────────────
+   Precies wat er nu staat, met één toevoeging: rechts in de balk komt
+   naast het zoekveld een cB dat je bij een klik naar boven brengt.
+
+   Het merk blijft in beeld en de knop doet ook echt iets, dus hij hoeft
+   zich niet te verantwoorden als decoratie. Prijs: het monogram staat
+   rechts tussen de knoppen en niet links waar een logo hoort, dus het
+   leest eerder als bediening dan als merk. */
+header.main{position:relative;z-index:41}
+nav.primary{position:sticky;top:0;z-index:40}
+
+nav.primary .naarboven{display:flex;align-items:center;justify-content:center;flex:none;
+  width:0;height:34px;overflow:hidden;border:1px solid transparent;background:none;
+  cursor:pointer;padding:0;opacity:0;
+  transition:width .18s cubic-bezier(.2,.7,.2,1),opacity .14s,border-color .12s}
+nav.primary.aan .naarboven{width:34px;opacity:1;border-color:var(--rule)}
+nav.primary .naarboven:hover{border-color:var(--dark)}
+nav.primary .naarboven img{height:19px;display:block}
+
+/* Het kleine zoekveld zoals het nu al is, zodat je ziet hoe ze samen staan. */
+nav.primary .kleinzoek{display:flex;align-items:center;gap:9px;height:34px;flex:none;
+  border:1px solid var(--rule);padding:0 11px;width:0;opacity:0;overflow:hidden;
+  transition:width .2s cubic-bezier(.2,.7,.2,1),opacity .14s,padding .2s}
+nav.primary.aan .kleinzoek{width:190px;opacity:1}
+nav.primary .kleinzoek input{border:0;outline:0;background:transparent;font-family:var(--body);
+  font-size:13.5px;flex:1;min-width:0}
+nav.primary .kleinzoek .tk{font-family:var(--mono);font-size:12px;color:var(--rule);flex:none}
+nav.primary.aan .rechts .label{display:none}
+
+.demo-uitleg{background:var(--lightblue);border-bottom:1px solid var(--rule)}
+.demo-uitleg .wrap{padding:14px 0;font-family:var(--mono);font-size:10px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.vul .wrap{padding:60px 0}
+.vul h2{font-size:32px;margin-bottom:14px}
+.vul p{max-width:62ch;color:var(--mute);font-size:16px;margin-bottom:12px}
+</style>
+</head><body>
+
+<header class="main">
+  <div class="wrap">
+    <div class="merk"><img src="assets/woordmerk.svg" alt="Casebuilder.com"></div>
+    <form class="search" onsubmit="return false">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+      <input placeholder="Zoek op case, onderdeel of artikelnummer…" aria-label="Zoeken">
+    </form>
+    <div class="hdr-r"><a href="#" class="stil">Inloggen</a><a href="#">Winkelwagen</a></div>
+  </div>
+</header>
+
+<nav class="primary">
+  <div class="wrap">
+    <a href="#">Case aanvragen</a>
+    <a href="#">Wat ga je vervoeren?</a>
+    <a href="#">Flightcases</a>
+    <a href="#">Shop</a>
+    <a href="#">Branches</a>
+    <a href="#">Service</a>
+    <div class="rechts">
+      <form class="kleinzoek" onsubmit="return false">
+        <span class="tk" aria-hidden="true">/</span>
+        <input placeholder="Zoeken…" aria-label="Zoeken">
+      </form>
+      <button class="naarboven" type="button" aria-label="Naar boven"><img src="assets/beeldmerk.svg" alt=""></button>
+      <span><span class="label">Direct advies </span><b>+31 (0)575 575734</b></span>
+      <a href="#">NL &#9662;</a>
+    </div>
+  </div>
+</nav>
+
+<div class="demo-uitleg"><div class="wrap">// OPTIE C &middot; scrol &mdash; rechts verschijnt een cB; klik erop en je gaat naar boven</div></div>
+
+<section class="vul"><div class="wrap">
+  <h2>Scrol naar beneden</h2>
+  <p>Er verandert niets aan wat er nu staat. Rechts komt naast het zoekveld een cB bij, en die brengt je bij een klik terug naar boven.</p>
+  <p>Probeer het: scrol een stuk door en klik dan op het monogram.</p>
+</div></section>
+<section class="vul" style="background:var(--bg)"><div class="wrap"><h2>Wat het oplevert</h2><p>Het merk blijft in beeld en de knop doet ook echt iets. Goedkoopste van de drie: het raakt alleen navzoek.js en niets aan de pagina&rsquo;s.</p></div></section>
+<section class="vul"><div class="wrap"><h2>Wat het kost</h2><p>Het monogram staat rechts tussen de knoppen en niet links waar een logo hoort. Daardoor leest het eerder als bediening dan als merk &mdash; dat is precies het verschil met optie A.</p></div></section>
+<section class="vul" style="background:var(--bg)"><div class="wrap"><h2>Klik nu maar</h2><p>Het cB rechtsboven brengt je terug naar de bovenkant.</p></div></section>
+<section class="vul"><div class="wrap"><h2>Einde</h2><p>Terug naar de vergelijking om de andere twee te bekijken.</p></div></section>
+
+<script>
+(function(){
+  var nav=document.querySelector('nav.primary'), kop=document.querySelector('header.main');
+  var aan=false, wacht=false;
+  function meet(){
+    wacht=false;
+    var g=kop.offsetHeight, y=scrollY||document.documentElement.scrollTop||0;
+    if(!aan && y>g+20){aan=true;nav.classList.add('aan');}
+    else if(aan && y<g-10){aan=false;nav.classList.remove('aan');}
+  }
+  addEventListener('scroll',function(){if(wacht)return;wacht=true;requestAnimationFrame(meet);},{passive:true});
+  nav.querySelector('.naarboven').addEventListener('click',function(){
+    scrollTo({top:0,behavior:'smooth'});
+  });
+  meet();
+})();
+</script>
+</body></html>

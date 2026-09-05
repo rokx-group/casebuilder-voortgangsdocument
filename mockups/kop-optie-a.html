@@ -1,0 +1,88 @@
+<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — kop optie A (monogram in de navbalk)</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ── OPTIE A — monogram links in de navbalk ─────────────────
+   De header scrolt weg zoals nu. Op hetzelfde moment dat het zoekveld
+   verschijnt, schuift het cB-monogram links de balk in.
+
+   De ruil: "Direct advies" valt weg en alleen het nummer blijft staan.
+   Zonder die ruil past het niet — op 1280 px is er zo'n 74 px over en
+   monogram plus zoekveld vragen er samen ongeveer 100. */
+header.main{position:relative;z-index:41}
+nav.primary{position:sticky;top:0;z-index:40}
+
+/* Het monogram schuift van breedte nul open, zodat de ingangen meebewegen
+   in plaats van te verspringen. */
+nav.primary .merkje{display:flex;align-items:center;flex:none;
+  width:0;overflow:hidden;opacity:0;
+  transition:width .18s cubic-bezier(.2,.7,.2,1),opacity .14s,margin .18s}
+nav.primary.aan .merkje{width:30px;opacity:1;margin-right:26px}
+nav.primary .merkje img{height:22px;display:block}
+
+/* De telefoonregel krimpt tot het nummer. Dezelfde afweging als in de
+   header: onderweg telt de handeling, niet het label. */
+nav.primary .rechts .label{display:inline;transition:opacity .14s}
+nav.primary.aan .rechts .label{display:none}
+
+.demo-uitleg{background:var(--lightblue);border-bottom:1px solid var(--rule)}
+.demo-uitleg .wrap{padding:14px 0;font-family:var(--mono);font-size:10px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.vul .wrap{padding:60px 0}
+.vul h2{font-size:32px;margin-bottom:14px}
+.vul p{max-width:62ch;color:var(--mute);font-size:16px;margin-bottom:12px}
+</style>
+</head><body>
+
+<header class="main">
+  <div class="wrap">
+    <div class="merk"><img src="assets/woordmerk.svg" alt="Casebuilder.com"></div>
+    <form class="search" onsubmit="return false">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+      <input placeholder="Zoek op case, onderdeel of artikelnummer…" aria-label="Zoeken">
+    </form>
+    <div class="hdr-r"><a href="#" class="stil">Inloggen</a><a href="#">Winkelwagen</a></div>
+  </div>
+</header>
+
+<nav class="primary">
+  <div class="wrap">
+    <a class="merkje" href="#top" aria-label="Naar boven"><img src="assets/beeldmerk.svg" alt=""></a>
+    <a href="#">Case aanvragen</a>
+    <a href="#">Wat ga je vervoeren?</a>
+    <a href="#">Flightcases</a>
+    <a href="#">Shop</a>
+    <a href="#">Branches</a>
+    <a href="#">Service</a>
+    <div class="rechts"><span><span class="label">Direct advies </span><b>+31 (0)575 575734</b></span><a href="#">NL &#9662;</a></div>
+  </div>
+</nav>
+
+<div class="demo-uitleg"><div class="wrap">// OPTIE A &middot; scrol naar beneden &mdash; het cB komt links de balk in, &ldquo;Direct advies&rdquo; valt weg</div></div>
+
+<section class="vul"><div class="wrap">
+  <h2>Scrol naar beneden</h2>
+  <p>Zodra de header weg is, verschijnt links het cB-monogram en rechts het zoekveld. De ingangen schuiven mee in plaats van te verspringen, doordat het monogram van breedte nul openschuift.</p>
+  <p>Let op wat er rechts gebeurt: &ldquo;Direct advies&rdquo; valt weg en het nummer blijft staan. Dat is de ruil die de ruimte oplevert.</p>
+</div></section>
+<section class="vul" style="background:var(--bg)"><div class="wrap"><h2>Verder scrollen</h2><p>De balk blijft nu compleet: merk, zes ingangen, zoeken, telefoon. Dat is de balk van de site, en niet alleen een menu.</p></div></section>
+<section class="vul"><div class="wrap"><h2>En weer terug</h2><p>Scrol terug naar boven: het monogram schuift dicht en het label komt terug zodra de header weer in beeld is.</p></div></section>
+<section class="vul" style="background:var(--bg)"><div class="wrap"><h2>Ruimte</h2><p>Op 1280 px is er zo&rsquo;n 74 px over in de balk. Monogram plus zoekveld vragen ongeveer 100 px, dus zonder het weglaten van het label loopt de laatste ingang eruit.</p></div></section>
+<section class="vul"><div class="wrap"><h2>Einde</h2><p>Terug naar de vergelijking om de andere twee te bekijken.</p></div></section>
+
+<script>
+(function(){
+  var nav=document.querySelector('nav.primary'), kop=document.querySelector('header.main');
+  var aan=false, wacht=false;
+  function meet(){
+    wacht=false;
+    var g=kop.offsetHeight, y=scrollY||document.documentElement.scrollTop||0;
+    if(!aan && y>g+20){aan=true;nav.classList.add('aan');}
+    else if(aan && y<g-10){aan=false;nav.classList.remove('aan');}
+  }
+  addEventListener('scroll',function(){if(wacht)return;wacht=true;requestAnimationFrame(meet);},{passive:true});
+  meet();
+})();
+</script>
+</body></html>

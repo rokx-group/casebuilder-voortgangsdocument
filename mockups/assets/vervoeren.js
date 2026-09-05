@@ -24,6 +24,15 @@
   'use strict';
 
   var AANVRAAG = 'case-aanvragen-v1.html';
+  /* Waar "alle categorieën" heen gaat. Als constante en niet in de markup:
+     hij hoort bij het gedrag van de balk, en die staat inmiddels op drie
+     pagina's. Eén regel om te wijzigen als /case-voor een ander sjabloon
+     krijgt. */
+  var ALLE = 'case-voor-v3.html#alle-categorieen';
+  /* Vier suggesties, en dan de uitweg. Meer dan vier leest niet meer als
+     "dit bedoel je waarschijnlijk" maar als een lijst die je moet
+     doornemen — en dan is doorklikken naar het overzicht sneller. */
+  var MAX = 4;
 
   /* ── 1 · de balk in de hero ─────────────────────────────────── */
 
@@ -62,13 +71,20 @@
     }
 
     function toonLijst() {
-      treffers = window.TOEPASSINGEN_ZOEK(input.value, 6);
+      var gevonden = window.TOEPASSINGEN_ZOEK(input.value, MAX);
       actief = -1;
 
-      if (!treffers.length) {
+      if (!gevonden.length) {
         sluitLijst();
         return;
       }
+
+      /* De uitweg hangt onderaan als gewone optie in dezelfde reeks. Zo
+         loopt de pijltjesnavigatie er vanzelf overheen en werkt Enter erop
+         zonder aparte afhandeling — verstuur() kijkt alleen naar .pagina. */
+      treffers = gevonden.concat([{ naam: 'Alle categorieën bekijken',
+                                    groep: '38 categorieën',
+                                    pagina: ALLE, alles: true }]);
 
       lijst.innerHTML = '';
       treffers.forEach(function (t, i) {
@@ -76,6 +92,7 @@
         li.setAttribute('role', 'option');
         li.setAttribute('aria-selected', 'false');
         li.id = 'vervoer-optie-' + i;
+        if (t.alles) li.className = 'alles';
         li.innerHTML = '<span class="nm"></span><span class="gr"></span>';
         li.querySelector('.nm').textContent = t.naam;
         li.querySelector('.gr').textContent = t.groep;
@@ -111,6 +128,8 @@
       if (!tekst) { input.focus(); return; }
 
       if (actief > -1 && treffers[actief]) return ga(treffers[actief].pagina);
+      // Zonder aanwijzing telt de uitweg niet mee: Enter hoort de beste
+      // treffer te openen, niet het overzicht.
 
       var beste = window.TOEPASSINGEN_ZOEK(tekst, 1)[0];
       if (beste) return ga(beste.pagina);

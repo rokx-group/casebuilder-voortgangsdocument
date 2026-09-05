@@ -91,8 +91,11 @@ header.main.gekrompen .merk .bm{max-width:70px;opacity:1;transition-delay:0s,.16
     linear-gradient(180deg,rgba(6,18,28,.42) 0%,transparent 30%,transparent 46%,rgba(6,18,28,.78) 100%),
     linear-gradient(100deg,rgba(6,18,28,.66) 0%,rgba(6,18,28,.40) 44%,rgba(6,18,28,.08) 78%,rgba(6,18,28,.20) 100%)}
 .hero .wrap{padding-top:96px;padding-bottom:64px;position:relative;z-index:1;width:100%}
+/* 23ch en niet 12: "de snelste van Nederland" is een langere regel dan
+   "in tien werkdagen" en viel op drie regels, waardoor de hero groeide
+   en de knoppen onder de vouw zakten. */
 .hero h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:.02em;
-  font-size:clamp(52px,7vw,96px);line-height:.92;color:#fff;max-width:12ch;margin:18px 0 0}
+  font-size:clamp(52px,6.4vw,88px);line-height:.92;color:#fff;max-width:23ch;margin:18px 0 0}
 .hero h1 .acc{color:var(--cyan)}
 .hero p.sub{margin-top:22px;max-width:56ch;font-size:18px;color:rgba(255,255,255,.78)}
 .hero .cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}

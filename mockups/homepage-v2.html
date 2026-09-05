@@ -29,8 +29,11 @@
 .hero .film img{display:none}
 @media(prefers-reduced-motion:reduce){.hero .film video{display:none}.hero .film img{display:block}}
 @media(max-width:760px){.hero{min-height:auto}.hero .film::after{background:linear-gradient(180deg,rgba(6,18,28,.72),rgba(6,18,28,.94))}}
+/* 23ch en niet 12: "de snelste van Nederland" is een langere regel dan
+   "in tien werkdagen" en viel op drie regels, waardoor de hero groeide
+   en de knoppen onder de vouw zakten. */
 .hero h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:.02em;
-  font-size:clamp(52px,7vw,96px);line-height:.92;color:#fff;max-width:12ch;margin:18px 0 0}
+  font-size:clamp(52px,6.4vw,88px);line-height:.92;color:#fff;max-width:23ch;margin:18px 0 0}
 .hero h1 .acc{color:var(--cyan)}
 .hero p.sub{margin-top:22px;max-width:56ch;font-size:18px;color:rgba(255,255,255,.78)}
 .hero .cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
@@ -224,7 +227,7 @@
         <ul class="vervoer-lijst" id="vervoer-lijst" role="listbox" aria-label="Toepassingen" hidden></ul>
       </div>
     </div>
-      <p class="vervoer-uitleg">Kennen we het? Dan zie je meteen de cases ervoor. <b>Kennen we het niet, dan gaat je tekst mee naar de aanvraag.</b></p>
+      <p class="vervoer-uitleg">Kennen we het niet? <b>Dan gaat je tekst mee naar de aanvraag.</b></p>
     <div class="specs">
       <div><div class="k">// LEVERTIJD</div><div class="v">De snelste van Nederland</div></div>
       <div><div class="k">// PRIJS</div><div class="v">Direct zichtbaar</div></div>

@@ -1,0 +1,117 @@
+<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — wat blijft er staan bij het scrollen</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   Drie manieren om het merk in beeld te houden
+
+   De navigatie plakt nu vast in plaats van de header. Dat werkt, maar het
+   krimpende woordmerk zat in de header en speelt zich sindsdien buiten
+   beeld af. Deze drie opties lossen dat elk anders op.
+
+   Elke optie staat als werkende pagina in een eigen venster: je moet erin
+   kunnen scrollen, want het gedrag is het ontwerp. Een schermafdruk zou
+   precies het enige weglaten waar het om gaat.
+   ══════════════════════════════════════════════════════════════ */
+body{background:#EDF0F4}
+.vgl{max-width:1440px;margin:0 auto;padding:0 24px 90px}
+.inleiding{max-width:78ch;margin:0 0 8px}
+.inleiding h2{font-size:26px;margin-bottom:8px}
+.inleiding p{font-size:14px;color:var(--mute);line-height:1.65}
+.inleiding p b{color:var(--ink)}
+
+.kop{margin:40px 0 14px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.kop .nr{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--blue)}
+.kop h3{font-size:24px}
+
+.optie{margin-top:26px;border:1px solid var(--rule);background:#fff;
+  box-shadow:0 1px 3px rgba(0,40,70,.07)}
+.optie .balk{background:var(--dark);color:#fff;font-family:var(--mono);font-size:10px;
+  letter-spacing:.18em;text-transform:uppercase;font-weight:600;padding:9px 16px;
+  display:flex;align-items:center;gap:10px;text-decoration:none}
+.optie .balk .letter{background:var(--cyan);color:var(--void);width:20px;height:20px;
+  display:flex;align-items:center;justify-content:center;flex:none;font-size:11px}
+.optie .balk .vs{margin-left:auto;opacity:.6;font-size:9px}
+.optie .uit{display:grid;grid-template-columns:1fr 320px;gap:0;align-items:stretch}
+@media(max-width:1080px){.optie .uit{grid-template-columns:1fr}}
+
+/* Het venster is de demo. Scroll-in-iframe is hier geen compromis maar
+   het punt: je moet het gedrag kunnen uitlokken. */
+.venster{height:420px;border-right:1px solid var(--rule)}
+.venster iframe{width:100%;height:100%;border:0;display:block}
+@media(max-width:1080px){.venster{border-right:0;border-bottom:1px solid var(--rule)}}
+
+.oordeel{padding:20px 22px 22px;display:flex;flex-direction:column;gap:14px}
+.oordeel .rij{display:grid;gap:4px}
+.oordeel .lb{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase}
+.oordeel .voor .lb{color:#2F7A4E}
+.oordeel .tegen .lb{color:#A34418}
+.oordeel .raakt .lb{color:var(--blue)}
+.oordeel p{font-size:13.5px;color:var(--mute);line-height:1.55;margin:0}
+.oordeel .aanrader{margin-top:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--void);background:var(--cyan);padding:7px 11px;align-self:flex-start}
+
+.slot{margin-top:40px;border:1px solid var(--rule);background:#fff;padding:22px 24px 24px}
+.slot h4{font-family:var(--disp);text-transform:uppercase;font-size:19px;letter-spacing:.03em;
+  color:var(--dark);margin:0 0 8px}
+.slot p{font-size:14.5px;color:var(--mute);line-height:1.6;max-width:74ch;margin:0 0 10px}
+.slot p b{color:var(--ink)}
+</style>
+</head><body>
+
+<div class="vgl">
+  <div class="kop" style="margin-top:34px">
+    <span class="nr">// KOP EN NAVIGATIE</span>
+    <h3>Wat blijft er staan bij het scrollen</h3>
+  </div>
+
+  <div class="inleiding">
+    <p><b>De navigatie plakt nu vast in plaats van de header.</b> Dat scheelt 74 px permanente hoogte, maar het krimpende woordmerk zat in de header en speelt zich sindsdien buiten beeld af. Deze drie opties brengen het merk terug &mdash; elk met een andere prijs. <b>Scrol in de vensters</b>: het gedrag is het ontwerp, en stilstaand zie je er niets van.</p>
+  </div>
+
+  <div class="optie">
+    <a class="balk" href="kop-optie-a.html" target="_blank" rel="noopener"><span class="letter">A</span> Monogram links in de navbalk<span class="vs">volledig scherm &#8599;</span></a>
+    <div class="uit">
+      <div class="venster"><iframe src="kop-optie-a.html" title="Optie A"></iframe></div>
+      <div class="oordeel">
+        <div class="rij voor"><span class="lb">// wat het oplevert</span><p>Het merk staat waar een logo hoort: links. De balk wordt daarmee de balk van de site &mdash; merk, ingangen, zoeken &mdash; en niet alleen een menu.</p></div>
+        <div class="rij tegen"><span class="lb">// wat het kost</span><p>Er is op 1280 px zo&rsquo;n 74 px over, en monogram plus zoekveld vragen er ongeveer 100. Daarom valt &ldquo;Direct advies&rdquo; weg en blijft alleen het nummer staan.</p></div>
+        <div class="rij raakt"><span class="lb">// raakt</span><p>brand.css en navzoek.js. Geen enkele pagina hoeft aangepast.</p></div>
+        <span class="aanrader">mijn voorkeur</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="optie">
+    <a class="balk" href="kop-optie-b.html" target="_blank" rel="noopener"><span class="letter">B</span> E&eacute;n balk die krimpt van 120 naar 46&nbsp;px<span class="vs">volledig scherm &#8599;</span></a>
+    <div class="uit">
+      <div class="venster"><iframe src="kop-optie-b.html" title="Optie B"></iframe></div>
+      <div class="oordeel">
+        <div class="rij voor"><span class="lb">// wat het oplevert</span><p>De mooiste overgang: je ziet de kop samentrekken in plaats van iets zien verdwijnen en iets anders zien verschijnen. Het merk is geen moment uit beeld, en merkkrimp blijft letterlijk doen wat hij al deed.</p></div>
+        <div class="rij tegen"><span class="lb">// wat het kost</span><p>Header en navigatie moeten in &eacute;&eacute;n element zitten. Nu zijn dat overal twee losse blokken, dus dit is een herbouw van de kop op alle 55 pagina&rsquo;s.</p></div>
+        <div class="rij raakt"><span class="lb">// raakt</span><p>brand.css plus de kop-markup van elke pagina.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="optie">
+    <a class="balk" href="kop-optie-c.html" target="_blank" rel="noopener"><span class="letter">C</span> Monogram rechts, als terug-naar-boven<span class="vs">volledig scherm &#8599;</span></a>
+    <div class="uit">
+      <div class="venster"><iframe src="kop-optie-c.html" title="Optie C"></iframe></div>
+      <div class="oordeel">
+        <div class="rij voor"><span class="lb">// wat het oplevert</span><p>Goedkoopst, en de knop doet ook echt iets: klikken brengt je naar boven. Hij hoeft zich dus niet te verantwoorden als decoratie.</p></div>
+        <div class="rij tegen"><span class="lb">// wat het kost</span><p>Het monogram staat rechts tussen de knoppen in plaats van links waar een logo hoort. Daardoor leest het eerder als bediening dan als merk.</p></div>
+        <div class="rij raakt"><span class="lb">// raakt</span><p>alleen navzoek.js.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slot">
+    <h4>De eigenlijke keuze</h4>
+    <p><b>A en C verschillen alleen in waar het monogram staat</b>, en dat bepaalt of het als merk of als knop leest. Links is merk, rechts is bediening. Wil je dat de balk de site vertegenwoordigt, dan is het links; wil je vooral een handige terug-knop, dan is het rechts.</p>
+    <p><b>B is een andere vraag.</b> Die gaat niet over het monogram maar over of je twee balken wilt of &eacute;&eacute;n. Het antwoord is mooier, maar het is werk aan elke pagina &mdash; dat is alleen de moeite waard als je toch al aan de kop wilde beginnen.</p>
+  </div>
+</div>
+
+</body></html>

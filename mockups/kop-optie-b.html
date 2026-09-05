@@ -1,0 +1,113 @@
+<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — kop optie B (één balk die krimpt)</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ── OPTIE B — één balk die krimpt ──────────────────────────
+   Header en navigatie zitten in één vastgeplakt blok. Bij het scrollen
+   klapt de bovenste rij dicht: 120 px wordt 46 px, het woordmerk wordt
+   het monogram en het grote zoekveld wordt een klein veld dat in de
+   onderste rij meeschuift.
+
+   Dit is de enige optie waarin merkkrimp letterlijk blijft doen wat hij
+   al deed. Prijs: header en nav moeten in één element zitten, en dat is
+   op alle 55 pagina's een andere kop dan er nu staat. */
+.kop2{position:sticky;top:0;z-index:41;background:#fff;border-bottom:1px solid var(--rule)}
+
+/* De bovenste rij: krimpt naar nul in plaats van te verdwijnen, zodat de
+   overgang glijdt en er niets onder de balk vandaan springt. */
+.kop2 .boven{overflow:hidden;height:74px;transition:height .2s cubic-bezier(.2,.7,.2,1)}
+.kop2.klein .boven{height:0}
+.kop2 .boven .wrap{display:flex;align-items:center;gap:32px;height:74px}
+
+.kop2 .onder .wrap{display:flex;gap:34px;align-items:center;height:46px}
+.kop2 .onder a.ing{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:16px;
+  letter-spacing:.05em;color:var(--dark);height:100%;display:flex;align-items:center;
+  border-bottom:3px solid transparent}
+.kop2 .onder a.ing:hover{border-bottom-color:var(--rule)}
+
+/* Monogram en klein veld horen bij de gekrompen stand en schuiven open. */
+.kop2 .merkje{display:flex;align-items:center;flex:none;width:0;overflow:hidden;opacity:0;
+  transition:width .18s cubic-bezier(.2,.7,.2,1),opacity .14s,margin .18s}
+.kop2.klein .merkje{width:30px;opacity:1;margin-right:26px}
+.kop2 .merkje img{height:22px;display:block}
+
+.kop2 .rechts{margin-left:auto;display:flex;align-items:center;gap:18px;font-size:14px;color:var(--mute)}
+.kop2 .rechts b{color:var(--dark);font-weight:500}
+.kop2 .kleinzoek{display:flex;align-items:center;gap:9px;height:32px;flex:none;
+  border:1px solid var(--rule);padding:0 11px;width:0;opacity:0;overflow:hidden;
+  transition:width .2s cubic-bezier(.2,.7,.2,1),opacity .14s,padding .2s}
+.kop2.klein .kleinzoek{width:210px;opacity:1}
+.kop2 .kleinzoek input{border:0;outline:0;background:transparent;font-family:var(--body);
+  font-size:13.5px;flex:1;min-width:0}
+.kop2 .kleinzoek .tk{font-family:var(--mono);font-size:12px;color:var(--rule);flex:none}
+.kop2.klein .rechts .label{display:none}
+
+.demo-uitleg{background:var(--lightblue);border-bottom:1px solid var(--rule)}
+.demo-uitleg .wrap{padding:14px 0;font-family:var(--mono);font-size:10px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.vul .wrap{padding:60px 0}
+.vul h2{font-size:32px;margin-bottom:14px}
+.vul p{max-width:62ch;color:var(--mute);font-size:16px;margin-bottom:12px}
+</style>
+</head><body>
+
+<div class="kop2" id="kop2">
+  <div class="boven">
+    <div class="wrap">
+      <div class="merk"><img src="assets/woordmerk.svg" alt="Casebuilder.com"></div>
+      <form class="search" onsubmit="return false">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+        <input placeholder="Zoek op case, onderdeel of artikelnummer…" aria-label="Zoeken">
+      </form>
+      <div class="hdr-r"><a href="#" class="stil">Inloggen</a><a href="#">Winkelwagen</a></div>
+    </div>
+  </div>
+  <div class="onder">
+    <div class="wrap">
+      <span class="merkje"><img src="assets/beeldmerk.svg" alt=""></span>
+      <a class="ing" href="#">Case aanvragen</a>
+      <a class="ing" href="#">Wat ga je vervoeren?</a>
+      <a class="ing" href="#">Flightcases</a>
+      <a class="ing" href="#">Shop</a>
+      <a class="ing" href="#">Branches</a>
+      <a class="ing" href="#">Service</a>
+      <div class="rechts">
+        <form class="kleinzoek" onsubmit="return false">
+          <span class="tk" aria-hidden="true">/</span>
+          <input placeholder="Zoeken…" aria-label="Zoeken">
+        </form>
+        <span><span class="label">Direct advies </span><b>+31 (0)575 575734</b></span>
+        <a href="#">NL &#9662;</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="demo-uitleg"><div class="wrap">// OPTIE B &middot; scrol &mdash; de bovenste rij klapt dicht, 120 px wordt 46 px</div></div>
+
+<section class="vul"><div class="wrap">
+  <h2>Scrol naar beneden</h2>
+  <p>De hele kop blijft staan, maar de bovenste rij klapt dicht. Wat overblijft is &eacute;&eacute;n balk van 46 px met het monogram, de zes ingangen en een klein zoekveld.</p>
+  <p>Dit is de enige optie waarin het krimpende woordmerk letterlijk blijft doen wat het nu al doet &mdash; alleen zie je het nu ook echt.</p>
+</div></section>
+<section class="vul" style="background:var(--bg)"><div class="wrap"><h2>Wat het kost</h2><p>Header en navigatie moeten in &eacute;&eacute;n element zitten. Op alle 55 pagina&rsquo;s staan dat nu twee losse blokken, dus dit raakt elke pagina opnieuw.</p></div></section>
+<section class="vul"><div class="wrap"><h2>Wat het oplevert</h2><p>E&eacute;n balk in plaats van twee, en er is geen moment waarop het merk uit beeld is. De overgang is bovendien de mooiste van de drie: je ziet de kop samentrekken, niet iets verdwijnen en iets anders verschijnen.</p></div></section>
+<section class="vul" style="background:var(--bg)"><div class="wrap"><h2>Terug naar boven</h2><p>Scrol terug: de bovenste rij schuift weer open en het grote zoekveld staat er weer.</p></div></section>
+<section class="vul"><div class="wrap"><h2>Einde</h2><p>Terug naar de vergelijking om de andere twee te bekijken.</p></div></section>
+
+<script>
+(function(){
+  var kop=document.getElementById('kop2');
+  var klein=false, wacht=false;
+  function meet(){
+    wacht=false;
+    var y=scrollY||document.documentElement.scrollTop||0;
+    if(!klein && y>90){klein=true;kop.classList.add('klein');}
+    else if(klein && y<50){klein=false;kop.classList.remove('klein');}
+  }
+  addEventListener('scroll',function(){if(wacht)return;wacht=true;requestAnimationFrame(meet);},{passive:true});
+  meet();
+})();
+</script>
+</body></html>
