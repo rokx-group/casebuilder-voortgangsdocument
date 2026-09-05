@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Casebuilder — /case-voor v1 (mockup)</title>
+<title>Casebuilder — /case-voor v3, meelopend zoeken (mockup)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -42,17 +42,54 @@
 .veelgezocht a{border:1px solid rgba(255,255,255,.28);padding:6px 12px;font-size:13px;color:rgba(255,255,255,.86)}
 .veelgezocht a:hover{border-color:var(--cyan);color:var(--cyan)}
 
-/* ── de index ──────────────────────────────────────────────
-   De deuren hangen half over de rand van de band erboven. Daarom telt de
-   uitsteek hier weer op bij de padding: haal je dat weg, dan schuift de
-   eerste kop onder de kaarten.
+/* ── de meelopende zoekbalk ─────────────────────────────────
+   In v2 stond het zoekveld in de hero. Dat werkt één keer: zodra je aan
+   het scrollen bent staat het buiten beeld, en juist dán weet je pas
+   welk woord je zoekt — je bladert immers omdat je het nog niet gevonden
+   hebt. Hier zit het veld onder de hero en loopt het mee naar beneden,
+   de hele index door.
 
-   Eén variabele voor allebei, zodat ze niet uit elkaar kunnen lopen. Wie
-   de kaarten hoger of lager maakt, zet hier het nieuwe getal en verder
-   nergens. Half een kaart is ongeveer 116px bij deze inhoud. */
-:root{--uitsteek:116px}
-.index{padding-top:calc(var(--uitsteek) + 34px)}
-@media(max-width:1180px){:root{--uitsteek:0px}}
+   Hij parkeert onder de sitebalk en niet bovenaan het scherm: die balk
+   is zelf al sticky op top:0, dus zonder deze afstand schuiven ze over
+   elkaar heen. Eén variabele, want de balk is op mobiel lager. */
+:root{--kop:74px}
+@media(max-width:760px){:root{--kop:64px}}
+.zoekbalk{position:sticky;top:var(--kop);z-index:30;background:#fff;
+  border-bottom:1px solid var(--rule);box-shadow:0 1px 0 rgba(0,40,70,.04)}
+.zoekbalk .wrap{display:flex;align-items:center;gap:18px;padding-top:14px;padding-bottom:14px}
+.zoekbalk .veld{flex:1;max-width:620px;display:flex;align-items:center;gap:11px;height:48px;
+  border:1.5px solid var(--dark);background:#fff;padding:0 16px}
+.zoekbalk .veld:focus-within{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(102,196,232,.28)}
+.zoekbalk .veld svg{flex:none;color:var(--mute)}
+.zoekbalk input{flex:1;border:0;outline:0;background:transparent;font-family:var(--body);
+  font-size:15.5px;color:var(--ink)}
+.zoekbalk input::placeholder{color:#9aa3ae}
+.zoekbalk .wis{border:0;background:none;cursor:pointer;font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--mute);padding:6px}
+.zoekbalk .wis:hover{color:var(--dark)}
+.zoekbalk .tel{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);white-space:nowrap}
+.zoekbalk .chips{display:flex;gap:7px;flex-wrap:wrap;margin-left:auto}
+.zoekbalk .chips a{border:1px solid var(--rule);padding:6px 11px;font-family:var(--mono);
+  font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);cursor:pointer}
+.zoekbalk .chips a:hover{border-color:var(--dark);color:var(--dark)}
+@media(max-width:1080px){.zoekbalk .chips,.zoekbalk .tel{display:none}}
+
+/* ── wat het filter doet ────────────────────────────────────
+   Gedempt in plaats van weg: de index blijft even hoog, dus er springt
+   niets terwijl je typt. De treffer krijgt het cyaan van het merk. */
+.vak li{transition:opacity .16s ease}
+.index.zoekt .vak li.mis{opacity:.24}
+.index .vak li.raak a{color:var(--dark);font-weight:500}
+.index mark{background:var(--cyan);color:var(--void);padding:0 2px}
+.vak{transition:opacity .2s ease}
+.index.zoekt .vak.leeg{opacity:.3}
+.index.zoekt .vak.leeg .vkop h3{color:var(--mute)}
+
+/* ── de index ──────────────────────────────────────────────
+   De deuren steken hier niet uit: direct onder de hero begint de
+   zoekbalk, en daar kan niets overheen hangen. */
+.index{padding-top:34px}
 .index .sec-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:26px}
 .index .sec-head h2{margin:10px 0 0}
 .vakken{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
@@ -182,8 +219,7 @@
    uitwegen voor wie zijn maten al weet of wiens apparaat er niet bij staat. */
 /* Half in de band, half erbuiten. De negatieve marge trekt ze naar
    beneden; z-index houdt ze boven de sectie die eronder begint. */
-.deuren{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px;
-  position:relative;z-index:2;margin-bottom:calc(var(--uitsteek) * -1)}
+.deuren{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px}
 
 /* Een kaart die over twee achtergronden ligt kan niet doorzichtig zijn:
    rgba(6,18,28,.42) is donker op de film en muisgrijs op het witte vlak
@@ -266,18 +302,8 @@
     <div class="ey">// 533 CASES · 38 CATEGORIEËN · ALLES OOK OP MAAT</div>
     <h1>Wat ga je <span class="acc">vervoeren?</span></h1>
     <p class="sub">Zeg wat erin gaat, dan bepalen wij de maten. Je hoeft niet te weten hoe een flightcase heet.</p>
-    <form class="field" onsubmit="return false">
-      <input placeholder="Bijvoorbeeld: Gibson Les Paul, 19&quot; rack 6 HE, Midas M32, moving head…" aria-label="Wat ga je vervoeren?">
-      <button type="submit">Zoek</button>
-    </form>
-    <div class="veelgezocht">
-      <span class="lb">Veelgezocht</span>
-      <a href="#">19" rack</a><a href="#">Moving head</a><a href="#">Mengtafel</a>
-      <a href="case-voor-gitaar-v1.html">Gitaar</a><a href="#">Camera</a><a href="#">Drone</a>
-    </div>
-
     <div class="deuren">
-      <a class="deur pri" href="#alle-categorieen">
+      <a class="deur pri" href="#alle-categorieen" data-naar-zoek>
         <div class="n">// 01</div>
         <h3>Zoek je apparaat op</h3>
         <p>Zes toepassingen, achtendertig categorie&euml;n. Per categorie weten we welke maten gangbaar zijn en welk schuim erin hoort.</p>
@@ -299,6 +325,29 @@
         <div class="go">Case aanvragen &rarr;</div>
       </a>
     </div>
+  </div>
+</div>
+
+<!-- ── DE MEELOPENDE ZOEKBALK ─────────────────────────────────
+     Onder de hero en niet erin: je zoekt pas als je aan het bladeren
+     bent, en dan is de hero al weg. Loopt mee tot onder aan de index. -->
+<div class="zoekbalk">
+  <div class="wrap">
+    <label class="veld">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+      <input type="search" data-categoriezoek
+             placeholder="Zoek je apparaat &mdash; moving head, Les Paul, 19&quot; rack, drone&hellip;"
+             aria-label="Zoek in de categorie&euml;n" autocomplete="off">
+    </label>
+    <button class="wis" type="button" data-zoekwis hidden>Wissen</button>
+    <span class="tel" data-zoekteller></span>
+    <span class="chips">
+      <a data-zoekterm="moving head">Moving head</a>
+      <a data-zoekterm="gitaar">Gitaar</a>
+      <a data-zoekterm="camera">Camera</a>
+      <a data-zoekterm="drone">Drone</a>
+      <a data-zoekterm="rack">Rack</a>
+    </span>
   </div>
 </div>
 
@@ -490,6 +539,7 @@
 </footer>
 
 <script src="assets/vouw.js"></script>
+<script src="assets/categoriezoek.js"></script>
 <script src="assets/versies.js"></script>
 <script src="assets/hoogtemelder.js"></script>
 </body>

@@ -49,7 +49,9 @@
       { id: 'v1', bestand: 'flightcases-v1.html', label: 'v1 · beeld' }
     ],
     'case-voor': [
-      { id: 'v1', bestand: 'case-voor-v1.html', label: 'v1' }
+      { id: 'v1', bestand: 'case-voor-v1.html', label: 'v1' },
+      { id: 'v2', bestand: 'case-voor-v2.html', label: 'v2 · index' },
+      { id: 'v3', bestand: 'case-voor-v3.html', label: 'v3 · meelopend zoeken' }
     ],
     'case-voor-gitaar': [
       { id: 'wireframe', bestand: 'case-voor-gitaar.html', label: 'wireframe' },
