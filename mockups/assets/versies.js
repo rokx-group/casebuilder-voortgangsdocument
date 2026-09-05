@@ -29,8 +29,7 @@
       { id: 'v8', bestand: 'homepage-v8.html', label: 'v8' },
       { id: 'v9', bestand: 'homepage-v9.html', label: 'v9 (video)' },
       { id: 'v10', bestand: 'homepage-v10.html', label: 'v10 (video)' },
-      { id: 'v11', bestand: 'homepage-v11.html', label: 'v11 (licht)' },
-      { id: 'v12', bestand: 'homepage-v12.html', label: 'v12 (zoekbalk)' }
+      { id: 'v11', bestand: 'homepage-v11.html', label: 'v11 (licht)' }
     ],
     'categorie': [
       { id: 'wireframe', bestand: 'categorie.html', label: 'wireframe' },

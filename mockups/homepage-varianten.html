@@ -12,15 +12,25 @@
 /* ══════════════════════════════════════════════════════════════
    Homepage beoordelen
 
-   Zes ontwerpen in twee rijen, vijf opzij gezet. Anders dan bij de
+   Zeven ontwerpen in vier rijen, vijf opzij gezet. Anders dan bij de
    andere tabs is hier nog niets gekozen, dus staan ze even groot: je
    vergelijkt richtingen, je leest geen pagina.
 
    De indeling ís de vergelijking. Elke rij stelt een andere vraag, en
    binnen een rij zijn de versies elkaars alternatief:
 
-     rij 1  v1, v2, v3     één ontwerp, stilstaand of met film
-     rij 2  v9, v10, v11   de pagina uitgewerkt, drie soorten hero
+     rij 1  v1, v3         dezelfde hero, stilstaand tegen film
+     rij 2  v10            dezelfde hero, de pagina eronder uitgewerkt
+
+   De vergelijking is samengekomen: alle drie hebben inmiddels dezelfde
+   kop en dezelfde twee knoppen. Wat er nog te kiezen valt is beeld tegen
+   film, en de korte pagina tegen de lange.
+
+   Vier versies staan eronder omdat ze ergens anders terechtkwamen of al
+   verwerkt zijn, niet omdat ze het verloren: v9 is de hero van
+   /case-voor v3, v11 is de hero van /flightcases v2, en v2 was dezelfde
+   pagina als v3 met een andere film. v12 bestaat niet meer: het veld dat
+   hij bracht zit nu in v1, v2 en v3 zelf.
 
    In één bak van acht vergelijk je v1 met v8, en dat gaat nergens over:
    die twee beantwoorden niet dezelfde vraag.
@@ -113,18 +123,21 @@ body{background:#EDF0F4}
    vragen. Zonder die kopregels is het één bak van acht en vergelijk je
    v1 met v8, wat nergens over gaat.
 
-   Beide rijen staan op drie kolommen. Alle kaders even breed houden
-   weegt zwaarder dan een rij precies vol krijgen: een kader dat
-   anderhalf keer zo groot is leest als een voorkeur. */
+   Elke rij staat op drie kolommen, ook als er twee in staan. Alle
+   kaders even breed houden weegt zwaarder dan een rij precies vol
+   krijgen: een kader dat anderhalf keer zo groot is leest als een
+   voorkeur. */
 .groepkop{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:30px 0 12px}
 .groepkop .gn{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--blue);flex:none}
 .groepkop b{font-family:var(--disp);text-transform:uppercase;font-size:20px;letter-spacing:.03em;
   color:var(--dark);flex:none}
-.groepkop .gu{font-size:13.5px;color:var(--mute);line-height:1.5;flex:1;min-width:280px}
+/* .gu stond hier: een uitlegregel achter elke rijkop. Die is eruit — de
+   kaders eronder laten zelf zien waar de rij over gaat, en drie regels
+   proza boven elke rij maakten van een vergelijking een leesstuk. */
 
-/* Kopje boven een groep afvallers. Ze vielen niet los af maar per
-   benadering: de hele rij ging eruit, niet drie losse ontwerpen. Dat
-   staat er dus boven, anders leest het als vijf toevallige missers. */
+/* Stond hier eerder een kopje per groep afvallers boven. Dat is eruit:
+   vijf regels met drie tussenkoppen ertussen leest als drie lijstjes, en
+   de reden staat al op de regel zelf. Nu is het één lijst van vijf. */
 .opzijgroep{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:26px 0 10px}
 .opzijgroep .ogn{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:#A34418;flex:none}
 .opzijgroep b{font-family:var(--disp);text-transform:uppercase;font-size:17px;letter-spacing:.03em;
@@ -132,21 +145,26 @@ body{background:#EDF0F4}
 .opzijgroep .ogu{font-size:13px;color:var(--mute);line-height:1.5;flex:1;min-width:300px}
 
 /* ── opzij gezet ─────────────────────────────────────────────
-   Zonder kader, want een kader nodigt uit tot vergelijken en dat is
-   precies niet de bedoeling: de vraag bij deze drie is niet "welke is
-   mooier" maar "hoort dit hier thuis". De reden staat erbij, anders
-   leest het als drie versies die iemand vergeten is. */
-.opzij{display:grid;grid-template-columns:1fr;gap:1px;background:var(--rule);
-  border:1px solid var(--rule)}
-.opzij a{background:#fff;padding:16px 18px 18px;display:grid;
-  grid-template-columns:260px 1fr auto;gap:20px;align-items:baseline;transition:.12s}
+   Alleen de namen, onder elkaar. Waaróm ze afvielen stond hier eerst
+   per regel uitgeschreven, maar dat leest niemand tijdens een gesprek —
+   en wie het wil weten kijkt in het versie-overzicht, waar de afweging
+   per versie thuishoort. Hier is één ding nodig: welke versies staan
+   niet meer in de vergelijking, en hoe kom ik er toch bij. */
+/* Dichtgeklapt in een <details>, hetzelfde element als de Details-blokken
+   hierboven op de pagina — het is dezelfde soort informatie: er als je
+   ernaar zoekt, niet in de weg als je vergelijkt. De lijst krijgt daarom
+   geen eigen kader; dat is de <details> al. */
+.opzijdet{margin-top:34px}
+.opzij{background:#fff}
+.opzij a{display:flex;align-items:baseline;gap:16px;padding:11px 16px;
+  border-bottom:1px solid var(--rule);transition:.12s}
+.opzij a:last-child{border-bottom:0}
 .opzij a:hover{background:var(--bg)}
-.opzij b{font-family:var(--disp);text-transform:uppercase;font-size:17px;letter-spacing:.03em;
-  color:var(--dark);line-height:1.1}
-.opzij span{font-size:13px;color:var(--mute);line-height:1.5}
-.opzij i{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--blue);font-style:normal;white-space:nowrap}
-@media (max-width:900px){.opzij a{grid-template-columns:1fr;gap:7px}}
+.opzij b{font-family:var(--disp);text-transform:uppercase;font-size:16px;letter-spacing:.03em;
+  color:var(--dark);font-weight:700}
+.opzij i{margin-left:auto;font-family:var(--mono);font-size:9px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--rule);white-space:nowrap}
+.opzij a:hover i{color:var(--blue)}
 
 /* ── aantekeningen ───────────────────────────────────────────
    Onder het ontwerp, drie naast elkaar. Elke notitie noemt wat er
@@ -232,12 +250,12 @@ body.focusmodus .demo:not(.aan){cursor:default}
   </div>
 
   <div class="inleiding">
-    <h2>Zes in beeld, vijf opzij</h2>
-    <p><b>Anders dan bij de andere tabs is hier nog niets geselecteerd.</b> Daarom staan ze even groot: je vergelijkt composities boven de vouw, je leest geen pagina&rsquo;s. Elk kader schuift, en het pijltje in de balk opent die versie volledig. Ze staan per rij bij elkaar: <b>rij&nbsp;1</b> is &eacute;&eacute;n ontwerp met drie soorten beeld, <b>rij&nbsp;2</b> zijn de drie nieuwste &mdash; alle drie volledig uitgewerkt, met het verschil boven de vouw: twee op film, &eacute;&eacute;n op wit. Binnen een rij kies je; tussen de rijen beantwoord je een andere vraag. De vijf die afvielen staan eronder als link, met de reden erbij. De afweging per versie staat in <a href="concepten-2sept.html" target="_blank" rel="noopener">het versie-overzicht</a>.</p>
+    <h2>Drie in beeld, negen opzij</h2>
+    <p><b>Anders dan bij de andere tabs is hier nog niets geselecteerd.</b> Daarom staan ze even groot: je vergelijkt composities boven de vouw, je leest geen pagina&rsquo;s. Elk kader schuift, en het pijltje in de balk opent die versie volledig. Er is nog &eacute;&eacute;n hero over: dezelfde kop en dezelfde twee knoppen in alle drie. <b>Rij&nbsp;1</b> is die hero stilstaand (v1) tegen bewegend (v3); <b>rij&nbsp;2</b> is dezelfde hero op een veel verder uitgewerkte pagina. De keuze gaat dus niet meer over de kop maar over twee dingen: beeld of film, en hoeveel pagina eronder. De negen eronder zijn niet allemaal afgevallen &mdash; vier leven elders door, en dat staat er per stuk bij. De afweging per versie staat in <a href="concepten-2sept.html" target="_blank" rel="noopener">het versie-overzicht</a>.</p>
   </div>
 
   <div class="kop">
-    <span class="nr">// ZES VERSIES</span>
+    <span class="nr">// DRIE VERSIES</span>
     <h3>De belangrijkste pagina van de site</h3>
     <span><span class="hgt">/ &middot; eigen sjabloon &middot; op 31%</span></span>
   </div>
@@ -254,20 +272,13 @@ body.focusmodus .demo:not(.aan){cursor:default}
 
   <div class="groepkop">
     <span class="gn">// RIJ 1</span>
-    <b>Dezelfde opzet, ander beeld</b>
-    <span class="gu">Eén ontwerp, drie keer. v1 staat stil, v2 en v3 draaien een film — twee verschillende films. Wat je hier kiest is beeld, geen indeling.</span>
+    <b>Snelheid, branche, twee knoppen</b>
   </div>
   <div class="beoordeel">
     <div class="demo">
       <a class="balk" href="homepage-v1.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">v1 &middot; Millimeterwerk, de snelste van Nederland<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
       <div class="venster" data-schaal=".31"><div class="houder">
         <iframe src="homepage-v1.html" title="Homepage v1" loading="lazy"></iframe>
-      </div></div>
-    </div>
-    <div class="demo">
-      <a class="balk" href="homepage-v2.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">v2 (video) &middot; Millimeterwerk, de snelste van Nederland<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
-      <div class="venster" data-schaal=".31"><div class="houder">
-        <iframe src="homepage-v2.html" title="Homepage v2 (video)" loading="lazy"></iframe>
       </div></div>
     </div>
     <div class="demo">
@@ -280,26 +291,13 @@ body.focusmodus .demo:not(.aan){cursor:default}
 
   <div class="groepkop">
     <span class="gn">// RIJ 2</span>
-    <b>De pagina uitgewerkt, drie soorten hero</b>
-    <span class="gu">De drie nieuwste, alle drie met een volledig uitgewerkte pagina eronder &mdash; bewijs, branches, prijs, offerte. Het verschil zit boven de vouw. v9 zet drie deuren in de filmhero, v10 houdt die hero leeg en zet de drie manieren als eerste sectie eronder, en v11 laat de film los: wit, kop links, de kist rechts, geen tekst over beeld. v10 is bovendien de <a href="homepage-samenstellen.html">samenstelling</a>: per band de variant die daar gekozen is, met twee eigen bewegingen &mdash; het woordmerk krimpt bij het scrollen tot het cB-monogram, en de slotkop wisselt door vijf regels zodra je er bent.</span>
+    <b>Film in de hero, de pagina eronder uitgewerkt</b>
   </div>
   <div class="beoordeel">
-    <div class="demo">
-      <a class="balk" href="homepage-v9.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">v9 (video) &middot; Je weet wat erin moet.<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
-      <div class="venster" data-schaal=".31"><div class="houder">
-        <iframe src="homepage-v9.html" title="Homepage v9 (video)" loading="lazy"></iframe>
-      </div></div>
-    </div>
     <div class="demo">
       <a class="balk" href="homepage-v10.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">v10 (video) &middot; Millimeterwerk, de snelste van Nederland<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
       <div class="venster" data-schaal=".31"><div class="houder">
         <iframe src="homepage-v10.html" title="Homepage v10 (video)" loading="lazy"></iframe>
-      </div></div>
-    </div>
-    <div class="demo">
-      <a class="balk" href="homepage-v11.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">v11 (lichte hero) &middot; Millimeterwerk, in tien werkdagen<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
-      <div class="venster" data-schaal=".31"><div class="houder">
-        <iframe src="homepage-v11.html" title="Homepage v11 (lichte hero)" loading="lazy"></iframe>
       </div></div>
     </div>
   </div>
@@ -342,60 +340,19 @@ body.focusmodus .demo:not(.aan){cursor:default}
     </div>
   </div>
 
-  <div class="kop" style="margin-top:38px">
-    <span class="nr">// OPZIJ GEZET</span>
-    <h3>Vijf richtingen die het niet worden</h3>
-    <span class="rechts"><span class="hgt">wel af &middot; niet als homepage-hero</span></span>
-  </div>
-
-  <div class="opzijgroep">
-    <span class="ogn">// AFGEVALLEN</span>
-    <b>Een werkend blok in de hero</b>
-    <span class="ogu">Alle drie zetten ze meteen gereedschap boven de vouw. Dat werkt voor wie weet wat hij zoekt, en sluit uit wie dat niet weet &mdash; en dat is de bezoeker met de hoogste orderwaarde. De blokken zelf blijven bruikbaar: het configuratorpaneel hoort op /configureren, het aanvraagpaneel staat al op /case-aanvragen.</span>
-  </div>
+  <details class="specdet opzijdet">
+    <summary>Opzij gezet<span class="aantal">9 versies</span></summary>
   <div class="opzij">
-    <a href="homepage-v5.html" target="_blank" rel="noopener">
-      <b>v5 &middot; Wat ga je vervoeren?</b>
-      <span>Zoekveld in de hero. Zet bovendien de toepassingen-as en de branche-as op &eacute;&eacute;n pagina, terwijl allebei al een eigen sjabloon hebben: /case-voor en /branches.</span>
-      <i>volledig scherm &#8599;</i>
-    </a>
-    <a href="homepage-v4.html" target="_blank" rel="noopener">
-      <b>v4 &middot; Jouw maten, nu een prijs</b>
-      <span>De configurator in de hero, prijs terwijl je typt. Vraagt om maten van iemand die vaak juist niet weet welke maat hij nodig heeft.</span>
-      <i>volledig scherm &#8599;</i>
-    </a>
-    <a href="homepage-v8.html" target="_blank" rel="noopener">
-      <b>v8 &middot; Je weet wat erin moet</b>
-      <span>Het aanvraagformulier boven de vouw. Dat is de offertepagina, en die hoort onder /case-aanvragen &mdash; waar hij inmiddels ook staat.</span>
-      <i>volledig scherm &#8599;</i>
-    </a>
-  </div>
-
-  <div class="opzijgroep">
-    <span class="ogn">// AFGEVALLEN</span>
-    <b>Drie deuren op stilstaand beeld</b>
-    <span class="ogu">Dezelfde opzet als v9, maar zonder film. Nu v9 die deuren op bewegend beeld laat zien, voegt de stilstaande versie niets meer toe: het verschil met v1 was al alleen de deuren, en het verschil met v9 is alleen het beeld.</span>
-  </div>
-  <div class="opzij">
-    <a href="homepage-v7.html" target="_blank" rel="noopener">
-      <b>v7 &middot; Millimeterwerk, de snelste van Nederland</b>
-      <span>Drie deuren op stilstaand beeld. De rest van de pagina is gelijk aan v1, zodat je precies dat verschil kon beoordelen.</span>
-      <i>volledig scherm &#8599;</i>
-    </a>
-  </div>
-
-  <div class="opzijgroep">
-    <span class="ogn">// AFGEVALLEN</span>
-    <b>De verkeerde bezoeker</b>
-    <span class="ogu">Niet omdat het ontwerp niet klopt, maar omdat het aan de kleine koper verkoopt terwijl de omzet bij de vloot zit.</span>
-  </div>
-  <div class="opzij">
-    <a href="homepage-v6.html" target="_blank" rel="noopener">
-      <b>v6 &middot; Wij bouwen ze zelf</b>
-      <span>Eigen fabriek, eigen mensen, &ldquo;ook &eacute;&eacute;n instrument&rdquo;, kom gerust langs. Een goed verhaal voor wie &eacute;&eacute;n kist koopt, maar het pitcht de werkplaats aan een partij die er dertig tegelijk nodig heeft. Het vakmanschapsblok is goed genoeg om ergens anders terug te komen.</span>
-      <i>volledig scherm &#8599;</i>
-    </a>
-  </div>
+    <a href="homepage-v9.html" target="_blank" rel="noopener"><b>v9 &middot; Drie deuren in de hero</b><i>volledig scherm &#8599;</i></a>
+    <a href="homepage-v11.html" target="_blank" rel="noopener"><b>v11 &middot; De lichte hero</b><i>volledig scherm &#8599;</i></a>
+    <a href="homepage-v2.html" target="_blank" rel="noopener"><b>v2 &middot; De tweede film</b><i>volledig scherm &#8599;</i></a>
+    <a href="homepage-v5.html" target="_blank" rel="noopener"><b>v5 &middot; Wat ga je vervoeren?</b><i>volledig scherm &#8599;</i></a>
+    <a href="homepage-v4.html" target="_blank" rel="noopener"><b>v4 &middot; Jouw maten, nu een prijs</b><i>volledig scherm &#8599;</i></a>
+    <a href="homepage-v8.html" target="_blank" rel="noopener"><b>v8 &middot; Je weet wat erin moet</b><i>volledig scherm &#8599;</i></a>
+    <a href="homepage-v7.html" target="_blank" rel="noopener"><b>v7 &middot; Millimeterwerk, de snelste van Nederland</b><i>volledig scherm &#8599;</i></a>
+    <a href="homepage-v6.html" target="_blank" rel="noopener"><b>v6 &middot; Wij bouwen ze zelf</b><i>volledig scherm &#8599;</i></a>
+    </div>
+  </details>
 
   <div class="kop" style="margin-top:40px">
     <span class="nr">// MIX EN MATCH</span>

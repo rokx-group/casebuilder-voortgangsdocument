@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Casebuilder — branche-overzicht (mockup)</title>
+<title>Casebuilder — /branches v2 · lichte kop (mockup)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -31,21 +31,22 @@
    ══════════════════════════════════════════════════════════════ */
 
 /* ── kop ─────────────────────────────────────────────────── */
-/* Achter de kop: vijf disciplines als strook, gedempt. Dezelfde foto's
-   van de live site die ook op de tegels en vakgebiedpagina's staan —
-   geen stockbeeld, en geen losse productfoto's op wit. */
-.kop{background:var(--void);color:#fff;position:relative;overflow:hidden}
-.kop .achter{position:absolute;inset:0;z-index:-2;display:grid;grid-template-columns:repeat(5,1fr);
-  gap:0;pointer-events:none}
-/* Vijf disciplines naast elkaar, dezelfde foto's als op de tegels en de
-   vakgebiedpagina's: machinebouw, backstage, broadcast, meetapparatuur,
-   motorsport. Echte foto's zijn al donker, dus geen brightness-boost meer;
-   grayscale + luminosity houdt ze rustig achter de tekst. */
-.kop .achter img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15);
-  opacity:.5;mix-blend-mode:luminosity}
-.kop .scrim{position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background:linear-gradient(90deg,rgba(6,18,28,.96) 0%,rgba(6,18,28,.86) 38%,rgba(6,18,28,.34) 100%),
-             linear-gradient(180deg,rgba(6,18,28,.3) 0%,transparent 34%,rgba(6,18,28,.72) 100%)}
+/* Achter de kop: de vijf cases als strook, gedempt. Dit zijn de echte
+   productfoto's van de live site — geen stockbeeld van een branche.
+   Er is nog geen beeld per toepassing; zodra dat er is, vervangt het
+   deze strook, maar tot die tijd is dit eerlijk: dit maken ze. */
+/* v2 — lichte grond. Alleen de achtergrond van de hero wisselt:
+   dezelfde twee tekstkolommen, geen donker vlak eronder de foto.
+   Oorspronkelijk commentaar: Het beeld draagt de sectie in plaats van een donker
+   vlak: foto rechts in een kader, tekst links op de merkgrond. De ruit
+   loopt in de donkere variant; hier houdt de foto het vlak bezet. */
+.kop{background:#fff;color:var(--ink);position:relative;overflow:hidden;border-bottom:1px solid var(--rule)}
+.kop.licht h1{color:var(--dark)}
+.kop.licht h1 .acc{color:var(--blue)}
+.kop.licht .ey{color:var(--blue)}
+.kop.licht p.lead{color:var(--mute)}
+.kop.licht .vak{border-left-color:var(--rule)}
+.kop.licht .vak p{color:var(--mute)}
 .kop .grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:end}
 .kop h1{font-size:clamp(40px,5vw,68px);color:#fff;line-height:.92;max-width:13ch;margin-top:16px}
 .kop h1 .acc{color:var(--cyan)}
@@ -229,7 +230,7 @@
   </div>
 </nav>
 
-<div class="crumbs donker">
+<div class="crumbs wit">
   <div class="wrap">
     <a href="#">Home</a><span class="sep">/</span>
     <span>Branches</span>
@@ -240,16 +241,7 @@
      Geen belofte maar een positie: marktleider in Nederland is
      CaseBuilder al, alleen weet niemand het. Dat is precies wat
      een branche-overzicht kan rechtzetten. ═════════════════ -->
-<section class="kop ruit ruit-dark ruit-aanzet beslag kop-hoog" style="padding-bottom:0">
-  <div class="achter" aria-hidden="true">
-    <img src="assets/foto-industrie-en-machinebouw.jpg" alt="">
-    <img src="assets/foto-audio-visueel.jpg" alt="">
-    <img src="assets/foto-broadcast-en-media.jpg" alt="">
-    <img src="assets/foto-meet-en-testapparatuur.jpg" alt="">
-    <img src="assets/foto-dakar-pitstop.jpg" alt="">
-  </div>
-  <div class="scrim"></div>
-  <span class="hk tl"></span><span class="hk tr"></span>
+<section class="kop licht kop-hoog" style="padding-bottom:0">
   <div class="wrap grid">
     <div>
       <span class="ey">Branches &middot; sectoren &middot; markten</span>
@@ -492,5 +484,30 @@
 
 <script src="assets/navzoek.js"></script>
 <script src="assets/versies.js"></script>
-</body>
+
+<script>
+addEventListener('load',function(){setTimeout(function(){
+ try{
+  var nav=document.querySelector('nav.primary');
+  var eigen=!!document.querySelector('[data-categoriezoek]');
+  var d=document.querySelector('.navzoek');
+  var hoog=document.documentElement.scrollHeight>1200;
+  if(eigen){document.title='RES|OK|eigen zoekbalk';return;}
+  var voor=nav.classList.contains('zoekbij');
+  window.scrollTo(0,800);
+  setTimeout(function(){
+   var na=nav.classList.contains('zoekbij');
+   d.querySelector('.knop').click();
+   var open=d.classList.contains('open');
+   var br=getComputedStyle(d.querySelector('.veld')).width;
+   window.scrollTo(0,0);
+   setTimeout(function(){
+    var terug=nav.classList.contains('zoekbij');
+    var ok=(!voor)&&(hoog? na:true)&&(hoog? open:true)&&(!terug);
+    document.title='RES|'+(ok?'OK':'FOUT')+'|start='+voor+' na800='+na+' open='+open+' breed='+br+' terug='+terug+' lang='+hoog;
+   },260);
+  },260);
+ }catch(e){document.title='RES|CRASH|'+e.message;}
+},260)});
+</script></body>
 </html>

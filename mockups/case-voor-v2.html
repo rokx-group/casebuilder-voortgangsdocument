@@ -49,8 +49,18 @@
 
    Eén variabele voor allebei, zodat ze niet uit elkaar kunnen lopen. Wie
    de kaarten hoger of lager maakt, zet hier het nieuwe getal en verder
-   nergens. Half een kaart is ongeveer 116px bij deze inhoud. */
-:root{--uitsteek:116px}
+   nergens: de helft van de kaarthoogte, die bij deze inhoud 229px is.
+
+   De onderpadding van .kop-laag gaat er hier af, anders trekt die 28px
+   de kaarten weer omhoog en hangt er maar 38% onder in plaats van de
+   helft. Zo is de uitsteek precies wat er staat. */
+/* flow-root, anders klapt de negatieve marge van .deuren gewoon uit de
+   band weg in plaats van de kaarten omlaag te trekken: zonder padding
+   eronder is er niets meer dat dat tegenhoudt, en dan krimpt de band mee
+   en steekt er niets uit. */
+.vraag{display:flow-root}
+.vraag.kop-laag{padding-bottom:0}
+:root{--uitsteek:114px}
 .index{padding-top:calc(var(--uitsteek) + 34px)}
 @media(max-width:1180px){:root{--uitsteek:0px}}
 .index .sec-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:26px}
@@ -489,6 +499,7 @@
   </div>
 </footer>
 
+<script src="assets/navzoek.js"></script>
 <script src="assets/vouw.js"></script>
 <script src="assets/versies.js"></script>
 <script src="assets/hoogtemelder.js"></script>

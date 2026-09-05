@@ -74,7 +74,53 @@ h1,h2,h3,h4,h5{font-family:var(--disp);text-transform:uppercase;letter-spacing:.
    footer. Alleen het woordmerk is 900-condensed — al het overige in de
    header is DM Sans en wijkt terug. Mono komt hier niet voor; die blijft
    voor eyebrows, specs en kruimelpad. */
-header.main{border-bottom:1px solid var(--rule);background:#fff;position:sticky;top:0;z-index:40}
+/* ── wat blijft staan bij het scrollen ──────────────────────
+   De navigatie, niet de header. Hiervoor plakte de header vast: 74 px
+   met het woordmerk, de zoekbalk en het winkelwagentje. Dat is veel
+   hoogte om permanent op te geven voor drie dingen waarvan je er tijdens
+   het lezen geen nodig hebt.
+
+   De navigatie is 46 px en is precies wél wat je onderweg nodig hebt: de
+   zes ingangen. De header scrolt gewoon weg. Wat je aan zoeken kwijtraakt
+   komt terug als een klein veld in de balk zelf — zie navzoek.js.
+
+   --kop is de hoogte van wat blijft staan. Alles wat er zelf onder moet
+   plakken (de zoekbalk op /case-voor bijvoorbeeld) rekent daarmee, zodat
+   er één getal is dat klopt. */
+:root{--kop:46px}
+header.main{border-bottom:1px solid var(--rule);background:#fff;position:relative;z-index:41}
+nav.primary{position:sticky;top:0;z-index:40}
+
+/* ── het kleine zoekveld in de balk ─────────────────────────
+   Ingeklapt een icoon van 34 px, want de balk heeft op 1280 px maar zo'n
+   zeventig pixel over: een veld van 200 px erbij duwt de laatste ingang
+   eruit. Uitgeklapt schuift het over de telefoonregel heen in plaats van
+   die opzij te duwen — anders verspringt de hele balk zodra je klikt.
+
+   Verschijnt pas voorbij de header. Zolang je die nog ziet staat het
+   grote veld er gewoon, en twee zoekvelden tegelijk is er één te veel. */
+nav.primary .navzoek{position:relative;display:flex;align-items:center;flex:none;
+  opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity .16s ease,transform .16s ease}
+nav.primary.zoekbij .navzoek{opacity:1;visibility:visible;transform:none}
+.navzoek .knop{width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--rule);background:#fff;color:var(--mute);cursor:pointer;padding:0;
+  transition:border-color .12s,color .12s}
+.navzoek .knop:hover{border-color:var(--dark);color:var(--dark)}
+.navzoek .veld{position:absolute;right:0;top:50%;transform:translateY(-50%);
+  display:flex;align-items:center;gap:9px;height:34px;background:#fff;
+  border:1px solid var(--cyan);box-shadow:0 8px 22px rgba(0,40,70,.16);
+  width:0;overflow:hidden;padding:0;opacity:0;pointer-events:none;
+  transition:width .2s cubic-bezier(.2,.7,.2,1),opacity .12s,padding .2s}
+.navzoek.open .veld{width:260px;padding:0 11px;opacity:1;pointer-events:auto}
+.navzoek.open .knop{opacity:0}
+.navzoek .veld svg{flex:none;color:var(--mute)}
+.navzoek input{flex:1;min-width:0;border:0;outline:0;background:transparent;
+  font-family:var(--body);font-size:14px;color:var(--ink)}
+.navzoek input::placeholder{color:#9aa3ae}
+@media(prefers-reduced-motion:reduce){
+  nav.primary .navzoek,.navzoek .veld{transition:none}
+}
+@media(max-width:900px){nav.primary .navzoek{display:none}}
 header.main .wrap{display:flex;align-items:center;gap:32px;height:74px}
 /* wordmerk — brandbook §09. Het echte merk als vector, niet nagetekend.
    Hier stond .logo: het woordmerk nagezet in Barlow Condensed 900, met

@@ -52,8 +52,8 @@
    Hij parkeert onder de sitebalk en niet bovenaan het scherm: die balk
    is zelf al sticky op top:0, dus zonder deze afstand schuiven ze over
    elkaar heen. Eén variabele, want de balk is op mobiel lager. */
-:root{--kop:74px}
-@media(max-width:760px){:root{--kop:64px}}
+/* --kop staat in brand.css: de hoogte van de balk die blijft staan.
+   Stond hier op 74px toen de héle header vastplakte. */
 .zoekbalk{position:sticky;top:var(--kop);z-index:30;background:#fff;
   border-bottom:1px solid var(--rule);box-shadow:0 1px 0 rgba(0,40,70,.04)}
 .zoekbalk .wrap{display:flex;align-items:center;gap:18px;padding-top:14px;padding-bottom:14px}
@@ -75,16 +75,70 @@
 .zoekbalk .chips a:hover{border-color:var(--dark);color:var(--dark)}
 @media(max-width:1080px){.zoekbalk .chips,.zoekbalk .tel{display:none}}
 
+/* ── het trefferpaneel ──────────────────────────────────────
+   Hangt onder de balk over de index heen, zodat je niet hoeft te
+   scrollen om te zien wat er gevonden is. De balk zelf is sticky; het
+   paneel hangt eraan en schuift dus mee.
+
+   Per regel twee doelen: links de naam met het aantal cases, rechts de
+   toepassing waar hij onder valt. Die rechterkant is een eigen knop en
+   springt naar dat vak in de index — één regel, twee bestemmingen. */
+.zoekbalk{position:sticky;top:var(--kop);z-index:30}
+.zoekpaneel{position:absolute;left:0;right:0;top:100%;z-index:31;background:#fff;
+  border-bottom:1px solid var(--rule);box-shadow:0 20px 44px rgba(0,40,70,.16)}
+.zoekpaneel ul{list-style:none;margin:0;padding:0;max-width:var(--wrap);
+  margin-left:auto;margin-right:auto;padding-left:32px;padding-right:32px}
+/* Even breed als het veld erboven, niet als de pagina. Een regel die
+   over de volle breedte loopt duwt de toepassingsknop zo ver naar rechts
+   dat je hem niet meer bij de naam leest waar hij bij hoort. */
+.zoekpaneel li{display:flex;align-items:stretch;gap:14px;border-bottom:1px solid var(--rule);
+  max-width:620px}
+.zoekpaneel li:last-child{border-bottom:0}
+.zoekpaneel .naar{flex:1;display:flex;align-items:baseline;gap:14px;padding:13px 0;min-width:0}
+.zoekpaneel .naar:hover .nm{color:var(--blue)}
+.zoekpaneel .nm{font-size:15.5px;color:var(--ink);font-weight:500;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.zoekpaneel .ct{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--mute);white-space:nowrap}
+/* De toepassing rechts: eigen knop, dus eigen randje — anders leest hij
+   als bijschrift bij de naam in plaats van als tweede bestemming. */
+.zoekpaneel .cat{flex:none;align-self:center;border:1px solid var(--rule);background:#fff;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--mute);padding:8px 12px;cursor:pointer;transition:.13s}
+.zoekpaneel .cat:hover{border-color:var(--dark);color:var(--dark);background:var(--bg)}
+/* Zonder eigen vak in deze index: label, geen knop. Zelfde plek en zelfde
+   maat, maar zonder rand — er valt niets te klikken. */
+.zoekpaneel .cat.los{border-color:transparent;background:none;cursor:default;color:var(--rule)}
+.zoekpaneel .meer,.zoekpaneel .niets{max-width:var(--wrap);margin:0 auto;padding:13px 32px;
+  font-size:13.5px;color:var(--mute)}
+.zoekpaneel .niets{padding-bottom:6px}
+.zoekpaneel .btn{margin:0 32px 16px}
+@media(max-width:700px){
+  .zoekpaneel .ct{display:none}
+  .zoekpaneel ul,.zoekpaneel .meer,.zoekpaneel .niets{padding-left:20px;padding-right:20px}
+}
+
+/* Het vak waar je vandaan komt, kort aangewezen: zonder dat sprong je
+   naar een kop en wist je niet welke van de zes je nu voor je had. */
+.vak.aangewezen{animation:aanwijzen 1.4s ease-out}
+@keyframes aanwijzen{
+  0%,60%{box-shadow:0 0 0 3px var(--cyan)}
+  100%{box-shadow:0 0 0 3px rgba(102,196,232,0)}
+}
+@media (prefers-reduced-motion: reduce){.vak.aangewezen{animation:none;box-shadow:0 0 0 3px var(--cyan)}}
+
 /* ── wat het filter doet ────────────────────────────────────
-   Gedempt in plaats van weg: de index blijft even hoog, dus er springt
-   niets terwijl je typt. De treffer krijgt het cyaan van het merk. */
-.vak li{transition:opacity .16s ease}
-.index.zoekt .vak li.mis{opacity:.24}
-.index .vak li.raak a{color:var(--dark);font-weight:500}
-.index mark{background:var(--cyan);color:var(--void);padding:0 2px}
-.vak{transition:opacity .2s ease}
-.index.zoekt .vak.leeg{opacity:.3}
-.index.zoekt .vak.leeg .vkop h3{color:var(--mute)}
+   Niets, aan de index. Toen het paneel er nog niet was moest de index
+   zelf het antwoord geven, en dempte hij alles wat niet paste. Nu staat
+   het antwoord bovenaan en is dat dempen dubbelop: je leest de treffers
+   in het paneel en kijkt tegelijk naar een halfuitgeschakelde index die
+   hetzelfde zegt. Twee antwoorden op één vraag leest als ruis.
+
+   De index blijft dus staan zoals hij is. Wat je typt verandert alleen
+   het paneel en de teller. Wil je van een treffer naar zijn plek in de
+   index, dan is daar de knop rechts op de regel voor — dat is een keuze
+   van jou en geen effect dat vanzelf gebeurt. */
+.vak.aangewezen{scroll-margin-top:calc(var(--kop) + 90px)}
 
 /* ── de index ──────────────────────────────────────────────
    De deuren steken hier niet uit: direct onder de hero begint de
@@ -204,6 +258,14 @@
    De film ligt op z-index -3, de scrim op -2. Zonder die scrim is een
    witte kop op bewegend beeld niet te lezen zodra er een lichte plek
    voorbijkomt. */
+/* .kop-laag geeft 32/28 px en dat is voor een band met alleen een kop
+   genoeg. Hier staan er drie kaarten in, en die kwamen met 28 px eronder
+   tegen de rand van de band aan te liggen — dan lijkt de hero afgesneden
+   in plaats van afgesloten. Overschreven op deze band en niet in de
+   merkklasse: .kop-laag doet elders precies wat hij moet doen. */
+.vraag.kop-laag{padding-top:46px;padding-bottom:60px}
+@media(max-width:760px){.vraag.kop-laag{padding-top:32px;padding-bottom:40px}}
+
 .vraag .film{position:absolute;inset:0;z-index:-3}
 .vraag .film video,.vraag .film img{width:100%;height:100%;object-fit:cover;display:block}
 .vraag .film img{display:none}
@@ -217,9 +279,9 @@
    De hoofdingang is hier niet de aanvraag maar de index eronder: wie op
    deze pagina komt, wil zijn apparaat vinden. De andere twee zijn de
    uitwegen voor wie zijn maten al weet of wiens apparaat er niet bij staat. */
-/* Half in de band, half erbuiten. De negatieve marge trekt ze naar
-   beneden; z-index houdt ze boven de sectie die eronder begint. */
-.deuren{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px}
+/* Ze liggen helemaal binnen de band, niet half eroverheen: met de
+   zoekbalk direct eronder heeft die overlap geen ruimte meer. */
+.deuren{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:34px}
 
 /* Een kaart die over twee achtergronden ligt kan niet doorzichtig zijn:
    rgba(6,18,28,.42) is donker op de film en muisgrijs op het witte vlak
@@ -349,6 +411,7 @@
       <a data-zoekterm="rack">Rack</a>
     </span>
   </div>
+  <div class="zoekpaneel" data-zoekpaneel hidden></div>
 </div>
 
 <!-- ── DE INDEX ───────────────────────────────────────────────
@@ -538,7 +601,9 @@
   </div>
 </footer>
 
+<script src="assets/navzoek.js"></script>
 <script src="assets/vouw.js"></script>
+<script src="assets/toepassingen.js"></script>
 <script src="assets/categoriezoek.js"></script>
 <script src="assets/versies.js"></script>
 <script src="assets/hoogtemelder.js"></script>

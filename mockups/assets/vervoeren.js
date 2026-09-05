@@ -3,7 +3,7 @@
  *
  * Twee kanten van dezelfde beweging, daarom in één bestand:
  *
- *   1. In de hero van homepage-v12 klapt de knop naar rechts open tot een
+ *   1. In de hero van homepage-v1, v2 en v3 klapt de knop naar rechts open tot een
  *      veld. Je typt wat erin moet, en dan gebeurt er één van twee dingen:
  *      we kennen het → de categoriepagina; we kennen het niet → de
  *      aanvraagpagina met jouw tekst er al in.

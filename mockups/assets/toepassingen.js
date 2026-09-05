@@ -1,8 +1,15 @@
 /**
- * De toepassingenlijst: waar een bezoeker op kan zoeken en waar hij dan
- * uitkomt. Eén lijst, want hij wordt op twee plekken gebruikt — de balk in
- * de hero van v12 en de prefill op de aanvraagpagina — en twee kopieën
- * lopen gegarandeerd uit elkaar.
+ * De zoeklijst: waar een bezoeker op kan zoeken en waar hij dan uitkomt.
+ *
+ * Er staan twee soorten dingen in. Toepassingen zijn wát je vervoert
+ * ("moving heads", "les paul"); branches zijn wíé je bent ("defensie",
+ * "broadcast"). Allebei zijn geldige antwoorden op "wat ga je vervoeren?",
+ * want de een weet zijn apparaat en de ander zijn vak. Wie "defensie" typt
+ * en alleen categorieën terugkrijgt, denkt dat we hem niet bedienen.
+ *
+ * Eén lijst, want hij wordt op drie plekken gebruikt — de balk in de hero
+ * van v1, v2 en v3, het zoekpaneel op case-voor-v3 en de prefill op de aanvraag-
+ * pagina — en drie kopieën lopen gegarandeerd uit elkaar.
  *
  * De categorieën komen uit case-voor-v1.html; dat is het overzicht dat er
  * al staat, dus de balk kan niet naar iets wijzen wat daar niet in zit.
@@ -68,7 +75,23 @@
     { naam: 'Standmateriaal',            groep: 'Beurs',      pagina: SJABLOON, zoek: ['stand', 'beurs', 'expo'] },
     { naam: 'Banners en kokers',         groep: 'Beurs',      pagina: SJABLOON, zoek: ['banner', 'koker', 'rollup'] },
     { naam: 'Displays en schermen',      groep: 'Beurs',      pagina: SJABLOON, zoek: ['display', 'led scherm', 'videowall'] },
-    { naam: 'Catering en bar',           groep: 'Beurs',      pagina: SJABLOON, zoek: ['catering', 'bar', 'keuken'] }
+    { naam: 'Catering en bar',           groep: 'Beurs',      pagina: SJABLOON, zoek: ['catering', 'bar', 'keuken'] },
+
+    /* Branches. Ze staan bewust ná de toepassingen: typt iemand "camera",
+       dan wil hij de cases voor camerabodies zien en niet eerst de hele
+       broadcastbranche. Bij gelijke score wint de bovenste. */
+    { naam: 'Audio-visueel',             groep: 'Branche', soort: 'branche', pagina: 'branche-audio-visueel-v1.html',
+      zoek: ['av', 'podium', 'theater', 'evenement', 'concert', 'tour', 'verhuur', 'rental', 'licht en geluid'] },
+    { naam: 'Broadcast en media',        groep: 'Branche', soort: 'branche', pagina: 'branche-broadcast-en-media-v1.html',
+      zoek: ['broadcast', 'tv', 'televisie', 'omroep', 'media', 'film', 'productiehuis'] },
+    { naam: 'Industrie en machinebouw',  groep: 'Branche', soort: 'branche', pagina: 'branche-industrie-en-machinebouw-v1.html',
+      zoek: ['industrie', 'machinebouw', 'fabriek', 'productie', 'oem', 'technische dienst'] },
+    { naam: 'Meet- en testapparatuur',   groep: 'Branche', soort: 'branche', pagina: 'branche-meet-en-testapparatuur-v1.html',
+      zoek: ['meettechniek', 'testen', 'kalibratie', 'meetlab', 'inspectie'] },
+    { naam: 'Defensie',                  groep: 'Branche', soort: 'branche', pagina: 'branche-defensie-v1.html',
+      zoek: ['defensie', 'leger', 'militair', 'krijgsmacht', 'landmacht', 'marine', 'luchtmacht', 'navo', 'veiligheidsregio'] },
+    { naam: 'Schaalmodellen',            groep: 'Branche', soort: 'branche', pagina: 'branche-schaalmodellen-v1.html',
+      zoek: ['schaalmodel', 'maquette', 'prototype', 'modelbouw', 'architect'] }
   ];
 
   /* Zonder accenten en in kleine letters, zodat "réflex" en "Reflex"
@@ -92,7 +115,7 @@
     if (q.length < 2) return [];
 
     var treffers = [];
-    window.TOEPASSINGEN.forEach(function (t) {
+    window.TOEPASSINGEN.forEach(function (t, plek) {
       var termen = [t.naam].concat(t.zoek || []);
       var beste = 0;
       termen.forEach(function (term) {
@@ -100,12 +123,15 @@
         var score = n === q ? 3 : n.indexOf(q) === 0 ? 2 : n.indexOf(q) > -1 ? 1 : 0;
         if (score > beste) beste = score;
       });
-      if (beste) treffers.push({ toepassing: t, score: beste });
+      if (beste) treffers.push({ toepassing: t, score: beste, plek: plek });
     });
 
+    /* Bij gelijke score telt de volgorde in de lijst, niet het alfabet:
+       toepassingen staan boven branches omdat iemand die een apparaat
+       noemt de cases ervoor zoekt, niet zijn eigen bedrijfstak. */
     treffers.sort(function (a, b) {
       if (b.score !== a.score) return b.score - a.score;
-      return a.toepassing.naam.localeCompare(b.toepassing.naam, 'nl');
+      return a.plek - b.plek;
     });
 
     return treffers.slice(0, max || 6).map(function (r) { return r.toepassing; });

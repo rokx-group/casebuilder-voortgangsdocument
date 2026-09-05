@@ -341,5 +341,30 @@
 <script src="assets/vouw.js"></script>
 <script src="assets/versies.js"></script>
 <script src="assets/uitsnede.js"></script>
-</body>
+
+<script>
+addEventListener('load',function(){setTimeout(function(){
+ try{
+  var nav=document.querySelector('nav.primary');
+  var eigen=!!document.querySelector('[data-categoriezoek]');
+  var d=document.querySelector('.navzoek');
+  var hoog=document.documentElement.scrollHeight>1200;
+  if(eigen){document.title='RES|OK|eigen zoekbalk';return;}
+  var voor=nav.classList.contains('zoekbij');
+  window.scrollTo(0,800);
+  setTimeout(function(){
+   var na=nav.classList.contains('zoekbij');
+   d.querySelector('.knop').click();
+   var open=d.classList.contains('open');
+   var br=getComputedStyle(d.querySelector('.veld')).width;
+   window.scrollTo(0,0);
+   setTimeout(function(){
+    var terug=nav.classList.contains('zoekbij');
+    var ok=(!voor)&&(hoog? na:true)&&(hoog? open:true)&&(!terug);
+    document.title='RES|'+(ok?'OK':'FOUT')+'|start='+voor+' na800='+na+' open='+open+' breed='+br+' terug='+terug+' lang='+hoog;
+   },260);
+  },260);
+ }catch(e){document.title='RES|CRASH|'+e.message;}
+},260)});
+</script></body>
 </html>
