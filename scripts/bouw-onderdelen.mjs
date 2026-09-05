@@ -40,16 +40,26 @@ for (const o of ONDERDELEN) o.inhoud = readFileSync(join(MAP, o.bestand), "utf8"
 /** Welk navigatie-item is hier actief? Terug te vinden aan de linktekst. */
 function actiefItem(nav) {
   const m = nav.match(/<a[^>]*class="[^"]*\bon\b[^"]*"[^>]*>([^<]+)<\/a>/);
-  return m ? m[1] : null;
+  if (!m) return null;
+  // "Zelf configureren" is geen tabblad meer maar zit in het menu onder
+  // Flightcases. Pagina's die het als actief item hadden — de configurator
+  // en laten-controleren — markeren nu de tak waar het onder valt.
+  return m[1] === "Zelf configureren" ? "Flightcases" : m[1];
 }
 
 /** Zet class="on" op het item met deze tekst. */
 function markeer(nav, tekst) {
   if (!tekst) return nav;
-  return nav.replace(
-    new RegExp(`(<a href="[^"]*")(>${tekst.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}</a>)`),
-    '$1 class="on"$2'
-  );
+  // Het megamenu even opzij: daarbinnen staan dezelfde woorden nog een
+  // keer, en die mogen de markering niet opvangen. Alleen eruit knippen
+  // en terugzetten werkt — afkappen bij het paneel zou Branches en
+  // Service buiten bereik laten, want die staan erna.
+  const PLAATS = "\u0000MENU\u0000";
+  const paneel = nav.match(/<div class="megamenu">[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/);
+  const kaal = paneel ? nav.replace(paneel[0], PLAATS) : nav;
+  const veilig = tekst.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const uit = kaal.replace(new RegExp(`(<a href="[^"]*")(>${veilig}</a>)`), '$1 class="on"$2');
+  return paneel ? uit.replace(PLAATS, paneel[0]) : uit;
 }
 
 const bestanden = readdirSync(MAP)
