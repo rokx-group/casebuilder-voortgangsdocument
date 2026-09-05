@@ -178,6 +178,12 @@ body{background:#EDF0F4}
   color:var(--dark);display:block;line-height:1.1}
 .nt p{font-size:13px;color:var(--mute);line-height:1.5;margin-top:6px}
 .nt.open .lb{color:#A34418}
+/* De kern van elke aantekening aangezet. In een gesprek leest niemand zes
+   alinea's; dit is per notitie de zin waar het besluit aan hangt.
+   Lichtblauw met een cyaan streep eronder: op te vinden zonder de alinea
+   uit elkaar te trekken. */
+.nt .sl{background:var(--lightblue);box-shadow:inset 0 -2px 0 var(--cyan);
+  padding:0 2px;color:var(--ink)}
 .notities .vraag{background:#FCF8EE}
 
 /* ── focusmodus ────────────────────────────────────────────── */
@@ -266,7 +272,7 @@ body.focusmodus .demo:not(.aan){cursor:default}
       <p><b>De bezoekersverdeling bepaalt de opzet, niet de webshoplogica.</b> Hoog: weet wat hij heeft, niet wat hij wil &rarr; de aanvraag. Midden: weet zijn maten &rarr; de configurator. Laag: weet zijn artikelnummer &rarr; onderdelen. Nihil: de particulier.</p>
       <p><b>Zeventig procent van de Nederlandse orders begint met een mail.</b> Soms een schets, soms alleen een datasheet; er wordt dezelfde dag getekend en teruggestuurd. Dat is geen omweg naar de webshop maar het product zelf &mdash; de vraag is of het bovenaan hoort te staan.</p>
       <p><b>Snel converteren of de leek opvangen.</b> Versies die snel naar een prijs sturen laten de bezoeker die het vak niet kent in de kou staan; versies die hem opvangen stellen de prijs uit. Dat is de eigenlijke keuze.</p>
-      <p><b>Vijf versies draaien een film, twee niet.</b> Dat verandert w&aacute;t je te zien krijgt en niet alleen hoe het eruitziet &mdash; vandaar dat het in het label staat. v2 en v3 draaien dezelfde compositie met een andere film, v9 draait de film achter het aanvraagpaneel en v10 houdt de hero leeg. v11 en v12 hebben bewust g&eacute;&eacute;n film: v11 zet de kist op wit naast de belofte, v12 draait dezelfde beeldhero als v1 maar maakt van de tweede knop een zoekveld.</p>
+      <p><b>Twee van de drie draaien een film.</b> Dat verandert w&aacute;t je te zien krijgt en niet alleen hoe het eruitziet &mdash; vandaar dat het in het label staat. v1 staat stil, v3 en v10 bewegen. v12 bestaat niet meer: zijn tweede knop die openklapt tot een zoekveld zit nu in v1 en v3. <b>Let op bij het vergelijken:</b> v10 heeft dat veld nog niet, dus tussen v3 en v10 verschilt niet alleen de pagina eronder maar ook de hero.</p>
     </div>
   </details>
 
@@ -311,32 +317,32 @@ body.focusmodus .demo:not(.aan){cursor:default}
     <div class="nt">
       <span class="lb">// 01 &middot; de hero</span>
       <b>Eén belofte, niet drie</b>
-      <p>De bezoeker met de hoogste orderwaarde weet wát hij heeft, niet wat hij wil. Een hero die om maten vraagt sluit hem uit; een hero die om zijn apparaat vraagt niet. Toets: kan iemand die het woord &ldquo;hoedcase&rdquo; niet kent hier verder?</p>
+      <p>De bezoeker met de hoogste orderwaarde <span class="sl">weet wát hij heeft, niet wat hij wil</span>. Een hero die om maten vraagt sluit hem uit; een hero die om zijn apparaat vraagt niet. Toets: kan iemand die het woord &ldquo;hoedcase&rdquo; niet kent hier verder?</p>
     </div>
     <div class="nt">
       <span class="lb">// 02 &middot; direct onder de hero</span>
       <b>Maak de belofte een getal</b>
-      <p>&ldquo;Snel geleverd&rdquo; zegt elke concurrent. Tien werkdagen, tekening dezelfde dag, offerte binnen 48 uur zijn controleerbaar. Vier feiten in een lichte band, waarde groot en de nuancering klein eronder &mdash; dat patroon staat al in v3 en op /branches.</p>
+      <p>&ldquo;Snel geleverd&rdquo; zegt elke concurrent. Tien werkdagen, tekening dezelfde dag, offerte binnen 48 uur <span class="sl">zijn controleerbaar</span>. Vier feiten in een lichte band, waarde groot en de nuancering klein eronder &mdash; dat patroon staat al in v3 en op /branches.</p>
     </div>
     <div class="nt">
       <span class="lb">// 03 &middot; de eerste sectie</span>
       <b>De drie routes, niet even zwaar</b>
-      <p>Webshop, configurator, aanvraag. Zeventig procent van de orders begint als aanvraag, dus die hoort het dichte cyaan vlak te krijgen en de andere twee een rand. Drie gelijke deuren is geen keuze maar uitstel.</p>
+      <p>Webshop, configurator, aanvraag. <span class="sl">Zeventig procent van de orders begint als aanvraag</span>, dus die hoort het dichte cyaan vlak te krijgen en de andere twee een rand. Drie gelijke deuren is geen keuze maar uitstel.</p>
     </div>
     <div class="nt">
       <span class="lb">// 04 &middot; het assortiment</span>
       <b>Modellen, toepassingen of branches</b>
-      <p>Precies het verschil tussen v4 en v5. Modellen tonen wat wij maken, toepassingen wat erin gaat, branches wie je bent. Wie niets van cases weet heeft aan &ldquo;trunccase&rdquo; niets &mdash; en dat is de meest waardevolle bezoeker.</p>
+      <p>Precies het verschil tussen v4 en v5. Modellen tonen wat wij maken, toepassingen wat erin gaat, branches wie je bent. Wie niets van cases weet heeft aan &ldquo;trunccase&rdquo; niets &mdash; en <span class="sl">dat is de meest waardevolle bezoeker</span>.</p>
     </div>
     <div class="nt">
       <span class="lb">// 05 &middot; het bewijs</span>
       <b>Marktleider is een lege claim</b>
-      <p>Ze zijn het al, maar niemand weet het. Zo'n uitspraak werkt alleen met iets ernaast: aantallen, namen, jaartallen. Mond-tot-mond is het enige kanaal dat aantoonbaar werkt; referenties zijn daar de online vertaling van.</p>
+      <p>Ze zijn het al, maar niemand weet het. Zo'n uitspraak <span class="sl">werkt alleen met iets ernaast: aantallen, namen, jaartallen</span>. Mond-tot-mond is het enige kanaal dat aantoonbaar werkt; referenties zijn daar de online vertaling van.</p>
     </div>
     <div class="nt">
       <span class="lb">// 06 &middot; de afsluiting</span>
       <b>Eindig bij een mens</b>
-      <p>Eén binnendienst, één reactieve verkoper, geen koude acquisitie. De pagina moet het kwalificatiewerk doen dat een accountmanager anders doet. Een naam en een gezicht kosten niets en zijn het verschil met een formulier.</p>
+      <p>Eén binnendienst, één reactieve verkoper, geen koude acquisitie. De pagina moet <span class="sl">het kwalificatiewerk doen dat een accountmanager anders doet</span>. Een naam en een gezicht kosten niets en zijn het verschil met een formulier.</p>
     </div>
   </div>
 

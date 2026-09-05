@@ -6,10 +6,17 @@
    maar niet altijd: halverwege een categoriepagina bedenk je alsnog een
    artikelnummer, en dan is terugscrollen naar boven een omweg.
 
-   Vandaar een klein veld in de balk. Ingeklapt is het een icoon, want de
-   balk heeft geen ruimte voor meer; uitgeklapt schuift het over de
-   telefoonregel heen in plaats van die opzij te duwen. Zo verspringt de
-   balk niet op het moment dat je erop klikt.
+   Vandaar een klein veld in de balk. Ingeklapt is het geen vergrootglas
+   maar een schuine streep: de toets waarmee je het opent. Een loep zegt
+   "hier kun je zoeken" en dat weet je al; de toets zegt hoe je er komt
+   zonder je hand van het toetsenbord te halen. Bovendien staat er al een
+   vergrootglas in de header, en twee dezelfde iconen boven elkaar met
+   verschillende bereiken leest als één ding dat twee keer staat.
+
+   De mono-streep sluit ook aan op de // -labels die overal op de site de
+   technische kant markeren. Uitgeklapt schuift het veld over de
+   telefoonregel heen in plaats van die opzij te duwen, zodat de balk niet
+   verspringt op het moment dat je erop klikt.
 
    Het verschijnt pas voorbij de header. Zolang je die nog ziet staat het
    grote veld er, en dan zijn het er twee — waarvan je er één per ongeluk
@@ -42,38 +49,29 @@
 
   /* ── bouwen ─────────────────────────────────────────────── */
 
-  function loep() {
-    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('width', '14');
-    svg.setAttribute('height', '14');
-    svg.setAttribute('viewBox', '0 0 16 16');
-    svg.setAttribute('fill', 'none');
-    svg.setAttribute('stroke', 'currentColor');
-    svg.setAttribute('stroke-width', '1.6');
-    svg.setAttribute('aria-hidden', 'true');
-    var c = document.createElementNS(svg.namespaceURI, 'circle');
-    c.setAttribute('cx', '7'); c.setAttribute('cy', '7'); c.setAttribute('r', '5');
-    var p = document.createElementNS(svg.namespaceURI, 'path');
-    p.setAttribute('d', 'M11 11l4 4');
-    svg.appendChild(c); svg.appendChild(p);
-    return svg;
-  }
-
   var doos = document.createElement('div');
   doos.className = 'navzoek';
 
   var knop = document.createElement('button');
   knop.type = 'button';
   knop.className = 'knop';
-  knop.setAttribute('aria-label', 'Zoeken');
+  knop.setAttribute('aria-label', 'Zoeken (toets /)');
+  knop.title = 'Zoeken \u2014 toets /';
   knop.setAttribute('aria-expanded', 'false');
-  knop.appendChild(loep());
+  knop.textContent = '/';
 
   var veld = document.createElement('form');
   veld.className = 'veld';
   veld.setAttribute('role', 'search');
   veld.addEventListener('submit', function (e) { e.preventDefault(); });
-  veld.appendChild(loep());
+
+  // Binnen het veld wél een streep als aanduiding, in dezelfde mono: hij
+  // zegt dan "dit is het veld dat bij die toets hoort".
+  var teken = document.createElement('span');
+  teken.className = 'teken';
+  teken.setAttribute('aria-hidden', 'true');
+  teken.textContent = '/';
+  veld.appendChild(teken);
 
   var invoer = document.createElement('input');
   invoer.type = 'search';
@@ -94,6 +92,18 @@
   }
 
   knop.addEventListener('click', function () { zet(true); });
+
+  /* De toets waarmaken die op de knop staat. Alleen als je niet al ergens
+     aan het typen bent — anders kun je in geen enkel veld meer een schuine
+     streep zetten. */
+  addEventListener('keydown', function (e) {
+    if (e.key !== '/' || e.metaKey || e.ctrlKey || e.altKey) return;
+    var el = document.activeElement;
+    if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable)) return;
+    if (!nav.classList.contains('zoekbij')) return;
+    e.preventDefault();
+    zet(true);
+  });
 
   // Dicht als je hem leeg laat. Staat er tekst in, dan blijft hij staan:
   // je bent nog bezig, ook als je even ergens anders klikt.

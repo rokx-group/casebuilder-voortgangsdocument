@@ -49,6 +49,92 @@
 
 @media(max-width:1080px){ .modellen{grid-template-columns:repeat(3,1fr)} }
 @media(max-width:620px){ .modellen{grid-template-columns:1fr 1fr} }
+/* ── de kop met een draaiende kist ────────────────────────────
+   Overgenomen uit homepage-v11. Daar laat de kist zien dat je de maat
+   zelf bepaalt; hier doet hij dat ook, maar hij kiest tegelijk het
+   model — de vijf knoppen eronder zijn de vijf modellen van deze
+   pagina, en de knop in de kop loopt mee naar het model dat je ziet.
+   Daarmee is de kop geen plaatje maar de eerste stap van de pagina.
+
+   De afmetingen per model zijn voorbeeldmaten tot er productdata is;
+   ze staan in de markup, op de knoppen. */
+.ovkop .grid{display:grid;grid-template-columns:1.02fr .98fr;gap:48px;align-items:center}
+/* De knoppen stonden tegen de lopende tekst aan: .cta bestond hier nog
+   niet, dus er was geen ruimte boven. */
+.ovkop .cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+.ovkop .lead{max-width:52ch}
+/* ── de draaiende kist ────────────────────────────────────────
+   Een flightcase is een balk, dus een balk in CSS-3D is geen namaak van
+   het product maar het product zelf. Twee dingen die een fotospin niet
+   heeft: hij draait op élke hoek, en zijn afmetingen zijn getallen —
+   de kist wordt breder omdat de breedte verandert, niet omdat er een
+   andere foto laadt. De maten komen uit assets/draaikist.js. */
+.kistvak{display:flex;flex-direction:column;align-items:center;gap:18px}
+.kist3d{position:relative;width:100%;height:330px;perspective:1400px;cursor:grab;
+  touch-action:none;user-select:none}
+.kist3d.pakt{cursor:grabbing}
+.kubus{position:absolute;left:50%;top:47%;width:0;height:0;transform-style:preserve-3d}
+
+/* Elk vlak: zwart paneel met een aluminium profiel eromheen en balhoeken
+   op de vier punten — dat profiel en die hoeken zijn wat een flightcase
+   een flightcase maakt. */
+.zij{position:absolute;left:50%;top:50%;box-sizing:border-box;
+  background:
+    radial-gradient(circle at 8px 8px, #cfd5d9 3.5px, transparent 4px),
+    radial-gradient(circle at calc(100% - 8px) 8px, #cfd5d9 3.5px, transparent 4px),
+    radial-gradient(circle at 8px calc(100% - 8px), #cfd5d9 3.5px, transparent 4px),
+    radial-gradient(circle at calc(100% - 8px) calc(100% - 8px), #cfd5d9 3.5px, transparent 4px),
+    linear-gradient(125deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 42%),
+    #15191c;
+  border:3px solid #b2babf;
+  box-shadow:inset 0 0 34px rgba(0,0,0,.62);
+  transition:width .75s cubic-bezier(.4,0,.2,1), height .75s cubic-bezier(.4,0,.2,1),
+             transform .75s cubic-bezier(.4,0,.2,1)}
+.voor  {width:var(--b);height:var(--h);transform:translate(-50%,-50%) translateZ(calc(var(--d) / 2))}
+.achter{width:var(--b);height:var(--h);transform:translate(-50%,-50%) rotateY(180deg) translateZ(calc(var(--d) / 2))}
+.links {width:var(--d);height:var(--h);transform:translate(-50%,-50%) rotateY(-90deg) translateZ(calc(var(--b) / 2))}
+.rechts{width:var(--d);height:var(--h);transform:translate(-50%,-50%) rotateY(90deg) translateZ(calc(var(--b) / 2))}
+.boven {width:var(--b);height:var(--d);transform:translate(-50%,-50%) rotateX(90deg) translateZ(calc(var(--h) / 2))}
+.onder {width:var(--b);height:var(--d);transform:translate(-50%,-50%) rotateX(-90deg) translateZ(calc(var(--h) / 2))}
+/* De greep op het voorpaneel: zonder dat leest de balk als een doos. */
+.voor::after{content:"";position:absolute;left:50%;top:50%;width:78px;height:19px;
+  transform:translate(-50%,-50%);background:#9aa3a9;
+  box-shadow:inset 0 2px 3px rgba(255,255,255,.35), inset 0 -2px 4px rgba(0,0,0,.5)}
+/* Schaduw op de vloer, plat gedraaid zodat hij met de kist meedraait. */
+.grond{position:absolute;left:50%;top:76%;width:300px;height:70px;transform:translate(-50%,-50%);
+  background:radial-gradient(ellipse at center, rgba(0,51,82,.26) 0%, rgba(0,51,82,0) 68%);
+  pointer-events:none}
+.kmaat{position:absolute;left:50%;bottom:0;transform:translateX(-50%);background:var(--dark);color:#fff;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;
+  padding:7px 12px;white-space:nowrap}
+.maatknoppen{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.maatknoppen button{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  padding:7px 12px;border:1px solid var(--rule);background:#fff;color:var(--mute);cursor:pointer}
+.maatknoppen button:hover{border-color:var(--dark);color:var(--dark)}
+.maatknoppen button.aan{background:var(--dark);border-color:var(--dark);color:#fff}
+@media(max-width:900px){.ovkop .grid{grid-template-columns:1fr}.kist3d{height:270px}}
+/* ── in het veld ──────────────────────────────────────────────
+   Tussen de kop en de vijf modellen. Wie hier binnenkomt weet wat hij
+   vervoert, niet hoe een flightcase heet — en die vertaalslag maakt de
+   modellenrij eronder niet. Deze strook doet dat wel: per foto staat er
+   wat erin gaat en welk model dat werd, met een link naar de branche.
+
+   Foto's over de volle breedte, geen kaders: dit is bewijs dat de
+   kisten bestaan, geen tweede productoverzicht. */
+.veld{padding:52px 0 8px}
+.veld .rij{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:26px}
+.veld a{display:flex;flex-direction:column;text-decoration:none}
+.veld .im{aspect-ratio:4/3;overflow:hidden;background:var(--bg)}
+.veld .im img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.veld a:hover .im img{transform:scale(1.045)}
+.veld .wat{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:18px;
+  letter-spacing:.03em;color:var(--dark);margin-top:14px;line-height:1.1}
+.veld .mdl{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--blue);margin-top:7px}
+.veld p{font-size:13.5px;color:var(--mute);margin-top:8px;line-height:1.5}
+.veld a:hover .wat{color:var(--blue)}
+@media(max-width:1080px){.veld .rij{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.veld .rij{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -85,12 +171,81 @@
 
 <div class="ovkop ruit ruit-aanzet kop-laag">
   <div class="wrap">
-    <div class="ey ey-dark">// FLIGHTCASES OP MAAT</div>
-    <h1>Vijf modellen, jouw maten</h1>
-    <p class="lead">Het verschil zit in het deksel en waar je bij moet kunnen. Kies op wat je
-      vervoert, niet op hoe het heet — en zie meteen wat de basisprijs is.</p>
+    <div class="grid">
+      <div class="kop">
+        <div class="ey ey-dark">// VIJF MODELLEN &middot; ALTIJD OP MAAT</div>
+        <h1>De vorm kies je.<br><span class="acc">De maten geef je.</span></h1>
+        <p class="lead">Het model bepaalt het deksel, het beslag en waar je bij kunt. De
+          afmetingen zijn van jou, tot op de millimeter &mdash; dus vergelijk op wat je vervoert,
+          niet op hoe het heet.</p>
+        <div class="cta">
+          <a class="btn btn-dark" data-kistlink href="casetype-koffer-v1.html">Bekijk de koffer &rarr;</a>
+          <a class="btn btn-out" href="#vergelijk">Vergelijk de vijf &darr;</a>
+        </div>
+      </div>
+
+      <div class="kistvak">
+        <div class="kist3d" data-draaikist title="Sleep om te draaien">
+          <div class="kubus">
+            <div class="zij achter"></div>
+            <div class="zij links"></div>
+            <div class="zij rechts"></div>
+            <div class="zij boven"></div>
+            <div class="zij onder"></div>
+            <div class="zij voor"></div>
+          </div>
+          <div class="grond"></div>
+          <span class="kmaat"></span>
+        </div>
+        <div class="maatknoppen">
+          <button type="button" data-maat data-naam="Koffer" data-mm="700x250x450" data-href="casetype-koffer-v1.html" class="aan">Koffer</button>
+          <button type="button" data-maat data-naam="Hoedcase" data-mm="800x550x500" data-href="casetype-hoedcase-v1.html">Hoedcase</button>
+          <button type="button" data-maat data-naam="Trunccase" data-mm="800x600x600" data-href="casetype-trunccase-v1.html">Trunccase</button>
+          <button type="button" data-maat data-naam="Rackcase enkel" data-mm="600x400x500" data-href="casetype-rackcase-enkel-deksel-v1.html">Rackcase enkel</button>
+          <button type="button" data-maat data-naam="Rackcase dubbel" data-mm="600x620x550" data-href="casetype-rackcase-dubbel-deksel-v1.html">Rackcase dubbel</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+
+<section class="veld">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ey ey-dark">// IN HET VELD</div>
+      <h2 style="font-size:32px;margin-top:12px">Waar deze modellen terechtkomen</h2>
+      <p class="lead" style="margin-top:10px;max-width:60ch">Je weet wat je vervoert, niet hoe een
+        flightcase heet. Dit is wat er bij anderen in ging, en welk model dat werd.</p>
+    </div>
+    <div class="rij">
+      <a href="branche-audio-visueel-v1.html">
+        <div class="im"><img src="assets/foto-audio-visueel.jpg" alt="Moving heads op tour" loading="lazy"></div>
+        <span class="wat">Moving heads op tour</span>
+        <span class="mdl">// Trunccase &middot; op wielen</span>
+        <p>Vier armaturen in &eacute;&eacute;n kist met vakverdeling. Tien keer per jaar de vrachtwagen in en uit.</p>
+      </a>
+      <a href="case-voor-v1.html">
+        <div class="im"><img src="assets/foto-broadcast-en-media.jpg" alt="Drone met accu&#39;s en controller in een koffer" loading="lazy"></div>
+        <span class="wat">Drone, accu&#39;s en controller</span>
+        <span class="mdl">// Koffer &middot; uitgefreesd schuim</span>
+        <p>Elk onderdeel in een eigen uitsparing, ook de propellers. Open de koffer en je vliegt.</p>
+      </a>
+      <a href="branche-meet-en-testapparatuur-v1.html">
+        <div class="im"><img src="assets/foto-meet-en-testapparatuur.jpg" alt="Meetopstelling in een trunccase in bedrijfskleur" loading="lazy"></div>
+        <span class="wat">Meetopstelling het terrein op</span>
+        <span class="mdl">// Trunccase &middot; in eigen kleur</span>
+        <p>Draagpunten op de behuizing, nooit op het display. Zeven kleuren, dus je ziet van ver wiens kist het is.</p>
+      </a>
+      <a href="casetype-rackcase-dubbel-deksel-v1.html">
+        <div class="im"><img src="assets/foto-industrie-en-machinebouw.jpg" alt="19-inch apparatuur met bekabeling achterin" loading="lazy"></div>
+        <span class="wat">19-inch tussen twee locaties</span>
+        <span class="mdl">// Rackcase dubbel &middot; bekabeling achterin</span>
+        <p>Voor- &eacute;n achterdeksel, want de kabels zitten achter. Aansluiten zonder de kist te draaien.</p>
+      </a>
+    </div>
+  </div>
+</section>
 
 <div class="wrap">
   <div class="modellen">
@@ -146,7 +301,7 @@
   </div>
 </div>
 
-<section class="tight">
+<section id="vergelijk" class="tight">
   <div class="wrap">
     <div class="sec-head" style="margin-bottom:6px">
       <div class="ey ey-dark">// NAAST ELKAAR</div>
@@ -199,6 +354,7 @@
 </footer>
 <script src="assets/navzoek.js"></script>
 <script src="assets/vouw.js"></script>
+<script src="assets/draaikist.js"></script>
 <script src="assets/versies.js"></script>
 <script src="assets/hoogtemelder.js"></script>
 </body>

@@ -102,10 +102,16 @@ nav.primary{position:sticky;top:0;z-index:40}
 nav.primary .navzoek{position:relative;display:flex;align-items:center;flex:none;
   opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity .16s ease,transform .16s ease}
 nav.primary.zoekbij .navzoek{opacity:1;visibility:visible;transform:none}
+/* Geen vergrootglas maar de toets waarmee je het opent. Er staat er al
+   een in de header, en dezelfde loep twee keer met een ander bereik leest
+   als één ding dat dubbel staat. De mono-streep hoort bovendien bij de
+   // -labels die overal de technische kant markeren. */
 .navzoek .knop{width:34px;height:34px;display:flex;align-items:center;justify-content:center;
   border:1px solid var(--rule);background:#fff;color:var(--mute);cursor:pointer;padding:0;
-  transition:border-color .12s,color .12s}
-.navzoek .knop:hover{border-color:var(--dark);color:var(--dark)}
+  font-family:var(--mono);font-size:15px;line-height:1;font-weight:500;
+  transition:border-color .12s,color .12s,background .12s}
+.navzoek .knop:hover{border-color:var(--dark);color:var(--dark);background:var(--bg)}
+.navzoek .teken{flex:none;font-family:var(--mono);font-size:13px;color:var(--rule)}
 .navzoek .veld{position:absolute;right:0;top:50%;transform:translateY(-50%);
   display:flex;align-items:center;gap:9px;height:34px;background:#fff;
   border:1px solid var(--cyan);box-shadow:0 8px 22px rgba(0,40,70,.16);
@@ -113,7 +119,6 @@ nav.primary.zoekbij .navzoek{opacity:1;visibility:visible;transform:none}
   transition:width .2s cubic-bezier(.2,.7,.2,1),opacity .12s,padding .2s}
 .navzoek.open .veld{width:260px;padding:0 11px;opacity:1;pointer-events:auto}
 .navzoek.open .knop{opacity:0}
-.navzoek .veld svg{flex:none;color:var(--mute)}
 .navzoek input{flex:1;min-width:0;border:0;outline:0;background:transparent;
   font-family:var(--body);font-size:14px;color:var(--ink)}
 .navzoek input::placeholder{color:#9aa3ae}
