@@ -16,8 +16,15 @@
    Zodra de renderservice meer hoeken kan leveren, kan dit één op één
    worden vervangen: dezelfde maatvoering, dezelfde draaihoek.
 
-   De maten hieronder zijn echte casematen uit de mockups. Ze staan op
-   één plek, zodat het label en de kist niet uit elkaar kunnen lopen.
+   De maten staan in de pagina, op de knoppen zelf:
+
+     <button data-maat data-naam="Trunccase" data-mm="800x600x600"
+             data-href="casetype-trunccase-v1.html">Trunccase</button>
+
+   Zo hoeft dit script niet te weten welke pagina hem gebruikt, en kunnen
+   het label, de knop en de kist niet uit elkaar lopen — er is één bron.
+   Staat er een data-href bij, dan loopt een knop met data-kistlink mee
+   naar dat adres: dan is de kist geen plaatje maar een keuze.
    ══════════════════════════════════════════════════════════════ */
 (function () {
   var kist = document.querySelector('[data-draaikist]');
@@ -27,20 +34,28 @@
   var label = kist.querySelector('.kmaat');
   if (!vlak) return;
 
-  /* breedte × hoogte × diepte in mm, met de naam die erbij hoort */
-  var MATEN = [
-    { naam: 'Trunccase',      b: 800,  h: 600, d: 600 },
-    { naam: 'Rackcase 6 HE',  b: 600,  h: 400, d: 500 },
-    { naam: 'Hoedcase',       b: 1060, h: 150, d: 410 },
-    { naam: 'Koffer',         b: 700,  h: 250, d: 450 }
-  ];
-  var SCHAAL = 0.3;          /* mm → px, zodat de grootste kist past */
-  var WISSEL = 4200;         /* hoe lang een maat blijft staan */
+  var knoppen = Array.prototype.slice.call(kist.parentNode.querySelectorAll('[data-maat]'));
+  var koppeling = kist.parentNode.parentNode.querySelector('[data-kistlink]');
 
-  var knoppen = [];
+  /* breedte × hoogte × diepte in mm, uit de knoppen zelf */
+  var MATEN = knoppen.map(function (k) {
+    var mm = (k.dataset.mm || '').split(/[x×]/).map(Number);
+    return { naam: k.dataset.naam || k.textContent.trim(), b: mm[0], h: mm[1], d: mm[2], href: k.dataset.href };
+  }).filter(function (m) { return m.b && m.h && m.d; });
+  if (!MATEN.length) return;
+
+  /* De grootste kist bepaalt de schaal, zodat geen enkele maat buiten
+     het kader valt en ze onderling vergelijkbaar blijven. */
+  var GROOTSTE = Math.max.apply(null, MATEN.map(function (m) { return Math.max(m.b, m.h, m.d); }));
+  var SCHAAL = 240 / GROOTSTE;
+  var WISSEL = 4200;         /* hoe lang een maat blijft staan */
 
   function toon(m, n) {
     knoppen.forEach(function (k, j) { k.classList.toggle('aan', j === n); });
+    if (koppeling && m.href) {
+      koppeling.setAttribute('href', m.href);
+      koppeling.textContent = 'Bekijk de ' + m.naam.toLowerCase() + ' \u2192';
+    }
     vlak.style.setProperty('--b', (m.b * SCHAAL).toFixed(1) + 'px');
     vlak.style.setProperty('--h', (m.h * SCHAAL).toFixed(1) + 'px');
     vlak.style.setProperty('--d', (m.d * SCHAAL).toFixed(1) + 'px');
@@ -51,7 +66,6 @@
   }
 
   var i = 0;
-  knoppen = Array.prototype.slice.call(kist.parentNode.querySelectorAll('[data-maat]'));
   toon(MATEN[0], 0);
 
   var stil = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
