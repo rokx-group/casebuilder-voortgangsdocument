@@ -237,7 +237,9 @@
   background-size:28px 28px;opacity:.05}.dv .ruit-dark::before{background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);opacity:.07}.dv .ruit-veld::before{-webkit-mask-image:radial-gradient(ellipse 70% 75% at 50% 45%,#000 20%,transparent 78%);mask-image:radial-gradient(ellipse 70% 75% at 50% 45%,#000 20%,transparent 78%)}.dv .ruit-aanzet::before{-webkit-mask-image:linear-gradient(135deg,#000 0%,transparent 55%);mask-image:linear-gradient(135deg,#000 0%,transparent 55%)}.dv .beslag{position:relative}.dv .beslag>.hk{position:absolute;width:26px;height:26px;border:1.5px solid var(--cyan);z-index:2;pointer-events:none}.dv .beslag>.hk.tl{top:30px;left:30px;border-right:0;border-bottom:0}.dv .beslag>.hk.tr{top:30px;right:30px;border-left:0;border-bottom:0}.dv .beslag>.hk.bl{bottom:30px;left:30px;border-right:0;border-top:0}.dv .beslag>.hk.br{bottom:30px;right:30px;border-left:0;border-top:0}.dv .serie{position:absolute;left:32px;bottom:26px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:rgba(255,255,255,.35);z-index:2}.dv .topbar{position:absolute;top:26px;left:32px;right:32px;display:flex;justify-content:space-between;
   font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:rgba(255,255,255,.4);z-index:2;text-transform:uppercase}.dv .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--disp);text-transform:uppercase;letter-spacing:.05em;
   font-weight:700;font-size:16px;padding:15px 26px;border:1.5px solid transparent;cursor:pointer;transition:.15s}.dv .btn-pri{background:var(--cyan);color:var(--void)}.dv .btn-pri:hover{background:#8ad3ef}.dv .btn-ghost{border-color:rgba(255,255,255,.35);color:#fff}.dv .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}.dv .btn-dark{background:var(--dark);color:#fff}.dv .btn-dark:hover{background:var(--blue)}.dv .btn-out{border-color:var(--dark);color:var(--dark);background:transparent}.dv .btn-out:hover{background:var(--dark);color:#fff}.dv .btn-sm{font-size:14px;padding:11px 18px}.dv{--kop:46px}.dv header.main{border-bottom:1px solid var(--rule);background:#fff;position:relative;z-index:41}.dv nav.primary{position:sticky;top:0;z-index:40}.dv nav.primary .navzoek{position:relative;display:flex;align-items:center;flex:none;
-  opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity .16s ease,transform .16s ease}.dv nav.primary.zoekbij .navzoek{opacity:1;visibility:visible;transform:none}.dv .navzoek .knop{width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+  width:0;overflow:visible;opacity:0;visibility:hidden;
+  transition:width .18s cubic-bezier(.2,.7,.2,1),opacity .16s ease,margin .18s,visibility 0s .18s}.dv nav.primary.zoekbij .navzoek{width:34px;margin-left:4px;opacity:1;visibility:visible;
+  transition:width .18s cubic-bezier(.2,.7,.2,1),opacity .16s ease,margin .18s,visibility 0s}.dv .navzoek .knop{width:34px;height:34px;display:flex;align-items:center;justify-content:center;
   border:1px solid var(--rule);background:#fff;color:var(--mute);cursor:pointer;padding:0;
   transition:border-color .12s,color .12s,background .12s}.dv .navzoek .knop:hover{border-color:var(--dark);color:var(--dark);background:var(--bg)}.dv .navzoek .veld svg{flex:none;color:var(--mute)}.dv .navzoek .veld{position:absolute;right:0;top:50%;transform:translateY(-50%);
   display:flex;align-items:center;gap:9px;height:34px;background:#fff;
@@ -267,11 +269,7 @@
   letter-spacing:.03em;color:var(--dark);display:block;line-height:1.1}.dv .megamenu .zelf p{font-size:14px;color:var(--mute);margin:9px 0 16px}.dv nav.primary .megamenu .zelf .btn-dark{color:#fff;height:auto}.dv .megamenu .zelf .btn{padding:12px 20px;font-size:14px}@media(prefers-reduced-motion:reduce){.dv .megamenu{transition:none}}@container (max-width:760px){.dv .megamenu{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;display:none}}.dv[data-page="categorie-v1"] .cathead{background:var(--bg);border-bottom:1px solid var(--rule)}.dv[data-page="categorie-v1"] .cathead h1{font-size:clamp(34px,4.2vw,52px)}.dv[data-page="categorie-v1"] .cathead .lead{margin-top:14px}.dv[data-page="categorie-v1"] .catlay{display:grid;grid-template-columns:236px minmax(0,1fr);gap:44px;padding:38px 0 80px}.dv[data-page="categorie-v1"] .filters{position:sticky;top:96px;align-self:start;display:flex;flex-direction:column;gap:26px}.dv[data-page="categorie-v1"] .fset h4{font-size:15px;letter-spacing:.06em;padding-bottom:9px;border-bottom:1px solid var(--rule);margin-bottom:11px}.dv[data-page="categorie-v1"] .fset label{display:flex;align-items:center;gap:10px;padding:5px 0;font-size:14px;color:var(--mute);cursor:pointer}.dv[data-page="categorie-v1"] .fset label:hover{color:var(--ink)}.dv[data-page="categorie-v1"] .bx{width:14px;height:14px;border:1.5px solid var(--rule);flex:none;background:#fff}.dv[data-page="categorie-v1"] .bx.on{background:var(--cyan);border-color:var(--cyan)}.dv[data-page="categorie-v1"] .fset .num{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--rule)}.dv[data-page="categorie-v1"] .toolbar{display:flex;align-items:center;gap:18px;flex-wrap:wrap;border-bottom:1px solid var(--rule);padding-bottom:14px;margin-bottom:24px}.dv[data-page="categorie-v1"] .toolbar .cnt{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}.dv[data-page="categorie-v1"] .toolbar .cnt b{color:var(--dark)}.dv[data-page="categorie-v1"] .toolbar .sort{margin-left:auto}.dv[data-page="categorie-v1"] .parts{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.dv[data-page="categorie-v1"] .pager{display:flex;gap:8px;justify-content:center;margin-top:38px}.dv[data-page="categorie-v1"] .pager a{border:1px solid var(--rule);padding:9px 15px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--mute)}.dv[data-page="categorie-v1"] .pager a.on{background:var(--dark);border-color:var(--dark);color:#fff}.dv[data-page="categorie-v1"] .crosslink{border:1px solid var(--rule);padding:26px 30px;margin-top:44px;display:flex;gap:26px;align-items:center;flex-wrap:wrap}.dv[data-page="categorie-v1"] .crosslink h3{font-size:22px}.dv[data-page="categorie-v1"] .crosslink p{font-size:14px;color:var(--mute);max-width:52ch;margin-top:6px}.dv[data-page="categorie-v1"] .crosslink .btn{margin-left:auto}@container (max-width:1080px){.dv[data-page="categorie-v1"] .catlay{grid-template-columns:1fr;gap:26px}.dv[data-page="categorie-v1"] .filters{position:static}.dv[data-page="categorie-v1"] .parts{grid-template-columns:repeat(2,1fr)}}@container (max-width:600px){.dv[data-page="categorie-v1"] .parts{grid-template-columns:1fr}}.dv[data-page="home-v1"] .hero{background:var(--void);color:#fff;position:relative;overflow:hidden}.dv[data-page="home-v1"] .hero .wrap{padding-top:96px;padding-bottom:78px;position:relative;z-index:1}.dv[data-page="home-v1"] .hero h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:.02em;
   font-size:clamp(46px,6.2vw,86px);line-height:.92;color:#fff;max-width:15ch;margin:18px 0 0}.dv[data-page="home-v1"] .hero h1 .acc{color:var(--cyan)}.dv[data-page="home-v1"] .hero p.sub{margin-top:22px;max-width:56ch;font-size:18px;color:rgba(255,255,255,.78)}.dv[data-page="home-v1"] .hero .cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}.dv[data-page="home-v1"] .hero .specs{display:flex;margin-top:60px;border-top:1px solid rgba(255,255,255,.18);flex-wrap:wrap}.dv[data-page="home-v1"] .hero .specs div{flex:1;min-width:190px;padding:20px 24px 0 0}.dv[data-page="home-v1"] .hero .specs .k{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--cyan);text-transform:uppercase}.dv[data-page="home-v1"] .hero .specs .v{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:19px;letter-spacing:.03em;margin-top:6px;color:#fff}.dv[data-page="home-v1"] .hero{min-height:clamp(600px,86vh,800px);display:flex;flex-direction:column;justify-content:center}.dv[data-page="home-v1"] .hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-3}.dv[data-page="home-v1"] .hero .scrim{position:absolute;inset:0;z-index:-2;pointer-events:none;
   background:linear-gradient(90deg,rgba(6,18,28,.72) 0%,rgba(6,18,28,.36) 48%,rgba(6,18,28,.05) 100%)}.dv[data-page="home-v1"] .hero .scrim-v{position:absolute;inset:0;z-index:-2;pointer-events:none;
-  background:linear-gradient(180deg,rgba(6,18,28,.52) 0%,transparent 22%,transparent 58%,rgba(6,18,28,.62) 100%)}.dv[data-page="home-v1"] .hero h1{max-width:23ch;font-size:clamp(52px,6.4vw,88px)}.dv[data-page="home-v1"] .hero p.sub{max-width:44ch}@media(prefers-reduced-motion:reduce){.dv[data-page="home-v1"] .hero .bg{display:none}.dv[data-page="home-v1"] .hero{background:var(--void) url(mockups/assets/hero-v2-poster.jpg) center/cover}}.dv[data-page="home-v1"] .again{background:var(--lightblue);border-bottom:1px solid var(--rule)}.dv[data-page="home-v1"] .again .wrap{display:flex;align-items:center;gap:22px;flex-wrap:wrap;padding-top:16px;padding-bottom:16px}.dv[data-page="home-v1"] .again .who{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}.dv[data-page="home-v1"] .again b{font-family:var(--disp);text-transform:uppercase;font-size:19px;letter-spacing:.03em;color:var(--dark)}.dv[data-page="home-v1"] .again span.d{font-size:14px;color:var(--mute)}.dv[data-page="home-v1"] .again .btn{margin-left:auto}.dv[data-page="home-v1"] .ingangen{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}.dv[data-page="home-v1"] .ing{background:#fff;padding:36px 30px 32px;display:flex;flex-direction:column;min-height:310px;transition:.15s}.dv[data-page="home-v1"] .ing:hover{background:var(--lightblue)}.dv[data-page="home-v1"] .ing .n{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--cyan)}.dv[data-page="home-v1"] .ing h3{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:26px;letter-spacing:.03em;
-  color:var(--dark);margin:16px 0 12px;line-height:1.05}.dv[data-page="home-v1"] .ing p{font-size:15px;color:var(--mute);flex:1}.dv[data-page="home-v1"] .ing .go{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:15px;letter-spacing:.05em;
-  color:var(--blue);margin-top:20px;display:flex;align-items:center;gap:9px}.dv[data-page="home-v1"] .ing:hover .go{color:var(--dark)}.dv[data-page="home-v1"] .models .sec-head{display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap}.dv[data-page="home-v1"] .models .sec-head > div{margin-right:auto}.dv[data-page="home-v1"] .case .pr b{display:block}.dv[data-page="home-v1"] .compare{border-top:1px solid var(--rule);margin-top:24px;padding-top:20px;display:flex;
-  align-items:center;gap:20px;flex-wrap:wrap}.dv[data-page="home-v1"] .compare p{font-size:15px;color:var(--mute);max-width:52ch}.dv[data-page="home-v1"] .assure{background:var(--dark);color:#fff}.dv[data-page="home-v1"] .assure .grid{display:grid;grid-template-columns:1.15fr 1fr;gap:64px;align-items:center}.dv[data-page="home-v1"] .assure h2{font-size:clamp(30px,3.4vw,46px);color:#fff;margin:14px 0 18px}.dv[data-page="home-v1"] .assure p{color:rgba(255,255,255,.8);font-size:17px;max-width:52ch}.dv[data-page="home-v1"] .assure .steps{border-left:1px solid rgba(255,255,255,.2);padding-left:32px}.dv[data-page="home-v1"] .assure .st{display:flex;gap:18px;padding:15px 0}.dv[data-page="home-v1"] .assure .st+.st{border-top:1px solid rgba(255,255,255,.14)}.dv[data-page="home-v1"] .assure .st .i{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--cyan);padding-top:4px;white-space:nowrap}.dv[data-page="home-v1"] .assure .st b{font-family:var(--disp);text-transform:uppercase;font-size:17px;letter-spacing:.03em;font-weight:700;display:block}.dv[data-page="home-v1"] .assure .st span{font-size:14px;color:rgba(255,255,255,.68)}.dv[data-page="home-v1"] .trust{border-top:1px solid var(--rule);background:var(--bg)}.dv[data-page="home-v1"] .trust .row{display:flex;gap:48px;align-items:center;flex-wrap:wrap}.dv[data-page="home-v1"] .trust .it{display:flex;flex-direction:column;gap:4px}.dv[data-page="home-v1"] .trust .it b{font-family:var(--disp);text-transform:uppercase;font-size:22px;letter-spacing:.03em;color:var(--dark)}.dv[data-page="home-v1"] .trust .it span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}.dv[data-page="home-v1"] .build{border-top:1px solid var(--rule)}.dv[data-page="home-v1"] .build .grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}.dv[data-page="home-v1"] .build .cats{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.dv[data-page="home-v1"] .build .cats a{border:1px solid var(--rule);background:#fff;padding:9px 14px;font-family:var(--mono);
-  font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}.dv[data-page="home-v1"] .build .cats a:hover{border-color:var(--dark);color:var(--dark)}.dv[data-page="home-v1"] .build .side{border:1px solid var(--rule);padding:28px 30px}.dv[data-page="home-v1"] .build .side h4{font-size:20px;margin-bottom:8px}.dv[data-page="home-v1"] .build .side p{font-size:14.5px;color:var(--mute)}.dv[data-page="home-v1"] .build .side + .side{margin-top:14px}.dv[data-page="home-v1"] .closer{background:var(--void);color:#fff;text-align:center}.dv[data-page="home-v1"] .closer h2{font-size:clamp(30px,3.6vw,50px);color:#fff}.dv[data-page="home-v1"] .closer p{color:rgba(255,255,255,.75);margin:14px auto 30px;max-width:48ch;font-size:17px}@container (max-width:1080px){.dv[data-page="home-v1"] .ingangen{grid-template-columns:1fr}.dv[data-page="home-v1"] .assure .grid,.dv[data-page="home-v1"] .build .grid{grid-template-columns:1fr;gap:36px}}@container (max-width:760px){.dv[data-page="home-v1"] .hero .wrap{padding-top:56px;padding-bottom:52px}.dv[data-page="home-v1"] .hero .specs div{min-width:50%;padding-right:12px}.dv[data-page="home-v1"] .again .btn{margin-left:0}.dv[data-page="home-v1"] .assure .steps{padding-left:20px}}.dv[data-page="home-v1"] .vervoer{position:relative;display:flex;align-items:stretch}.dv[data-page="home-v1"] .vervoer-knop{font-family:var(--disp);text-transform:uppercase;letter-spacing:.05em;font-weight:700;
+  background:linear-gradient(180deg,rgba(6,18,28,.52) 0%,transparent 22%,transparent 58%,rgba(6,18,28,.62) 100%)}.dv[data-page="home-v1"] .hero h1{max-width:23ch;font-size:clamp(52px,6.4vw,88px)}.dv[data-page="home-v1"] .hero p.sub{max-width:44ch}@media(prefers-reduced-motion:reduce){.dv[data-page="home-v1"] .hero .bg{display:none}.dv[data-page="home-v1"] .hero{background:var(--void) url(mockups/assets/hero-v2-poster.jpg) center/cover}}@container (max-width:760px){.dv[data-page="home-v1"] .hero .wrap{padding-top:56px;padding-bottom:52px}.dv[data-page="home-v1"] .hero .specs div{min-width:50%;padding-right:12px}}.dv[data-page="home-v1"] .vervoer{position:relative;display:flex;align-items:stretch}.dv[data-page="home-v1"] .vervoer-knop{font-family:var(--disp);text-transform:uppercase;letter-spacing:.05em;font-weight:700;
   font-size:16px;padding:15px 26px;border:1.5px solid rgba(255,255,255,.35);background:transparent;
   color:#fff;cursor:pointer;transition:.15s;white-space:nowrap}.dv[data-page="home-v1"] .vervoer:hover .vervoer-knop,.dv[data-page="home-v1"] .vervoer.is-open .vervoer-knop{border-color:var(--cyan);color:var(--cyan)}.dv[data-page="home-v1"] .vervoer.is-open .vervoer-knop{border-right-color:transparent}.dv[data-page="home-v1"] .vervoer-veld{display:flex;align-items:stretch;width:0;overflow:hidden;
   transition:width .28s cubic-bezier(.2,.7,.2,1)}.dv[data-page="home-v1"] .vervoer.is-open .vervoer-veld{width:min(380px,44vw)}.dv[data-page="home-v1"] .vervoer-veld input{width:100%;min-width:0;border:1.5px solid var(--cyan);border-left:0;border-right:0;
@@ -402,11 +400,7 @@
   background:
     linear-gradient(180deg,rgba(6,18,28,.42) 0%,transparent 30%,transparent 46%,rgba(6,18,28,.78) 100%),
     linear-gradient(100deg,rgba(6,18,28,.66) 0%,rgba(6,18,28,.40) 44%,rgba(6,18,28,.08) 78%,rgba(6,18,28,.20) 100%)}.dv[data-page="home-v2"] .hero .wrap{padding-top:96px;padding-bottom:64px;position:relative;z-index:1;width:100%}.dv[data-page="home-v2"] .hero .film img{display:none}@media(prefers-reduced-motion:reduce){.dv[data-page="home-v2"] .hero .film video{display:none}.dv[data-page="home-v2"] .hero .film img{display:block}}@container (max-width:760px){.dv[data-page="home-v2"] .hero{min-height:auto}.dv[data-page="home-v2"] .hero .film::after{background:linear-gradient(180deg,rgba(6,18,28,.72),rgba(6,18,28,.94))}}.dv[data-page="home-v2"] .hero h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:.02em;
-  font-size:clamp(52px,6.4vw,88px);line-height:.92;color:#fff;max-width:23ch;margin:18px 0 0}.dv[data-page="home-v2"] .hero h1 .acc{color:var(--cyan)}.dv[data-page="home-v2"] .hero p.sub{margin-top:22px;max-width:56ch;font-size:18px;color:rgba(255,255,255,.78)}.dv[data-page="home-v2"] .hero .cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}.dv[data-page="home-v2"] .hero .specs{display:flex;margin-top:60px;border-top:1px solid rgba(255,255,255,.18);flex-wrap:wrap}.dv[data-page="home-v2"] .hero .specs div{flex:1;min-width:190px;padding:20px 24px 0 0}.dv[data-page="home-v2"] .hero .specs .k{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--cyan);text-transform:uppercase}.dv[data-page="home-v2"] .hero .specs .v{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:19px;letter-spacing:.03em;margin-top:6px;color:#fff}.dv[data-page="home-v2"] .again{background:var(--lightblue);border-bottom:1px solid var(--rule)}.dv[data-page="home-v2"] .again .wrap{display:flex;align-items:center;gap:22px;flex-wrap:wrap;padding-top:16px;padding-bottom:16px}.dv[data-page="home-v2"] .again .who{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}.dv[data-page="home-v2"] .again b{font-family:var(--disp);text-transform:uppercase;font-size:19px;letter-spacing:.03em;color:var(--dark)}.dv[data-page="home-v2"] .again span.d{font-size:14px;color:var(--mute)}.dv[data-page="home-v2"] .again .btn{margin-left:auto}.dv[data-page="home-v2"] .ingangen{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}.dv[data-page="home-v2"] .ing{background:#fff;padding:36px 30px 32px;display:flex;flex-direction:column;min-height:310px;transition:.15s}.dv[data-page="home-v2"] .ing:hover{background:var(--lightblue)}.dv[data-page="home-v2"] .ing .n{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--cyan)}.dv[data-page="home-v2"] .ing h3{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:26px;letter-spacing:.03em;
-  color:var(--dark);margin:16px 0 12px;line-height:1.05}.dv[data-page="home-v2"] .ing p{font-size:15px;color:var(--mute);flex:1}.dv[data-page="home-v2"] .ing .go{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:15px;letter-spacing:.05em;
-  color:var(--blue);margin-top:20px;display:flex;align-items:center;gap:9px}.dv[data-page="home-v2"] .ing:hover .go{color:var(--dark)}.dv[data-page="home-v2"] .models .sec-head{display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap}.dv[data-page="home-v2"] .models .sec-head > div{margin-right:auto}.dv[data-page="home-v2"] .case .pr b{display:block}.dv[data-page="home-v2"] .compare{border-top:1px solid var(--rule);margin-top:24px;padding-top:20px;display:flex;
-  align-items:center;gap:20px;flex-wrap:wrap}.dv[data-page="home-v2"] .compare p{font-size:15px;color:var(--mute);max-width:52ch}.dv[data-page="home-v2"] .assure{background:var(--dark);color:#fff}.dv[data-page="home-v2"] .assure .grid{display:grid;grid-template-columns:1.15fr 1fr;gap:64px;align-items:center}.dv[data-page="home-v2"] .assure h2{font-size:clamp(30px,3.4vw,46px);color:#fff;margin:14px 0 18px}.dv[data-page="home-v2"] .assure p{color:rgba(255,255,255,.8);font-size:17px;max-width:52ch}.dv[data-page="home-v2"] .assure .steps{border-left:1px solid rgba(255,255,255,.2);padding-left:32px}.dv[data-page="home-v2"] .assure .st{display:flex;gap:18px;padding:15px 0}.dv[data-page="home-v2"] .assure .st+.st{border-top:1px solid rgba(255,255,255,.14)}.dv[data-page="home-v2"] .assure .st .i{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--cyan);padding-top:4px;white-space:nowrap}.dv[data-page="home-v2"] .assure .st b{font-family:var(--disp);text-transform:uppercase;font-size:17px;letter-spacing:.03em;font-weight:700;display:block}.dv[data-page="home-v2"] .assure .st span{font-size:14px;color:rgba(255,255,255,.68)}.dv[data-page="home-v2"] .trust{border-top:1px solid var(--rule);background:var(--bg)}.dv[data-page="home-v2"] .trust .row{display:flex;gap:48px;align-items:center;flex-wrap:wrap}.dv[data-page="home-v2"] .trust .it{display:flex;flex-direction:column;gap:4px}.dv[data-page="home-v2"] .trust .it b{font-family:var(--disp);text-transform:uppercase;font-size:22px;letter-spacing:.03em;color:var(--dark)}.dv[data-page="home-v2"] .trust .it span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}.dv[data-page="home-v2"] .build{border-top:1px solid var(--rule)}.dv[data-page="home-v2"] .build .grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}.dv[data-page="home-v2"] .build .cats{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.dv[data-page="home-v2"] .build .cats a{border:1px solid var(--rule);background:#fff;padding:9px 14px;font-family:var(--mono);
-  font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}.dv[data-page="home-v2"] .build .cats a:hover{border-color:var(--dark);color:var(--dark)}.dv[data-page="home-v2"] .build .side{border:1px solid var(--rule);padding:28px 30px}.dv[data-page="home-v2"] .build .side h4{font-size:20px;margin-bottom:8px}.dv[data-page="home-v2"] .build .side p{font-size:14.5px;color:var(--mute)}.dv[data-page="home-v2"] .build .side + .side{margin-top:14px}.dv[data-page="home-v2"] .closer{background:var(--void);color:#fff;text-align:center}.dv[data-page="home-v2"] .closer h2{font-size:clamp(30px,3.6vw,50px);color:#fff}.dv[data-page="home-v2"] .closer p{color:rgba(255,255,255,.75);margin:14px auto 30px;max-width:48ch;font-size:17px}@container (max-width:1080px){.dv[data-page="home-v2"] .ingangen{grid-template-columns:1fr}.dv[data-page="home-v2"] .assure .grid,.dv[data-page="home-v2"] .build .grid{grid-template-columns:1fr;gap:36px}}@container (max-width:760px){.dv[data-page="home-v2"] .hero .wrap{padding-top:56px;padding-bottom:52px}.dv[data-page="home-v2"] .hero .specs div{min-width:50%;padding-right:12px}.dv[data-page="home-v2"] .again .btn{margin-left:0}.dv[data-page="home-v2"] .assure .steps{padding-left:20px}}.dv[data-page="home-v2"] .vervoer{position:relative;display:flex;align-items:stretch}.dv[data-page="home-v2"] .vervoer-knop{font-family:var(--disp);text-transform:uppercase;letter-spacing:.05em;font-weight:700;
+  font-size:clamp(52px,6.4vw,88px);line-height:.92;color:#fff;max-width:23ch;margin:18px 0 0}.dv[data-page="home-v2"] .hero h1 .acc{color:var(--cyan)}.dv[data-page="home-v2"] .hero p.sub{margin-top:22px;max-width:56ch;font-size:18px;color:rgba(255,255,255,.78)}.dv[data-page="home-v2"] .hero .cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}.dv[data-page="home-v2"] .hero .specs{display:flex;margin-top:60px;border-top:1px solid rgba(255,255,255,.18);flex-wrap:wrap}.dv[data-page="home-v2"] .hero .specs div{flex:1;min-width:190px;padding:20px 24px 0 0}.dv[data-page="home-v2"] .hero .specs .k{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--cyan);text-transform:uppercase}.dv[data-page="home-v2"] .hero .specs .v{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:19px;letter-spacing:.03em;margin-top:6px;color:#fff}@container (max-width:760px){.dv[data-page="home-v2"] .hero .wrap{padding-top:56px;padding-bottom:52px}.dv[data-page="home-v2"] .hero .specs div{min-width:50%;padding-right:12px}}.dv[data-page="home-v2"] .vervoer{position:relative;display:flex;align-items:stretch}.dv[data-page="home-v2"] .vervoer-knop{font-family:var(--disp);text-transform:uppercase;letter-spacing:.05em;font-weight:700;
   font-size:16px;padding:15px 26px;border:1.5px solid rgba(255,255,255,.35);background:transparent;
   color:#fff;cursor:pointer;transition:.15s;white-space:nowrap}.dv[data-page="home-v2"] .vervoer:hover .vervoer-knop,.dv[data-page="home-v2"] .vervoer.is-open .vervoer-knop{border-color:var(--cyan);color:var(--cyan)}.dv[data-page="home-v2"] .vervoer.is-open .vervoer-knop{border-right-color:transparent}.dv[data-page="home-v2"] .vervoer-veld{display:flex;align-items:stretch;width:0;overflow:hidden;
   transition:width .28s cubic-bezier(.2,.7,.2,1)}.dv[data-page="home-v2"] .vervoer.is-open .vervoer-veld{width:min(380px,44vw)}.dv[data-page="home-v2"] .vervoer-veld input{width:100%;min-width:0;border:1.5px solid var(--cyan);border-left:0;border-right:0;
@@ -997,6 +991,7 @@
   .chip-gone { background:var(--surface-2); color:var(--faint); border:1px dashed var(--line); }
   .chip-keep { background:var(--keep-bg); color:var(--keep); }
   .chip-open { background:var(--open-bg); color:var(--open); }
+  .chip-new { background:var(--keep-bg); color:var(--keep); }
 
   .legend { display:flex; flex-wrap:wrap; gap:16px; align-items:center; padding:0 2px; }
   .legend span.item { display:flex; align-items:center; gap:6px; font-size:12.5px; color:var(--muted); }
@@ -1831,7 +1826,7 @@
           <ul class="tree">
             <li><div class="node"><span class="path root">/</span><span class="note">homepage · drie ingangen op intentie</span></div></li>
             <li>
-              <div class="node"><span class="path root">/flightcases</span><span class="note">overzicht · 5 modellen</span></div>
+              <div class="node"><span class="path root">/flightcases</span><span class="note">overzicht · 10 modellen — vijf bestaan, vijf komen erbij</span></div>
               <ul>
                 <li><div class="node"><span class="path">/koffer</span></div></li>
                 <li><div class="node"><span class="path">/hoedcase</span></div></li>
@@ -1856,6 +1851,30 @@
                 <li><div class="node"><span class="path">/moving-head</span><span class="note">productdetail</span></div></li>
                 <li><div class="node"><span class="path">/…</span><span class="note">productdetail · groeit met het assortiment</span></div></li>
               </ul>
+            </li>
+            <li>
+              <div class="node"><span class="path root">/branches</span><span class="chip chip-new">nieuw</span><span class="note">wie je bent, niet wat je vervoert · zes markten</span></div>
+              <ul>
+                <li><div class="node"><span class="path">/industrie-en-machinebouw</span></div></li>
+                <li><div class="node"><span class="path">/audio-visueel</span></div></li>
+                <li><div class="node"><span class="path">/defensie</span></div></li>
+                <li><div class="node"><span class="path">/broadcast-en-media</span></div></li>
+                <li><div class="node"><span class="path">/meet-en-testapparatuur</span></div></li>
+                <li><div class="node"><span class="path">/schaalmodellen</span></div></li>
+              </ul>
+            </li>
+            <li>
+              <div class="node"><span class="path root">/grote-spelers</span><span class="chip chip-new">nieuw</span><span class="note">manieren van inkopen · leunt op referenties</span></div>
+              <ul>
+                <li><div class="node"><span class="path">/defensie-en-overheid</span></div></li>
+                <li><div class="node"><span class="path">/oem-en-series</span></div></li>
+                <li><div class="node"><span class="path">/verhuur-en-touring</span></div></li>
+                <li><div class="node"><span class="path">/omroep-en-studio</span></div></li>
+                <li><div class="node"><span class="path">/netbeheer-en-energie</span></div></li>
+              </ul>
+            </li>
+            <li>
+              <div class="node"><span class="path root">/case-aanvragen</span><span class="chip chip-new">nieuw</span><span class="note">stuur een schets, datasheet of foto · zeventig procent van de orders</span></div>
             </li>
             <li>
               <div class="node"><span class="path root">/laten-controleren</span><span class="note">specialist kijkt mee</span></div>
@@ -1995,8 +2014,10 @@
           <tr><td class="mono"><a href="#wf-categorie">categorie</a></td><td class="num">49</td><td>/onderdelen + 10 categorieën + 38 subcategorieën</td></tr>
           <tr><td class="mono"><a href="#wf-content">content</a></td><td class="num">7</td><td>Levertijden, verzending, zaagservice, zakelijk bestellen, over ons, voorwaarden, privacy</td></tr>
           <tr><td class="mono"><a href="#wf-account">account</a></td><td class="num">6</td><td>Overzicht, orders, herbestellen, configuraties, offertes, gegevens</td></tr>
-          <tr><td class="mono"><a href="#wf-casetype">casetype</a></td><td class="num">10</td><td>De vijf modellen</td></tr>
+          <tr><td class="mono"><a href="#wf-casetype">casetype</a></td><td class="num">10</td><td>De modellen &mdash; vijf bestaan, vijf komen erbij</td></tr>
           <tr><td class="mono"><a href="#wf-formulier">formulier</a></td><td class="num">3</td><td>Laten controleren, offerte, contact</td></tr>
+          <tr><td class="mono">branche</td><td class="num">7</td><td>/branches plus zes markten</td></tr>
+          <tr><td class="mono">speler</td><td class="num">6</td><td>/grote-spelers plus vijf manieren van inkopen</td></tr>
           <tr><td class="mono"><a href="#wf-homepage">homepage</a></td><td class="num">1</td><td>De belangrijkste pagina van de site &mdash; eigen sjabloon</td></tr>
           <tr><td class="mono"><a href="#wf-servicehub">servicehub</a></td><td class="num">1</td><td>/service met vier onderliggende pagina’s</td></tr>
           <tr><td class="mono"><a href="#wf-tool">tool</a></td><td class="num">2</td><td>Configurator en fit-finder</td></tr>
@@ -3415,90 +3436,259 @@
   </div>
 </div>
 
-<div class="again" data-band="herhaalorder">
-  <div class="wrap">
-    <div>
-      <div class="who">// WELKOM TERUG, PROFLITE AV</div>
-      <b>Rackcase enkel deksel · 12 maart</b>
-      <span class="d">483 × 600 × 1.334 mm · zwart · 40 stuks balhoek medium</span>
-    </div>
-    <a class="btn btn-out btn-sm" href="#">Opnieuw bestellen →</a>
-  </div>
-</div>
-
+<!-- ══ gedeelde homepage-inhoud · begin — zie mockups/onderdelen/homepage-onder.html ══ -->
+<!-- ── 01 · DRIE MANIEREN — v1 ────────────────────────────────── -->
 <section data-band="routes">
   <div class="wrap">
     <div class="sec-head">
-      <div class="ey ey-dark">// 01 — WAAR BEGIN JE?</div>
+      <div class="ey ey-dark">// 01 &mdash; WAAR BEGIN JE?</div>
       <h2>Drie manieren om bij de juiste case te komen</h2>
       <p class="lead">Je hoeft niet te weten hoe een flightcase heet om er een te bestellen.</p>
     </div>
     <div class="ingangen">
-      <div class="ing">
+      <a class="ing" href="mockups/configurator-v1.html">
         <div class="n">// A</div>
         <h3>Ik weet wat ik nodig heb</h3>
         <p>Model en maten zijn bekend. Direct de configurator in, prijs meteen in beeld, klaar in vijf stappen.</p>
-        <div class="go">Naar de configurator →</div>
-      </div>
-      <div class="ing">
+        <div class="go">Naar de configurator &rarr;</div>
+      </a>
+      <a class="ing" href="mockups/case-voor-v1.html">
         <div class="n">// B</div>
         <h3>Ik weet wat ik moet beschermen</h3>
         <p>Een Les Paul, een 19-inch rack van 6 HE, een moving head. Zeg wat erin gaat, wij bepalen de maten.</p>
-        <div class="go">Wat ga je vervoeren? →</div>
-      </div>
-      <div class="ing">
+        <div class="go">Wat ga je vervoeren? &rarr;</div>
+      </a>
+      <a class="ing" href="mockups/flightcases-v1.html">
         <div class="n">// C</div>
         <h3>Ik weet het nog niet</h3>
-        <p>Koffer, hoedcase, trunccase of rackcase — wat is het verschil, en wat past bij jouw transport?</p>
-        <div class="go">Vergelijk de vijf modellen →</div>
-      </div>
+        <p>Koffer, hoedcase, trunccase of rackcase &mdash; wat is het verschil, en wat past bij jouw transport?</p>
+        <div class="go">Vergelijk de vijf modellen &rarr;</div>
+      </a>
     </div>
   </div>
 </section>
 
+<!-- ── 02 · WIE ER MEE OP TOUR IS — v4 ────────────────────────── -->
+<section class="klanten tight" data-band="klanten">
+  <div class="wrap">
+    <div class="ey ey-dark">// 02 &mdash; WIE ER MEE OP TOUR IS</div>
+    <div class="row">
+      <div class="lg">logo ontbreekt</div>
+      <div class="lg">logo ontbreekt</div>
+      <div class="lg">logo ontbreekt</div>
+      <div class="lg">logo ontbreekt</div>
+      <div class="lg">logo ontbreekt</div>
+      <div class="lg">logo ontbreekt</div>
+    </div>
+    <div class="cit">
+      <p>&ldquo;Wij bestellen per seizoen zeventig kisten. Dat het bedrag er meteen staat, scheelt ons een week heen-en-weer per bestelling.&rdquo;</p>
+      <span>// citaat nog op te halen &middot; plaatsvervangende tekst</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── 03 · BRANCHES ─────────────────────────────────────────
+     Tussen het bewijs en het proces: je hebt net namen gezien, en de
+     vraag die daarop volgt is "zit mijn markt daar ook bij". -->
+<section class="branches tight" data-band="branches">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="ey ey-dark">// 03 &mdash; ZES MARKTEN</div>
+        <h2>Waar onze cases terechtkomen</h2>
+      </div>
+      <a class="btn btn-out btn-sm" href="mockups/branches.html">Alle branches &rarr;</a>
+    </div>
+    <div class="rail">
+      <a class="br" href="mockups/branche-industrie-en-machinebouw-v1.html">
+        <div class="im"><img src="mockups/assets/foto-industrie-en-machinebouw.jpg" alt=""><span class="tel">14 toepassingen</span></div>
+        <div class="bd"><h3>Industrie en machinebouw</h3>
+          <p>Machineonderdelen, prototypes en behuizing voor mobiele opstellingen. Seriematig, met een tekening vooraf.</p>
+          <span class="go">Bekijk branche &rarr;</span></div>
+      </a>
+      <a class="br" href="mockups/branche-audio-visueel-v1.html">
+        <div class="im"><img src="mockups/assets/foto-audio-visueel.jpg" alt=""><span class="tel">22 toepassingen</span></div>
+        <div class="bd"><h3>Audio-visueel</h3>
+          <p>De markt waar we mee begonnen zijn. Cases die tien keer per jaar de vrachtwagen in en uit gaan, vijf jaar lang.</p>
+          <span class="go">Bekijk branche &rarr;</span></div>
+      </a>
+      <a class="br" href="mockups/branche-defensie-v1.html">
+        <div class="im"><img src="mockups/assets/foto-defensie.jpg" alt=""><span class="tel">7 toepassingen</span></div>
+        <div class="bd"><h3>Defensie</h3>
+          <p>Transport dat aan specificatie moet voldoen en dat aantoonbaar moet zijn. Materiaal, documentatie en keuring liggen vooraf vast.</p>
+          <span class="go">Bekijk branche &rarr;</span></div>
+      </a>
+      <a class="br" href="mockups/branche-meet-en-testapparatuur-v1.html">
+        <div class="im"><img src="mockups/assets/foto-meet-en-testapparatuur.jpg" alt=""><span class="tel">11 toepassingen</span></div>
+        <div class="bd"><h3>Meet- en testapparatuur</h3>
+          <p>Meetinstrumenten die het veld in gaan. Het schuiminterieur is hier het product &mdash; gefreesd op het instrument, niet op de kist.</p>
+          <span class="go">Bekijk branche &rarr;</span></div>
+      </a>
+      <a class="br" href="mockups/branche-broadcast-en-media-v1.html">
+        <div class="im"><img src="mockups/assets/foto-broadcast-en-media.jpg" alt=""><span class="tel">9 toepassingen</span></div>
+        <div class="bd"><h3>Broadcast en media</h3>
+          <p>Camera's, optiek en regieapparatuur die dagelijks op locatie staan. Snel open, snel dicht, en altijd compleet.</p>
+          <span class="go">Bekijk branche &rarr;</span></div>
+      </a>
+      <a class="br" href="mockups/branche-schaalmodellen-v1.html">
+        <div class="im"><img src="mockups/assets/foto-schaalmodellen.jpg" alt=""><span class="tel">5 toepassingen</span></div>
+        <div class="bd"><h3>Schaalmodellen en maquettes</h3>
+          <p>Eenmalig, onvervangbaar en zelden rechthoekig &mdash; altijd volledig maatwerk.</p>
+          <span class="go">Bekijk branche &rarr;</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── 04 · VAN MAAT NAAR KADE — v1 ───────────────────────────── -->
 <section class="assure" data-band="proces">
   <div class="wrap">
     <div class="grid">
       <div>
-        <div class="ey">// 02 — HOE HET WERKT</div>
+        <div class="ey">// 04 &mdash; HOE HET WERKT</div>
         <h2>Van maat naar kade in vier stappen</h2>
-        <p>Je wacht niet op een prijs en niet op een terugbelverzoek. En vóór je bestelt kijkt er
-          altijd nog een casebouwer mee — gratis, want een case die niet past kost ons allebei tijd.</p>
-        <a class="btn btn-pri" href="#" style="margin-top:26px">Laat je maten controleren →</a>
+        <p>Je wacht niet op een prijs en niet op een terugbelverzoek. En v&oacute;&oacute;r je bestelt kijkt er
+          altijd nog een casebouwer mee &mdash; gratis, want een case die niet past kost ons allebei tijd.</p>
+        <a class="btn btn-pri" href="mockups/laten-controleren-v1.html" style="margin-top:26px">Laat je maten controleren &rarr;</a>
       </div>
       <div class="steps">
         <div class="st"><div class="i">// 01</div><div><b>Kies of laat kiezen</b><span>Model zelf kiezen, of zeg wat je vervoert.</span></div></div>
         <div class="st"><div class="i">// 02</div><div><b>Configureer online</b><span>Maten, kleur, beslag, wielen. Prijs verandert live mee.</span></div></div>
-        <div class="st"><div class="i">// 03</div><div><b>Laat het controleren</b><span>Een casebouwer kijkt je configuratie na. Binnen één werkdag.</span></div></div>
+        <div class="st"><div class="i">// 03</div><div><b>Laat het controleren</b><span>Een casebouwer kijkt je configuratie na. Binnen &eacute;&eacute;n werkdag.</span></div></div>
         <div class="st"><div class="i">// 04</div><div><b>Zo snel als tien werkdagen later</b><span>Kant-en-klaar of als bouwpakket, met alle onderdelen op maat.</span></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="trust tight" data-band="vertrouwen">
+<!-- ── 06 · EN DE PRIJS DAN — v6 ──────────────────────────────── -->
+<section class="uitnodiging" data-band="prijsopbouw">
   <div class="wrap">
-    <div class="row">
-      <div class="it"><b>Sinds 1987</b><span>Eigen productie in Doesburg</span></div>
-      <div class="it"><b>De snelste van Nederland</b><span>Ook bij maatwerk</span></div>
-      <div class="it"><b>Op rekening</b><span>Voor zakelijke klanten</span></div>
-      <div class="it"><b>Eigen werkplaats</b><span>Geen tussenhandel</span></div>
+    <div class="grid">
+      <div>
+        <div class="ey ey-dark">// 05 &mdash; EN DE PRIJS DAN</div>
+        <h2>Geen offerte, geen wachttijd</h2>
+        <p>Wat je in de configurator ziet, is de prijs. Geen aanvraagformulier, geen terugbelverzoek, geen drie werkdagen stilte.</p>
+        <a class="btn btn-dark" href="mockups/configurator-v1.html" style="margin-top:26px">Start met configureren &rarr;</a>
+      </div>
+      <div class="kaart">
+        <div class="ey ey-dark" style="margin-bottom:16px">// VOORBEELD &middot; RACKCASE ENKEL, 19" 24 HE</div>
+        <div class="rij"><span>Basis rackcase enkel deksel</span><b>&euro; 229</b></div>
+        <div class="rij"><span>Maatwerk 483 &times; 600 &times; 1.334 mm</span><b>&euro; 118</b></div>
+        <div class="rij"><span>Zwart paneel, logo op deksel</span><b>&euro; 45</b></div>
+        <div class="rij"><span>Wielenset 100 mm met rem</span><b>&euro; 20,50</b></div>
+        <div class="tot">
+          <span class="k">// Als bouwpakket</span>
+          <b>&euro; 412,50</b>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="build" data-band="onderdelen">
+<!-- ── 07 · OOK ÉÉN CASE — v6 ─────────────────────────────────── -->
+<section class="eencase tight" data-band="eencase">
   <div class="wrap">
     <div class="grid">
       <div>
-        <div class="ey ey-dark">// 03 — ZELF BOUWEN</div>
+        <div class="ey ey-dark">// 06 &mdash; OOK VOOR &Eacute;&Eacute;N INSTRUMENT</div>
+        <h2>&Eacute;&eacute;n case? Ook goed.</h2>
+        <p>Wij bouwen voor verhuurbedrijven met zeventig kisten per seizoen, en voor de gitarist met &eacute;&eacute;n Les Paul. Dezelfde fabriek, dezelfde tolerantie.</p>
+      </div>
+      <div class="obj">
+        <a href="mockups/case-voor-gibson-les-paul-v2.html"><b>Gibson Les Paul</b><span>vanaf &euro; 189</span></a>
+        <a href="mockups/case-voor-gitaar-v2.html"><b>Fender Stratocaster</b><span>vanaf &euro; 189</span></a>
+        <a href="mockups/case-voor-v1.html"><b>Viool of altviool</b><span>vanaf &euro; 175</span></a>
+        <a href="mockups/case-voor-v1.html"><b>DJ-controller</b><span>vanaf &euro; 219</span></a>
+        <a href="mockups/case-voor-v1.html"><b>Draagbare drone</b><span>vanaf &euro; 165</span></a>
+        <a href="mockups/case-voor-v1.html"><b>Alle 38 objecten &rarr;</b><span>zoek op wat je vervoert</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 08 · LIEVER EEN OFFERTE ────────────────────────────────
+     Het paneel van case-aanvragen-v1.html. Staat hier ná de prijs:
+     wie het bedrag al gezien heeft en dan nog een offerte wil, wil hem
+     op papier voor zijn inkoop — dat is een andere vraag dan "wat kost
+     het". De sleepzone is de kern; zo komt het nu ook binnen. -->
+<section class="offerte ruit ruit-dark ruit-aanzet" data-band="aanvraag">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <div class="ey">// 07 &mdash; LIEVER EEN OFFERTE</div>
+        <h2>Of stuur gewoon <span class="acc">wat je hebt</span></h2>
+        <p class="sub">Geen maten bij de hand? Een schets, een datasheet of een foto van je apparatuur is genoeg. Je krijgt dezelfde werkdag een tekening met prijs terug.</p>
+        <div class="sturen">
+          <span>Schets op papier</span>
+          <span>Datasheet of PDF</span>
+          <span>Foto van je apparatuur</span>
+          <span>Alleen de afmetingen</span>
+          <span>Een oude case</span>
+        </div>
+        <div class="zelfdedag">
+          <div class="foto"><img src="mockups/assets/joran.svg" alt=""></div>
+          <div>
+            <b>Joran tekent het uit</b>
+            <span>Geen verkoper maar een casebouwer. Reactie op dezelfde werkdag, ook op een half verhaal.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="paneel">
+        <div class="pkop"><b>Vraag je case aan</b><i>// duurt 1 minuut</i></div>
+        <div class="pbody">
+          <div class="vld">
+            <label>Wat ga je vervoeren?</label>
+            <div class="inv"><input placeholder="Bijvoorbeeld: mengtafel Midas M32, of 4&times; moving head"></div>
+          </div>
+          <div class="vld">
+            <label>Wat heb je erbij? <em>&mdash; optioneel</em></label>
+            <div class="sleep">
+              <div class="ic">+</div>
+              <div>
+                <b>Sleep je schets, foto of datasheet hierheen</b>
+                <span>PDF, JPG, DWG of STEP &middot; meerdere bestanden mag</span>
+              </div>
+            </div>
+          </div>
+          <div class="tweekolom">
+            <div class="vld">
+              <label>Aantal</label>
+              <div class="inv"><input placeholder="1"></div>
+            </div>
+            <div class="vld">
+              <label>Wanneer moet hij er zijn?</label>
+              <div class="inv"><input placeholder="Geen haast"></div>
+            </div>
+          </div>
+          <div class="vld" style="margin-bottom:0">
+            <label>Waar sturen we het naartoe?</label>
+            <div class="inv"><input placeholder="naam@bedrijf.nl"></div>
+          </div>
+        </div>
+        <div class="voet">
+          <div class="bel">Geen account nodig &middot; <b>reactie dezelfde werkdag</b><br>Vrijblijvend &mdash; je zit nergens aan vast</div>
+          <a class="btn btn-dark" href="mockups/case-aanvragen-v1.html">Stuur op &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 09 · ONDERDELEN, UITGEBREID — v1 ───────────────────────── -->
+<section class="build tight" data-band="onderdelen">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <div class="ey ey-dark">// 08 &mdash; ZELF BOUWEN</div>
         <h2>Of bestel alleen de onderdelen</h2>
-        <p class="lead">Profielen, hoeken, sluitingen, wielen en schuim — hetzelfde materiaal
+        <p class="lead">Profielen, hoeken, sluitingen, wielen en schuim &mdash; hetzelfde materiaal
           waarmee wij bouwen. Vandaag besteld, morgen verstuurd.</p>
         <div class="cats">
-          <a href="#">Profielen</a><a href="#">Hoeken</a><a href="#">Handgrepen</a>
-          <a href="#">Sluitingen</a><a href="#">Scharnieren</a><a href="#">Wielen</a>
-          <a href="#">Schuimplastic</a><a href="#">19" artikelen</a>
+          <a href="mockups/categorie-v1.html">Profielen</a><a href="mockups/categorie-v1.html">Hoeken</a><a href="mockups/categorie-v1.html">Handgrepen</a>
+          <a href="mockups/categorie-v1.html">Sluitingen</a><a href="mockups/categorie-v1.html">Scharnieren</a><a href="mockups/categorie-v1.html">Wielen</a>
+          <a href="mockups/categorie-v1.html">Schuimplastic</a><a href="mockups/categorie-v1.html">19" artikelen</a>
         </div>
       </div>
       <div>
@@ -3519,14 +3709,22 @@
   </div>
 </section>
 
-<section class="closer ruit ruit-dark ruit-veld" data-band="slot">
+<!-- ── SLOT — v1, met wisselende kop ──────────────────────────
+     De vijf regels zijn de slotkoppen van de andere versies. Ze zeggen
+     hetzelfde op vijf manieren, en dat is precies het punt: er is niet
+     één deur. De eigen kop van deze versie staat vooraan en blijft het
+     langst staan. Het wisselen begint pas als je hier bent — zie
+     assets/wisselkop.js. -->
+<section class="closer ruit ruit-dark ruit-veld beslag" data-band="slot">
+  <span class="hk tl"></span><span class="hk tr"></span><span class="hk bl"></span><span class="hk br"></span>
   <div class="wrap">
     <div class="ey">// KLAAR OM TE BEGINNEN?</div>
-    <h2>Jouw maten. Jouw kist.</h2>
+    <h2 data-wisselkop='["Jouw maten. Jouw kist.","Bel een casebouwer.","Kom gerust langs.","Vul je maten in.","Stuur het gewoon op."]'>Jouw maten. Jouw kist.</h2>
     <p>Begin met configureren en zie binnen een minuut wat je case gaat kosten.</p>
-    <a class="btn btn-pri" href="#">Open de configurator →</a>
+    <a class="btn btn-pri" href="mockups/configurator-v1.html">Open de configurator &rarr;</a>
   </div>
 </section>
+<!-- ══ gedeelde homepage-inhoud · eind ══ -->
 
 <footer>
   <div class="wrap">
@@ -3660,60 +3858,259 @@
   </div>
 </div>
 
-<div class="again">
+<!-- ══ gedeelde homepage-inhoud · begin — zie mockups/onderdelen/homepage-onder.html ══ -->
+<!-- ── 01 · DRIE MANIEREN — v1 ────────────────────────────────── -->
+<section data-band="routes">
   <div class="wrap">
-    <div>
-      <div class="who">// WELKOM TERUG, PROFLITE AV</div>
-      <b>Rackcase enkel deksel · 12 maart</b>
-      <span class="d">483 × 600 × 1.334 mm · zwart · 40 stuks balhoek medium</span>
+    <div class="sec-head">
+      <div class="ey ey-dark">// 01 &mdash; WAAR BEGIN JE?</div>
+      <h2>Drie manieren om bij de juiste case te komen</h2>
+      <p class="lead">Je hoeft niet te weten hoe een flightcase heet om er een te bestellen.</p>
     </div>
-    <a class="btn btn-out btn-sm" href="#">Opnieuw bestellen →</a>
+    <div class="ingangen">
+      <a class="ing" href="mockups/configurator-v1.html">
+        <div class="n">// A</div>
+        <h3>Ik weet wat ik nodig heb</h3>
+        <p>Model en maten zijn bekend. Direct de configurator in, prijs meteen in beeld, klaar in vijf stappen.</p>
+        <div class="go">Naar de configurator &rarr;</div>
+      </a>
+      <a class="ing" href="mockups/case-voor-v1.html">
+        <div class="n">// B</div>
+        <h3>Ik weet wat ik moet beschermen</h3>
+        <p>Een Les Paul, een 19-inch rack van 6 HE, een moving head. Zeg wat erin gaat, wij bepalen de maten.</p>
+        <div class="go">Wat ga je vervoeren? &rarr;</div>
+      </a>
+      <a class="ing" href="mockups/flightcases-v1.html">
+        <div class="n">// C</div>
+        <h3>Ik weet het nog niet</h3>
+        <p>Koffer, hoedcase, trunccase of rackcase &mdash; wat is het verschil, en wat past bij jouw transport?</p>
+        <div class="go">Vergelijk de vijf modellen &rarr;</div>
+      </a>
+    </div>
   </div>
-</div>
+</section>
 
-<section class="assure">
+<!-- ── 02 · WIE ER MEE OP TOUR IS — v4 ────────────────────────── -->
+<section class="klanten tight" data-band="klanten">
+  <div class="wrap">
+    <div class="ey ey-dark">// 02 &mdash; WIE ER MEE OP TOUR IS</div>
+    <div class="row">
+      <div class="lg">logo ontbreekt</div>
+      <div class="lg">logo ontbreekt</div>
+      <div class="lg">logo ontbreekt</div>
+      <div class="lg">logo ontbreekt</div>
+      <div class="lg">logo ontbreekt</div>
+      <div class="lg">logo ontbreekt</div>
+    </div>
+    <div class="cit">
+      <p>&ldquo;Wij bestellen per seizoen zeventig kisten. Dat het bedrag er meteen staat, scheelt ons een week heen-en-weer per bestelling.&rdquo;</p>
+      <span>// citaat nog op te halen &middot; plaatsvervangende tekst</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── 03 · BRANCHES ─────────────────────────────────────────
+     Tussen het bewijs en het proces: je hebt net namen gezien, en de
+     vraag die daarop volgt is "zit mijn markt daar ook bij". -->
+<section class="branches tight" data-band="branches">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="ey ey-dark">// 03 &mdash; ZES MARKTEN</div>
+        <h2>Waar onze cases terechtkomen</h2>
+      </div>
+      <a class="btn btn-out btn-sm" href="mockups/branches.html">Alle branches &rarr;</a>
+    </div>
+    <div class="rail">
+      <a class="br" href="mockups/branche-industrie-en-machinebouw-v1.html">
+        <div class="im"><img src="mockups/assets/foto-industrie-en-machinebouw.jpg" alt=""><span class="tel">14 toepassingen</span></div>
+        <div class="bd"><h3>Industrie en machinebouw</h3>
+          <p>Machineonderdelen, prototypes en behuizing voor mobiele opstellingen. Seriematig, met een tekening vooraf.</p>
+          <span class="go">Bekijk branche &rarr;</span></div>
+      </a>
+      <a class="br" href="mockups/branche-audio-visueel-v1.html">
+        <div class="im"><img src="mockups/assets/foto-audio-visueel.jpg" alt=""><span class="tel">22 toepassingen</span></div>
+        <div class="bd"><h3>Audio-visueel</h3>
+          <p>De markt waar we mee begonnen zijn. Cases die tien keer per jaar de vrachtwagen in en uit gaan, vijf jaar lang.</p>
+          <span class="go">Bekijk branche &rarr;</span></div>
+      </a>
+      <a class="br" href="mockups/branche-defensie-v1.html">
+        <div class="im"><img src="mockups/assets/foto-defensie.jpg" alt=""><span class="tel">7 toepassingen</span></div>
+        <div class="bd"><h3>Defensie</h3>
+          <p>Transport dat aan specificatie moet voldoen en dat aantoonbaar moet zijn. Materiaal, documentatie en keuring liggen vooraf vast.</p>
+          <span class="go">Bekijk branche &rarr;</span></div>
+      </a>
+      <a class="br" href="mockups/branche-meet-en-testapparatuur-v1.html">
+        <div class="im"><img src="mockups/assets/foto-meet-en-testapparatuur.jpg" alt=""><span class="tel">11 toepassingen</span></div>
+        <div class="bd"><h3>Meet- en testapparatuur</h3>
+          <p>Meetinstrumenten die het veld in gaan. Het schuiminterieur is hier het product &mdash; gefreesd op het instrument, niet op de kist.</p>
+          <span class="go">Bekijk branche &rarr;</span></div>
+      </a>
+      <a class="br" href="mockups/branche-broadcast-en-media-v1.html">
+        <div class="im"><img src="mockups/assets/foto-broadcast-en-media.jpg" alt=""><span class="tel">9 toepassingen</span></div>
+        <div class="bd"><h3>Broadcast en media</h3>
+          <p>Camera's, optiek en regieapparatuur die dagelijks op locatie staan. Snel open, snel dicht, en altijd compleet.</p>
+          <span class="go">Bekijk branche &rarr;</span></div>
+      </a>
+      <a class="br" href="mockups/branche-schaalmodellen-v1.html">
+        <div class="im"><img src="mockups/assets/foto-schaalmodellen.jpg" alt=""><span class="tel">5 toepassingen</span></div>
+        <div class="bd"><h3>Schaalmodellen en maquettes</h3>
+          <p>Eenmalig, onvervangbaar en zelden rechthoekig &mdash; altijd volledig maatwerk.</p>
+          <span class="go">Bekijk branche &rarr;</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── 04 · VAN MAAT NAAR KADE — v1 ───────────────────────────── -->
+<section class="assure" data-band="proces">
   <div class="wrap">
     <div class="grid">
       <div>
-        <div class="ey">// 01 — HOE HET WERKT</div>
+        <div class="ey">// 04 &mdash; HOE HET WERKT</div>
         <h2>Van maat naar kade in vier stappen</h2>
-        <p>Je wacht niet op een prijs en niet op een terugbelverzoek. En vóór je bestelt kijkt er
-          altijd nog een casebouwer mee — gratis, want een case die niet past kost ons allebei tijd.</p>
-        <a class="btn btn-pri" href="#" style="margin-top:26px">Laat je maten controleren →</a>
+        <p>Je wacht niet op een prijs en niet op een terugbelverzoek. En v&oacute;&oacute;r je bestelt kijkt er
+          altijd nog een casebouwer mee &mdash; gratis, want een case die niet past kost ons allebei tijd.</p>
+        <a class="btn btn-pri" href="mockups/laten-controleren-v1.html" style="margin-top:26px">Laat je maten controleren &rarr;</a>
       </div>
       <div class="steps">
         <div class="st"><div class="i">// 01</div><div><b>Kies of laat kiezen</b><span>Model zelf kiezen, of zeg wat je vervoert.</span></div></div>
         <div class="st"><div class="i">// 02</div><div><b>Configureer online</b><span>Maten, kleur, beslag, wielen. Prijs verandert live mee.</span></div></div>
-        <div class="st"><div class="i">// 03</div><div><b>Laat het controleren</b><span>Een casebouwer kijkt je configuratie na. Binnen één werkdag.</span></div></div>
+        <div class="st"><div class="i">// 03</div><div><b>Laat het controleren</b><span>Een casebouwer kijkt je configuratie na. Binnen &eacute;&eacute;n werkdag.</span></div></div>
         <div class="st"><div class="i">// 04</div><div><b>Zo snel als tien werkdagen later</b><span>Kant-en-klaar of als bouwpakket, met alle onderdelen op maat.</span></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="trust tight">
+<!-- ── 06 · EN DE PRIJS DAN — v6 ──────────────────────────────── -->
+<section class="uitnodiging" data-band="prijsopbouw">
   <div class="wrap">
-    <div class="row">
-      <div class="it"><b>Sinds 1987</b><span>Eigen productie in Doesburg</span></div>
-      <div class="it"><b>De snelste van Nederland</b><span>Ook bij maatwerk</span></div>
-      <div class="it"><b>Op rekening</b><span>Voor zakelijke klanten</span></div>
-      <div class="it"><b>Eigen werkplaats</b><span>Geen tussenhandel</span></div>
+    <div class="grid">
+      <div>
+        <div class="ey ey-dark">// 05 &mdash; EN DE PRIJS DAN</div>
+        <h2>Geen offerte, geen wachttijd</h2>
+        <p>Wat je in de configurator ziet, is de prijs. Geen aanvraagformulier, geen terugbelverzoek, geen drie werkdagen stilte.</p>
+        <a class="btn btn-dark" href="mockups/configurator-v1.html" style="margin-top:26px">Start met configureren &rarr;</a>
+      </div>
+      <div class="kaart">
+        <div class="ey ey-dark" style="margin-bottom:16px">// VOORBEELD &middot; RACKCASE ENKEL, 19" 24 HE</div>
+        <div class="rij"><span>Basis rackcase enkel deksel</span><b>&euro; 229</b></div>
+        <div class="rij"><span>Maatwerk 483 &times; 600 &times; 1.334 mm</span><b>&euro; 118</b></div>
+        <div class="rij"><span>Zwart paneel, logo op deksel</span><b>&euro; 45</b></div>
+        <div class="rij"><span>Wielenset 100 mm met rem</span><b>&euro; 20,50</b></div>
+        <div class="tot">
+          <span class="k">// Als bouwpakket</span>
+          <b>&euro; 412,50</b>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="build">
+<!-- ── 07 · OOK ÉÉN CASE — v6 ─────────────────────────────────── -->
+<section class="eencase tight" data-band="eencase">
   <div class="wrap">
     <div class="grid">
       <div>
-        <div class="ey ey-dark">// 02 — ZELF BOUWEN</div>
+        <div class="ey ey-dark">// 06 &mdash; OOK VOOR &Eacute;&Eacute;N INSTRUMENT</div>
+        <h2>&Eacute;&eacute;n case? Ook goed.</h2>
+        <p>Wij bouwen voor verhuurbedrijven met zeventig kisten per seizoen, en voor de gitarist met &eacute;&eacute;n Les Paul. Dezelfde fabriek, dezelfde tolerantie.</p>
+      </div>
+      <div class="obj">
+        <a href="mockups/case-voor-gibson-les-paul-v2.html"><b>Gibson Les Paul</b><span>vanaf &euro; 189</span></a>
+        <a href="mockups/case-voor-gitaar-v2.html"><b>Fender Stratocaster</b><span>vanaf &euro; 189</span></a>
+        <a href="mockups/case-voor-v1.html"><b>Viool of altviool</b><span>vanaf &euro; 175</span></a>
+        <a href="mockups/case-voor-v1.html"><b>DJ-controller</b><span>vanaf &euro; 219</span></a>
+        <a href="mockups/case-voor-v1.html"><b>Draagbare drone</b><span>vanaf &euro; 165</span></a>
+        <a href="mockups/case-voor-v1.html"><b>Alle 38 objecten &rarr;</b><span>zoek op wat je vervoert</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 08 · LIEVER EEN OFFERTE ────────────────────────────────
+     Het paneel van case-aanvragen-v1.html. Staat hier ná de prijs:
+     wie het bedrag al gezien heeft en dan nog een offerte wil, wil hem
+     op papier voor zijn inkoop — dat is een andere vraag dan "wat kost
+     het". De sleepzone is de kern; zo komt het nu ook binnen. -->
+<section class="offerte ruit ruit-dark ruit-aanzet" data-band="aanvraag">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <div class="ey">// 07 &mdash; LIEVER EEN OFFERTE</div>
+        <h2>Of stuur gewoon <span class="acc">wat je hebt</span></h2>
+        <p class="sub">Geen maten bij de hand? Een schets, een datasheet of een foto van je apparatuur is genoeg. Je krijgt dezelfde werkdag een tekening met prijs terug.</p>
+        <div class="sturen">
+          <span>Schets op papier</span>
+          <span>Datasheet of PDF</span>
+          <span>Foto van je apparatuur</span>
+          <span>Alleen de afmetingen</span>
+          <span>Een oude case</span>
+        </div>
+        <div class="zelfdedag">
+          <div class="foto"><img src="mockups/assets/joran.svg" alt=""></div>
+          <div>
+            <b>Joran tekent het uit</b>
+            <span>Geen verkoper maar een casebouwer. Reactie op dezelfde werkdag, ook op een half verhaal.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="paneel">
+        <div class="pkop"><b>Vraag je case aan</b><i>// duurt 1 minuut</i></div>
+        <div class="pbody">
+          <div class="vld">
+            <label>Wat ga je vervoeren?</label>
+            <div class="inv"><input placeholder="Bijvoorbeeld: mengtafel Midas M32, of 4&times; moving head"></div>
+          </div>
+          <div class="vld">
+            <label>Wat heb je erbij? <em>&mdash; optioneel</em></label>
+            <div class="sleep">
+              <div class="ic">+</div>
+              <div>
+                <b>Sleep je schets, foto of datasheet hierheen</b>
+                <span>PDF, JPG, DWG of STEP &middot; meerdere bestanden mag</span>
+              </div>
+            </div>
+          </div>
+          <div class="tweekolom">
+            <div class="vld">
+              <label>Aantal</label>
+              <div class="inv"><input placeholder="1"></div>
+            </div>
+            <div class="vld">
+              <label>Wanneer moet hij er zijn?</label>
+              <div class="inv"><input placeholder="Geen haast"></div>
+            </div>
+          </div>
+          <div class="vld" style="margin-bottom:0">
+            <label>Waar sturen we het naartoe?</label>
+            <div class="inv"><input placeholder="naam@bedrijf.nl"></div>
+          </div>
+        </div>
+        <div class="voet">
+          <div class="bel">Geen account nodig &middot; <b>reactie dezelfde werkdag</b><br>Vrijblijvend &mdash; je zit nergens aan vast</div>
+          <a class="btn btn-dark" href="mockups/case-aanvragen-v1.html">Stuur op &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 09 · ONDERDELEN, UITGEBREID — v1 ───────────────────────── -->
+<section class="build tight" data-band="onderdelen">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <div class="ey ey-dark">// 08 &mdash; ZELF BOUWEN</div>
         <h2>Of bestel alleen de onderdelen</h2>
-        <p class="lead">Profielen, hoeken, sluitingen, wielen en schuim — hetzelfde materiaal
+        <p class="lead">Profielen, hoeken, sluitingen, wielen en schuim &mdash; hetzelfde materiaal
           waarmee wij bouwen. Vandaag besteld, morgen verstuurd.</p>
         <div class="cats">
-          <a href="#">Profielen</a><a href="#">Hoeken</a><a href="#">Handgrepen</a>
-          <a href="#">Sluitingen</a><a href="#">Scharnieren</a><a href="#">Wielen</a>
-          <a href="#">Schuimplastic</a><a href="#">19" artikelen</a>
+          <a href="mockups/categorie-v1.html">Profielen</a><a href="mockups/categorie-v1.html">Hoeken</a><a href="mockups/categorie-v1.html">Handgrepen</a>
+          <a href="mockups/categorie-v1.html">Sluitingen</a><a href="mockups/categorie-v1.html">Scharnieren</a><a href="mockups/categorie-v1.html">Wielen</a>
+          <a href="mockups/categorie-v1.html">Schuimplastic</a><a href="mockups/categorie-v1.html">19" artikelen</a>
         </div>
       </div>
       <div>
@@ -3734,14 +4131,22 @@
   </div>
 </section>
 
-<section class="closer ruit ruit-dark ruit-veld">
+<!-- ── SLOT — v1, met wisselende kop ──────────────────────────
+     De vijf regels zijn de slotkoppen van de andere versies. Ze zeggen
+     hetzelfde op vijf manieren, en dat is precies het punt: er is niet
+     één deur. De eigen kop van deze versie staat vooraan en blijft het
+     langst staan. Het wisselen begint pas als je hier bent — zie
+     assets/wisselkop.js. -->
+<section class="closer ruit ruit-dark ruit-veld beslag" data-band="slot">
+  <span class="hk tl"></span><span class="hk tr"></span><span class="hk bl"></span><span class="hk br"></span>
   <div class="wrap">
     <div class="ey">// KLAAR OM TE BEGINNEN?</div>
-    <h2>Jouw maten. Jouw kist.</h2>
+    <h2 data-wisselkop='["Jouw maten. Jouw kist.","Bel een casebouwer.","Kom gerust langs.","Vul je maten in.","Stuur het gewoon op."]'>Jouw maten. Jouw kist.</h2>
     <p>Begin met configureren en zie binnen een minuut wat je case gaat kosten.</p>
-    <a class="btn btn-pri" href="#">Open de configurator →</a>
+    <a class="btn btn-pri" href="mockups/configurator-v1.html">Open de configurator &rarr;</a>
   </div>
 </section>
+<!-- ══ gedeelde homepage-inhoud · eind ══ -->
 
 <footer>
   <div class="wrap">
@@ -4994,7 +5399,7 @@
             <tr><td>case-voor categorieën</td><td class="mono">~15 of 38 · nieuw</td><td class="blocks"><em>De sitemap zegt ~15, de mockup toont 38.</em> Dat verschil moet eruit voordat er geschreven wordt. Elke pagina moet echte inhoud hebben — afmetingen, waar je op moet letten — anders leest Google het als dunne content. <em>Twee uitgangen per pagina</em>: kleur kiezen bij een standaardcase, configurator bij de rest.</td></tr>
             <tr><td>Blokkenbibliotheek</td><td class="mono">~12 blokken · Sanity</td><td class="blocks">Hero, tekstblok, galerij, CTA, productgrid, specificatietabel, FAQ, testimonial. Eenmalig bouwen, daarna stelt de redactie zelf samen.</td></tr>
             <tr><td>Fotografie</td><td class="mono">onbekend · nieuw</td><td class="blocks">Lichte achtergrond, 3/4 hoekperspectief, <em>schaalreferentie in beeld</em>. Nu zijn klein, medium en groot niet te onderscheiden. Komt er per standaardcase een set bij, dan is dit geen eenmalige shoot maar een terugkerende.</td></tr>
-            <tr><td>SEO-velden</td><td class="mono">311 × meta</td><td class="blocks">Meta descriptions zijn nu grotendeels leeg of automatisch. Plus Product- en Breadcrumb-schema.</td></tr>
+            <tr><td>SEO-velden</td><td class="mono">330 × meta</td><td class="blocks">Meta descriptions zijn nu grotendeels leeg of automatisch. Plus Product- en Breadcrumb-schema.</td></tr>
           </tbody>
         </table>
       </div>
@@ -5194,14 +5599,14 @@
         <div class="fhead">
           <span class="fn">03 &middot; frontend <span class="fprog" data-f="prog"></span></span>
           <h3><button class="ftopen" type="button">Website</button></h3>
-          <p>De pagina&#39;s zelf: vijftien sjablonen, de navigatie, zoeken, en de verhuizing van 386 bestaande adressen.</p>
+          <p>De pagina&#39;s zelf: zestien sjablonen, de navigatie, zoeken, en de verhuizing van 386 bestaande adressen.</p>
           <div class="fstat"><span class="chip chip-move">ontwerp loopt</span><span class="chip chip-open">bouw okt</span></div>
           <span class="fmeer">Openen &rarr;</span>
         </div>
         <div class="fbody">
           <span class="flab">Wat erin hoort</span>
           <ul class="fcheck">
-            <li><label><input type="checkbox" data-id="web-sjablonen"><span>De vijftien sjablonen uit de sitemap &mdash; zie het tabblad Wireframes</span></label></li>
+            <li><label><input type="checkbox" data-id="web-sjablonen"><span>De zestien sjablonen uit de sitemap &mdash; zie het tabblad Wireframes</span></label></li>
             <li><label><input type="checkbox" data-id="web-nav"><span>Nieuwe navigatie: onderdelen blijven, maar niet meer als grootste tak</span></label></li>
             <li><label><input type="checkbox" data-id="web-zoek"><span>Zoeken op case, onderdeel &eacute;n apparatuur, met facetten die ertoe doen</span></label></li>
             <li><label><input type="checkbox" data-id="web-casevoor"><span><code>/case-voor</code> als productcatalogus: categorie plus een pagina per apparaat, met een directe bestelroute</span></label></li>
@@ -5333,7 +5738,7 @@
       <div class="sec-head">
         <span class="eyebrow">Eerstvolgende</span>
         <h2 class="anch" id="m-2026-09-04" data-rail="4 september">4 september 2026 &mdash; het homepage-ontwerp<a class="hash" href="#m-2026-09-04" aria-label="Link naar deze meeting">#</a></h2>
-        <p>&Eacute;&eacute;n onderwerp. De homepage is het eerste van vijftien sjablonen dat in het merk af is, dus wat hier wordt vastgelegd &mdash; typografie, kleurgebruik, de manier waarop een sectie is opgebouwd &mdash; geldt straks voor de veertien die volgen. <strong>Eerst de richting, dan de pagina.</strong> Er liggen drie hero&#39;s op tafel die het oneens zijn over waar de homepage v&oacute;&oacute;r is &mdash; snelheid, vertrouwen of de aanvraag. Is die keuze gemaakt, dan lopen we het ontwerp van boven naar beneden door. Vink af wat akkoord is; wat blijft staan, bespreken we.</p>
+        <p>&Eacute;&eacute;n onderwerp. De homepage is het eerste van zestien sjablonen dat in het merk af is, dus wat hier wordt vastgelegd &mdash; typografie, kleurgebruik, de manier waarop een sectie is opgebouwd &mdash; geldt straks voor de veertien die volgen. <strong>Eerst de richting, dan de pagina.</strong> Er liggen drie hero&#39;s op tafel die het oneens zijn over waar de homepage v&oacute;&oacute;r is &mdash; snelheid, vertrouwen of de aanvraag. Is die keuze gemaakt, dan lopen we het ontwerp van boven naar beneden door. Vink af wat akkoord is; wat blijft staan, bespreken we.</p>
         <p class="lede">Wat je hieronder invult wordt <strong>meteen bewaard</strong> en zien wij ook &mdash; houd het open tijdens het gesprek, dan lopen we het samen langs.</p>
       </div>
 
@@ -5578,7 +5983,7 @@
             <ul class="fcheck">
               <li><label><input type="checkbox" data-id="hp-mobiel"><span>Mobiel: de header, de drie ingangen en de vijf modellen op een telefoon</span></label></li>
               <li><label><input type="checkbox" data-id="hp-toon"><span>Toon en woordkeuze &mdash; spreekt dit de vaste klant aan?</span></label></li>
-              <li><label><input type="checkbox" data-id="hp-merk"><span>Typografie en kleur: DM Sans, Barlow Condensed, cyaan als hoofdactie &mdash; <strong>dit geldt straks voor alle vijftien sjablonen</strong></span></label></li>
+              <li><label><input type="checkbox" data-id="hp-merk"><span>Typografie en kleur: DM Sans, Barlow Condensed, cyaan als hoofdactie &mdash; <strong>dit geldt straks voor alle zestien sjablonen</strong></span></label></li>
             </ul>
             <label class="flab" for="nt-hp-overig">Wat mist er? <span class="saved" data-f="saved">bewaard</span></label>
             <textarea id="nt-hp-overig" data-note="hp-overig" placeholder="Aantekeningen tijdens het gesprek kunnen hier ook."></textarea>
@@ -5594,7 +5999,7 @@
         <div class="mt cb"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">02</span><h4>Welke vijf cases komen erbij?</h4><p>Er staan er nu vijf: koffer, hoedcase, trunccase, rackcase enkel en dubbel. Het plan gaat naar tien &mdash; vijf modellen die je <strong>kant-en-klaar</strong> kunt bestellen in plaats van configureren. <strong>Welke vijf?</strong> Die keuze bepaalt de modellenband op de homepage, de overzichtspagina, en waar de ~300 apparaatpagina&#39;s naartoe wijzen. Drie maatstaven: de maat moet vast genoeg zijn om op voorraad te leggen, er moet op gezocht worden, en samen zouden ze een vakgebied moeten dekken dat de huidige vijf laten liggen.</p></div><span class="tag">van cb</span></div>
         <div class="mt beslissing"><div class="mtop"><a class="fase f-cont" href="#content" title="Hoort bij de contentfase">content</a><span class="mn">03</span><h4>Trustpilot of eKomi</h4><p>Twee platforms, twee scores &mdash; 4,68 en 4,63. Er komt er &eacute;&eacute;n op de site, en die keuze geldt daarna overal: homepage, productpagina&#39;s en de kassa.</p></div><span class="tag">beslissen</span></div>
         <div class="mt cb"><div class="mtop"><a class="fase f-cont" href="#content" title="Hoort bij de contentfase">content</a><span class="mn">04</span><h4>Beeldmateriaal</h4><p>Modelfoto&#39;s met dezelfde uitsnede en schaal &mdash; tien in plaats van vijf, plus de videobeelden als het v2 wordt. <strong>Lange doorlooptijd</strong> &mdash; hier hangt de fotoshoot van 233 onderdelen straks achteraan.</p></div><span class="tag">van cb</span></div>
-        <div class="mt actie"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">05</span><h4>Groen licht voor de rest</h4><p>Is de homepage akkoord, dan liggen typografie, kleurgebruik en sectieopbouw vast en gaan de overige veertien sjablonen door in het merk. Zo niet, dan corrigeren we hier &mdash; niet veertien keer verderop.</p><a class="live" href="#wireframes">alle vijftien sjablonen &rarr;</a></div><span class="tag">vervolg</span></div>
+        <div class="mt actie"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">05</span><h4>Groen licht voor de rest</h4><p>Is de homepage akkoord, dan liggen typografie, kleurgebruik en sectieopbouw vast en gaan de overige veertien sjablonen door in het merk. Zo niet, dan corrigeren we hier &mdash; niet vijftien keer verderop.</p><a class="live" href="#wireframes">alle zestien sjablonen &rarr;</a></div><span class="tag">vervolg</span></div>
       <div class="mt beslissing"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">06</span><h4>De toon</h4><p>Hoe zakelijk mag het klinken? De persona&#39;s zijn professionele kopers, maar het zoekverkeer komt voor een deel van particulieren &mdash; iemand met &eacute;&eacute;n gitaar zoekt dezelfde case als een verhuurbedrijf met veertig. <strong>Vakman onder vakmensen, zonder de eenmalige koper weg te jagen.</strong> Concreet: prijzen excl. btw leidend met incl. eronder, geen inlog of KvK-nummer nodig om te bestellen, en apparaatnamen in de tekst in plaats van artikelnummers.</p></div><span class="tag">beslissen</span></div>
       
     </section>
@@ -5612,7 +6017,7 @@
         <div class="mt af"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">02</span><h4>Medusa</h4><p>Webshop-skeleton staat. Stack bevestigd, Magento valt af — pakket B, schone lei en code-first.</p><a class="live" href="https://46.224.236.191.sslip.io/app/login" target="_blank" rel="noopener noreferrer">open de Medusa-admin &#8599;</a></div><span class="tag">afgerond</span></div>
         <div class="mt af"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">03</span><h4>Sanity</h4><p>Basisinrichting staat. De blokkenbibliotheek — circa twaalf on-brand blokken — volgt in oktober.</p><a class="live" href="https://casebuilder-web.vercel.app/studio/" target="_blank" rel="noopener noreferrer">open de Sanity Studio &#8599;</a></div><span class="tag">afgerond</span></div>
         <div class="mt af"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">04</span><h4>Minimale frontend om de configurator te testen</h4><p>Connection test tussen frontend en casebuilder api geslaagd, plus de iframe-embed met POST-integratie. Het technisch risicovolste punt is aangetoond.</p><a class="live" href="https://casebuilder-web.vercel.app" target="_blank" rel="noopener noreferrer">bekijk de testomgeving &#8599;</a></div><span class="tag">afgerond</span></div>
-        <div class="mt deels"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">05</span><h4>Sitemap en sitestructuur</h4><p>386 pagina&#39;s worden er 311 over vijftien sjablonen. Zeventien besteltaken getoetst tegen de nieuwe boom: zes gaten gevonden, drie opgelost in het ontwerp.</p></div><span class="tag">in review</span></div>
+        <div class="mt deels"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">05</span><h4>Sitemap en sitestructuur</h4><p>386 pagina&#39;s worden er 330 over zestien sjablonen. Zeventien besteltaken getoetst tegen de nieuwe boom: zes gaten gevonden, drie opgelost in het ontwerp.</p></div><span class="tag">in review</span></div>
         <div class="mt deels"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">06</span><h4>Wireframes — hoe een contentpagina eruitziet</h4><p>Vijftien sjablonen uitgetekend. Eén sjabloon dekt zeven servicepagina&#39;s: koptekst, tekstkolom uit blokken, sectienavigatie, contactblok. <strong>Wat daarvoor nodig is:</strong> de blokkenbibliotheek plus de teksten.</p></div><span class="tag">in review</span></div>
         <div class="mt deels"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">07</span><h4>Testresultaten</h4><ul><li><strong>Medusa haalt alle grenzen.</strong> Filteren: 82 ms bij 1.000, 164 ms bij 3.000 — grens 500 ms.</li><li>Admin blijft onder 470 ms, tegen een grens van 2 seconden.</li><li>Nul fouten, in elke meting.</li><li><strong>Het knelpunt zit in de frontend:</strong> die haalt álle producten op en filtert in het geheugen.</li><li>27 seconden laadtijd bij 1.000 producten.</li><li>Paginatie en filteren in de database lossen het op — staat al in het categorie-ontwerp.</li></ul><a class="live" href="https://docs.google.com/document/d/1pY7MQxi06DV0y_98nmLTkq7isR0lsShYSuS3cogkq3o/edit" target="_blank" rel="noopener noreferrer">lees het testdocument &#8599;</a></div><span class="tag">in review</span></div>
       </div>
@@ -5657,7 +6062,7 @@
           <div class="tlwhen">t/m aug</div><div class="tlaxis"></div>
           <div class="tlbody">
             <h4>Analyse, architectuur en stack<span class="tlfase">definitie</span></h4>
-            <p>De live site in kaart, de scheidslijn bij de casebuilder api vastgelegd, Medusa en Sanity ingericht en de configurator-handoff aangetoond. Sitemap van 386 naar 311 pagina&#39;s over vijftien sjablonen.</p>
+            <p>De live site in kaart, de scheidslijn bij de casebuilder api vastgelegd, Medusa en Sanity ingericht en de configurator-handoff aangetoond. Sitemap van 386 naar 330 pagina&#39;s over zestien sjablonen.</p>
           </div>
         </div>
 
