@@ -115,7 +115,8 @@
     e.preventDefault();
     scrollTo({ top: 0, behavior: 'smooth' });
   });
-  nav.querySelector('.wrap').insertBefore(merkje, nav.querySelector('.wrap').firstChild);
+  var navwrap = nav.querySelector('.wrap');
+  if (navwrap) navwrap.insertBefore(merkje, navwrap.firstChild);
 
   /* "Direct advies" wijkt voor het monogram. In de pagina's staat dat als
      kale tekst vóór het nummer; hier krijgt het een haakje zodat de CSS

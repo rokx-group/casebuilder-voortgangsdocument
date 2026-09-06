@@ -99,9 +99,15 @@ nav.primary{position:sticky;top:0;z-index:40}
 
    Verschijnt pas voorbij de header. Zolang je die nog ziet staat het
    grote veld er gewoon, en twee zoekvelden tegelijk is er één te veel. */
+/* Ingeklapt neemt hij geen plek in. Met alleen visibility:hidden houdt hij
+   zijn 34 px plus de gap van de balk bezet — ook bovenaan de pagina, waar
+   hij niet eens hoort te staan — en dat duwt op smallere schermen de
+   laatste ingang eruit. Vandaar breedte nul, net als het monogram. */
 nav.primary .navzoek{position:relative;display:flex;align-items:center;flex:none;
-  opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity .16s ease,transform .16s ease}
-nav.primary.zoekbij .navzoek{opacity:1;visibility:visible;transform:none}
+  width:0;overflow:visible;opacity:0;visibility:hidden;
+  transition:width .18s cubic-bezier(.2,.7,.2,1),opacity .16s ease,margin .18s,visibility 0s .18s}
+nav.primary.zoekbij .navzoek{width:34px;margin-left:4px;opacity:1;visibility:visible;
+  transition:width .18s cubic-bezier(.2,.7,.2,1),opacity .16s ease,margin .18s,visibility 0s}
 /* Een loep, maar niet dezelfde als in de header: die staat op 1.6 met
    vierkante uiteinden en oogt op 14 px slap. Deze is iets zwaarder, heeft
    ronde uiteinden en een steel die de cirkel raakt in plaats van er los
