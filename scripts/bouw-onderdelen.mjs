@@ -33,6 +33,23 @@ const ONDERDELEN = [
   { naam: "header", bestand: "onderdelen/header.html", patroon: /<header class="main">[\s\S]*?<\/header>/ },
   { naam: "nav",    bestand: "onderdelen/nav.html",    patroon: /<nav class="primary">[\s\S]*?<\/nav>/ },
   { naam: "footer", bestand: "onderdelen/footer.html", patroon: /<footer>[\s\S]*?<\/footer>/ },
+  /* Alles onder de hero van de homepage. Anders dan de drie hierboven zit
+     dit niet in élke mockup maar alleen in de versies die er nog staan: de
+     homepage is één ontwerp waarvan alleen de hero verschilt, en dat is
+     precies wat er te kiezen valt. Vandaar `alleen`.
+
+     De grenzen zijn hier merktekens en geen begin- en eindtag, omdat het om
+     een reeks secties gaat en niet om één element. Ze staan er ook voor de
+     lezer: wie het bestand opent ziet meteen dat dit stuk elders vandaan
+     komt en hier niet met de hand bijgewerkt moet worden.
+
+     De opmaak hoort bij deze markup en staat in assets/homepage-onder.css. */
+  { naam: "homepage-onder", bestand: "onderdelen/homepage-onder.html",
+    alleen: /^homepage-v(1|2)\.html$/,
+    patroon: /<!-- ══ gedeelde homepage-inhoud · begin[\s\S]*?<!-- ══ gedeelde homepage-inhoud · eind ══ -->/,
+    omhullen: (inhoud) =>
+      "<!-- ══ gedeelde homepage-inhoud · begin — zie mockups/onderdelen/homepage-onder.html ══ -->\n" +
+      inhoud + "\n<!-- ══ gedeelde homepage-inhoud · eind ══ -->" },
 ];
 
 for (const o of ONDERDELEN) o.inhoud = readFileSync(join(MAP, o.bestand), "utf8").trimEnd();
@@ -75,9 +92,12 @@ for (const naam of bestanden) {
   const voor = s;
 
   for (const o of ONDERDELEN) {
+    if (o.alleen && !o.alleen.test(naam)) continue;
     const m = s.match(o.patroon);
     if (!m) continue;
-    const vervanging = o.naam === "nav" ? markeer(o.inhoud, actiefItem(m[0])) : o.inhoud;
+    const vervanging = o.naam === "nav" ? markeer(o.inhoud, actiefItem(m[0]))
+                     : o.omhullen ? o.omhullen(o.inhoud)
+                     : o.inhoud;
     if (m[0] !== vervanging) afwijkend.push(`${naam} · ${o.naam}`);
     s = s.replace(o.patroon, () => vervanging);
   }

@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/brand.css">
+<link rel="stylesheet" href="assets/homepage-onder.css">
 <style>
 /* ── homepage — paginaspecifiek, bovenop brand.css ── */
 /* ── videoheader ──────────────────────────────────────────
@@ -42,67 +43,14 @@
 .hero .specs .k{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--cyan);text-transform:uppercase}
 .hero .specs .v{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:19px;letter-spacing:.03em;margin-top:6px;color:#fff}
 
-/* ingelogde bijbestel-strip */
-.again{background:var(--lightblue);border-bottom:1px solid var(--rule)}
-.again .wrap{display:flex;align-items:center;gap:22px;flex-wrap:wrap;padding-top:16px;padding-bottom:16px}
-.again .who{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
-.again b{font-family:var(--disp);text-transform:uppercase;font-size:19px;letter-spacing:.03em;color:var(--dark)}
-.again span.d{font-size:14px;color:var(--mute)}
-.again .btn{margin-left:auto}
+/* Alles onder de hero staat in assets/homepage-onder.css en
+   mockups/onderdelen/homepage-onder.html — gedeeld met de andere
+   homepageversie, zodat die twee alleen nog in hun hero verschillen.
+   Wat hieronder staat is hero en balk, en dat is per versie anders. */
 
-.ingangen{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}
-.ing{background:#fff;padding:36px 30px 32px;display:flex;flex-direction:column;min-height:310px;transition:.15s}
-.ing:hover{background:var(--lightblue)}
-.ing .n{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--cyan)}
-.ing h3{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:26px;letter-spacing:.03em;
-  color:var(--dark);margin:16px 0 12px;line-height:1.05}
-.ing p{font-size:15px;color:var(--mute);flex:1}
-.ing .go{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:15px;letter-spacing:.05em;
-  color:var(--blue);margin-top:20px;display:flex;align-items:center;gap:9px}
-.ing:hover .go{color:var(--dark)}
-
-.models .sec-head{display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap}
-.models .sec-head > div{margin-right:auto}
-.case .pr b{display:block}
-.compare{border-top:1px solid var(--rule);margin-top:24px;padding-top:20px;display:flex;
-  align-items:center;gap:20px;flex-wrap:wrap}
-.compare p{font-size:15px;color:var(--mute);max-width:52ch}
-
-.assure{background:var(--dark);color:#fff}
-.assure .grid{display:grid;grid-template-columns:1.15fr 1fr;gap:64px;align-items:center}
-.assure h2{font-size:clamp(30px,3.4vw,46px);color:#fff;margin:14px 0 18px}
-.assure p{color:rgba(255,255,255,.8);font-size:17px;max-width:52ch}
-.assure .steps{border-left:1px solid rgba(255,255,255,.2);padding-left:32px}
-.assure .st{display:flex;gap:18px;padding:15px 0}
-.assure .st+.st{border-top:1px solid rgba(255,255,255,.14)}
-.assure .st .i{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--cyan);padding-top:4px;white-space:nowrap}
-.assure .st b{font-family:var(--disp);text-transform:uppercase;font-size:17px;letter-spacing:.03em;font-weight:700;display:block}
-.assure .st span{font-size:14px;color:rgba(255,255,255,.68)}
-
-.trust{border-top:1px solid var(--rule);background:var(--bg)}
-.trust .row{display:flex;gap:48px;align-items:center;flex-wrap:wrap}
-.trust .it{display:flex;flex-direction:column;gap:4px}
-.trust .it b{font-family:var(--disp);text-transform:uppercase;font-size:22px;letter-spacing:.03em;color:var(--dark)}
-.trust .it span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
-
-.build{border-top:1px solid var(--rule)}
-.build .grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
-.build .cats{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
-.build .cats a{border:1px solid var(--rule);background:#fff;padding:9px 14px;font-family:var(--mono);
-  font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
-.build .cats a:hover{border-color:var(--dark);color:var(--dark)}
-.build .side{border:1px solid var(--rule);padding:28px 30px}
-.build .side h4{font-size:20px;margin-bottom:8px}
-.build .side p{font-size:14.5px;color:var(--mute)}
-.build .side + .side{margin-top:14px}
-
-.closer{background:var(--void);color:#fff;text-align:center}
-.closer h2{font-size:clamp(30px,3.6vw,50px);color:#fff}
-.closer p{color:rgba(255,255,255,.75);margin:14px auto 30px;max-width:48ch;font-size:17px}
-
-@media(max-width:1080px){.ingangen{grid-template-columns:1fr}.assure .grid,.build .grid{grid-template-columns:1fr;gap:36px}}
-@media(max-width:760px){.hero .wrap{padding-top:56px;padding-bottom:52px}.hero .specs div{min-width:50%;padding-right:12px}
-  .again .btn{margin-left:0}.assure .steps{padding-left:20px}}
+/* Hero op smal scherm; de sectieregels zitten in de gedeelde stylesheet. */
+@media(max-width:760px){.hero .wrap{padding-top:56px;padding-bottom:52px}
+  .hero .specs div{min-width:50%;padding-right:12px}}
 
 /* ── de tweede knop is een veld ───────────────────────────────
    Overgenomen uit v12. Wie zijn case niet bij naam kent kon alleen
@@ -286,60 +234,259 @@
   </div>
 </div>
 
-<div class="again">
+<!-- ══ gedeelde homepage-inhoud · begin — zie mockups/onderdelen/homepage-onder.html ══ -->
+<!-- ── 01 · DRIE MANIEREN — v1 ────────────────────────────────── -->
+<section data-band="routes">
   <div class="wrap">
-    <div>
-      <div class="who">// WELKOM TERUG, PROFLITE AV</div>
-      <b>Rackcase enkel deksel · 12 maart</b>
-      <span class="d">483 × 600 × 1.334 mm · zwart · 40 stuks balhoek medium</span>
+    <div class="sec-head">
+      <div class="ey ey-dark">// 01 &mdash; WAAR BEGIN JE?</div>
+      <h2>Drie manieren om bij de juiste case te komen</h2>
+      <p class="lead">Je hoeft niet te weten hoe een flightcase heet om er een te bestellen.</p>
     </div>
-    <a class="btn btn-out btn-sm" href="#">Opnieuw bestellen →</a>
+    <div class="ingangen">
+      <a class="ing" href="configurator-v1.html">
+        <div class="n">// A</div>
+        <h3>Ik weet wat ik nodig heb</h3>
+        <p>Model en maten zijn bekend. Direct de configurator in, prijs meteen in beeld, klaar in vijf stappen.</p>
+        <div class="go">Naar de configurator &rarr;</div>
+      </a>
+      <a class="ing" href="case-voor-v1.html">
+        <div class="n">// B</div>
+        <h3>Ik weet wat ik moet beschermen</h3>
+        <p>Een Les Paul, een 19-inch rack van 6 HE, een moving head. Zeg wat erin gaat, wij bepalen de maten.</p>
+        <div class="go">Wat ga je vervoeren? &rarr;</div>
+      </a>
+      <a class="ing" href="flightcases-v1.html">
+        <div class="n">// C</div>
+        <h3>Ik weet het nog niet</h3>
+        <p>Koffer, hoedcase, trunccase of rackcase &mdash; wat is het verschil, en wat past bij jouw transport?</p>
+        <div class="go">Vergelijk de vijf modellen &rarr;</div>
+      </a>
+    </div>
   </div>
-</div>
+</section>
 
-<section class="assure">
+<!-- ── 02 · WIE ER MEE OP TOUR IS — v4 ────────────────────────── -->
+<section class="klanten tight" data-band="klanten">
+  <div class="wrap">
+    <div class="ey ey-dark">// 02 &mdash; WIE ER MEE OP TOUR IS</div>
+    <div class="row">
+      <div class="lg">logo ontbreekt</div>
+      <div class="lg">logo ontbreekt</div>
+      <div class="lg">logo ontbreekt</div>
+      <div class="lg">logo ontbreekt</div>
+      <div class="lg">logo ontbreekt</div>
+      <div class="lg">logo ontbreekt</div>
+    </div>
+    <div class="cit">
+      <p>&ldquo;Wij bestellen per seizoen zeventig kisten. Dat het bedrag er meteen staat, scheelt ons een week heen-en-weer per bestelling.&rdquo;</p>
+      <span>// citaat nog op te halen &middot; plaatsvervangende tekst</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── 03 · BRANCHES ─────────────────────────────────────────
+     Tussen het bewijs en het proces: je hebt net namen gezien, en de
+     vraag die daarop volgt is "zit mijn markt daar ook bij". -->
+<section class="branches tight" data-band="branches">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="ey ey-dark">// 03 &mdash; ZES MARKTEN</div>
+        <h2>Waar onze cases terechtkomen</h2>
+      </div>
+      <a class="btn btn-out btn-sm" href="branches.html">Alle branches &rarr;</a>
+    </div>
+    <div class="rail">
+      <a class="br" href="branche-industrie-en-machinebouw-v1.html">
+        <div class="im"><img src="assets/foto-industrie-en-machinebouw.jpg" alt=""><span class="tel">14 toepassingen</span></div>
+        <div class="bd"><h3>Industrie en machinebouw</h3>
+          <p>Machineonderdelen, prototypes en behuizing voor mobiele opstellingen. Seriematig, met een tekening vooraf.</p>
+          <span class="go">Bekijk branche &rarr;</span></div>
+      </a>
+      <a class="br" href="branche-audio-visueel-v1.html">
+        <div class="im"><img src="assets/foto-audio-visueel.jpg" alt=""><span class="tel">22 toepassingen</span></div>
+        <div class="bd"><h3>Audio-visueel</h3>
+          <p>De markt waar we mee begonnen zijn. Cases die tien keer per jaar de vrachtwagen in en uit gaan, vijf jaar lang.</p>
+          <span class="go">Bekijk branche &rarr;</span></div>
+      </a>
+      <a class="br" href="branche-defensie-v1.html">
+        <div class="im"><img src="assets/foto-defensie.jpg" alt=""><span class="tel">7 toepassingen</span></div>
+        <div class="bd"><h3>Defensie</h3>
+          <p>Transport dat aan specificatie moet voldoen en dat aantoonbaar moet zijn. Materiaal, documentatie en keuring liggen vooraf vast.</p>
+          <span class="go">Bekijk branche &rarr;</span></div>
+      </a>
+      <a class="br" href="branche-meet-en-testapparatuur-v1.html">
+        <div class="im"><img src="assets/foto-meet-en-testapparatuur.jpg" alt=""><span class="tel">11 toepassingen</span></div>
+        <div class="bd"><h3>Meet- en testapparatuur</h3>
+          <p>Meetinstrumenten die het veld in gaan. Het schuiminterieur is hier het product &mdash; gefreesd op het instrument, niet op de kist.</p>
+          <span class="go">Bekijk branche &rarr;</span></div>
+      </a>
+      <a class="br" href="branche-broadcast-en-media-v1.html">
+        <div class="im"><img src="assets/foto-broadcast-en-media.jpg" alt=""><span class="tel">9 toepassingen</span></div>
+        <div class="bd"><h3>Broadcast en media</h3>
+          <p>Camera's, optiek en regieapparatuur die dagelijks op locatie staan. Snel open, snel dicht, en altijd compleet.</p>
+          <span class="go">Bekijk branche &rarr;</span></div>
+      </a>
+      <a class="br" href="branche-schaalmodellen-v1.html">
+        <div class="im"><img src="assets/foto-schaalmodellen.jpg" alt=""><span class="tel">5 toepassingen</span></div>
+        <div class="bd"><h3>Schaalmodellen en maquettes</h3>
+          <p>Eenmalig, onvervangbaar en zelden rechthoekig &mdash; altijd volledig maatwerk.</p>
+          <span class="go">Bekijk branche &rarr;</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── 04 · VAN MAAT NAAR KADE — v1 ───────────────────────────── -->
+<section class="assure" data-band="proces">
   <div class="wrap">
     <div class="grid">
       <div>
-        <div class="ey">// 01 — HOE HET WERKT</div>
+        <div class="ey">// 04 &mdash; HOE HET WERKT</div>
         <h2>Van maat naar kade in vier stappen</h2>
-        <p>Je wacht niet op een prijs en niet op een terugbelverzoek. En vóór je bestelt kijkt er
-          altijd nog een casebouwer mee — gratis, want een case die niet past kost ons allebei tijd.</p>
-        <a class="btn btn-pri" href="#" style="margin-top:26px">Laat je maten controleren →</a>
+        <p>Je wacht niet op een prijs en niet op een terugbelverzoek. En v&oacute;&oacute;r je bestelt kijkt er
+          altijd nog een casebouwer mee &mdash; gratis, want een case die niet past kost ons allebei tijd.</p>
+        <a class="btn btn-pri" href="laten-controleren-v1.html" style="margin-top:26px">Laat je maten controleren &rarr;</a>
       </div>
       <div class="steps">
         <div class="st"><div class="i">// 01</div><div><b>Kies of laat kiezen</b><span>Model zelf kiezen, of zeg wat je vervoert.</span></div></div>
         <div class="st"><div class="i">// 02</div><div><b>Configureer online</b><span>Maten, kleur, beslag, wielen. Prijs verandert live mee.</span></div></div>
-        <div class="st"><div class="i">// 03</div><div><b>Laat het controleren</b><span>Een casebouwer kijkt je configuratie na. Binnen één werkdag.</span></div></div>
+        <div class="st"><div class="i">// 03</div><div><b>Laat het controleren</b><span>Een casebouwer kijkt je configuratie na. Binnen &eacute;&eacute;n werkdag.</span></div></div>
         <div class="st"><div class="i">// 04</div><div><b>Zo snel als tien werkdagen later</b><span>Kant-en-klaar of als bouwpakket, met alle onderdelen op maat.</span></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="trust tight">
+<!-- ── 06 · EN DE PRIJS DAN — v6 ──────────────────────────────── -->
+<section class="uitnodiging" data-band="prijsopbouw">
   <div class="wrap">
-    <div class="row">
-      <div class="it"><b>Sinds 1987</b><span>Eigen productie in Doesburg</span></div>
-      <div class="it"><b>De snelste van Nederland</b><span>Ook bij maatwerk</span></div>
-      <div class="it"><b>Op rekening</b><span>Voor zakelijke klanten</span></div>
-      <div class="it"><b>Eigen werkplaats</b><span>Geen tussenhandel</span></div>
+    <div class="grid">
+      <div>
+        <div class="ey ey-dark">// 05 &mdash; EN DE PRIJS DAN</div>
+        <h2>Geen offerte, geen wachttijd</h2>
+        <p>Wat je in de configurator ziet, is de prijs. Geen aanvraagformulier, geen terugbelverzoek, geen drie werkdagen stilte.</p>
+        <a class="btn btn-dark" href="configurator-v1.html" style="margin-top:26px">Start met configureren &rarr;</a>
+      </div>
+      <div class="kaart">
+        <div class="ey ey-dark" style="margin-bottom:16px">// VOORBEELD &middot; RACKCASE ENKEL, 19" 24 HE</div>
+        <div class="rij"><span>Basis rackcase enkel deksel</span><b>&euro; 229</b></div>
+        <div class="rij"><span>Maatwerk 483 &times; 600 &times; 1.334 mm</span><b>&euro; 118</b></div>
+        <div class="rij"><span>Zwart paneel, logo op deksel</span><b>&euro; 45</b></div>
+        <div class="rij"><span>Wielenset 100 mm met rem</span><b>&euro; 20,50</b></div>
+        <div class="tot">
+          <span class="k">// Als bouwpakket</span>
+          <b>&euro; 412,50</b>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="build">
+<!-- ── 07 · OOK ÉÉN CASE — v6 ─────────────────────────────────── -->
+<section class="eencase tight" data-band="eencase">
   <div class="wrap">
     <div class="grid">
       <div>
-        <div class="ey ey-dark">// 02 — ZELF BOUWEN</div>
+        <div class="ey ey-dark">// 06 &mdash; OOK VOOR &Eacute;&Eacute;N INSTRUMENT</div>
+        <h2>&Eacute;&eacute;n case? Ook goed.</h2>
+        <p>Wij bouwen voor verhuurbedrijven met zeventig kisten per seizoen, en voor de gitarist met &eacute;&eacute;n Les Paul. Dezelfde fabriek, dezelfde tolerantie.</p>
+      </div>
+      <div class="obj">
+        <a href="case-voor-gibson-les-paul-v2.html"><b>Gibson Les Paul</b><span>vanaf &euro; 189</span></a>
+        <a href="case-voor-gitaar-v2.html"><b>Fender Stratocaster</b><span>vanaf &euro; 189</span></a>
+        <a href="case-voor-v1.html"><b>Viool of altviool</b><span>vanaf &euro; 175</span></a>
+        <a href="case-voor-v1.html"><b>DJ-controller</b><span>vanaf &euro; 219</span></a>
+        <a href="case-voor-v1.html"><b>Draagbare drone</b><span>vanaf &euro; 165</span></a>
+        <a href="case-voor-v1.html"><b>Alle 38 objecten &rarr;</b><span>zoek op wat je vervoert</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 08 · LIEVER EEN OFFERTE ────────────────────────────────
+     Het paneel van case-aanvragen-v1.html. Staat hier ná de prijs:
+     wie het bedrag al gezien heeft en dan nog een offerte wil, wil hem
+     op papier voor zijn inkoop — dat is een andere vraag dan "wat kost
+     het". De sleepzone is de kern; zo komt het nu ook binnen. -->
+<section class="offerte ruit ruit-dark ruit-aanzet" data-band="aanvraag">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <div class="ey">// 07 &mdash; LIEVER EEN OFFERTE</div>
+        <h2>Of stuur gewoon <span class="acc">wat je hebt</span></h2>
+        <p class="sub">Geen maten bij de hand? Een schets, een datasheet of een foto van je apparatuur is genoeg. Je krijgt dezelfde werkdag een tekening met prijs terug.</p>
+        <div class="sturen">
+          <span>Schets op papier</span>
+          <span>Datasheet of PDF</span>
+          <span>Foto van je apparatuur</span>
+          <span>Alleen de afmetingen</span>
+          <span>Een oude case</span>
+        </div>
+        <div class="zelfdedag">
+          <div class="foto"><img src="assets/joran.svg" alt=""></div>
+          <div>
+            <b>Joran tekent het uit</b>
+            <span>Geen verkoper maar een casebouwer. Reactie op dezelfde werkdag, ook op een half verhaal.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="paneel">
+        <div class="pkop"><b>Vraag je case aan</b><i>// duurt 1 minuut</i></div>
+        <div class="pbody">
+          <div class="vld">
+            <label>Wat ga je vervoeren?</label>
+            <div class="inv"><input placeholder="Bijvoorbeeld: mengtafel Midas M32, of 4&times; moving head"></div>
+          </div>
+          <div class="vld">
+            <label>Wat heb je erbij? <em>&mdash; optioneel</em></label>
+            <div class="sleep">
+              <div class="ic">+</div>
+              <div>
+                <b>Sleep je schets, foto of datasheet hierheen</b>
+                <span>PDF, JPG, DWG of STEP &middot; meerdere bestanden mag</span>
+              </div>
+            </div>
+          </div>
+          <div class="tweekolom">
+            <div class="vld">
+              <label>Aantal</label>
+              <div class="inv"><input placeholder="1"></div>
+            </div>
+            <div class="vld">
+              <label>Wanneer moet hij er zijn?</label>
+              <div class="inv"><input placeholder="Geen haast"></div>
+            </div>
+          </div>
+          <div class="vld" style="margin-bottom:0">
+            <label>Waar sturen we het naartoe?</label>
+            <div class="inv"><input placeholder="naam@bedrijf.nl"></div>
+          </div>
+        </div>
+        <div class="voet">
+          <div class="bel">Geen account nodig &middot; <b>reactie dezelfde werkdag</b><br>Vrijblijvend &mdash; je zit nergens aan vast</div>
+          <a class="btn btn-dark" href="case-aanvragen-v1.html">Stuur op &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 09 · ONDERDELEN, UITGEBREID — v1 ───────────────────────── -->
+<section class="build tight" data-band="onderdelen">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <div class="ey ey-dark">// 08 &mdash; ZELF BOUWEN</div>
         <h2>Of bestel alleen de onderdelen</h2>
-        <p class="lead">Profielen, hoeken, sluitingen, wielen en schuim — hetzelfde materiaal
+        <p class="lead">Profielen, hoeken, sluitingen, wielen en schuim &mdash; hetzelfde materiaal
           waarmee wij bouwen. Vandaag besteld, morgen verstuurd.</p>
         <div class="cats">
-          <a href="#">Profielen</a><a href="#">Hoeken</a><a href="#">Handgrepen</a>
-          <a href="#">Sluitingen</a><a href="#">Scharnieren</a><a href="#">Wielen</a>
-          <a href="#">Schuimplastic</a><a href="#">19" artikelen</a>
+          <a href="categorie-v1.html">Profielen</a><a href="categorie-v1.html">Hoeken</a><a href="categorie-v1.html">Handgrepen</a>
+          <a href="categorie-v1.html">Sluitingen</a><a href="categorie-v1.html">Scharnieren</a><a href="categorie-v1.html">Wielen</a>
+          <a href="categorie-v1.html">Schuimplastic</a><a href="categorie-v1.html">19" artikelen</a>
         </div>
       </div>
       <div>
@@ -360,14 +507,22 @@
   </div>
 </section>
 
-<section class="closer ruit ruit-dark ruit-veld">
+<!-- ── SLOT — v1, met wisselende kop ──────────────────────────
+     De vijf regels zijn de slotkoppen van de andere versies. Ze zeggen
+     hetzelfde op vijf manieren, en dat is precies het punt: er is niet
+     één deur. De eigen kop van deze versie staat vooraan en blijft het
+     langst staan. Het wisselen begint pas als je hier bent — zie
+     assets/wisselkop.js. -->
+<section class="closer ruit ruit-dark ruit-veld beslag" data-band="slot">
+  <span class="hk tl"></span><span class="hk tr"></span><span class="hk bl"></span><span class="hk br"></span>
   <div class="wrap">
     <div class="ey">// KLAAR OM TE BEGINNEN?</div>
-    <h2>Jouw maten. Jouw kist.</h2>
+    <h2 data-wisselkop='["Jouw maten. Jouw kist.","Bel een casebouwer.","Kom gerust langs.","Vul je maten in.","Stuur het gewoon op."]'>Jouw maten. Jouw kist.</h2>
     <p>Begin met configureren en zie binnen een minuut wat je case gaat kosten.</p>
-    <a class="btn btn-pri" href="#">Open de configurator →</a>
+    <a class="btn btn-pri" href="configurator-v1.html">Open de configurator &rarr;</a>
   </div>
 </section>
+<!-- ══ gedeelde homepage-inhoud · eind ══ -->
 
 <footer>
   <div class="wrap">

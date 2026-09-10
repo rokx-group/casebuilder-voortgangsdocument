@@ -1,0 +1,233 @@
+/* ══════════════════════════════════════════════════════════════
+   Homepage — alles onder de hero
+
+   Gedeeld door de homepageversies die alleen in hun hero verschillen.
+   Stond eerst per versie in een <style>-blok, en liep daar meteen uiteen:
+   v2 en v3 raakten los van elkaar op regels die niemand bewust had
+   veranderd, en v12 miste een USP die de rest wel kreeg.
+
+   De bijbehorende markup staat in mockups/onderdelen/homepage-onder.html
+   en wordt met scripts/bouw-onderdelen.mjs bijgeschreven. Hier de opmaak,
+   daar de inhoud — allebei op één plek.
+
+   Wat hier NIET in hoort: alles wat met de hero of de balk te maken heeft.
+   Dat is per versie anders en is precies waar de vergelijking over gaat.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── 01 · drie manieren — v1 ─────────────────────────────────
+   A, B en C, niet 01/02/03: dit zijn geen stappen maar routes. Wie er
+   één kiest doet de andere twee niet. */
+.ingangen{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
+  border:1px solid var(--rule)}
+.ing{background:#fff;padding:36px 30px 32px;display:flex;flex-direction:column;min-height:310px;transition:.15s}
+.ing:hover{background:var(--lightblue)}
+.ing .n{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--cyan)}
+.ing h3{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:26px;letter-spacing:.03em;
+  color:var(--dark);margin:16px 0 12px;line-height:1.05}
+.ing p{font-size:15px;color:var(--mute);flex:1}
+.ing .go{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:15px;letter-spacing:.05em;
+  color:var(--blue);margin-top:20px;display:flex;align-items:center;gap:9px}
+.ing:hover .go{color:var(--dark)}
+
+/* ── 02 · wie er mee op tour is — v4 ─────────────────────────
+   Namen, geen bijvoeglijke naamwoorden. Logo's en citaat zijn
+   plaatshouders tot iemand bij Proflite toestemming heeft gevraagd. */
+.klanten{background:var(--bg);border-top:1px solid var(--rule)}
+.klanten .row{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px}
+.klanten .lg{flex:1;min-width:150px;height:66px;border:1px solid var(--rule);background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--rule)}
+.klanten .cit{margin-top:34px;border-left:3px solid var(--cyan);padding-left:26px;max-width:70ch}
+.klanten .cit p{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:24px;
+  letter-spacing:.02em;color:var(--dark);line-height:1.2}
+.klanten .cit span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mute);display:block;margin-top:12px}
+
+/* ── 03 · branches — overzicht als rail ──────────────────────
+   Zes markten, liggend te schuiven. Een rail en geen raster van zes,
+   omdat het geen keuzemenu is: je hoeft er maar één te herkennen. Een
+   raster vraagt of je alles gelezen hebt, een rail niet.
+
+   scroll-snap zonder script, hetzelfde patroon als de rail op
+   grote-spelers-v1. Elke kaart klikt door naar zijn eigen branchepagina;
+   de aantallen komen van /branches en moeten daarmee gelijk blijven. */
+.branches{border-top:1px solid var(--rule)}
+.branches .sec-head{display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.branches .sec-head > div{margin-right:auto}
+.rail{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
+  padding-bottom:8px;margin-top:26px}
+.rail::-webkit-scrollbar{height:6px}
+.rail::-webkit-scrollbar-thumb{background:var(--rule)}
+.br{flex:0 0 316px;scroll-snap-align:start;border:1px solid var(--rule);background:#fff;
+  display:flex;flex-direction:column;transition:.15s}
+.br:hover{border-color:var(--dark)}
+.br .im{aspect-ratio:16/10;overflow:hidden;position:relative;background:var(--bg)}
+.br .im img{width:100%;height:100%;object-fit:cover}
+.br .tel{position:absolute;left:0;bottom:0;background:var(--void);color:var(--cyan);
+  font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:6px 10px}
+.br .bd{padding:18px 20px 20px;display:flex;flex-direction:column;flex:1}
+.br h3{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:20px;
+  letter-spacing:.03em;color:var(--dark);line-height:1.05}
+.br p{font-size:14px;color:var(--mute);line-height:1.5;margin-top:9px;flex:1}
+.br .go{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:14px;
+  letter-spacing:.05em;color:var(--blue);margin-top:16px}
+.br:hover .go{color:var(--dark)}
+
+/* ── 04 · van maat naar kade — v1 ────────────────────────────── */
+.assure{background:var(--dark);color:#fff}
+.assure .grid{display:grid;grid-template-columns:1.15fr 1fr;gap:64px;align-items:center}
+.assure h2{font-size:clamp(30px,3.4vw,46px);color:#fff;margin:14px 0 18px}
+.assure p{color:rgba(255,255,255,.8);font-size:17px;max-width:52ch}
+.assure .steps{border-left:1px solid rgba(255,255,255,.2);padding-left:32px}
+.assure .st{display:flex;gap:18px;padding:15px 0}
+.assure .st+.st{border-top:1px solid rgba(255,255,255,.14)}
+.assure .st .i{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--cyan);padding-top:4px;white-space:nowrap}
+.assure .st b{font-family:var(--disp);text-transform:uppercase;font-size:17px;letter-spacing:.03em;font-weight:700;display:block}
+.assure .st span{font-size:14px;color:rgba(255,255,255,.68)}
+
+/* ── 05 · vijf kaarten, prijs groot — v4/v6 ──────────────────
+   Het bedrag als display-cijfer en de nuancering klein eronder: dat is
+   waar deze variant zich van v1 onderscheidt, waar prijs en voorwaarde
+   even zwaar wogen en je dus geen van beide las. */
+.mdlrij .sec-head{display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.mdlrij .sec-head > div{margin-right:auto}
+.mdlrij .case .pr b{display:block;font-family:var(--disp);font-weight:900;font-size:27px;
+  letter-spacing:.02em;color:var(--dark);line-height:1}
+.mdlrij .case .pr i{display:block;margin-top:5px;font-family:var(--mono);font-size:9px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+
+/* ── 06 · en de prijs dan — v6 ───────────────────────────────
+   Eén voorbeeldkist helemaal uitgerekend. Een percentage of een "vanaf"
+   overtuigt niemand; vier regels met een optelsom eronder wel, omdat je
+   ziet waar het geld heen gaat. */
+.uitnodiging{border-top:1px solid var(--rule)}
+.uitnodiging .grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.uitnodiging h2{font-size:clamp(28px,3.2vw,42px);margin:14px 0 16px}
+.uitnodiging p{font-size:16.5px;color:var(--mute);max-width:46ch}
+.uitnodiging .kaart{border:1px solid var(--rule);background:#fff;padding:26px 28px 24px}
+.uitnodiging .rij{display:flex;align-items:baseline;gap:16px;padding:11px 0;
+  border-bottom:1px solid var(--rule);font-size:14.5px;color:var(--mute)}
+.uitnodiging .rij b{margin-left:auto;font-family:var(--disp);font-weight:700;font-size:17px;
+  letter-spacing:.02em;color:var(--dark);white-space:nowrap}
+.uitnodiging .tot{display:flex;align-items:baseline;gap:16px;padding-top:18px}
+.uitnodiging .tot .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--blue)}
+.uitnodiging .tot b{margin-left:auto;font-family:var(--disp);font-weight:900;font-size:34px;
+  letter-spacing:.02em;color:var(--dark);line-height:1}
+
+/* ── 07 · ook één case — v6 ──────────────────────────────────── */
+.eencase{border-top:1px solid var(--rule)}
+.eencase .grid{display:grid;grid-template-columns:1fr 1.25fr;gap:52px;align-items:center}
+.eencase h2{font-size:clamp(26px,2.9vw,38px);margin:12px 0 14px}
+.eencase p{font-size:16px;color:var(--mute);max-width:44ch}
+.eencase .obj{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
+  border:1px solid var(--rule)}
+.eencase .obj a{background:#fff;padding:18px 18px 20px;transition:.13s}
+.eencase .obj a:hover{background:var(--lightblue)}
+.eencase .obj b{font-family:var(--disp);text-transform:uppercase;font-size:16px;letter-spacing:.03em;
+  color:var(--dark);display:block;line-height:1.1}
+.eencase .obj span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--mute);display:block;margin-top:7px}
+
+/* ── 08 · liever een offerte — v8/case-aanvragen ─────────────
+   Hier stond "kleur en logo". Dat blok verkoopt een detail; dit blok
+   vangt de bezoeker op die na negen secties nog steeds niet weet welke
+   maat hij nodig heeft — en dat is de duurste bezoeker op de pagina.
+
+   Het paneel is dat van case-aanvragen-v1.html, niet nagemaakt: als de
+   velden daar veranderen moeten ze hier mee. Bewust ná de prijsopbouw,
+   want wie de prijs al gezien heeft en dan nog een offerte wil, wil hem
+   op papier — niet omdat hij het bedrag niet kon vinden.
+
+   De sleepzone is het hart ervan. Zeventig procent van de orders komt
+   binnen als een mail met een bijlage; een veld dat daarom vraagt is
+   dichter bij hoe het werkelijk gaat dan een maatformulier. */
+.offerte{background:var(--void);color:#fff}
+.offerte .grid{display:grid;grid-template-columns:1fr 620px;gap:56px;align-items:start}
+.offerte h2{font-size:clamp(28px,3.2vw,44px);color:#fff;margin:16px 0 0;max-width:20ch}
+.offerte h2 .acc{color:var(--cyan)}
+.offerte p.sub{margin-top:18px;font-size:17px;color:rgba(255,255,255,.8);max-width:44ch}
+.sturen{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
+.sturen span{border:1px solid rgba(255,255,255,.3);padding:8px 14px;font-family:var(--mono);
+  font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.82)}
+.zelfdedag{margin-top:30px;border-top:1px solid rgba(255,255,255,.2);padding-top:22px;
+  display:flex;gap:16px;align-items:center}
+.zelfdedag .foto{width:52px;height:52px;flex:none;background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.24);overflow:hidden}
+.zelfdedag .foto img{width:100%;height:100%;object-fit:cover;display:block}
+.zelfdedag b{font-family:var(--disp);text-transform:uppercase;font-size:19px;letter-spacing:.03em;
+  color:#fff;display:block;line-height:1.1}
+.zelfdedag span{font-size:14px;color:rgba(255,255,255,.7);display:block;margin-top:4px}
+
+.paneel{background:#fff;color:var(--ink);box-shadow:0 18px 60px rgba(0,0,0,.45)}
+.paneel .pkop{background:var(--dark);color:#fff;padding:16px 28px;display:flex;align-items:baseline;gap:14px}
+.paneel .pkop b{font-family:var(--disp);text-transform:uppercase;font-size:20px;letter-spacing:.03em}
+.paneel .pkop i{margin-left:auto;font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
+.pbody{padding:24px 28px 26px}
+.vld{margin-bottom:16px}
+.vld label{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);display:block;margin-bottom:7px}
+.vld label em{color:var(--rule);letter-spacing:.1em}
+.vld .inv{display:flex;align-items:center;border:1.5px solid var(--rule);height:46px;padding:0 14px;background:#fff}
+.vld .inv:focus-within{border-color:var(--dark)}
+.vld input{border:0;outline:0;width:100%;font-family:var(--body);font-size:15px;color:var(--ink);background:transparent}
+.vld input::placeholder{color:#9aa3ae}
+.tweekolom{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sleep{border:1.5px dashed var(--rule);background:var(--bg);padding:18px 20px;
+  display:flex;align-items:center;gap:16px;cursor:pointer;transition:.14s}
+.sleep:hover{border-color:var(--blue);background:var(--lightblue)}
+.sleep .ic{width:38px;height:38px;flex:none;border:1.5px solid var(--dark);display:flex;
+  align-items:center;justify-content:center;color:var(--dark);font-family:var(--mono);font-size:17px}
+.sleep b{font-family:var(--disp);text-transform:uppercase;font-size:16px;letter-spacing:.03em;
+  color:var(--dark);display:block;line-height:1.1}
+.sleep span{font-size:13px;color:var(--mute);display:block;margin-top:4px}
+.paneel .voet{border-top:1px solid var(--rule);background:var(--bg);padding:18px 28px;
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.paneel .voet .bel{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--mute);line-height:1.7}
+.paneel .voet .bel b{color:var(--dark);font-weight:600}
+.paneel .voet .btn{margin-left:auto}
+
+/* ── 09 · onderdelen, uitgebreid — v1 ───────────────────────── */
+.build{border-top:1px solid var(--rule)}
+.build .grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.build .cats{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.build .cats a{border:1px solid var(--rule);background:#fff;padding:9px 14px;font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.build .cats a:hover{border-color:var(--dark);color:var(--dark)}
+.build .side{border:1px solid var(--rule);padding:28px 30px}
+.build .side h4{font-size:20px;margin-bottom:8px}
+.build .side p{font-size:14.5px;color:var(--mute)}
+.build .side + .side{margin-top:14px}
+
+/* ── slot, met wisselende kop — v1 ───────────────────────────
+   De kop wisselt door vijf regels. De hoogte staat vast op twee regels,
+   anders springt de knop eronder mee zodra er een langere regel komt —
+   en dan beweegt de hele sectie in plaats van alleen de kop.
+
+   .weg is de uit-stand; de duur hier moet gelijk zijn aan UIT in
+   assets/wisselkop.js, anders zie je de tekst halverwege wisselen. */
+.closer{background:var(--void);color:#fff;text-align:center}
+.closer h2{font-size:clamp(30px,3.6vw,50px);color:#fff;
+  min-height:2.05em;display:flex;align-items:center;justify-content:center;
+  opacity:1;transform:translateY(0);
+  transition:opacity .42s ease,transform .42s cubic-bezier(.4,0,.2,1)}
+.closer h2.weg{opacity:0;transform:translateY(-14px)}
+.closer p{color:rgba(255,255,255,.75);margin:14px auto 30px;max-width:48ch;font-size:17px}
+@media (prefers-reduced-motion: reduce){.closer h2{transition:none}}
+
+@media (max-width:1080px){
+  .offerte .grid{grid-template-columns:1fr;gap:34px}
+  .ingangen{grid-template-columns:1fr}
+  .assure .grid,.uitnodiging .grid,.eencase .grid,.build .grid{grid-template-columns:1fr;gap:36px}
+  .eencase .obj{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:760px){
+  .pbody{padding:20px 18px 22px}
+  .paneel .pkop,.paneel .voet{padding-left:18px;padding-right:18px}
+  .paneel .voet .btn{margin-left:0;width:100%;justify-content:center}
+  .tweekolom{grid-template-columns:1fr}
+  .assure .steps{padding-left:20px}
+  .eencase .obj{grid-template-columns:1fr}
+}
