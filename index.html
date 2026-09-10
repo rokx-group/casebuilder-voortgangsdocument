@@ -1212,12 +1212,50 @@
        alleen de vijf fasen toont. Ze houden class="tab" en data-hash, dus
        het schakelscript pakt ze ongewijzigd op. -->
   <ul class="doorsnee">
+    <li><button class="tab" role="tab" id="t9" data-hash="intro" aria-controls="p9" aria-selected="false">Intro</button></li>
     <li><button class="tab" role="tab" id="t4" data-hash="wireframes" aria-controls="p4" aria-selected="false">Wireframes</button></li>
     <li><button class="tab" role="tab" id="t8" data-hash="features" aria-controls="p8" aria-selected="false">Features</button></li>
     <li><button class="tab" role="tab" id="t7" data-hash="meetings" aria-controls="p7" aria-selected="false">Meetings</button></li>
     <li><a class="uit" href="mockups/header-varianten.html" target="_blank" rel="noopener">Prototypes<span class="pijl">&#8599;</span></a></li>
     <li><a class="uit" href="mockups/overzicht.html" target="_blank" rel="noopener">Alle mockups<span class="pijl">&#8599;</span></a></li>
   </ul>
+
+  <div class="tabpanel" id="p9" role="tabpanel" aria-labelledby="t9" hidden>
+
+    <header class="masthead">
+      <span class="eyebrow">CaseBuilder</span>
+      <h1>Intro</h1>
+      <p class="lede">Waarom de site zo in elkaar zit: per onderdeel het doel, de keuze erachter, en wat erop moet staan.</p>
+    </header>
+
+    <div class="thesis">
+      <span class="eyebrow">Uitgangspunt</span>
+      <p><strong>Drie routes, en wij bepalen per product welke.</strong> <b>Shop</b> (niveau 1): een vaste case voor één apparaat, alleen kleur en logo, direct afrekenen — plus de onderdelen. <b>Configurator</b> (niveau 2 en 3): hoeken en maten, en wie meer wil gaat door naar alles. <b>Aanvraag</b>: geen ontwerp, een casebouwer tekent op een schets of datasheet.</p>
+      <p>De klant hoeft het woord &quot;niveau&quot; nooit te zien: het apparaat dat hij invult bepaalt de route. Een vaste case kan niet opgeschaald worden naar andere maten; de configurator wel, van 2 naar 3.</p>
+      <p>De homepage spreekt in de eerste plaats de professionele klant aan. De kleine koper moet zich er welkom voelen, maar hij draagt de pagina niet.</p>
+    </div>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Per onderdeel</span>
+        <h2 data-rail="Ontwerpkeuzes">Ontwerpkeuzes</h2>
+      </div>
+      <div class="cards">
+        <div class="card"><h3>Navigatiebalk</h3><p><b>Doel</b> elke bezoeker in één klik op de juiste route.</p><p><b>Waarom</b> drie soorten bezoekers: wie weet wat hij nodig heeft, wie weet wat erin moet, en wie het nog niet weet. Zelf configureren is geen tabblad meer maar hoort bij Flightcases — als eigen tab concurreerde het met zijn eigen product.</p><p><b>Bevat</b> Case aanvragen · Wat ga je vervoeren? · Flightcases (menu met toepassingen, modellen en zelf configureren) · Branches · Service · Shop, achteraan. Zoekveld altijd zichtbaar voor artikelnummers, telefoonnummer rechts.</p></div>
+        <div class="card"><h3>Hero (homepage)</h3><p><b>Doel</b> in één scherm zeggen wat we doen, en de grote klant aanspreken zonder de kleine af te schrikken.</p><p><b>Waarom</b> een belofte in plaats van een getal — &quot;de snelste van Nederland&quot; in plaats van &quot;tien werkdagen&quot;, want de levertijd wordt straks per configuratie berekend.</p><p><b>Bevat</b> kop · Case aanvragen als hoofdknop · Wat ga je vervoeren? als veld dat openklapt, met &quot;Ik weet het nog niet&quot; eronder · specband met levertijd, prijs, uitvoering en controle. Knoppen boven de vouw.</p></div>
+        <div class="card"><h3>Onder de hero</h3><p><b>Doel</b> de drie routes zichtbaar maken.</p><p><b>Waarom</b> de professional draagt de pagina, de consument vindt hier zijn deur.</p><p><b>Bevat</b> ik weet wat ik vervoer → wij kiezen de route · ik weet mijn maten → configurator · ik heb een tekening of een serie → aanvraag.</p></div>
+        <div class="card"><h3>Flightcases</h3><p><b>Doel</b> van &quot;welk model?&quot; naar een modelpagina.</p><p><b>Waarom</b> bezoekers kiezen op wat ze vervoeren, niet op hoe het heet.</p><p><b>Bevat</b> &quot;De vorm kies je, de maten geef je&quot; · draaiende 3D-kist die van maat verandert en het model kiest · knop die meeloopt naar dat model · strook &quot;in het veld&quot; · modellen met vanafprijs · vergelijkingstabel.</p></div>
+        <div class="card"><h3>Modelpagina</h3><p><b>Doel</b> vertrouwen geven vóór de configurator.</p><p><b>Bevat</b> vanafprijs · foto van een afgebouwde case · verwachtingen (maten, levertijd, kleur, controle) · configurator die start bij stap 2.</p></div>
+        <div class="card"><h3>Wat ga je vervoeren?</h3><p><b>Doel</b> wie zijn apparaat kent maar niet de case, toch laten bestellen — en hier bepaalt het apparaat de route.</p><p><b>Bevat</b> zoekveld als hoofdactie · index van toepassingen · drie uitwegen: vaste case bekend → shop · maten bekend → configurator · staat er niet bij → aanvraag.</p></div>
+        <div class="card"><h3>Shop (niveau 1)</h3><p><b>Doel</b> kant-en-klare cases en onderdelen direct verkopen.</p><p><b>Waarom</b> een vaste case voor één apparaat — kleur en logo kiezen, verder niets. Een Medusa-product, geen configurator, en niet op te schalen naar andere maten. Er zijn er nu bijna nul; dit assortiment moet nog worden opgebouwd. Shop wijst voorlopig naar Wat ga je vervoeren.</p><p><b>Bevat</b> beeld links, koopblok rechts (prijs, kleur, logo, aantal, winkelwagen) · specificaties · alternatieven pas onderaan.</p></div>
+        <div class="card"><h3>Configurator (niveau 2 en 3)</h3><p><b>Doel</b> maatwerk zonder wachten op een offerte.</p><p><b>Waarom</b> niveau 2 zet hoeken en afmetingen open; wie meer wil gaat door naar niveau 3, waar alles aanpasbaar is, ook handgrepen en beslag.</p><p><b>Bevat</b> prijs die meeloopt · stap omhoog van 2 naar 3 · een casebouwer die meekijkt vóór er gezaagd wordt.</p></div>
+        <div class="card"><h3>Branches</h3><p><b>Doel</b> laten zien dat we deze markt kennen.</p><p><b>Waarom</b> zoekverkeer zit op apparatuur; sectoren alleen op eigen pagina&#39;s.</p><p><b>Bevat</b> per branche: eisen die vooraf vastliggen · toepassingen · bewijs in plaats van klantverhalen · afsluiting met naam en gezicht.</p></div>
+        <div class="card"><h3>Grote spelers</h3><p><b>Doel</b> inkopers aanspreken op de manier waarop ze inkopen.</p><p><b>Bevat</b> aanbesteding, OEM en series, verhuur, omroep, netbeheer · referenties (daar is toestemming voor nodig, geen tekst).</p></div>
+        <div class="card"><h3>Case aanvragen</h3><p><b>Doel</b> van schets naar tekening met prijs, dezelfde werkdag.</p><p><b>Waarom</b> zeventig procent van de orders begint hier, dus deze route krijgt overal de hoofdknop.</p><p><b>Bevat</b> formulier boven de vouw · schets, datasheet of foto · aantal · wanneer · budget (optioneel, scheelt een ronde) · e-mail.</p></div>
+      </div>
+    </section>
+
+  </div>
 
   <div class="tabpanel" id="p1" role="tabpanel" aria-labelledby="t1" hidden>
 
