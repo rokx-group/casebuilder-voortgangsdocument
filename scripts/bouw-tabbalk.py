@@ -4,7 +4,7 @@ import glob, re, os
 OUDERS = [
  ('header-varianten.html',        'Header',          None),
  ('hero-voorstellen.html',        'Hero',            None),
- ('homepage-varianten.html',      'Homepage',        None),
+ ('homepage-varianten.html',      'Homepage',        'homepage'),
  ('case-aanvragen-varianten.html','Case aanvragen',  None),
  ('case-voor-varianten.html',     '/case-voor',      'case-voor'),
  ('flightcases-varianten.html',   '/flightcases',    'flightcases'),
@@ -16,6 +16,7 @@ OUDERS = [
  ('footer-varianten.html',        'Footer',          None),
 ]
 KINDEREN = {
+ 'homepage':    [('homepage-samenstellen.html',        'Samenstellen')],
  'case-voor':   [('case-voor-categorie-varianten.html', 'Productcategorie'),
                  ('case-voor-detail-varianten.html',    'Productdetail')],
  'flightcases': [('configurator-varianten.html',        '/configurator')],
@@ -53,7 +54,8 @@ STIJL = """
 
 if __name__ == '__main__':
     n = 0
-    for pad in glob.glob('mockups/*varianten*.html') + ['mockups/hero-voorstellen.html']:
+    for pad in (glob.glob('mockups/*varianten*.html')
+                + ['mockups/hero-voorstellen.html', 'mockups/homepage-samenstellen.html']):
         bestand = os.path.basename(pad)
         s = open(pad, encoding='utf-8').read()
         m = re.search(r'<div class="tabs">.*?</div>(\s*<div class="subtabs">.*?</div>)?', s, re.S)
