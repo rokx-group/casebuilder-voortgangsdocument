@@ -75,6 +75,18 @@
 .specs dd{font-size:15px;color:var(--ink)}
 .specs dd.prijs{font-family:var(--disp);font-size:22px;font-weight:900;color:var(--dark)}
 .podium .cta{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+/* Probeer het (besloten 11 september, punt 05): de schuiven zetten de
+   grote kist op jouw maat; de prijs loopt mee en zakt nooit onder de
+   vanafprijs van het model. Gedrag: assets/probeer.js. */
+.jouwmaat{margin-top:18px;border-top:1.5px solid var(--dark);padding-top:14px}
+.jouwmaat .kop{display:flex;align-items:baseline;gap:12px;margin-bottom:8px}
+.jouwmaat .kop .ey{margin:0}
+.jouwmaat .kop b{margin-left:auto;font-family:var(--disp);font-size:26px;font-weight:900;color:var(--dark)}
+.jouwmaat .kop small{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--mute)}
+.jouwmaat label{display:grid;grid-template-columns:70px 1fr 60px;align-items:center;gap:10px;font-family:var(--mono);
+  font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+.jouwmaat input[type=range]{accent-color:var(--dark);width:100%}
+.jouwmaat output{font-family:var(--disp);font-size:16px;color:var(--dark);text-align:right}
 
 /* De vijf: allemaal draaiend, allemaal tegelijk. De kist in een tegel
    vangt geen muis — de hele tegel is de knop. */
@@ -347,7 +359,7 @@
     <h1>De vorm kies je. <span class="acc">De maten geef je.</span></h1>
     <p class="lead">Vijf modellen, allemaal op maat. Klik er een aan om hem groot te zien, met waar hij voor is en wat hij kost.</p>
 
-    <div class="podium">
+    <div class="podium" data-probeer data-vanaf="149">
       <div class="kistvak">
         <div class="kist3d" data-draaikist data-vrij="800" data-grootte="250" data-podium title="Sleep om te draaien">
           <div class="kubus"><div class="zij achter"></div><div class="zij links"></div><div class="zij rechts"></div><div class="zij boven"></div><div class="zij onder"></div><div class="zij voor"></div></div>
@@ -360,8 +372,14 @@
         <h2 data-p-naam></h2>
         <p class="waar" data-p-waar></p>
         <dl class="specs" data-p-specs></dl>
+        <div class="jouwmaat">
+          <div class="kop"><span class="ey ey-dark">// Probeer het &middot; jouw maat</span><b data-probeerprijs></b><small>voorbeeld &middot; excl. btw</small></div>
+          <label>Breedte<input type="range" min="300" max="1400" step="10" value="700" data-schuif="b"><output data-uit="b">700</output></label>
+          <label>Hoogte<input type="range" min="150" max="1000" step="10" value="250" data-schuif="h"><output data-uit="h">250</output></label>
+          <label>Diepte<input type="range" min="200" max="1000" step="10" value="450" data-schuif="d"><output data-uit="d">450</output></label>
+        </div>
         <div class="cta">
-          <a class="btn btn-pri" data-p-config href="#">Configureer dit model &rarr;</a>
+          <a class="btn btn-pri" data-p-config data-probeerlink data-basis="configurator-v1.html?start=1" href="configurator-v1.html?start=1">Configureer dit model &rarr;</a>
           <a class="btn btn-out" data-p-meer href="#">Meer over dit model</a>
         </div>
       </div>
@@ -504,6 +522,7 @@ window.MODELLEN = [
 })();
 </script>
 <script src="assets/draaikist.js"></script>
+<script src="assets/probeer.js"></script>
 <script>
 /* De kisten staan en draaien; nu de maten erin, en het podium. */
 (function () {
@@ -516,7 +535,9 @@ window.MODELLEN = [
   var podium = q('[data-podium]');
   function kies(i, scrol) {
     var m = MODELLEN[i];
-    maat(podium, m);
+    podium.closest('[data-probeer]').dispatchEvent(new CustomEvent('probeer:zet', { detail: {
+      b: m.b, h: m.h, d: m.d, vanaf: m.prijs, naam: m.naam,
+      basis: 'configurator-v1.html?start=1&model=' + encodeURIComponent(m.naam) } }));
     q('[data-p-ey]').textContent = '// Model ' + (i + 1) + ' van 5';
     q('[data-p-naam]').textContent = m.naam;
     q('[data-p-waar]').textContent = m.waar;
@@ -530,7 +551,6 @@ window.MODELLEN = [
       if (n === lijst.length - 1) dd.className = 'prijs';
       dl.appendChild(dt); dl.appendChild(dd);
     });
-    q('[data-p-config]').href = 'configurator-v1.html?start=1&model=' + encodeURIComponent(m.naam);
     q('[data-p-meer]').href = m.href;
     q('[data-p-meer]').textContent = 'Meer over de ' + m.naam.toLowerCase();
     qa('[data-vijf] button').forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.i === i)); });
