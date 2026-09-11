@@ -70,7 +70,7 @@ const BANDEN = [
   ["aanvraag",    "Offertepaneel",     "Het aanvraagformulier met sleepzone."],
   ["zakelijk",    "Zakelijk",          "Series, staffels, op rekening, herhaalorders."],
   ["herhaalorder","Bijbestellen",      "De strook voor wie ingelogd terugkomt."],
-  ["vertrouwen",  "Vertrouwen",        "Sinds 1987, eigen werkplaats, geen tussenhandel."],
+  ["vertrouwen",  "Vertrouwen",        "20+ jaar, eigen werkplaats, geen tussenhandel."],
   ["omweg",       "De omweg",          "Waarom het zonder offerte sneller gaat."],
   ["geenmatch",   "Niets gevonden",    "Wat er gebeurt als je object er niet bij staat."],
   ["onderdelen",  "Onderdelen",        "Zelf bouwen: profielen, hoeken, zaagservice."],
