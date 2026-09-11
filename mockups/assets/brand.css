@@ -418,15 +418,20 @@ nav.primary .megamenu .wrap{display:grid;grid-template-columns:1.15fr 1fr 1fr;ga
 .megamenu li a .n{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--rule)}
 /* Zelf configureren is geen link tussen de andere: het is de route die
    hier vandaan het meeste oplevert, dus die krijgt een vlak. */
-.megamenu .zelf{background:var(--lightblue);padding:22px 22px 24px;border:1px solid var(--rule)}
-.megamenu .zelf b{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:19px;
+/* Een tweede kop in dezelfde kolom (Service: bestellen, dan over ons)
+   heeft lucht nodig; de eerste staat al bovenaan. */
+.megamenu ul + h4{margin-top:22px}
+/* Het uitgelichte vlak rechts in elk menu. Heette .zelf toen alleen
+   Flightcases een menu had en dat vlak "Zelf configureren" was. */
+.megamenu .vlak{background:var(--lightblue);padding:22px 22px 24px;border:1px solid var(--rule)}
+.megamenu .vlak b{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:19px;
   letter-spacing:.03em;color:var(--dark);display:block;line-height:1.1}
-.megamenu .zelf p{font-size:14px;color:var(--mute);margin:9px 0 16px}
+.megamenu .vlak p{font-size:14px;color:var(--mute);margin:9px 0 16px}
 /* nav.primary a zet de kleur op var(--dark) en is specifieker dan
    .btn-dark, dus de knoptekst werd donker op een donkere knop: een leeg
    vlak. Dezelfde reden voor height: de balk zet links op height:100%. */
-nav.primary .megamenu .zelf .btn-dark{color:#fff;height:auto}
-.megamenu .zelf .btn{padding:12px 20px;font-size:14px}
+nav.primary .megamenu .vlak .btn-dark{color:#fff;height:auto}
+.megamenu .vlak .btn{padding:12px 20px;font-size:14px}
 
 @media(prefers-reduced-motion:reduce){ .megamenu{transition:none} }
 /* Op een telefoon geen zwevend paneel: het klapt daar gewoon in de

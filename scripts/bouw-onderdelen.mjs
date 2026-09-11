@@ -67,16 +67,23 @@ function actiefItem(nav) {
 /** Zet class="on" op het item met deze tekst. */
 function markeer(nav, tekst) {
   if (!tekst) return nav;
-  // Het megamenu even opzij: daarbinnen staan dezelfde woorden nog een
-  // keer, en die mogen de markering niet opvangen. Alleen eruit knippen
-  // en terugzetten werkt — afkappen bij het paneel zou Branches en
-  // Service buiten bereik laten, want die staan erna.
-  const PLAATS = "\u0000MENU\u0000";
-  const paneel = nav.match(/<div class="megamenu">[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/);
-  const kaal = paneel ? nav.replace(paneel[0], PLAATS) : nav;
+  // De megamenu's even opzij: daarbinnen staan dezelfde woorden nog een
+  // keer, en die mogen de markering niet opvangen. Eruit knippen en
+  // terugzetten werkt — afkappen bij het eerste paneel zou alles erna
+  // buiten bereik laten.
+  //
+  // Elk paneel eindigt op <!-- /megamenu -->. Eerst zocht dit op drie
+  // sluitende </div>'s achter elkaar, en dat hield op te kloppen zodra er
+  // een tweede paneel met een andere opbouw bij kwam. Een eindmerk telt
+  // niet mee met de nesting, dus maakt het niet uit wat erin staat.
+  const panelen = [];
+  const kaal = nav.replace(/<div class="megamenu">[\s\S]*?<!-- \/megamenu -->/g, (p) => {
+    panelen.push(p);
+    return `\u0000MENU${panelen.length - 1}\u0000`;
+  });
   const veilig = tekst.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const uit = kaal.replace(new RegExp(`(<a href="[^"]*")(>${veilig}</a>)`), '$1 class="on"$2');
-  return paneel ? uit.replace(PLAATS, paneel[0]) : uit;
+  return uit.replace(/\u0000MENU(\d+)\u0000/g, (_, i) => panelen[+i]);
 }
 
 const bestanden = readdirSync(MAP)
