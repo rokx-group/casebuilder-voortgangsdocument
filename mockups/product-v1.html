@@ -644,6 +644,7 @@
   </div>
 </footer>
 
+<script src="assets/laatst.js"></script>
 <script src="assets/draaikist.js"></script>
 <script>
 /* ══════════════════════════════════════════════════════════════
@@ -909,6 +910,9 @@
     q('[data-hulp]').hidden = true;
     q('[data-hulpknop]').setAttribute('aria-expanded', 'false');
     bouwMaatknoppen(); crumbs(); waarom(); teken();
+    // verder waar je was (assets/laatst.js): dit product, en de categorie erboven
+    if (window.cbOnthoud) window.cbOnthoud({ naam: nieuw.crumbs[2][1], pagina: 'product-v1.html#' + p,
+      categorie: nieuw.crumbs[1][1], categoriepagina: nieuw.crumbs[1][0] });
   }
 
   qa('[data-producten] button').forEach(function (b) { b.addEventListener('click', function () { kiesProduct(b.dataset.p); }); });

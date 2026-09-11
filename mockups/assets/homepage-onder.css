@@ -247,3 +247,14 @@
 .probeer .pr{font-family:var(--disp);font-size:32px;font-weight:900;color:var(--dark);margin:14px 0 16px}
 .probeer .pr small{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--mute);font-weight:500;margin-left:8px}
 @media(max-width:900px){.probeer{grid-template-columns:1fr}}
+
+/* ── Verder waar je was (punt 06): een smalle strook onder de hero ── */
+.verder{background:var(--lightblue);border-bottom:1px solid var(--rule)}
+.verder .wrap{display:flex;align-items:center;gap:18px;padding-top:12px;padding-bottom:12px;flex-wrap:wrap}
+.verder .ey{margin:0}
+.verder-product{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:17px;letter-spacing:.03em;color:var(--dark)}
+.verder-product::after{content:" \2192";color:var(--blue)}
+.verder-cat{font-size:14px;color:var(--blue);border-bottom:1px solid var(--rule)}
+.verder-weg{margin-left:auto;background:none;border:0;cursor:pointer;font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.verder-weg:hover{color:var(--dark)}
