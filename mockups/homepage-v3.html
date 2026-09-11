@@ -146,13 +146,10 @@
 .vervoer-lijst .nm{font-size:15px;color:var(--ink)}
 .vervoer-lijst .gr{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--blue)}
-/* De regel onder het veld zegt wat er gebeurt als we het niet kennen.
-   Zonder die regel voelt typen als een gok. */
-/* De hint hoort onder de tweede knop en niet over de volle breedte:
-   hij gaat over die knop, niet over de hero. */
-.cta .tweede{display:flex;flex-direction:column;align-items:flex-start;gap:9px}
-.vervoer-uitleg{margin-top:0;font-size:13.5px;color:rgba(255,255,255,.62)}
-.vervoer-uitleg b{color:rgba(255,255,255,.85);font-weight:500}
+.cta .tweede{display:flex}
+/* Twee knoppen, één maat: de breedste ("Wat ga je vervoeren?", 207 px)
+   bepaalt de breedte, de tekst staat in het midden. */
+.hero .cta .btn-pri,.hero .vervoer-knop{min-width:210px;justify-content:center;text-align:center}
 
 @media(prefers-reduced-motion:reduce){
   .vervoer-veld{transition:none}
@@ -402,7 +399,6 @@
           </div>
           <ul class="vervoer-lijst" id="vervoer-lijst" role="listbox" aria-label="Toepassingen" hidden></ul>
         </div>
-        <p class="vervoer-uitleg">Ik weet het nog niet</p>
       </div>
     </div>
     <div class="specs">
