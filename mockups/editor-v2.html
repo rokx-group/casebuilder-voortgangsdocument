@@ -1,0 +1,910 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — editor v2, L2 in de configurator (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<link rel="stylesheet" href="assets/draaikist.css">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   Editor v2 — L2 is de configurator in een beperkte stand
+
+   Besloten op 11 september: we bouwen L2 niet zelf. De bestaande
+   configurator van CaseBuilder draait voor L2 in een beperkte stand,
+   geopend met een template van de kist waar je vandaan komt:
+
+     L1  alleen kleur en logo      op de productpagina; een Medusa-
+                                   product, geen configurator
+     L2  beperkte stand            dezelfde configurator; de template
+                                   zet het model en de vaste onderdelen
+                                   vast, maten, hoeken, slot, kleur en
+                                   logo staan open
+     L3  volledige stand           dezelfde configurator zonder template
+
+   Wat vastligt verdwijnt niet: het staat er als regel "vast in deze
+   stand". Zo zie je wat je krijgt, en waarom je naar L3 zou gaan.
+   L2 → L3 ontgrendelt dezelfde configuratie; L3 → L2 zet wat de
+   template vastzet terug op zijn standaard.
+
+   Afgevallen: een eigen L2-editor naast de configurator (editor-v1).
+   Die had een tweede prijsregel en tweede grenzen nodig die gelijk
+   moeten blijven met de configurator.
+
+   Of de configurator een template kan laden en velden kan vergrendelen,
+   is de vraag aan CaseBuilder. De templatecode, slotnamen, toeslagen en
+   de prijsregel zijn voorbeelden.
+   ══════════════════════════════════════════════════════════════ */
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ── kop — dezelfde band als /flightcases, /shop en editor v1 ── */
+.ovkop{background:var(--bg);border-bottom:1px solid var(--rule)}
+.ovkop.kop-laag{padding-bottom:0}
+.ovkop h1{font-size:clamp(34px,4.2vw,54px);margin-top:12px}
+.ovkop .lead{margin-top:14px;max-width:66ch}
+.wissel{display:flex;gap:0;margin-top:26px;margin-bottom:-1px;overflow-x:auto}
+.wissel button{flex:none;background:none;border:0;border-bottom:3px solid transparent;cursor:pointer;
+  font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:15px;letter-spacing:.04em;
+  color:var(--mute);padding:12px 18px 11px;white-space:nowrap}
+.wissel button:hover{color:var(--dark)}
+.wissel button[aria-pressed="true"]{color:var(--dark);border-bottom-color:var(--cyan)}
+
+/* ── indeling: de kist links, de configurator rechts ─────────
+   De configurator krijgt hier meer ruimte dan de keuzes in v1: er
+   staat een stappenbalk in, en die moet op één regel passen. */
+.edlay{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;padding:30px 0 80px;align-items:start}
+.kistkant{position:sticky;top:96px}
+.kistkant .kist3d{height:380px}
+.kistkant .kmaat{display:none}
+.edmaat{background:var(--dark);color:#fff;font-family:var(--mono);font-size:9.5px;letter-spacing:.15em;
+  text-transform:uppercase;padding:7px 12px}
+
+.nivkop h2{font-size:clamp(28px,3vw,40px);margin:10px 0}
+.nivkop p{color:var(--mute);max-width:56ch}
+.blok{border-top:1px solid var(--rule);padding:16px 0 18px}
+.nivkop + .blok,.nivkop + div > .blok:first-child{margin-top:18px}
+.blok h4{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);
+  font-weight:500;margin-bottom:10px}
+.blok .vast{font-size:15px;color:var(--ink)}
+.blok .vast b{font-family:var(--disp);letter-spacing:.03em;color:var(--dark)}
+.hint{font-size:12.5px;color:var(--mute);margin-top:8px}
+
+.maten3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.maten3 label{display:flex;flex-direction:column;gap:6px;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--mute)}
+.maten3 input{height:46px;border:1.5px solid var(--rule);padding:0 12px;font-family:var(--disp);font-size:20px;
+  font-weight:700;color:var(--dark);width:100%;background:#fff}
+.maten3 input:focus{outline:0;border-color:var(--dark)}
+
+.keuze{display:flex;gap:8px;flex-wrap:wrap}
+.keuze button{border:1.5px solid var(--rule);background:#fff;padding:10px 14px;cursor:pointer;display:flex;
+  flex-direction:column;align-items:flex-start;gap:3px;font-family:var(--disp);text-transform:uppercase;
+  font-weight:700;font-size:15px;letter-spacing:.03em;color:var(--dark);text-align:left}
+.keuze button small{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--mute);font-weight:500}
+.keuze button:hover{border-color:var(--dark)}
+.keuze button[aria-pressed="true"]{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(102,196,232,.22)}
+.keuze.modellen5{display:grid;grid-template-columns:repeat(5,1fr)}
+
+.stalen{display:flex;gap:8px;flex-wrap:wrap}
+.stalen button{width:30px;height:30px;border:1.5px solid var(--rule);cursor:pointer;padding:0}
+.stalen button[aria-pressed="true"]{outline:2px solid var(--cyan);outline-offset:2px}
+.upload{border:1.5px dashed var(--rule);padding:12px 14px;display:flex;flex-direction:column;gap:2px;cursor:pointer;
+  background:var(--bg)}
+.upload:hover{border-color:var(--blue)}
+.upload span{font-family:var(--disp);text-transform:uppercase;font-size:15px;letter-spacing:.04em;color:var(--dark)}
+.upload small{font-size:12px;color:var(--mute)}
+
+.prijsvak{display:flex;align-items:flex-end;gap:18px;justify-content:space-between;border-top:1.5px solid var(--dark);
+  padding-top:16px;margin-top:4px;flex-wrap:wrap}
+.prijsvak .lab{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.prijsvak b{display:block;font-family:var(--disp);font-size:34px;font-weight:900;color:var(--dark);line-height:1;margin-top:6px}
+.prijsvak i{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+
+.door{display:block;margin-top:18px;border:1px solid var(--rule);background:var(--lightblue);padding:16px 18px;transition:.14s}
+.door:hover{border-color:var(--dark)}
+.door b{display:block;font-family:var(--disp);text-transform:uppercase;font-size:18px;letter-spacing:.03em;color:var(--dark)}
+.door span{font-size:14px;color:var(--mute)}
+.door.terug{background:#fff}
+
+/* ── de configurator ─────────────────────────────────────────
+   Zelfde opbouw als het venster op configurator-v1: donkere kop,
+   stappenbalk, inhoud, voet met prijs. Hier ingebed in de pagina in
+   plaats van als overlay, zodat de kist ernaast mee kan draaien.
+   De stand staat in de kop: dat is het enige wat L2 en L3 van elkaar
+   onderscheidt, dus daar hoort het. */
+.cfg{border:1.5px solid var(--dark);background:#fff;margin-top:18px}
+.cfg .tkop{background:var(--dark);color:#fff;padding:14px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.cfg .tkop b{font-family:var(--disp);text-transform:uppercase;font-size:18px;letter-spacing:.03em}
+.cfg .stand{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  padding:5px 9px;border:1px solid var(--cyan);color:var(--cyan)}
+.cfg .stand.vol{background:var(--cyan);color:var(--void)}
+.cfg .ref{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:rgba(255,255,255,.6)}
+
+/* De lijnen tussen de stappen rekken mee en krimpen tot 6 px: zo past
+   de balk ook met "vast" achter de eerste stap op één regel. */
+.stappen{display:flex;align-items:center;padding:16px 20px;border-bottom:1px solid var(--rule);overflow-x:auto}
+.stap{display:flex;align-items:center;gap:7px;flex:none;background:none;border:0;padding:0;cursor:pointer}
+.stap .bol{width:26px;height:26px;border:1.5px solid var(--rule);display:flex;align-items:center;
+  justify-content:center;font-family:var(--mono);font-size:11px;color:var(--mute);background:#fff}
+.stap .lb{font-family:var(--disp);text-transform:uppercase;font-size:13.5px;letter-spacing:.04em;color:var(--mute)}
+.stap:hover .lb{color:var(--dark)}
+.stap.gedaan .bol{border-color:var(--dark);color:var(--dark)}
+.stap[aria-current="step"] .bol{background:var(--dark);border-color:var(--dark);color:#fff}
+.stap[aria-current="step"] .lb{color:var(--dark)}
+/* Een stap die de template helemaal vastzet: gestippeld, met "vast"
+   erachter. Klikbaar, want je mag zien wat er vastligt. */
+.stap.dicht .bol{border-style:dashed}
+.stap.dicht .lb::after{content:" \00b7 vast";font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--mute)}
+.stappen .lijn{flex:1 1 22px;min-width:6px;max-width:34px;height:1px;background:var(--rule);margin:0 6px}
+
+.tbody{padding:22px 20px 8px}
+.tbody .stapkop{margin-bottom:6px}
+.tbody .stapkop .ey{display:block;margin-bottom:4px}
+.tbody .stapkop h3{font-size:24px}
+.tbody .blok:last-child{padding-bottom:22px}
+
+.tvoet{border-top:1px solid var(--rule);background:var(--bg);padding:14px 20px;display:flex;align-items:center;
+  gap:14px;flex-wrap:wrap}
+.tvoet .lab{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.tvoet b{display:block;font-family:var(--disp);font-size:28px;font-weight:900;color:var(--dark);line-height:1;margin-top:4px}
+.tvoet .knoppen{margin-left:auto;display:flex;gap:8px}
+
+/* Vastgezet door de template. Gestippeld zoals de stap, en met de
+   waarde erin: "vast" zonder te zeggen wát, laat je raden. */
+.vastrij{display:flex;align-items:baseline;gap:14px;padding:11px 12px;border:1px dashed var(--rule);
+  background:var(--bg);margin-top:10px;flex-wrap:wrap}
+.vastrij .wat{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);min-width:11ch}
+.vastrij .waarde{font-size:14.5px;color:var(--ink)}
+.vastrij .tag{margin-left:auto;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+
+.samen{display:grid;grid-template-columns:auto 1fr;gap:0;border-top:1px solid var(--rule);margin:14px 0 22px}
+.samen dt,.samen dd{padding:9px 0;border-bottom:1px solid var(--rule)}
+.samen dt{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);padding-right:22px}
+.samen dd{font-size:14.5px;color:var(--ink);display:flex;gap:10px;align-items:baseline}
+.samen .tag{margin-left:auto;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+
+/* ── voor de review: hoe de beperkte stand werkt ────────────── */
+.hoe{background:var(--bg);border-top:1px solid var(--rule)}
+.hoe h2{margin-top:10px}
+.hoe .drie{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:26px}
+.hoe .kol{background:#fff;padding:22px 22px 24px}
+.hoe .kol .n{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+.hoe .kol h3{font-size:20px;margin:10px 0 8px;line-height:1.1}
+.hoe .kol p,.hoe .kol li{font-size:14px;color:var(--mute);line-height:1.55}
+.hoe .kol ul{padding-left:18px}
+.hoe code{font-family:var(--mono);font-size:12px;background:var(--lightblue);color:var(--dark);padding:2px 5px;word-break:break-all}
+.hoe .niet{margin-top:18px;font-size:14px;color:var(--mute);max-width:84ch}
+.hoe .niet b{color:var(--ink)}
+
+@media(max-width:1100px){.edlay{grid-template-columns:1fr}.kistkant{position:static}.kistkant .kist3d{height:300px}
+  .keuze.modellen5{grid-template-columns:repeat(3,1fr)}.hoe .drie{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="main">
+  <div class="wrap">
+    <a class="merk" href="homepage-v2.html" aria-label="Casebuilder.com &mdash; naar de homepage"><img src="assets/woordmerk.svg" alt="Casebuilder.com"></a>
+    <form class="search" onsubmit="return false">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+      <input placeholder="Zoek op case, onderdeel of artikelnummer…" aria-label="Zoeken">
+    </form>
+    <div class="hdr-r">
+      <a href="#" class="stil">Inloggen</a>
+      <a href="#">Winkelwagen</a>
+    </div>
+  </div>
+</header>
+
+<nav class="primary">
+  <div class="wrap">
+    <a href="case-aanvragen-v1.html">Case aanvragen</a>
+    <a href="case-voor-v1.html">Wat ga je vervoeren?</a>
+
+    <!-- Flightcases draagt nu drie ingangen tegelijk: waarvoor, welk
+         model, en zelf bouwen. Zelf configureren stond hiervoor los in
+         de balk; als top-level item concurreerde het met Flightcases
+         terwijl het er een onderdeel van is.
+
+         "Waarvoor" zijn de zes toepassingen (wat je vervoert), niet de
+         branches (wie je bent): die hebben hun eigen menu, en dezelfde zes
+         markten twee keer in de balk zei niets extra's. Backline heeft al
+         een eigen pagina; de rest wijst hun vak in de index aan. -->
+    <span class="heeft-menu">
+      <a href="flightcases-v1.html" class="on">Flightcases</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// WAAR GEBRUIK JE HEM VOOR</h4>
+            <ul>
+              <li><a href="case-voor-v3.html#av-licht">AV &amp; licht<span class="n">142</span></a></li>
+              <li><a href="case-voor-backline-v1.html">Backline &amp; muziek<span class="n">118</span></a></li>
+              <li><a href="case-voor-v3.html#broadcast">Broadcast &amp; camera<span class="n">86</span></a></li>
+              <li><a href="case-voor-v3.html#medisch">Medisch &amp; lab<span class="n">64</span></a></li>
+              <li><a href="case-voor-v3.html#industrie">Industrie &amp; meettechniek<span class="n">73</span></a></li>
+              <li><a href="case-voor-v3.html#evenement">Evenement &amp; beursbouw<span class="n">50</span></a></li>
+              <li><a href="case-voor-v3.html#alle-categorieen">Alle toepassingen &rarr;</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// MODELLEN</h4>
+            <ul>
+              <li><a href="casetype-rackcase-enkel-deksel-v1.html">Rackcase enkel deksel</a></li>
+              <li><a href="casetype-rackcase-dubbel-deksel-v1.html">Rackcase dubbel deksel</a></li>
+              <li><a href="casetype-trunccase-v1.html">Trunccase</a></li>
+              <li><a href="casetype-hoedcase-v1.html">Hoedcase</a></li>
+              <li><a href="casetype-koffer-v1.html">Koffer</a></li>
+              <li><a href="flightcases-v1.html">Alle modellen &rarr;</a></li>
+            </ul>
+          </div>
+          <div class="vlak">
+            <b>Zelf configureren</b>
+            <p>Jouw maten invullen en de prijs zien terwijl je typt. Een casebouwer kijkt je opgave na voordat we zagen.</p>
+            <a class="btn btn-dark" href="configurator-v1.html">Start met configureren &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </span>
+
+    <!-- Branches: wie je bent. Links de zes markten met een eigen pagina,
+         in het midden de manieren van inkopen voor grote partijen — dat is
+         dezelfde koper in een andere rol (zie /grote-spelers), niet een
+         zevende markt. Rechts de opvang voor wie zichzelf er niet in ziet. -->
+    <span class="heeft-menu">
+      <a href="branches.html">Branches</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// ZES MARKTEN</h4>
+            <ul>
+              <li><a href="branche-audio-visueel-v1.html">Audio-visueel en podium<span class="n">22</span></a></li>
+              <li><a href="branche-broadcast-en-media-v1.html">Broadcast en media<span class="n">9</span></a></li>
+              <li><a href="branche-industrie-en-machinebouw-v1.html">Industrie en machinebouw<span class="n">14</span></a></li>
+              <li><a href="branche-meet-en-testapparatuur-v1.html">Meet- en testapparatuur<span class="n">11</span></a></li>
+              <li><a href="branche-defensie-v1.html">Defensie<span class="n">7</span></a></li>
+              <li><a href="branche-schaalmodellen-v1.html">Schaalmodellen<span class="n">5</span></a></li>
+              <li><a href="branches.html">Alle branches &rarr;</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// INKOPEN ALS GROTE PARTIJ</h4>
+            <ul>
+              <li><a href="speler-defensie-en-overheid-v1.html">Defensie en overheid</a></li>
+              <li><a href="speler-oem-en-series-v1.html">OEM en series</a></li>
+              <li><a href="speler-verhuur-en-touring-v1.html">Verhuur en touring</a></li>
+              <li><a href="speler-omroep-en-studio-v1.html">Omroep en studio</a></li>
+              <li><a href="speler-netbeheer-en-energie-v1.html">Netbeheer en energie</a></li>
+              <li><a href="grote-spelers-v1.html">Hoe je bij ons inkoopt &rarr;</a></li>
+            </ul>
+          </div>
+          <div class="vlak">
+            <b>Staat je markt er niet bij?</b>
+            <p>We bouwen ook voor winkelinrichting, IT-racks en medisch en lab &mdash; alleen nog zonder eigen pagina. Vertel wat je vervoert, dan tekenen we het.</p>
+            <a class="btn btn-dark" href="case-aanvragen-v1.html">Case aanvragen &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </span>
+
+    <!-- Service: alles rond bestellen en daarna. Het vlak is de telefoon,
+         want direct advies is wat een servicepagina het vaakst oplevert. -->
+    <span class="heeft-menu">
+      <a href="service-hub-v1.html">Service</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// BESTELLEN EN LEVEREN</h4>
+            <ul>
+              <li><a href="zo-werkt-het-v1.html">Zo werkt het</a></li>
+              <li><a href="service-levertijden-v1.html">Levertijden</a></li>
+              <li><a href="#">Verzending</a></li>
+              <li><a href="laten-controleren-v1.html">Maten laten controleren</a></li>
+              <li><a href="#">Veelgestelde vragen</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// ZELF BOUWEN</h4>
+            <ul>
+              <li><a href="categorie-v1.html">Onderdelen</a></li>
+              <li><a href="#">Zaagservice</a></li>
+            </ul>
+            <h4>// OVER ONS</h4>
+            <ul>
+              <li><a href="over-ons-v1.html">Over Proflite</a></li>
+              <li><a href="contact-v1.html">Contact</a></li>
+            </ul>
+          </div>
+          <div class="vlak">
+            <b>Direct advies</b>
+            <p>+31 (0)575 575734 &mdash; je belt met iemand uit de werkplaats in Doesburg, niet met een callcenter.</p>
+            <a class="btn btn-dark" href="contact-v1.html">Stuur een bericht &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </span>
+    <!-- Shop: links het overzicht — klik je op Shop zelf, dan kom je daar,
+         met alle vaste cases en filters. Onderaan die kolom de weg via je
+         apparaat: de 38 categorieën, waarvandaan je in vier klikken bij het
+         apparaat bent. In het midden een paar populaire producten en
+         daaronder de populairste onderdelen — kort, want het overzicht en
+         de onderdelenpagina zijn één klik verder. Rechts de uitweg voor wie
+         een andere maat nodig heeft.
+         Shop staat achteraan: wie het assortiment zoekt weet dat al. -->
+    <span class="heeft-menu">
+      <a href="shop-v1.html">Shop</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// ALLE VASTE CASES, MET FILTERS</h4>
+            <ul>
+              <li><a href="shop-v1.html#av-licht">AV &amp; licht</a></li>
+              <li><a href="shop-v1.html#backline">Backline &amp; muziek</a></li>
+              <li><a href="shop-v1.html#broadcast">Broadcast &amp; camera</a></li>
+              <li><a href="shop-v1.html#medisch">Medisch &amp; lab</a></li>
+              <li><a href="shop-v1.html#industrie">Industrie &amp; meettechniek</a></li>
+              <li><a href="shop-v1.html#evenement">Evenement &amp; beursbouw</a></li>
+              <li><a href="case-voor-v3.html">Alle 38 categorie&euml;n &rarr;</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// POPULAIRE PRODUCTEN</h4>
+            <ul>
+              <li><a href="case-voor-gibson-les-paul-v2.html">Gibson Les Paul Standard</a></li>
+              <li><a href="case-voor-gibson-les-paul-v2.html" title="/product — hier nog de Les Paul-pagina">Pioneer DDJ-FLX10</a></li>
+              <li><a href="case-voor-gibson-les-paul-v2.html" title="/product — hier nog de Les Paul-pagina">Robe Robin 600 LEDWash, duo</a></li>
+              <li><a href="case-voor-gibson-les-paul-v2.html" title="/product — hier nog de Les Paul-pagina">Sony FX6</a></li>
+            </ul>
+            <h4>// POPULAIRE ONDERDELEN</h4>
+            <ul>
+              <li><a href="categorie-v1.html">Balhoeken</a></li>
+              <li><a href="categorie-v1.html" title="/onderdelen/{categorie} — hier nog het balhoeken-sjabloon">Vlindersluitingen</a></li>
+              <li><a href="categorie-v1.html" title="/onderdelen/{categorie} — hier nog het balhoeken-sjabloon">Handgrepen</a></li>
+              <li><a href="categorie-v1.html">Alle onderdelen &rarr;</a></li>
+            </ul>
+          </div>
+          <div class="vlak">
+            <b>Andere maat nodig?</b>
+            <p>Kies je eigen afmetingen, ronde of vierkante hoeken en een slot. Wil je meer, dan ga je vanuit daar door naar de volledige editor.</p>
+            <a class="btn btn-dark" href="editor-v2.html#l2">Op jouw maat &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </span>
+    <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#">NL &#9662;</a></div>
+  </div>
+</nav>
+
+<div class="crumbs donker"><div class="wrap"><a href="homepage-v2.html">Home</a><span class="sep">/</span><a href="flightcases-v1.html">Flightcases</a><span class="sep">/</span><span>Op maat</span></div></div>
+
+<div class="ovkop ruit ruit-aanzet kop-laag">
+  <div class="wrap">
+    <div class="ey ey-dark">// EDITOR &middot; L2 IN DE CONFIGURATOR</div>
+    <h1>E&eacute;n configurator, twee standen</h1>
+    <p class="lead">L1 blijft op de productpagina. L2 en L3 zijn dezelfde configurator: in L2 zet een template het model en de vaste onderdelen vast, en staan alleen maten, hoeken, slot, kleur en logo open. In L3 gaat alles open, en wat je al koos blijft staan.</p>
+    <div class="wissel" data-niveaus role="group" aria-label="Kies een niveau">
+      <button type="button" data-n="l1">L1 &middot; Kleur en logo</button>
+      <button type="button" data-n="l2">L2 &middot; Beperkte stand</button>
+      <button type="button" data-n="l3">L3 &middot; Volledige stand</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="edlay">
+    <div class="kistkant">
+      <div class="kistvak">
+        <div class="kist3d" data-draaikist data-vrij="1400" title="Sleep om te draaien">
+          <div class="kubus" data-kubus>
+            <div class="zij achter"></div>
+            <div class="zij links"></div>
+            <div class="zij rechts"></div>
+            <div class="zij boven"></div>
+            <div class="zij onder"></div>
+            <div class="zij voor"><img class="logo" data-logo alt="" hidden><span class="slot" data-slot></span></div>
+          </div>
+          <div class="grond"></div>
+          <span class="kmaat"></span>
+        </div>
+        <span class="edmaat" data-edmaat></span>
+      </div>
+    </div>
+
+    <div class="bedien">
+      <div class="nivkop">
+        <div class="ey ey-dark" data-nivey></div>
+        <h2 data-nivh></h2>
+        <p data-nivp></p>
+      </div>
+
+      <!-- ── L1: de productpagina, zoals in editor v1 ── -->
+      <div data-toon="l1">
+        <div class="blok">
+          <h4>Maten</h4>
+          <p class="vast">Hoedcase voor een Gibson Les Paul &middot; <b>1.060 &times; 410 &times; 150 mm</b> &mdash; die liggen vast.</p>
+        </div>
+        <div class="blok">
+          <h4>Paneelkleur</h4>
+          <div class="stalen" data-stalen role="group" aria-label="Paneelkleur"></div>
+          <p class="hint" data-kleurnaam></p>
+        </div>
+        <div class="blok">
+          <h4>Logo</h4>
+          <label class="upload">
+            <input type="file" accept="image/png,image/svg+xml,image/jpeg" class="sr" data-upload>
+            <span data-uploadtekst>Upload je logo</span>
+            <small>SVG, PNG of JPG &middot; wij zetten hem op het deksel</small>
+          </label>
+        </div>
+        <div class="prijsvak">
+          <div><span class="lab">Vaste prijs</span><b data-prijs></b><i>excl. btw</i></div>
+          <a class="btn btn-dark" href="#">In winkelwagen &rarr;</a>
+        </div>
+        <a class="door" href="#l2" data-naar="l2"><b>Andere maat nodig?</b><span>Dan maak je hem op maat in de configurator &mdash; je begint met de maten van deze kist.</span></a>
+      </div>
+
+      <!-- ── L2 en L3: de configurator ── -->
+      <div class="cfg" data-toon="l2 l3">
+        <div class="tkop">
+          <b>Configurator</b>
+          <span class="stand" data-stand></span>
+          <span class="ref" data-ref></span>
+        </div>
+        <div class="stappen" role="group" aria-label="Stappen">
+          <button type="button" class="stap" data-stapknop="1"><span class="bol">1</span><span class="lb">Model</span></button><span class="lijn"></span>
+          <button type="button" class="stap" data-stapknop="2"><span class="bol">2</span><span class="lb">Afmetingen</span></button><span class="lijn"></span>
+          <button type="button" class="stap" data-stapknop="3"><span class="bol">3</span><span class="lb">Uitvoering</span></button><span class="lijn"></span>
+          <button type="button" class="stap" data-stapknop="4"><span class="bol">4</span><span class="lb">Hardware</span></button><span class="lijn"></span>
+          <button type="button" class="stap" data-stapknop="5"><span class="bol">5</span><span class="lb">Overzicht</span></button>
+        </div>
+
+        <div class="tbody">
+          <!-- stap 1 -->
+          <div data-stap="1">
+            <div class="stapkop"><span class="ey ey-dark">// Stap 1 van 5</span><h3>Welk model wordt het?</h3></div>
+            <div class="blok" data-open="model">
+              <div class="keuze modellen5" data-keuze="model">
+                <button type="button" data-w="koffer">Koffer<small>draagbaar</small></button>
+                <button type="button" data-w="hoedcase">Hoedcase<small>los deksel</small></button>
+                <button type="button" data-w="trunccase">Trunccase<small>bovendeksel</small></button>
+                <button type="button" data-w="rack1">Rack enkel<small>19 inch</small></button>
+                <button type="button" data-w="rack2">Rack dubbel<small>19 inch</small></button>
+              </div>
+            </div>
+            <p class="vastrij" data-vast="model"><span class="wat">Model</span><span class="waarde"></span><span class="tag">// vast in deze stand</span></p>
+          </div>
+
+          <!-- stap 2 -->
+          <div data-stap="2">
+            <div class="stapkop"><span class="ey ey-dark">// Stap 2 van 5</span><h3>Afmetingen</h3></div>
+            <div class="blok">
+              <h4>Buitenmaten in mm</h4>
+              <div class="maten3">
+                <label>Breedte<input type="number" data-veld="b" min="200" max="1400" step="10" inputmode="numeric"></label>
+                <label>Diepte<input type="number" data-veld="d" min="150" max="1000" step="10" inputmode="numeric"></label>
+                <label>Hoogte<input type="number" data-veld="h" min="100" max="1000" step="10" inputmode="numeric"></label>
+              </div>
+              <p class="hint" data-grenshint></p>
+            </div>
+            <div class="blok" data-open="maat">
+              <h4>Maatvoering</h4>
+              <div class="keuze" data-keuze="maat">
+                <button type="button" data-w="buiten">Buitenmaten<small>standaard</small></button>
+                <button type="button" data-w="binnen">Binnenmaten<small>wij rekenen de wand erbij</small></button>
+              </div>
+            </div>
+            <p class="vastrij" data-vast="maat"><span class="wat">Maatvoering</span><span class="waarde"></span><span class="tag">// vast in deze stand</span></p>
+          </div>
+
+          <!-- stap 3 -->
+          <div data-stap="3">
+            <div class="stapkop"><span class="ey ey-dark">// Stap 3 van 5</span><h3>Uitvoering</h3></div>
+            <div class="blok">
+              <h4>Hoeken</h4>
+              <div class="keuze" data-keuze="hoek">
+                <button type="button" data-w="rond">Ronde hoeken<small>balhoek &middot; standaard</small></button>
+                <button type="button" data-w="vierkant">Vierkante hoeken<small>+ &euro; 14</small></button>
+              </div>
+            </div>
+            <div class="blok" data-open="paneel">
+              <h4>Paneel</h4>
+              <div class="keuze" data-keuze="paneel">
+                <button type="button" data-w="7">7 mm multiplex<small>standaard</small></button>
+                <button type="button" data-w="9">9 mm multiplex<small>+ &euro; 18</small></button>
+              </div>
+            </div>
+            <p class="vastrij" data-vast="paneel"><span class="wat">Paneel</span><span class="waarde"></span><span class="tag">// vast in deze stand</span></p>
+            <div class="blok">
+              <h4>Paneelkleur</h4>
+              <div class="stalen" data-stalen role="group" aria-label="Paneelkleur"></div>
+              <p class="hint" data-kleurnaam></p>
+            </div>
+            <div class="blok">
+              <h4>Logo</h4>
+              <label class="upload">
+                <input type="file" accept="image/png,image/svg+xml,image/jpeg" class="sr" data-upload>
+                <span data-uploadtekst>Upload je logo</span>
+                <small>SVG, PNG of JPG &middot; wij zetten hem op het deksel</small>
+              </label>
+            </div>
+          </div>
+
+          <!-- stap 4 -->
+          <div data-stap="4">
+            <div class="stapkop"><span class="ey ey-dark">// Stap 4 van 5</span><h3>Hardware</h3></div>
+            <div class="blok">
+              <h4>Slot</h4>
+              <div class="keuze" data-keuze="slot">
+                <button type="button" data-w="vlinder">Vlindersluiting<small>standaard</small></button>
+                <button type="button" data-w="hangslot">Met hangslotoog<small>+ &euro; 9,50</small></button>
+                <button type="button" data-w="klap">Klapsluiting<small>+ &euro; 6</small></button>
+              </div>
+            </div>
+            <div class="blok" data-open="greep">
+              <h4>Handgrepen</h4>
+              <div class="keuze" data-keuze="greep">
+                <button type="button" data-w="koffer">2&times; koffergreep<small>standaard</small></button>
+                <button type="button" data-w="inbouw">2&times; inbouwgreep<small>+ &euro; 12</small></button>
+              </div>
+            </div>
+            <p class="vastrij" data-vast="greep"><span class="wat">Handgrepen</span><span class="waarde"></span><span class="tag">// vast in deze stand</span></p>
+            <div class="blok" data-open="wielen">
+              <h4>Wielen</h4>
+              <div class="keuze" data-keuze="wielen">
+                <button type="button" data-w="geen">Geen wielen<small>standaard</small></button>
+                <button type="button" data-w="zwenk">4 zwenkwielen<small>2 met rem &middot; + &euro; 48</small></button>
+              </div>
+            </div>
+            <p class="vastrij" data-vast="wielen"><span class="wat">Wielen</span><span class="waarde"></span><span class="tag">// vast in deze stand</span></p>
+            <div class="blok" data-open="schuim">
+              <h4>Schuim</h4>
+              <div class="keuze" data-keuze="schuim">
+                <button type="button" data-w="geen">Geen schuim<small>standaard</small></button>
+                <button type="button" data-w="pluk">Plukschuim<small>bodem en deksel &middot; + &euro; 35</small></button>
+              </div>
+            </div>
+            <p class="vastrij" data-vast="schuim"><span class="wat">Schuim</span><span class="waarde"></span><span class="tag">// vast in deze stand</span></p>
+          </div>
+
+          <!-- stap 5 -->
+          <div data-stap="5">
+            <div class="stapkop"><span class="ey ey-dark">// Stap 5 van 5</span><h3>Overzicht</h3></div>
+            <dl class="samen" data-samen></dl>
+          </div>
+        </div>
+
+        <div class="tvoet">
+          <div><span class="lab">Voorbeeldprijs &middot; verandert mee &middot; excl. btw</span><b data-cfgprijs></b></div>
+          <div class="knoppen">
+            <button type="button" class="btn btn-out btn-sm" data-vorige>&larr; Vorige</button>
+            <button type="button" class="btn btn-dark btn-sm" data-volgende></button>
+          </div>
+        </div>
+      </div>
+
+      <a class="door" data-toon="l2" href="#l3" data-naar="l3"><b>Meer aanpassen?</b><span>Open de volledige stand: ook model, paneel, handgrepen, wielen en schuim. Je maten, hoeken, slot en kleur blijven staan.</span></a>
+      <a class="door terug" data-toon="l3" href="#l2" data-naar="l2"><b>&larr; Terug naar de beperkte stand</b><span>Wat de template vastzet, gaat terug naar zijn standaard.</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ VOOR DE REVIEW ══════════════════════════════════════════
+     Geen deel van de klantpagina: wat de configurator moet kunnen om
+     dit te laten werken, en wat er afviel. ═══════════════════ -->
+<section class="hoe">
+  <div class="wrap">
+    <div class="ey ey-dark">// VOOR DE REVIEW &middot; HOE DE BEPERKTE STAND WERKT</div>
+    <h2>E&eacute;n tool, vastgezet door een template</h2>
+    <div class="drie">
+      <div class="kol">
+        <span class="n">// 01 &middot; de template</span>
+        <h3>De productpagina opent de configurator</h3>
+        <p>Met een template erbij: het model, de onderdelen die vastliggen en de grenzen van de maten. Bijvoorbeeld <code>/configurator?template=HC-LP-1060&amp;stand=beperkt</code>. De code is verzonnen.</p>
+      </div>
+      <div class="kol">
+        <span class="n">// 02 &middot; wat open staat</span>
+        <h3>Vijf keuzes</h3>
+        <ul>
+          <li>Buitenmaten, binnen de grenzen van de template</li>
+          <li>Ronde of vierkante hoeken</li>
+          <li>Het slot</li>
+          <li>Paneelkleur</li>
+          <li>Logo op het deksel</li>
+        </ul>
+      </div>
+      <div class="kol">
+        <span class="n">// 03 &middot; de vraag aan casebuilder</span>
+        <h3>Wat de configurator moet kunnen</h3>
+        <p>Een template laden, velden vergrendelen en ze tonen als vast, en bij &ldquo;meer aanpassen&rdquo; dezelfde configuratie ontgrendelen zonder opnieuw te beginnen. Of dat al kan, is nog de vraag; deze mockup laat zien hoe het eruitziet als het kan.</p>
+      </div>
+    </div>
+    <p class="niet"><b>Wat afviel:</b> een eigen L2-editor naast de configurator (<a href="editor-v1.html#l2">editor v1</a>). Die had een tweede prijsregel en een tweede set grenzen nodig, die gelijk moeten blijven met de configurator &mdash; dubbel onderhoud dat na een jaar uit elkaar loopt.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="merk"><img src="assets/woordmerk-wit.svg" alt="Casebuilder.com"></div>
+        <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734">+31 (0)575 575734</a></p>
+      </div>
+      <div><h5>Offerte aanvragen</h5><a href="case-aanvragen-v1.html">Case aanvragen</a><a href="laten-controleren-v1.html">Maten laten controleren</a><a href="#">Series en staffels</a><a href="#">Zakelijk bestellen</a></div>
+      <div><h5>Zelf configureren</h5><a href="configurator-v1.html">Naar de configurator</a><a href="zo-werkt-het-v1.html">Zo werkt het</a><a href="#">Herhaalorder</a><a href="#">Mijn configuraties</a></div>
+      <div><h5>Flightcases</h5><a href="flightcases-v1.html">Alle flightcases</a><a href="casetype-koffer-v1.html">Koffer</a><a href="casetype-hoedcase-v1.html">Hoedcase</a><a href="casetype-trunccase-v1.html">Trunccase</a><a href="casetype-rackcase-enkel-deksel-v1.html">Rackcase enkel</a><a href="casetype-rackcase-dubbel-deksel-v1.html">Rackcase dubbel</a></div>
+      <div><h5>Service</h5><a href="service-levertijden-v1.html">Levertijden</a><a href="#">Verzending</a><a href="categorie-v1.html">Onderdelen</a><a href="#">Zaagservice</a><a href="#">Over Proflite</a><a href="contact-v1.html">Contact</a></div>
+    </div>
+    <div class="bot"><span>KVK 09123456</span><span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span></div>
+  </div>
+</footer>
+
+<script src="assets/draaikist.js"></script>
+<script>
+/* ══════════════════════════════════════════════════════════════
+   De editor. Eén staat voor alle drie de niveaus, zodat wat je in L2
+   kiest in L3 nog klopt. In L2 bepaalt TEMPLATE wat vastligt: die
+   velden verdwijnen als keuze en verschijnen als regel "vast".
+
+   De kist wordt aangestuurd via het event kist:maat van
+   assets/draaikist.js, plus de CSS-variabele --paneel en twee klassen.
+   Het logo blijft in de browser (URL.createObjectURL); namen gaan via
+   textContent.
+   ══════════════════════════════════════════════════════════════ */
+(function () {
+  function q(s) { return document.querySelector(s); }
+  function qa(s) { return Array.prototype.slice.call(document.querySelectorAll(s)); }
+
+  var kist = q('[data-draaikist]');
+  var kubus = q('[data-kubus]');
+  var logo = q('[data-logo]');
+  var slotEl = q('[data-slot]');
+
+  /* De paneelkleuren van de huisstijlsectie — dezelfde lijst als v1. */
+  var KLEUREN = [['Zwart','#1A1A1A'],['Navy','#003352'],['Rood','#8C1A1A'],['Groen','#1F5133'],
+                 ['Oranje','#C8781A'],['Grijs','#B8B8B8'],['Ivoor','#E8E4DC'],['Paars','#4A3B6B']];
+  var NAMEN = {
+    model:  { koffer: 'Koffer', hoedcase: 'Hoedcase', trunccase: 'Trunccase', rack1: 'Rackcase enkel deksel', rack2: 'Rackcase dubbel deksel' },
+    maat:   { buiten: 'Buitenmaten', binnen: 'Binnenmaten' },
+    hoek:   { rond: 'Ronde hoeken', vierkant: 'Vierkante hoeken' },
+    paneel: { '7': '7 mm multiplex', '9': '9 mm multiplex' },
+    slot:   { vlinder: 'Vlindersluiting', hangslot: 'Vlindersluiting met hangslotoog', klap: 'Klapsluiting' },
+    greep:  { koffer: '2× koffergreep', inbouw: '2× inbouwgreep' },
+    wielen: { geen: 'Geen wielen', zwenk: '4 zwenkwielen, 2 met rem' },
+    schuim: { geen: 'Geen schuim', pluk: 'Plukschuim in bodem en deksel' }
+  };
+  var TOESLAG = { hoek: { vierkant: 14 }, slot: { hangslot: 9.5, klap: 6 }, paneel: { '9': 18 },
+                  greep: { inbouw: 12 }, wielen: { zwenk: 48 }, schuim: { pluk: 35 } };
+  var VAST = { naam: 'Hoedcase Les Paul', b: 1060, d: 410, h: 150, prijs: 214.80 };
+
+  /* De template waarmee de productpagina de configurator opent. Wat in
+     `vast` staat, is in de beperkte stand niet te kiezen. */
+  var TEMPLATE = { code: 'HC-LP-1060',
+                   vast: { model: 'hoedcase', maat: 'buiten', paneel: '7', greep: 'koffer', wielen: 'geen', schuim: 'geen' },
+                   grens: { b: [200, 1400], d: [150, 1000], h: [100, 1000] } };
+  var STAPPEN = ['Model', 'Afmetingen', 'Uitvoering', 'Hardware', 'Overzicht'];
+  var TEKST = {
+    l1: ['// L1 · op de productpagina', 'Kleur en logo',
+         'De maten liggen vast: deze case is gebouwd voor één apparaat. Je kiest een paneelkleur en zet je logo op het deksel. Dit is een webshopproduct; de configurator komt er niet aan te pas.'],
+    l2: ['// L2 · de configurator, beperkte stand', 'Maten, hoeken en slot',
+         'Dezelfde configurator als L3, geopend met de template van deze kist. Wat je hier niet kiest ligt vast, maar je ziet het wel staan — zodat je weet wat je krijgt.'],
+    l3: ['// L3 · de configurator, volledige stand', 'Alles',
+         'Dezelfde configurator zonder template: ook model, paneel, handgrepen, wielen en schuim. Wat je in de beperkte stand koos, staat er nog.']
+  };
+
+  var staat = { n: 'l1', stap: 2, kleur: 0, b: VAST.b, d: VAST.d, h: VAST.h, hoek: 'rond', slot: 'vlinder',
+                model: 'hoedcase', maat: 'buiten', paneel: '7', greep: 'koffer', wielen: 'geen', schuim: 'geen' };
+  var logoNaam = '';
+
+  function vergrendeld(k) { return staat.n === 'l2' && Object.prototype.hasOwnProperty.call(TEMPLATE.vast, k); }
+  function eersteStap() { return staat.n === 'l2' ? 2 : 1; }
+  function euro(x) { return '€ ' + x.toFixed(2).replace('.', ','); }
+  function mm(x) { return Number(x).toLocaleString('nl-NL'); }
+  function klem(w, k) { var g = TEMPLATE.grens[k]; return Math.max(g[0], Math.min(g[1], w)); }
+
+  /* Voorbeeldprijs: een basis plus het paneeloppervlak, plus de toeslagen
+     op de knoppen. De echte prijs komt uit de configurator. */
+  function prijs() {
+    var opp = 2 * (staat.b * staat.h + staat.b * staat.d + staat.h * staat.d) / 1e6;
+    var p = 95 + opp * 78;
+    Object.keys(TOESLAG).forEach(function (k) { p += TOESLAG[k][staat[k]] || 0; });
+    return Math.round(p * 20) / 20;
+  }
+
+  /* Kleurknoppen, in elk vak dat erom vraagt (L1 en stap 3). */
+  qa('[data-stalen]').forEach(function (vak) {
+    KLEUREN.forEach(function (k, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.style.background = k[1];
+      b.title = k[0];
+      b.setAttribute('aria-label', k[0]);
+      b.addEventListener('click', function () { staat.kleur = i; teken(); });
+      vak.appendChild(b);
+    });
+  });
+
+  function samenvatting() {
+    var dl = q('[data-samen]');
+    dl.textContent = '';
+    /* Eén regel per keuze, zodat "vast" alleen staat bij wat de template
+       vastzet: de maten zelf zijn open, de maatvoering niet. */
+    [['Model', NAMEN.model[staat.model], 'model'],
+     ['Maten', mm(staat.b) + ' × ' + mm(staat.d) + ' × ' + mm(staat.h) + ' mm', 'b'],
+     ['Maatvoering', NAMEN.maat[staat.maat], 'maat'],
+     ['Hoeken', NAMEN.hoek[staat.hoek], 'hoek'],
+     ['Paneel', NAMEN.paneel[staat.paneel], 'paneel'],
+     ['Kleur', KLEUREN[staat.kleur][0], 'kleur'],
+     ['Logo', logoNaam || 'Geen', 'logo'],
+     ['Slot', NAMEN.slot[staat.slot], 'slot'],
+     ['Handgrepen', NAMEN.greep[staat.greep], 'greep'],
+     ['Wielen', NAMEN.wielen[staat.wielen], 'wielen'],
+     ['Schuim', NAMEN.schuim[staat.schuim], 'schuim']
+    ].forEach(function (r) {
+      var dt = document.createElement('dt');
+      dt.textContent = r[0];
+      var dd = document.createElement('dd');
+      var w = document.createElement('span');
+      w.textContent = r[1];
+      dd.appendChild(w);
+      if (vergrendeld(r[2])) {
+        var t = document.createElement('span');
+        t.className = 'tag';
+        t.textContent = '// vast';
+        dd.appendChild(t);
+      }
+      dl.appendChild(dt);
+      dl.appendChild(dd);
+    });
+  }
+
+  function teken() {
+    var n = staat.n;
+    var m = n === 'l1' ? VAST : staat;
+
+    qa('[data-niveaus] button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-n') === n)); });
+    q('[data-nivey]').textContent = TEKST[n][0];
+    q('[data-nivh]').textContent = TEKST[n][1];
+    q('[data-nivp]').textContent = TEKST[n][2];
+    qa('[data-toon]').forEach(function (el) { el.hidden = el.getAttribute('data-toon').split(' ').indexOf(n) < 0; });
+
+    // de configurator: stand, stappen, open of vast
+    var stand = q('[data-stand]');
+    stand.textContent = n === 'l3' ? 'Volledige stand' : 'Beperkte stand';
+    stand.classList.toggle('vol', n === 'l3');
+    q('[data-ref]').textContent = (n === 'l3' ? '// concept 7K2M-4813' : '// template ' + TEMPLATE.code) + ' · automatisch bewaard';
+    qa('[data-stapknop]').forEach(function (b) {
+      var i = +b.getAttribute('data-stapknop');
+      if (i === staat.stap) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+      b.classList.toggle('gedaan', i < staat.stap);
+      b.classList.toggle('dicht', i === 1 && n === 'l2');
+    });
+    qa('[data-stap]').forEach(function (p) { p.hidden = +p.getAttribute('data-stap') !== staat.stap; });
+    qa('[data-open]').forEach(function (el) { el.hidden = vergrendeld(el.getAttribute('data-open')); });
+    qa('[data-vast]').forEach(function (el) {
+      var k = el.getAttribute('data-vast');
+      el.hidden = !vergrendeld(k);
+      el.querySelector('.waarde').textContent = NAMEN[k][TEMPLATE.vast[k]] +
+        (k === 'model' ? ' — gekozen door de productpagina waar je vandaan komt' : '');
+    });
+    var g = TEMPLATE.grens;
+    q('[data-grenshint]').textContent = (n === 'l2' ? 'Grenzen uit de template: ' : 'Grenzen: ') +
+      'breedte ' + mm(g.b[0]) + '–' + mm(g.b[1]) + ' · diepte ' + mm(g.d[0]) + '–' + mm(g.d[1]) +
+      ' · hoogte ' + mm(g.h[0]) + '–' + mm(g.h[1]) + ' mm.';
+
+    // de kist
+    kist.dispatchEvent(new CustomEvent('kist:maat', { detail: { naam: '', b: m.b, h: m.h, d: m.d } }));
+    kubus.style.setProperty('--paneel', KLEUREN[staat.kleur][1]);
+    kubus.classList.toggle('hoek-vierkant', n !== 'l1' && staat.hoek === 'vierkant');
+    slotEl.className = 'slot' + (n !== 'l1' && staat.slot !== 'vlinder' ? ' ' + staat.slot : '');
+    q('[data-edmaat]').textContent = (n === 'l1' ? VAST.naam : 'Op maat') + ' · ' +
+      mm(m.b) + ' × ' + mm(m.d) + ' × ' + mm(m.h) + ' mm';
+
+    // prijzen en keuzes
+    q('[data-prijs]').textContent = euro(VAST.prijs);
+    q('[data-cfgprijs]').textContent = euro(prijs());
+    qa('[data-kleurnaam]').forEach(function (el) { el.textContent = KLEUREN[staat.kleur][0]; });
+    qa('[data-stalen]').forEach(function (vak) {
+      Array.prototype.forEach.call(vak.children, function (b, i) { b.setAttribute('aria-pressed', String(i === staat.kleur)); });
+    });
+    qa('[data-keuze]').forEach(function (groep) {
+      var sleutel = groep.getAttribute('data-keuze');
+      Array.prototype.forEach.call(groep.querySelectorAll('button'), function (b) {
+        b.setAttribute('aria-pressed', String(b.getAttribute('data-w') === staat[sleutel]));
+      });
+    });
+    qa('[data-veld]').forEach(function (inp) {
+      if (document.activeElement !== inp) inp.value = staat[inp.getAttribute('data-veld')];
+    });
+
+    // de voet
+    q('[data-vorige]').hidden = staat.stap <= eersteStap();
+    q('[data-volgende]').textContent = staat.stap < 5
+      ? 'Volgende: ' + STAPPEN[staat.stap].toLowerCase() + ' →'
+      : 'In winkelwagen →';
+
+    samenvatting();
+    if (location.hash !== '#' + n) history.replaceState(null, '', '#' + n);
+  }
+
+  /* Van niveau wisselen. Naar L2 zet de template zijn vaste waarden terug
+     en begin je bij de maten, want het model ligt vast. Naar L3 blijft
+     alles staan; wie rechtstreeks uit L1 komt, begint bij het model. */
+  function kiesNiveau(n) {
+    if (!TEKST[n]) return;
+    var van = staat.n;
+    staat.n = n;
+    if (n === 'l2') {
+      Object.keys(TEMPLATE.vast).forEach(function (k) { staat[k] = TEMPLATE.vast[k]; });
+      if (van === 'l1' || staat.stap < 2) staat.stap = 2;
+    }
+    if (n === 'l3' && van === 'l1') staat.stap = 1;
+    teken();
+  }
+
+  qa('[data-niveaus] button').forEach(function (b) {
+    b.addEventListener('click', function () { kiesNiveau(b.getAttribute('data-n')); });
+  });
+  qa('[data-naar]').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); kiesNiveau(a.getAttribute('data-naar')); });
+  });
+  qa('[data-stapknop]').forEach(function (b) {
+    b.addEventListener('click', function () { staat.stap = +b.getAttribute('data-stapknop'); teken(); });
+  });
+  q('[data-vorige]').addEventListener('click', function () { staat.stap = Math.max(eersteStap(), staat.stap - 1); teken(); });
+  q('[data-volgende]').addEventListener('click', function () { if (staat.stap < 5) { staat.stap++; teken(); } });
+  qa('[data-keuze] button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var sleutel = b.parentNode.getAttribute('data-keuze');
+      if (vergrendeld(sleutel)) return;
+      staat[sleutel] = b.getAttribute('data-w');
+      teken();
+    });
+  });
+
+  /* Maten: meetekenen zolang het getal binnen de grenzen valt, en bij
+     het verlaten van het veld terugzetten naar de dichtstbijzijnde maat
+     die kan — zoals in v1. */
+  qa('[data-veld]').forEach(function (inp) {
+    var k = inp.getAttribute('data-veld');
+    inp.addEventListener('input', function () {
+      var w = parseInt(inp.value, 10), g = TEMPLATE.grens[k];
+      if (w >= g[0] && w <= g[1]) { staat[k] = w; teken(); }
+    });
+    inp.addEventListener('change', function () {
+      var w = parseInt(inp.value, 10);
+      staat[k] = klem(isNaN(w) ? staat[k] : w, k);
+      inp.value = staat[k];
+      teken();
+    });
+  });
+
+  var vorigeUrl = null;
+  qa('[data-upload]').forEach(function (inp) {
+    inp.addEventListener('change', function (e) {
+      var f = e.target.files && e.target.files[0];
+      if (!f || !/^image\//.test(f.type)) return;
+      if (vorigeUrl) URL.revokeObjectURL(vorigeUrl);
+      vorigeUrl = URL.createObjectURL(f);
+      logo.src = vorigeUrl;
+      logo.hidden = false;
+      logoNaam = f.name;
+      qa('[data-uploadtekst]').forEach(function (el) { el.textContent = f.name; });
+      teken();
+    });
+  });
+
+  function uitHash() {
+    var n = location.hash.slice(1);
+    if (TEKST[n] && n !== staat.n) kiesNiveau(n); else teken();
+  }
+  addEventListener('hashchange', uitHash);
+  uitHash();
+})();
+</script>
+<script src="assets/vouw.js"></script>
+<script src="assets/versies.js"></script>
+</body>
+</html>

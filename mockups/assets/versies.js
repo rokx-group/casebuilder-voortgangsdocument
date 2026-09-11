@@ -95,6 +95,12 @@
       { id: 'wireframe', bestand: 'configurator.html', label: 'wireframe' },
       { id: 'v1', bestand: 'configurator-v1.html', label: 'v1 · eigen pagina' }
     ],
+    // L1-L3. v1 had een eigen L2-editor; op 11 september besloten dat L2
+    // de configurator in een beperkte stand wordt (v2).
+    'editor': [
+      { id: 'v1', bestand: 'editor-v1.html', label: 'v1 · eigen L2-editor' },
+      { id: 'v2', bestand: 'editor-v2.html', label: 'v2 · L2 in de configurator' }
+    ],
     // Nieuw: het branche-overzicht heeft nog geen wireframe, alleen een
     // ontwerp. De reeks staat er vast in zodat de knop meegroeit.
     'zo-werkt-het': [
