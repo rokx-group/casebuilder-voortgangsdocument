@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/brand.css">
+<link rel="stylesheet" href="assets/vervoeren.css">
 <style>
 /* ══════════════════════════════════════════════════════════════
    /case-voor — de ingang "wat ga je vervoeren?"
@@ -39,16 +40,6 @@
 .vraag{overflow:visible;z-index:3}
 .vraag .vervoer{position:relative;max-width:760px;margin-top:24px}
 .vraag .vervoer .field{margin-top:0}
-.vervoer-lijst{position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:40;margin:0;padding:6px;list-style:none;
-  background:#fff;border:1px solid var(--rule);box-shadow:0 18px 40px rgba(0,40,70,.18)}
-.vervoer-lijst li{display:flex;align-items:baseline;gap:12px;padding:9px 12px;cursor:pointer}
-.vervoer-lijst li.aan,.vervoer-lijst li:hover{background:var(--lightblue)}
-.vervoer-lijst li.alles{border-top:1px solid var(--rule)}
-.vervoer-lijst li.alles .nm{color:var(--blue);font-weight:500}
-.vervoer-lijst li.alles .nm::after{content:" \2192"}
-.vervoer-lijst .nm{font-size:15px;color:var(--ink)}
-.vervoer-lijst .gr{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--mute)}
 .veelgezocht{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center}
 .veelgezocht .lb{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
   color:rgba(255,255,255,.45);margin-right:6px}
