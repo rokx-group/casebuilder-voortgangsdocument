@@ -54,7 +54,9 @@
 .reskop .lead{margin-top:14px;max-width:64ch}
 .advies{padding:26px 0 0}
 .advies .top{border:1.5px solid var(--dark);background:#fff;display:flex;flex-direction:column}
-.advies .top .lab{background:var(--dark);color:#fff;font-family:var(--mono);font-size:10px;
+/* Alleen de balk zelf: een .lab dieper in het blok (prijs, hulpvak) is
+   een gewoon label, geen balk. */
+.advies .top > .lab{background:var(--dark);color:#fff;font-family:var(--mono);font-size:10px;
   letter-spacing:.16em;text-transform:uppercase;padding:9px 20px}
 .advies .top .bd{padding:26px 28px 28px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;align-items:start}
 /* In L3 krijgt de configurator de ruimte: er staat een stappenbalk in. */
