@@ -80,7 +80,30 @@
 .zelfdedag .foto{width:52px;height:52px;flex:none;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.24);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:8px;color:rgba(255,255,255,.35)}
 .zelfdedag b{font-family:var(--disp);text-transform:uppercase;font-size:19px;letter-spacing:.03em;color:#fff;display:block}
 .zelfdedag span{font-size:14px;color:rgba(255,255,255,.7);display:block;margin-top:4px}
-@media(max-width:1000px){.aanvraag .grid{grid-template-columns:1fr}}
+/* Wat het meestal kost (besloten 11 september, punt 04). Een aanvraag
+   voelt als een sprong in het duister zolang je geen idee hebt van de
+   orde van grootte. Een bandbreedte, geen prijs: die komt met de
+   tekening. De bedragen zijn verzonnen tot CB de echte levert. */
+.bandbreedte{margin-top:24px;border:1px solid rgba(255,255,255,.22);border-left:3px solid var(--cyan);padding:14px 18px;max-width:46ch}
+.bandbreedte .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
+.bandbreedte b{display:block;font-family:var(--disp);text-transform:uppercase;font-size:24px;letter-spacing:.02em;color:#fff;margin-top:4px}
+.bandbreedte p{font-size:13.5px;color:rgba(255,255,255,.7);margin-top:4px}
+/* Dit bouwden we eerder (punt 09): wat een aanvraag oplevert, met maat
+   en prijs. Echte cases, foto's en bedragen komen van CB; tot dan zijn
+   dit voorbeelden, en dat staat er ook. */
+.eerder{background:var(--bg)}
+.eerder .rij{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:24px}
+.eerder .kaart{background:#fff;border:1px solid var(--rule);display:flex;flex-direction:column}
+.eerder .kaart .im{aspect-ratio:4/3;overflow:hidden;background:var(--bg)}
+.eerder .kaart img{width:100%;height:100%;object-fit:cover;display:block}
+.eerder .kaart .bd{padding:14px 16px 16px;display:flex;flex-direction:column;flex:1}
+.eerder h3{font-size:18px;line-height:1.1}
+.eerder .mt{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--mute);margin-top:6px}
+.eerder .kaart p{font-size:13.5px;color:var(--mute);margin-top:8px;flex:1}
+.eerder .pr{font-family:var(--disp);font-size:22px;font-weight:900;color:var(--dark);margin-top:10px}
+.eerder .pr small{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--mute);font-weight:500;margin-left:6px}
+.eerder .noot{font-size:12.5px;color:var(--mute);margin-top:14px}
+@media(max-width:1000px){.aanvraag .grid{grid-template-columns:1fr}.eerder .rij{grid-template-columns:1fr 1fr}}
 @media(max-width:760px){
   .pbody{padding:20px 18px 22px}
   .paneel .pkop,.paneel .voet{padding-left:18px;padding-right:18px}
@@ -287,6 +310,11 @@
     <h1>Je weet wat erin moet. <span class="acc">Wij weten hoe.</span></h1>
     <p class="sub">Stuur wat je hebt. Een datasheet is genoeg, een foto van een servet ook. Je krijgt dezelfde werkdag een tekening met prijs terug.</p>
     <div class="sturen"><span>Datasheet</span><span>Schets</span><span>Foto</span><span>Maten in een mail</span><span>Een oude case</span></div>
+    <div class="bandbreedte">
+      <span class="k">// Wat kost het meestal?</span>
+      <b>&euro; 150 &ndash; &euro; 450 per case</b>
+      <p>Een eigen maat met wielen en schuim zit aan de bovenkant. De exacte prijs staat op de tekening die je dezelfde werkdag krijgt.</p>
+    </div>
     <div class="zelfdedag"><div class="foto"><img src="assets/joran.svg" alt="Joran" style="width:100%;height:100%;object-fit:cover;display:block"></div><div><b>Joran tekent het uit</b><span>Zeventig procent van onze orders begint zo &mdash; dezelfde dag een tekening met prijs.</span></div></div>
   </div>
   <div class="paneel">
@@ -330,6 +358,33 @@
         </div>
   </div>
 </div></section>
+
+<section class="eerder tight">
+  <div class="wrap">
+    <div class="ey ey-dark">// DIT BOUWDEN WE EERDER</div>
+    <h2 style="font-size:32px;margin-top:12px">Zo ziet een aanvraag eruit als hij af is</h2>
+    <p class="lead" style="margin-top:10px;max-width:60ch">Wat erin ging, de maat die het werd, en wat het kostte. Ook met niets meer dan een foto begonnen.</p>
+    <div class="rij">
+      <div class="kaart"><div class="im"><img src="assets/foto-audio-visueel.jpg" alt="Rack voor een mengtafel" loading="lazy"></div><div class="bd">
+        <h3>Rack voor een Midas M32</h3><span class="mt">820 &times; 610 &times; 420 mm &middot; 4 wielen</span>
+        <p>Begonnen met een foto van de tafel en de vraag of de kabels erachter konden blijven zitten.</p>
+        <div class="pr">&euro; 412<small>excl. btw</small></div></div></div>
+      <div class="kaart"><div class="im"><img src="assets/foto-product-drone.jpg" alt="Koffer voor een drone" loading="lazy"></div><div class="bd">
+        <h3>Koffer voor een inspectiedrone</h3><span class="mt">640 &times; 480 &times; 260 mm &middot; plukschuim</span>
+        <p>Een datasheet en een lijst accu&rsquo;s. Elk onderdeel kreeg een eigen uitsparing.</p>
+        <div class="pr">&euro; 239<small>excl. btw</small></div></div></div>
+      <div class="kaart"><div class="im"><img src="assets/foto-flightcase-beurs.jpg" alt="Standkist voor een beurs" loading="lazy"></div><div class="bd">
+        <h3>Standkist voor een beurs</h3><span class="mt">1.200 &times; 600 &times; 600 mm &middot; 2 vakken</span>
+        <p>Een schets op een servet: banners onderin, folders en een scherm erboven.</p>
+        <div class="pr">&euro; 529<small>excl. btw</small></div></div></div>
+      <div class="kaart"><div class="im"><img src="assets/foto-meet-en-testapparatuur.jpg" alt="Meetopstelling in een trunccase" loading="lazy"></div><div class="bd">
+        <h3>Meetopstelling het terrein op</h3><span class="mt">900 &times; 600 &times; 650 mm &middot; eigen kleur</span>
+        <p>Maten in een mail, en de eis dat het display nooit het draagpunt mocht zijn.</p>
+        <div class="pr">&euro; 368<small>excl. btw</small></div></div></div>
+    </div>
+    <p class="noot">Voorbeelden: de cases, maten en bedragen zijn verzonnen tot CaseBuilder drie of vier echte levert, met foto.</p>
+  </div>
+</section>
 <footer>
   <div class="wrap">
     <div class="cols">
