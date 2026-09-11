@@ -285,5 +285,17 @@
     });
   });
 
+  /* Vanuit het menu: case-voor-v3.html#backline wijst het vak van die
+     toepassing aan, met dezelfde animatie als een treffer uit het
+     trefferpaneel. Een hash die geen vak is (#alle-categorieen) laat de
+     browser zelf afhandelen. */
+  function uitHash() {
+    var id = decodeURIComponent(location.hash.slice(1));
+    var vak = id && document.getElementById(id);
+    if (vak && vak.classList.contains('vak')) springNaar(vak);
+  }
+  addEventListener('hashchange', uitHash);
+
   filter();
+  uitHash();
 })();
