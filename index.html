@@ -1034,10 +1034,24 @@
   .urgent p { font-size:14.5px; color:var(--muted); max-width:78ch; }
   .urgent p strong { color:var(--ink); font-weight:600; }
   h3.tablabel { padding-top:14px; }
-  /* De doorsnedelijst staat onder de lijn van .tabs. De .tab-opmaak is voor
-     een balk gemaakt — onderstreping plus negatieve marge — dus die zetten we
-     hier terug naar iets dat in een lijst thuishoort. */
-  .doorsnee { list-style:none; margin:5px 0 0; padding:0;
+  /* De kop: de fasebalk met rechts Features en Componenten, en direct onder
+     de lijn de doorsneden. Eén element, zodat de gap van .wrap tussen de kop
+     en de inhoud valt en niet tussen de balk en de lijst eronder. De lijn
+     hoort bij .kop-rij, zodat de link naar Componenten erop staat zonder
+     dat hij in de tablist hoeft. */
+  .kop { display:flex; flex-direction:column; gap:6px; }
+  .kop-rij { display:flex; align-items:flex-end; flex-wrap:wrap; border-bottom:1px solid var(--line); }
+  .kop-rij .tabs { border-bottom:0; flex:1 1 auto; }
+  .tablink { font-family:"Barlow Condensed","Inter",sans-serif; font-size:19px; font-weight:600;
+    color:var(--faint); text-decoration:none; padding:10px 18px 12px;
+    display:flex; align-items:baseline; gap:7px; }
+  .tablink:hover { color:var(--muted); }
+  .tablink .pijl { font-size:12px; color:var(--accent); }
+  .tablink:focus-visible { outline:2px solid var(--accent); outline-offset:2px; border-radius:2px; }
+  /* De .tab-opmaak is voor een balk gemaakt — onderstreping plus negatieve
+     marge — dus die zetten we in de doorsnedelijst terug naar iets dat in een
+     lijst thuishoort. */
+  .doorsnee { list-style:none; margin:0; padding:0;
     display:flex; flex-wrap:wrap; justify-content:flex-end; gap:0 20px; }
   .doorsnee li { display:flex; align-items:baseline; gap:9px; }
   .doorsnee li::before { content:"\2022"; color:var(--line); font-size:15px; }
@@ -1049,6 +1063,27 @@
     color:var(--faint); display:flex; align-items:baseline; gap:7px; }
   .doorsnee .uit:hover, .doorsnee .tab:hover { color:var(--muted); }
   .doorsnee .pijl { font-size:12px; color:var(--accent); }
+
+  /* Ontwerpkeuzes per onderdeel, onder elkaar in plaats van als tegels: in
+     tegels lees je kriskras, hier van boven naar beneden. Zelfde lijstopmaak
+     als .tasklist; doel, waarom en bevat op een vaste labelkolom zodat de
+     drie over alle onderdelen heen onder elkaar staan. */
+  .keuzes { display:flex; flex-direction:column; gap:1px; background:var(--line);
+    border:1px solid var(--line); border-radius:3px; overflow:hidden; }
+  .keuze { background:var(--surface); display:grid; grid-template-columns:38px minmax(150px,220px) 1fr; align-items:start; }
+  .keuze .num { font-family:"IBM Plex Mono",monospace; font-size:12px; font-weight:600; color:var(--faint);
+    padding:21px 0 18px 14px; font-variant-numeric:tabular-nums; }
+  .keuze h3 { font-size:19px; padding:17px 18px 18px 10px; }
+  .keuze dl { margin:0; padding:18px 22px 20px; border-left:1px solid var(--line-soft);
+    display:grid; grid-template-columns:72px minmax(0,1fr); gap:8px 14px; }
+  .keuze dt { font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--faint); padding-top:4px; }
+  .keuze dd { margin:0; font-size:14.5px; color:var(--muted); max-width:82ch; }
+  @media (max-width:760px){
+    .keuze { grid-template-columns:38px 1fr; }
+    .keuze dl { grid-column:2; border-left:0; padding:0 18px 18px 10px; grid-template-columns:1fr; gap:2px; }
+    .keuze dd { margin-bottom:8px; }
+  }
 
   /* vaste kolombreedtes zodat gelijksoortige tabellen op elkaar uitlijnen */
   table.tpl.fixed { table-layout:fixed; min-width:640px; }
@@ -1180,26 +1215,34 @@
 
 <div class="wrap">
 
-  <div class="tabs" role="tablist" aria-label="Projectfase">
-    <button class="tab" role="tab" id="t1" data-hash="definitie" aria-controls="p1" aria-selected="false"><span class="tnum">01</span>Definitiefase</button>
-    <button class="tab" role="tab" id="t2" data-hash="ontwerp" aria-controls="p2" aria-selected="true"><span class="tnum">02</span>Ontwerpfase</button>
-    <button class="tab" role="tab" id="t3" data-hash="bouw" aria-controls="p3" aria-selected="false"><span class="tnum">03</span>Bouwfase</button>
-    <button class="tab" role="tab" id="t5" data-hash="content" aria-controls="p5" aria-selected="false"><span class="tnum">04</span>Contentfase</button>
-    <button class="tab" role="tab" id="t6" data-hash="livegang" aria-controls="p6" aria-selected="false"><span class="tnum">05</span>Live-gang</button>
-  </div>
+  <div class="kop">
+    <!-- De balk: de vijf fasen, en rechts de twee dingen die je in elke fase
+         nodig hebt — de features en de componenten. Componenten is een link
+         naar het mockup-overzicht, geen tab, en staat daarom naast de
+         tablist in plaats van erin. -->
+    <div class="kop-rij">
+      <div class="tabs" role="tablist" aria-label="Projectfase">
+        <button class="tab" role="tab" id="t1" data-hash="definitie" aria-controls="p1" aria-selected="false"><span class="tnum">01</span>Definitiefase</button>
+        <button class="tab" role="tab" id="t2" data-hash="ontwerp" aria-controls="p2" aria-selected="true"><span class="tnum">02</span>Ontwerpfase</button>
+        <button class="tab" role="tab" id="t3" data-hash="bouw" aria-controls="p3" aria-selected="false"><span class="tnum">03</span>Bouwfase</button>
+        <button class="tab" role="tab" id="t5" data-hash="content" aria-controls="p5" aria-selected="false"><span class="tnum">04</span>Contentfase</button>
+        <button class="tab" role="tab" id="t6" data-hash="livegang" aria-controls="p6" aria-selected="false"><span class="tnum">05</span>Live-gang</button>
+        <button class="tab tab-right" role="tab" id="t8" data-hash="features" aria-controls="p8" aria-selected="false">Features</button>
+      </div>
+      <a class="tablink" href="mockups/overzicht.html#componenten" target="_blank" rel="noopener">Componenten<span class="pijl">&#8599;</span></a>
+    </div>
 
-  <!-- Deze vier horen niet bij de fasereeks: het zijn doorsneden door het
-       project, geen stappen erin. Onder de lijn als lijst, zodat de balk
-       alleen de vijf fasen toont. Ze houden class="tab" en data-hash, dus
-       het schakelscript pakt ze ongewijzigd op. -->
-  <ul class="doorsnee">
-    <li><button class="tab" role="tab" id="t9" data-hash="intro" aria-controls="p9" aria-selected="false">Intro</button></li>
-    <li><button class="tab" role="tab" id="t4" data-hash="wireframes" aria-controls="p4" aria-selected="false">Wireframes</button></li>
-    <li><button class="tab" role="tab" id="t8" data-hash="features" aria-controls="p8" aria-selected="false">Features</button></li>
-    <li><button class="tab" role="tab" id="t7" data-hash="meetings" aria-controls="p7" aria-selected="false">Meetings</button></li>
-    <li><a class="uit" href="mockups/header-varianten.html" target="_blank" rel="noopener">Prototypes<span class="pijl">&#8599;</span></a></li>
-    <li><a class="uit" href="mockups/overzicht.html" target="_blank" rel="noopener">Alle mockups<span class="pijl">&#8599;</span></a></li>
-  </ul>
+    <!-- Deze horen niet bij de fasereeks: het zijn doorsneden door het
+         project, geen stappen erin. Direct onder de lijn als lijst. Ze houden
+         class="tab" en data-hash, dus het schakelscript pakt ze ongewijzigd
+         op. -->
+    <ul class="doorsnee">
+      <li><button class="tab" role="tab" id="t9" data-hash="intro" aria-controls="p9" aria-selected="false">Intro</button></li>
+      <li><button class="tab" role="tab" id="t4" data-hash="wireframes" aria-controls="p4" aria-selected="false">Wireframes</button></li>
+      <li><button class="tab" role="tab" id="t7" data-hash="meetings" aria-controls="p7" aria-selected="false">Meetings</button></li>
+      <li><a class="uit" href="mockups/header-varianten.html" target="_blank" rel="noopener">Prototypes<span class="pijl">&#8599;</span></a></li>
+    </ul>
+  </div>
 
   <div class="tabpanel" id="p9" role="tabpanel" aria-labelledby="t9" hidden>
 
@@ -1221,18 +1264,59 @@
         <span class="eyebrow">Per onderdeel</span>
         <h2 data-rail="Ontwerpkeuzes">Ontwerpkeuzes</h2>
       </div>
-      <div class="cards">
-        <div class="card"><h3>Navigatiebalk</h3><p><b>Doel</b> elke bezoeker in één klik op de juiste route.</p><p><b>Waarom</b> drie soorten bezoekers: wie weet wat hij nodig heeft, wie weet wat erin moet, en wie het nog niet weet. Zelf configureren is geen tabblad meer maar hoort bij Flightcases — als eigen tab concurreerde het met zijn eigen product.</p><p><b>Bevat</b> Case aanvragen · Wat ga je vervoeren? · Flightcases (menu met toepassingen, modellen en zelf configureren) · Branches · Service · Shop, achteraan. Zoekveld altijd zichtbaar voor artikelnummers, telefoonnummer rechts.</p></div>
-        <div class="card"><h3>Hero (homepage)</h3><p><b>Doel</b> in één scherm zeggen wat we doen, en de grote klant aanspreken zonder de kleine af te schrikken.</p><p><b>Waarom</b> een belofte in plaats van een getal — &quot;de snelste van Nederland&quot; in plaats van &quot;tien werkdagen&quot;, want de levertijd wordt straks per configuratie berekend.</p><p><b>Bevat</b> kop · Case aanvragen als hoofdknop · Wat ga je vervoeren? als veld dat openklapt, met &quot;Ik weet het nog niet&quot; eronder · specband met levertijd, prijs, uitvoering en controle. Knoppen boven de vouw.</p></div>
-        <div class="card"><h3>Onder de hero</h3><p><b>Doel</b> de drie routes zichtbaar maken.</p><p><b>Waarom</b> de professional draagt de pagina, de consument vindt hier zijn deur.</p><p><b>Bevat</b> ik weet wat ik vervoer → wij kiezen de route · ik weet mijn maten → configurator · ik heb een tekening of een serie → aanvraag.</p></div>
-        <div class="card"><h3>Flightcases</h3><p><b>Doel</b> van &quot;welk model?&quot; naar een modelpagina.</p><p><b>Waarom</b> bezoekers kiezen op wat ze vervoeren, niet op hoe het heet.</p><p><b>Bevat</b> &quot;De vorm kies je, de maten geef je&quot; · draaiende 3D-kist die van maat verandert en het model kiest · knop die meeloopt naar dat model · strook &quot;in het veld&quot; · modellen met vanafprijs · vergelijkingstabel.</p></div>
-        <div class="card"><h3>Modelpagina</h3><p><b>Doel</b> vertrouwen geven vóór de configurator.</p><p><b>Bevat</b> vanafprijs · foto van een afgebouwde case · verwachtingen (maten, levertijd, kleur, controle) · configurator die start bij stap 2.</p></div>
-        <div class="card"><h3>Wat ga je vervoeren?</h3><p><b>Doel</b> wie zijn apparaat kent maar niet de case, toch laten bestellen — en hier bepaalt het apparaat de route.</p><p><b>Bevat</b> zoekveld als hoofdactie · index van toepassingen · drie uitwegen: vaste case bekend → shop · maten bekend → configurator · staat er niet bij → aanvraag.</p></div>
-        <div class="card"><h3>Shop (niveau 1)</h3><p><b>Doel</b> kant-en-klare cases en onderdelen direct verkopen.</p><p><b>Waarom</b> een vaste case voor één apparaat — kleur en logo kiezen, verder niets. Een Medusa-product, geen configurator, en niet op te schalen naar andere maten. Er zijn er nu bijna nul; dit assortiment moet nog worden opgebouwd. Shop wijst voorlopig naar Wat ga je vervoeren.</p><p><b>Bevat</b> beeld links, koopblok rechts (prijs, kleur, logo, aantal, winkelwagen) · specificaties · alternatieven pas onderaan.</p></div>
-        <div class="card"><h3>Configurator (niveau 2 en 3)</h3><p><b>Doel</b> maatwerk zonder wachten op een offerte.</p><p><b>Waarom</b> niveau 2 zet hoeken en afmetingen open; wie meer wil gaat door naar niveau 3, waar alles aanpasbaar is, ook handgrepen en beslag.</p><p><b>Bevat</b> prijs die meeloopt · stap omhoog van 2 naar 3 · een casebouwer die meekijkt vóór er gezaagd wordt.</p></div>
-        <div class="card"><h3>Branches</h3><p><b>Doel</b> laten zien dat we deze markt kennen.</p><p><b>Waarom</b> zoekverkeer zit op apparatuur; sectoren alleen op eigen pagina&#39;s.</p><p><b>Bevat</b> per branche: eisen die vooraf vastliggen · toepassingen · bewijs in plaats van klantverhalen · afsluiting met naam en gezicht.</p></div>
-        <div class="card"><h3>Grote spelers</h3><p><b>Doel</b> inkopers aanspreken op de manier waarop ze inkopen.</p><p><b>Bevat</b> aanbesteding, OEM en series, verhuur, omroep, netbeheer · referenties (daar is toestemming voor nodig, geen tekst).</p></div>
-        <div class="card"><h3>Case aanvragen</h3><p><b>Doel</b> van schets naar tekening met prijs, dezelfde werkdag.</p><p><b>Waarom</b> zeventig procent van de orders begint hier, dus deze route krijgt overal de hoofdknop.</p><p><b>Bevat</b> formulier boven de vouw · schets, datasheet of foto · aantal · wanneer · budget (optioneel, scheelt een ronde) · e-mail.</p></div>
+      <div class="keuzes">
+        <article class="keuze"><span class="num">01</span><h3>Navigatiebalk</h3><dl>
+          <dt>Doel</dt><dd>elke bezoeker in één klik op de juiste route.</dd>
+          <dt>Waarom</dt><dd>drie soorten bezoekers: wie weet wat hij nodig heeft, wie weet wat erin moet, en wie het nog niet weet. Zelf configureren is geen tabblad meer maar hoort bij Flightcases — als eigen tab concurreerde het met zijn eigen product.</dd>
+          <dt>Bevat</dt><dd>Case aanvragen · Wat ga je vervoeren? · Flightcases (menu met toepassingen, modellen en zelf configureren) · Branches · Service · Shop, achteraan. Zoekveld altijd zichtbaar voor artikelnummers, telefoonnummer rechts.</dd>
+        </dl></article>
+        <article class="keuze"><span class="num">02</span><h3>Hero (homepage)</h3><dl>
+          <dt>Doel</dt><dd>in één scherm zeggen wat we doen, en de grote klant aanspreken zonder de kleine af te schrikken.</dd>
+          <dt>Waarom</dt><dd>een belofte in plaats van een getal — &quot;de snelste van Nederland&quot; in plaats van &quot;tien werkdagen&quot;, want de levertijd wordt straks per configuratie berekend.</dd>
+          <dt>Bevat</dt><dd>kop · Case aanvragen als hoofdknop · Wat ga je vervoeren? als veld dat openklapt, met &quot;Ik weet het nog niet&quot; eronder · specband met levertijd, prijs, uitvoering en controle. Knoppen boven de vouw.</dd>
+        </dl></article>
+        <article class="keuze"><span class="num">03</span><h3>Onder de hero</h3><dl>
+          <dt>Doel</dt><dd>de drie routes zichtbaar maken.</dd>
+          <dt>Waarom</dt><dd>de professional draagt de pagina, de consument vindt hier zijn deur.</dd>
+          <dt>Bevat</dt><dd>ik weet wat ik vervoer → wij kiezen de route · ik weet mijn maten → configurator · ik heb een tekening of een serie → aanvraag.</dd>
+        </dl></article>
+        <article class="keuze"><span class="num">04</span><h3>Flightcases</h3><dl>
+          <dt>Doel</dt><dd>van &quot;welk model?&quot; naar een modelpagina.</dd>
+          <dt>Waarom</dt><dd>bezoekers kiezen op wat ze vervoeren, niet op hoe het heet.</dd>
+          <dt>Bevat</dt><dd>&quot;De vorm kies je, de maten geef je&quot; · draaiende 3D-kist die van maat verandert en het model kiest · knop die meeloopt naar dat model · strook &quot;in het veld&quot; · modellen met vanafprijs · vergelijkingstabel.</dd>
+        </dl></article>
+        <article class="keuze"><span class="num">05</span><h3>Modelpagina</h3><dl>
+          <dt>Doel</dt><dd>vertrouwen geven vóór de configurator.</dd>
+          <dt>Bevat</dt><dd>vanafprijs · foto van een afgebouwde case · verwachtingen (maten, levertijd, kleur, controle) · configurator die start bij stap 2.</dd>
+        </dl></article>
+        <article class="keuze"><span class="num">06</span><h3>Wat ga je vervoeren?</h3><dl>
+          <dt>Doel</dt><dd>wie zijn apparaat kent maar niet de case, toch laten bestellen — en hier bepaalt het apparaat de route.</dd>
+          <dt>Bevat</dt><dd>zoekveld als hoofdactie · index van toepassingen · drie uitwegen: vaste case bekend → shop · maten bekend → configurator · staat er niet bij → aanvraag.</dd>
+        </dl></article>
+        <article class="keuze"><span class="num">07</span><h3>Shop (niveau 1)</h3><dl>
+          <dt>Doel</dt><dd>kant-en-klare cases en onderdelen direct verkopen.</dd>
+          <dt>Waarom</dt><dd>een vaste case voor één apparaat — kleur en logo kiezen, verder niets. Een Medusa-product, geen configurator, en niet op te schalen naar andere maten. Er zijn er nu bijna nul; dit assortiment moet nog worden opgebouwd. Shop wijst voorlopig naar Wat ga je vervoeren.</dd>
+          <dt>Bevat</dt><dd>beeld links, koopblok rechts (prijs, kleur, logo, aantal, winkelwagen) · specificaties · alternatieven pas onderaan.</dd>
+        </dl></article>
+        <article class="keuze"><span class="num">08</span><h3>Configurator (niveau 2 en 3)</h3><dl>
+          <dt>Doel</dt><dd>maatwerk zonder wachten op een offerte.</dd>
+          <dt>Waarom</dt><dd>niveau 2 zet hoeken en afmetingen open; wie meer wil gaat door naar niveau 3, waar alles aanpasbaar is, ook handgrepen en beslag.</dd>
+          <dt>Bevat</dt><dd>prijs die meeloopt · stap omhoog van 2 naar 3 · een casebouwer die meekijkt vóór er gezaagd wordt.</dd>
+        </dl></article>
+        <article class="keuze"><span class="num">09</span><h3>Branches</h3><dl>
+          <dt>Doel</dt><dd>laten zien dat we deze markt kennen.</dd>
+          <dt>Waarom</dt><dd>zoekverkeer zit op apparatuur; sectoren alleen op eigen pagina&#39;s.</dd>
+          <dt>Bevat</dt><dd>per branche: eisen die vooraf vastliggen · toepassingen · bewijs in plaats van klantverhalen · afsluiting met naam en gezicht.</dd>
+        </dl></article>
+        <article class="keuze"><span class="num">10</span><h3>Grote spelers</h3><dl>
+          <dt>Doel</dt><dd>inkopers aanspreken op de manier waarop ze inkopen.</dd>
+          <dt>Bevat</dt><dd>aanbesteding, OEM en series, verhuur, omroep, netbeheer · referenties (daar is toestemming voor nodig, geen tekst).</dd>
+        </dl></article>
+        <article class="keuze"><span class="num">11</span><h3>Case aanvragen</h3><dl>
+          <dt>Doel</dt><dd>van schets naar tekening met prijs, dezelfde werkdag.</dd>
+          <dt>Waarom</dt><dd>zeventig procent van de orders begint hier, dus deze route krijgt overal de hoofdknop.</dd>
+          <dt>Bevat</dt><dd>formulier boven de vouw · schets, datasheet of foto · aantal · wanneer · budget (optioneel, scheelt een ronde) · e-mail.</dd>
+        </dl></article>
       </div>
     </section>
 
