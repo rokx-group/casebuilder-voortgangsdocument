@@ -173,6 +173,14 @@ body.focusmodus .demo:not(.aan){cursor:default}
   color:var(--mute);padding:9px 16px;border-bottom:2px solid transparent}
 .subtabs a:hover{color:var(--dark)}
 .subtabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+
+/* Het Shop-menu staat hier open onder de gekozen balk, als plaat. Zelfde
+   markup als de echte balk; alleen het open- en dichtklappen staat uit. */
+.h-shoppaneel{border-top:1px solid var(--rule);background:#fff}
+.h-shoppaneel .lab{display:block;padding:10px 32px 0;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--blue)}
+.h-shoppaneel .megamenu.vast{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border:0}
+.demo.va .h-nav a[href="shop-v1.html"]{box-shadow:inset 0 -3px 0 var(--cyan)}
 </style>
 </head>
 <body>
@@ -218,8 +226,8 @@ body.focusmodus .demo:not(.aan){cursor:default}
         <div class="h-logo"><img src="assets/woordmerk.svg" alt="Casebuilder.com"></div>
         <div class="h-nav-inline">
           <a href="case-aanvragen-v1.html">Case aanvragen</a><a href="case-voor-v1.html">Wat ga je vervoeren?</a>
-          <a href="configurator-v1.html">Zelf configureren</a><a href="flightcases-v1.html">Flightcases</a>
-          <a href="branches.html">Branches</a><a href="service-hub-v1.html">Service</a>
+          <a href="flightcases-v1.html">Flightcases</a>
+          <a href="branches.html">Branches</a><a href="service-hub-v1.html">Service</a><a href="shop-v1.html">Shop</a>
         </div>
         <div class="h-acties">
           <a href="#" class="h-icoon stil"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg> Zoeken</a>
@@ -234,12 +242,13 @@ body.focusmodus .demo:not(.aan){cursor:default}
 
   <div class="kop gekozen"><span class="nr">// 2 BALKEN</span><h3>Twee balken</h3><span class="gekozen">&#10003; geselecteerd voor nu</span><span class="hgt">122 px chrome · −28%</span></div>
   <details class="specdet">
-    <summary>Details<span class="aantal">9 punten</span></summary>
+    <summary>Details<span class="aantal">10 punten</span></summary>
     <p class="uitleg">De utility-balk verdwijnt; taal en inloggen schuiven naar rechts in de hoofdbalk, de merkregel naar de footer. <b>De offerteknop is er later uit gehaald</b> — een header vol acties maakt geen van alle belangrijk, en de belofte staat nu in de pagina zelf, bij &quot;laten controleren&quot;. Winkelwagen krijgt een telbadge in plaats van een tweede regel. De navigatie houdt één gewicht en één actief-signaal (cyaan streep). Alleen het logo blijft 900-condensed; alles rechts is DM Sans en wijkt terug.</p>
     <dl class="spec">
     <dt>Hoogte</dt><dd><b>122 px</b> in twee balken &mdash; er blijft <span class="let">638 px</span> over voor de pagina</dd>
     <dt>Zoeken</dt><dd>Veld altijd zichtbaar, tot 460 px breed. Wie een artikelnummer heeft, typt het meteen</dd>
-    <dt>Navigatie</dt><dd>Vier items in een eigen balk; er is ruimte tot ongeveer zes</dd>
+    <dt>Navigatie</dt><dd>Zes items in een eigen balk &mdash; daar houdt de ruimte op. Zelf configureren zit onder Flightcases</dd>
+    <dt>Shop</dt><dd>Klik gaat naar het overzicht met alle vaste cases en filters. Het menu toont ook de andere weg: zoeken op je apparaat, van toepassing via categorie tot het apparaat. Rechts de uitweg naar een andere maat</dd>
     <dt>Actief item</dt><dd>Cyaan streep van 3 px onder het label &mdash; &eacute;&eacute;n signaal, geen tweede kleur</dd>
     <dt>Rechtsboven</dt><dd>Inloggen en winkelwagen met telbadge, in DM Sans zodat ze terugwijken</dd>
     <dt>Taal</dt><dd>NL &#9662; rechts in de navigatiebalk &mdash; zichtbaar zonder klik</dd>
@@ -266,11 +275,44 @@ body.focusmodus .demo:not(.aan){cursor:default}
     <nav class="h-nav">
       <div class="wrap">
         <a href="case-aanvragen-v1.html">Case aanvragen</a><a href="case-voor-v1.html">Wat ga je vervoeren?</a>
-        <a href="configurator-v1.html">Zelf configureren</a><a href="flightcases-v1.html">Flightcases</a>
-        <a href="branches.html">Branches</a><a href="service-hub-v1.html">Service</a>
+        <a href="flightcases-v1.html">Flightcases</a>
+        <a href="branches.html">Branches</a><a href="service-hub-v1.html">Service</a><a href="shop-v1.html">Shop</a>
         <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#" class="stil">NL ▾</a></div>
       </div>
     </nav>
+    <div class="h-shoppaneel">
+      <span class="lab">// Shop, opengeklapt &mdash; twee wegen naar hetzelfde aanbod</span>
+      <div class="megamenu vast">
+        <div class="wrap">
+          <div>
+            <h4>// ALLE VASTE CASES, MET FILTERS</h4>
+            <ul>
+              <li><a href="shop-v1.html#av-licht">AV &amp; licht</a></li>
+              <li><a href="shop-v1.html#backline">Backline &amp; muziek</a></li>
+              <li><a href="shop-v1.html#broadcast">Broadcast &amp; camera</a></li>
+              <li><a href="shop-v1.html#medisch">Medisch &amp; lab</a></li>
+              <li><a href="shop-v1.html#industrie">Industrie &amp; meettechniek</a></li>
+              <li><a href="shop-v1.html#evenement">Evenement &amp; beursbouw</a></li>
+              <li><a href="categorie-v1.html">Onderdelen</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// OF ZOEK OP JE APPARAAT</h4>
+            <ul>
+              <li><a href="case-voor-v3.html">Alle 38 categorie&euml;n</a></li>
+              <li><a href="case-voor-backline-v1.html">Per toepassing &mdash; bijvoorbeeld backline</a></li>
+              <li><a href="case-voor-gitaar-v2.html">Per categorie &mdash; bijvoorbeeld gitaren</a></li>
+              <li><a href="case-voor-gibson-les-paul-v2.html">Tot op het apparaat &mdash; bijvoorbeeld een Les Paul</a></li>
+            </ul>
+          </div>
+          <div class="vlak">
+            <b>Andere maat nodig?</b>
+            <p>Kies je eigen afmetingen, ronde of vierkante hoeken en een slot. Wil je meer, dan ga je vanuit daar door naar de volledige editor.</p>
+            <a class="btn btn-dark" href="editor-v1.html#l2">Op jouw maat &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </div>
     <div class="vulling">PAGINA-INHOUD</div>
   </div>
 
@@ -309,8 +351,8 @@ body.focusmodus .demo:not(.aan){cursor:default}
     <nav class="h-nav">
       <div class="wrap">
         <a href="case-aanvragen-v1.html">Case aanvragen</a><a href="case-voor-v1.html">Wat ga je vervoeren?</a>
-        <a href="configurator-v1.html">Zelf configureren</a><a href="flightcases-v1.html">Flightcases</a>
-        <a href="branches.html">Branches</a><a href="service-hub-v1.html">Service</a>
+        <a href="flightcases-v1.html">Flightcases</a>
+        <a href="branches.html">Branches</a><a href="service-hub-v1.html">Service</a><a href="shop-v1.html">Shop</a>
         <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span></div>
       </div>
     </nav>
