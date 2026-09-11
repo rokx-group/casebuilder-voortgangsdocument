@@ -249,7 +249,9 @@
 @media(max-width:900px){.probeer{grid-template-columns:1fr}}
 
 /* ── Verder waar je was (punt 06): een smalle strook onder de hero ── */
-.verder{background:var(--lightblue);border-bottom:1px solid var(--rule)}
+/* Een section krijgt uit brand.css de ruimte van een hele band; dit is
+   een strook, dus zonder. */
+.verder{background:var(--lightblue);border-bottom:1px solid var(--rule);padding:0}
 .verder .wrap{display:flex;align-items:center;gap:18px;padding-top:12px;padding-bottom:12px;flex-wrap:wrap}
 .verder .ey{margin:0}
 .verder-product{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:17px;letter-spacing:.03em;color:var(--dark)}
