@@ -110,6 +110,18 @@
 .door span{font-size:14px;color:var(--mute)}
 .door.terug{background:#fff}
 
+/* Hulp nodig: zelfde knop en vak als op de productpagina (product-v1).
+   In L2 en L3, onder de configurator; de case staat er al in. */
+.hulpknop{margin-top:14px;width:100%;justify-content:center}
+.hulp{margin-top:10px;border:1.5px solid var(--dark);padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.hulp .lab{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.hulp .id{font-family:var(--mono);font-size:10px;letter-spacing:.08em;background:var(--lightblue);color:var(--dark);padding:8px 10px;line-height:1.6}
+.hulp textarea{border:1.5px solid var(--rule);padding:10px 12px;font-family:var(--body);font-size:14px;min-height:70px;resize:vertical}
+.hulp textarea:focus{outline:0;border-color:var(--dark)}
+.hulp .up{border:1.5px dashed var(--rule);padding:8px 12px;font-size:12.5px;color:var(--mute);background:var(--bg);cursor:pointer}
+.hulp .btn{align-self:flex-start}
+.hulp .klaar{font-size:13px;color:var(--dark)}
+
 /* ── de configurator ─────────────────────────────────────────
    Zelfde opbouw als het venster op configurator-v1: donkere kop,
    stappenbalk, inhoud, voet met prijs. Hier ingebed in de pagina in
@@ -585,6 +597,19 @@
         </div>
       </div>
 
+      <div data-toon="l2 l3">
+        <button type="button" class="btn btn-out btn-sm hulpknop" data-hulpknop aria-expanded="false" aria-controls="hulp">Hulp nodig bij deze case?</button>
+        <div class="hulp" id="hulp" data-hulp hidden>
+          <span class="lab">// Vraag een expert &middot; met deze case erbij</span>
+          <div class="id" data-hulpid></div>
+          <label class="sr" for="hulpvraag">Wat wil je anders?</label>
+          <textarea id="hulpvraag" placeholder="Bijvoorbeeld: help, ik wil een zijvak rechts"></textarea>
+          <label class="up">+ Schets, foto of datasheet toevoegen<input type="file" class="sr"></label>
+          <button type="button" class="btn btn-dark btn-sm" data-hulpstuur>Stuur naar een expert &rarr;</button>
+          <p class="klaar" data-hulpklaar hidden>Verstuurd (mockup). Een expert antwoordt dezelfde werkdag, met deze case als uitgangspunt.</p>
+        </div>
+      </div>
+
       <a class="door" data-toon="l2" href="#l3" data-naar="l3"><b>Meer aanpassen?</b><span>Open de volledige stand: ook model, paneel, handgrepen, wielen en schuim. Je maten, hoeken, slot en kleur blijven staan.</span></a>
       <a class="door terug" data-toon="l3" href="#l2" data-naar="l2"><b>&larr; Terug naar de beperkte stand</b><span>Wat de template vastzet, gaat terug naar zijn standaard.</span></a>
     </div>
@@ -826,6 +851,11 @@
       : 'In winkelwagen →';
 
     samenvatting();
+    q('[data-hulpid]').textContent = 'Case 7K2M-4813 · ' + NAMEN.model[staat.model].toLowerCase() + ' ' +
+      mm(staat.b) + ' × ' + mm(staat.d) + ' × ' + mm(staat.h) + ' mm · ' + NAMEN.hoek[staat.hoek].toLowerCase() + ' · ' +
+      NAMEN.slot[staat.slot].toLowerCase() + ' · ' + KLEUREN[staat.kleur][0].toLowerCase() +
+      (n === 'l3' ? ' · ' + NAMEN.greep[staat.greep] + ' · ' + NAMEN.wielen[staat.wielen].toLowerCase() + ' · ' + NAMEN.schuim[staat.schuim].toLowerCase() : '') +
+      (logoNaam ? ' · logo ' + logoNaam : '');
     if (location.hash !== '#' + n) history.replaceState(null, '', '#' + n);
   }
 
@@ -880,6 +910,15 @@
       teken();
     });
   });
+
+  var hulpknop = q('[data-hulpknop]');
+  hulpknop.addEventListener('click', function () {
+    var vak = q('[data-hulp]');
+    vak.hidden = !vak.hidden;
+    hulpknop.setAttribute('aria-expanded', String(!vak.hidden));
+    if (!vak.hidden) q('#hulpvraag').focus();
+  });
+  q('[data-hulpstuur]').addEventListener('click', function () { q('[data-hulpklaar]').hidden = false; });
 
   var vorigeUrl = null;
   qa('[data-upload]').forEach(function (inp) {
