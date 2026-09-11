@@ -42,11 +42,18 @@
     var mm = (k.dataset.mm || '').split(/[x×]/).map(Number);
     return { naam: k.dataset.naam || k.textContent.trim(), b: mm[0], h: mm[1], d: mm[2], href: k.dataset.href };
   }).filter(function (m) { return m.b && m.h && m.d; });
-  if (!MATEN.length) return;
+  /* Vrije maat (data-vrij): de editor zet de maten zelf, via het event
+     'kist:maat', in plaats van via knoppen in de pagina. Dan is er geen
+     reeks om doorheen te wisselen, en bepaalt data-vrij de grootste maat
+     in mm waarop de schaal wordt afgesteld. Zo is er één draaiende kist
+     voor het modeloverzicht én de editor, en geen tweede die afwijkt. */
+  var vrij = kist.hasAttribute('data-vrij');
+  if (!MATEN.length && !vrij) return;
 
   /* De grootste kist bepaalt de schaal, zodat geen enkele maat buiten
      het kader valt en ze onderling vergelijkbaar blijven. */
-  var GROOTSTE = Math.max.apply(null, MATEN.map(function (m) { return Math.max(m.b, m.h, m.d); }));
+  var GROOTSTE = vrij ? (Number(kist.getAttribute('data-vrij')) || 1400)
+               : Math.max.apply(null, MATEN.map(function (m) { return Math.max(m.b, m.h, m.d); }));
   var SCHAAL = 240 / GROOTSTE;
   var WISSEL = 4200;         /* hoe lang een maat blijft staan */
 
@@ -60,13 +67,13 @@
     vlak.style.setProperty('--h', (m.h * SCHAAL).toFixed(1) + 'px');
     vlak.style.setProperty('--d', (m.d * SCHAAL).toFixed(1) + 'px');
     if (label) {
-      label.textContent = m.naam + ' · ' + m.b.toLocaleString('nl-NL') + ' × ' +
+      label.textContent = (m.naam ? m.naam + ' · ' : '') + m.b.toLocaleString('nl-NL') + ' × ' +
         m.h.toLocaleString('nl-NL') + ' × ' + m.d.toLocaleString('nl-NL') + ' mm';
     }
   }
 
   var i = 0;
-  toon(MATEN[0], 0);
+  if (MATEN.length) toon(MATEN[0], 0);
 
   var stil = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var wisselaar = null;
@@ -75,7 +82,7 @@
     wisselaar = setInterval(function () { i = (i + 1) % MATEN.length; toon(MATEN[i], i); }, WISSEL);
   }
   function stopWisselen() { clearInterval(wisselaar); wisselaar = null; }
-  startWisselen();
+  if (MATEN.length > 1) startWisselen();
 
   /* ── draaien ───────────────────────────────────────────────
      Vanzelf, tot de bezoeker hem vastpakt. Dan neemt hij het over en
@@ -120,5 +127,13 @@
       stopWisselen();
       i = n; toon(MATEN[n], n);
     });
+  });
+  /* Maat van buitenaf zetten — voor de editor. Wisselen stopt: wie
+     maten intypt, wil niet dat de kist naar een voorbeeldmaat springt. */
+  kist.addEventListener('kist:maat', function (e) {
+    var m = e.detail || {};
+    if (!(m.b && m.h && m.d)) return;
+    stopWisselen();
+    toon({ naam: m.naam || '', b: m.b, h: m.h, d: m.d }, -1);
   });
 })();
