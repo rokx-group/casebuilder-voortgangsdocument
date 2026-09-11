@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder &mdash; editor beoordelen (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   Editor beoordelen
+
+   De twee opzetten van de editor naast elkaar, per niveau één rij:
+
+     rij L1  kleur en logo       v2 · v1
+     rij L2  maten, hoeken, slot v2 · v1
+     rij L3  alles               v2 · v1
+
+   Per niveau en niet per versie, omdat de vraag per niveau verschilt.
+   Op L1 en L3 doen beide hetzelfde; het verschil zit in L2: een eigen
+   editor (v1) of de configurator van CaseBuilder in een beperkte stand
+   (v2). Zo zie je dat verschil op de rij waar het zit.
+
+   Elk kader opent de mockup op zijn niveau via de hash (#l1, #l2, #l3);
+   de editor leest die bij het laden. De mockups zelf staan in
+   editor-v1.html en editor-v2.html — hier wordt niets nagebouwd.
+
+   Op 47% past een venster van 1440 in 677 px: twee naast elkaar op deze
+   breedte. De schaal staat op drie plekken en moet gelijk blijven: in
+   .houder, in de iframe, en in data-schaal, want kaderhoogte.js rekent
+   de hoogte daarmee terug.
+   ══════════════════════════════════════════════════════════════ */
+body{background:#EDF0F4}
+.vgl{max-width:1440px;margin:0 auto;padding:0 24px 90px}
+.inleiding{max-width:82ch;margin:0 0 10px}
+.inleiding h2{font-size:26px;margin-bottom:8px}
+.inleiding p{font-size:14px;color:var(--mute);line-height:1.65}
+.inleiding p+p{margin-top:8px}
+.inleiding p b{color:var(--ink)}
+
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--rule);margin:0 0 26px;flex-wrap:wrap}
+.tabs a{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mute);padding:16px 20px 13px;border-bottom:3px solid transparent;margin-bottom:-1px}
+.tabs a:hover{color:var(--dark)}
+.tabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+
+.groepkop{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:34px 0 12px}
+.groepkop .gn{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--blue);flex:none}
+.groepkop b{font-family:var(--disp);text-transform:uppercase;font-size:20px;letter-spacing:.03em;
+  color:var(--dark);flex:none}
+.groepkop span.gu{font-size:13.5px;color:var(--mute)}
+
+/* ── twee kaders per rij ───────────────────────────────────── */
+.paar{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+.demo{border:1px solid var(--rule);background:#fff;box-shadow:0 1px 3px rgba(0,40,70,.07);overflow:hidden}
+.demo.gekozen{border:2px solid var(--cyan);box-shadow:0 0 0 6px rgba(102,196,232,.18),0 1px 3px rgba(0,40,70,.07)}
+.demo .balk{display:flex;align-items:center;gap:8px;text-decoration:none;cursor:pointer;transition:background .12s;
+  background:var(--dark);color:#fff;font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+  text-transform:uppercase;font-weight:600;padding:7px 14px}
+.demo.gekozen .balk{background:var(--cyan);color:var(--void)}
+.demo .balk .vs{margin-left:auto;max-width:0;overflow:hidden;white-space:nowrap;opacity:0;
+  transition:opacity .12s,max-width .12s;font-size:9px;letter-spacing:.12em}
+.demo a.balk:hover .vs{opacity:.85;max-width:16ch}
+.demo a.balk:hover{background:var(--blue)}
+.demo a.balk:focus-visible{outline:2px solid var(--cyan);outline-offset:-2px}
+.demo .toel{padding:10px 14px 12px;font-size:13px;line-height:1.5;color:var(--mute);border-bottom:1px solid var(--rule);margin:0}
+.demo .toel b{color:var(--ink)}
+.venster{height:620px;overflow:auto;background:var(--bg)}
+.houder{width:677px;height:1128px}
+.venster iframe{width:1440px;height:2400px;border:0;display:block;transform:scale(.47);transform-origin:top left}
+
+/* ── focusmodus (assets/focus.js) ──────────────────────────── */
+.dim{position:fixed;inset:0;background:rgba(11,26,38,.62);z-index:50;opacity:0;pointer-events:none;transition:opacity .14s}
+body.focusmodus .dim{opacity:1;pointer-events:auto}
+.demo.aan{position:relative;z-index:60}
+.demo{cursor:zoom-in}
+.demo.aan{cursor:zoom-out}
+body.focusmodus .demo:not(.aan){cursor:default}
+.demo a,.demo iframe{cursor:auto}
+@media (prefers-reduced-motion: reduce){ .dim{transition:none} }
+@media (max-width:1180px){ .paar{grid-template-columns:1fr} }
+
+.tabs a.tak{color:var(--dark)}
+.subtabs{display:flex;align-items:baseline;gap:0;margin:-20px 0 26px;flex-wrap:wrap}
+.subtabs .pad{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);padding:9px 14px 9px 2px}
+.subtabs a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);padding:9px 16px;border-bottom:2px solid transparent}
+.subtabs a:hover{color:var(--dark)}
+.subtabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+</style>
+</head><body>
+
+<div class="vgl">
+
+  <div class="tabs">
+    <a href="header-varianten.html">Header</a>
+    <a href="hero-voorstellen.html">Hero</a>
+    <a href="homepage-varianten.html">Homepage</a>
+    <a href="case-aanvragen-varianten.html">Case aanvragen</a>
+    <a href="case-voor-varianten.html">/case-voor</a>
+    <a href="flightcases-varianten.html">/flightcases</a>
+    <a href="editor-varianten.html" class="on">Editor</a>
+    <a href="groot-zakelijk-varianten.html">/groot-zakelijk</a>
+    <a href="branches-varianten.html">Kopkeuze</a>
+    <a href="service-varianten.html">/service</a>
+    <a href="shop-varianten.html">/shop</a>
+    <a href="zoeken-varianten.html">/zoeken</a>
+    <a href="faq-varianten.html">FAQ</a>
+    <a href="footer-varianten.html">Footer</a>
+  </div>
+
+  <div class="inleiding">
+    <h2>Een case aanpassen, in drie niveaus</h2>
+    <p>Hoever je een case kunt aanpassen hangt af van het product, en dat bepaalt CaseBuilder &mdash; niet de klant. <b>L1</b>: alleen kleur en logo, op de productpagina. <b>L2</b>: ook maten, ronde of vierkante hoeken en een slot. <b>L3</b>: alles. De klant ziet het woord &ldquo;niveau&rdquo; nooit.</p>
+    <p><b>Gekozen op 11 september: v2.</b> L2 bouwen we niet zelf; het is de configurator van CaseBuilder in een beperkte stand, geopend met een template van de kist waar je vandaan komt. v1 had een eigen L2-editor naast de configurator, en daarmee een tweede prijsregel en tweede grenzen die gelijk moeten blijven met de configurator. Of de configurator een template kan laden en velden kan vergrendelen, is de vraag aan CaseBuilder.</p>
+  </div>
+
+  <div class="groepkop">
+    <span class="gn">// L1</span>
+    <b>Kleur en logo</b>
+    <span class="gu">Op de productpagina. Een Medusa-product, geen configurator.</span>
+  </div>
+  <div class="paar">
+    <div class="demo gekozen">
+      <a class="balk" href="editor-v2.html#l1" target="_blank" rel="noopener">v2 &middot; gekozen<span class="vs">volledig scherm</span><span aria-hidden="true">&#8599;</span></a>
+      <div class="venster" data-schaal=".47"><div class="houder">
+        <iframe src="editor-v2.html#l1" title="Editor v2, L1" loading="lazy"></iframe>
+      </div></div>
+    </div>
+    <div class="demo">
+      <a class="balk" href="editor-v1.html#l1" target="_blank" rel="noopener">v1 &middot; afgevallen<span class="vs">volledig scherm</span><span aria-hidden="true">&#8599;</span></a>
+      <div class="venster" data-schaal=".47"><div class="houder">
+        <iframe src="editor-v1.html#l1" title="Editor v1, L1" loading="lazy"></iframe>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="groepkop">
+    <span class="gn">// L2</span>
+    <b>Maten, hoeken en slot</b>
+    <span class="gu">Hier zit het verschil: de configurator in een beperkte stand (v2) of een eigen editor (v1).</span>
+  </div>
+  <div class="paar">
+    <div class="demo gekozen">
+      <a class="balk" href="editor-v2.html#l2" target="_blank" rel="noopener">v2 &middot; beperkte stand van de configurator<span class="vs">volledig scherm</span><span aria-hidden="true">&#8599;</span></a>
+      <div class="venster" data-schaal=".47"><div class="houder">
+        <iframe src="editor-v2.html#l2" title="Editor v2, L2" loading="lazy"></iframe>
+      </div></div>
+    </div>
+    <div class="demo">
+      <a class="balk" href="editor-v1.html#l2" target="_blank" rel="noopener">v1 &middot; eigen L2-editor<span class="vs">volledig scherm</span><span aria-hidden="true">&#8599;</span></a>
+      <div class="venster" data-schaal=".47"><div class="houder">
+        <iframe src="editor-v1.html#l2" title="Editor v1, L2" loading="lazy"></iframe>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="groepkop">
+    <span class="gn">// L3</span>
+    <b>Alles</b>
+    <span class="gu">De configurator zoals hij nu is.</span>
+  </div>
+  <div class="paar">
+    <div class="demo gekozen">
+      <a class="balk" href="editor-v2.html#l3" target="_blank" rel="noopener">v2 &middot; volledige stand<span class="vs">volledig scherm</span><span aria-hidden="true">&#8599;</span></a>
+      <div class="venster" data-schaal=".47"><div class="houder">
+        <iframe src="editor-v2.html#l3" title="Editor v2, L3" loading="lazy"></iframe>
+      </div></div>
+    </div>
+    <div class="demo">
+      <a class="balk" href="editor-v1.html#l3" target="_blank" rel="noopener">v1 &middot; alles<span class="vs">volledig scherm</span><span aria-hidden="true">&#8599;</span></a>
+      <div class="venster" data-schaal=".47"><div class="houder">
+        <iframe src="editor-v1.html#l3" title="Editor v1, L3" loading="lazy"></iframe>
+      </div></div>
+    </div>
+  </div>
+
+</div>
+
+<script src="assets/kaderhoogte.js"></script>
+<script src="assets/focus.js"></script>
+</body>
+</html>
