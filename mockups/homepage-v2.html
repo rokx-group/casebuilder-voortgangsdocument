@@ -72,6 +72,9 @@
 .vervoer.is-open .vervoer-knop{border-right-color:transparent}
 .vervoer-veld{display:flex;align-items:stretch;width:0;overflow:hidden;
   transition:width .28s cubic-bezier(.2,.7,.2,1)}
+/* Dicht is dicht: met breedte 0 tekende de ingeklapte pijlknop nog een
+   streepje naast de knop. Op een telefoon staat het veld altijd open. */
+@media(min-width:761px){.vervoer:not(.is-open) .vervoer-veld{visibility:hidden}}
 .vervoer.is-open .vervoer-veld{width:min(380px,44vw)}
 .vervoer-veld input{width:100%;min-width:0;border:1.5px solid var(--cyan);border-left:0;border-right:0;
   background:rgba(255,255,255,.09);color:#fff;font-family:var(--body);font-size:16px;padding:0 16px;outline:0}
@@ -662,5 +665,7 @@
 <script src="assets/versies.js"></script>
 <script src="assets/uitsnede.js"></script>
 <script src="assets/hero-keuze.js"></script>
+<script src="assets/toepassingen.js"></script>
+<script src="assets/vervoeren.js"></script>
 </body>
 </html>
