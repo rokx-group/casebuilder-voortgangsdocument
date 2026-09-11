@@ -15,6 +15,10 @@
   --wrap:1280px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
+/* Het hidden-attribuut moet winnen van elke display-regel. Zonder dit
+   bleef een blok met display:flex gewoon staan als een script het
+   verborg — het attribuut stond erop, de pagina toonde het toch. */
+[hidden]{display:none!important}
 html{scroll-behavior:smooth}
 body{font-family:var(--body);color:var(--ink);background:var(--white);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
