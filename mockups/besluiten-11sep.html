@@ -100,6 +100,13 @@ body{background:#EDF0F4}
 .p-prijs small{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--mute);font-weight:500;margin-left:6px}
 .p-band{margin-top:10px;background:#fff;border:1px solid var(--rule);border-left:3px solid var(--cyan);padding:10px 14px;font-size:13.5px}
 .p-band b{font-family:var(--disp);font-size:16px;color:var(--dark);letter-spacing:.02em}
+/* Delen van een voorbeeld die aan een vinkje hangen (data-hangt), en
+   de lege stand zolang er niets gekozen is (data-leeg). */
+.p-deel + .p-deel,.p-leeg + .p-deel{margin-top:12px}
+.p-deel > .lab{margin-bottom:6px}
+.p-leeg{background:#fff;border:1px dashed var(--rule);padding:12px 14px;font-size:13.5px;color:var(--mute)}
+.p-cases.klein img{height:64px}
+.p-cases.klein h5{font-size:12.5px}
 
 .p-probeer{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:center;background:#fff;border:1px solid var(--rule);padding:16px}
 .p-probeer .kist3d{height:230px}
@@ -297,12 +304,29 @@ body{background:#EDF0F4}
     <p class="voorstel">Meer dan &eacute;&eacute;n mag. De prijs zit dan op de plek waar iemand kiest, niet in een aparte sectie.</p>
     <div class="bgrid">
       <div class="vb">
-        <span class="lab">Voorbeeld &middot; modeltegel en offertepagina</span>
-        <div class="p-model">
-          <img src="assets/flightcase-koffer.jpg" alt="">
-          <div><h4>Koffer</h4><div class="p-prijs">vanaf &euro; 149<small>excl. btw</small></div></div>
+        <span class="lab">Voorbeeld &middot; vink rechts aan, dan verschijnt het hier</span>
+        <div class="p-leeg" data-leeg>Nog niets aangevinkt. Nu staat de prijs alleen in de configurator en in de prijsopbouw op de homepage.</div>
+        <div class="p-deel" data-hangt="Vanaf-prijs op elke model- en producttegel" hidden>
+          <span class="lab">Op elke modeltegel en in de shop</span>
+          <div class="p-model"><img src="assets/flightcase-koffer.jpg" alt=""><div><h4>Koffer</h4><div class="p-prijs">vanaf &euro; 149<small>excl. btw</small></div></div></div>
         </div>
-        <div class="p-band">Op de offertepagina: <b>meestal tussen &euro; 150 en &euro; 450 per case</b> &mdash; de bedragen zijn verzonnen, CB levert de echte.</div>
+        <div class="p-deel" data-hangt="Prijsbandbreedte op de offertepagina" hidden>
+          <span class="lab">Op de offertepagina, boven het formulier</span>
+          <div class="p-band">Meestal tussen <b>&euro; 150 en &euro; 450</b> per case. Een eigen maat met wielen en schuim zit aan de bovenkant. <span style="color:var(--mute)">De bedragen zijn verzonnen; CB levert de echte.</span></div>
+        </div>
+        <div class="p-deel" data-hangt="Echte voorbeelden met prijs op de offertepagina (zie 09)" hidden>
+          <span class="lab">Op de offertepagina &middot; zie 09</span>
+          <div class="p-cases klein">
+            <div class="p-case"><img src="assets/foto-audio-visueel.jpg" alt=""><div><h5>Rack voor een Midas M32</h5><b>&euro; 412</b></div></div>
+            <div class="p-case"><img src="assets/foto-product-drone.jpg" alt=""><div><h5>Koffer voor een drone</h5><b>&euro; 239</b></div></div>
+            <div class="p-case"><img src="assets/foto-flightcase-beurs.jpg" alt=""><div><h5>Standkist voor een beurs</h5><b>&euro; 529</b></div></div>
+          </div>
+        </div>
+        <div class="p-deel" data-hangt="De probeerstrook met live prijs (zie 05)" hidden>
+          <span class="lab">Op de homepage en /flightcases &middot; zie 05</span>
+          <div class="p-band">Probeer het: 700 &times; 450 &times; 300 mm &rarr; <b>&euro; 197,95</b> &mdash; de prijs loopt mee terwijl je schuift.</div>
+        </div>
+        <div class="p-leeg" data-hangt="Niets extra" hidden>Blijft zoals het is.</div>
       </div>
       <div class="kies">
         <fieldset data-vraag="Prijsindicatie">
@@ -713,6 +737,13 @@ body{background:#EDF0F4}
 
   /* De voorbeelden die met een keuze meebewegen. */
   function voorbeelden() {
+    /* Delen die aan een keuze hangen: data-hangt staat er alleen als die
+       keuze aan staat, data-leeg zolang er in die sectie niets gekozen is. */
+    secties.forEach(function (s) {
+      var aan = qa('.kies input:checked', s).map(function (i) { return i.value; });
+      qa('[data-hangt]', s).forEach(function (el) { el.hidden = aan.indexOf(el.dataset.hangt) < 0; });
+      qa('[data-leeg]', s).forEach(function (el) { el.hidden = aan.length > 0; });
+    });
     var c = q('input[name="b01"]:checked');
     var k = q('input[name="b02"]:checked');
     var kort = !!(k && k.dataset.tekst === 'kort');
