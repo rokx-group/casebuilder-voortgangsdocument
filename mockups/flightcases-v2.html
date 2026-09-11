@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — /flightcases v2, vijf modellen tegelijk (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<link rel="stylesheet" href="assets/draaikist.css">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   /flightcases v2 — vijf modellen tegelijk, en het menu met beeld
+
+   Twee besluiten van 11 september, eerst als mockup:
+
+   12   De vijf modellen staan tegelijk in beeld, elk draaiend. Klikken
+        maakt er de grote van, met de specificaties en "Configureer dit
+        model". Nu met de draaiende kist uit assets/draaikist.*; die wordt
+        vervangen door echte renders als de configurator ze kan maken.
+
+   13   Het Flightcases-menu: de modellen worden de hoofdkolom, elk met
+   14   een klein beeld. De toepassingen blijven als tekstkolom. Het beeld
+        wordt een render uit de configurator; tot die er is staat hier de
+        kist, stil, want een menu moet meteen openen en niet bewegen.
+
+   Het menu staat hier opengeklapt als voorstel. Het echte menu in de
+   balk is nog het gedeelde (onderdelen/nav.html) en verandert pas als
+   dit akkoord is.
+
+   Modellen, maten en vanafprijzen zijn die van flightcases-v1.
+   ══════════════════════════════════════════════════════════════ */
+
+/* De band bovenaan hoort bij de review, niet bij de pagina. */
+.review{background:var(--dark);color:#fff}
+.review .wrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
+.review .lab{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan)}
+.review p{font-size:12.5px;color:rgba(255,255,255,.75)}
+
+/* ── 13–14 · het menu, opengeklapt ────────────────────────── */
+.menuvoorbeeld{background:#fff;border-bottom:1px solid var(--rule);box-shadow:0 14px 30px rgba(0,40,70,.10)}
+.menuvoorbeeld .kaart{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);
+  padding:14px 0 0}
+/* Het echte menu krijgt zijn kolommen alleen binnen nav.primary
+   (brand.css). Buiten de balk zetten we hetzelfde raster hier neer, met
+   een bredere middenkolom voor de vijf beelden. */
+.menuvoorbeeld .megamenu{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border:0;pointer-events:auto}
+.menuvoorbeeld .megamenu > .wrap{display:grid;grid-template-columns:1fr 1.8fr 1fr;gap:44px;align-items:start;padding-top:18px;padding-bottom:28px}
+.mm-modellen{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.mm-modellen a{display:flex;flex-direction:column;border:1px solid var(--rule);background:#fff;transition:.14s}
+.mm-modellen a:hover{border-color:var(--dark)}
+.mm-modellen .beeld{background:var(--bg);height:92px;position:relative;overflow:hidden}
+.mm-modellen .kist3d{height:92px;pointer-events:none}
+.mm-modellen .kmaat,.mm-modellen .grond{display:none}
+.mm-modellen span{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:13px;letter-spacing:.03em;
+  color:var(--dark);padding:7px 8px 8px}
+.mm-modellen small{display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;color:var(--mute);font-weight:500;margin-top:2px}
+.mm-noot{font-size:11.5px;color:var(--mute);margin-top:10px}
+.mm-alle{display:inline-block;margin-top:10px;font-family:var(--disp);text-transform:uppercase;font-size:14px;letter-spacing:.04em;color:var(--blue)}
+
+/* ── 12 · de kop: één groot, vijf klein ───────────────────── */
+.ovkop{background:var(--bg);border-bottom:1px solid var(--rule)}
+.ovkop h1{font-size:clamp(34px,4.2vw,54px)}
+.ovkop .lead{margin-top:14px;max-width:60ch}
+.podium{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;margin-top:30px;
+  background:#fff;border:1px solid var(--rule);padding:22px 28px}
+.podium .kist3d{height:340px}
+.podium .kmaat{display:none}
+.podium h2{font-size:34px}
+.podium .waar{font-size:15.5px;color:var(--mute);margin-top:10px;max-width:46ch}
+.specs{display:grid;grid-template-columns:auto 1fr;border-top:1px solid var(--rule);margin-top:18px}
+.specs dt,.specs dd{padding:9px 0;border-bottom:1px solid var(--rule)}
+.specs dt{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);padding-right:22px}
+.specs dd{font-size:15px;color:var(--ink)}
+.specs dd.prijs{font-family:var(--disp);font-size:22px;font-weight:900;color:var(--dark)}
+.podium .cta{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+
+/* De vijf: allemaal draaiend, allemaal tegelijk. De kist in een tegel
+   vangt geen muis — de hele tegel is de knop. */
+.vijf{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin:18px 0 0;padding-bottom:44px}
+.vijf button{border:1.5px solid var(--rule);background:#fff;padding:0;cursor:pointer;text-align:left;display:flex;flex-direction:column;transition:.14s}
+.vijf button:hover{border-color:var(--dark)}
+.vijf button[aria-pressed="true"]{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(102,196,232,.24)}
+.vijf .beeld{background:var(--bg);height:170px;overflow:hidden;position:relative}
+.vijf .kist3d{height:170px;pointer-events:none}
+.vijf .kmaat{display:none}
+.vijf .naam{padding:12px 14px 14px;display:flex;align-items:baseline;gap:10px}
+.vijf .naam b{font-family:var(--disp);text-transform:uppercase;font-size:17px;letter-spacing:.03em;color:var(--dark)}
+.vijf .naam small{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--mute)}
+.vijf .hint{grid-column:1/-1;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+
+/* ── de vergelijking, zoals op v1 ─────────────────────────── */
+.verg{width:100%;border-collapse:collapse;margin-top:26px}
+.verg th,.verg td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--rule);font-size:14px}
+.verg thead th{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-weight:500;border-bottom:1.5px solid var(--dark)}
+.verg tbody th{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:17px;letter-spacing:.03em;color:var(--dark);width:22%}
+.verg td.ja{color:#2F7355;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.verg td.nee{color:var(--mute);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.verg td.prijs{font-family:var(--disp);font-size:19px;font-weight:900;color:var(--dark);letter-spacing:.02em}
+.verg tbody tr{cursor:pointer}
+.verg tbody tr:hover,.verg tbody tr.aan{background:var(--lightblue)}
+.scroller{overflow-x:auto}
+
+@media(max-width:1080px){.vijf{grid-template-columns:repeat(3,1fr)}.podium{grid-template-columns:1fr}
+  .menuvoorbeeld .megamenu > .wrap{grid-template-columns:1fr}.mm-modellen{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+
+<header class="main">
+  <div class="wrap">
+    <a class="merk" href="homepage-v2.html" aria-label="Casebuilder.com &mdash; naar de homepage"><img src="assets/woordmerk.svg" alt="Casebuilder.com"></a>
+    <form class="search" onsubmit="return false">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+      <input placeholder="Zoek op case, onderdeel of artikelnummer…" aria-label="Zoeken">
+    </form>
+    <div class="hdr-r">
+      <a href="#" class="stil">Inloggen</a>
+      <a href="#">Winkelwagen</a>
+    </div>
+  </div>
+</header>
+
+<nav class="primary">
+  <div class="wrap">
+    <a href="case-aanvragen-v1.html">Case aanvragen</a>
+    <a href="case-voor-v1.html">Wat ga je vervoeren?</a>
+
+    <!-- Flightcases draagt nu drie ingangen tegelijk: waarvoor, welk
+         model, en zelf bouwen. Zelf configureren stond hiervoor los in
+         de balk; als top-level item concurreerde het met Flightcases
+         terwijl het er een onderdeel van is.
+
+         "Waarvoor" zijn de zes toepassingen (wat je vervoert), niet de
+         branches (wie je bent): die hebben hun eigen menu, en dezelfde zes
+         markten twee keer in de balk zei niets extra's. Backline heeft al
+         een eigen pagina; de rest wijst hun vak in de index aan. -->
+    <span class="heeft-menu">
+      <a href="flightcases-v1.html" class="on">Flightcases</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// WAAR GEBRUIK JE HEM VOOR</h4>
+            <ul>
+              <li><a href="case-voor-v3.html#av-licht">AV &amp; licht<span class="n">142</span></a></li>
+              <li><a href="case-voor-backline-v1.html">Backline &amp; muziek<span class="n">118</span></a></li>
+              <li><a href="case-voor-v3.html#broadcast">Broadcast &amp; camera<span class="n">86</span></a></li>
+              <li><a href="case-voor-v3.html#medisch">Medisch &amp; lab<span class="n">64</span></a></li>
+              <li><a href="case-voor-v3.html#industrie">Industrie &amp; meettechniek<span class="n">73</span></a></li>
+              <li><a href="case-voor-v3.html#evenement">Evenement &amp; beursbouw<span class="n">50</span></a></li>
+              <li><a href="case-voor-v3.html#alle-categorieen">Alle toepassingen &rarr;</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// MODELLEN</h4>
+            <ul>
+              <li><a href="casetype-rackcase-enkel-deksel-v1.html">Rackcase enkel deksel</a></li>
+              <li><a href="casetype-rackcase-dubbel-deksel-v1.html">Rackcase dubbel deksel</a></li>
+              <li><a href="casetype-trunccase-v1.html">Trunccase</a></li>
+              <li><a href="casetype-hoedcase-v1.html">Hoedcase</a></li>
+              <li><a href="casetype-koffer-v1.html">Koffer</a></li>
+              <li><a href="flightcases-v1.html">Alle modellen &rarr;</a></li>
+            </ul>
+          </div>
+          <div class="vlak">
+            <b>Zelf configureren</b>
+            <p>Jouw maten invullen en de prijs zien terwijl je typt. Een casebouwer kijkt je opgave na voordat we zagen.</p>
+            <a class="btn btn-dark" href="configurator-v1.html">Start met configureren &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </span>
+
+    <!-- Branches: wie je bent. Links de zes markten met een eigen pagina,
+         in het midden de manieren van inkopen voor grote partijen — dat is
+         dezelfde koper in een andere rol (zie /grote-spelers), niet een
+         zevende markt. Rechts de opvang voor wie zichzelf er niet in ziet. -->
+    <span class="heeft-menu">
+      <a href="branches.html">Branches</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// ZES MARKTEN</h4>
+            <ul>
+              <li><a href="branche-audio-visueel-v1.html">Audio-visueel en podium<span class="n">22</span></a></li>
+              <li><a href="branche-broadcast-en-media-v1.html">Broadcast en media<span class="n">9</span></a></li>
+              <li><a href="branche-industrie-en-machinebouw-v1.html">Industrie en machinebouw<span class="n">14</span></a></li>
+              <li><a href="branche-meet-en-testapparatuur-v1.html">Meet- en testapparatuur<span class="n">11</span></a></li>
+              <li><a href="branche-defensie-v1.html">Defensie<span class="n">7</span></a></li>
+              <li><a href="branche-schaalmodellen-v1.html">Schaalmodellen<span class="n">5</span></a></li>
+              <li><a href="branches.html">Alle branches &rarr;</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// INKOPEN ALS GROTE PARTIJ</h4>
+            <ul>
+              <li><a href="speler-defensie-en-overheid-v1.html">Defensie en overheid</a></li>
+              <li><a href="speler-oem-en-series-v1.html">OEM en series</a></li>
+              <li><a href="speler-verhuur-en-touring-v1.html">Verhuur en touring</a></li>
+              <li><a href="speler-omroep-en-studio-v1.html">Omroep en studio</a></li>
+              <li><a href="speler-netbeheer-en-energie-v1.html">Netbeheer en energie</a></li>
+              <li><a href="grote-spelers-v1.html">Hoe je bij ons inkoopt &rarr;</a></li>
+            </ul>
+          </div>
+          <div class="vlak">
+            <b>Staat je markt er niet bij?</b>
+            <p>We bouwen ook voor winkelinrichting, IT-racks en medisch en lab &mdash; alleen nog zonder eigen pagina. Vertel wat je vervoert, dan tekenen we het.</p>
+            <a class="btn btn-dark" href="case-aanvragen-v1.html">Case aanvragen &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </span>
+
+    <!-- Service: alles rond bestellen en daarna. Het vlak is de telefoon,
+         want direct advies is wat een servicepagina het vaakst oplevert. -->
+    <span class="heeft-menu">
+      <a href="service-hub-v1.html">Service</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// BESTELLEN EN LEVEREN</h4>
+            <ul>
+              <li><a href="zo-werkt-het-v1.html">Zo werkt het</a></li>
+              <li><a href="service-levertijden-v1.html">Levertijden</a></li>
+              <li><a href="#">Verzending</a></li>
+              <li><a href="laten-controleren-v1.html">Maten laten controleren</a></li>
+              <li><a href="#">Veelgestelde vragen</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// ZELF BOUWEN</h4>
+            <ul>
+              <li><a href="categorie-v1.html">Onderdelen</a></li>
+              <li><a href="#">Zaagservice</a></li>
+            </ul>
+            <h4>// OVER ONS</h4>
+            <ul>
+              <li><a href="over-ons-v1.html">Over Proflite</a></li>
+              <li><a href="contact-v1.html">Contact</a></li>
+            </ul>
+          </div>
+          <div class="vlak">
+            <b>Direct advies</b>
+            <p>+31 (0)575 575734 &mdash; je belt met iemand uit de werkplaats in Doesburg, niet met een callcenter.</p>
+            <a class="btn btn-dark" href="contact-v1.html">Stuur een bericht &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </span>
+    <!-- Shop: links het overzicht — klik je op Shop zelf, dan kom je daar,
+         met alle vaste cases en filters. Onderaan die kolom de weg via je
+         apparaat: de 38 categorieën, waarvandaan je in vier klikken bij het
+         apparaat bent. In het midden een paar populaire producten en
+         daaronder de populairste onderdelen — kort, want het overzicht en
+         de onderdelenpagina zijn één klik verder. Rechts de uitweg voor wie
+         een andere maat nodig heeft.
+         Shop staat achteraan: wie het assortiment zoekt weet dat al. -->
+    <span class="heeft-menu">
+      <a href="shop-v1.html">Shop</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// ALLE VASTE CASES, MET FILTERS</h4>
+            <ul>
+              <li><a href="shop-v1.html#av-licht">AV &amp; licht</a></li>
+              <li><a href="shop-v1.html#backline">Backline &amp; muziek</a></li>
+              <li><a href="shop-v1.html#broadcast">Broadcast &amp; camera</a></li>
+              <li><a href="shop-v1.html#medisch">Medisch &amp; lab</a></li>
+              <li><a href="shop-v1.html#industrie">Industrie &amp; meettechniek</a></li>
+              <li><a href="shop-v1.html#evenement">Evenement &amp; beursbouw</a></li>
+              <li><a href="case-voor-v3.html">Alle 38 categorie&euml;n &rarr;</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// POPULAIRE PRODUCTEN</h4>
+            <ul>
+              <li><a href="case-voor-gibson-les-paul-v2.html">Gibson Les Paul Standard</a></li>
+              <li><a href="case-voor-gibson-les-paul-v2.html" title="/product — hier nog de Les Paul-pagina">Pioneer DDJ-FLX10</a></li>
+              <li><a href="case-voor-gibson-les-paul-v2.html" title="/product — hier nog de Les Paul-pagina">Robe Robin 600 LEDWash, duo</a></li>
+              <li><a href="case-voor-gibson-les-paul-v2.html" title="/product — hier nog de Les Paul-pagina">Sony FX6</a></li>
+            </ul>
+            <h4>// POPULAIRE ONDERDELEN</h4>
+            <ul>
+              <li><a href="categorie-v1.html">Balhoeken</a></li>
+              <li><a href="categorie-v1.html" title="/onderdelen/{categorie} — hier nog het balhoeken-sjabloon">Vlindersluitingen</a></li>
+              <li><a href="categorie-v1.html" title="/onderdelen/{categorie} — hier nog het balhoeken-sjabloon">Handgrepen</a></li>
+              <li><a href="categorie-v1.html">Alle onderdelen &rarr;</a></li>
+            </ul>
+          </div>
+          <div class="vlak">
+            <b>Andere maat nodig?</b>
+            <p>Kies je eigen afmetingen, ronde of vierkante hoeken en een slot. Wil je meer, dan ga je vanuit daar door naar de volledige editor.</p>
+            <a class="btn btn-dark" href="editor-v2.html#l2">Op jouw maat &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </span>
+    <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#">NL &#9662;</a></div>
+  </div>
+</nav>
+
+<div class="review">
+  <div class="wrap">
+    <span class="lab">// Mockup &middot; besluiten 12 en 13&ndash;14 van 11 september</span>
+    <p>Bovenaan het voorstel voor het Flightcases-menu, opengeklapt. Daaronder de pagina met de vijf modellen tegelijk.</p>
+  </div>
+</div>
+
+<!-- ══ 13–14 · HET MENU MET BEELD, OPENGEKLAPT ═══════════════════ -->
+<div class="menuvoorbeeld">
+  <div class="wrap"><div class="kaart">// Voorstel &middot; het Flightcases-menu, opengeklapt</div></div>
+  <div class="megamenu">
+    <div class="wrap">
+      <div>
+        <h4>// WAAR GEBRUIK JE HEM VOOR</h4>
+        <ul>
+          <li><a href="case-voor-v3.html#av-licht">AV &amp; licht<span class="n">142</span></a></li>
+          <li><a href="case-voor-backline-v1.html">Backline &amp; muziek<span class="n">118</span></a></li>
+          <li><a href="case-voor-v3.html#broadcast">Broadcast &amp; camera<span class="n">86</span></a></li>
+          <li><a href="case-voor-v3.html#medisch">Medisch &amp; lab<span class="n">64</span></a></li>
+          <li><a href="case-voor-v3.html#industrie">Industrie &amp; meettechniek<span class="n">73</span></a></li>
+          <li><a href="case-voor-v3.html#evenement">Evenement &amp; beursbouw<span class="n">50</span></a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>// MODELLEN</h4>
+        <div class="mm-modellen" data-menumodellen></div>
+        <p class="mm-noot">Beeld: hier komt de render uit de configurator, zodra CaseBuilder die kan leveren. Tot dan de kist, stilstaand &mdash; een menu moet meteen openen.</p>
+        <a class="mm-alle" href="#vijf">Alle vijf vergelijken &rarr;</a>
+      </div>
+      <div class="vlak">
+        <b>Zelf configureren</b>
+        <p>Jouw maten invullen en de prijs zien terwijl je typt. Een casebouwer kijkt je opgave na voordat we zagen.</p>
+        <a class="btn btn-dark" href="configurator-v1.html">Start met configureren &rarr;</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="crumbs"><div class="wrap"><a href="homepage-v2.html">Home</a><span class="sep">/</span><span>Flightcases</span></div></div>
+
+<!-- ══ 12 · DE VIJF, TEGELIJK ════════════════════════════════════ -->
+<div class="ovkop ruit ruit-aanzet kop-laag" id="vijf">
+  <div class="wrap">
+    <div class="ey ey-dark">// VIJF MODELLEN &middot; ALTIJD OP MAAT</div>
+    <h1>De vorm kies je. <span class="acc">De maten geef je.</span></h1>
+    <p class="lead">Vijf modellen, allemaal op maat. Klik er een aan om hem groot te zien, met waar hij voor is en wat hij kost.</p>
+
+    <div class="podium">
+      <div class="kistvak">
+        <div class="kist3d" data-draaikist data-vrij="800" data-grootte="250" data-podium title="Sleep om te draaien">
+          <div class="kubus"><div class="zij achter"></div><div class="zij links"></div><div class="zij rechts"></div><div class="zij boven"></div><div class="zij onder"></div><div class="zij voor"></div></div>
+          <div class="grond"></div>
+          <span class="kmaat"></span>
+        </div>
+      </div>
+      <div>
+        <div class="ey ey-dark" data-p-ey></div>
+        <h2 data-p-naam></h2>
+        <p class="waar" data-p-waar></p>
+        <dl class="specs" data-p-specs></dl>
+        <div class="cta">
+          <a class="btn btn-pri" data-p-config href="#">Configureer dit model &rarr;</a>
+          <a class="btn btn-out" data-p-meer href="#">Meer over dit model</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="vijf" data-vijf role="group" aria-label="De vijf modellen">
+      <span class="hint">// Klik een model om het groot te zien</span>
+    </div>
+  </div>
+</div>
+
+<section id="vergelijk" class="tight">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:6px">
+      <div class="ey ey-dark">// NAAST ELKAAR</div>
+      <h2 style="font-size:32px;margin-top:12px">De vijf vergeleken</h2>
+      <p class="lead" style="margin-top:10px">Klik een rij, dan staat dat model bovenaan groot.</p>
+    </div>
+    <div class="scroller">
+      <table class="verg">
+        <thead><tr><th>Model</th><th>Waarvoor</th><th>Deksel</th><th>19-inch</th><th>Wielen</th><th>Vanaf</th></tr></thead>
+        <tbody data-verg></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="navy tight">
+  <div class="wrap" style="display:flex;gap:30px;align-items:center;flex-wrap:wrap">
+    <div>
+      <div class="ey">// KLAAR OM TE BEGINNEN?</div>
+      <h2 style="font-size:clamp(26px,3vw,38px);margin-top:12px">Model gekozen? Dan de maten.</h2>
+      <p style="margin-top:10px;max-width:52ch">De configurator opent op stap 2 &mdash; het model neemt hij mee.</p>
+    </div>
+    <a class="btn btn-pri" href="configurator-v1.html?start=1" style="margin-left:auto">Open de configurator &rarr;</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="merk"><img src="assets/woordmerk-wit.svg" alt="Casebuilder.com"></div>
+        <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734">+31 (0)575 575734</a></p>
+      </div>
+      <div><h5>Offerte aanvragen</h5><a href="case-aanvragen-v1.html">Case aanvragen</a><a href="laten-controleren-v1.html">Maten laten controleren</a><a href="#">Series en staffels</a><a href="#">Zakelijk bestellen</a></div>
+      <div><h5>Zelf configureren</h5><a href="configurator-v1.html">Naar de configurator</a><a href="zo-werkt-het-v1.html">Zo werkt het</a><a href="#">Herhaalorder</a><a href="#">Mijn configuraties</a></div>
+      <div><h5>Branches</h5><a href="branche-audio-visueel-v1.html">Audio-visueel en podium</a><a href="branche-broadcast-en-media-v1.html">Broadcast en media</a><a href="branche-industrie-en-machinebouw-v1.html">Industrie en machinebouw</a><a href="branche-meet-en-testapparatuur-v1.html">Meet- en testapparatuur</a><a href="branche-defensie-v1.html">Defensie</a><a href="branche-schaalmodellen-v1.html">Schaalmodellen</a><a href="grote-spelers-v1.html">Inkopen als grote partij</a></div>
+      <div><h5>Service</h5><a href="service-levertijden-v1.html">Levertijden</a><a href="#">Verzending</a><a href="categorie-v1.html">Onderdelen</a><a href="#">Zaagservice</a><a href="#">Over Proflite</a><a href="contact-v1.html">Contact</a></div>
+    </div>
+    <div class="bot"><span>KVK 09123456</span><span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span></div>
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   De vijf modellen. Eén lijst, drie plekken: het menu, de tegels en de
+   tabel. De kisten worden hier gebouwd en daarna door draaikist.js
+   aangezet (dat script staat hieronder, na dit blok). Maten en
+   vanafprijzen uit flightcases-v1; maten in mm, breedte × hoogte × diepte.
+   ══════════════════════════════════════════════════════════════ */
+window.MODELLEN = [
+  { naam: 'Koffer', b: 700, h: 250, d: 450, prijs: 149, href: 'casetype-koffer-v1.html',
+    waar: 'Draag je hem met de hand mee? Gitaar, gereedschap, een set microfoons.',
+    kort: 'Met de hand meenemen', deksel: 'Scharnierend', rack: 'nee', wielen: 'zelden' },
+  { naam: 'Hoedcase', b: 800, h: 550, d: 500, prijs: 179, href: 'casetype-hoedcase-v1.html',
+    waar: 'Deksel er helemaal af, dan sta je er met twee handen bij. Voor opbouwen op locatie.',
+    kort: 'Opbouwen op locatie', deksel: 'Volledig afneembaar', rack: 'nee', wielen: 'optioneel' },
+  { naam: 'Trunccase', b: 800, h: 600, d: 600, prijs: 199, href: 'casetype-trunccase-v1.html',
+    waar: 'De werkkist: bovendeksel, veel volume, rijdt op wielen. Kabels, statieven, losse spullen.',
+    kort: 'Veel losse spullen', deksel: 'Bovendeksel', rack: 'nee', wielen: 'standaard' },
+  { naam: 'Rackcase enkel', b: 600, h: 400, d: 500, prijs: 229, href: 'casetype-rackcase-enkel-deksel-v1.html',
+    waar: '19-inch apparatuur die je alleen aan de voorkant bedient. Eén deksel is genoeg.',
+    kort: 'Alleen voorkant bedienen', deksel: 'Voordeksel', rack: 'ja', wielen: 'optioneel' },
+  { naam: 'Rackcase dubbel', b: 600, h: 620, d: 550, prijs: 259, href: 'casetype-rackcase-dubbel-deksel-v1.html',
+    waar: 'Moet je er ook achter bij, voor bekabeling? Dan voor- én achterdeksel.',
+    kort: 'Ook bekabeling achterin', deksel: 'Voor én achter', rack: 'ja', wielen: 'optioneel' }
+];
+
+(function () {
+  function el(tag, cls, tekst) { var e = document.createElement(tag); if (cls) e.className = cls; if (tekst != null) e.textContent = tekst; return e; }
+  /* Eén kist: dezelfde opbouw als in de rest van de mockups. */
+  function kist(attrs) {
+    var k = el('div', 'kist3d');
+    k.setAttribute('data-draaikist', '');
+    Object.keys(attrs).forEach(function (a) { k.setAttribute(a, attrs[a]); });
+    var kubus = el('div', 'kubus');
+    ['achter', 'links', 'rechts', 'boven', 'onder', 'voor'].forEach(function (z) { kubus.appendChild(el('div', 'zij ' + z)); });
+    k.appendChild(kubus);
+    k.appendChild(el('div', 'grond'));
+    k.appendChild(el('span', 'kmaat'));
+    return k;
+  }
+
+  // het menu: klein en stil
+  var menu = document.querySelector('[data-menumodellen]');
+  MODELLEN.forEach(function (m, i) {
+    var a = el('a');
+    a.href = '#vijf';
+    a.dataset.i = String(i);
+    var beeld = el('div', 'beeld');
+    beeld.appendChild(kist({ 'data-vrij': '800', 'data-grootte': '62', 'data-stil': '', 'data-hoek': '-32', 'data-mdl': String(i) }));
+    a.appendChild(beeld);
+    var s = el('span', null, m.naam);
+    s.appendChild(el('small', null, 'vanaf € ' + m.prijs));
+    a.appendChild(s);
+    menu.appendChild(a);
+  });
+
+  // de vijf tegels: draaiend, elk op een andere hoek
+  var vijf = document.querySelector('[data-vijf]');
+  MODELLEN.forEach(function (m, i) {
+    var b = el('button');
+    b.type = 'button';
+    b.dataset.i = String(i);
+    b.setAttribute('aria-pressed', 'false');
+    var beeld = el('div', 'beeld');
+    beeld.appendChild(kist({ 'data-vrij': '800', 'data-grootte': '118', 'data-hoek': String(-28 + i * 36), 'data-mdl': String(i) }));
+    b.appendChild(beeld);
+    var naam = el('span', 'naam');
+    naam.appendChild(el('b', null, m.naam));
+    naam.appendChild(el('small', null, 'vanaf € ' + m.prijs));
+    b.appendChild(naam);
+    vijf.appendChild(b);
+  });
+
+  // de tabel
+  var verg = document.querySelector('[data-verg]');
+  MODELLEN.forEach(function (m, i) {
+    var tr = el('tr');
+    tr.dataset.i = String(i);
+    tr.appendChild(el('th', null, m.naam));
+    tr.appendChild(el('td', null, m.kort));
+    tr.appendChild(el('td', null, m.deksel));
+    tr.appendChild(el('td', m.rack === 'ja' ? 'ja' : 'nee', m.rack));
+    tr.appendChild(el('td', m.wielen === 'zelden' ? 'nee' : 'ja', m.wielen));
+    tr.appendChild(el('td', 'prijs', '€ ' + m.prijs));
+    verg.appendChild(tr);
+  });
+})();
+</script>
+<script src="assets/draaikist.js"></script>
+<script>
+/* De kisten staan en draaien; nu de maten erin, en het podium. */
+(function () {
+  function q(s) { return document.querySelector(s); }
+  function qa(s) { return Array.prototype.slice.call(document.querySelectorAll(s)); }
+  function maat(k, m) { k.dispatchEvent(new CustomEvent('kist:maat', { detail: { naam: m.naam, b: m.b, h: m.h, d: m.d } })); }
+
+  qa('[data-mdl]').forEach(function (k) { maat(k, MODELLEN[+k.dataset.mdl]); });
+
+  var podium = q('[data-podium]');
+  function kies(i, scrol) {
+    var m = MODELLEN[i];
+    maat(podium, m);
+    q('[data-p-ey]').textContent = '// Model ' + (i + 1) + ' van 5';
+    q('[data-p-naam]').textContent = m.naam;
+    q('[data-p-waar]').textContent = m.waar;
+    var dl = q('[data-p-specs]');
+    dl.textContent = '';
+    [['Waarvoor', m.kort], ['Deksel', m.deksel], ['19-inch', m.rack], ['Wielen', m.wielen],
+     ['Voorbeeldmaat', m.b.toLocaleString('nl-NL') + ' × ' + m.h.toLocaleString('nl-NL') + ' × ' + m.d.toLocaleString('nl-NL') + ' mm'],
+     ['Vanaf', '€ ' + m.prijs + ' excl. btw']].forEach(function (r, n, lijst) {
+      var dt = document.createElement('dt'); dt.textContent = r[0];
+      var dd = document.createElement('dd'); dd.textContent = r[1];
+      if (n === lijst.length - 1) dd.className = 'prijs';
+      dl.appendChild(dt); dl.appendChild(dd);
+    });
+    q('[data-p-config]').href = 'configurator-v1.html?start=1&model=' + encodeURIComponent(m.naam);
+    q('[data-p-meer]').href = m.href;
+    q('[data-p-meer]').textContent = 'Meer over de ' + m.naam.toLowerCase();
+    qa('[data-vijf] button').forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.i === i)); });
+    qa('[data-verg] tr').forEach(function (tr) { tr.classList.toggle('aan', +tr.dataset.i === i); });
+    if (scrol) q('#vijf').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  qa('[data-vijf] button').forEach(function (b) { b.addEventListener('click', function () { kies(+b.dataset.i); }); });
+  qa('[data-verg] tr').forEach(function (tr) { tr.addEventListener('click', function () { kies(+tr.dataset.i, true); }); });
+  qa('[data-menumodellen] a').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); kies(+a.dataset.i, true); }); });
+  kies(0);
+})();
+</script>
+<script src="assets/versies.js"></script>
+</body>
+</html>

@@ -42,7 +42,8 @@
     ],
     'flightcases': [
       { id: 'wireframe', bestand: 'flightcases.html', label: 'wireframe' },
-      { id: 'v1', bestand: 'flightcases-v1.html', label: 'v1 · beeld' }
+      { id: 'v1', bestand: 'flightcases-v1.html', label: 'v1 · beeld' },
+      { id: 'v2', bestand: 'flightcases-v2.html', label: 'v2 · vijf tegelijk' }
     ],
     'over-ons': [
       { id: 'v1', bestand: 'over-ons-v1.html', label: 'v1' }
