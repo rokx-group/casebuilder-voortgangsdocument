@@ -1,0 +1,891 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — /shop v1, producten per toepassing (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   /shop v1 — producten per toepassing
+
+   Losse mockup, nog niet in de bestaande sjablonen verwerkt. Hij laat
+   zien hoe de webshop zou werken als de toepassing (wát je vervoert) de
+   winkelindeling is, en niet een tussenpagina.
+
+   Nu: Shop → /case-voor (zes groepen) → /case-voor/backline (uitleg,
+   geen producten) → /case-voor/gitaar (categorie) → het product. Vier
+   klikken voor je iets ziet wat je kunt kopen, en de groeppagina heeft
+   nul productkaarten.
+
+   Hier: Shop → de groep, meteen met producten en filters → het product.
+   De categorie is geen eigen niveau meer maar een filter binnen de
+   groep. Een categorie-URL (#backline/elektrische-gitaren) opent deze
+   zelfde pagina met dat filter al aan, zodat er voor zoekmachines nog
+   steeds een landingspagina per apparaat bestaat — alleen niet als
+   extra klik voor de bezoeker.
+
+   De filters in twee lagen, en dat is het antwoord op "wisselen van
+   branche verliest je filters":
+
+     binnen deze toepassing   categorie, merk     — bewaard per tabblad
+     geldt overal             model, prijs,       — blijven staan
+                              levertijd, aan te
+                              passen, branche
+
+   Categorie en merk bestaan alleen binnen een groep (een moving head
+   heeft geen merk Gibson). Die gaan bij het wisselen niet weg maar
+   blijven bij hun eigen tabblad: kom je terug, dan staan ze er nog. De
+   rest betekent in elke groep hetzelfde en loopt mee. Alles wordt ook in
+   de browser bewaard, dus na herladen staat het er nog.
+
+   Vooral vaste cases (L1), maar met een ingang naar op maat (L2): een
+   facet "aan te passen", een regel op elke kaart, en een eigen tegel
+   achteraan het raster. Sommige cases zijn niet aan te passen — een
+   vormkoffer voor één gitaar, een DJ-case met vaste inlay — en dat staat
+   er dan ook.
+
+   Branche is hier een filter en geen schakelaar bovenaan. Een branche
+   is een etiket op een product, geen map (zie de drie assen): de
+   gitaarcase en de camerakoffer kunnen allebei bij broadcast horen. Een
+   schakelaar die de hele winkel ompoot dwingt je bovendien om te kiezen
+   voor je iets gezien hebt. Bovenaan wissel je dus van toepassing — dat
+   is de as waarop mensen zoeken — en branche verfijnt.
+
+   De bouwstenen komen van het modeloverzicht (flightcases-v1), niet uit
+   een nieuw ontwerp: dezelfde kopband met de ruit, dezelfde kaart met
+   de prijs groot en een regel in klanttaal eronder, en hetzelfde
+   lichtblauwe vlak als uitweg. De shop en /flightcases zijn de twee
+   helften van hetzelfde aanbod (vaste case of op maat), en horen er
+   dus hetzelfde uit te zien.
+
+   Alle producten, merken, prijzen en voorraad zijn verzonnen. Elke kaart
+   linkt naar de ene uitgewerkte productpagina.
+   ══════════════════════════════════════════════════════════════ */
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ── kop — de band van /flightcases ──────────────────────────
+   Zelfde achtergrond, zelfde ruit-aanzet, zelfde maat kop. Alleen de
+   onderpadding gaat eraf: de tabbladen staan op de rand van de band, en
+   de rand is waar ze in de pagina overgaan. */
+.ovkop{background:var(--bg);border-bottom:1px solid var(--rule)}
+.ovkop.kop-laag{padding-bottom:0}
+.ovkop h1{font-size:clamp(34px,4.2vw,54px);margin-top:12px}
+.ovkop .lead{margin-top:14px;max-width:62ch}
+
+/* ── wisselen van toepassing ─────────────────────────────────
+   Tabbladen en geen keuzelijst: de zes zijn het assortiment, en wie ze
+   ziet staan weet meteen wat er te koop is. Onderdelen staat erachter
+   omdat het ook webshop is, maar een ander soort product — het linkt
+   naar zijn eigen overzicht. */
+.wissel{display:flex;gap:0;margin-top:26px;overflow-x:auto;scrollbar-width:thin}
+.wissel button,.wissel a{flex:none;background:none;border:0;border-bottom:3px solid transparent;cursor:pointer;
+  font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:15px;letter-spacing:.04em;
+  color:var(--mute);padding:12px 18px 11px;display:flex;align-items:baseline;gap:8px;white-space:nowrap}
+.wissel button:hover,.wissel a:hover{color:var(--dark)}
+.wissel button[aria-pressed="true"]{color:var(--dark);border-bottom-color:var(--cyan)}
+.wissel .n{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--rule);font-weight:500}
+.wissel button[aria-pressed="true"] .n{color:var(--blue)}
+.wissel .los{margin-left:auto;border-left:1px solid var(--rule)}
+.ovkop .wissel{margin-bottom:-1px}
+
+/* ── indeling: filters links, producten rechts ───────────────
+   Zelfde maat en zelfde vinkjes als de onderdelenpagina (categorie-v1),
+   zodat de twee helften van de webshop hetzelfde aanvoelen. */
+.catlay{display:grid;grid-template-columns:236px minmax(0,1fr);gap:44px;padding:30px 0 80px}
+.filters{position:sticky;top:96px;align-self:start;display:flex;flex-direction:column;gap:22px}
+.laag{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);
+  margin:0 0 -8px}
+.laag + .laag,.fset + .laag{margin-top:10px;padding-top:18px;border-top:1.5px solid var(--dark)}
+.fset h4{font-size:15px;letter-spacing:.06em;padding-bottom:9px;border-bottom:1px solid var(--rule);margin-bottom:9px}
+.fset label{display:flex;align-items:center;gap:10px;padding:4px 0;font-size:14px;color:var(--mute);cursor:pointer}
+.fset label:hover{color:var(--ink)}
+.fset label.nul{opacity:.4;cursor:default}
+.bx{width:14px;height:14px;border:1.5px solid var(--rule);flex:none;background:#fff}
+.fset input:checked + .bx{background:var(--cyan);border-color:var(--cyan)}
+.fset input:focus-visible + .bx{outline:2px solid var(--blue);outline-offset:2px}
+.fset .num{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--rule)}
+
+/* ── balk boven de producten ─────────────────────────────── */
+.toolbar{display:flex;align-items:center;gap:18px;flex-wrap:wrap;border-bottom:1px solid var(--rule);
+  padding-bottom:14px;margin-bottom:14px}
+.toolbar .cnt{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.toolbar .cnt b{color:var(--dark)}
+.toolbar .sort{margin-left:auto}
+.toolbar .chip{cursor:pointer;background:#fff}
+
+/* Wat er aan staat, als chips die je wegklikt. En de melding als er bij
+   het wisselen van toepassing iets gewist is — anders verdwijnt je
+   filter zonder dat je weet waarom. */
+.aan{display:flex;gap:8px;flex-wrap:wrap;align-items:center;min-height:30px;margin-bottom:18px}
+.aan .chip{cursor:pointer;background:#fff}
+.aan .chip::after{content:" \00d7";color:var(--mute)}
+.aan .wis{border:0;background:none;cursor:pointer;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mute);padding:4px}
+.aan .wis:hover{color:var(--dark)}
+.melding{font-size:13px;color:var(--ink);background:var(--lightblue);box-shadow:inset 3px 0 0 var(--cyan);
+  padding:9px 14px;margin-bottom:16px}
+
+/* ── de producten — de modelkaart van /flightcases ───────────
+   .mod zoals op het modeloverzicht: prijs groot, en een regel in
+   klanttaal eronder. Die regel is hier waar de case gebruikt wordt — de
+   branches als etiket op het product, precies zoals ze in de filter
+   staan. Daarboven categorie en model, eronder of hij morgen er is. */
+.shopgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.mod{border:1px solid var(--rule);background:#fff;display:flex;flex-direction:column;transition:.15s}
+.mod:hover{border-color:var(--dark)}
+.mod .im{background:var(--bg);aspect-ratio:1}
+.mod .im img{width:100%;height:100%;object-fit:cover}
+.mod .bd{padding:18px 18px 22px;border-top:1px solid var(--rule);display:flex;flex-direction:column;flex:1}
+.mod .meta{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--blue);margin-bottom:8px}
+.mod h3{font-size:20px;line-height:1.05}
+.mod .waar{font-size:13.5px;color:var(--mute);margin-top:8px;flex:1}
+.mod .pr{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--mute);margin-top:14px}
+.mod .pr b{display:block;font-family:var(--disp);font-size:21px;font-weight:900;color:var(--dark);letter-spacing:.02em}
+.mod .stk{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  margin-top:10px;color:var(--mute)}
+.mod .stk.ja{color:#2F7355}
+.mod .lvl{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  margin-top:10px;color:var(--mute)}
+.mod .lvl.maat{color:var(--blue)}
+/* De tegel naar op maat: lichtblauw en gestippeld, zodat hij niet leest
+   als nog een product maar als de weg eruit. */
+.mod.optmaat{background:var(--lightblue);border-style:dashed}
+.mod.optmaat .im{display:flex;align-items:center;justify-content:center;background:var(--lightblue)}
+.mod.optmaat .pr b{font-size:18px}
+
+.leeg{border:1px dashed var(--rule);padding:34px 30px;text-align:left}
+.leeg h3{font-size:22px}
+.leeg p{color:var(--mute);margin:8px 0 18px;max-width:56ch}
+.leeg .btns{display:flex;gap:12px;flex-wrap:wrap}
+
+/* De uitweg onderaan, als het lichtblauwe vlak van /flightcases: alles
+   hier heeft vaste maten. Past het niet, dan is dit niet de goede route
+   — en dat moet de pagina zelf zeggen. */
+.geenidee{border:1px solid var(--rule);background:var(--lightblue);padding:26px 30px;margin-top:40px;
+  display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+.geenidee div{flex:1;min-width:260px}
+.geenidee h3{font-size:22px}
+.geenidee p{font-size:14.5px;color:var(--mute);max-width:56ch;margin-top:6px}
+
+@media (max-width:1080px){
+  .catlay{grid-template-columns:1fr;gap:26px}
+  .filters{position:static;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px 26px}
+  .laag,.laag + .laag,.fset + .laag{grid-column:1/-1;margin:0}
+  .shopgrid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:640px){.shopgrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="main">
+  <div class="wrap">
+    <a class="merk" href="homepage-v2.html" aria-label="Casebuilder.com &mdash; naar de homepage"><img src="assets/woordmerk.svg" alt="Casebuilder.com"></a>
+    <form class="search" onsubmit="return false">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+      <input placeholder="Zoek op case, onderdeel of artikelnummer…" aria-label="Zoeken">
+    </form>
+    <div class="hdr-r">
+      <a href="#" class="stil">Inloggen</a>
+      <a href="#">Winkelwagen</a>
+    </div>
+  </div>
+</header>
+
+<nav class="primary">
+  <div class="wrap">
+    <a href="case-aanvragen-v1.html">Case aanvragen</a>
+    <a href="case-voor-v1.html">Wat ga je vervoeren?</a>
+
+    <!-- Flightcases draagt nu drie ingangen tegelijk: waarvoor, welk
+         model, en zelf bouwen. Zelf configureren stond hiervoor los in
+         de balk; als top-level item concurreerde het met Flightcases
+         terwijl het er een onderdeel van is. -->
+    <span class="heeft-menu">
+      <a href="flightcases-v1.html">Flightcases</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// WAAR GEBRUIK JE HEM VOOR</h4>
+            <ul>
+              <li><a href="branche-audio-visueel-v1.html">Audio-visueel en podium<span class="n">22</span></a></li>
+              <li><a href="branche-broadcast-en-media-v1.html">Broadcast en media<span class="n">9</span></a></li>
+              <li><a href="branche-industrie-en-machinebouw-v1.html">Industrie en machinebouw<span class="n">14</span></a></li>
+              <li><a href="branche-meet-en-testapparatuur-v1.html">Meet- en testapparatuur<span class="n">11</span></a></li>
+              <li><a href="branche-defensie-v1.html">Defensie<span class="n">7</span></a></li>
+              <li><a href="branche-schaalmodellen-v1.html">Schaalmodellen<span class="n">5</span></a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// MODELLEN</h4>
+            <ul>
+              <li><a href="casetype-rackcase-enkel-deksel-v1.html">Rackcase enkel deksel</a></li>
+              <li><a href="casetype-rackcase-dubbel-deksel-v1.html">Rackcase dubbel deksel</a></li>
+              <li><a href="casetype-trunccase-v1.html">Trunccase</a></li>
+              <li><a href="casetype-hoedcase-v1.html">Hoedcase</a></li>
+              <li><a href="casetype-koffer-v1.html">Koffer</a></li>
+              <li><a href="flightcases-v1.html">Alle modellen &rarr;</a></li>
+            </ul>
+          </div>
+          <div class="vlak">
+            <b>Zelf configureren</b>
+            <p>Jouw maten invullen en de prijs zien terwijl je typt. Een casebouwer kijkt je opgave na voordat we zagen.</p>
+            <a class="btn btn-dark" href="configurator-v1.html">Start met configureren &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </span>
+
+    <!-- Branches: wie je bent. Links de zes markten met een eigen pagina,
+         in het midden de manieren van inkopen voor grote partijen — dat is
+         dezelfde koper in een andere rol (zie /grote-spelers), niet een
+         zevende markt. Rechts de opvang voor wie zichzelf er niet in ziet. -->
+    <span class="heeft-menu">
+      <a href="branches.html">Branches</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// ZES MARKTEN</h4>
+            <ul>
+              <li><a href="branche-audio-visueel-v1.html">Audio-visueel en podium<span class="n">22</span></a></li>
+              <li><a href="branche-broadcast-en-media-v1.html">Broadcast en media<span class="n">9</span></a></li>
+              <li><a href="branche-industrie-en-machinebouw-v1.html">Industrie en machinebouw<span class="n">14</span></a></li>
+              <li><a href="branche-meet-en-testapparatuur-v1.html">Meet- en testapparatuur<span class="n">11</span></a></li>
+              <li><a href="branche-defensie-v1.html">Defensie<span class="n">7</span></a></li>
+              <li><a href="branche-schaalmodellen-v1.html">Schaalmodellen<span class="n">5</span></a></li>
+              <li><a href="branches.html">Alle branches &rarr;</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// INKOPEN ALS GROTE PARTIJ</h4>
+            <ul>
+              <li><a href="speler-defensie-en-overheid-v1.html">Defensie en overheid</a></li>
+              <li><a href="speler-oem-en-series-v1.html">OEM en series</a></li>
+              <li><a href="speler-verhuur-en-touring-v1.html">Verhuur en touring</a></li>
+              <li><a href="speler-omroep-en-studio-v1.html">Omroep en studio</a></li>
+              <li><a href="speler-netbeheer-en-energie-v1.html">Netbeheer en energie</a></li>
+              <li><a href="grote-spelers-v1.html">Hoe je bij ons inkoopt &rarr;</a></li>
+            </ul>
+          </div>
+          <div class="vlak">
+            <b>Staat je markt er niet bij?</b>
+            <p>We bouwen ook voor winkelinrichting, IT-racks en medisch en lab &mdash; alleen nog zonder eigen pagina. Vertel wat je vervoert, dan tekenen we het.</p>
+            <a class="btn btn-dark" href="case-aanvragen-v1.html">Case aanvragen &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </span>
+
+    <!-- Service: alles rond bestellen en daarna. Het vlak is de telefoon,
+         want direct advies is wat een servicepagina het vaakst oplevert. -->
+    <span class="heeft-menu">
+      <a href="service-hub-v1.html">Service</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// BESTELLEN EN LEVEREN</h4>
+            <ul>
+              <li><a href="zo-werkt-het-v1.html">Zo werkt het</a></li>
+              <li><a href="service-levertijden-v1.html">Levertijden</a></li>
+              <li><a href="#">Verzending</a></li>
+              <li><a href="laten-controleren-v1.html">Maten laten controleren</a></li>
+              <li><a href="#">Veelgestelde vragen</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// ZELF BOUWEN</h4>
+            <ul>
+              <li><a href="categorie-v1.html">Onderdelen</a></li>
+              <li><a href="#">Zaagservice</a></li>
+            </ul>
+            <h4>// OVER ONS</h4>
+            <ul>
+              <li><a href="over-ons-v1.html">Over Proflite</a></li>
+              <li><a href="contact-v1.html">Contact</a></li>
+            </ul>
+          </div>
+          <div class="vlak">
+            <b>Direct advies</b>
+            <p>+31 (0)575 575734 &mdash; je belt met iemand uit de werkplaats in Doesburg, niet met een callcenter.</p>
+            <a class="btn btn-dark" href="contact-v1.html">Stuur een bericht &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </span>
+    <!-- Shop: twee wegen naar hetzelfde aanbod. Klik je op Shop zelf, dan
+         kom je in het overzicht met alle vaste cases en filters — de snelste
+         weg naar iets wat je kunt kopen. Het menu laat ook de andere weg
+         zien: zoeken op je apparaat, van toepassing via categorie tot het
+         apparaat zelf. Rechts de uitweg voor wie een andere maat nodig
+         heeft. Shop staat achteraan: wie het assortiment zoekt weet dat al. -->
+    <span class="heeft-menu">
+      <a href="shop-v1.html" class="on">Shop</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// ALLE VASTE CASES, MET FILTERS</h4>
+            <ul>
+              <li><a href="shop-v1.html#av-licht">AV &amp; licht</a></li>
+              <li><a href="shop-v1.html#backline">Backline &amp; muziek</a></li>
+              <li><a href="shop-v1.html#broadcast">Broadcast &amp; camera</a></li>
+              <li><a href="shop-v1.html#medisch">Medisch &amp; lab</a></li>
+              <li><a href="shop-v1.html#industrie">Industrie &amp; meettechniek</a></li>
+              <li><a href="shop-v1.html#evenement">Evenement &amp; beursbouw</a></li>
+              <li><a href="categorie-v1.html">Onderdelen</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// OF ZOEK OP JE APPARAAT</h4>
+            <ul>
+              <li><a href="case-voor-v3.html">Alle 38 categorie&euml;n</a></li>
+              <li><a href="case-voor-backline-v1.html">Per toepassing &mdash; bijvoorbeeld backline</a></li>
+              <li><a href="case-voor-gitaar-v2.html">Per categorie &mdash; bijvoorbeeld gitaren</a></li>
+              <li><a href="case-voor-gibson-les-paul-v2.html">Tot op het apparaat &mdash; bijvoorbeeld een Les Paul</a></li>
+            </ul>
+          </div>
+          <div class="vlak">
+            <b>Andere maat nodig?</b>
+            <p>Kies je eigen afmetingen, ronde of vierkante hoeken en een slot. Wil je meer, dan ga je vanuit daar door naar de volledige editor.</p>
+            <a class="btn btn-dark" href="editor-v1.html#l2">Op jouw maat &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </span>
+    <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#">NL &#9662;</a></div>
+  </div>
+</nav>
+
+<div class="crumbs donker"><div class="wrap"><a href="homepage-v2.html">Home</a><span class="sep">/</span><a href="case-voor-v3.html">Shop</a><span class="sep">/</span><span data-kruimel>Backline &amp; muziek</span></div></div>
+
+<div class="ovkop ruit ruit-aanzet kop-laag">
+  <div class="wrap">
+    <div class="ey ey-dark">// SHOP &middot; VASTE CASES VOOR &Eacute;&Eacute;N APPARAAT</div>
+    <h1 data-titel>Backline &amp; muziek</h1>
+    <p class="lead">Elke case hier is gebouwd voor &eacute;&eacute;n apparaat en heeft vaste maten. Je kiest kleur en logo, wij bouwen hem. Staat jouw apparaat er niet bij, dan configureer je hem op maat of vraag je hem aan.</p>
+    <div class="wissel" data-wissel role="group" aria-label="Kies een toepassing"></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="catlay">
+    <aside class="filters" data-filters aria-label="Filters"></aside>
+
+    <div>
+      <p class="note">Mockup &middot; Filters per toepassing worden per tabblad bewaard: ga terug en ze staan er nog, ook na herladen. Model, prijs, levertijd, aan te passen en branche lopen mee. Producten, prijzen en de DJ-categorie zijn verzonnen; de drie tekeningen zijn illustraties, geen foto&#39;s.</p>
+      <div class="toolbar" style="margin-top:16px">
+        <span class="cnt"><b data-aantal>0</b> cases</span>
+        <span class="cnt">Prijzen excl. btw</span>
+        <div class="chips sort" data-sort>
+          <span class="chip on" data-s="populair">Meest verkocht</span>
+          <span class="chip" data-s="op">Prijs laag&ndash;hoog</span>
+          <span class="chip" data-s="af">Prijs hoog&ndash;laag</span>
+        </div>
+      </div>
+      <div class="melding" data-melding hidden></div>
+      <div class="aan" data-aan></div>
+      <div class="shopgrid" data-grid></div>
+
+      <div class="geenidee">
+        <div>
+          <h3>Staat jouw apparaat er niet bij?</h3>
+          <p>Alles hier heeft vaste maten voor &eacute;&eacute;n apparaat. Voor een andere maat kies je zelf afmetingen, hoeken en slot &mdash; en wil je meer, dan ga je door naar de volledige editor. Of stuur een schets en wij tekenen hem.</p>
+        </div>
+        <a class="btn btn-out btn-sm" href="editor-v1.html#l2">Op jouw maat &rarr;</a>
+        <a class="btn btn-dark btn-sm" href="case-aanvragen-v1.html">Case aanvragen &rarr;</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="merk"><img src="assets/woordmerk-wit.svg" alt="Casebuilder.com"></div>
+        <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734">+31 (0)575 575734</a></p>
+      </div>
+      <div><h5>Offerte aanvragen</h5><a href="case-aanvragen-v1.html">Case aanvragen</a><a href="laten-controleren-v1.html">Maten laten controleren</a><a href="#">Series en staffels</a><a href="#">Zakelijk bestellen</a></div>
+      <div><h5>Zelf configureren</h5><a href="configurator-v1.html">Naar de configurator</a><a href="zo-werkt-het-v1.html">Zo werkt het</a><a href="#">Herhaalorder</a><a href="#">Mijn configuraties</a></div>
+      <div><h5>Flightcases</h5><a href="flightcases-v1.html">Alle flightcases</a><a href="casetype-koffer-v1.html">Koffer</a><a href="casetype-hoedcase-v1.html">Hoedcase</a><a href="casetype-trunccase-v1.html">Trunccase</a><a href="casetype-rackcase-enkel-deksel-v1.html">Rackcase enkel</a><a href="casetype-rackcase-dubbel-deksel-v1.html">Rackcase dubbel</a></div>
+      <div><h5>Service</h5><a href="service-levertijden-v1.html">Levertijden</a><a href="#">Verzending</a><a href="categorie-v1.html">Onderdelen</a><a href="#">Zaagservice</a><a href="#">Over Proflite</a><a href="contact-v1.html">Contact</a></div>
+    </div>
+    <div class="bot"><span>KVK 09123456</span><span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span></div>
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   De winkel. Staat hier en niet in assets/ omdat het een losse mockup
+   is: zodra dit het sjabloon wordt, komt de data uit Medusa en blijft
+   alleen de filterlogica over.
+
+   Alles gaat via textContent en createElement — ook de productnamen,
+   want straks komen die uit een CMS en niet uit dit bestand.
+   ══════════════════════════════════════════════════════════════ */
+(function () {
+  var PDP = 'case-voor-gibson-les-paul-v2.html';
+  var BEELD = { koffer: 'flightcase-koffer.jpg', hoedcase: 'flightcase-hoedcase.jpg',
+                trunccase: 'flightcase-trunccase.jpg', rackcase: 'flightcase-rackcase-enkel-deksel.jpg',
+                vormkoffer: 'vorm-gitaarkoffer.svg' };
+
+  /* De zes groepen en hun categorieën zijn die uit de index op
+     case-voor-v3.html — dezelfde taxonomie, niet opnieuw bedacht. */
+  var GROEPEN = [
+    { id: 'av-licht',  naam: 'AV & licht', cats: ['Moving heads','Wash- en spotarmaturen','Dimmerpacks en racks','Blinders en strobes','Line-array en speakers','Kabelhaspels en multicore','Truss-hardware','Hazers en rookmachines'] },
+    { id: 'backline',  naam: 'Backline & muziek', cats: ['Elektrische gitaren','Basgitaren','Akoestische gitaren','Versterkers en cabinets','Pedalboards','Drumhardware','Keyboards en synths','Blaasinstrumenten','DJ-apparatuur'] },
+    { id: 'broadcast', naam: 'Broadcast & camera', cats: ['Camerabodies','Optiek en lenzensets','Statieven en heads','Monitoren','Regie- en switchkoffers','Audio en microfoons','Drone en gimbal'] },
+    { id: 'medisch',   naam: 'Medisch & lab', cats: ['Meetapparatuur','Demokoffers met inlay','Endoscopie','Laboratoriuminstrumenten','Trolleycases'] },
+    { id: 'industrie', naam: 'Industrie & meettechniek', cats: ['Servicekoffers','Kalibratieapparatuur','Handgereedschap','Drones en inspectie','Sensoren en dataloggers'] },
+    { id: 'evenement', naam: 'Evenement & beursbouw', cats: ['Standmateriaal','Banners en kokers','Displays en schermen','Catering en bar','Documenten en samples'] }
+  ];
+
+  var BRANCHES = { av: 'Audio-visueel en podium', bc: 'Broadcast en media', ind: 'Industrie en machinebouw',
+                   meet: 'Meet- en testapparatuur', def: 'Defensie', schaal: 'Schaalmodellen' };
+
+  /* naam · groep · categorie · merk · model · prijs · op voorraad · branches
+     · vast (niet aan te passen) · eigen beeld — allemaal verzonnen */
+  var RUW = [
+    ['Gibson Les Paul Standard','backline','Elektrische gitaren','Gibson','koffer',189,1,'av'],
+    ['Gibson Les Paul vormkoffer','backline','Elektrische gitaren','Gibson','vormkoffer',169,1,'av',1],
+    ['Fender Stratocaster vormkoffer','backline','Elektrische gitaren','Fender','vormkoffer',159,1,'av',1],
+    ['Pioneer DDJ-FLX10','backline','DJ-apparatuur','Pioneer DJ','koffer',219,1,'av',1,'dj-controllercase.svg'],
+    ['Pioneer CDJ-3000 ×2 met DJM-A9','backline','DJ-apparatuur','Pioneer DJ','trunccase',449,0,'av',1,'dj-coffin.svg'],
+    ['Allen & Heath Xone:96','backline','DJ-apparatuur','Allen & Heath','koffer',179,0,'av',1,'dj-controllercase.svg'],
+    ['Fender Stratocaster','backline','Elektrische gitaren','Fender','koffer',179,1,'av'],
+    ['Fender Telecaster','backline','Elektrische gitaren','Fender','koffer',179,0,'av'],
+    ['PRS Custom 24','backline','Elektrische gitaren','PRS','koffer',195,0,'av'],
+    ['Fender Precision Bass','backline','Basgitaren','Fender','koffer',199,1,'av'],
+    ['Ibanez SR-serie','backline','Basgitaren','Ibanez','koffer',189,0,''],
+    ['Marshall 4×12 cabinet','backline','Versterkers en cabinets','Marshall','trunccase',289,0,'av'],
+    ['Fender Twin Reverb','backline','Versterkers en cabinets','Fender','hoedcase',249,1,'av'],
+    ['Pedalboard 60 cm','backline','Pedalboards','Universeel','koffer',149,1,''],
+    ['Roland RD-2000','backline','Keyboards en synths','Roland','koffer',239,0,'av bc'],
+    ['Nord Stage 4 88','backline','Keyboards en synths','Nord','koffer',259,0,'av'],
+    ['Snaredrum 14 inch','backline','Drumhardware','Universeel','hoedcase',159,1,'av'],
+    ['Drumhardware-kist','backline','Drumhardware','Universeel','trunccase',219,1,'av'],
+    ['Trompet','backline','Blaasinstrumenten','Yamaha','koffer',159,0,''],
+
+    ['Robe Robin 600 LEDWash, duo','av-licht','Moving heads','Robe','trunccase',329,0,'av'],
+    ['Martin MAC Aura XB, duo','av-licht','Moving heads','Martin','trunccase',319,0,'av'],
+    ['Clay Paky Sharpy, quad','av-licht','Moving heads','Clay Paky','trunccase',389,0,'av'],
+    ['ADJ Focus Spot, duo','av-licht','Moving heads','ADJ','trunccase',269,1,'av'],
+    ['LED-par, acht stuks','av-licht','Wash- en spotarmaturen','Universeel','trunccase',229,1,'av'],
+    ['Dimmerrack 6 HE','av-licht','Dimmerpacks en racks','Universeel','rackcase',239,1,'av bc'],
+    ['L-Acoustics Kara, duo','av-licht','Line-array en speakers','L-Acoustics','trunccase',349,0,'av'],
+    ['Kabelhaspel 50 m','av-licht','Kabelhaspels en multicore','Universeel','trunccase',189,1,'av ind'],
+    ['Hazer Unique 2.1','av-licht','Hazers en rookmachines','Look Solutions','hoedcase',199,0,'av'],
+    ['Blinder vier lampen, duo','av-licht','Blinders en strobes','Universeel','trunccase',249,1,'av'],
+
+    ['Sony FX6','broadcast','Camerabodies','Sony','koffer',219,1,'bc'],
+    ['Canon C70','broadcast','Camerabodies','Canon','koffer',209,0,'bc'],
+    ['Blackmagic URSA','broadcast','Camerabodies','Blackmagic','koffer',239,0,'bc'],
+    ['Cine-lenzenset, vier','broadcast','Optiek en lenzensets','Universeel','koffer',269,0,'bc'],
+    ['Sachtler statiefkop','broadcast','Statieven en heads','Sachtler','koffer',179,1,'bc'],
+    ['Regiemonitor 24 inch','broadcast','Monitoren','Universeel','koffer',229,1,'bc av'],
+    ['ATEM-regiekoffer','broadcast','Regie- en switchkoffers','Blackmagic','rackcase',299,0,'bc av'],
+    ['DJI Inspire 3','broadcast','Drone en gimbal','DJI','koffer',249,1,'bc ind'],
+    ['Draadloze microfoonset','broadcast','Audio en microfoons','Sennheiser','koffer',169,1,'bc av'],
+
+    ['Oscilloscoop','medisch','Meetapparatuur','Tektronix','koffer',199,1,'meet'],
+    ['Demokoffer met inlay','medisch','Demokoffers met inlay','Universeel','koffer',189,0,'meet'],
+    ['Endoscopieset','medisch','Endoscopie','Olympus','koffer',279,0,''],
+    ['Pipettenset','medisch','Laboratoriuminstrumenten','Universeel','koffer',159,1,''],
+    ['Labtrolley','medisch','Trolleycases','Universeel','trunccase',259,0,''],
+
+    ['Servicekoffer technicus','industrie','Servicekoffers','Universeel','koffer',169,1,'ind'],
+    ['Fluke kalibratieset','industrie','Kalibratieapparatuur','Fluke','koffer',219,0,'meet ind'],
+    ['Veldmeetset','industrie','Kalibratieapparatuur','Universeel','trunccase',289,0,'meet def'],
+    ['Momentsleutelset','industrie','Handgereedschap','Universeel','koffer',149,1,'ind'],
+    ['Inspectiedrone','industrie','Drones en inspectie','DJI','koffer',239,0,'ind def'],
+    ['Dataloggers','industrie','Sensoren en dataloggers','Universeel','koffer',179,1,'meet'],
+
+    ['Standmateriaal','evenement','Standmateriaal','Universeel','trunccase',229,1,''],
+    ['Bannerkoker 2 m','evenement','Banners en kokers','Universeel','koffer',149,1,''],
+    ['Scherm 55 inch','evenement','Displays en schermen','Universeel','koffer',279,0,'av'],
+    ['Barcase','evenement','Catering en bar','Universeel','trunccase',259,0,''],
+    ['Samplekoffer','evenement','Documenten en samples','Universeel','koffer',139,1,''],
+    ['Maquettekist','evenement','Documenten en samples','Universeel','trunccase',299,0,'schaal']
+  ];
+
+  var PRODUCTEN = RUW.map(function (r, i) {
+    return { naam: r[0], groep: r[1], cat: r[2], merk: r[3], model: r[4], prijs: r[5],
+             voorraad: r[6] ? 'ja' : '', branche: r[7] ? r[7].split(' ') : [], plek: i,
+             vast: !!r[8], beeld: r[9] || BEELD[r[4]] };
+  });
+
+  function prijsband(p) { return p < 150 ? 'tot150' : p <= 250 ? '150-250' : '250plus'; }
+  function slug(t) { return t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
+
+  /* ── de facetten ──
+     `laag` bepaalt wat er gebeurt bij wisselen: 'lokaal' wordt gewist,
+     'overal' blijft. `waarde` haalt uit een product wat er vergeleken
+     wordt (een lijst, want een product kan meerdere branches hebben). */
+  var FACETTEN = [
+    { id: 'cat',      naam: 'Categorie', laag: 'lokaal',
+      opties: function (g) { return g.cats.map(function (c) { return [c, c]; }); },
+      waarde: function (p) { return [p.cat]; } },
+    { id: 'merk',     naam: 'Merk', laag: 'lokaal',
+      opties: function (g) {
+        var m = {}; PRODUCTEN.forEach(function (p) { if (p.groep === g.id) m[p.merk] = 1; });
+        return Object.keys(m).sort(function (a, b) {
+          return a === 'Universeel' ? 1 : b === 'Universeel' ? -1 : a.localeCompare(b);
+        }).map(function (x) { return [x, x]; });
+      },
+      waarde: function (p) { return [p.merk]; } },
+    { id: 'model',    naam: 'Model', laag: 'overal',
+      opties: function () { return [['koffer','Koffer'],['hoedcase','Hoedcase'],['trunccase','Trunccase'],['rackcase','Rackcase'],['vormkoffer','Vormkoffer']]; },
+      waarde: function (p) { return [p.model]; } },
+    { id: 'prijs',    naam: 'Prijs', laag: 'overal',
+      opties: function () { return [['tot150','Tot € 150'],['150-250','€ 150 – 250'],['250plus','€ 250 en meer']]; },
+      waarde: function (p) { return [prijsband(p.prijs)]; } },
+    { id: 'voorraad', naam: 'Levertijd', laag: 'overal',
+      opties: function () { return [['ja','Op voorraad']]; },
+      waarde: function (p) { return [p.voorraad]; } },
+    /* Aan te passen of niet: dat is het verschil tussen deze winkel en
+       de editor, en het is waar een koper op filtert als zijn maat net
+       afwijkt. Loopt mee over de tabbladen, want het betekent overal
+       hetzelfde. */
+    { id: 'aanpas',   naam: 'Aan te passen', laag: 'overal',
+      opties: function () { return [['maat','Ook op jouw maat'],['vast','Vaste vorm']]; },
+      waarde: function (p) { return [p.vast ? 'vast' : 'maat']; } },
+    { id: 'branche',  naam: 'Gebruikt in', laag: 'overal',
+      opties: function () { return Object.keys(BRANCHES).map(function (k) { return [k, BRANCHES[k]]; }); },
+      waarde: function (p) { return p.branche; } }
+  ];
+
+  var staat = { groep: 'backline', sort: 'populair', f: {}, bewaard: {} };
+  FACETTEN.forEach(function (f) { staat.f[f.id] = {}; });
+
+  var el = {
+    wissel: document.querySelector('[data-wissel]'),
+    filters: document.querySelector('[data-filters]'),
+    grid: document.querySelector('[data-grid]'),
+    aantal: document.querySelector('[data-aantal]'),
+    aan: document.querySelector('[data-aan]'),
+    melding: document.querySelector('[data-melding]'),
+    titel: document.querySelector('[data-titel]'),
+    kruimel: document.querySelector('[data-kruimel]'),
+    sort: document.querySelector('[data-sort]')
+  };
+
+  function groep() { return GROEPEN.filter(function (g) { return g.id === staat.groep; })[0]; }
+
+  /* Past een product? Binnen een facet is het OF, tussen facetten EN.
+     `behalve` laat één facet buiten beschouwing — dat is hoe de aantallen
+     naast elke optie kloppen met wat je krijgt als je hem aanvinkt. */
+  function past(p, behalve) {
+    if (p.groep !== staat.groep) return false;
+    return FACETTEN.every(function (f) {
+      if (f.id === behalve) return true;
+      var aan = Object.keys(staat.f[f.id]);
+      if (!aan.length) return true;
+      var w = f.waarde(p);
+      return aan.some(function (o) { return w.indexOf(o) >= 0; });
+    });
+  }
+
+  function tekenWissel() {
+    el.wissel.textContent = '';
+    GROEPEN.forEach(function (g) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-pressed', String(g.id === staat.groep));
+      b.appendChild(document.createTextNode(g.naam));
+      var n = document.createElement('span');
+      n.className = 'n';
+      n.textContent = PRODUCTEN.filter(function (p) { return p.groep === g.id; }).length;
+      b.appendChild(n);
+      b.addEventListener('click', function () { kies(g.id); });
+      el.wissel.appendChild(b);
+    });
+    var los = document.createElement('a');
+    los.className = 'los';
+    los.href = 'categorie-v1.html';
+    los.textContent = 'Onderdelen →';
+    el.wissel.appendChild(los);
+  }
+
+  function tekenFilters() {
+    el.filters.textContent = '';
+    var g = groep(), vorigeLaag = null;
+    FACETTEN.forEach(function (f) {
+      if (f.laag !== vorigeLaag) {
+        var l = document.createElement('p');
+        l.className = 'laag';
+        l.textContent = f.laag === 'lokaal' ? '// binnen ' + g.naam.toLowerCase() : '// geldt overal';
+        el.filters.appendChild(l);
+        vorigeLaag = f.laag;
+      }
+      var set = document.createElement('div');
+      set.className = 'fset';
+      var h = document.createElement('h4');
+      h.textContent = f.naam;
+      set.appendChild(h);
+      f.opties(g).forEach(function (o) {
+        var n = PRODUCTEN.filter(function (p) { return past(p, f.id) && f.waarde(p).indexOf(o[0]) >= 0; }).length;
+        var aan = !!staat.f[f.id][o[0]];
+        var lab = document.createElement('label');
+        if (!n && !aan) lab.className = 'nul';
+        var inp = document.createElement('input');
+        inp.type = 'checkbox';
+        inp.className = 'sr';
+        inp.checked = aan;
+        inp.disabled = !n && !aan;
+        inp.addEventListener('change', function () {
+          if (inp.checked) staat.f[f.id][o[0]] = o[1]; else delete staat.f[f.id][o[0]];
+          el.melding.hidden = true;
+          teken();
+        });
+        var bx = document.createElement('span');
+        bx.className = 'bx';
+        var num = document.createElement('span');
+        num.className = 'num';
+        num.textContent = n;
+        lab.appendChild(inp);
+        lab.appendChild(bx);
+        lab.appendChild(document.createTextNode(o[1]));
+        lab.appendChild(num);
+        set.appendChild(lab);
+      });
+      el.filters.appendChild(set);
+    });
+  }
+
+  function tekenAan() {
+    el.aan.textContent = '';
+    var iets = false;
+    FACETTEN.forEach(function (f) {
+      Object.keys(staat.f[f.id]).forEach(function (o) {
+        iets = true;
+        var c = document.createElement('span');
+        c.className = 'chip on';
+        c.setAttribute('role', 'button');
+        c.tabIndex = 0;
+        c.title = 'Filter weghalen';
+        c.textContent = staat.f[f.id][o];
+        function weg() { delete staat.f[f.id][o]; el.melding.hidden = true; teken(); }
+        c.addEventListener('click', weg);
+        c.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); weg(); } });
+        el.aan.appendChild(c);
+      });
+    });
+    if (iets) {
+      var w = document.createElement('button');
+      w.type = 'button';
+      w.className = 'wis';
+      w.textContent = 'Wis alles';
+      w.addEventListener('click', function () {
+        FACETTEN.forEach(function (f) { staat.f[f.id] = {}; });
+        el.melding.hidden = true;
+        teken();
+      });
+      el.aan.appendChild(w);
+    }
+  }
+
+  function kaart(p) {
+    var a = document.createElement('a');
+    a.className = 'mod';
+    a.href = PDP;
+    var im = document.createElement('div');
+    im.className = 'im';
+    var img = document.createElement('img');
+    img.src = 'assets/' + p.beeld;
+    img.alt = '';
+    img.loading = 'lazy';
+    im.appendChild(img);
+    var bd = document.createElement('div');
+    bd.className = 'bd';
+    var meta = document.createElement('div');
+    meta.className = 'meta';
+    meta.textContent = p.cat + ' · ' + p.model;
+    var h = document.createElement('h3');
+    h.textContent = p.naam;
+    /* De regel in klanttaal: waar hij gebruikt wordt. Zonder branche-
+       etiket zeggen we wat je wél kiest, in plaats van een lege regel. */
+    var waar = document.createElement('p');
+    waar.className = 'waar';
+    waar.textContent = p.branche.length
+      ? 'Gebruikt in ' + p.branche.map(function (b) { return BRANCHES[b].toLowerCase(); }).join(' en ') + '.'
+      : 'Vaste maten voor dit apparaat, kleur en logo naar keuze.';
+    var pr = document.createElement('div');
+    pr.className = 'pr';
+    var b = document.createElement('b');
+    b.textContent = '€ ' + p.prijs;
+    pr.appendChild(b);
+    pr.appendChild(document.createTextNode('excl. btw · kleur en logo naar keuze'));
+    /* Zonder het woord niveau: de koper leest wat hij kan, niet hoe wij
+       het intern noemen. */
+    var lvl = document.createElement('div');
+    lvl.className = 'lvl' + (p.vast ? '' : ' maat');
+    lvl.textContent = p.vast ? 'Vaste vorm · alleen kleur en logo' : 'Ook op jouw maat';
+    var stk = document.createElement('div');
+    stk.className = 'stk' + (p.voorraad ? ' ja' : '');
+    stk.textContent = p.voorraad ? 'Op voorraad · morgen verstuurd' : 'Op bestelling · gebouwd op order';
+    bd.appendChild(meta);
+    bd.appendChild(h);
+    bd.appendChild(waar);
+    bd.appendChild(pr);
+    bd.appendChild(lvl);
+    bd.appendChild(stk);
+    a.appendChild(im);
+    a.appendChild(bd);
+    return a;
+  }
+
+  /* De ingang naar op maat, als laatste tegel van het raster: je komt
+     hem pas tegen als je door wat er vast is heen bent, en dat is precies
+     het moment dat je hem nodig hebt. Het beeld is een vaste tekening van
+     onszelf, dus hier mag innerHTML. */
+  function maatTegel() {
+    var a = document.createElement('a');
+    a.className = 'mod optmaat';
+    a.href = 'editor-v1.html#l2';
+    a.innerHTML =
+      '<div class="im"><svg viewBox="0 0 120 90" width="120" height="90" aria-hidden="true">' +
+      '<rect x="24" y="26" width="64" height="44" fill="none" stroke="#003352" stroke-width="3"/>' +
+      '<path d="M24 16h64M24 12v8M88 12v8M100 26v44M96 26h8M96 70h8" stroke="#0066A8" stroke-width="2" fill="none"/>' +
+      '</svg></div><div class="bd"><div class="meta">// op jouw maat</div><h3>Andere maat nodig?</h3>' +
+      '<p class="waar">Kies je eigen afmetingen, ronde of vierkante hoeken en een slot. Wil je meer, dan ga je door naar de volledige editor.</p>' +
+      '<div class="pr"><b>Naar de editor →</b>de prijs verandert mee terwijl je kiest</div></div>';
+    return a;
+  }
+
+  function tekenGrid() {
+    var lijst = PRODUCTEN.filter(function (p) { return past(p); });
+    if (staat.sort === 'op') lijst.sort(function (a, b) { return a.prijs - b.prijs || a.plek - b.plek; });
+    else if (staat.sort === 'af') lijst.sort(function (a, b) { return b.prijs - a.prijs || a.plek - b.plek; });
+    el.aantal.textContent = lijst.length;
+    el.grid.textContent = '';
+    if (!lijst.length) {
+      var leeg = document.createElement('div');
+      leeg.className = 'leeg';
+      leeg.style.gridColumn = '1/-1';
+      var h = document.createElement('h3');
+      h.textContent = 'Geen vaste case met deze filters';
+      var p = document.createElement('p');
+      p.textContent = 'Haal een filter weg, of laat de vaste maten los: op maat kies je zelf afmetingen, hoeken en slot, met een aanvraag tekenen wij hem.';
+      var btns = document.createElement('div');
+      btns.className = 'btns';
+      [['editor-v1.html#l2','btn btn-out btn-sm','Op jouw maat →'],
+       ['case-aanvragen-v1.html','btn btn-dark btn-sm','Case aanvragen →']].forEach(function (x) {
+        var a = document.createElement('a'); a.href = x[0]; a.className = x[1]; a.textContent = x[2]; btns.appendChild(a);
+      });
+      leeg.appendChild(h); leeg.appendChild(p); leeg.appendChild(btns);
+      el.grid.appendChild(leeg);
+      return;
+    }
+    lijst.forEach(function (p) { el.grid.appendChild(kaart(p)); });
+    el.grid.appendChild(maatTegel());
+  }
+
+  function teken() {
+    var g = groep();
+    el.titel.textContent = g.naam;
+    el.kruimel.textContent = g.naam;
+    document.title = 'Casebuilder — /shop, ' + g.naam.toLowerCase() + ' (mockup)';
+    tekenWissel();
+    tekenFilters();
+    tekenAan();
+    tekenGrid();
+    Array.prototype.forEach.call(el.sort.children, function (c) {
+      c.classList.toggle('on', c.getAttribute('data-s') === staat.sort);
+    });
+    var cats = Object.keys(staat.f.cat);
+    var hash = staat.groep + (cats.length === 1 ? '/' + slug(cats[0]) : '');
+    if (location.hash.slice(1) !== hash) history.replaceState(null, '', '#' + hash);
+    bewaar();
+  }
+
+  /* In de browser bewaard, zodat herladen of later terugkomen je filters
+     niet kost. Een browser die niets wil bewaren (privévenster) laat de
+     pagina gewoon werken, alleen zonder geheugen. */
+  var SLEUTEL = 'cb-shop-v1';
+  function bewaar() {
+    try { localStorage.setItem(SLEUTEL, JSON.stringify({ groep: staat.groep, sort: staat.sort, f: staat.f, bewaard: staat.bewaard })); }
+    catch (e) {}
+  }
+  function laad() {
+    var d;
+    try { d = JSON.parse(localStorage.getItem(SLEUTEL)); } catch (e) { d = null; }
+    if (!d) return;
+    if (GROEPEN.some(function (g) { return g.id === d.groep; })) staat.groep = d.groep;
+    if (d.sort) staat.sort = d.sort;
+    FACETTEN.forEach(function (f) { if (d.f && d.f[f.id]) staat.f[f.id] = d.f[f.id]; });
+    staat.bewaard = d.bewaard || {};
+  }
+
+  /* Wisselen van toepassing. De lokale filters (categorie, merk) gaan niet
+     weg maar blijven bij hun eigen tabblad, en komen terug als je daar
+     weer bent. De pagina zegt allebei: wat er bewaard is, en wat er
+     terugkomt — anders lijkt het alsof je filter verdwenen is. */
+  function lokaal() {
+    var lok = {};
+    FACETTEN.forEach(function (f) { if (f.laag === 'lokaal') lok[f.id] = staat.f[f.id]; });
+    return lok;
+  }
+  function namen(lok) {
+    var uit = [];
+    Object.keys(lok).forEach(function (id) { Object.keys(lok[id] || {}).forEach(function (o) { uit.push(lok[id][o]); }); });
+    return uit;
+  }
+  function kies(id) {
+    if (id === staat.groep) return;
+    var van = groep().naam;
+    var mee = namen(lokaal());
+    staat.bewaard[staat.groep] = lokaal();
+    staat.groep = id;
+    var terug = staat.bewaard[id] || {};
+    FACETTEN.forEach(function (f) { if (f.laag === 'lokaal') staat.f[f.id] = Object.assign({}, terug[f.id] || {}); });
+    var hersteld = namen(lokaal());
+    var zinnen = [];
+    if (mee.length) zinnen.push(mee.join(', ') + ' bewaard bij ' + van + ' — staat weer aan als je teruggaat.');
+    if (hersteld.length) zinnen.push(hersteld.join(', ') + ' staat nog aan van de vorige keer.');
+    el.melding.textContent = zinnen.join(' ');
+    el.melding.hidden = !zinnen.length;
+    teken();
+  }
+
+  el.sort.addEventListener('click', function (e) {
+    var c = e.target.closest('[data-s]');
+    if (!c) return;
+    staat.sort = c.getAttribute('data-s');
+    teken();
+  });
+
+  /* #backline of #backline/elektrische-gitaren — een categorie-URL opent
+     deze pagina met dat filter al aan. Zo blijft er per apparaat een
+     landingspagina bestaan zonder dat het een extra klik is. Een andere
+     groep in de hash werkt als wisselen: wat er bij de vorige groep aan
+     stond, wordt daar bewaard. */
+  function uitHash() {
+    var d = location.hash.slice(1).split('/');
+    var g = GROEPEN.filter(function (x) { return x.id === d[0]; })[0];
+    if (!g) return;
+    if (g.id !== staat.groep) {
+      staat.bewaard[staat.groep] = lokaal();
+      var terug = staat.bewaard[g.id] || {};
+      FACETTEN.forEach(function (f) { if (f.laag === 'lokaal') staat.f[f.id] = Object.assign({}, terug[f.id] || {}); });
+      staat.groep = g.id;
+    }
+    if (d[1]) {
+      var c = g.cats.filter(function (x) { return slug(x) === d[1]; })[0];
+      if (c) { staat.f.cat = {}; staat.f.cat[c] = c; }
+    }
+  }
+  laad();
+  uitHash();
+  teken();
+})();
+</script>
+<script src="assets/vouw.js"></script>
+<script src="assets/versies.js"></script>
+</body>
+</html>
