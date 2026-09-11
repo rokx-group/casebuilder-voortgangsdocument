@@ -7020,6 +7020,7 @@
             <li><label><input type="checkbox" data-id="ana-ga4"><span>GA4-toegang &mdash; kijken volstaat</span></label></li>
             <li><label><input type="checkbox" data-id="ana-gsc"><span>Search Console op het domein</span></label></li>
             <li><label><input type="checkbox" data-id="ana-events"><span>Een meting per configuratorstap, plus &eacute;&eacute;n op de overgang naar de winkelwagen</span></label></li>
+            <li><label><input type="checkbox" data-id="ana-configurator"><span><strong>Tracking in de configurator zelf</strong> &mdash; welke stap, welke keuzes, waar mensen afhaken, en de offerte vanuit de configurator. Besproken op 11 september</span></label></li>
             <li><label><input type="checkbox" data-id="ana-nulmeting"><span>Nulmeting v&oacute;&oacute;r livegang, anders blijft &quot;is het beter geworden?&quot; onbeantwoordbaar</span></label></li>
             <li><label><input type="checkbox" data-id="ana-ecom"><span>Omzetmeting: bekeken product, winkelwagen, bestelling</span></label></li>
             <li><label><input type="checkbox" data-id="ana-consent"><span>Cookiemelding en toestemming, met meting die zich daaraan houdt</span></label></li>
@@ -7069,9 +7070,9 @@
 
     <section data-checklist="meeting-2026-09-11" data-titel="meeting 11 september">
       <div class="sec-head">
-        <span class="eyebrow">Eerstvolgende</span>
+        <span class="eyebrow">Laatste meeting</span>
         <h2 class="anch" id="m-2026-09-11" data-rail="11 september">11 september 2026 &mdash; homepage, shop en de bouw<a class="hash" href="#m-2026-09-11" aria-label="Link naar deze meeting">#</a></h2>
-        <p>Vervolg op <a href="#m-2026-09-04">4 september</a>. De homepage is teruggebracht tot &eacute;&eacute;n vraag. Daarnaast de shop, het beeldmateriaal, de koppeling met CaseBuilder, waar de server draait en de branchespagina.</p>
+        <p>Vervolg op <a href="#m-2026-09-04">4 september</a>. De homepage is teruggebracht tot &eacute;&eacute;n vraag. Daarnaast de shop, het beeldmateriaal, de koppeling met CaseBuilder, waar de server draait en de branchespagina. <strong>Besproken:</strong> de homepage, de shop en de navigatie &mdash; de <a href="#m-2026-09-11-notes">aantekeningen</a> en wat er volgende week speelt staan onderaan.</p>
       </div>
 
       <details class="bronnen">
@@ -7104,6 +7105,174 @@
         <div class="mt cb"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">04</span><h4>API en endpoint</h4><p>Twee koppelingen staan met een CB-markering: het endpoint voor de Magento-klantportaalorders en de watchdog-koppeling met cb_core_v2. <strong>Milestone 2b hangt eraan.</strong> Daarnaast nog open: handelt de casebuilder api betaling geslaagd of mislukt af, of zit dat nu in Magento?</p></div><span class="tag">van cb</span></div>
         <div class="mt beslissing"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">05</span><h4>Waar Medusa draait</h4><p>Het keuzedocument noemt <strong>cloud, niet self-hosted</strong> een harde voorwaarde. Medusa draait nu zelf gehost. Houden we dat, of gaat het naar managed hosting &mdash; en wie beheert het dan?</p></div><span class="tag">beslissen</span></div>
         <div class="mt actie"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">06</span><h4>De branchespagina</h4><p>Het ontwerp nalopen. <strong>Besloten:</strong> /branches/defensie en /grote-spelers/defensie-en-overheid blijven apart &mdash; de een informatief, de ander inkoopgericht.</p><a class="live" href="mockups/branches.html" target="_blank" rel="noopener">branches &#8599;</a></div><span class="tag">bekijken</span></div>
+      </div>
+
+      <div class="carhead"><h3 class="tablabel anch" id="m-2026-09-11-besproken" data-rail="Besproken">Besproken<a class="hash" href="#m-2026-09-11-besproken" aria-label="Link naar deze sectie">#</a></h3><div class="carbtns"><button class="carbtn" type="button" data-car="car-0911-besproken" data-dir="-1" aria-label="Vorige">&#8592;</button><button class="carbtn" type="button" data-car="car-0911-besproken" data-dir="1" aria-label="Volgende">&#8594;</button></div></div>
+      <p class="wfnote" style="margin-bottom:14px">Drie onderwerpen. Wat eruit kwam staat per pagina in de aantekeningen hieronder.</p>
+      <div class="mtiles carousel" id="car-0911-besproken" tabindex="0" role="group" aria-label="Besproken">
+        <div class="mt af"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">01</span><h4>Homepage</h4><p>Het ontwerp doorgelopen op v2. De aantekeningen gaan mee in de revisie van volgende week.</p><a class="live" href="mockups/homepage-v2.html" target="_blank" rel="noopener">homepage &middot; v2 &#8599;</a></div><span class="tag">besproken</span></div>
+        <div class="mt af"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">02</span><h4>Shop</h4><p>Het overzicht met filters per toepassing, de vaste cases en de ingang naar op maat.</p><a class="live" href="mockups/shop-v1.html" target="_blank" rel="noopener">shop &middot; mockup &#8599;</a></div><span class="tag">besproken</span></div>
+        <div class="mt af"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">03</span><h4>De navigatie</h4><p>Het menu staat hier. <strong>Feedback welkom</strong> &mdash; wij gaan er zelf ook nog overheen.</p><a class="live" href="mockups/header-varianten.html" target="_blank" rel="noopener">header en menu &#8599;</a></div><span class="tag">besproken</span></div>
+      </div>
+
+      <div class="fbar">
+        <span class="hint" data-f="tally">&nbsp;</span>
+      </div>
+
+      <h3 class="tablabel anch" id="m-2026-09-11-notes" data-rail="Aantekeningen">Aantekeningen uit de meeting<a class="hash" href="#m-2026-09-11-notes" aria-label="Link naar deze sectie">#</a></h3>
+      <p class="wfnote" style="margin:-10px 0 14px">Per pagina wat er gezegd is. Vink af wat verwerkt is; een regel is aan te passen door erop te klikken.</p>
+      <div class="ftiles">
+        <article class="ft" data-titel="01 &middot; Homepage">
+          <div class="fhead">
+            <span class="fn">01 &middot; homepage <span class="fprog" data-f="prog"></span></span>
+            <h3><button class="ftopen" type="button">Homepage</button></h3>
+            <p>De hero, de USP&rsquo;s en de drie ingangen. Twee punten gaan over tekst, &eacute;&eacute;n over de prijs.</p>
+            <div class="fstat"><span class="chip chip-open">6 punten</span></div>
+            <span class="fmeer">Openen &rarr;</span>
+          </div>
+          <div class="fbody">
+            <span class="flab">Uit de meeting</span>
+            <ul class="fcheck">
+              <li><label><input type="checkbox" data-id="n-hp-ikweet"><span><strong>&ldquo;Ik weet het nog niet&rdquo;</strong> is geen goede zin bij de drie tegels om uit te kiezen</span></label></li>
+              <li><label><input type="checkbox" data-id="n-hp-drie"><span>&ldquo;Drie manieren om bij de juiste case te komen&rdquo; &mdash; de tekst mag duidelijker; mensen willen hier niet lezen</span></label></li>
+              <li><label><input type="checkbox" data-id="n-hp-usp-uit"><span>De USP <strong>// UITVOERING &middot; Bouwpakket of kant-en-klaar</strong> mag uit de hero</span></label></li>
+              <li><label><input type="checkbox" data-id="n-hp-usp-volg"><span>Volgorde van de USP&rsquo;s: <strong>1 snelste &middot; 2 controle &middot; 3 ervaring &middot; 4 prijs</strong></span></label></li>
+              <li><label><input type="checkbox" data-id="n-hp-prijs"><span>Transparantie over de prijs mist een beetje &mdash; waar kunnen we een prijsindicatie verwerken?</span></label></li>
+              <li><label><input type="checkbox" data-id="n-hp-persoon"><span>Personalisatie: wie naar een gitaarcase zoekt, kunnen we die daarna dynamisch andere dingen laten zien?</span></label></li>
+            </ul>
+            <label class="flab" for="nt-0911-hp">Aanvulling? <span class="saved" data-f="saved">bewaard</span></label>
+            <textarea id="nt-0911-hp" data-note="0911-hp" placeholder="Bijvoorbeeld: de prijsindicatie mag ook op de modeltegels."></textarea>
+          </div>
+        </article>
+        <article class="ft" data-titel="02 &middot; Case aanvragen en offerte">
+          <div class="fhead">
+            <span class="fn">02 &middot; offerte <span class="fprog" data-f="prog"></span></span>
+            <h3><button class="ftopen" type="button">Case aanvragen en offerte</button></h3>
+            <p>De pagina waar zeventig procent van de orders begint.</p>
+            <div class="fstat"><span class="chip chip-open">3 punten</span></div>
+            <span class="fmeer">Openen &rarr;</span>
+          </div>
+          <div class="fbody">
+            <span class="flab">Uit de meeting</span>
+            <ul class="fcheck">
+              <li><label><input type="checkbox" data-id="n-ca-cta"><span><strong>Case aanvragen</strong> krijgt een andere CTA-tekst &mdash; wij komen met voorstellen</span></label></li>
+              <li><label><input type="checkbox" data-id="n-ca-budget"><span>Het budgetveld gaat uit het offerteformulier</span></label></li>
+              <li><label><input type="checkbox" data-id="n-ca-voorbeelden"><span>Op de offertepagina laten zien welke cases we kunnen maken, met prijs</span></label></li>
+            </ul>
+            <label class="flab" for="nt-0911-ca">Aanvulling? <span class="saved" data-f="saved">bewaard</span></label>
+            <textarea id="nt-0911-ca" data-note="0911-ca" placeholder="Bijvoorbeeld: welke drie cases laten we als voorbeeld zien?"></textarea>
+          </div>
+        </article>
+        <article class="ft" data-titel="03 &middot; Wat ga je vervoeren en zoeken">
+          <div class="fhead">
+            <span class="fn">03 &middot; zoeken <span class="fprog" data-f="prog"></span></span>
+            <h3><button class="ftopen" type="button">Wat ga je vervoeren en zoeken</button></h3>
+            <p>Waar een zoekopdracht naartoe mag leiden, en wat er in de suggesties staat.</p>
+            <div class="fstat"><span class="chip chip-open">2 punten</span></div>
+            <span class="fmeer">Openen &rarr;</span>
+          </div>
+          <div class="fbody">
+            <span class="flab">Uit de meeting</span>
+            <ul class="fcheck">
+              <li><label><input type="checkbox" data-id="n-zoek-bestemming"><span>De zoekbalk op /case-voor kan naar de shop, maar ook naar een branche- of SEO-pagina gaan</span></label></li>
+              <li><label><input type="checkbox" data-id="n-zoek-niveaus"><span>De zoekbalk toont productdetail en subcategorie, maar ook de categorie &mdash; zoals backline &mdash; en die is klikbaar</span></label></li>
+            </ul>
+            <label class="flab" for="nt-0911-zoek">Aanvulling? <span class="saved" data-f="saved">bewaard</span></label>
+            <textarea id="nt-0911-zoek" data-note="0911-zoek" placeholder="Bijvoorbeeld: welke SEO-pagina&rsquo;s blijven bestaan?"></textarea>
+          </div>
+        </article>
+        <article class="ft" data-titel="04 &middot; Flightcases">
+          <div class="fhead">
+            <span class="fn">04 &middot; flightcases <span class="fprog" data-f="prog"></span></span>
+            <h3><button class="ftopen" type="button">Flightcases</button></h3>
+            <p>De overzichtspagina en het megamenu, allebei met een render van de case.</p>
+            <div class="fstat"><span class="chip chip-open">3 punten</span></div>
+            <span class="fmeer">Openen &rarr;</span>
+          </div>
+          <div class="fbody">
+            <span class="flab">Uit de meeting</span>
+            <ul class="fcheck">
+              <li><label><input type="checkbox" data-id="n-fc-render"><span>Op /flightcases een render van een model: <strong>de vijf modellen tegelijk in beeld</strong>, draaiend, en klikken vergroot de case</span></label></li>
+              <li><label><input type="checkbox" data-id="n-fc-menu"><span>Megamenu Flightcases: wat moet daar in?</span></label></li>
+              <li><label><input type="checkbox" data-id="n-fc-menurender"><span>Kan er een render van een case in het Flightcases-megamenu?</span></label></li>
+            </ul>
+            <label class="flab" for="nt-0911-fc">Aanvulling? <span class="saved" data-f="saved">bewaard</span></label>
+            <textarea id="nt-0911-fc" data-note="0911-fc" placeholder="Bijvoorbeeld: renders uit de configurator, of foto&rsquo;s?"></textarea>
+          </div>
+        </article>
+        <article class="ft" data-titel="05 &middot; Editor en configurator">
+          <div class="fhead">
+            <span class="fn">05 &middot; editor <span class="fprog" data-f="prog"></span></span>
+            <h3><button class="ftopen" type="button">Editor en configurator</button></h3>
+            <p>Wat we met de configurator laten zien, en de offerte vanuit de configurator.</p>
+            <div class="fstat"><span class="chip chip-open">3 punten</span></div>
+            <span class="fmeer">Openen &rarr;</span>
+          </div>
+          <div class="fbody">
+            <span class="flab">Uit de meeting</span>
+            <ul class="fcheck">
+              <li><label><input type="checkbox" data-id="n-ed-showcase"><span>De configurator laat nu overtuigend zien dat CaseBuilder dit kan &mdash; kunnen we daar iets mee, bijvoorbeeld de editor laten zien?</span></label></li>
+              <li><label><input type="checkbox" data-id="n-ed-offerte"><span>Offerte vanuit de configurator mist. L1 (kleur) kan dat niet, L2 (maten) en L3 (volledig) wel. In de editor wil je kunnen zeggen <strong>&ldquo;case-hulp&rdquo;</strong> en dan een offerte-element zien met de case-ID erin, waar je iets aan toevoegt &mdash; bijvoorbeeld &ldquo;help, ik wil een zijvak rechts&rdquo;</span></label></li>
+              <li><label><input type="checkbox" data-id="n-ed-tracking"><span>Tracking in de configurator toevoegen &mdash; staat bij <a href="#features">Features &middot; Analytics</a></span></label></li>
+            </ul>
+            <label class="flab" for="nt-0911-ed">Aanvulling? <span class="saved" data-f="saved">bewaard</span></label>
+            <textarea id="nt-0911-ed" data-note="0911-ed" placeholder="Bijvoorbeeld: wie beantwoordt een hulpvraag uit de editor?"></textarea>
+          </div>
+        </article>
+        <article class="ft" data-titel="06 &middot; Shop en producten">
+          <div class="fhead">
+            <span class="fn">06 &middot; shop <span class="fprog" data-f="prog"></span></span>
+            <h3><button class="ftopen" type="button">Shop en producten</button></h3>
+            <p>E&eacute;n case in meerdere maten, en wie bepaalt of een product L1, L2 of L3 is.</p>
+            <div class="fstat"><span class="chip chip-open">3 punten</span></div>
+            <span class="fmeer">Openen &rarr;</span>
+          </div>
+          <div class="fbody">
+            <span class="flab">Uit de meeting</span>
+            <ul class="fcheck">
+              <li><label><input type="checkbox" data-id="n-shop-maten"><span>Een case van 80&times;80&times;80 die ook in 100&times;60&times;60 bestaat, staat allebei in het productoverzicht: <strong>twee aparte productpagina&rsquo;s</strong>. Je kiest een maat en gaat naar de productpagina</span></label></li>
+              <li><label><input type="checkbox" data-id="n-shop-pdpmaat"><span>Op de productpagina van de 80&times;80&times;80 kun je de maat nog veranderen als het een L2-product is, bij L1 niet &mdash; prijs en de rest veranderen mee</span></label></li>
+              <li><label><input type="checkbox" data-id="n-shop-niveau"><span>CaseBuilder levert per categorie de parameters, en of die categorie L1, L2 of L3 is</span></label></li>
+            </ul>
+            <label class="flab" for="nt-0911-shop">Aanvulling? <span class="saved" data-f="saved">bewaard</span></label>
+            <textarea id="nt-0911-shop" data-note="0911-shop" placeholder="Bijvoorbeeld: welke categorie&euml;n zijn L2?"></textarea>
+          </div>
+        </article>
+        <article class="ft" data-titel="07 &middot; Footer">
+          <div class="fhead">
+            <span class="fn">07 &middot; footer <span class="fprog" data-f="prog"></span></span>
+            <h3><button class="ftopen" type="button">Footer</button></h3>
+            <p>Minder dubbel met het menu, meer over wie we bedienen.</p>
+            <div class="fstat"><span class="chip chip-open">2 punten</span></div>
+            <span class="fmeer">Openen &rarr;</span>
+          </div>
+          <div class="fbody">
+            <span class="flab">Uit de meeting</span>
+            <ul class="fcheck">
+              <li><label><input type="checkbox" data-id="n-ft-flightcases"><span>De kolom Flightcases met de modellen gaat uit de footer</span></label></li>
+              <li><label><input type="checkbox" data-id="n-ft-branches"><span>Daarvoor in de plaats: de branches</span></label></li>
+            </ul>
+            <label class="flab" for="nt-0911-ft">Aanvulling? <span class="saved" data-f="saved">bewaard</span></label>
+            <textarea id="nt-0911-ft" data-note="0911-ft" placeholder="Bijvoorbeeld: ook de grote partijen erbij?"></textarea>
+          </div>
+        </article>
+      </div>
+
+      <div class="carhead"><h3 class="tablabel anch" id="m-2026-09-11-volgende" data-rail="Volgende week">Volgende week<a class="hash" href="#m-2026-09-11-volgende" aria-label="Link naar deze sectie">#</a></h3><div class="carbtns"><button class="carbtn" type="button" data-car="car-0911-volgende" data-dir="-1" aria-label="Vorige">&#8592;</button><button class="carbtn" type="button" data-car="car-0911-volgende" data-dir="1" aria-label="Volgende">&#8594;</button></div></div>
+      <p class="wfnote" style="margin-bottom:14px">Het eerste punt is de voorwaarde om te bouwen: na het akkoord zetten we de pagina&rsquo;s in het CMS. Vier en vijf zijn misschien.</p>
+      <div class="mtiles carousel" id="car-0911-volgende" tabindex="0" role="group" aria-label="Volgende week">
+        <div class="mt beslissing"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">01</span><h4>Designrevisie en volledig akkoord</h4><p>Na Rici&rsquo;s ronde een revisie van het ontwerp, en daarna een volledig akkoord van jullie kant. <strong>Dan gaan we bouwen in het CMS.</strong> Het gaat om drie pagina&rsquo;s: de homepage, case aanvragen en wat ga je vervoeren.</p><a class="live" href="mockups/homepage-v2.html" target="_blank" rel="noopener">homepage &#8599;</a><a class="live" href="mockups/case-aanvragen-v1.html" target="_blank" rel="noopener">case aanvragen &#8599;</a><a class="live" href="mockups/case-voor-v1.html" target="_blank" rel="noopener">wat ga je vervoeren &#8599;</a></div><span class="tag">akkoord</span></div>
+        <div class="mt beslissing"><div class="mtop"><a class="fase f-cont" href="#content" title="Hoort bij de contentfase">content</a><span class="mn">02</span><h4>De hero-video: gaan we schieten?</h4><p>Een eigen film, of verder met bestaand beeld. Nu staan er twee: de huidige film van 1,8 MB en de precisiefilm van 769 KB.</p></div><span class="tag">beslissen</span></div>
+        <div class="mt actie"><div class="mtop"><a class="fase f-cont" href="#content" title="Hoort bij de contentfase">content</a><span class="mn">03</span><h4>De eerste productcategorie&euml;n en producten</h4><p>Bepalen met Joran, in twee sessies: vandaag, vrijdag 11 september, en volgende week nog een keer een uur.</p></div><span class="tag">met joran</span></div>
+        <div class="mt gepland"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">04</span><h4>Stripe technisch integreren</h4><p>Misschien al volgende week: de betaling technisch koppelen.</p></div><span class="tag">misschien</span></div>
+        <div class="mt gepland"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">05</span><h4>API en endpoint voor betaalde bestellingen</h4><p>Misschien: het endpoint waarmee CaseBuilder betaalde bestellingen ophaalt.</p></div><span class="tag">misschien</span></div>
+      </div>
+
+      <div class="carhead"><h3 class="tablabel anch" id="m-2026-09-11-nodig" data-rail="Nodig">Wat we nodig hebben<a class="hash" href="#m-2026-09-11-nodig" aria-label="Link naar deze sectie">#</a></h3><div class="carbtns"><button class="carbtn" type="button" data-car="car-0911-nodig" data-dir="-1" aria-label="Vorige">&#8592;</button><button class="carbtn" type="button" data-car="car-0911-nodig" data-dir="1" aria-label="Volgende">&#8594;</button></div></div>
+      <p class="wfnote" style="margin-bottom:14px">Twee dingen van CaseBuilder, allebei nodig voor de bouw.</p>
+      <div class="mtiles carousel" id="car-0911-nodig" tabindex="0" role="group" aria-label="Wat we nodig hebben">
+        <div class="mt cb"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">01</span><h4>Medusa in de cloud of op een eigen server</h4><p>Waar de webshop draait. <strong>Vraag voor Gert.</strong> Het keuzedocument noemt cloud een harde voorwaarde; Medusa draait nu zelf gehost.</p></div><span class="tag">van cb</span></div>
+        <div class="mt cb"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">02</span><h4>Een API-voorbeeld</h4><p>Een voorbeeld van de API, zodat we de koppeling kunnen bouwen. <strong>Van Martijn.</strong></p></div><span class="tag">van cb</span></div>
       </div>
 
     </section>
