@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — besluiten na 11 september</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<link rel="stylesheet" href="assets/draaikist.css">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   Besluiten na 11 september
+
+   De voorstellen bij de aantekeningen van de meeting, elk met een
+   voorbeeld en een paar keuzes. Kiezen, eventueel een opmerking, en
+   onderaan "Toon mijn keuzes": dat geeft een tekst om door te sturen.
+
+   Een werkblad, geen sitepagina. De voorbeelden zijn schetsen in het
+   merk, niet de uitgewerkte pagina's. Keuzes blijven in deze browser
+   staan (localStorage); er gaat niets naar een server.
+   ══════════════════════════════════════════════════════════════ */
+body{background:#EDF0F4}
+.blad{max-width:1240px;margin:0 auto;padding:34px 24px 150px}
+.terug{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.intro h1{font-size:clamp(34px,4vw,50px);margin:12px 0 12px}
+.intro p{color:var(--mute);max-width:72ch}
+.gedaan{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.gedaan span{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;background:#fff;
+  border:1px solid var(--rule);padding:7px 11px;color:var(--dark)}
+.gedaan span b{color:var(--blue);font-weight:600}
+
+/* ── een besluit ───────────────────────────────────────────── */
+.besluit{background:#fff;border:1px solid var(--rule);margin-top:22px;scroll-margin-top:20px}
+.besluit.gekozen{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(102,196,232,.18)}
+.bkop{display:flex;align-items:baseline;gap:14px;padding:18px 22px 0;flex-wrap:wrap}
+.bkop .nr{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--blue)}
+.bkop h2{font-size:24px}
+.bkop .soort{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);border:1px solid var(--rule);padding:5px 9px}
+.besluit.gekozen .bkop .soort{border-color:var(--cyan);color:var(--dark);background:var(--lightblue)}
+.notitie{padding:8px 22px 0;font-size:13.5px;color:var(--mute);max-width:92ch}
+.notitie b{color:var(--ink);font-weight:500}
+.voorstel{padding:6px 22px 0;font-size:15px;color:var(--ink);max-width:92ch}
+.bgrid{display:grid;grid-template-columns:1.35fr 1fr;margin-top:16px;border-top:1px solid var(--rule)}
+.vb{background:var(--bg);padding:22px;border-right:1px solid var(--rule);min-width:0}
+.lab{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);margin-bottom:10px}
+.kies{padding:20px 22px 22px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.kies fieldset{border:0;display:flex;flex-direction:column;gap:8px}
+.kies fieldset + fieldset{margin-top:10px}
+/* Keuzes als vlakken, niet als rondjes: het merk kent geen cirkels, en
+   een vlak is ook op een telefoon makkelijk te raken. */
+.optie{position:relative;display:block;border:1.5px solid var(--rule);padding:10px 14px;cursor:pointer;background:#fff}
+.optie:hover{border-color:var(--dark)}
+.optie:has(input:checked){border-color:var(--cyan);box-shadow:0 0 0 3px rgba(102,196,232,.22);background:#F7FBFD}
+.optie:focus-within{outline:2px solid var(--cyan);outline-offset:2px}
+.optie input{position:absolute;opacity:0;pointer-events:none}
+.optie b{display:block;font-family:var(--disp);text-transform:uppercase;font-size:16px;letter-spacing:.03em;color:var(--dark)}
+.optie small{display:block;font-size:12.5px;color:var(--mute);margin-top:2px}
+.optie .aanb{font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--blue);margin-left:6px;font-weight:500}
+.optie.meer b::before{content:"+ ";color:var(--blue)}
+.optie.meer:has(input:checked) b::before{content:"\2713  "}
+.kies textarea{margin-top:6px;min-height:62px;border:1.5px solid var(--rule);padding:10px 12px;font-family:var(--body);
+  font-size:14px;resize:vertical;color:var(--ink)}
+.kies textarea:focus{outline:0;border-color:var(--dark)}
+
+/* ── voorbeelden ───────────────────────────────────────────── */
+.p-kop{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:21px;color:var(--dark);margin-bottom:12px;line-height:1.05}
+.p-tegels{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.p-tegel{background:#fff;border:1px solid var(--rule);padding:14px 14px 16px;display:flex;flex-direction:column;gap:6px}
+.p-tegel .n{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--blue)}
+.p-tegel h3{font-size:17px;line-height:1.1}
+.p-tegel p{font-size:12.5px;color:var(--mute);line-height:1.45}
+.p-tegel .go{margin-top:auto;font-family:var(--disp);text-transform:uppercase;font-size:13px;letter-spacing:.05em;color:var(--blue);padding-top:6px}
+.p-tegel.wissel{outline:2px dashed var(--cyan);outline-offset:3px}
+
+.p-donker{background:var(--void);color:#fff;padding:20px}
+.p-donker .h{font-family:var(--disp);text-transform:uppercase;font-weight:900;font-size:26px;line-height:1}
+.p-donker .h span{color:var(--cyan)}
+.p-knoppen{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.p-knoppen .btn{min-width:210px;justify-content:center}
+.p-menu{display:flex;gap:22px;background:#fff;padding:12px 16px;margin-bottom:10px;border:1px solid var(--rule);flex-wrap:wrap}
+.p-menu span{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:14px;letter-spacing:.05em;color:var(--dark)}
+.p-menu span.aan{box-shadow:inset 0 -3px 0 var(--cyan)}
+
+.p-usps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid rgba(255,255,255,.18)}
+.p-usps.vier{grid-template-columns:repeat(4,1fr)}
+.p-usps div{padding:10px 10px 0 0}
+.p-usps .k{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;color:var(--cyan)}
+.p-usps .v{font-size:12.5px;color:#fff;margin-top:3px;line-height:1.3}
+.p-usps .weg .v,.p-usps .weg .k{text-decoration:line-through;opacity:.45}
+.p-usprij + .p-usprij{margin-top:16px}
+.p-usprij > .lab{color:rgba(255,255,255,.55)}
+
+.p-model{display:grid;grid-template-columns:150px 1fr;gap:14px;background:#fff;border:1px solid var(--rule);align-items:center}
+.p-model img{width:150px;height:110px;object-fit:cover;display:block}
+.p-model h4{font-family:var(--disp);text-transform:uppercase;font-size:18px;color:var(--dark)}
+.p-prijs{font-family:var(--disp);font-weight:900;font-size:22px;color:var(--dark);margin-top:4px}
+.p-prijs small{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--mute);font-weight:500;margin-left:6px}
+.p-band{margin-top:10px;background:#fff;border:1px solid var(--rule);border-left:3px solid var(--cyan);padding:10px 14px;font-size:13.5px}
+.p-band b{font-family:var(--disp);font-size:16px;color:var(--dark);letter-spacing:.02em}
+
+.p-probeer{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:center;background:#fff;border:1px solid var(--rule);padding:16px}
+.p-probeer .kist3d{height:230px}
+.p-probeer .kmaat{display:none}
+.p-schuif label{display:grid;grid-template-columns:70px 1fr 64px;align-items:center;gap:8px;font-family:var(--mono);
+  font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-bottom:8px}
+.p-schuif input{accent-color:var(--dark);width:100%}
+.p-schuif output{font-family:var(--disp);font-size:16px;color:var(--dark);text-align:right}
+.p-schuif .p-prijs{margin:8px 0 10px}
+
+.p-strook{background:#fff;border:1px solid var(--rule);padding:14px 16px}
+.p-strook .t{font-family:var(--disp);text-transform:uppercase;font-size:17px;color:var(--dark);margin-bottom:10px}
+.p-chips{display:flex;gap:8px;flex-wrap:wrap}
+.p-chips span{border:1px solid var(--rule);padding:7px 10px;font-size:13px;background:var(--bg)}
+
+.p-veld{background:#fff;border:1px solid var(--rule);padding:14px 16px}
+.p-veld label{display:block;font-size:13.5px;color:var(--ink);margin-bottom:6px}
+.p-veld .inv{border:1.5px solid var(--rule);padding:10px 12px;font-size:13.5px;color:var(--mute)}
+.p-veld.weg{position:relative}
+.p-veld.weg::after{content:"valt weg";position:absolute;top:10px;right:12px;font-family:var(--mono);font-size:9px;
+  letter-spacing:.14em;text-transform:uppercase;background:#A34418;color:#fff;padding:4px 8px}
+.p-veld.weg label,.p-veld.weg .inv{text-decoration:line-through;opacity:.55}
+
+.p-cases{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.p-case{background:#fff;border:1px solid var(--rule)}
+.p-case img{width:100%;height:96px;object-fit:cover;display:block}
+.p-case div{padding:10px 12px 12px}
+.p-case h5{font-family:var(--disp);text-transform:uppercase;font-size:14px;color:var(--dark);line-height:1.1}
+.p-case p{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--mute);margin-top:4px}
+.p-case b{display:block;font-family:var(--disp);font-size:17px;color:var(--dark);margin-top:6px}
+
+.p-zoek{background:#fff;border:1px solid var(--rule)}
+.p-zoek .in{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--rule);padding:11px 14px;font-size:14px}
+.p-zoek .in span{color:var(--mute)}
+.p-zoek .groep{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);padding:10px 14px 4px}
+.p-zoek .r{display:flex;align-items:baseline;gap:10px;padding:7px 14px;font-size:14px}
+.p-zoek .r:hover{background:var(--lightblue)}
+.p-zoek .r small{margin-left:auto;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.p-zoek .r.klik{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+.p-zoek .uit{border-top:1px solid var(--rule);background:var(--bg)}
+
+.p-groot{background:#fff;border:1px solid var(--rule);display:grid;grid-template-columns:1.2fr 1fr;align-items:center}
+.p-groot img{width:100%;height:190px;object-fit:cover;display:block}
+.p-groot div{padding:14px 16px}
+.p-groot h4{font-family:var(--disp);text-transform:uppercase;font-size:22px;color:var(--dark)}
+.p-groot p{font-size:13px;color:var(--mute);margin-top:4px}
+.p-groot .go{display:inline-block;margin-top:10px;font-family:var(--disp);text-transform:uppercase;font-size:14px;letter-spacing:.05em;color:var(--blue)}
+.p-vijf{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:8px}
+.p-vijf button{border:1.5px solid var(--rule);background:#fff;padding:0;cursor:pointer;text-align:left}
+.p-vijf button[aria-pressed="true"]{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(102,196,232,.22)}
+.p-vijf img{width:100%;height:58px;object-fit:cover;display:block}
+.p-vijf span{display:block;font-family:var(--disp);text-transform:uppercase;font-size:11.5px;color:var(--dark);padding:5px 6px;letter-spacing:.03em}
+
+.p-mm{background:#fff;border:1px solid var(--rule);display:grid;grid-template-columns:1fr 1.5fr 1fr;gap:18px;padding:16px}
+.p-mm h6{font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;color:var(--blue);margin-bottom:8px;font-weight:500}
+.p-mm ul{list-style:none;font-size:12.5px;line-height:1.95;color:var(--ink)}
+.p-mm .mod{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.p-mm .mod a{display:block;border:1px solid var(--rule);font-size:11px;font-family:var(--disp);text-transform:uppercase;color:var(--dark);letter-spacing:.03em}
+.p-mm .mod img{width:100%;height:44px;object-fit:cover;display:block}
+.p-mm .mod a span{display:block;padding:4px 5px}
+.p-mm .vlak{background:var(--lightblue);border:1px solid var(--rule);padding:12px}
+.p-mm .vlak b{display:block;font-family:var(--disp);text-transform:uppercase;font-size:15px;color:var(--dark)}
+.p-mm .vlak p{font-size:11.5px;color:var(--mute);margin-top:4px}
+
+.p-cfg{border:1.5px solid var(--dark);background:#fff}
+.p-cfg .kop{background:var(--dark);color:#fff;padding:10px 14px;font-family:var(--disp);text-transform:uppercase;font-size:15px;letter-spacing:.03em}
+.p-cfg .voet{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--bg);border-top:1px solid var(--rule);flex-wrap:wrap}
+.p-cfg .voet .p-prijs{margin:0;font-size:20px}
+.p-cfg .voet .btn{margin-left:auto}
+.p-hulp{padding:14px;border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:8px}
+.p-hulp .id{font-family:var(--mono);font-size:10px;letter-spacing:.1em;background:var(--lightblue);color:var(--dark);padding:8px 10px}
+.p-hulp .vak{border:1.5px solid var(--rule);padding:10px 12px;font-size:13px;color:var(--mute);min-height:54px}
+.p-hulp .up{border:1.5px dashed var(--rule);padding:8px 12px;font-size:12.5px;color:var(--mute);background:var(--bg)}
+
+.p-pdp{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.p-pk{background:#fff;border:1px solid var(--rule)}
+.p-pk img{width:100%;height:84px;object-fit:cover;display:block}
+.p-pk div{padding:9px 11px 11px}
+.p-pk h5{font-family:var(--disp);text-transform:uppercase;font-size:14px;color:var(--dark)}
+.p-pk b{font-family:var(--disp);font-size:16px;color:var(--dark)}
+.p-detail{grid-column:1/-1;background:#fff;border:1px solid var(--rule);padding:12px 14px}
+.p-detail h5{font-family:var(--disp);text-transform:uppercase;font-size:17px;color:var(--dark)}
+.p-maatchips{display:flex;gap:6px;margin-top:8px;align-items:center;flex-wrap:wrap}
+.p-maatchips .lab{margin:0 6px 0 0}
+.p-maatchips span{border:1.5px solid var(--rule);padding:5px 9px;font-family:var(--disp);font-size:13px;color:var(--dark)}
+.p-maatchips span.aan{border-color:var(--cyan);box-shadow:0 0 0 2px rgba(102,196,232,.25)}
+.p-l2{margin-top:10px;border-top:1px dashed var(--rule);padding-top:10px}
+.p-l2 .rij{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.p-l2 .rij span{border:1.5px solid var(--rule);padding:6px 8px;font-family:var(--disp);font-size:15px;color:var(--dark)}
+
+/* ── de balk onderaan ─────────────────────────────────────── */
+.balk{position:fixed;left:0;right:0;bottom:0;background:var(--dark);color:#fff;z-index:50;box-shadow:0 -8px 24px rgba(0,30,50,.2)}
+.balk .in{max-width:1240px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.balk .tel{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.balk .knop{margin-left:auto;display:flex;gap:8px}
+.uitvoer{max-width:1240px;margin:0 auto;padding:0 24px 14px}
+.uitvoer textarea{width:100%;min-height:230px;font-family:var(--mono);font-size:12.5px;line-height:1.55;padding:12px;border:0;background:#fff;color:var(--ink)}
+.uitvoer .rij{display:flex;gap:10px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
+.uitvoer .rij span{font-size:13px;color:rgba(255,255,255,.75)}
+.btn-licht{background:#fff;color:var(--dark)}
+.btn-licht:hover{background:var(--cyan)}
+
+@media(max-width:980px){.bgrid{grid-template-columns:1fr}.vb{border-right:0;border-bottom:1px solid var(--rule)}
+  .p-tegels,.p-cases{grid-template-columns:1fr}.p-mm,.p-probeer,.p-groot{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="blad">
+  <a class="terug" href="../index.html#m-2026-09-11-notes">&larr; Terug naar de meeting van 11 september</a>
+  <div class="intro">
+    <h1>Besluiten na 11 september</h1>
+    <p>Per aantekening een voorstel, een voorbeeld en een paar keuzes. Kies wat je wilt, zet er eventueel een opmerking bij, en klik onderaan op <b>Toon mijn keuzes</b>: dan krijg je een tekst om door te sturen. De nummers zijn die van de lijst in de chat. Je keuzes blijven in deze browser staan.</p>
+    <div class="gedaan">
+      <span><b>&#10003; gedaan</b> &middot; 16 &middot; tracking in de configurator staat bij Features</span>
+      <span><b>&#10003; gedaan</b> &middot; 18 &middot; footer: branches in plaats van flightcases</span>
+    </div>
+  </div>
+
+  <!-- ── 01 en 02 · de drie tegels ─────────────────────────── -->
+  <section class="besluit" data-besluit="01–02" id="b01">
+    <div class="bkop"><span class="nr">01 &middot; 02</span><h2>De drie tegels op de homepage</h2><span class="soort">tekst &middot; snel</span></div>
+    <p class="notitie">Uit de meeting: <b>&ldquo;Ik weet het nog niet&rdquo; is geen goede zin bij de drie tegels om te kiezen.</b> En: <b>&ldquo;Drie manieren om bij de juiste case te komen&rdquo; &mdash; tekst duidelijker, mensen willen niet lezen.</b></p>
+    <p class="voorstel">Tegel C krijgt een echt beginpunt in plaats van een niet-antwoord, en de tegels worden korter. Het voorbeeld verandert mee met wat je kiest.</p>
+    <div class="bgrid">
+      <div class="vb">
+        <span class="lab">Voorbeeld &middot; de gestippelde tegel is C</span>
+        <div class="p-kop" data-p="kop">Drie manieren om bij de juiste case te komen</div>
+        <div class="p-tegels">
+          <div class="p-tegel"><span class="n">// A</span><h3>Ik weet wat ik nodig heb</h3><p data-p-tekst data-lang="Model en maten zijn bekend. Direct de configurator in, prijs meteen in beeld, klaar in vijf stappen." data-kort="Maten bekend? Prijs in vijf stappen.">Model en maten zijn bekend. Direct de configurator in, prijs meteen in beeld, klaar in vijf stappen.</p><span class="go">Naar de configurator &rarr;</span></div>
+          <div class="p-tegel"><span class="n">// B</span><h3>Ik weet wat ik moet beschermen</h3><p data-p-tekst data-lang="Een Les Paul, een 19-inch rack van 6 HE, een moving head. Zeg wat erin gaat, wij bepalen de maten." data-kort="Zeg wat erin gaat, wij bepalen de maten.">Een Les Paul, een 19-inch rack van 6 HE, een moving head. Zeg wat erin gaat, wij bepalen de maten.</p><span class="go">Wat ga je vervoeren? &rarr;</span></div>
+          <div class="p-tegel wissel"><span class="n">// C</span><h3 data-p="c-h3">Ik weet het nog niet</h3><p data-p="c-p">Koffer, hoedcase, trunccase of rackcase &mdash; wat is het verschil, en wat past bij jouw transport?</p><span class="go" data-p="c-go">Vergelijk de vijf modellen &rarr;</span></div>
+        </div>
+      </div>
+      <div class="kies">
+        <fieldset data-vraag="Tegel C">
+          <span class="lab">01 &middot; Tegel C wordt</span>
+          <label class="optie"><input type="radio" name="b01" value="Ik heb een schets of datasheet (naar case aanvragen)" data-h3="Ik heb een schets of datasheet" data-lang="Een tekening, een foto of alleen een datasheet: stuur het op, Joran tekent de case uit. Reactie dezelfde werkdag." data-kort="Stuur wat je hebt, Joran tekent het uit." data-go="Case aanvragen →"><b>Ik heb een schets of datasheet<span class="aanb">// aanbevolen</span></b><small>&rarr; case aanvragen. Een echt beginpunt, en daar begint zeventig procent van de orders.</small></label>
+          <label class="optie"><input type="radio" name="b01" value="Ik wil advies van een casebouwer (naar contact)" data-h3="Ik wil advies van een casebouwer" data-lang="Twijfel je tussen modellen of weet je niet wat erin moet? Bel of mail, iemand uit de werkplaats denkt mee." data-kort="Bel of mail, iemand uit de werkplaats denkt mee." data-go="Vraag advies →"><b>Ik wil advies van een casebouwer</b><small>&rarr; contact. Voor wie echt nog niet weet waar te beginnen.</small></label>
+          <label class="optie"><input type="radio" name="b01" value="Ik wil eerst rondkijken (naar /flightcases)" data-h3="Ik wil eerst rondkijken" data-lang="Koffer, hoedcase, trunccase of rackcase — wat is het verschil, en wat past bij jouw transport?" data-kort="Vijf modellen naast elkaar, met prijzen." data-go="Bekijk de vijf modellen →"><b>Ik wil eerst rondkijken</b><small>&rarr; /flightcases, zoals nu. Alleen de zin verandert.</small></label>
+          <label class="optie"><input type="radio" name="b01" value="Anders, zie opmerking" data-h3="…" data-lang="Zie je opmerking." data-kort="Zie je opmerking." data-go="…"><b>Anders</b><small>Zet je voorstel in de opmerking.</small></label>
+        </fieldset>
+        <fieldset data-vraag="Kop en tekst">
+          <span class="lab">02 &middot; Kop en tekst in de tegels</span>
+          <label class="optie"><input type="radio" name="b02" value="Kop 'Hoe wil je beginnen?', één regel per tegel" data-kop="Hoe wil je beginnen?" data-tekst="kort"><b>&ldquo;Hoe wil je beginnen?&rdquo; + &eacute;&eacute;n regel<span class="aanb">// aanbevolen</span></b><small>Een vraag als kop, en per tegel alleen de kern.</small></label>
+          <label class="optie"><input type="radio" name="b02" value="Kop 'Waar begin je?', één regel per tegel" data-kop="Waar begin je?" data-tekst="kort"><b>&ldquo;Waar begin je?&rdquo; + &eacute;&eacute;n regel</b><small>Nog korter.</small></label>
+          <label class="optie"><input type="radio" name="b02" value="Kop houden, tekst in de tegels korter" data-kop="Drie manieren om bij de juiste case te komen" data-tekst="kort"><b>Kop houden, tekst korter</b><small>Alleen de tegels worden korter.</small></label>
+        </fieldset>
+        <textarea data-noot placeholder="Opmerking (optioneel)"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 03 · USP's ────────────────────────────────────────── -->
+  <section class="besluit" data-besluit="03">
+    <div class="bkop"><span class="nr">03</span><h2>De USP&rsquo;s in de hero</h2><span class="soort">tekst &middot; snel</span></div>
+    <p class="notitie">Uit de meeting: <b>&ldquo;Bouwpakket of kant-en-klaar&rdquo; mag eruit; volgorde 1 snelste, 2 controle, 3 ervaring, 4 prijs.</b></p>
+    <div class="bgrid">
+      <div class="vb">
+        <span class="lab">Voorbeeld</span>
+        <div class="p-donker">
+          <div class="p-usprij"><span class="lab">Nu</span>
+            <div class="p-usps">
+              <div><div class="k">// LEVERTIJD</div><div class="v">De snelste van Nederland</div></div>
+              <div><div class="k">// PRIJS</div><div class="v">Direct zichtbaar</div></div>
+              <div class="weg"><div class="k">// UITVOERING</div><div class="v">Bouwpakket of kant-en-klaar</div></div>
+              <div><div class="k">// CONTROLE</div><div class="v">Specialist kijkt mee</div></div>
+              <div><div class="k">// ERVARING</div><div class="v">20+ jaar</div></div>
+            </div>
+          </div>
+          <div class="p-usprij"><span class="lab">Wordt</span>
+            <div class="p-usps vier">
+              <div><div class="k">// LEVERTIJD</div><div class="v">De snelste van Nederland</div></div>
+              <div><div class="k">// CONTROLE</div><div class="v">Specialist kijkt mee</div></div>
+              <div><div class="k">// ERVARING</div><div class="v">20+ jaar</div></div>
+              <div><div class="k">// PRIJS</div><div class="v">Direct zichtbaar</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="kies">
+        <fieldset data-vraag="USP's">
+          <label class="optie"><input type="radio" name="b03" value="Zo doen"><b>Zo doen</b><small>Op homepage v1 en v2, en in de versies die dezelfde hero delen.</small></label>
+          <label class="optie"><input type="radio" name="b03" value="Anders, zie opmerking"><b>Anders</b><small>Zet het in de opmerking.</small></label>
+        </fieldset>
+        <textarea data-noot placeholder="Opmerking (optioneel)"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 04 · prijstransparantie ───────────────────────────── -->
+  <section class="besluit" data-besluit="04">
+    <div class="bkop"><span class="nr">04</span><h2>Meer transparantie over de prijs</h2><span class="soort">ontwerp &middot; prijzen van cb</span></div>
+    <p class="notitie">Uit de meeting: <b>transparantie over de prijs mist een beetje &mdash; waar verwerken we een prijsindicatie?</b> De prijsopbouw op de homepage blijft staan waar hij staat.</p>
+    <p class="voorstel">Meer dan &eacute;&eacute;n mag. De prijs zit dan op de plek waar iemand kiest, niet in een aparte sectie.</p>
+    <div class="bgrid">
+      <div class="vb">
+        <span class="lab">Voorbeeld &middot; modeltegel en offertepagina</span>
+        <div class="p-model">
+          <img src="assets/flightcase-koffer.jpg" alt="">
+          <div><h4>Koffer</h4><div class="p-prijs">vanaf &euro; 149<small>excl. btw</small></div></div>
+        </div>
+        <div class="p-band">Op de offertepagina: <b>meestal tussen &euro; 150 en &euro; 450 per case</b> &mdash; de bedragen zijn verzonnen, CB levert de echte.</div>
+      </div>
+      <div class="kies">
+        <fieldset data-vraag="Prijsindicatie">
+          <span class="lab">Kies wat erbij komt</span>
+          <label class="optie meer"><input type="checkbox" name="b04" value="Vanaf-prijs op elke model- en producttegel"><b>Vanaf-prijs op elke tegel</b><small>Modellen, shop en categoriepagina&rsquo;s.</small></label>
+          <label class="optie meer"><input type="checkbox" name="b04" value="Prijsbandbreedte op de offertepagina"><b>Bandbreedte op de offertepagina</b><small>&ldquo;Meestal tussen &euro; X en &euro; Y&rdquo;, zodat een aanvraag geen sprong in het duister is.</small></label>
+          <label class="optie meer"><input type="checkbox" name="b04" value="Echte voorbeelden met prijs op de offertepagina (zie 09)"><b>Echte voorbeelden met prijs</b><small>Zie 09.</small></label>
+          <label class="optie meer"><input type="checkbox" name="b04" value="De probeerstrook met live prijs (zie 05)"><b>De probeerstrook met live prijs</b><small>Zie 05.</small></label>
+          <label class="optie meer"><input type="checkbox" name="b04" value="Niets extra"><b>Niets extra</b><small>Het blijft zoals het is.</small></label>
+        </fieldset>
+        <textarea data-noot placeholder="Opmerking (optioneel)"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 05 · de configurator laten zien ───────────────────── -->
+  <section class="besluit" data-besluit="05">
+    <div class="bkop"><span class="nr">05</span><h2>De configurator laten zien</h2><span class="soort">ontwerp</span></div>
+    <p class="notitie">Uit de meeting: <b>de configurator laat nu overtuigend zien dat CB dit kan &mdash; kunnen we daar iets mee?</b></p>
+    <p class="voorstel">Een strook &ldquo;Probeer het&rdquo;: de draaiende kist met drie schuiven en een prijs die meeloopt. E&eacute;n klik opent de configurator met die maten. Het laat zien wat CB kan, en is meteen prijstransparantie. Probeer het voorbeeld.</p>
+    <div class="bgrid">
+      <div class="vb">
+        <span class="lab">Voorbeeld &middot; werkt echt, sleep ook aan de kist</span>
+        <div class="p-probeer">
+          <div class="kistvak">
+            <div class="kist3d" data-draaikist data-vrij="1400" title="Sleep om te draaien">
+              <div class="kubus" data-kubus>
+                <div class="zij achter"></div><div class="zij links"></div><div class="zij rechts"></div>
+                <div class="zij boven"></div><div class="zij onder"></div><div class="zij voor"><span class="slot"></span></div>
+              </div>
+              <div class="grond"></div>
+              <span class="kmaat"></span>
+            </div>
+          </div>
+          <div class="p-schuif">
+            <span class="lab">// Probeer het &middot; jouw maten</span>
+            <label>Breedte<input type="range" min="300" max="1200" step="10" value="700" data-schuif="b"><output data-uit="b">700</output></label>
+            <label>Diepte<input type="range" min="200" max="800" step="10" value="450" data-schuif="d"><output data-uit="d">450</output></label>
+            <label>Hoogte<input type="range" min="150" max="800" step="10" value="300" data-schuif="h"><output data-uit="h">300</output></label>
+            <div class="p-prijs" data-probeerprijs>&euro; 0<small>voorbeeldprijs</small></div>
+            <span class="btn btn-dark btn-sm">Verder in de configurator &rarr;</span>
+          </div>
+        </div>
+      </div>
+      <div class="kies">
+        <fieldset data-vraag="Probeerstrook">
+          <label class="optie"><input type="radio" name="b05" value="Op de homepage én /flightcases"><b>Homepage &eacute;n /flightcases<span class="aanb">// aanbevolen</span></b><small>Op de homepage als bewijs, op /flightcases als begin.</small></label>
+          <label class="optie"><input type="radio" name="b05" value="Alleen op /flightcases"><b>Alleen /flightcases</b><small>De homepage blijft rustiger.</small></label>
+          <label class="optie"><input type="radio" name="b05" value="Alleen op de homepage"><b>Alleen de homepage</b></label>
+          <label class="optie"><input type="radio" name="b05" value="Niet doen"><b>Niet doen</b></label>
+        </fieldset>
+        <textarea data-noot placeholder="Opmerking (optioneel)"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 06 · personalisatie ───────────────────────────────── -->
+  <section class="besluit" data-besluit="06">
+    <div class="bkop"><span class="nr">06</span><h2>Personalisatie</h2><span class="soort">later &middot; bouw</span></div>
+    <p class="notitie">Uit de meeting: <b>wie naar een gitaarcase zoekt, kunnen we die dynamisch andere dingen laten zien?</b></p>
+    <p class="voorstel">Beginnen met een simpele regel, geen personalisatiesysteem: de laatst bekeken categorie onthouden (alleen met cookietoestemming) en die terug laten komen.</p>
+    <div class="bgrid">
+      <div class="vb">
+        <span class="lab">Voorbeeld &middot; op de homepage, na een bezoek aan gitaarcases</span>
+        <div class="p-strook"><div class="t">Verder met gitaarcases</div><div class="p-chips"><span>Gibson Les Paul Standard</span><span>Fender Stratocaster</span><span>Alle gitaarcases &rarr;</span></div></div>
+      </div>
+      <div class="kies">
+        <fieldset data-vraag="Personalisatie">
+          <label class="optie"><input type="radio" name="b06" value="Later, als er GA4-data is"><b>Later, met GA4-data<span class="aanb">// aanbevolen</span></b><small>Eerst meten wat mensen doen, dan pas bijsturen.</small></label>
+          <label class="optie"><input type="radio" name="b06" value="Nu, met een simpele regel"><b>Nu, met een simpele regel</b><small>Laatste categorie onthouden, met toestemming.</small></label>
+          <label class="optie"><input type="radio" name="b06" value="Niet doen"><b>Niet doen</b></label>
+        </fieldset>
+        <textarea data-noot placeholder="Opmerking (optioneel)"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 07 · CTA-tekst ────────────────────────────────────── -->
+  <section class="besluit" data-besluit="07">
+    <div class="bkop"><span class="nr">07</span><h2>De tekst op &ldquo;Case aanvragen&rdquo;</h2><span class="soort">tekst &middot; snel</span></div>
+    <p class="notitie">Uit de meeting: <b>case aanvragen moet een alternatieve CTA-tekst krijgen.</b></p>
+    <div class="bgrid">
+      <div class="vb">
+        <span class="lab">Voorbeeld &middot; de menubalk en de hero</span>
+        <div class="p-menu"><span data-p="menu">Case aanvragen</span><span>Wat ga je vervoeren?</span><span>Flightcases</span><span>Branches</span><span>Service</span><span>Shop</span></div>
+        <div class="p-donker">
+          <div class="h">Millimeterwerk,<br><span>de snelste van Nederland</span></div>
+          <div class="p-knoppen"><span class="btn btn-pri" data-p="cta">Case aanvragen &rarr;</span><span class="btn btn-ghost">Wat ga je vervoeren?</span></div>
+        </div>
+      </div>
+      <div class="kies">
+        <fieldset data-vraag="Knop">
+          <span class="lab">De knop wordt</span>
+          <label class="optie"><input type="radio" name="b07" value="Stuur je schets of maten" data-cta="Stuur je schets of maten"><b>Stuur je schets of maten<span class="aanb">// aanbevolen</span></b><small>Zegt wat je doet, en dat het geen lang traject is.</small></label>
+          <label class="optie"><input type="radio" name="b07" value="Laat het ons tekenen" data-cta="Laat het ons tekenen"><b>Laat het ons tekenen</b><small>Legt de nadruk op wat CB doet.</small></label>
+          <label class="optie"><input type="radio" name="b07" value="Vraag een case op maat aan" data-cta="Vraag een case op maat aan"><b>Vraag een case op maat aan</b><small>Dicht bij nu, iets concreter.</small></label>
+          <label class="optie"><input type="radio" name="b07" value="Leg je vraag voor" data-cta="Leg je vraag voor"><b>Leg je vraag voor</b><small>Het laagdrempeligst.</small></label>
+          <label class="optie"><input type="radio" name="b07" value="Houden: Case aanvragen" data-cta="Case aanvragen"><b>Houden</b><small>&ldquo;Case aanvragen&rdquo; blijft.</small></label>
+        </fieldset>
+        <fieldset data-vraag="Menu-item">
+          <span class="lab">En het menu-item bovenin?</span>
+          <label class="optie"><input type="radio" name="b07m" value="Menu houdt 'Case aanvragen'"><b>Menu houdt &ldquo;Case aanvragen&rdquo;</b><small>Kort in de balk, de knop mag uitgebreider.</small></label>
+          <label class="optie"><input type="radio" name="b07m" value="Menu krijgt dezelfde tekst als de knop" data-zelfde="1"><b>Zelfde tekst als de knop</b></label>
+        </fieldset>
+        <textarea data-noot placeholder="Opmerking (optioneel)"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 08 · budgetveld ───────────────────────────────────── -->
+  <section class="besluit" data-besluit="08">
+    <div class="bkop"><span class="nr">08</span><h2>Het budgetveld in het offerteformulier</h2><span class="soort">snel</span></div>
+    <p class="notitie">Uit de meeting: <b>budget uit het offerteformulier halen.</b> Het stond erin omdat Joran zonder bedrag een case kan tekenen die drie keer te duur is. Zonder veld kan hij dat in zijn antwoord vragen.</p>
+    <div class="bgrid">
+      <div class="vb">
+        <span class="lab">Voorbeeld &middot; case aanvragen</span>
+        <div class="p-veld weg"><label>Wat mag hij ongeveer kosten? &mdash; optioneel, maar het scheelt een ronde</label><div class="inv">Bijvoorbeeld: rond de &euro; 400 per stuk, of &euro; 5.000 voor de hele serie</div></div>
+      </div>
+      <div class="kies">
+        <fieldset data-vraag="Budgetveld">
+          <label class="optie"><input type="radio" name="b08" value="Weghalen"><b>Weghalen</b><small>Zoals besproken.</small></label>
+          <label class="optie"><input type="radio" name="b08" value="Laten staan, optioneel"><b>Laten staan</b><small>Optioneel, zoals nu.</small></label>
+        </fieldset>
+        <textarea data-noot placeholder="Opmerking (optioneel)"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 09 · voorbeelden op de offertepagina ──────────────── -->
+  <section class="besluit" data-besluit="09">
+    <div class="bkop"><span class="nr">09</span><h2>&ldquo;Dit bouwden we eerder&rdquo; op de offertepagina</h2><span class="soort">ontwerp &middot; input van cb</span></div>
+    <p class="notitie">Uit de meeting: <b>op de offertepagina laten zien welke cases we kunnen maken, en de prijs.</b></p>
+    <p class="voorstel">Drie of vier echte cases met maat, wat erin zit, prijs en foto. Namen, maten en prijzen hieronder zijn verzonnen.</p>
+    <div class="bgrid">
+      <div class="vb">
+        <span class="lab">Voorbeeld</span>
+        <div class="p-cases">
+          <div class="p-case"><img src="assets/foto-audio-visueel.jpg" alt=""><div><h5>Rack voor een Midas M32</h5><p>820 &times; 610 &times; 420 mm &middot; 4 wielen</p><b>&euro; 412</b></div></div>
+          <div class="p-case"><img src="assets/foto-product-drone.jpg" alt=""><div><h5>Koffer voor een inspectiedrone</h5><p>640 &times; 480 &times; 260 mm &middot; plukschuim</p><b>&euro; 239</b></div></div>
+          <div class="p-case"><img src="assets/foto-flightcase-beurs.jpg" alt=""><div><h5>Standkist voor een beurs</h5><p>1.200 &times; 600 &times; 600 mm &middot; 2 vakken</p><b>&euro; 529</b></div></div>
+        </div>
+      </div>
+      <div class="kies">
+        <fieldset data-vraag="Voorbeelden">
+          <label class="optie"><input type="radio" name="b09" value="Ja, CB levert 3–4 echte cases met foto, maten en prijs"><b>Ja<span class="aanb">// aanbevolen</span></b><small>CB levert drie of vier echte cases met foto, maten en prijs.</small></label>
+          <label class="optie"><input type="radio" name="b09" value="Nee"><b>Nee</b></label>
+        </fieldset>
+        <textarea data-noot placeholder="Opmerking (optioneel) — bijvoorbeeld welke cases"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 10 · zoeksuggesties op /case-voor ─────────────────── -->
+  <section class="besluit" data-besluit="10">
+    <div class="bkop"><span class="nr">10</span><h2>Waar het zoekveld op /case-voor naartoe leidt</h2><span class="soort">ontwerp</span></div>
+    <p class="notitie">Uit de meeting: <b>de zoekbalk op case-voor kan naar de shop, maar ook naar een branche- of SEO-pagina gaan.</b></p>
+    <p class="voorstel">De suggesties per soort gegroepeerd. De uitweg onderaan blijft.</p>
+    <div class="bgrid">
+      <div class="vb">
+        <span class="lab">Voorbeeld &middot; je typt &ldquo;gitaar&rdquo;</span>
+        <div class="p-zoek">
+          <div class="in">gitaar<span>&middot; wat ga je vervoeren?</span></div>
+          <div class="groep">Producten</div>
+          <div class="r">Gibson Les Paul Standard<small>&euro; 189</small></div>
+          <div class="r">Fender Stratocaster<small>&euro; 179</small></div>
+          <div class="groep">Categorie&euml;n</div>
+          <div class="r">Elektrische gitaren<small>26 cases</small></div>
+          <div class="groep">Branches en gidsen</div>
+          <div class="r">Audio-visueel en podium<small>branche</small></div>
+          <div class="r">Welke case voor een gitaar op tour?<small>gids</small></div>
+          <div class="r uit">Alle gitaarcases bekijken &rarr;</div>
+        </div>
+      </div>
+      <div class="kies">
+        <fieldset data-vraag="Gegroepeerde suggesties">
+          <label class="optie"><input type="radio" name="b10" value="Ja, gegroepeerd: producten, categorieën, branches en gidsen"><b>Ja, gegroepeerd<span class="aanb">// aanbevolen</span></b><small>Producten &middot; categorie&euml;n &middot; branches en gidsen.</small></label>
+          <label class="optie"><input type="radio" name="b10" value="Alleen producten en categorieën"><b>Alleen producten en categorie&euml;n</b><small>Geen branche- of SEO-pagina&rsquo;s in de suggesties.</small></label>
+        </fieldset>
+        <textarea data-noot placeholder="Opmerking (optioneel)"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 11 · zoekbalk bovenin ─────────────────────────────── -->
+  <section class="besluit" data-besluit="11">
+    <div class="bkop"><span class="nr">11</span><h2>De zoekbalk bovenin: ook de categorie klikbaar</h2><span class="soort">ontwerp</span></div>
+    <p class="notitie">Uit de meeting: <b>zoekbalk ook productdetail en subcategorie, maar ook de categorie zoals backline klikbaar maken.</b></p>
+    <p class="voorstel">Drie niveaus in &eacute;&eacute;n lijst, elk met een eigen bestemming. Op case-voor-v3 werkt dat al voor categorie&euml;n.</p>
+    <div class="bgrid">
+      <div class="vb">
+        <span class="lab">Voorbeeld &middot; je typt &ldquo;backline&rdquo; in de zoekbalk bovenin</span>
+        <div class="p-zoek">
+          <div class="in">backline<span>&middot; zoek op case, onderdeel of artikelnummer</span></div>
+          <div class="groep">Categorie</div>
+          <div class="r klik">Backline &amp; muziek<small>118 cases</small></div>
+          <div class="groep">Subcategorie</div>
+          <div class="r klik">Elektrische gitaren<small>26 cases</small></div>
+          <div class="r klik">Versterkers en cabinets<small>19 cases</small></div>
+          <div class="groep">Product</div>
+          <div class="r klik">Gibson Les Paul Standard<small>&euro; 189</small></div>
+        </div>
+      </div>
+      <div class="kies">
+        <fieldset data-vraag="Drie niveaus in de zoekbalk">
+          <label class="optie"><input type="radio" name="b11" value="Ja, categorie, subcategorie en product klikbaar"><b>Ja<span class="aanb">// aanbevolen</span></b><small>Categorie, subcategorie en product, elk klikbaar.</small></label>
+          <label class="optie"><input type="radio" name="b11" value="Nee"><b>Nee</b></label>
+        </fieldset>
+        <textarea data-noot placeholder="Opmerking (optioneel)"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 12 · /flightcases met vijf modellen ───────────────── -->
+  <section class="besluit" data-besluit="12">
+    <div class="bkop"><span class="nr">12</span><h2>/flightcases: de vijf modellen tegelijk</h2><span class="soort">ontwerp &middot; renders van cb</span></div>
+    <p class="notitie">Uit de meeting: <b>render van &eacute;&eacute;n model; de vijf modellen tegelijk zichtbaar, draaiend; klikken vergroot de case.</b></p>
+    <p class="voorstel">Vijf kleine modellen naast elkaar; klikken maakt er de grote van, met maten en &ldquo;Configureer dit model&rdquo;. Nu met foto&rsquo;s of de draaiende kist, later echte renders als de configurator ze kan maken. Klik in het voorbeeld.</p>
+    <div class="bgrid">
+      <div class="vb">
+        <span class="lab">Voorbeeld &middot; klik op een model</span>
+        <div class="p-groot"><img data-p="groot-img" src="assets/flightcase-koffer.jpg" alt=""><div><h4 data-p="groot-naam">Koffer</h4><p data-p="groot-tekst">Draagbare transportkoffer &middot; vanaf &euro; 149</p><span class="go">Configureer dit model &rarr;</span></div></div>
+        <div class="p-vijf" data-vijf>
+          <button type="button" aria-pressed="true" data-img="assets/flightcase-koffer.jpg" data-naam="Koffer" data-tekst="Draagbare transportkoffer · vanaf € 149"><img src="assets/flightcase-koffer.jpg" alt=""><span>Koffer</span></button>
+          <button type="button" aria-pressed="false" data-img="assets/flightcase-hoedcase.jpg" data-naam="Hoedcase" data-tekst="Case met afneembaar deksel · vanaf € 169"><img src="assets/flightcase-hoedcase.jpg" alt=""><span>Hoedcase</span></button>
+          <button type="button" aria-pressed="false" data-img="assets/flightcase-trunccase.jpg" data-naam="Trunccase" data-tekst="Universele kist met bovendeksel · vanaf € 199"><img src="assets/flightcase-trunccase.jpg" alt=""><span>Trunccase</span></button>
+          <button type="button" aria-pressed="false" data-img="assets/flightcase-rackcase-enkel-deksel.jpg" data-naam="Rackcase enkel" data-tekst="19 inch, afneembaar voordeksel · vanaf € 189"><img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt=""><span>Rack enkel</span></button>
+          <button type="button" aria-pressed="false" data-img="assets/flightcase-rackcase-dubbel-deksel.jpg" data-naam="Rackcase dubbel" data-tekst="19 inch, voor- én achterdeksel · vanaf € 229"><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt=""><span>Rack dubbel</span></button>
+        </div>
+      </div>
+      <div class="kies">
+        <fieldset data-vraag="Vijf modellen">
+          <label class="optie"><input type="radio" name="b12" value="Ja, nu met de draaiende kist, later echte renders"><b>Ja, met de draaiende kist<span class="aanb">// aanbevolen</span></b><small>Die staat al op /flightcases; renders vervangen hem later.</small></label>
+          <label class="optie"><input type="radio" name="b12" value="Ja, met foto's"><b>Ja, met foto&rsquo;s</b><small>Zoals in het voorbeeld.</small></label>
+          <label class="optie"><input type="radio" name="b12" value="Nee, één groot model zoals nu"><b>Nee, zoals nu</b><small>E&eacute;n groot model met een wissel.</small></label>
+        </fieldset>
+        <textarea data-noot placeholder="Opmerking (optioneel)"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 13 en 14 · het Flightcases-megamenu ───────────────── -->
+  <section class="besluit" data-besluit="13–14">
+    <div class="bkop"><span class="nr">13 &middot; 14</span><h2>Het Flightcases-megamenu, met beeld</h2><span class="soort">ontwerp</span></div>
+    <p class="notitie">Uit de meeting: <b>megamenu Flightcases: wat moet daar in? En kan er een render van een case in?</b></p>
+    <p class="voorstel">De modellen worden de hoofdkolom, elk met een klein beeld. De toepassingen blijven als tekstkolom, rechts zelf configureren. Het beeld is een vaste afbeelding, geen draaiende kist: een menu moet meteen openen.</p>
+    <div class="bgrid">
+      <div class="vb">
+        <span class="lab">Voorbeeld</span>
+        <div class="p-mm">
+          <div><h6>// WAAR GEBRUIK JE HEM VOOR</h6><ul><li>AV &amp; licht</li><li>Backline &amp; muziek</li><li>Broadcast &amp; camera</li><li>Medisch &amp; lab</li><li>Industrie &amp; meettechniek</li><li>Evenement &amp; beursbouw</li></ul></div>
+          <div><h6>// MODELLEN</h6>
+            <div class="mod">
+              <a><img src="assets/flightcase-koffer.jpg" alt=""><span>Koffer</span></a>
+              <a><img src="assets/flightcase-hoedcase.jpg" alt=""><span>Hoedcase</span></a>
+              <a><img src="assets/flightcase-trunccase.jpg" alt=""><span>Trunccase</span></a>
+              <a><img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt=""><span>Rack enkel</span></a>
+              <a><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt=""><span>Rack dubbel</span></a>
+            </div>
+          </div>
+          <div class="vlak"><b>Zelf configureren</b><p>Jouw maten invullen en de prijs zien terwijl je typt.</p></div>
+        </div>
+      </div>
+      <div class="kies">
+        <fieldset data-vraag="Megamenu Flightcases">
+          <label class="optie"><input type="radio" name="b13" value="Modellen met beeld als hoofdkolom, toepassingen als tekst"><b>Modellen met beeld<span class="aanb">// aanbevolen</span></b><small>Zoals in het voorbeeld.</small></label>
+          <label class="optie"><input type="radio" name="b13" value="Zoals nu, alles tekst"><b>Zoals nu</b><small>Toepassingen en modellen als tekst.</small></label>
+          <label class="optie"><input type="radio" name="b13" value="Anders, zie opmerking"><b>Anders</b></label>
+        </fieldset>
+        <fieldset data-vraag="Beeld in het menu">
+          <span class="lab">Welk beeld?</span>
+          <label class="optie"><input type="radio" name="b14" value="Renders uit de configurator, als CB die kan maken"><b>Renders uit de configurator</b><small>Als CB ze kan exporteren.</small></label>
+          <label class="optie"><input type="radio" name="b14" value="De modelfoto's"><b>De modelfoto&rsquo;s</b><small>Die er nu zijn, na de fotoshoot vervangen.</small></label>
+        </fieldset>
+        <textarea data-noot placeholder="Opmerking (optioneel)"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 15 · hulp vanuit de configurator ──────────────────── -->
+  <section class="besluit" data-besluit="15">
+    <div class="bkop"><span class="nr">15</span><h2>Hulp en offerte vanuit de configurator</h2><span class="soort">ontwerp &middot; vraag aan cb</span></div>
+    <p class="notitie">Uit de meeting: <b>in de editor wil ik &ldquo;case-hulp&rdquo; kunnen zeggen en dan een offerte-element zien met de case-ID erin, waar de gebruiker iets aan toevoegt.</b> L1 kan dat niet, L2 en L3 wel.</p>
+    <p class="voorstel">Een knop &ldquo;Hulp nodig bij deze case?&rdquo; in de voet van de configurator. Die opent een vak met de case-ID en een samenvatting al ingevuld, een tekstveld en een upload. Het gaat als aanvraag naar een casebouwer. Bij L1 een link naar case aanvragen met het product erin. Klik in het voorbeeld.</p>
+    <div class="bgrid">
+      <div class="vb">
+        <span class="lab">Voorbeeld &middot; de voet van de configurator (L2)</span>
+        <div class="p-cfg">
+          <div class="kop">Configurator &middot; beperkte stand</div>
+          <div class="voet"><div class="p-prijs">&euro; 197,20</div><button type="button" class="btn btn-out btn-sm" data-hulpknop aria-expanded="false">Hulp nodig bij deze case?</button><span class="btn btn-dark btn-sm">In winkelwagen &rarr;</span></div>
+          <div class="p-hulp" data-hulp hidden>
+            <span class="lab">// Vraag een casebouwer</span>
+            <div class="id">Case 7K2M-4813 &middot; hoedcase 1.060 &times; 410 &times; 150 mm &middot; ronde hoeken &middot; vlindersluiting</div>
+            <div class="vak">Bijvoorbeeld: help, ik wil een zijvak rechts</div>
+            <div class="up">+ Schets, foto of datasheet toevoegen</div>
+            <span class="btn btn-dark btn-sm" style="align-self:flex-start">Stuur naar een casebouwer &rarr;</span>
+          </div>
+        </div>
+      </div>
+      <div class="kies">
+        <fieldset data-vraag="Case-hulp">
+          <label class="optie"><input type="radio" name="b15" value="Ja, uitwerken in editor v2"><b>Ja, uitwerken in editor v2<span class="aanb">// aanbevolen</span></b><small>Plus de vraag aan CB of de configurator de case-ID kan doorgeven.</small></label>
+          <label class="optie"><input type="radio" name="b15" value="Nee"><b>Nee</b></label>
+        </fieldset>
+        <textarea data-noot placeholder="Opmerking (optioneel) — bijvoorbeeld wie de hulpvraag beantwoordt"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 17 · één case in twee maten ───────────────────────── -->
+  <section class="besluit" data-besluit="17">
+    <div class="bkop"><span class="nr">17</span><h2>E&eacute;n case in twee maten</h2><span class="soort">ontwerp &middot; parameters van cb</span></div>
+    <p class="notitie">Uit de meeting: <b>80&times;80&times;80 en 100&times;60&times;60 allebei op het productoverzicht, twee aparte productpagina&rsquo;s. Op de productpagina kun je de maat nog veranderen als het L2 is, bij L1 niet. CB levert per categorie of het L1, L2 of L3 is.</b></p>
+    <p class="voorstel">Elke maat is een eigen product in Medusa, met een eigen pagina. Op de productpagina staan de andere maten als knoppen. Is de categorie L2, dan staan daaronder ook de maatvelden: de configurator in beperkte stand, met een prijs die meeloopt.</p>
+    <div class="bgrid">
+      <div class="vb">
+        <span class="lab">Voorbeeld &middot; het overzicht en de productpagina</span>
+        <div class="p-pdp">
+          <div class="p-pk"><img src="assets/flightcase-trunccase.jpg" alt=""><div><h5>Trunccase 80&times;80&times;80</h5><b>&euro; 289</b></div></div>
+          <div class="p-pk"><img src="assets/flightcase-trunccase.jpg" alt=""><div><h5>Trunccase 100&times;60&times;60</h5><b>&euro; 305</b></div></div>
+          <div class="p-detail">
+            <h5>Trunccase 80 &times; 80 &times; 80 cm</h5>
+            <div class="p-maatchips"><span class="lab">Ook in</span><span class="aan">80&times;80&times;80</span><span>100&times;60&times;60</span></div>
+            <div class="p-l2"><span class="lab">Alleen bij een L2-categorie &middot; eigen maat</span><div class="rij"><span>800</span><span>800</span><span>800</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="kies">
+        <fieldset data-vraag="Maten">
+          <label class="optie"><input type="radio" name="b17" value="Zo: aparte pagina's, maatknoppen, bij L2 maatvelden"><b>Zo<span class="aanb">// aanbevolen</span></b><small>Aparte pagina&rsquo;s, maatknoppen, en bij L2 maatvelden op de productpagina.</small></label>
+          <label class="optie"><input type="radio" name="b17" value="Alleen aparte pagina's en maatknoppen, geen maatvelden"><b>Zonder maatvelden</b><small>Een andere maat gaat via &ldquo;Andere maat nodig?&rdquo; naar de configurator.</small></label>
+          <label class="optie"><input type="radio" name="b17" value="Anders, zie opmerking"><b>Anders</b></label>
+        </fieldset>
+        <textarea data-noot placeholder="Opmerking (optioneel)"></textarea>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="balk">
+  <div class="uitvoer" data-uitvoer hidden>
+    <div class="rij" style="padding-top:14px"><span>Kopieer deze tekst en plak hem in de chat.</span><button type="button" class="btn btn-licht btn-sm" data-kopieer>Kopieer</button><span data-gekopieerd></span></div>
+    <textarea data-uit readonly aria-label="Je keuzes als tekst"></textarea>
+  </div>
+  <div class="in">
+    <span class="tel" data-tel></span>
+    <div class="knop">
+      <button type="button" class="btn btn-licht btn-sm" data-wis>Alles wissen</button>
+      <button type="button" class="btn btn-pri btn-sm" data-toon aria-expanded="false">Toon mijn keuzes</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/draaikist.js"></script>
+<script>
+/* ══════════════════════════════════════════════════════════════
+   Het werkblad. Onthoudt de keuzes in localStorage, werkt de
+   voorbeelden bij en maakt er onderaan een tekst van. Alles via
+   textContent en value: opmerkingen komen nooit als opmaak binnen.
+   ══════════════════════════════════════════════════════════════ */
+(function () {
+  function q(s, r) { return (r || document).querySelector(s); }
+  function qa(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  var SLEUTEL = 'cb-besluiten-11sep';
+  var secties = qa('[data-besluit]');
+
+  function lees() { try { return JSON.parse(localStorage.getItem(SLEUTEL)) || {}; } catch (e) { return {}; } }
+  function bewaar(d) { try { localStorage.setItem(SLEUTEL, JSON.stringify(d)); } catch (e) {} }
+
+  /* Herstellen wat er al gekozen was. */
+  var oud = lees();
+  qa('.kies input').forEach(function (i) {
+    var v = oud[i.name];
+    if (v == null) return;
+    i.checked = Array.isArray(v) ? v.indexOf(i.value) > -1 : v === i.value;
+  });
+  secties.forEach(function (s) {
+    var t = q('textarea[data-noot]', s);
+    if (t && oud['noot ' + s.dataset.besluit]) t.value = oud['noot ' + s.dataset.besluit];
+  });
+
+  function verzamel() {
+    var d = {};
+    qa('.kies input:checked').forEach(function (i) {
+      if (i.type === 'radio') d[i.name] = i.value;
+      else (d[i.name] = d[i.name] || []).push(i.value);
+    });
+    secties.forEach(function (s) {
+      var t = q('textarea[data-noot]', s);
+      if (t && t.value.trim()) d['noot ' + s.dataset.besluit] = t.value;
+    });
+    return d;
+  }
+
+  function alsTekst() {
+    var r = ['Besluiten na 11 september', ''];
+    secties.forEach(function (s) {
+      qa('fieldset', s).forEach(function (f) {
+        var gekozen = qa('input:checked', f).map(function (i) { return i.value; });
+        r.push(s.dataset.besluit + ' · ' + f.dataset.vraag + ': ' + (gekozen.length ? gekozen.join(' + ') : '— nog niet gekozen'));
+      });
+      var t = q('textarea[data-noot]', s);
+      if (t && t.value.trim()) r.push('   opmerking: ' + t.value.trim().replace(/\s+/g, ' '));
+    });
+    return r.join('\n');
+  }
+
+  function zet(sel, tekst) { var el = q(sel); if (el) el.textContent = tekst; }
+
+  /* De voorbeelden die met een keuze meebewegen. */
+  function voorbeelden() {
+    var c = q('input[name="b01"]:checked');
+    var k = q('input[name="b02"]:checked');
+    var kort = !!(k && k.dataset.tekst === 'kort');
+    zet('[data-p="kop"]', k ? k.dataset.kop : 'Drie manieren om bij de juiste case te komen');
+    qa('[data-p-tekst]').forEach(function (p) { p.textContent = kort ? p.dataset.kort : p.dataset.lang; });
+    if (c) {
+      zet('[data-p="c-h3"]', c.dataset.h3);
+      zet('[data-p="c-p"]', kort ? c.dataset.kort : c.dataset.lang);
+      zet('[data-p="c-go"]', c.dataset.go);
+    }
+    var cta = q('input[name="b07"]:checked');
+    var menu = q('input[name="b07m"]:checked');
+    var tekst = cta ? cta.dataset.cta : 'Case aanvragen';
+    zet('[data-p="cta"]', tekst + ' →');
+    zet('[data-p="menu"]', menu && menu.dataset.zelfde ? tekst : 'Case aanvragen');
+  }
+
+  var tel = q('[data-tel]');
+  var uit = q('[data-uit]');
+  function werkBij() {
+    bewaar(verzamel());
+    var klaar = 0;
+    secties.forEach(function (s) {
+      var af = qa('fieldset', s).every(function (f) { return !!q('input:checked', f); });
+      s.classList.toggle('gekozen', af);
+      if (af) klaar++;
+    });
+    tel.textContent = klaar + ' van ' + secties.length + ' besluiten gekozen';
+    uit.value = alsTekst();
+    voorbeelden();
+  }
+  document.addEventListener('change', function (e) { if (e.target.closest('.kies')) werkBij(); });
+  document.addEventListener('input', function (e) { if (e.target.matches('textarea[data-noot]')) werkBij(); });
+
+  /* De balk onderaan. */
+  var paneel = q('[data-uitvoer]');
+  var toon = q('[data-toon]');
+  toon.addEventListener('click', function () {
+    paneel.hidden = !paneel.hidden;
+    toon.setAttribute('aria-expanded', String(!paneel.hidden));
+    toon.textContent = paneel.hidden ? 'Toon mijn keuzes' : 'Verberg';
+  });
+  q('[data-kopieer]').addEventListener('click', function () {
+    var melding = q('[data-gekopieerd]');
+    function gelukt() { melding.textContent = 'Gekopieerd.'; }
+    function handmatig() { uit.focus(); uit.select(); melding.textContent = 'Geselecteerd — kopieer met Cmd+C.'; }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(uit.value).then(gelukt, handmatig);
+    else handmatig();
+  });
+  q('[data-wis]').addEventListener('click', function () {
+    if (!confirm('Alle keuzes en opmerkingen wissen?')) return;
+    qa('.kies input').forEach(function (i) { i.checked = false; });
+    qa('textarea[data-noot]').forEach(function (t) { t.value = ''; });
+    try { localStorage.removeItem(SLEUTEL); } catch (e) {}
+    werkBij();
+  });
+
+  /* 05 · de probeerstrook: dezelfde kist en prijsregel als editor v2. */
+  var kist = q('[data-draaikist]');
+  var maat = { b: 700, d: 450, h: 300 };
+  function probeer() {
+    qa('[data-schuif]').forEach(function (s) { maat[s.dataset.schuif] = +s.value; zet('[data-uit="' + s.dataset.schuif + '"]', s.value); });
+    kist.dispatchEvent(new CustomEvent('kist:maat', { detail: { naam: '', b: maat.b, h: maat.h, d: maat.d } }));
+    var opp = 2 * (maat.b * maat.h + maat.b * maat.d + maat.h * maat.d) / 1e6;
+    var p = Math.round((95 + opp * 78) * 20) / 20;
+    var el = q('[data-probeerprijs]');
+    el.firstChild.textContent = '€ ' + p.toFixed(2).replace('.', ',');
+  }
+  qa('[data-schuif]').forEach(function (s) { s.addEventListener('input', probeer); });
+
+  /* 12 · klik op een model maakt het groot. */
+  qa('[data-vijf] button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      qa('[data-vijf] button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      q('[data-p="groot-img"]').src = b.dataset.img;
+      zet('[data-p="groot-naam"]', b.dataset.naam);
+      zet('[data-p="groot-tekst"]', b.dataset.tekst);
+    });
+  });
+
+  /* 15 · het hulpvak. */
+  var hulpknop = q('[data-hulpknop]');
+  hulpknop.addEventListener('click', function () {
+    var vak = q('[data-hulp]');
+    vak.hidden = !vak.hidden;
+    hulpknop.setAttribute('aria-expanded', String(!vak.hidden));
+  });
+
+  probeer();
+  werkBij();
+})();
+</script>
+</body>
+</html>
