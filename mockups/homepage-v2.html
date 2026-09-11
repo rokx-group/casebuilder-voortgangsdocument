@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/brand.css">
 <link rel="stylesheet" href="assets/vervoeren.css">
+<link rel="stylesheet" href="assets/draaikist.css">
 <link rel="stylesheet" href="assets/homepage-onder.css">
 <style>
 /* ── homepage — paginaspecifiek, bovenop brand.css ── */
@@ -495,6 +496,30 @@
         </div>
       </div>
     </div>
+
+    <!-- Probeer het (besloten 11 september, punten 04 en 05): de kist met
+         drie schuiven en een prijs die meeloopt. Het bewijs dat de
+         configurator rekent, en meteen de prijstransparantie. De
+         prijsopbouw hierboven blijft staan waar hij staat. Gedrag:
+         assets/probeer.js; opmaak: assets/homepage-onder.css. -->
+    <div class="probeer" data-probeer data-vanaf="149">
+      <div class="kistvak">
+        <div class="kist3d" data-draaikist data-vrij="1200" data-grootte="230" title="Sleep om te draaien">
+          <div class="kubus"><div class="zij achter"></div><div class="zij links"></div><div class="zij rechts"></div><div class="zij boven"></div><div class="zij onder"></div><div class="zij voor"></div></div>
+          <div class="grond"></div>
+          <span class="kmaat"></span>
+        </div>
+      </div>
+      <div class="schuiven">
+        <div class="ey ey-dark">// PROBEER HET &middot; JOUW MATEN</div>
+        <h3>Schuif, en de prijs loopt mee</h3>
+        <label>Breedte<input type="range" min="300" max="1200" step="10" value="700" data-schuif="b"><output data-uit="b">700</output></label>
+        <label>Diepte<input type="range" min="200" max="800" step="10" value="450" data-schuif="d"><output data-uit="d">450</output></label>
+        <label>Hoogte<input type="range" min="150" max="800" step="10" value="300" data-schuif="h"><output data-uit="h">300</output></label>
+        <div class="pr"><span data-probeerprijs>&euro; 149,00</span><small>voorbeeldprijs &middot; excl. btw</small></div>
+        <a class="btn btn-dark" data-probeerlink data-basis="configurator-v1.html?start=1" href="configurator-v1.html?start=1">Verder in de configurator &rarr;</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -661,5 +686,7 @@
 <script src="assets/hero-keuze.js"></script>
 <script src="assets/toepassingen.js"></script>
 <script src="assets/vervoeren.js"></script>
+<script src="assets/draaikist.js"></script>
+<script src="assets/probeer.js"></script>
 </body>
 </html>
