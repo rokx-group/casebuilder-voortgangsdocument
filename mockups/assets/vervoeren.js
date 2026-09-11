@@ -41,13 +41,18 @@
     var veld  = root.querySelector('.vervoer-veld');
     var input = root.querySelector('input');
     var lijst = root.querySelector('.vervoer-lijst');
-    if (!knop || !veld || !input || !lijst) return;
+    if (!input || !lijst) return;
+    /* Zonder knop staat het veld altijd open — zo zit hij op /case-voor,
+       waar zoeken de hoofdzaak is en niet de tweede knop. Dan gaat alleen
+       de lijst open en dicht, niet het veld zelf. */
+    var vast = !knop;
 
     var open = false;
     var actief = -1;      // welke suggestie met de pijltjes is aangewezen
     var treffers = [];
 
     function zetOpen(nieuw) {
+      if (vast) { if (!nieuw) sluitLijst(); return; }
       if (open === nieuw) return;
       open = nieuw;
       root.classList.toggle('is-open', open);
@@ -70,6 +75,18 @@
       treffers = [];
     }
 
+    /* De uitweg onderaan. Hangt het beste antwoord onder een categorie —
+       een Gibson Les Paul valt onder gitaren — dan is dat "alle
+       gitaarcases": je blijft in de buurt van wat je zocht. Anders het
+       overzicht van alle categorieën. Wat erboven hangt staat in de lijst
+       zelf (toepassingen.js, veld ouder), niet hier. */
+    function uitweg(beste) {
+      if (beste && beste.ouder) {
+        return { naam: beste.ouder.naam, groep: beste.groep, pagina: beste.ouder.pagina, alles: true };
+      }
+      return { naam: 'Alle categorieën bekijken', groep: '38 categorieën', pagina: ALLE, alles: true };
+    }
+
     function toonLijst() {
       var gevonden = window.TOEPASSINGEN_ZOEK(input.value, MAX);
       actief = -1;
@@ -82,9 +99,7 @@
       /* De uitweg hangt onderaan als gewone optie in dezelfde reeks. Zo
          loopt de pijltjesnavigatie er vanzelf overheen en werkt Enter erop
          zonder aparte afhandeling — verstuur() kijkt alleen naar .pagina. */
-      treffers = gevonden.concat([{ naam: 'Alle categorieën bekijken',
-                                    groep: '38 categorieën',
-                                    pagina: ALLE, alles: true }]);
+      treffers = gevonden.concat([uitweg(gevonden[0])]);
 
       lijst.innerHTML = '';
       treffers.forEach(function (t, i) {
@@ -137,13 +152,14 @@
       ga(AANVRAAG + '?vervoeren=' + encodeURIComponent(tekst));
     }
 
-    knop.addEventListener('click', function () {
-      zetOpen(true);
-      input.focus();
-    });
-
-    root.addEventListener('mouseenter', function () { zetOpen(true); });
-    root.addEventListener('mouseleave', function () { if (magDicht()) zetOpen(false); });
+    if (!vast) {
+      knop.addEventListener('click', function () {
+        zetOpen(true);
+        input.focus();
+      });
+      root.addEventListener('mouseenter', function () { zetOpen(true); });
+      root.addEventListener('mouseleave', function () { if (magDicht()) zetOpen(false); });
+    }
 
     input.addEventListener('focus', function () { zetOpen(true); });
     input.addEventListener('blur', function () {
@@ -177,7 +193,8 @@
       }
     });
 
-    root.querySelector('.vervoer-ga').addEventListener('click', verstuur);
+    var gaKnop = root.querySelector('.vervoer-ga');
+    if (gaKnop) gaKnop.addEventListener('click', verstuur);
   }
 
   /* ── 2 · de prefill op de aanvraagpagina ────────────────────── */

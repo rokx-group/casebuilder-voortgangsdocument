@@ -20,6 +20,10 @@
  * tot ze eigen inhoud hebben. Zodra een categorie een eigen pagina krijgt,
  * verandert hier één regel.
  *
+ * `ouder` zet een apparaat onder zijn categorie: wie "gibson" typt krijgt
+ * het apparaat zelf, en onderaan de lijst "alle gitaarcases" in plaats van
+ * het algemene overzicht. Alleen voor apparaten met een eigen pagina.
+ *
  * `zoek` zijn de woorden die iemand intypt en die niet in de naam staan.
  * Merknamen horen daar thuis: wie "les paul" typt zoekt geen categorie maar
  * zijn eigen gitaar, en moet toch ergens landen.
@@ -41,7 +45,8 @@
     { naam: 'Mengtafels',                groep: 'Audio',      pagina: SJABLOON, zoek: ['mengtafel', 'mixer', 'midas', 'm32', 'x32', 'console', 'foh'] },
     { naam: 'Kabelhaspels en multicore', groep: 'Audio',      pagina: SJABLOON, zoek: ['kabel', 'haspel', 'multicore', 'stagebox'] },
     { naam: 'Elektrische gitaren',       groep: 'Backline',   pagina: 'case-voor-gitaar-v1.html', zoek: ['gitaar', 'guitar', 'stratocaster', 'telecaster'] },
-    { naam: 'Gibson Les Paul',           groep: 'Backline',   pagina: 'case-voor-gibson-les-paul-v1.html', zoek: ['les paul', 'lespaul', 'gibson'] },
+    { naam: 'Gibson Les Paul',           groep: 'Backline',   pagina: 'case-voor-gibson-les-paul-v2.html', zoek: ['les paul', 'lespaul', 'gibson'],
+      ouder: { naam: 'Alle gitaarcases bekijken', pagina: 'case-voor-gitaar-v2.html' } },
     { naam: 'Basgitaren',                groep: 'Backline',   pagina: SJABLOON, zoek: ['bas', 'basgitaar', 'precision', 'jazz bass'] },
     { naam: 'Akoestische gitaren',       groep: 'Backline',   pagina: SJABLOON, zoek: ['akoestisch', 'western', 'klassieke gitaar'] },
     { naam: 'Versterkers en cabinets',   groep: 'Backline',   pagina: SJABLOON, zoek: ['versterker', 'amp', 'cabinet', 'combo', 'head'] },
