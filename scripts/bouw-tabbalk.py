@@ -54,16 +54,42 @@ STIJL = """
 .subtabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
 </style>"""
 
+
+# De balk past niet meer op één regel: veertien tabs zijn breder dan het
+# scherm. Zonder afbreken schuiven de laatste buiten beeld — je ziet dan niet
+# eens dát er meer is. Deze regel staat hier en niet in de pagina's zelf,
+# zodat elke vergelijkpagina dezelfde balk heeft, ook een nieuwe.
+WRAP = """
+/* tabbalk: alle tabs staan op elke pagina, en ze breken af naar een tweede
+   regel als ze niet op één passen. */
+.tabs{flex-wrap:wrap}
+</style>"""
+
+PATROON = re.compile(r'<div class="tabs">.*?</div>(\s*<div class="subtabs">.*?</div>)?', re.S)
+
 if __name__ == '__main__':
     n = 0
+    overgeslagen = []
     for pad in (glob.glob('mockups/*varianten*.html')
                 + ['mockups/hero-voorstellen.html', 'mockups/homepage-samenstellen.html']):
         bestand = os.path.basename(pad)
         s = open(pad, encoding='utf-8').read()
-        m = re.search(r'<div class="tabs">.*?</div>(\s*<div class="subtabs">.*?</div>)?', s, re.S)
-        if not m: continue
+        # Alleen in de body zoeken. Stond de tekst <div class="tabs"> ergens in
+        # een stijlblok of een commentaar, dan pakte het patroon dát voorkomen
+        # en schreef het de balk in de CSS — de pagina was daarna stuk.
+        romp = s.find('<body')
+        m = PATROON.search(s, romp if romp != -1 else 0)
+        # Een pagina zonder <div class="tabs"> kreeg de balk stilzwijgend niet.
+        # Zo stond kop-varianten maanden zonder tabs; niemand zag het. Nu meldt
+        # hij het, zodat je hem een balk geeft of hem bewust uit de reeks laat.
+        if not m:
+            overgeslagen.append(bestand); continue
         s = s[:m.start()] + balk_voor(bestand) + s[m.end():]
         if '.subtabs{' not in s:
             s = s.replace('</style>', STIJL, 1)
+        if '/* tabbalk:' not in s:
+            s = s.replace('</style>', WRAP, 1)
         open(pad, 'w', encoding='utf-8').write(s); n += 1
     print('tabbalk geschreven op', n, 'pagina\'s')
+    if overgeslagen:
+        print('  overgeslagen, geen <div class="tabs">:', ', '.join(overgeslagen))

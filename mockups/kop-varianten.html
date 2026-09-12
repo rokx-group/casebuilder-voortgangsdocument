@@ -57,10 +57,50 @@ body{background:#EDF0F4}
   color:var(--dark);margin:0 0 8px}
 .slot p{font-size:14.5px;color:var(--mute);line-height:1.6;max-width:74ch;margin:0 0 10px}
 .slot p b{color:var(--ink)}
+
+/* Deze pagina stond eerst buiten de reeks en had daardoor geen tabbalk: je
+   kwam hier binnen en kon nergens heen. De opmaak is dezelfde als op de
+   andere vergelijkpagina's; de balk zelf komt uit scripts/bouw-tabbalk.py. */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--rule);margin:0 0 26px}
+.tabs a{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mute);padding:16px 20px 13px;border-bottom:3px solid transparent;margin-bottom:-1px}
+.tabs a:hover{color:var(--dark)}
+.tabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+
+.tabs a.tak{color:var(--dark)}
+.subtabs{display:flex;align-items:baseline;gap:0;margin:-20px 0 26px;flex-wrap:wrap}
+.subtabs .pad{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);padding:9px 14px 9px 2px}
+.subtabs a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);padding:9px 16px;border-bottom:2px solid transparent}
+.subtabs a:hover{color:var(--dark)}
+.subtabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+
+/* tabbalk: alle tabs staan op elke pagina, en ze breken af naar een tweede
+   regel als ze niet op één passen. */
+.tabs{flex-wrap:wrap}
 </style>
 </head><body>
 
 <div class="vgl">
+
+  <div class="tabs">
+    <a href="header-varianten.html">Header</a>
+    <a href="hero-voorstellen.html">Hero</a>
+    <a href="homepage-varianten.html">Homepage</a>
+    <a href="case-aanvragen-varianten.html">Case aanvragen</a>
+    <a href="case-voor-varianten.html">/case-voor</a>
+    <a href="flightcases-varianten.html">/flightcases</a>
+    <a href="editor-varianten.html">Editor</a>
+    <a href="groot-zakelijk-varianten.html">/groot-zakelijk</a>
+    <a href="branches-varianten.html">Kopkeuze</a>
+    <a href="service-varianten.html">/service</a>
+    <a href="shop-varianten.html">/shop</a>
+    <a href="zoeken-varianten.html">/zoeken</a>
+    <a href="faq-varianten.html">FAQ</a>
+    <a href="footer-varianten.html">Footer</a>
+  </div>
+
   <div class="kop" style="margin-top:34px">
     <span class="nr">// KOP EN NAVIGATIE</span>
     <h3>Wat blijft er staan bij het scrollen</h3>
