@@ -301,7 +301,9 @@ section.tight{padding:56px 0}
 
 /* footer */
 footer{background:var(--void);color:rgba(255,255,255,.66);padding:64px 0 30px}
-footer .cols{display:grid;grid-template-columns:1.3fr repeat(4,1fr);gap:36px}
+/* Vijf kolommen sinds de koopkant erbij kwam; de tussenruimte moest
+   mee omlaag, anders wordt "Industrie en machinebouw" drie regels. */
+footer .cols{display:grid;grid-template-columns:1.15fr repeat(5,1fr);gap:26px}
 footer h5{font-size:15px;letter-spacing:.06em;color:#fff;font-weight:700;
   border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:9px;margin-bottom:15px}
 footer a{display:block;padding:5px 0;font-size:14px}
