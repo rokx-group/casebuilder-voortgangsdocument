@@ -1920,10 +1920,10 @@
         <div class="mt af"><div class="mtop"><span class="mn">2a</span><h4>Minimale frontend om een geconfigureerd product te bestellen</h4><p>Gebouwd: productpagina, winkelwagen, afrekenen en de orderpagina staan in de klantrepo (PR #12 en #16). De configurator-embed loopt via <strong>postMessage</strong> &mdash; hij stuurt een configuratie-id, wij halen de prijs server-side op bij de read-API van CaseBuilder. Geen POST-integratie dus.</p></div><span class="tag">afgerond</span></div>
         <div class="mt cb"><div class="mtop"><span class="mn">2b</span><h4>We zien de order terug in het webshopportaal</h4><p>Hangt op het Magento-orderendpoint en de watchdog-koppeling met cb_core_v2 — beide van CaseBuilder.</p></div><span class="tag">wacht op cb</span></div>
         <div class="mt af"><div class="mtop"><span class="mn">3</span><h4>Stresstest — afgerond</h4><p>Medusa blijft binnen alle grenzen; het knelpunt zit in de frontend, die álle producten ophaalt en in het geheugen filtert. De oorzaak is bekend en de drie ingrepen staan vast — dat is <strong>bouwwerk, geen onderzoek meer</strong>.</p></div><span class="tag">afgerond</span></div>
-        <div class="mt af"><div class="mtop"><span class="mn">4</span><h4>Sitemap, wireframes en user flows uitgestippeld</h4><p>Achttien sjablonen, twintig besteltaken en de volledige nieuwe boom liggen er; zeventien sjablonen zijn getekend.</p></div><span class="tag">afgerond</span></div>
+        <div class="mt af"><div class="mtop"><span class="mn">4</span><h4>Sitemap, wireframes en user flows uitgestippeld</h4><p>Negentien sjablonen, twintig besteltaken en de volledige nieuwe boom liggen er; achttien sjablonen zijn getekend.</p></div><span class="tag">afgerond</span></div>
         <div class="mt gepland"><div class="mtop"><span class="mn">4</span><h4>API en endpoint klaar</h4><p>De eigen Casebuilder API-middleware uit opdracht 1595 zit <strong>niet</strong> in de MVP: de site praat rechtstreeks met Medusa, en de prijs van een configuratie halen we server-side op bij de read-API van CaseBuilder. Blijft staan als plan voor later.</p></div><span class="tag">vervalt voor mvp</span></div>
         <div class="mt gepland"><div class="mtop"><span class="mn">4</span><h4>Hoofdtemplates staan in de CMS</h4><p>Sanity-templates en de blokkenbibliotheek — oktober.</p></div><span class="tag">gepland</span></div>
-        <div class="mt loopt"><div class="mtop"><span class="mn">5a</span><h4>Designprototype klaar</h4><p>Dertien van de achttien sjablonen hebben een ontwerp. Nog niet: bevestiging, account, checkout en de foutpagina; de shop heeft er wel een maar nog geen wireframe-koppeling in de ontwerpweergave.</p></div><span class="tag">loopt</span></div>
+        <div class="mt loopt"><div class="mtop"><span class="mn">5a</span><h4>Designprototype klaar</h4><p>Vijftien van de negentien sjablonen hebben een ontwerp. Nog niet: bevestiging, account, checkout en de foutpagina.</p></div><span class="tag">loopt</span></div>
         <div class="mt gepland"><div class="mtop"><span class="mn">5b</span><h4>Website usability-test</h4><p>Nog niet belegd. Vraagt een werkend prototype en deelnemers uit de doelgroep.</p></div><span class="tag">te plannen</span></div>
         <div class="mt gepland"><div class="mtop"><span class="mn">6</span><h4>Eerste contentpagina&#39;s live</h4><p>Vraagt de blokkenbibliotheek én de vertaalbeslissing — beide staan nog open.</p></div><span class="tag">gepland</span></div>
       </div>
@@ -2220,7 +2220,11 @@
             <li>
               <div class="node"><span class="path root">/shop</span><span class="chip chip-new">nieuw</span><span class="note">niveau 1 &middot; vaste cases per toepassing, met filters &middot; de onderdelen horen er ook bij</span></div>
               <ul>
-                <li><div class="node"><span class="path">/{toepassing}</span><span class="note">zes tabbladen &middot; categorie en merk blijven per tabblad bewaard</span></div></li>
+                <li><div class="node"><span class="path">/{toepassing}</span><span class="note">zes tabbladen &middot; categorie en merk blijven per tabblad bewaard</span></div>
+                  <ul>
+                    <li><div class="node"><span class="path">/{product}</span><span class="chip chip-new">nieuw</span><span class="note">de case zelf &middot; kleur en logo, en afhankelijk van het niveau ook maten, hoeken en slot &middot; elke maat die als product bestaat is een eigen pagina</span></div></li>
+                  </ul>
+                </li>
                 <li><div class="node"><span class="path">?zoek=</span><span class="note">zoekwoord uit de site komt mee als chip</span></div></li>
               </ul>
             </li>
@@ -2766,7 +2770,7 @@
     <header class="masthead">
       <span class="eyebrow">CaseBuilder · ontwerpfase</span>
       <h1>Wireframes</h1>
-      <p class="lede">Achttien sjablonen dekken de hele site; zeventien zijn er getekend, de foutpagina (404/410) nog niet. Geen plaatjes maar structuur: wat er op het scherm staat en in welke volgorde. Kies er links één.</p>
+      <p class="lede">Negentien sjablonen dekken de hele site; achttien zijn er getekend, de foutpagina (404/410) nog niet. Geen plaatjes maar structuur: wat er op het scherm staat en in welke volgorde. Kies er links één.</p>
     </header>
 
     <div class="wflayout">
@@ -2774,6 +2778,7 @@
         <span class="wfgroup">Instappen en configureren</span>
         <button class="wfitem" type="button" data-wf="homepage"><span class="u">/</span><span class="m"><span class="t">homepage</span><span class="c">1</span></span></button>
         <button class="wfitem" type="button" data-wf="shop"><span class="u">/shop</span><span class="m"><span class="t">shop</span><span class="c">1</span></span></button>
+        <button class="wfitem kind laatst" type="button" data-wf="product"><span class="u"><span class="pfx">/shop</span>/{toepassing}/{product}</span><span class="m"><span class="t">product</span><span class="c">n</span></span></button>
         <span class="wftak">/case-voor<span class="n">1 pagina &middot; index van 39 categorie&euml;n &middot; ontwerp klaar, wireframe volgt</span></span>
         <button class="wfitem kind" type="button" data-wf="case-voor-categorie"><span class="u"><span class="pfx">/case-voor</span>/{categorie}</span><span class="m"><span class="t">case-voor-categorie</span><span class="c">~10</span></span></button>
         <button class="wfitem kind laatst" type="button" data-wf="case-voor-resultaat"><span class="u"><span class="pfx">/case-voor</span>/{apparaat}</span><span class="m"><span class="t">case-voor-resultaat</span><span class="c">n</span></span></button>
@@ -4115,6 +4120,493 @@
   </div>
 </footer>
 <!-- @einde:ontwerpweergave-html:shop-v1 -->
+  </div>
+</figure>
+<figure class="wf" data-mode="wire" hidden id="wf-product">
+  <figcaption><h3>/shop/{toepassing}/{product}</h3><span class="wfmeta">product &middot; n pagina&#39;s · de case zelf, met de drie niveaus eraan</span><span class="wftoggle"><button type="button" data-mode="wire" data-ver="wireframe" aria-pressed="true">wireframe</button><button type="button" data-mode="design" data-ver="v1" aria-pressed="false">v1</button><a class="wffull" href="mockups/product-v1.html" target="_blank" rel="noopener" data-wire="mockups/product-v1.html" data-design="mockups/product-v1.html">volledig scherm &#8599;</a></span></figcaption>
+  <div class="wfframe"><div class="wfurl">/shop/backline/hoedcase-gibson-les-paul &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
+  <ol class="wflijst">
+    <li><span class="n">01</span><span class="s">Header</span><span class="u">caseBuilder.com · zoek op case, onderdeel of artikelnummer · inloggen &middot; winkelwagen</span></li>
+    <li><span class="n">02</span><span class="s">Nav</span><span class="u">Case aanvragen &middot; Wat ga je vervoeren? &middot; Flightcases &middot; Branches &middot; Service &middot; <i>Shop</i> · zoekveld · direct advies &middot; NL</span></li>
+    <li><span class="n">03</span><span class="s">Kruimelpad</span><span class="u">home &rsaquo; shop &rsaquo; toepassing &rsaquo; dit product</span></li>
+    <li><span class="n">04</span><span class="s">De kist</span><span class="u">draaiende case links &mdash; altijd dezelfde kist, met wat je kiest erop: kleur en logo</span></li>
+    <li><span class="n">05</span><span class="s">Koopblok</span><span class="u">naam &middot; vaste prijs excl. btw &middot; paneelkleur &middot; logo uploaden &middot; aantal &middot; in winkelwagen &middot; levertijd<span class="vouwmerk">vouw &middot; 900 px &mdash; hieronder moet je scrollen</span></span></li>
+    <li><span class="n">06</span><span class="s">Niveau 1</span><span class="u">kleur en logo, verder niets &mdash; vaste maten. Niet wat je zoekt? dan bouwen we hem op maat: naar de aanvraag</span></li>
+    <li><span class="n">07</span><span class="s">Niveau 2</span><span class="u">ook maten, hoeken en slot &middot; &ldquo;ook in&rdquo;-knoppen naar de maten die als eigen product bestaan &middot; vrije maten binnen de grenzen &middot; prijs loopt mee</span></li>
+    <li><span class="n">08</span><span class="s">Niveau 3</span><span class="u">de configurator van CaseBuilder in de pagina, volledige stand &mdash; een iframe op hun bestaande dienst</span></li>
+    <li><span class="n">09</span><span class="s">Hulp nodig bij deze case?</span><span class="u">alleen bij niveau 2 en 3 &mdash; een vak met de case en een samenvatting al ingevuld, dat naar een casebouwer gaat</span></li>
+    <li><span class="n">10</span><span class="s">Specificaties</span><span class="u">binnenmaat &middot; buitenmaat &middot; gewicht &middot; materiaal &middot; wielen &middot; wat erin past</span></li>
+    <li><span class="n">11</span><span class="s">Footer</span><span class="u">caseBuilder.com · Proflite BV, Doesburg · +31 (0)575 575734 · shop &middot; flightcases &middot; branches &middot; service &middot; voorwaarden &middot; privacy &middot; taal</span></li>
+  </ol>
+  </div>
+  <p class="wfnote">Welk niveau een product krijgt, bepaalt CaseBuilder per categorie &mdash; de klant ziet het woord niveau nooit. Elke maat die als product bestaat heeft een eigen pagina; een maat daartussen is &ldquo;eigen maat&rdquo; op deze pagina.</p>
+  <div class="dv" data-ver="v1" data-page="product-v1">
+  <!-- @gegenereerd:ontwerpweergave-html:product-v1 -->
+<header class="main">
+  <div class="wrap">
+    <a class="merk" href="mockups/homepage-v2.html" aria-label="Casebuilder.com &mdash; naar de homepage"><img src="mockups/assets/woordmerk.svg" alt="Casebuilder.com"></a>
+    <form class="search" onsubmit="return false">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+      <input placeholder="Zoek op case, onderdeel of artikelnummer…" aria-label="Zoeken">
+    </form>
+    <div class="hdr-r">
+      <a href="#" class="stil">Inloggen</a>
+      <a href="#">Winkelwagen</a>
+    </div>
+  </div>
+</header>
+
+<nav class="primary">
+  <div class="wrap">
+    <a href="mockups/case-aanvragen-v1.html">Case aanvragen</a>
+    <a href="mockups/case-voor-v1.html">Wat ga je vervoeren?</a>
+
+    <!-- Flightcases draagt nu drie ingangen tegelijk: waarvoor, welk
+         model, en zelf bouwen. Zelf configureren stond hiervoor los in
+         de balk; als top-level item concurreerde het met Flightcases
+         terwijl het er een onderdeel van is.
+
+         "Waarvoor" zijn de zes toepassingen (wat je vervoert), niet de
+         branches (wie je bent): die hebben hun eigen menu, en dezelfde zes
+         markten twee keer in de balk zei niets extra's. Backline heeft al
+         een eigen pagina; de rest wijst hun vak in de index aan. -->
+    <span class="heeft-menu">
+      <a href="mockups/flightcases-v1.html">Flightcases</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// WAAR GEBRUIK JE HEM VOOR</h4>
+            <ul>
+              <li><a href="mockups/case-voor-v3.html#av-licht">AV &amp; licht<span class="n">142</span></a></li>
+              <li><a href="mockups/case-voor-backline-v1.html">Backline &amp; muziek<span class="n">127</span></a></li>
+              <li><a href="mockups/case-voor-v3.html#broadcast">Broadcast &amp; camera<span class="n">86</span></a></li>
+              <li><a href="mockups/case-voor-v3.html#medisch">Medisch &amp; lab<span class="n">64</span></a></li>
+              <li><a href="mockups/case-voor-v3.html#industrie">Industrie &amp; meettechniek<span class="n">73</span></a></li>
+              <li><a href="mockups/case-voor-v3.html#evenement">Evenement &amp; beursbouw<span class="n">50</span></a></li>
+              <li><a href="mockups/case-voor-v3.html#alle-categorieen">Alle toepassingen &rarr;</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// MODELLEN</h4>
+            <!-- Met beeld (besloten 12 september): een model herken je aan
+                 zijn vorm, niet aan zijn naam. Een stilstaande kist per
+                 model, in CSS — geen foto's, want die hebben vijf
+                 verschillende uitsnedes, en geen script, want dit menu
+                 staat op elke pagina. Zodra CaseBuilder renders uit de
+                 configurator levert, komen die hiervoor in de plaats. -->
+            <div class="modeltegels">
+              <a href="mockups/casetype-koffer-v1.html"><span class="modelkist" style="--b:46.0px;--h:16.4px;--d:29.6px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Koffer<small>vanaf &euro; 149</small></span></a>
+              <a href="mockups/casetype-hoedcase-v1.html"><span class="modelkist" style="--b:46.0px;--h:31.6px;--d:28.8px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Hoedcase<small>vanaf &euro; 179</small></span></a>
+              <a href="mockups/casetype-trunccase-v1.html"><span class="modelkist" style="--b:46.0px;--h:34.5px;--d:34.5px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Trunccase<small>vanaf &euro; 199</small></span></a>
+              <a href="mockups/casetype-rackcase-enkel-deksel-v1.html"><span class="modelkist" style="--b:46.0px;--h:30.7px;--d:38.3px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Rackcase enkel<small>vanaf &euro; 229</small></span></a>
+              <a href="mockups/casetype-rackcase-dubbel-deksel-v1.html"><span class="modelkist" style="--b:44.5px;--h:46.0px;--d:40.8px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Rackcase dubbel<small>vanaf &euro; 259</small></span></a>
+            </div>
+            <a class="allemodellen" href="mockups/flightcases-v1.html">Alle modellen &rarr;</a>
+          </div>
+          <div class="vlak">
+            <b>Zelf configureren</b>
+            <p>Jouw maten invullen en de prijs zien terwijl je typt. Een casebouwer kijkt je opgave na voordat we zagen.</p>
+            <a class="btn btn-dark" href="mockups/configurator-v1.html">Start met configureren &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </span>
+
+    <!-- Branches: wie je bent. Links de zes markten met een eigen pagina,
+         in het midden de manieren van inkopen voor grote partijen — dat is
+         dezelfde koper in een andere rol (zie /grote-spelers), niet een
+         zevende markt. Rechts de opvang voor wie zichzelf er niet in ziet. -->
+    <span class="heeft-menu">
+      <a href="mockups/branches.html">Branches</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// ZES MARKTEN</h4>
+            <ul>
+              <li><a href="mockups/branche-audio-visueel-v1.html">Audio-visueel en podium<span class="n">22</span></a></li>
+              <li><a href="mockups/branche-broadcast-en-media-v1.html">Broadcast en media<span class="n">9</span></a></li>
+              <li><a href="mockups/branche-industrie-en-machinebouw-v1.html">Industrie en machinebouw<span class="n">14</span></a></li>
+              <li><a href="mockups/branche-meet-en-testapparatuur-v1.html">Meet- en testapparatuur<span class="n">11</span></a></li>
+              <li><a href="mockups/branche-defensie-v1.html">Defensie<span class="n">7</span></a></li>
+              <li><a href="mockups/branche-schaalmodellen-v1.html">Schaalmodellen<span class="n">5</span></a></li>
+              <li><a href="mockups/branches.html">Alle branches &rarr;</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// INKOPEN ALS GROTE PARTIJ</h4>
+            <ul>
+              <li><a href="mockups/speler-defensie-en-overheid-v1.html">Defensie en overheid</a></li>
+              <li><a href="mockups/speler-oem-en-series-v1.html">OEM en series</a></li>
+              <li><a href="mockups/speler-verhuur-en-touring-v1.html">Verhuur en touring</a></li>
+              <li><a href="mockups/speler-omroep-en-studio-v1.html">Omroep en studio</a></li>
+              <li><a href="mockups/speler-netbeheer-en-energie-v1.html">Netbeheer en energie</a></li>
+              <li><a href="mockups/grote-spelers-v1.html">Hoe je bij ons inkoopt &rarr;</a></li>
+            </ul>
+          </div>
+          <div class="vlak">
+            <b>Staat je markt er niet bij?</b>
+            <p>We bouwen ook voor winkelinrichting, IT-racks en medisch en lab &mdash; alleen nog zonder eigen pagina. Vertel wat je vervoert, dan tekenen we het.</p>
+            <a class="btn btn-dark" href="mockups/case-aanvragen-v1.html">Case aanvragen &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </span>
+
+    <!-- Service: alles rond bestellen en daarna. Het vlak is de telefoon,
+         want direct advies is wat een servicepagina het vaakst oplevert. -->
+    <span class="heeft-menu">
+      <a href="mockups/service-hub-v1.html">Service</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// BESTELLEN EN LEVEREN</h4>
+            <ul>
+              <li><a href="mockups/zo-werkt-het-v1.html">Zo werkt het</a></li>
+              <li><a href="mockups/service-levertijden-v1.html">Levertijden</a></li>
+              <li><a href="#">Verzending</a></li>
+              <li><a href="mockups/laten-controleren-v1.html">Maten laten controleren</a></li>
+              <li><a href="#">Veelgestelde vragen</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// ZELF BOUWEN</h4>
+            <ul>
+              <li><a href="mockups/categorie-v1.html">Onderdelen</a></li>
+              <li><a href="#">Zaagservice</a></li>
+            </ul>
+            <h4>// OVER ONS</h4>
+            <ul>
+              <li><a href="mockups/over-ons-v1.html">Over Proflite</a></li>
+              <li><a href="mockups/contact-v1.html">Contact</a></li>
+            </ul>
+          </div>
+          <div class="vlak">
+            <b>Direct advies</b>
+            <p>+31 (0)575 575734 &mdash; je belt met iemand uit de werkplaats in Doesburg, niet met een callcenter.</p>
+            <a class="btn btn-dark" href="mockups/contact-v1.html">Stuur een bericht &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </span>
+    <!-- Shop: links het overzicht — klik je op Shop zelf, dan kom je daar,
+         met alle vaste cases en filters. Onderaan die kolom de weg via je
+         apparaat: de 39 categorieën, waarvandaan je in vier klikken bij het
+         apparaat bent. In het midden een paar populaire producten en
+         daaronder de populairste onderdelen — kort, want het overzicht en
+         de onderdelenpagina zijn één klik verder. Rechts de uitweg voor wie
+         een andere maat nodig heeft.
+         Shop staat achteraan: wie het assortiment zoekt weet dat al. -->
+    <span class="heeft-menu">
+      <a href="mockups/shop-v1.html" class="on">Shop</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// ALLE VASTE CASES, MET FILTERS</h4>
+            <ul>
+              <li><a href="mockups/shop-v1.html#av-licht">AV &amp; licht</a></li>
+              <li><a href="mockups/shop-v1.html#backline">Backline &amp; muziek</a></li>
+              <li><a href="mockups/shop-v1.html#broadcast">Broadcast &amp; camera</a></li>
+              <li><a href="mockups/shop-v1.html#medisch">Medisch &amp; lab</a></li>
+              <li><a href="mockups/shop-v1.html#industrie">Industrie &amp; meettechniek</a></li>
+              <li><a href="mockups/shop-v1.html#evenement">Evenement &amp; beursbouw</a></li>
+              <li><a href="mockups/case-voor-v3.html">Alle 39 categorie&euml;n &rarr;</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// POPULAIRE PRODUCTEN</h4>
+            <ul>
+              <li><a href="mockups/case-voor-gibson-les-paul-v2.html">Gibson Les Paul Standard</a></li>
+              <li><a href="mockups/case-voor-gibson-les-paul-v2.html" title="/product — hier nog de Les Paul-pagina">Pioneer DDJ-FLX10</a></li>
+              <li><a href="mockups/case-voor-gibson-les-paul-v2.html" title="/product — hier nog de Les Paul-pagina">Robe Robin 600 LEDWash, duo</a></li>
+              <li><a href="mockups/case-voor-gibson-les-paul-v2.html" title="/product — hier nog de Les Paul-pagina">Sony FX6</a></li>
+            </ul>
+            <h4>// POPULAIRE ONDERDELEN</h4>
+            <ul>
+              <li><a href="mockups/categorie-v1.html">Balhoeken</a></li>
+              <li><a href="mockups/categorie-v1.html" title="/onderdelen/{categorie} — hier nog het balhoeken-sjabloon">Vlindersluitingen</a></li>
+              <li><a href="mockups/categorie-v1.html" title="/onderdelen/{categorie} — hier nog het balhoeken-sjabloon">Handgrepen</a></li>
+              <li><a href="mockups/categorie-v1.html">Alle onderdelen &rarr;</a></li>
+            </ul>
+          </div>
+          <div class="vlak">
+            <b>Andere maat nodig?</b>
+            <p>Kies je eigen afmetingen, ronde of vierkante hoeken en een slot. Wil je meer, dan ga je vanuit daar door naar de volledige editor.</p>
+            <a class="btn btn-dark" href="mockups/editor-v2.html#l2">Op jouw maat &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </span>
+    <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#">NL &#9662;</a></div>
+  </div>
+</nav>
+
+<div class="review">
+  <div class="wrap">
+    <span class="lab">// Mockup &middot; drie producten</span>
+    <div class="wissel" data-producten role="group" aria-label="Kies een product">
+      <button type="button" data-p="l1">L1 &middot; Hoedcase Les Paul</button>
+      <button type="button" data-p="l2">L2 &middot; Trunccase 80&times;80&times;80</button>
+      <button type="button" data-p="l3">L3 &middot; Rackcase, alles op maat</button>
+    </div>
+    <span class="uitleg">Zelfde pagina, zelfde kist. Welke opties er staan, bepaalt CB per categorie.</span>
+  </div>
+</div>
+
+<div class="crumbs"><div class="wrap" data-crumbs></div></div>
+
+<div class="wrap">
+  <div class="reskop kop-laag">
+    <div class="ey ey-dark" data-ey></div>
+    <h1 data-h1></h1>
+    <p class="lead" data-lead></p>
+  </div>
+
+  <div class="advies">
+    <div class="top">
+      <div class="lab" data-balk></div>
+      <div class="bd" data-bd>
+        <div class="beeld">
+          <div class="kistvak">
+            <div class="kist3d" data-draaikist data-vrij="1400" title="Sleep om te draaien">
+              <div class="kubus" data-kubus>
+                <div class="zij achter"></div>
+                <div class="zij links"></div>
+                <div class="zij rechts"></div>
+                <div class="zij boven"></div>
+                <div class="zij onder"></div>
+                <div class="zij voor"><img class="logo" data-logo alt="" hidden><span class="slot" data-slot></span></div>
+              </div>
+              <div class="grond"></div>
+              <span class="kmaat"></span>
+            </div>
+          </div>
+          <div class="sc"><i></i><b data-schaal></b><span>sleep om te draaien</span></div>
+        </div>
+
+        <div class="koop">
+          <h2 data-h2></h2>
+          <div class="maten" data-maten></div>
+          <p data-tekst></p>
+          <div class="pr" data-toon="l1 l2"><span data-prijs></span><small data-prijslab></small></div>
+
+          <!-- ── L1 en L2: de keuzes in de pagina ── -->
+          <div class="kies" data-toon="l1 l2">
+            <div class="kg" data-toon="l2">
+              <span class="lb">Maat</span>
+              <div>
+                <div class="keuze" data-maatknoppen role="group" aria-label="Maten"></div>
+                <div class="maten3">
+                  <label>Breedte<input type="number" data-veld="b" step="10" inputmode="numeric"></label>
+                  <label>Diepte<input type="number" data-veld="d" step="10" inputmode="numeric"></label>
+                  <label>Hoogte<input type="number" data-veld="h" step="10" inputmode="numeric"></label>
+                </div>
+                <p class="hint" data-grens></p>
+              </div>
+            </div>
+            <div class="kg" data-toon="l2">
+              <span class="lb">Hoeken</span>
+              <div class="keuze" data-keuze="hoek">
+                <button type="button" data-w="rond">Rond<small>balhoek &middot; standaard</small></button>
+                <button type="button" data-w="vierkant">Vierkant<small>+ &euro; 14</small></button>
+              </div>
+            </div>
+            <div class="kg">
+              <span class="lb">Kleur</span>
+              <div><div class="stalen" data-stalen role="group" aria-label="Paneelkleur"></div><p class="hint" data-kleurnaam></p></div>
+            </div>
+            <div class="kg">
+              <span class="lb">Logo</span>
+              <label class="upload">
+                <input type="file" accept="image/png,image/svg+xml,image/jpeg" class="sr" data-upload>
+                <span data-uploadtekst>Upload je logo</span>
+                <small>SVG, PNG of JPG &middot; wij zetten hem op het deksel</small>
+              </label>
+            </div>
+            <div class="kg">
+              <span class="lb">Aantal</span>
+              <input class="aantal" type="number" value="1" min="1" aria-label="Aantal">
+            </div>
+          </div>
+
+          <a class="btn btn-pri" data-toon="l1 l2" href="#" style="width:100%;justify-content:center">In winkelwagen &rarr;</a>
+
+          <!-- ── L3: de configurator van CaseBuilder, volledige stand ── -->
+          <div class="cfg" data-toon="l3">
+            <div class="tkop"><b>Configurator</b><span class="stand">Volledige stand</span><span class="ref" data-ref></span></div>
+            <div class="stappen" role="group" aria-label="Stappen">
+              <button type="button" class="stap" data-stapknop="1"><span class="bol">1</span><span class="lb">Model</span></button><span class="lijn"></span>
+              <button type="button" class="stap" data-stapknop="2"><span class="bol">2</span><span class="lb">Afmetingen</span></button><span class="lijn"></span>
+              <button type="button" class="stap" data-stapknop="3"><span class="bol">3</span><span class="lb">Uitvoering</span></button><span class="lijn"></span>
+              <button type="button" class="stap" data-stapknop="4"><span class="bol">4</span><span class="lb">Hardware</span></button><span class="lijn"></span>
+              <button type="button" class="stap" data-stapknop="5"><span class="bol">5</span><span class="lb">Overzicht</span></button>
+            </div>
+            <div class="tbody">
+              <div data-stap="1">
+                <div class="stapkop"><span class="ey ey-dark">// Stap 1 van 5</span><h3>Welk model wordt het?</h3></div>
+                <div class="blok">
+                  <div class="keuze modellen5" data-keuze="model">
+                    <button type="button" data-w="koffer">Koffer<small>draagbaar</small></button>
+                    <button type="button" data-w="hoedcase">Hoedcase<small>los deksel</small></button>
+                    <button type="button" data-w="trunccase">Trunccase<small>bovendeksel</small></button>
+                    <button type="button" data-w="rack1">Rack enkel<small>19 inch</small></button>
+                    <button type="button" data-w="rack2">Rack dubbel<small>19 inch</small></button>
+                  </div>
+                </div>
+              </div>
+              <div data-stap="2">
+                <div class="stapkop"><span class="ey ey-dark">// Stap 2 van 5</span><h3>Afmetingen</h3></div>
+                <div class="blok">
+                  <h4>Buitenmaten in mm</h4>
+                  <div class="maten3">
+                    <label>Breedte<input type="number" data-veld="b" step="10" inputmode="numeric"></label>
+                    <label>Diepte<input type="number" data-veld="d" step="10" inputmode="numeric"></label>
+                    <label>Hoogte<input type="number" data-veld="h" step="10" inputmode="numeric"></label>
+                  </div>
+                  <p class="hint" data-grens></p>
+                </div>
+                <div class="blok">
+                  <h4>Maatvoering</h4>
+                  <div class="keuze" data-keuze="maat">
+                    <button type="button" data-w="buiten">Buitenmaten<small>standaard</small></button>
+                    <button type="button" data-w="binnen">Binnenmaten<small>wij rekenen de wand erbij</small></button>
+                  </div>
+                </div>
+              </div>
+              <div data-stap="3">
+                <div class="stapkop"><span class="ey ey-dark">// Stap 3 van 5</span><h3>Uitvoering</h3></div>
+                <div class="blok">
+                  <h4>Hoeken</h4>
+                  <div class="keuze" data-keuze="hoek">
+                    <button type="button" data-w="rond">Ronde hoeken<small>balhoek &middot; standaard</small></button>
+                    <button type="button" data-w="vierkant">Vierkante hoeken<small>+ &euro; 14</small></button>
+                  </div>
+                </div>
+                <div class="blok">
+                  <h4>Paneel</h4>
+                  <div class="keuze" data-keuze="paneel">
+                    <button type="button" data-w="7">7 mm multiplex<small>standaard</small></button>
+                    <button type="button" data-w="9">9 mm multiplex<small>+ &euro; 18</small></button>
+                  </div>
+                </div>
+                <div class="blok">
+                  <h4>Paneelkleur</h4>
+                  <div class="stalen" data-stalen role="group" aria-label="Paneelkleur"></div>
+                  <p class="hint" data-kleurnaam></p>
+                </div>
+                <div class="blok">
+                  <h4>Logo</h4>
+                  <label class="upload">
+                    <input type="file" accept="image/png,image/svg+xml,image/jpeg" class="sr" data-upload>
+                    <span data-uploadtekst>Upload je logo</span>
+                    <small>SVG, PNG of JPG &middot; wij zetten hem op het deksel</small>
+                  </label>
+                </div>
+              </div>
+              <div data-stap="4">
+                <div class="stapkop"><span class="ey ey-dark">// Stap 4 van 5</span><h3>Hardware</h3></div>
+                <div class="blok">
+                  <h4>Slot</h4>
+                  <div class="keuze" data-keuze="slot">
+                    <button type="button" data-w="vlinder">Vlindersluiting<small>standaard</small></button>
+                    <button type="button" data-w="hangslot">Met hangslotoog<small>+ &euro; 9,50</small></button>
+                    <button type="button" data-w="klap">Klapsluiting<small>+ &euro; 6</small></button>
+                  </div>
+                </div>
+                <div class="blok">
+                  <h4>Handgrepen</h4>
+                  <div class="keuze" data-keuze="greep">
+                    <button type="button" data-w="koffer">2&times; koffergreep<small>standaard</small></button>
+                    <button type="button" data-w="inbouw">2&times; inbouwgreep<small>+ &euro; 12</small></button>
+                  </div>
+                </div>
+                <div class="blok">
+                  <h4>Wielen</h4>
+                  <div class="keuze" data-keuze="wielen">
+                    <button type="button" data-w="geen">Geen wielen<small>standaard</small></button>
+                    <button type="button" data-w="zwenk">4 zwenkwielen<small>2 met rem &middot; + &euro; 48</small></button>
+                  </div>
+                </div>
+                <div class="blok">
+                  <h4>Schuim</h4>
+                  <div class="keuze" data-keuze="schuim">
+                    <button type="button" data-w="geen">Geen schuim<small>standaard</small></button>
+                    <button type="button" data-w="pluk">Plukschuim<small>bodem en deksel &middot; + &euro; 35</small></button>
+                  </div>
+                </div>
+              </div>
+              <div data-stap="5">
+                <div class="stapkop"><span class="ey ey-dark">// Stap 5 van 5</span><h3>Overzicht</h3></div>
+                <dl class="samen" data-samen></dl>
+              </div>
+            </div>
+            <div class="tvoet">
+              <div><span class="lab">Voorbeeldprijs &middot; verandert mee &middot; excl. btw</span><b data-cfgprijs></b></div>
+              <div class="knoppen">
+                <button type="button" class="btn btn-out btn-sm" data-vorige>&larr; Vorige</button>
+                <button type="button" class="btn btn-dark btn-sm" data-volgende></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── L2 en L3: hulp nodig ── -->
+          <button type="button" class="btn btn-out btn-sm hulpknop" data-toon="l2 l3" data-hulpknop aria-expanded="false" aria-controls="hulp">Hulp nodig bij deze case?</button>
+          <div class="hulp" id="hulp" data-hulp hidden>
+            <span class="lab">// Vraag een expert &middot; met deze case erbij</span>
+            <div class="id" data-hulpid></div>
+            <label class="sr" for="hulpvraag">Wat wil je anders?</label>
+            <textarea id="hulpvraag" placeholder="Bijvoorbeeld: help, ik wil een zijvak rechts"></textarea>
+            <label class="up">+ Schets, foto of datasheet toevoegen<input type="file" class="sr"></label>
+            <button type="button" class="btn btn-dark btn-sm" data-hulpstuur>Stuur naar een expert &rarr;</button>
+            <p class="klaar" data-hulpklaar hidden>Verstuurd (mockup). Een expert antwoordt dezelfde werkdag, met deze case als uitgangspunt.</p>
+          </div>
+
+          <!-- ── L2: door naar de volledige configurator ── -->
+          <a class="door wit" data-toon="l2" data-l3 href="#l3"><b>Meer aanpassen? Open de volledige configurator</b><span>Daar kies je ook het <strong>slot</strong>, handgrepen, wielen, schuim en de vakverdeling. Je maten, hoeken en kleur gaan mee.</span></a>
+
+          <!-- ── L1: geen hulpvak, wel de weg naar maatwerk ── -->
+          <a class="door" data-toon="l1" href="mockups/case-aanvragen-v1.html"><b>Niet precies wat je zoekt?</b><span>Wij bouwen hem op maat voor je. Stuur een schets, een foto of je maten &mdash; Joran tekent hem uit.</span><span class="deurcta">Case aanvragen &rarr;</span></a>
+          <p class="naast" data-toon="l1">Alleen een andere maat? <a href="#l2">Kies je eigen maten</a> &mdash; je begint met de maten van deze kist.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="waarom" data-waarom></div>
+
+  <div class="ey ey-dark" style="margin-top:54px">// VOOR DE REVIEW &middot; WAT ER PER NIVEAU OP DE PRODUCTPAGINA STAAT</div>
+  <h2 style="font-size:30px;margin:12px 0 0">E&eacute;n pagina, drie niveaus</h2>
+  <p style="font-size:15px;color:var(--mute);margin-top:10px;max-width:70ch">De kist is altijd dezelfde. CaseBuilder geeft per categorie op of die L1, L2 of L3 is, en de pagina toont de opties die daarbij horen.</p>
+  <div class="matrix">
+    <table>
+      <thead><tr><th></th><th>L1 &middot; vast</th><th>L2 &middot; op maat</th><th>L3 &middot; alles</th></tr></thead>
+      <tbody>
+        <tr><th>De kist</th><td>Draait, met je kleur en logo</td><td>Draait, en groeit mee met je maten</td><td>Draait, en volgt elke keuze in de configurator</td></tr>
+        <tr><th>Kiezen</th><td>Kleur, logo, aantal</td><td>+ maten, hoeken, slot</td><td>De configurator in de pagina: model, maten, paneel, hoeken, slot, handgrepen, wielen, schuim</td></tr>
+        <tr><th>Andere maten</th><td>Niet op deze pagina</td><td>&ldquo;Ook in&rdquo;-knoppen naar de andere productpagina&rsquo;s, plus een eigen maat binnen de grenzen</td><td>Vrij, binnen de grenzen van de configurator</td></tr>
+        <tr><th>Hulp nodig</th><td>&ldquo;Niet precies wat je zoekt?&rdquo; &rarr; case aanvragen</td><td>Vak met de case ingevuld &rarr; een expert</td><td>Zelfde vak, onder de configurator</td></tr>
+        <tr><th>Hoe het draait</th><td colspan="2">Onze eigen frontend</td><td>De bestaande configurator, in een <strong>iframe</strong> in de pagina. Dit ontwerp gaat naar CaseBuilder; zij bouwen het na in hun frontend, zodat het venster bij de pagina past.</td></tr>
+        <tr><th>Van CB nodig</th><td colspan="3">Per categorie: het niveau, de maten die als product bestaan, en de grenzen voor een eigen maat. Voor L3: het ontwerp nabouwen in de configurator, en hem in een iframe laten draaien in plaats van in een los venster.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="merk"><img src="mockups/assets/woordmerk-wit.svg" alt="Casebuilder.com"></div>
+        <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734">+31 (0)575 575734</a></p>
+      </div>
+      <div><h5>Offerte aanvragen</h5><a href="mockups/case-aanvragen-v1.html">Case aanvragen</a><a href="mockups/laten-controleren-v1.html">Maten laten controleren</a><a href="#">Series en staffels</a><a href="#">Zakelijk bestellen</a></div>
+      <div><h5>Zelf configureren</h5><a href="mockups/configurator-v1.html">Naar de configurator</a><a href="mockups/zo-werkt-het-v1.html">Zo werkt het</a><a href="#">Herhaalorder</a><a href="#">Mijn configuraties</a></div>
+      <div><h5>Branches</h5><a href="mockups/branche-audio-visueel-v1.html">Audio-visueel en podium</a><a href="mockups/branche-broadcast-en-media-v1.html">Broadcast en media</a><a href="mockups/branche-industrie-en-machinebouw-v1.html">Industrie en machinebouw</a><a href="mockups/branche-meet-en-testapparatuur-v1.html">Meet- en testapparatuur</a><a href="mockups/branche-defensie-v1.html">Defensie</a><a href="mockups/branche-schaalmodellen-v1.html">Schaalmodellen</a><a class="anders" href="mockups/grote-spelers-v1.html">Inkopen als grote partij &rarr;</a></div>
+      <div><h5>Service</h5><a href="mockups/service-levertijden-v1.html">Levertijden</a><a href="#">Verzending</a><a href="mockups/categorie-v1.html">Onderdelen</a><a href="#">Zaagservice</a><a href="#">Over Proflite</a><a href="mockups/contact-v1.html">Contact</a></div>
+    </div>
+    <div class="bot"><span>KVK 09123456</span><span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span></div>
+  </div>
+</footer>
+<!-- @einde:ontwerpweergave-html:product-v1 -->
   </div>
 </figure>
 <figure class="wf" data-mode="wire" hidden id="wf-aanvraag">
@@ -9328,14 +9820,14 @@
         <div class="fhead">
           <span class="fn">03 &middot; frontend <span class="fprog" data-f="prog"></span></span>
           <h3><button class="ftopen" type="button">Website</button></h3>
-          <p>De pagina&#39;s zelf: achttien sjablonen, de navigatie, zoeken, en de verhuizing van 386 bestaande adressen.</p>
+          <p>De pagina&#39;s zelf: negentien sjablonen, de navigatie, zoeken, en de verhuizing van 386 bestaande adressen.</p>
           <div class="fstat"><span class="chip chip-move">ontwerp loopt</span><span class="chip chip-open">bouw okt</span></div>
           <span class="fmeer">Openen &rarr;</span>
         </div>
         <div class="fbody">
           <span class="flab">Wat erin hoort</span>
           <ul class="fcheck">
-            <li><label><input type="checkbox" data-id="web-sjablonen"><span>De achttien sjablonen uit de sitemap &mdash; zie het tabblad Wireframes</span></label></li>
+            <li><label><input type="checkbox" data-id="web-sjablonen"><span>De negentien sjablonen uit de sitemap &mdash; zie het tabblad Wireframes</span></label></li>
             <li><label><input type="checkbox" data-id="web-nav"><span>Nieuwe navigatie: onderdelen blijven, maar niet meer als grootste tak</span></label></li>
             <li><label><input type="checkbox" data-id="web-zoek"><span>Zoeken op case, onderdeel &eacute;n apparatuur, met facetten die ertoe doen</span></label></li>
             <li><label><input type="checkbox" data-id="web-casevoor"><span><code>/case-voor</code> als productcatalogus: categorie plus een pagina per apparaat, met een directe bestelroute</span></label></li>
