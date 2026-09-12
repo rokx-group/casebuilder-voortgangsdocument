@@ -32,6 +32,11 @@ const PAGINAS = [
   { naam: "servicehub", bestand: "mockups/service.html", overslaan: ["wireframe"] },
   { naam: "content", bestand: "mockups/service-levertijden.html", overslaan: ["wireframe"] },
   { naam: "zoekresultaat", bestand: "mockups/zoeken.html", overslaan: ["wireframe"] },
+  // Deze drie hebben (nog) geen wireframe; de basis wordt overgeslagen en
+  // alleen de ontwerpversies worden opgepikt.
+  { naam: "shop", bestand: "mockups/shop.html", overslaan: ["wireframe"] },
+  { naam: "aanvraag", bestand: "mockups/case-aanvragen.html", overslaan: ["wireframe"] },
+  { naam: "product", bestand: "mockups/product.html", overslaan: ["wireframe"] },
 ];
 
 /** Selectors die geen voorvoegsel krijgen maar een vervanging. */
@@ -127,11 +132,13 @@ const html = {};
  * hetzelfde sjabloon naast elkaar te bekijken zijn zonder dat de een de ander
  * overschrijft. Handig als er aan twee versies tegelijk gewerkt wordt.
  */
-/* Sommige ontwerpen zijn op een vast raster getekend en breken in de
-   ingesloten weergave, die smaller is dan een venster. Die tonen we
-   niet verkleind maar alleen als wireframe, met de knop naar het
-   volledige scherm — een kapot ontwerp beoordeelt niemand goed. */
-const NIET_RESPONSIEF = ["case-voor-resultaat", "case-voor-categorie"];
+/* Stond hier eerder voor ontwerpen die op een vast raster waren getekend
+   en in de smalle kolom braken. Sinds de @media-regels container queries
+   worden (zie schaalIn) schalen ze wél mee, en de case-voor-ontwerpen
+   werden juist het probleem: ze werden niet gegenereerd, dus bleef er een
+   met de hand getypte kopie staan met links zonder mockups/-voorvoegsel.
+   Leeg laten betekent: alles wordt gegenereerd. */
+const NIET_RESPONSIEF = [];
 
 /* Bestandsnaam → stam waar hij op leek te horen. Pas ná de hele lus weten we
    of hij elders alsnog is opgepikt: service-levertijden-v1.html lijkt een
@@ -170,6 +177,22 @@ for (const { naam, bestand, overslaan = [] } of PAGINAS) {
     const bron = readFileSync(join(wortel, variant.bestand), "utf8");
     const wortelSel = `.dv[data-page="${sleutel}"]`;
     const map = dirname(variant.bestand);
+
+    /* Een mockup laadt naast brand.css ook eigen stylesheets — de draaiende
+       kist, de suggestielijst, de gedeelde homepage-inhoud. Die stonden
+       hier niet in, dus de ingesloten weergave toonde de kist zonder
+       panelen en de lijst zonder opmaak. brand.css staat er al globaal in
+       en slaan we over; alles met een eigen schema (fonts) ook. */
+    for (const m of bron.matchAll(/<link\b[^>]*rel=["']stylesheet["'][^>]*>/gi)) {
+      const href = (m[0].match(/href=["']([^"']+)["']/) || [])[1];
+      if (!href || /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(href) || href.endsWith("brand.css")) continue;
+      const pad = join(wortel, map, href);
+      let stijl;
+      try { stijl = readFileSync(pad, "utf8"); }
+      catch { console.warn(`  let op: ${href} uit ${variant.bestand} niet gevonden`); continue; }
+      css += schaalIn(herschrijfPaden(stijl, dirname(`${map}/${href}`)), wortelSel);
+    }
+
     css += schaalIn(
       herschrijfPaden(tussen(bron, "<style>", "</style>", `stijlblok in ${variant.bestand}`).inhoud, map),
       wortelSel
