@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — besluiten 12 september, ronde 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   Besluiten 12 september — ronde 3
+
+   Keuzewerkblad (skill keuzewerkblad) voor wat er na het verwerken van
+   de eerste ronde nog openstaat. Zelfde opbouw als besluiten-11sep.html:
+   per punt een notitie, een voorstel, een voorbeeld dat meebeweegt met de
+   keuze (data-hangt / data-leeg) en een opmerkingenveld. Onderaan wordt
+   het een tekst om terug te plakken. Keuzes blijven in deze browser.
+
+   De schermafbeeldingen in assets/besluiten/ zijn van de mockups zoals ze
+   op 11 september stonden.
+   ══════════════════════════════════════════════════════════════ */
+body{background:#EDF0F4}
+.blad{max-width:1240px;margin:0 auto;padding:34px 24px 150px}
+.terug{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.intro h1{font-size:clamp(34px,4vw,50px);margin:12px 0 12px}
+.intro p{color:var(--mute);max-width:72ch}
+.gedaan{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.gedaan span{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;background:#fff;border:1px solid var(--rule);padding:7px 11px;color:var(--dark)}
+.gedaan span b{color:var(--blue);font-weight:600}
+
+.besluit{background:#fff;border:1px solid var(--rule);margin-top:22px}
+.besluit.gekozen{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(102,196,232,.18)}
+.bkop{display:flex;align-items:baseline;gap:14px;padding:18px 22px 0;flex-wrap:wrap}
+.bkop .nr{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--blue)}
+.bkop h2{font-size:24px}
+.bkop .soort{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);border:1px solid var(--rule);padding:5px 9px}
+.besluit.gekozen .bkop .soort{border-color:var(--cyan);color:var(--dark);background:var(--lightblue)}
+/* Wat ermee gedaan is, boven de notitie: dit werkblad is beantwoord en
+   verwerkt op 12 september. */
+.verwerkt{margin:12px 22px 0;border-left:3px solid var(--cyan);background:var(--lightblue);padding:9px 14px;font-size:13.5px;color:var(--ink)}
+.verwerkt b{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:3px}
+.notitie{padding:8px 22px 0;font-size:13.5px;color:var(--mute);max-width:92ch}
+.notitie b{color:var(--ink);font-weight:500}
+.voorstel{padding:6px 22px 0;font-size:15px;color:var(--ink);max-width:92ch}
+.voorstel a{color:var(--blue);border-bottom:1px solid var(--rule)}
+.bgrid{display:grid;grid-template-columns:1.35fr 1fr;margin-top:16px;border-top:1px solid var(--rule)}
+.vb{background:var(--bg);padding:22px;border-right:1px solid var(--rule);min-width:0}
+.lab{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);margin-bottom:10px}
+.kies{padding:20px 22px 22px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.kies fieldset{border:0;display:flex;flex-direction:column;gap:8px}
+/* Keuzes als vlakken, niet als rondjes: het merk kent geen cirkels. */
+.optie{position:relative;display:block;border:1.5px solid var(--rule);padding:10px 14px;cursor:pointer;background:#fff}
+.optie:hover{border-color:var(--dark)}
+.optie:has(input:checked){border-color:var(--cyan);box-shadow:0 0 0 3px rgba(102,196,232,.22);background:#F7FBFD}
+.optie:focus-within{outline:2px solid var(--cyan);outline-offset:2px}
+.optie input{position:absolute;opacity:0;pointer-events:none}
+.optie b{display:block;font-family:var(--disp);text-transform:uppercase;font-size:16px;letter-spacing:.03em;color:var(--dark)}
+.optie small{display:block;font-size:12.5px;color:var(--mute);margin-top:2px}
+.optie .aanb{font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--blue);margin-left:6px;font-weight:500}
+.kies textarea{margin-top:6px;min-height:62px;border:1.5px solid var(--rule);padding:10px 12px;font-family:var(--body);font-size:14px;resize:vertical;color:var(--ink)}
+.kies textarea:focus{outline:0;border-color:var(--dark)}
+
+/* ── voorbeelden ───────────────────────────────────────────── */
+.p-deel + .p-deel,.p-leeg + .p-deel{margin-top:12px}
+.p-leeg{background:#fff;border:1px dashed var(--rule);padding:12px 14px;font-size:13.5px;color:var(--mute)}
+.p-shot{border:1px solid var(--rule);background:#fff}
+.p-shot img{width:100%;display:block}
+.p-shot .onder{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);padding:7px 10px;border-top:1px solid var(--rule)}
+.p-twee{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.p-stempel{position:relative}
+.p-stempel::after{content:attr(data-stempel);position:absolute;top:12px;right:12px;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;background:var(--dark);color:#fff;padding:6px 10px}
+
+.p-kop .ey{display:block;margin-bottom:6px}
+.p-kop h3{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:28px;color:var(--dark);line-height:1}
+.p-kop p{font-size:15px;color:var(--mute);margin-top:6px}
+.p-tegels{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.p-tegel{background:#fff;border:1px solid var(--rule);padding:12px 12px 14px}
+.p-tegel .n{font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--blue)}
+.p-tegel h4{font-size:15px;line-height:1.1;margin-top:6px}
+.p-tegel p{font-size:12px;color:var(--mute);margin-top:4px}
+
+.p-opties{background:#fff;border:1px solid var(--rule);padding:14px 16px}
+.p-opties .rij{display:grid;grid-template-columns:78px 1fr;gap:12px;align-items:center;padding:8px 0;border-top:1px solid var(--rule)}
+.p-opties .rij:first-of-type{border-top:0}
+.p-opties .rij > span{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.p-chips{display:flex;gap:6px;flex-wrap:wrap}
+.p-chips i{font-style:normal;border:1.5px solid var(--rule);padding:5px 9px;font-family:var(--disp);text-transform:uppercase;font-size:13px;color:var(--dark)}
+.p-chips i.aan{border-color:var(--cyan);box-shadow:0 0 0 2px rgba(102,196,232,.25)}
+.p-weg{margin-top:8px;font-size:12.5px;color:var(--mute)}
+
+.p-koop{background:#fff;border:1px solid var(--rule);padding:14px 16px}
+.p-koop .knop{display:block;text-align:center;background:var(--cyan);color:var(--void);font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:15px;letter-spacing:.05em;padding:12px}
+.p-door{display:block;margin-top:10px;border:1px solid var(--rule);background:var(--lightblue);padding:12px 14px}
+.p-door b{display:block;font-family:var(--disp);text-transform:uppercase;font-size:16px;color:var(--dark)}
+.p-door span{font-size:13px;color:var(--mute)}
+.p-naast{margin-top:10px;font-size:12.5px;color:var(--mute)}
+.p-naast u{text-decoration:none;color:var(--blue);border-bottom:1px solid var(--rule)}
+
+.p-zoek{background:#fff;border:1px solid var(--rule)}
+.p-zoek .in{padding:10px 14px;border-bottom:1px solid var(--rule);font-size:14px}
+.p-zoek .drie{display:grid;grid-template-columns:repeat(3,1fr)}
+.p-zoek .drie div{padding:10px 12px;font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:13px;color:var(--dark)}
+.p-zoek .drie div.aan{background:var(--lightblue)}
+.p-zoek .drie small{display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;color:var(--mute);font-weight:500}
+.p-pijl{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:10px 0 6px}
+.p-winkel{background:#fff;border:1px solid var(--rule);padding:12px 14px}
+.p-winkel .tabs{display:flex;gap:14px;font-family:var(--disp);text-transform:uppercase;font-size:13px;color:var(--mute);border-bottom:1px solid var(--rule);padding-bottom:6px}
+.p-winkel .tabs b{color:var(--dark);box-shadow:inset 0 -2px 0 var(--cyan)}
+.p-winkel .filter{margin-top:8px;display:flex;gap:6px;align-items:center;font-size:12.5px;color:var(--mute)}
+.p-winkel .filter i{font-style:normal;border:1.5px solid var(--cyan);background:var(--lightblue);padding:3px 8px;color:var(--dark);font-family:var(--mono);font-size:10px;letter-spacing:.08em}
+.p-winkel .kaarten{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+.p-winkel .kaarten div{border:1px solid var(--rule);padding:8px;font-size:12px;color:var(--ink)}
+
+.p-pagina{background:#fff;border:1px solid var(--rule);font-size:11px}
+.p-pagina > div{padding:8px 12px;border-bottom:1px solid var(--rule);color:var(--mute);font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase;font-size:9px}
+.p-pagina .held{background:var(--void);color:rgba(255,255,255,.7);height:74px;display:flex;align-items:flex-end}
+.p-pagina .plek{background:var(--lightblue);color:var(--dark);font-weight:600;border:1.5px solid var(--cyan)}
+.p-pagina .balk{display:flex;justify-content:space-between}
+.p-pagina .balk .plek{padding:2px 8px;border:1.5px solid var(--cyan)}
+
+.p-cats{background:#fff;border:1px solid var(--rule);padding:12px 14px}
+.p-cats h5{font-family:var(--disp);text-transform:uppercase;font-size:15px;color:var(--dark);margin-bottom:6px}
+.p-cats ul{list-style:none;font-size:13px;line-height:1.9;color:var(--ink);columns:2}
+.p-cats li.nieuw{color:var(--blue);font-weight:500}
+.p-toep{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}
+.p-toep div{border:1px solid var(--rule);background:#fff;padding:8px;font-family:var(--disp);text-transform:uppercase;font-size:12px;color:var(--dark)}
+.p-toep div.nieuw{border-color:var(--cyan);background:var(--lightblue)}
+
+.p-versies{display:flex;gap:0;flex-wrap:wrap;background:var(--void);padding:4px;width:max-content;max-width:100%}
+.p-versies span{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:#fff;padding:7px 10px}
+.p-versies span.aan{background:var(--cyan);color:var(--void)}
+.p-versies span.weg{color:rgba(255,255,255,.28);text-decoration:line-through}
+.p-bestanden{margin-top:10px;font-family:var(--mono);font-size:11px;line-height:1.9;color:var(--ink)}
+.p-bestanden s{color:var(--mute)}
+
+/* ── de balk onderaan ─────────────────────────────────────── */
+.balk-onder{position:fixed;left:0;right:0;bottom:0;background:var(--dark);color:#fff;z-index:50;box-shadow:0 -8px 24px rgba(0,30,50,.2)}
+.balk-onder .in{max-width:1240px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.balk-onder .tel{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.balk-onder .knop{margin-left:auto;display:flex;gap:8px}
+.uitvoer{max-width:1240px;margin:0 auto;padding:0 24px 14px}
+.uitvoer textarea{width:100%;min-height:230px;font-family:var(--mono);font-size:12.5px;line-height:1.55;padding:12px;border:0;background:#fff;color:var(--ink)}
+.uitvoer .rij{display:flex;gap:10px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
+.uitvoer .rij span{font-size:13px;color:rgba(255,255,255,.75)}
+.btn-licht{background:#fff;color:var(--dark)}
+.btn-licht:hover{background:var(--cyan)}
+
+@media(max-width:980px){.bgrid{grid-template-columns:1fr}.vb{border-right:0;border-bottom:1px solid var(--rule)}.p-twee{grid-template-columns:1fr}}
+
+/* lijstjes in de voorbeelden van ronde 3 */
+.p-lijst{background:#fff;border:1px solid var(--rule)}
+.p-lijst .rij{display:flex;gap:14px;align-items:baseline;padding:9px 14px;border-top:1px solid var(--rule);font-size:13.5px}
+.p-lijst .rij:first-child{border-top:0}
+.p-lijst .rij span{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);min-width:16ch}
+.p-lijst .rij b{font-family:var(--disp);font-size:15px;letter-spacing:.02em;color:var(--dark)}
+.p-lijst .rij.nieuw b{color:var(--blue)}
+.p-lijst .rij.weg b{color:var(--mute);text-decoration:line-through}
+.p-winkel{background:#fff;border:1px solid var(--rule);padding:12px 14px}
+.p-winkel .tabs{display:flex;gap:14px;font-family:var(--disp);text-transform:uppercase;font-size:13px;color:var(--mute);border-bottom:1px solid var(--rule);padding-bottom:6px}
+.p-winkel .tabs b{color:var(--dark);box-shadow:inset 0 -2px 0 var(--cyan)}
+.p-winkel .filter{margin-top:8px;display:flex;gap:6px;align-items:center;font-size:12.5px;color:var(--mute)}
+.p-winkel .filter i{font-style:normal;border:1.5px solid var(--cyan);background:var(--lightblue);padding:3px 8px;color:var(--dark);font-family:var(--mono);font-size:10px;letter-spacing:.08em}
+.p-winkel .kaarten{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+.p-winkel .kaarten div{border:1px solid var(--rule);padding:8px;font-size:12px;color:var(--ink)}
+.p-weg{margin-top:8px;font-size:12.5px;color:var(--mute)}
+code{font-family:var(--mono);font-size:12.5px;background:var(--lightblue);padding:1px 5px;color:var(--dark)}
+</style>
+</head>
+<body data-keuzeblad="cb-besluiten-12sep" data-titel="Besluiten 12 september — ronde 3">
+
+<div class="blad">
+  <a class="terug" href="besluiten-11sep-2.html">&larr; Ronde 2, beantwoord en verwerkt</a>
+  <div class="intro">
+    <h1>Besluiten, ronde 3</h1>
+    <p>Zes punten die vandaag overbleven of ontstonden. Per punt een voorstel, een voorbeeld dat meeverandert met je keuze, en een opmerkingenveld. Klik onderaan op <b>Toon mijn keuzes</b> en plak de tekst in de chat.</p>
+    <div class="gedaan">
+      <span><b>&#10003; verwerkt</b> &middot; ronde 1 en 2 &middot; <a href="besluiten-11sep-2.html" style="color:var(--blue)">ronde 2</a></span>
+      <span><b>wacht op cb</b> &middot; voorbeeldcases, prijsbandbreedte, renders, niveau per categorie</span>
+    </div>
+  </div>
+
+  <!-- ── 01 · het sitemapdocument ──────────────────────────── -->
+  <section class="besluit" data-besluit="01">
+    <div class="bkop"><span class="nr">01</span><h2>Het sitemapdocument bijwerken?</h2><span class="soort">document</span></div>
+    <p class="notitie">Je vroeg: <b>klopt de sitemap?</b> Nee. <code>docs/sitemap-en-flows.md</code> in de Casebuilder-repo is het voorstel van 5 augustus en kent /shop niet, splitst branches en grote partijen niet, telt 15 in plaats van 39 categorie&euml;n, kent L1/L2/L3 niet, en heeft nog /zakelijk &mdash; dat vervalt.</p>
+    <p class="voorstel">Nu bijwerken: de sitemap is waar de bouw straks op steunt, en hij loopt elke week verder achter.</p>
+    <div class="bgrid">
+      <div class="vb">
+        <span class="lab">Voorbeeld &middot; wat er verandert</span>
+        <div class="p-leeg" data-leeg>Nu: het voorstel van 5 augustus, met /zakelijk en zonder shop, branches of niveaus.</div>
+        <div class="p-deel" data-hangt="Ja, nu bijwerken" hidden>
+          <div class="p-lijst">
+            <div class="rij weg"><span>/zakelijk</span><b>vervalt</b></div>
+            <div class="rij nieuw"><span>/shop</span><b>erbij &middot; overzicht met filters</b></div>
+            <div class="rij nieuw"><span>/branches + /grote-spelers</span><b>erbij &middot; wie je bent, hoe je koopt</b></div>
+            <div class="rij nieuw"><span>/case-voor</span><b>39 categorie&euml;n in plaats van ~15</b></div>
+            <div class="rij nieuw"><span>productpagina&rsquo;s</span><b>L1, L2, L3 per categorie &middot; een pagina per maat</b></div>
+            <div class="rij nieuw"><span>/flightcases</span><b>kop, uitleg, vijf modellen</b></div>
+          </div>
+        </div>
+        <div class="p-deel" data-hangt="Pas na de designrevisie van volgende week" hidden><div class="p-leeg">Het document blijft tot na de revisie staan zoals het is; de mockups lopen dan v&oacute;&oacute;r op het document.</div></div>
+        <div class="p-deel" data-hangt="Alleen de sitemapsectie in het voortgangsdocument" hidden><div class="p-leeg">De klant ziet een kloppende sitemap in het voortgangsdocument; het losse document blijft het voorstel van augustus.</div></div>
+      </div>
+      <div class="kies">
+        <fieldset data-vraag="Sitemap">
+          <label class="optie"><input type="radio" name="d01" value="Ja, nu bijwerken"><b>Ja, nu bijwerken<span class="aanb">// aanbevolen</span></b><small>Document &eacute;n de sectie in het voortgangsdocument.</small></label>
+          <label class="optie"><input type="radio" name="d01" value="Pas na de designrevisie van volgende week"><b>Pas na de revisie</b></label>
+          <label class="optie"><input type="radio" name="d01" value="Alleen de sitemapsectie in het voortgangsdocument"><b>Alleen in het voortgangsdocument</b></label>
+        </fieldset>
+        <textarea data-noot placeholder="Opmerking (optioneel)"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 02 · wordt v2 de echte /flightcases ──────────────── -->
+  <section class="besluit" data-besluit="02">
+    <div class="bkop"><span class="nr">02</span><h2>Wordt v2 de echte /flightcases?</h2><span class="soort">ontwerp</span></div>
+    <p class="notitie">De opbouw die je koos staat in v2: <b>de kop van v1, een sectie over wat een flightcase is, en dan de vijf modellen tegelijk</b>. v1 is nog de pagina waar alles naar linkt.</p>
+    <div class="bgrid">
+      <div class="vb">
+        <span class="lab">Voorbeeld</span>
+        <div class="p-twee" data-leeg>
+          <div class="p-shot"><img src="assets/besluiten/r2-fc-v1.jpg" alt="v1" loading="lazy"><div class="onder">v1 &middot; waar nu alles naartoe linkt</div></div>
+          <div class="p-shot"><img src="assets/besluiten/r2-fc-v2.jpg" alt="v2" loading="lazy"><div class="onder">v2 &middot; de nieuwe opbouw</div></div>
+        </div>
+        <div class="p-deel" data-hangt="Ja, v2 wordt de pagina; v1 naar het archief" hidden><div class="p-shot"><img src="assets/besluiten/r2-fc-v2.jpg" alt="v2" loading="lazy"><div class="onder">v2 &middot; alle links wijzen hierheen, v1 blijft als bestand</div></div></div>
+        <div class="p-deel" data-hangt="Nee, v1 blijft tot de designrevisie" hidden><div class="p-shot"><img src="assets/besluiten/r2-fc-v1.jpg" alt="v1" loading="lazy"><div class="onder">v1 &middot; v2 blijft mockup tot de revisie</div></div></div>
+      </div>
+      <div class="kies">
+        <fieldset data-vraag="/flightcases">
+          <label class="optie"><input type="radio" name="d02" value="Ja, v2 wordt de pagina; v1 naar het archief"><b>Ja, v2 wordt de pagina<span class="aanb">// aanbevolen</span></b><small>Menu, footer en tegels gaan naar v2 wijzen.</small></label>
+          <label class="optie"><input type="radio" name="d02" value="Nee, v1 blijft tot de designrevisie"><b>Nee, v1 blijft</b></label>
+        </fieldset>
+        <textarea data-noot placeholder="Opmerking (optioneel)"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 03 · de pdf's ─────────────────────────────────────── -->
+  <section class="besluit" data-besluit="03">
+    <div class="bkop"><span class="nr">03</span><h2>De pdf&rsquo;s van de productpagina</h2><span class="soort">snel</span></div>
+    <p class="notitie">Je vroeg om <b>L1, L2 en L3 apart als pdf</b> voor volgende week. Ze staan in de repo, maar ze zijn zwaar: samen 12 MB, omdat de foto&rsquo;s en de kist er op volle resolutie in zitten.</p>
+    <div class="bgrid">
+      <div class="vb">
+        <span class="lab">Voorbeeld &middot; wat er in de repo staat</span>
+        <div class="p-lijst" data-leeg>
+          <div class="rij"><span>product-L1.pdf</span><b>4,5 MB</b></div>
+          <div class="rij"><span>product-L2.pdf</span><b>3,6 MB</b></div>
+          <div class="rij"><span>product-L3.pdf</span><b>3,8 MB</b></div>
+        </div>
+        <div class="p-deel" data-hangt="Houden zoals ze zijn" hidden><div class="p-lijst">
+          <div class="rij"><span>product-L1.pdf</span><b>4,5 MB</b></div><div class="rij"><span>product-L2.pdf</span><b>3,6 MB</b></div><div class="rij"><span>product-L3.pdf</span><b>3,8 MB</b></div></div>
+          <p class="p-weg">Scherp op een groot scherm, en zwaar om te mailen.</p></div>
+        <div class="p-deel" data-hangt="Lichter maken (±0,5 MB per stuk)" hidden><div class="p-lijst">
+          <div class="rij nieuw"><span>product-L1.pdf</span><b>~0,5 MB</b></div><div class="rij nieuw"><span>product-L2.pdf</span><b>~0,4 MB</b></div><div class="rij nieuw"><span>product-L3.pdf</span><b>~0,4 MB</b></div></div>
+          <p class="p-weg">Zelfde pagina, foto&rsquo;s kleiner ingesloten. Prima op een scherm en in een mail.</p></div>
+        <div class="p-deel" data-hangt="Uit de repo; ik lever ze los aan" hidden><div class="p-leeg">De pdf&rsquo;s gaan uit de repo; je krijgt ze als bestand, bijvoorbeeld via Drive.</div></div>
+      </div>
+      <div class="kies">
+        <fieldset data-vraag="Pdf's">
+          <label class="optie"><input type="radio" name="d03" value="Lichter maken (±0,5 MB per stuk)"><b>Lichter maken<span class="aanb">// aanbevolen</span></b><small>Zelfde pagina, tien keer kleiner.</small></label>
+          <label class="optie"><input type="radio" name="d03" value="Houden zoals ze zijn"><b>Houden zoals ze zijn</b></label>
+          <label class="optie"><input type="radio" name="d03" value="Uit de repo; ik lever ze los aan"><b>Uit de repo</b></label>
+        </fieldset>
+        <textarea data-noot placeholder="Opmerking (optioneel)"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 04 · zoekwoord bij tabwissel ──────────────────────── -->
+  <section class="besluit" data-besluit="04">
+    <div class="bkop"><span class="nr">04</span><h2>Het zoekwoord als je van tabblad wisselt</h2><span class="soort">ontwerp</span></div>
+    <p class="notitie">Nieuw sinds vandaag: je komt met een zoekwoord in de shop. <b>Nu blijft dat woord staan als je een ander tabblad kiest</b>, dus je ziet daar alleen de treffers.</p>
+    <div class="bgrid">
+      <div class="vb">
+        <span class="lab">Voorbeeld &middot; je zocht &ldquo;gitaar&rdquo; en klikt op AV &amp; licht</span>
+        <div class="p-winkel" data-leeg><div class="tabs"><span>Backline</span><b>AV &amp; licht</b><span>Broadcast</span></div><div class="filter">Zoekwoord <i>gitaar &times;</i> &middot; 0 cases</div><div class="kaarten"><div style="grid-column:1/-1;color:var(--mute)">Geen gitaarcases in AV &amp; licht</div></div></div>
+        <div class="p-winkel" data-hangt="Het woord blijft staan (zoals nu)" hidden><div class="tabs"><span>Backline</span><b>AV &amp; licht</b><span>Broadcast</span></div><div class="filter">Zoekwoord <i>gitaar &times;</i> &middot; 0 cases</div><div class="kaarten"><div style="grid-column:1/-1;color:var(--mute)">Geen gitaarcases in AV &amp; licht &mdash; haal het woord weg om alles te zien</div></div></div>
+        <div class="p-winkel" data-hangt="Het woord vervalt zodra je een ander tabblad kiest" hidden><div class="tabs"><span>Backline</span><b>AV &amp; licht</b><span>Broadcast</span></div><div class="filter">Alle vaste cases &middot; 10 cases</div><div class="kaarten"><div>Robe Robin 600</div><div>Martin MAC Aura</div><div>Clay Paky Sharpy</div></div></div>
+      </div>
+      <div class="kies">
+        <fieldset data-vraag="Zoekwoord bij tabwissel">
+          <label class="optie"><input type="radio" name="d04" value="Het woord vervalt zodra je een ander tabblad kiest"><b>Vervalt bij wisselen<span class="aanb">// aanbevolen</span></b><small>Een tabblad kiezen is zelf een zoekopdracht.</small></label>
+          <label class="optie"><input type="radio" name="d04" value="Het woord blijft staan (zoals nu)"><b>Blijft staan</b><small>Zoals het nu werkt.</small></label>
+        </fieldset>
+        <textarea data-noot placeholder="Opmerking (optioneel)"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 05 · v9 als alternatief ───────────────────────────── -->
+  <section class="besluit" data-besluit="05">
+    <div class="bkop"><span class="nr">05</span><h2>Blijft v9 als alternatief op de vergelijkpagina?</h2><span class="soort">snel</span></div>
+    <p class="notitie">Op de homepagevergelijking staan <b>v1 en v2 als uitgangspunt en v9 als alternatief</b>. In de versiebalk staan sinds vandaag alleen nog v1 en v2.</p>
+    <div class="bgrid">
+      <div class="vb">
+        <span class="lab">Voorbeeld &middot; de vergelijkpagina</span>
+        <div class="p-lijst" data-leeg><div class="rij"><span>Rij 1</span><b>v1 &middot; v2</b></div><div class="rij"><span>Rij 2</span><b>v9 als alternatief</b></div><div class="rij"><span>Opzij</span><b>negen afvallers, ingeklapt</b></div></div>
+        <div class="p-deel" data-hangt="Ja, tot de designrevisie" hidden><div class="p-lijst"><div class="rij"><span>Rij 1</span><b>v1 &middot; v2</b></div><div class="rij"><span>Rij 2</span><b>v9 als alternatief</b></div><div class="rij"><span>Opzij</span><b>negen afvallers, ingeklapt</b></div></div></div>
+        <div class="p-deel" data-hangt="Nee, v9 gaat naar de afvallers" hidden><div class="p-lijst"><div class="rij"><span>Rij 1</span><b>v1 &middot; v2</b></div><div class="rij weg"><span>Rij 2</span><b>vervalt</b></div><div class="rij"><span>Opzij</span><b>tien afvallers, ingeklapt</b></div></div></div>
+      </div>
+      <div class="kies">
+        <fieldset data-vraag="v9">
+          <label class="optie"><input type="radio" name="d05" value="Ja, tot de designrevisie"><b>Ja, tot de revisie<span class="aanb">// aanbevolen</span></b><small>Een alternatief naast het uitgangspunt houdt de keuze open.</small></label>
+          <label class="optie"><input type="radio" name="d05" value="Nee, v9 gaat naar de afvallers"><b>Nee, naar de afvallers</b></label>
+        </fieldset>
+        <textarea data-noot placeholder="Opmerking (optioneel)"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 06 · beeld in het menu tot de renders er zijn ─────── -->
+  <section class="besluit" data-besluit="06">
+    <div class="bkop"><span class="nr">06</span><h2>Welk beeld in het menu, tot de renders er zijn</h2><span class="soort">ontwerp</span></div>
+    <p class="notitie">Het menu met beeld staat sinds vandaag in de balk, met de <b>modelfoto&rsquo;s</b>. In de mockup stond er een stilstaande kist. De renders uit de configurator moeten nog van CaseBuilder komen.</p>
+    <div class="bgrid">
+      <div class="vb">
+        <span class="lab">Voorbeeld &middot; het menu zoals het nu opent</span>
+        <div class="p-shot" data-leeg><img src="assets/besluiten/r3-menu-fotos.jpg" alt="Menu met modelfoto's" loading="lazy"><div class="onder">Nu &middot; modelfoto&rsquo;s</div></div>
+        <div class="p-shot" data-hangt="De modelfoto's houden" hidden><img src="assets/besluiten/r3-menu-fotos.jpg" alt="Menu met modelfoto's" loading="lazy"><div class="onder">Modelfoto&rsquo;s &middot; echte kisten, ongelijke uitsnede</div></div>
+        <div class="p-shot" data-hangt="De stilstaande kist, tot de renders er zijn" hidden><img src="assets/besluiten/r2-menu-voorstel.jpg" alt="Menu met stilstaande kist" loading="lazy"><div class="onder">Kist &middot; gelijke vorm, geen foto</div></div>
+      </div>
+      <div class="kies">
+        <fieldset data-vraag="Beeld in het menu">
+          <label class="optie"><input type="radio" name="d06" value="De modelfoto's houden"><b>Modelfoto&rsquo;s houden<span class="aanb">// aanbevolen</span></b><small>Echte kisten; renders vervangen ze later.</small></label>
+          <label class="optie"><input type="radio" name="d06" value="De stilstaande kist, tot de renders er zijn"><b>De stilstaande kist</b><small>Vijf keer dezelfde vorm en uitsnede.</small></label>
+        </fieldset>
+        <textarea data-noot placeholder="Opmerking (optioneel)"></textarea>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="balk-onder">
+  <div class="uitvoer" data-uitvoer hidden>
+    <div class="rij" style="padding-top:14px"><span>Kopieer deze tekst en plak hem in de chat.</span><button type="button" class="btn btn-licht btn-sm" data-kopieer>Kopieer</button><span data-gekopieerd></span></div>
+    <textarea data-uit readonly aria-label="Je keuzes als tekst"></textarea>
+  </div>
+  <div class="in">
+    <span class="tel" data-tel></span>
+    <div class="knop">
+      <button type="button" class="btn btn-licht btn-sm" data-wis>Alles wissen</button>
+      <button type="button" class="btn btn-pri btn-sm" data-toon aria-expanded="false">Toon mijn keuzes</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   Het engine-script van de skill keuzewerkblad (template.html): keuzes
+   onthouden, voorbeelden laten meebewegen (data-hangt, data-leeg),
+   tellen, en de tekst onderaan. Alles via textContent en value.
+   ══════════════════════════════════════════════════════════════ */
+(function () {
+  function q(s, r) { return (r || document).querySelector(s); }
+  function qa(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  var SLEUTEL = document.body.dataset.keuzeblad || 'keuzeblad';
+  var TITEL = document.body.dataset.titel || 'Besluiten';
+  var secties = qa('[data-besluit]');
+
+  function lees() { try { return JSON.parse(localStorage.getItem(SLEUTEL)) || {}; } catch (e) { return {}; } }
+  function bewaar(d) { try { localStorage.setItem(SLEUTEL, JSON.stringify(d)); } catch (e) {} }
+
+  var oud = lees();
+  qa('.kies input').forEach(function (i) {
+    var v = oud[i.name];
+    if (v == null) return;
+    i.checked = Array.isArray(v) ? v.indexOf(i.value) > -1 : v === i.value;
+  });
+  secties.forEach(function (s) {
+    var t = q('textarea[data-noot]', s);
+    if (t && oud['noot ' + s.dataset.besluit]) t.value = oud['noot ' + s.dataset.besluit];
+  });
+
+  function verzamel() {
+    var d = {};
+    qa('.kies input:checked').forEach(function (i) {
+      if (i.type === 'radio') d[i.name] = i.value; else (d[i.name] = d[i.name] || []).push(i.value);
+    });
+    secties.forEach(function (s) {
+      var t = q('textarea[data-noot]', s);
+      if (t && t.value.trim()) d['noot ' + s.dataset.besluit] = t.value;
+    });
+    return d;
+  }
+
+  function alsTekst() {
+    var r = [TITEL, ''];
+    secties.forEach(function (s) {
+      qa('fieldset', s).forEach(function (f) {
+        var g = qa('input:checked', f).map(function (i) { return i.value; });
+        r.push(s.dataset.besluit + ' · ' + f.dataset.vraag + ': ' + (g.length ? g.join(' + ') : '— nog niet gekozen'));
+      });
+      var t = q('textarea[data-noot]', s);
+      if (t && t.value.trim()) r.push('   opmerking: ' + t.value.trim().replace(/\s+/g, ' '));
+    });
+    return r.join('\n');
+  }
+
+  var tel = q('[data-tel]'), uit = q('[data-uit]');
+  function werkBij() {
+    var d = verzamel();
+    bewaar(d);
+    var klaar = 0;
+    secties.forEach(function (s) {
+      var aan = qa('.kies input:checked', s).map(function (i) { return i.value; });
+      qa('[data-hangt]', s).forEach(function (el) { el.hidden = aan.indexOf(el.dataset.hangt) < 0; });
+      qa('[data-leeg]', s).forEach(function (el) { el.hidden = aan.length > 0; });
+      var af = qa('fieldset', s).every(function (f) { return !!q('input:checked', f); });
+      s.classList.toggle('gekozen', af);
+      if (af) klaar++;
+    });
+    tel.textContent = klaar + ' van ' + secties.length + ' besluiten gekozen';
+    uit.value = alsTekst();
+    document.dispatchEvent(new CustomEvent('keuzeblad:wijzig', { detail: d }));
+  }
+  document.addEventListener('change', function (e) { if (e.target.closest('.kies')) werkBij(); });
+  document.addEventListener('input', function (e) { if (e.target.matches('textarea[data-noot]')) werkBij(); });
+
+  var paneel = q('[data-uitvoer]'), toon = q('[data-toon]');
+  toon.addEventListener('click', function () {
+    paneel.hidden = !paneel.hidden;
+    toon.setAttribute('aria-expanded', String(!paneel.hidden));
+    toon.textContent = paneel.hidden ? 'Toon mijn keuzes' : 'Verberg';
+  });
+  q('[data-kopieer]').addEventListener('click', function () {
+    var m = q('[data-gekopieerd]');
+    function gelukt() { m.textContent = 'Gekopieerd.'; }
+    function handmatig() { uit.focus(); uit.select(); m.textContent = 'Geselecteerd — kopieer met Cmd+C.'; }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(uit.value).then(gelukt, handmatig);
+    else handmatig();
+  });
+  q('[data-wis]').addEventListener('click', function () {
+    if (!confirm('Alle keuzes en opmerkingen wissen?')) return;
+    qa('.kies input').forEach(function (i) { i.checked = false; });
+    qa('textarea[data-noot]').forEach(function (t) { t.value = ''; });
+    try { localStorage.removeItem(SLEUTEL); } catch (e) {}
+    werkBij();
+  });
+
+  werkBij();
+})();
+</script>
+</body>
+</html>
