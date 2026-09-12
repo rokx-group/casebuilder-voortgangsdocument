@@ -1632,10 +1632,10 @@
         <div class="mt af"><div class="mtop"><span class="mn">2a</span><h4>Minimale frontend om een geconfigureerd product te bestellen</h4><p>Gebouwd: productpagina, winkelwagen, afrekenen en de orderpagina staan in de klantrepo (PR #12 en #16). De configurator-embed loopt via <strong>postMessage</strong> &mdash; hij stuurt een configuratie-id, wij halen de prijs server-side op bij de read-API van CaseBuilder. Geen POST-integratie dus.</p></div><span class="tag">afgerond</span></div>
         <div class="mt cb"><div class="mtop"><span class="mn">2b</span><h4>We zien de order terug in het webshopportaal</h4><p>Hangt op het Magento-orderendpoint en de watchdog-koppeling met cb_core_v2 — beide van CaseBuilder.</p></div><span class="tag">wacht op cb</span></div>
         <div class="mt af"><div class="mtop"><span class="mn">3</span><h4>Stresstest — afgerond</h4><p>Medusa blijft binnen alle grenzen; het knelpunt zit in de frontend, die álle producten ophaalt en in het geheugen filtert. De oorzaak is bekend en de drie ingrepen staan vast — dat is <strong>bouwwerk, geen onderzoek meer</strong>.</p></div><span class="tag">afgerond</span></div>
-        <div class="mt af"><div class="mtop"><span class="mn">4</span><h4>Sitemap, wireframes en user flows uitgestippeld</h4><p>Zestien sjablonen, twintig besteltaken en de volledige nieuwe boom liggen er; vijftien sjablonen zijn getekend.</p></div><span class="tag">afgerond</span></div>
+        <div class="mt af"><div class="mtop"><span class="mn">4</span><h4>Sitemap, wireframes en user flows uitgestippeld</h4><p>Achttien sjablonen, twintig besteltaken en de volledige nieuwe boom liggen er; zeventien sjablonen zijn getekend.</p></div><span class="tag">afgerond</span></div>
         <div class="mt gepland"><div class="mtop"><span class="mn">4</span><h4>API en endpoint klaar</h4><p>De eigen Casebuilder API-middleware uit opdracht 1595 zit <strong>niet</strong> in de MVP: de site praat rechtstreeks met Medusa, en de prijs van een configuratie halen we server-side op bij de read-API van CaseBuilder. Blijft staan als plan voor later.</p></div><span class="tag">vervalt voor mvp</span></div>
         <div class="mt gepland"><div class="mtop"><span class="mn">4</span><h4>Hoofdtemplates staan in de CMS</h4><p>Sanity-templates en de blokkenbibliotheek — oktober.</p></div><span class="tag">gepland</span></div>
-        <div class="mt loopt"><div class="mtop"><span class="mn">5a</span><h4>Designprototype klaar</h4><p>Twaalf van de zestien sjablonen hebben een ontwerp. Nog niet: formulier, bevestiging, account, checkout en de foutpagina.</p></div><span class="tag">loopt</span></div>
+        <div class="mt loopt"><div class="mtop"><span class="mn">5a</span><h4>Designprototype klaar</h4><p>Dertien van de achttien sjablonen hebben een ontwerp. Nog niet: bevestiging, account, checkout en de foutpagina; de shop heeft er wel een maar nog geen wireframe-koppeling in de ontwerpweergave.</p></div><span class="tag">loopt</span></div>
         <div class="mt gepland"><div class="mtop"><span class="mn">5b</span><h4>Website usability-test</h4><p>Nog niet belegd. Vraagt een werkend prototype en deelnemers uit de doelgroep.</p></div><span class="tag">te plannen</span></div>
         <div class="mt gepland"><div class="mtop"><span class="mn">6</span><h4>Eerste contentpagina&#39;s live</h4><p>Vraagt de blokkenbibliotheek én de vertaalbeslissing — beide staan nog open.</p></div><span class="tag">gepland</span></div>
       </div>
@@ -2478,19 +2478,21 @@
     <header class="masthead">
       <span class="eyebrow">CaseBuilder · ontwerpfase</span>
       <h1>Wireframes</h1>
-      <p class="lede">Zestien sjablonen dekken de hele site; vijftien zijn er getekend, de foutpagina (404/410) nog niet. Geen plaatjes maar structuur: wat er op het scherm staat en in welke volgorde. Kies er links één.</p>
+      <p class="lede">Achttien sjablonen dekken de hele site; zeventien zijn er getekend, de foutpagina (404/410) nog niet. Geen plaatjes maar structuur: wat er op het scherm staat en in welke volgorde. Kies er links één.</p>
     </header>
 
     <div class="wflayout">
       <nav class="wfnav" aria-label="Sjablonen">
         <span class="wfgroup">Instappen en configureren</span>
         <button class="wfitem" type="button" data-wf="homepage"><span class="u">/</span><span class="m"><span class="t">homepage</span><span class="c">1</span></span></button>
-        <span class="wftak">/case-voor<span class="n">1 pagina &middot; index van 38 categorie&euml;n &middot; ontwerp klaar, wireframe volgt</span></span>
+        <button class="wfitem" type="button" data-wf="shop"><span class="u">/shop</span><span class="m"><span class="t">shop</span><span class="c">1</span></span></button>
+        <span class="wftak">/case-voor<span class="n">1 pagina &middot; index van 39 categorie&euml;n &middot; ontwerp klaar, wireframe volgt</span></span>
         <button class="wfitem kind" type="button" data-wf="case-voor-categorie"><span class="u"><span class="pfx">/case-voor</span>/{categorie}</span><span class="m"><span class="t">case-voor-categorie</span><span class="c">~10</span></span></button>
         <button class="wfitem kind laatst" type="button" data-wf="case-voor-resultaat"><span class="u"><span class="pfx">/case-voor</span>/{apparaat}</span><span class="m"><span class="t">case-voor-resultaat</span><span class="c">n</span></span></button>
         <button class="wfitem" type="button" data-wf="overzicht"><span class="u">/flightcases</span><span class="m"><span class="t">overzicht</span><span class="c">1</span></span></button>
         <button class="wfitem kind laatst" type="button" data-wf="casetype"><span class="u"><span class="pfx">/flightcases</span>/{model}</span><span class="m"><span class="t">casetype</span><span class="c">5</span></span></button>
         <button class="wfitem" type="button" data-wf="tool"><span class="u">/flightcases/configurator</span><span class="m"><span class="t">tool</span><span class="c">2</span></span></button>
+        <button class="wfitem" type="button" data-wf="aanvraag"><span class="u">/case-aanvragen</span><span class="m"><span class="t">aanvraag</span><span class="c">1</span></span></button>
         <button class="wfitem" type="button" data-wf="formulier"><span class="u">/laten-controleren</span><span class="m"><span class="t">formulier</span><span class="c">3</span></span></button>
         <button class="wfitem kind laatst" type="button" data-wf="bevestiging"><span class="u"><span class="pfx">/laten-controleren</span>/bedankt</span><span class="m"><span class="t">bevestiging</span><span class="c">1</span></span></button>
         <span class="wfgroup">Catalogus</span>
@@ -3524,6 +3526,39 @@
 </footer>
 <!-- @einde:ontwerpweergave-html:content-v1 -->
       </div>
+</figure>
+<figure class="wf" data-mode="wire" hidden id="wf-shop">
+  <figcaption><h3>/shop</h3><span class="wfmeta">shop &middot; 1 pagina · niveau 1: vaste cases per toepassing</span><span class="wftoggle"><button type="button" data-mode="wire" data-ver="wireframe" aria-pressed="true">wireframe</button><button type="button" disabled>v1 &middot; volgt</button><a class="wffull" href="mockups/shop-v1.html" target="_blank" rel="noopener" data-wire="mockups/shop-v1.html" data-design="mockups/shop-v1.html">volledig scherm &#8599;</a></span></figcaption>
+  <div class="wfframe"><div class="wfurl">/shop &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
+  <ol class="wflijst">
+    <li><span class="n">01</span><span class="s">Header</span><span class="u">caseBuilder.com · zoek op case, onderdeel of artikelnummer · inloggen &middot; winkelwagen</span></li>
+    <li><span class="n">02</span><span class="s">Nav</span><span class="u">Case aanvragen &middot; Wat ga je vervoeren? &middot; Flightcases &middot; Branches &middot; Service &middot; <i>Shop</i> · zoekveld · direct advies &middot; NL</span></li>
+    <li><span class="n">03</span><span class="s">Kop</span><span class="u">H1 &middot; de toepassing · intro &middot; elke case hier is gebouwd voor &eacute;&eacute;n apparaat en heeft vaste maten; je kiest kleur en logo</span></li>
+    <li><span class="n">04</span><span class="s">Tabbladen</span><span class="u">zes toepassingen met aantal &middot; onderdelen achteraan, die linkt naar het eigen overzicht</span></li>
+    <li><span class="n">05</span><span class="s">Filters</span><span class="u">binnen deze toepassing: categorie &middot; merk &mdash; blijven per tabblad bewaard · geldt overal: model &middot; prijs &middot; levertijd &middot; aan te passen &middot; branche &mdash; lopen mee</span></li>
+    <li><span class="n">06</span><span class="s">Balk</span><span class="u">aantal cases &middot; prijzen excl. btw &middot; sortering · actieve filters als chips die je wegklikt</span></li>
+    <li><span class="n">07</span><span class="s">Raster</span><span class="u">productkaart &times; n &mdash; beeld &middot; categorie en merk &middot; naam &middot; waar hij voor gebruikt wordt &middot; prijs &middot; kleur en logo naar keuze &middot; levertijd<span class="vouwmerk">vouw &middot; 900 px &mdash; hieronder moet je scrollen</span></span></li>
+    <li><span class="n">08</span><span class="s">Op jouw maat</span><span class="u">tegel achteraan het raster &mdash; staat jouw apparaat er niet bij, of wil je een andere maat? naar de configurator (niveau 2)</span></li>
+    <li><span class="n">09</span><span class="s">Aanvraag</span><span class="u">strook onderaan &mdash; geen ontwerp? stuur je schets of datasheet</span></li>
+    <li><span class="n">10</span><span class="s">Footer</span><span class="u">caseBuilder.com · Proflite BV, Doesburg · +31 (0)575 575734 · shop &middot; flightcases &middot; branches &middot; service &middot; voorwaarden &middot; privacy &middot; taal</span></li>
+  </ol>
+  </div>
+</figure>
+<figure class="wf" data-mode="wire" hidden id="wf-aanvraag">
+  <figcaption><h3>/case-aanvragen</h3><span class="wfmeta">aanvraag &middot; 1 pagina · zeventig procent van de orders begint hier</span><span class="wftoggle"><button type="button" data-mode="wire" data-ver="wireframe" aria-pressed="true">wireframe</button><button type="button" disabled>v1 &middot; volgt</button><a class="wffull" href="mockups/case-aanvragen-v1.html" target="_blank" rel="noopener" data-wire="mockups/case-aanvragen-v1.html" data-design="mockups/case-aanvragen-v1.html">volledig scherm &#8599;</a></span></figcaption>
+  <div class="wfframe"><div class="wfurl">/case-aanvragen &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
+  <ol class="wflijst">
+    <li><span class="n">01</span><span class="s">Header</span><span class="u">caseBuilder.com · zoek op case, onderdeel of artikelnummer · inloggen &middot; winkelwagen</span></li>
+    <li><span class="n">02</span><span class="s">Nav</span><span class="u"><i>Case aanvragen</i> &middot; Wat ga je vervoeren? &middot; Flightcases &middot; Branches &middot; Service &middot; Shop · zoekveld · direct advies &middot; NL</span></li>
+    <li><span class="n">03</span><span class="s">Kop</span><span class="u">H1 &middot; stuur je schets of maten · intro &middot; je krijgt een tekening met prijs terug, dezelfde werkdag</span></li>
+    <li><span class="n">04</span><span class="s">Formulier</span><span class="u">sleepzone voor schets, datasheet of foto &middot; wat erin gaat &middot; aantal &middot; wanneer je hem nodig hebt &middot; budget (optioneel, scheelt een ronde) &middot; e-mail en telefoon<span class="vouwmerk">vouw &middot; 900 px &mdash; hieronder moet je scrollen</span></span></li>
+    <li><span class="n">05</span><span class="s">Wat er daarna gebeurt</span><span class="u">drie stappen &mdash; een casebouwer tekent · je krijgt tekening en prijs · akkoord, dan gaat hij de werkplaats in</span></li>
+    <li><span class="n">06</span><span class="s">Waarom hier</span><span class="u">geen ontwerp nodig &middot; series en afwijkend werk &middot; keuringsplichtig transport</span></li>
+    <li><span class="n">07</span><span class="s">Uitwegen</span><span class="u">weet je je maten al? naar de configurator · zoek je een vaste case? naar de shop</span></li>
+    <li><span class="n">08</span><span class="s">Vertrouwen</span><span class="u">20+ jaar &middot; eigen werkplaats in Doesburg &middot; op rekening voor zakelijke klanten</span></li>
+    <li><span class="n">09</span><span class="s">Footer</span><span class="u">caseBuilder.com · Proflite BV, Doesburg · +31 (0)575 575734 · shop &middot; flightcases &middot; branches &middot; service &middot; voorwaarden &middot; privacy &middot; taal</span></li>
+  </ol>
+  </div>
 </figure>
 <figure class="wf" data-mode="wire" hidden id="wf-account">
   <figcaption><h3>/account/orders</h3><span class="wfmeta">account &middot; 6 pagina&#39;s · het klantportaal in de frontend</span><span class="wftoggle"><button type="button" data-mode="wire" data-ver="wireframe" aria-pressed="true">wireframe</button><button type="button" disabled>v1 &middot; volgt</button><a class="wffull" href="mockups/account.html" target="_blank" rel="noopener" data-wire="mockups/account.html" data-design="mockups/account-v1.html">volledig scherm &#8599;</a></span></figcaption>
@@ -5692,13 +5727,13 @@
       </div>
 </figure>
         <figure class="wf" data-mode="wire" hidden id="wf-tool">
-  <figcaption><h3>/flightcases/configurator</h3><span class="wfmeta">tool &middot; 2 pagina&#39;s · configurator en fit-finder</span><span class="wftoggle"><button type="button" data-mode="wire" data-ver="wireframe" aria-pressed="true">wireframe</button><button type="button" disabled>v1 &middot; volgt</button><a class="wffull" href="mockups/configurator.html" target="_blank" rel="noopener" data-wire="mockups/configurator.html" data-design="mockups/configurator-v1.html">volledig scherm &#8599;</a></span></figcaption>
+  <figcaption><h3>/flightcases/configurator</h3><span class="wfmeta">tool &middot; 2 pagina&#39;s · de configurator in twee standen: beperkt (niveau 2) en volledig (niveau 3)</span><span class="wftoggle"><button type="button" data-mode="wire" data-ver="wireframe" aria-pressed="true">wireframe</button><button type="button" disabled>v1 &middot; volgt</button><a class="wffull" href="mockups/configurator.html" target="_blank" rel="noopener" data-wire="mockups/configurator.html" data-design="mockups/configurator-v1.html">volledig scherm &#8599;</a></span></figcaption>
   <div class="wfframe"><div class="wfurl">/configurator &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <ol class="wflijst">
     <li><span class="n">01</span><span class="s">Minimale header</span><span class="u">minimale header &middot; logo &middot; stap terug &middot; hulp &#9742;</span></li>
-    <li><span class="n">02</span><span class="s">Stappenbalk</span><span class="u">1 model &#10003; &middot; 2 afmetingen &middot; 3 uitvoering &middot; 4 hardware &middot; 5 overzicht</span></li>
-    <li><span class="n">03</span><span class="s">Werkvlak</span><span class="u">live preview van de case · invoervelden voor deze stap · prijs &mdash; live bijgewerkt, server-side bepaald · aantal [ 1 ] &mdash; ontbreekt nu · bewaren &amp; delen &rarr; /configurator/{ref} · past het niet? &rarr; laten controleren of offerte</span></li>
-    <li><span class="n">04</span><span class="s">Volgende</span><span class="u">volgende stap &rarr;<span class="vouwmerk">vouw &middot; 900 px &mdash; hieronder moet je scrollen</span></span></li>
+    <li><span class="n">02</span><span class="s">Stappenbalk</span><span class="u">1 model &#10003; &middot; 2 afmetingen &middot; 3 uitvoering &middot; 4 hardware &middot; 5 overzicht &mdash; in de beperkte stand (niveau 2) staan model en de vaste onderdelen vast en zijn alleen maten, hoeken, kleur en logo open</span></li>
+    <li><span class="n">03</span><span class="s">Werkvlak</span><span class="u">live preview van de case · invoervelden voor deze stap · wat de template vastzet staat er als regel &ldquo;vast in deze stand&rdquo; · prijs &mdash; live bijgewerkt, server-side bepaald · aantal [ 1 ] &mdash; ontbreekt nu · bewaren &amp; delen &rarr; /configurator/{ref} · past het niet? &rarr; case aanvragen</span></li>
+    <li><span class="n">04</span><span class="s">Volgende</span><span class="u">volgende stap &rarr; · meer aanpassen? &rarr; alles open (niveau 3), dezelfde configuratie blijft staan<span class="vouwmerk">vouw &middot; 900 px &mdash; hieronder moet je scrollen</span></span></li>
     <li><span class="n">05</span><span class="s">Footer</span><span class="u">caseBuilder.com · Proflite BV, Doesburg · +31 (0)575 575734 · flightcases · onderdelen · service · voorwaarden &middot; privacy &middot; taal</span></li>
   </ol></div>
   <p class="wfnote">Variant fit-finder (<code>/case-voor</code>): één vraag — wat ga je vervoeren? — met zoekveld en categorieën, die uitkomt op een resultaatpagina.</p>
@@ -6988,14 +7023,14 @@
         <div class="fhead">
           <span class="fn">03 &middot; frontend <span class="fprog" data-f="prog"></span></span>
           <h3><button class="ftopen" type="button">Website</button></h3>
-          <p>De pagina&#39;s zelf: zestien sjablonen, de navigatie, zoeken, en de verhuizing van 386 bestaande adressen.</p>
+          <p>De pagina&#39;s zelf: achttien sjablonen, de navigatie, zoeken, en de verhuizing van 386 bestaande adressen.</p>
           <div class="fstat"><span class="chip chip-move">ontwerp loopt</span><span class="chip chip-open">bouw okt</span></div>
           <span class="fmeer">Openen &rarr;</span>
         </div>
         <div class="fbody">
           <span class="flab">Wat erin hoort</span>
           <ul class="fcheck">
-            <li><label><input type="checkbox" data-id="web-sjablonen"><span>De zestien sjablonen uit de sitemap &mdash; zie het tabblad Wireframes</span></label></li>
+            <li><label><input type="checkbox" data-id="web-sjablonen"><span>De achttien sjablonen uit de sitemap &mdash; zie het tabblad Wireframes</span></label></li>
             <li><label><input type="checkbox" data-id="web-nav"><span>Nieuwe navigatie: onderdelen blijven, maar niet meer als grootste tak</span></label></li>
             <li><label><input type="checkbox" data-id="web-zoek"><span>Zoeken op case, onderdeel &eacute;n apparatuur, met facetten die ertoe doen</span></label></li>
             <li><label><input type="checkbox" data-id="web-casevoor"><span><code>/case-voor</code> als productcatalogus: categorie plus een pagina per apparaat, met een directe bestelroute</span></label></li>
@@ -7690,7 +7725,7 @@
           <div class="tlwhen">t/m aug</div><div class="tlaxis"></div>
           <div class="tlbody">
             <h4>Analyse, architectuur en stack<span class="tlfase">definitie</span></h4>
-            <p>De live site in kaart, de scheidslijn bij de casebuilder api vastgelegd, Medusa en Sanity ingericht en de configurator-handoff aangetoond. Sitemap van 386 naar 330 pagina&#39;s over zestien sjablonen.</p>
+            <p>De live site in kaart, de scheidslijn bij de casebuilder api vastgelegd, Medusa en Sanity ingericht en de configurator-handoff aangetoond. Sitemap van 386 naar ongeveer 632 pagina&#39;s over zestien sjablonen &mdash; inmiddels achttien.</p>
           </div>
         </div>
 
