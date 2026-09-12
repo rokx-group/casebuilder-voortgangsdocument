@@ -119,7 +119,7 @@
     /* De drie deuren die er altijd staan. */
     function altijd(tekst) {
       return [
-        { naam: 'We hebben het', groep: 'zoek in de shop', pagina: WINKEL, altijd: true },
+        { naam: 'We hebben het', groep: 'zoek in de shop', pagina: WINKEL + '?zoek=' + encodeURIComponent(tekst), altijd: true },
         { naam: 'Jij maakt het', groep: 'in de configurator', pagina: CONFIGURATOR, altijd: true },
         { naam: 'Wij maken het', groep: 'case aanvragen', pagina: AANVRAAG + '?vervoeren=' + encodeURIComponent(tekst), altijd: true }
       ];

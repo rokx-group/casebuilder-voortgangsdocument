@@ -127,6 +127,21 @@
 .aan .wis{border:0;background:none;cursor:pointer;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--mute);padding:4px}
 .aan .wis:hover{color:var(--dark)}
+/* Verder waar je was (besloten 12 september): stond eerst op de
+   homepage, staat nu hier — in de shop kijk je rond, dus hier heeft
+   "verder waar je was" betekenis. Gedrag: assets/laatst.js. */
+.verder{background:var(--lightblue);border-bottom:1px solid var(--rule);padding:0}
+.verder .wrap{display:flex;align-items:center;gap:18px;padding-top:12px;padding-bottom:12px;flex-wrap:wrap}
+.verder .ey{margin:0}
+.verder-product{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:17px;letter-spacing:.03em;color:var(--dark)}
+.verder-product::after{content:" \2192";color:var(--blue)}
+.verder-cat{font-size:14px;color:var(--blue);border-bottom:1px solid var(--rule)}
+.verder-weg{margin-left:auto;background:none;border:0;cursor:pointer;font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.verder-weg:hover{color:var(--dark)}
+/* Het zoekwoord waarmee je binnenkwam: een chip zoals de filters, maar
+   met het woord zelf erin. */
+.chip.zoekchip{border-color:var(--dark)}
 .melding{font-size:13px;color:var(--ink);background:var(--lightblue);box-shadow:inset 3px 0 0 var(--cyan);
   padding:9px 14px;margin-bottom:16px}
 
@@ -392,6 +407,15 @@
   </div>
 </div>
 
+<div class="verder" data-verder hidden>
+  <div class="wrap">
+    <span class="ey ey-dark">// Verder waar je was</span>
+    <a class="verder-product" data-verder-product href="#"></a>
+    <a class="verder-cat" data-verder-cat href="#"></a>
+    <button type="button" class="verder-weg" data-verder-weg>Vergeet dit</button>
+  </div>
+</div>
+
 <div class="wrap">
   <div class="catlay">
     <aside class="filters" data-filters aria-label="Filters"></aside>
@@ -578,7 +602,10 @@
       waarde: function (p) { return p.branche; } }
   ];
 
-  var staat = { groep: 'backline', sort: 'populair', f: {}, bewaard: {} };
+  /* zoek komt uit ?zoek= in de URL (vanuit de suggestielijst: "we hebben
+     het"). Hij staat bewust niet in de opslag: een zoekwoord hoort bij dít
+     bezoek, een filter bij jouw voorkeur. */
+  var staat = { groep: 'backline', sort: 'populair', f: {}, bewaard: {}, zoek: '' };
   FACETTEN.forEach(function (f) { staat.f[f.id] = {}; });
 
   var el = {
@@ -598,8 +625,24 @@
   /* Past een product? Binnen een facet is het OF, tussen facetten EN.
      `behalve` laat één facet buiten beschouwing — dat is hoe de aantallen
      naast elke optie kloppen met wat je krijgt als je hem aanvinkt. */
+  /* Nederlands laat bij het meervoud een dubbele klinker vallen: gitaar
+     wordt gitaren. Wie "gitaar" typt moet "Elektrische gitaren" vinden,
+     dus vergelijken we op een vorm waarin aa/ee/oo/uu tot één letter is
+     teruggebracht — dezelfde regel als het zoekpaneel op /case-voor. */
+  function vergelijkvorm(t) {
+    return String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/(aa|ee|oo|uu)/g, function (m) { return m[0]; });
+  }
+
+  function zoekPast(p) {
+    if (!staat.zoek) return true;
+    var q = vergelijkvorm(staat.zoek);
+    return vergelijkvorm(p.naam + ' ' + p.cat + ' ' + p.merk).indexOf(q) > -1;
+  }
+
   function past(p, behalve) {
     if (p.groep !== staat.groep) return false;
+    if (!zoekPast(p)) return false;
     return FACETTEN.every(function (f) {
       if (f.id === behalve) return true;
       var aan = Object.keys(staat.f[f.id]);
@@ -679,6 +722,26 @@
   function tekenAan() {
     el.aan.textContent = '';
     var iets = false;
+    if (staat.zoek) {
+      iets = true;
+      var z = document.createElement('span');
+      z.className = 'chip on zoekchip';
+      z.setAttribute('role', 'button');
+      z.tabIndex = 0;
+      z.title = 'Zoekwoord weghalen';
+      z.textContent = 'Zoekwoord: ' + staat.zoek;
+      function zoekWeg() {
+        staat.zoek = '';
+        el.melding.hidden = true;
+        var u = new URL(location.href);
+        u.searchParams.delete('zoek');
+        history.replaceState(null, '', u.pathname + (u.search || '') + u.hash);
+        teken();
+      }
+      z.addEventListener('click', zoekWeg);
+      z.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); zoekWeg(); } });
+      el.aan.appendChild(z);
+    }
     FACETTEN.forEach(function (f) {
       Object.keys(staat.f[f.id]).forEach(function (o) {
         iets = true;
@@ -898,11 +961,35 @@
       if (c) { staat.f.cat = {}; staat.f.cat[c] = c; }
     }
   }
+  /* Binnenkomen met een zoekwoord: open het tabblad waar de meeste
+     treffers staan, en zeg hoeveel er in de andere tabbladen liggen —
+     anders lijkt het alsof de rest er niet is. */
+  function uitZoek() {
+    var q = new URLSearchParams(location.search).get('zoek');
+    if (!q) return;
+    staat.zoek = q.trim().slice(0, 60);
+    if (!staat.zoek) return;
+    var perGroep = GROEPEN.map(function (g) {
+      return { id: g.id, naam: g.naam, n: PRODUCTEN.filter(function (p) { return p.groep === g.id && zoekPast(p); }).length };
+    });
+    var beste = perGroep.slice().sort(function (a, b) { return b.n - a.n; })[0];
+    if (beste && beste.n) staat.groep = beste.id;
+    var elders = perGroep.filter(function (g) { return g.id !== staat.groep && g.n; });
+    var totaal = perGroep.reduce(function (n, g) { return n + g.n; }, 0);
+    el.melding.hidden = false;
+    el.melding.textContent = totaal
+      ? totaal + (totaal === 1 ? ' case voor ' : ' cases voor ') + '“' + staat.zoek + '”' +
+        (elders.length ? ' — ook in ' + elders.map(function (g) { return g.naam + ' (' + g.n + ')'; }).join(', ') + '.' : '.')
+      : 'Geen vaste case voor “' + staat.zoek + '”. Op maat kan hij wel: kies je eigen afmetingen, of vraag hem aan.';
+  }
+
   laad();
   uitHash();
+  uitZoek();
   teken();
 })();
 </script>
+<script src="assets/laatst.js"></script>
 <script src="assets/vouw.js"></script>
 <script src="assets/versies.js"></script>
 </body>
