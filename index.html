@@ -1632,7 +1632,7 @@
         <div class="mt af"><div class="mtop"><span class="mn">2a</span><h4>Minimale frontend om een geconfigureerd product te bestellen</h4><p>Gebouwd: productpagina, winkelwagen, afrekenen en de orderpagina staan in de klantrepo (PR #12 en #16). De configurator-embed loopt via <strong>postMessage</strong> &mdash; hij stuurt een configuratie-id, wij halen de prijs server-side op bij de read-API van CaseBuilder. Geen POST-integratie dus.</p></div><span class="tag">afgerond</span></div>
         <div class="mt cb"><div class="mtop"><span class="mn">2b</span><h4>We zien de order terug in het webshopportaal</h4><p>Hangt op het Magento-orderendpoint en de watchdog-koppeling met cb_core_v2 — beide van CaseBuilder.</p></div><span class="tag">wacht op cb</span></div>
         <div class="mt af"><div class="mtop"><span class="mn">3</span><h4>Stresstest — afgerond</h4><p>Medusa blijft binnen alle grenzen; het knelpunt zit in de frontend, die álle producten ophaalt en in het geheugen filtert. De oorzaak is bekend en de drie ingrepen staan vast — dat is <strong>bouwwerk, geen onderzoek meer</strong>.</p></div><span class="tag">afgerond</span></div>
-        <div class="mt af"><div class="mtop"><span class="mn">4</span><h4>Sitemap, wireframes en user flows uitgestippeld</h4><p>Zestien sjablonen, zeventien besteltaken en de volledige nieuwe boom liggen er; vijftien sjablonen zijn getekend.</p></div><span class="tag">afgerond</span></div>
+        <div class="mt af"><div class="mtop"><span class="mn">4</span><h4>Sitemap, wireframes en user flows uitgestippeld</h4><p>Zestien sjablonen, twintig besteltaken en de volledige nieuwe boom liggen er; vijftien sjablonen zijn getekend.</p></div><span class="tag">afgerond</span></div>
         <div class="mt gepland"><div class="mtop"><span class="mn">4</span><h4>API en endpoint klaar</h4><p>De eigen Casebuilder API-middleware uit opdracht 1595 zit <strong>niet</strong> in de MVP: de site praat rechtstreeks met Medusa, en de prijs van een configuratie halen we server-side op bij de read-API van CaseBuilder. Blijft staan als plan voor later.</p></div><span class="tag">vervalt voor mvp</span></div>
         <div class="mt gepland"><div class="mtop"><span class="mn">4</span><h4>Hoofdtemplates staan in de CMS</h4><p>Sanity-templates en de blokkenbibliotheek — oktober.</p></div><span class="tag">gepland</span></div>
         <div class="mt loopt"><div class="mtop"><span class="mn">5a</span><h4>Designprototype klaar</h4><p>Twaalf van de zestien sjablonen hebben een ontwerp. Nog niet: formulier, bevestiging, account, checkout en de foutpagina.</p></div><span class="tag">loopt</span></div>
@@ -1652,8 +1652,7 @@
             <tr><td class="mono">case-voor-categorie</td><td class="mono">/case-voor/gitaar</td>
               <td>Productcategorie &mdash; gitaarcases, rackcases, lichtcases</td><td>~15</td></tr>
             <tr><td class="mono">case-voor-resultaat</td><td class="mono">/case-voor/gibson-les-paul</td>
-              <td>Productdetail &mdash; de case voor dat apparaat: kant-en-klaar bestellen óf de maten
-                overnemen in de configurator</td><td>~300</td></tr>
+              <td>Productdetail &mdash; de case voor dat apparaat. Is er een ontwerp, dan kies je kleur en logo en reken je af (niveau 1); is dat er niet, dan is de enige knop een aanvraag. Wie een andere maat nodig heeft, gaat via een aparte ingang naar de configurator (niveau 2), met de maten van deze kist als begin</td><td>~300</td></tr>
           </tbody>
         </table>
       </div>
@@ -1931,6 +1930,13 @@
           <ul class="tree">
             <li><div class="node"><span class="path root">/</span><span class="note">homepage · drie ingangen op intentie</span></div></li>
             <li>
+              <div class="node"><span class="path root">/shop</span><span class="chip chip-new">nieuw</span><span class="note">niveau 1 &middot; vaste cases per toepassing, met filters &middot; de onderdelen horen er ook bij</span></div>
+              <ul>
+                <li><div class="node"><span class="path">/{toepassing}</span><span class="note">zes tabbladen &middot; categorie en merk blijven per tabblad bewaard</span></div></li>
+                <li><div class="node"><span class="path">?zoek=</span><span class="note">zoekwoord uit de site komt mee als chip</span></div></li>
+              </ul>
+            </li>
+            <li>
               <div class="node"><span class="path root">/flightcases</span><span class="note">overzicht · 10 modellen — vijf bestaan, vijf komen erbij</span></div>
               <ul>
                 <li><div class="node"><span class="path">/koffer</span></div></li>
@@ -1938,7 +1944,7 @@
                 <li><div class="node"><span class="path">/trunccase</span></div></li>
                 <li><div class="node"><span class="path">/rackcase-enkel-deksel</span></div></li>
                 <li><div class="node"><span class="path">/rackcase-dubbel-deksel</span></div></li>
-                <li><div class="node"><span class="path">/configurator</span><span class="note">eigen pagina, geen popup &middot; hoort bij het product dat je ermee bouwt</span></div>
+                <li><div class="node"><span class="path">/configurator</span><span class="note">eigen pagina, geen popup &middot; hoort bij het product dat je ermee bouwt &middot; niveau 2 is dezelfde configurator in een beperkte stand (maten en hoeken), niveau 3 is alles</span></div>
                   <ul>
                     <li><div class="node"><span class="path">/{ref}</span><span class="note">deelbaar &middot; flash ID in cb_core_v2</span></div></li>
                   </ul>
@@ -1948,10 +1954,10 @@
             <li>
               <div class="node"><span class="path root">/case-voor</span><span class="note">de productcatalogus · categorie en detail, allebei plat in het pad</span></div>
               <ul>
-                <li><div class="node"><span class="path">/gitaar</span><span class="note">productcategorie · ~15 stuks</span></div></li>
+                <li><div class="node"><span class="path">/gitaar</span><span class="note">productcategorie · 39 in totaal, verdeeld over zes toepassingen</span></div></li>
                 <li><div class="node"><span class="path">/19-inch-rack</span><span class="note">productcategorie</span></div></li>
                 <li><div class="node"><span class="path">/lichtapparatuur</span><span class="note">productcategorie</span></div></li>
-                <li><div class="node"><span class="path">/gibson-les-paul</span><span class="note">productdetail · ~300 stuks</span></div></li>
+                <li><div class="node"><span class="path">/gibson-les-paul</span><span class="note">productdetail · ~300 stuks &middot; is er een ontwerp, dan kleur en logo (niveau 1); zo niet, dan een aanvraag</span></div></li>
                 <li><div class="node"><span class="path">/19-inch-rack-6he</span><span class="note">productdetail</span></div></li>
                 <li><div class="node"><span class="path">/moving-head</span><span class="note">productdetail</span></div></li>
                 <li><div class="node"><span class="path">/…</span><span class="note">productdetail · groeit met het assortiment</span></div></li>
@@ -2011,7 +2017,7 @@
                 <li><div class="node"><span class="path">/verzending</span></div></li>
                 <li><div class="node"><span class="path">/zaagservice</span></div></li>
                 <li><div class="node"><span class="path">/zakelijk-bestellen</span><span class="note">op rekening · staffels · series</span></div></li>
-                <li><div class="node"><span class="path">/offerte</span><span class="note">aanvraagformulier</span></div></li>
+                <li><div class="node"><span class="path">/offerte</span><span class="note">vervalt &middot; gaat op in /case-aanvragen, anders zijn er twee formulieren voor hetzelfde</span></div></li>
                 <li><div class="node"><span class="path">/contact</span></div></li>
               </ul>
             </li>
@@ -2218,7 +2224,7 @@
   <section>
     <div class="sec-head">
       <span class="eyebrow">Toets voor de structuur</span>
-      <h2 data-rail="Besteltaken">Zeventien besteltaken</h2>
+      <h2 data-rail="Besteltaken">Twintig besteltaken</h2>
       <p>Wat iemand met een bestelintentie komt doen, in haar eigen woorden — en waar de nieuwe boom haar naartoe stuurt. De gemarkeerde regels zijn de gaten: daar heeft de structuur nog geen antwoord.</p>
     </div>
 
@@ -2231,15 +2237,15 @@
           <div class="task"><span class="num">02</span><span class="want">Ik wil precies dezelfde case als vorige keer, nog één.</span><span class="route">/account/orders → /account/herbestellen → /checkout</span></div>
           <div class="task"><span class="num">03</span><span class="want">Dezelfde case, maar één maat groter.</span><span class="route">/account/configuraties → /flightcases/configurator/{ref} → maat aanpassen</span></div>
           <div class="task"><span class="num">04</span><span class="want">Dezelfde case, maar in het blauw en met ons logo erop.</span><span class="route">/account/configuraties → /flightcases/configurator/{ref} → uitvoering<br><span class="gap">gat · bedrukking staat in geen document en niet op de live site</span></span></div>
-          <div class="task"><span class="num">05</span><span class="want">Ik wil er tien, met staffelprijs.</span><span class="route">/service/zakelijk-bestellen → /service/offerte<br><span class="gap">gat · geen aantal in de configurator</span></span></div>
+          <div class="task"><span class="num">05</span><span class="want">Ik wil er tien, met staffelprijs.</span><span class="route">/service/zakelijk-bestellen → /case-aanvragen<br><span class="gap">gat · geen aantal in de configurator</span></span></div>
         </div>
       </div>
 
       <div class="taskgroup">
         <h3>Zij weet het product, niet de maten</h3>
         <div class="tasklist">
-          <div class="task"><span class="num">06</span><span class="want">Ik weet wat erin moet, maar niet hoe groot de case moet zijn.</span><span class="route">/case-voor → resultaat → /flightcases/configurator</span></div>
-          <div class="task"><span class="num">07</span><span class="want">Mijn apparaat is te afwijkend voor de configurator.</span><span class="route">/service/offerte<br><span class="gap">gat · geen uitstap vanuit de configurator</span></span></div>
+          <div class="task"><span class="num">06</span><span class="want">Ik weet wat erin moet, maar niet hoe groot de case moet zijn.</span><span class="route">/case-voor/{apparaat} → het apparaat bepaalt de route: vaste case → kleur en logo → /checkout · andere maat → configurator (niveau 2) · geen ontwerp → /case-aanvragen</span></div>
+          <div class="task"><span class="num">07</span><span class="want">Mijn apparaat is te afwijkend voor de configurator.</span><span class="route">/case-aanvragen<br><span class="gap">gat · geen uitstap vanuit de configurator</span></span></div>
           <div class="task"><span class="num">08</span><span class="want">Ik heb hem geconfigureerd, maar klopt dit wel?</span><span class="route">/flightcases/configurator → /laten-controleren → /bedankt</span></div>
         </div>
       </div>
@@ -2249,7 +2255,7 @@
         <div class="tasklist">
           <div class="task"><span class="num">09</span><span class="want">Wat kost zoiets ongeveer, voordat ik ga klikken?</span><span class="route">/flightcases/{model} — vanafprijs op de modelpagina</span></div>
           <div class="task"><span class="num">10</span><span class="want">Welk type heb ik eigenlijk nodig?</span><span class="route">/flightcases — overzicht<br><span class="gap">gat · geen vergelijking of beslisboom</span></span></div>
-          <div class="task"><span class="num">11</span><span class="want">Ik zocht op "case voor Gibson Les Paul" en kwam hier.</span><span class="route">/case-voor/gibson-les-paul → /flightcases/configurator</span></div>
+          <div class="task"><span class="num">11</span><span class="want">Ik zocht op "case voor Gibson Les Paul" en kwam hier.</span><span class="route">/case-voor/gibson-les-paul → kleur en logo → /checkout</span></div>
         </div>
       </div>
 
@@ -2266,8 +2272,11 @@
         <h3>Zij moet het intern rondkrijgen</h3>
         <div class="tasklist">
           <div class="task"><span class="num">15</span><span class="want">Ik wil dit ontwerp intern rondsturen voordat we bestellen.</span><span class="route">/flightcases/configurator/{ref} — deelbare link, geen login nodig</span></div>
-          <div class="task"><span class="num">16</span><span class="want">Onze inkoop wil er een formele offerte bij.</span><span class="route">/flightcases/configurator/{ref} → /service/offerte → /account/offertes</span></div>
+          <div class="task"><span class="num">16</span><span class="want">Onze inkoop wil er een formele offerte bij.</span><span class="route">/flightcases/configurator/{ref} → /case-aanvragen → /account/offertes</span></div>
           <div class="task"><span class="num">17</span><span class="want">Wij willen op rekening bestellen — nieuwe klant worden.</span><span class="route">/service/zakelijk-bestellen → /account registreren</span></div>
+          <div class="task"><span class="num">18</span><span class="want">Ik wil gewoon een kant-en-klare case kopen, zonder iets aan te passen.</span><span class="route">/shop → toepassing kiezen → product → kleur en logo → /checkout</span></div>
+          <div class="task"><span class="num">19</span><span class="want">Deze case, maar dan in mijn maat.</span><span class="route">product → configurator niveau 2 (maten en hoeken, begint met de maten van deze kist) → niveau 3 voor de rest → /checkout</span></div>
+          <div class="task"><span class="num">20</span><span class="want">Ik heb alleen een schets en een datasheet.</span><span class="route">/case-aanvragen → tekening met prijs, dezelfde werkdag → /bedankt</span></div>
         </div>
       </div>
 
@@ -2337,7 +2346,8 @@
           <span class="fn">Keuze 01 <span class="fprog" data-f="prog"></span></span>
           <h3 data-rail="Hoofdnavigatie"><button class="ftopen" type="button">Wat staat er in de hoofdnavigatie?</button></h3>
           <p>Vandaag hangt het hele onderdelen-boomdiagram links in de balk. Onderdelen verkopen weinig, maar ze zijn w&eacute;l de lange staart van het zoekverkeer en de reden dat Marco terugkomt.</p>
-          <div class="fstat"><span class="chip chip-open">keuze open</span><span class="chip chip-move">blokkeert de header</span></div>
+          <p><b>Besloten op 11 september:</b> zes items &mdash; Case aanvragen &middot; Wat ga je vervoeren? &middot; Flightcases &middot; Branches &middot; Service &middot; Shop, in die volgorde. Onderdelen staan niet meer los in de balk maar onder Shop; zelf configureren hoort bij Flightcases. Het zoekveld is altijd zichtbaar en het telefoonnummer staat rechts. De opties hieronder zijn daarmee beantwoord; ze blijven staan omdat de afweging nog leesbaar hoort te zijn.</p>
+          <div class="fstat"><span class="chip chip-keep">besloten</span></div>
           <span class="fmeer">Openen &rarr;</span>
         </div>
         <div class="fbody">
@@ -2501,7 +2511,7 @@
   <div class="wfframe"><div class="wfurl">/onderdelen/eg-0105 &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <ol class="wflijst">
     <li><span class="n">01</span><span class="s">Header</span><span class="u">caseBuilder.com · zoek op case, onderdeel of apparatuur · inloggen &middot; winkelwagen</span></li>
-    <li><span class="n">02</span><span class="s">Nav</span><span class="u">Flightcases &middot; Wat ga je vervoeren? &middot; <i>Onderdelen</i> &middot; Service · direct advies &middot; NL</span></li>
+    <li><span class="n">02</span><span class="s">Nav</span><span class="u">Case aanvragen &middot; Wat ga je vervoeren? &middot; Flightcases &middot; Branches &middot; Service &middot; Shop · zoekveld · direct advies &middot; NL</span></li>
     <li><span class="n">03</span><span class="s">Kruimelpad</span><span class="u">onderdelen &rsaquo; hoeken &rsaquo; balhoeken &rsaquo; EG-0105</span></li>
     <li><span class="n">04</span><span class="s">Product</span><span class="u">foto met schaalreferentie &mdash; klein, medium en groot zijn nu niet te onderscheiden · H1 &middot; Balhoek medium, verzinkt · EG-0105 &mdash; SKU ondergeschikt, niet als titel · &euro; 1,45 excl. &mdash; incl. btw klein eronder, niet doorgestreept · aantal [ 25 ] &middot; in winkelwagen · voorraad &middot; levertijd · eerder besteld: 12 maart, 40 stuks</span></li>
     <li><span class="n">05</span><span class="s">Specificaties</span><span class="u">Specificaties · maat · materiaal · boorgat · dikte<span class="vouwmerk">vouw &middot; 900 px &mdash; hieronder moet je scrollen</span></span></li>
@@ -3244,7 +3254,7 @@
   <div class="wfframe"><div class="wfurl">/service/levertijden &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <ol class="wflijst">
     <li><span class="n">01</span><span class="s">Header</span><span class="u">caseBuilder.com · zoek op case, onderdeel of apparatuur · inloggen &middot; winkelwagen</span></li>
-    <li><span class="n">02</span><span class="s">Nav</span><span class="u">Flightcases &middot; Wat ga je vervoeren? &middot; Onderdelen &middot; <i>Service</i> · direct advies &middot; NL</span></li>
+    <li><span class="n">02</span><span class="s">Nav</span><span class="u">Case aanvragen &middot; Wat ga je vervoeren? &middot; Flightcases &middot; Branches &middot; <i>Service</i> &middot; Shop · zoekveld · direct advies &middot; NL</span></li>
     <li><span class="n">03</span><span class="s">Kruimelpad</span><span class="u">service &rsaquo; levertijden</span></li>
     <li><span class="n">04</span><span class="s">Tekstpagina</span><span class="u">H1 &middot; Levertijden · tekstkolom &middot; opgebouwd uit blokken uit de Sanity-bibliotheek · inhoudsblok &middot; tabel of opsomming · in deze sectie · &middot; levertijden · &middot; verzending · &middot; zaagservice · &middot; zakelijk bestellen · &middot; contact · hulp nodig? &#9742;<span class="vouwmerk">vouw &middot; 900 px &mdash; hieronder moet je scrollen</span></span></li>
     <li><span class="n">05</span><span class="s">Footer</span><span class="u">caseBuilder.com · Proflite BV, Doesburg · +31 (0)575 575734 · flightcases · onderdelen · service · voorwaarden &middot; privacy &middot; taal</span></li>
@@ -3520,7 +3530,7 @@
   <div class="wfframe"><div class="wfurl">/account/orders &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <ol class="wflijst">
     <li><span class="n">01</span><span class="s">Header</span><span class="u">caseBuilder.com · zoek op case, onderdeel of apparatuur · inloggen &middot; winkelwagen</span></li>
-    <li><span class="n">02</span><span class="s">Nav</span><span class="u">Flightcases &middot; Wat ga je vervoeren? &middot; Onderdelen &middot; Service · direct advies &middot; NL</span></li>
+    <li><span class="n">02</span><span class="s">Nav</span><span class="u">Case aanvragen &middot; Wat ga je vervoeren? &middot; Flightcases &middot; Branches &middot; Service &middot; Shop · zoekveld · direct advies &middot; NL</span></li>
     <li><span class="n">03</span><span class="s">Klantportaal</span><span class="u">overzicht · orders · herbestellen · configuraties · offertes · gegevens · H1 &middot; Mijn bestellingen · order &middot; 12 maart &middot; rackcase enkel &middot; &euro;&mdash; · [ opnieuw bestellen ] &nbsp; [ als basis gebruiken ] · order &middot; 4 februari &middot; 40&times; balhoek medium · [ opnieuw bestellen ] · status &middot; in productie &mdash; komt uit de casebuilder api · fase 1: alleen online bestelde cases &middot; CRM-orders later</span></li>
     <li><span class="n">04</span><span class="s">Footer</span><span class="u">caseBuilder.com · Proflite BV, Doesburg · +31 (0)575 575734 · flightcases · onderdelen · service · voorwaarden &middot; privacy &middot; taal<span class="vouwmerk">vouw &middot; 900 px &mdash; hieronder moet je scrollen</span></span></li>
   </ol></div>
@@ -3531,7 +3541,7 @@
   <div class="wfframe"><div class="wfurl">/flightcases/rackcase-enkel-deksel &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <ol class="wflijst">
     <li><span class="n">01</span><span class="s">Header</span><span class="u">caseBuilder.com · zoek op case, onderdeel of apparatuur · inloggen &middot; winkelwagen</span></li>
-    <li><span class="n">02</span><span class="s">Nav</span><span class="u"><i>Flightcases</i> &middot; Wat ga je vervoeren? &middot; Onderdelen &middot; Service · direct advies &middot; NL</span></li>
+    <li><span class="n">02</span><span class="s">Nav</span><span class="u">Case aanvragen &middot; Wat ga je vervoeren? &middot; <i>Flightcases</i> &middot; Branches &middot; Service &middot; Shop · zoekveld · direct advies &middot; NL</span></li>
     <li><span class="n">03</span><span class="s">Kruimelpad</span><span class="u">flightcases &rsaquo; rackcase enkel deksel</span></li>
     <li><span class="n">04</span><span class="s">Model</span><span class="u">productfoto&#39;s &middot; drie stuks, echte case in context · H1 &middot; Rackcase enkel deksel · vanaf &euro;229,60 excl. &mdash; prijsindicatie v&oacute;&oacute;r configureren · uitleg &middot; case met voordeksel, voor 19&quot; inbouwapparatuur · &#9654; start configurator &mdash; opent op stap 2, model is al bekend · verwachtingen &middot; eigen maten &middot; kleur en beslag &middot; tien werkdagen · bouwpakket of kant-en-klaar &mdash; keuze zichtbaar maken</span></li>
     <li><span class="n">05</span><span class="s">Specificaties</span><span class="u">Specificaties · standaardmaten · materiaal · gewicht<span class="vouwmerk">vouw &middot; 900 px &mdash; hieronder moet je scrollen</span></span></li>
@@ -3900,7 +3910,7 @@
   <div class="wfframe"><div class="wfurl">/laten-controleren &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <ol class="wflijst">
     <li><span class="n">01</span><span class="s">Header</span><span class="u">caseBuilder.com · zoek op case, onderdeel of apparatuur · inloggen &middot; winkelwagen</span></li>
-    <li><span class="n">02</span><span class="s">Nav</span><span class="u">Flightcases &middot; Wat ga je vervoeren? &middot; Onderdelen &middot; Service · direct advies &middot; NL</span></li>
+    <li><span class="n">02</span><span class="s">Nav</span><span class="u">Case aanvragen &middot; Wat ga je vervoeren? &middot; Flightcases &middot; Branches &middot; Service &middot; Shop · zoekveld · direct advies &middot; NL</span></li>
     <li><span class="n">03</span><span class="s">Kop</span><span class="u">H1 &middot; Laat een specialist meekijken · uitleg &middot; wat je terugkrijgt en binnen hoeveel tijd</span></li>
     <li><span class="n">04</span><span class="s">Formulier</span><span class="u">meegenomen configuratie &mdash; samenvatting van /configurator/{ref} · velden &middot; naam &middot; bedrijf &middot; e-mail &middot; telefoon · waar twijfel je over? &middot; vrij tekstveld · bijlage &middot; foto of tekening · verzenden · wat gebeurt er daarna · · 1 wij kijken mee · 2 je hoort binnen 1 werkdag · 3 aanpassen of bestellen<span class="vouwmerk">vouw &middot; 900 px &mdash; hieronder moet je scrollen</span></span></li>
     <li><span class="n">05</span><span class="s">Footer</span><span class="u">caseBuilder.com · Proflite BV, Doesburg · +31 (0)575 575734 · flightcases · onderdelen · service · voorwaarden &middot; privacy &middot; taal</span></li>
@@ -3911,7 +3921,7 @@
   <div class="wfframe"><div class="wfurl">/ &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes gemeten, schaal 1:3</div>
   <ol class="wflijst">
     <li><span class="n">01</span><span class="s">Header</span><span class="u">caseBuilder.com · zoek op case, onderdeel of apparatuur · inloggen &middot; winkelwagen</span></li>
-    <li><span class="n">02</span><span class="s">Nav</span><span class="u">Flightcases &middot; Wat ga je vervoeren? &middot; <i>onderdelen</i> &middot; <i>service</i> · direct advies &middot; NL</span></li>
+    <li><span class="n">02</span><span class="s">Nav</span><span class="u">Case aanvragen &middot; Wat ga je vervoeren? &middot; Flightcases &middot; Branches &middot; <i>Service</i> &middot; <i>Shop</i> · zoekveld · direct advies &middot; NL</span></li>
     <li><span class="n">03</span><span class="s">// 01 hero</span><span class="u">// prijs direct zichtbaar &middot; geen wachttijd · H1 &middot; Je flightcase staat <b>over tien dagen</b> op de kade · subkop &middot; configureer tot op de millimeter, zie meteen wat het kost, en laat je maten gratis controleren · Start met configureren &rarr; · Wat ga je vervoeren? · // levertijd · 10 werkdagen · // prijs · direct zichtbaar · // uitvoering · bouwpakket of kant-en-klaar · // controle · specialist kijkt mee · blueprint-ruit, hoekbeslag en serienummer &mdash; geen foto: het merkvlak dr&aacute;&aacute;gt de hero<span class="vouwmerk">vouw &middot; 900 px &mdash; hieronder moet je scrollen</span></span></li>
     <li><span class="n">04</span><span class="s">Ingelogd</span><span class="u">// welkom terug &mdash; rackcase enkel deksel &middot; 12 maart &middot; 483 &times; 600 &times; 1.334 mm &middot; zwart · Opnieuw bestellen &rarr;</span></li>
     <li><span class="n">05</span><span class="s">// 02 waar begin je?</span><span class="u">Drie manieren om bij de juiste case te komen · je hoeft niet te weten hoe een flightcase heet om er een te bestellen · // A &mdash; ik weet wat ik nodig heb · · model en maten bekend, prijs meteen in beeld · · &rarr; naar de configurator · // B &mdash; ik weet wat ik moet beschermen · · Les Paul, 19-inch rack 6 HE, moving head · · &rarr; wat ga je vervoeren? · // C &mdash; ik weet het nog niet · · wat is het verschil tussen de vier typen? · · &rarr; vergelijk de modellen naast elkaar</span></li>
@@ -5393,7 +5403,7 @@
   <div class="wfframe"><div class="wfurl">/service &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <ol class="wflijst">
     <li><span class="n">01</span><span class="s">Header</span><span class="u">caseBuilder.com · zoek op case, onderdeel of apparatuur · inloggen &middot; winkelwagen</span></li>
-    <li><span class="n">02</span><span class="s">Nav</span><span class="u">Flightcases &middot; Wat ga je vervoeren? &middot; Onderdelen &middot; <i>Service</i> · direct advies &middot; NL</span></li>
+    <li><span class="n">02</span><span class="s">Nav</span><span class="u">Case aanvragen &middot; Wat ga je vervoeren? &middot; Flightcases &middot; Branches &middot; <i>Service</i> &middot; Shop · zoekveld · direct advies &middot; NL</span></li>
     <li><span class="n">03</span><span class="s">Kruimelpad</span><span class="u">service</span></li>
     <li><span class="n">04</span><span class="s">Kop</span><span class="u">H1 &middot; Service · introtekst &middot; wat je hier vindt, en wanneer je beter kunt bellen · zoek in service &mdash; vangt vragen op die anders bij contact belanden</span></li>
     <li><span class="n">05</span><span class="s">Vier ingangen</span><span class="u">levertijden · tien werkdagen, en wanneer niet · verzending · kosten, landen, gratis vanaf &euro;150 · zaagservice · plaatmateriaal op maat, ook zonder case · zakelijk bestellen · op rekening, staffels, series</span></li>
@@ -5698,7 +5708,7 @@
   <div class="wfframe"><div class="wfurl">/flightcases &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <ol class="wflijst">
     <li><span class="n">01</span><span class="s">Header</span><span class="u">caseBuilder.com · zoek op case, onderdeel of apparatuur · inloggen &middot; winkelwagen</span></li>
-    <li><span class="n">02</span><span class="s">Nav</span><span class="u"><i>Flightcases</i> &middot; Wat ga je vervoeren? &middot; Onderdelen &middot; Service · direct advies &middot; NL</span></li>
+    <li><span class="n">02</span><span class="s">Nav</span><span class="u">Case aanvragen &middot; Wat ga je vervoeren? &middot; <i>Flightcases</i> &middot; Branches &middot; Service &middot; Shop · zoekveld · direct advies &middot; NL</span></li>
     <li><span class="n">03</span><span class="s">Kruimelpad</span><span class="u">flightcases</span></li>
     <li><span class="n">04</span><span class="s">Kop</span><span class="u">H1 &middot; Flightcases &mdash; vijf modellen · introtekst &middot; welk type waarvoor, in klanttaal</span></li>
     <li><span class="n">05</span><span class="s">De vijf modellen</span><span class="u">koffer · foto &middot; waarvoor · vanaf &euro;&mdash; · hoedcase · foto &middot; waarvoor · vanaf &euro;&mdash; · trunccase · foto &middot; waarvoor · vanaf &euro;&mdash; · rackcase enkel deksel · rackcase dubbel deksel · weet je het niet? &rarr; fit-finder<span class="vouwmerk">vouw &middot; 900 px &mdash; hieronder moet je scrollen</span></span></li>
@@ -6095,7 +6105,7 @@
   <div class="wfframe"><div class="wfurl">/zoeken?q=eg-0105 &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <ol class="wflijst">
     <li><span class="n">01</span><span class="s">Header</span><span class="u">caseBuilder.com · zoek op case, onderdeel of apparatuur · inloggen &middot; winkelwagen</span></li>
-    <li><span class="n">02</span><span class="s">Nav</span><span class="u">Flightcases &middot; Wat ga je vervoeren? &middot; Onderdelen &middot; Service · direct advies &middot; NL</span></li>
+    <li><span class="n">02</span><span class="s">Nav</span><span class="u">Case aanvragen &middot; Wat ga je vervoeren? &middot; Flightcases &middot; Branches &middot; Service &middot; Shop · zoekveld · direct advies &middot; NL</span></li>
     <li><span class="n">03</span><span class="s">Zoekopdracht</span><span class="u">zoekveld met de opdracht &middot; &quot;eg-0105&quot;</span></li>
     <li><span class="n">04</span><span class="s">Directe treffer</span><span class="u">directe SKU-treffer bovenaan, met aantal en wagen ernaast</span></li>
     <li><span class="n">05</span><span class="s">Resultaten</span><span class="u">filters &middot; categorie &middot; type · resultaat · niets gevonden? &rarr; zoektermenrapport voedt de navigatie<span class="vouwmerk">vouw &middot; 900 px &mdash; hieronder moet je scrollen</span></span></li>
@@ -6389,7 +6399,7 @@
   <div class="wfframe"><div class="wfurl">/laten-controleren/bedankt &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <ol class="wflijst">
     <li><span class="n">01</span><span class="s">Header</span><span class="u">caseBuilder.com · zoek op case, onderdeel of apparatuur · inloggen &middot; winkelwagen</span></li>
-    <li><span class="n">02</span><span class="s">Nav</span><span class="u">Flightcases &middot; Wat ga je vervoeren? &middot; Onderdelen &middot; Service · direct advies &middot; NL</span></li>
+    <li><span class="n">02</span><span class="s">Nav</span><span class="u">Case aanvragen &middot; Wat ga je vervoeren? &middot; Flightcases &middot; Branches &middot; Service &middot; Shop · zoekveld · direct advies &middot; NL</span></li>
     <li><span class="n">03</span><span class="s">Bevestiging</span><span class="u">&#10003; Je aanvraag staat klaar · referentie &middot; CB-2026-0842 &mdash; ook per mail · wat er nu gebeurt en wanneer je iets hoort</span></li>
     <li><span class="n">04</span><span class="s">Vervolg</span><span class="u">bekijk je configuratie · verder kijken bij onderdelen</span></li>
     <li><span class="n">05</span><span class="s">Footer</span><span class="u">caseBuilder.com · Proflite BV, Doesburg · +31 (0)575 575734 · flightcases · onderdelen · service · voorwaarden &middot; privacy &middot; taal<span class="vouwmerk">vouw &middot; 900 px &mdash; hieronder moet je scrollen</span></span></li>
@@ -6400,7 +6410,7 @@
   <div class="wfframe"><div class="wfurl">/case-voor/gitaar &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <ol class="wflijst">
     <li><span class="n">01</span><span class="s">Header</span><span class="u">caseBuilder.com · zoek op case, onderdeel of apparatuur · inloggen &middot; winkelwagen</span></li>
-    <li><span class="n">02</span><span class="s">Nav</span><span class="u">Flightcases &middot; <i>Wat ga je vervoeren?</i> &middot; onderdelen &middot; service · direct advies &middot; NL</span></li>
+    <li><span class="n">02</span><span class="s">Nav</span><span class="u">Case aanvragen &middot; <i>Wat ga je vervoeren?</i> &middot; Flightcases &middot; Branches &middot; Service &middot; Shop · zoekveld · direct advies &middot; NL</span></li>
     <li><span class="n">03</span><span class="s">Kruimelpad</span><span class="u">wat ga je vervoeren? &rsaquo; gitaar</span></li>
     <li><span class="n">04</span><span class="s">Kop</span><span class="u">H1 &middot; Flightcases voor gitaren · introtekst &mdash; waarom een gitaar andere bescherming vraagt: hals, kopplaat, vochtigheid. Dit is de tekst die de pagina indexeerbaar maakt. · foto &mdash; gitaarcase open, met inleg</span></li>
     <li><span class="n">05</span><span class="s">Apparaten in deze categorie</span><span class="u">Welke gitaar vervoer je? · Gibson Les Paul · · &rarr; /case-voor/gibson-les-paul · Fender Stratocaster · · &rarr; /case-voor/fender-stratocaster · akoestische gitaar · · &rarr; /case-voor/akoestische-gitaar · basgitaar · · &rarr; /case-voor/basgitaar · staat je model er niet bij? &rarr; fit-finder op maten<span class="vouwmerk">vouw &middot; 900 px &mdash; hieronder moet je scrollen</span></span></li>
@@ -6556,10 +6566,10 @@
   <div class="wfframe"><div class="wfurl">/case-voor/gibson-les-paul &nbsp;·&nbsp; 1440 &times; 900 &nbsp;·&nbsp; hoogtes op schaal 1:3</div>
   <ol class="wflijst">
     <li><span class="n">01</span><span class="s">Header</span><span class="u">caseBuilder.com · zoek op case, onderdeel of apparatuur · inloggen &middot; winkelwagen</span></li>
-    <li><span class="n">02</span><span class="s">Nav</span><span class="u">Flightcases &middot; <i>Wat ga je vervoeren?</i> &middot; Onderdelen &middot; Service · direct advies &middot; NL</span></li>
+    <li><span class="n">02</span><span class="s">Nav</span><span class="u">Case aanvragen &middot; <i>Wat ga je vervoeren?</i> &middot; Flightcases &middot; Branches &middot; Service &middot; Shop · zoekveld · direct advies &middot; NL</span></li>
     <li><span class="n">03</span><span class="s">Kruimelpad</span><span class="u">wat ga je vervoeren? &rsaquo; gitaar &rsaquo; Gibson Les Paul</span></li>
     <li><span class="n">04</span><span class="s">Kop</span><span class="u">H1 &middot; Flightcase voor een Gibson Les Paul · intro &middot; afmetingen van het instrument, waar je op moet letten</span></li>
-    <li><span class="n">05</span><span class="s">Aanbeveling</span><span class="u">aanbevolen case &mdash; hoedcase, maten voorgevuld · &#9654; configureer met deze maten · alternatief &middot; trunccase · alternatief &middot; koffer<span class="vouwmerk">vouw &middot; 900 px &mdash; hieronder moet je scrollen</span></span></li>
+    <li><span class="n">05</span><span class="s">Koopblok</span><span class="u">de case voor dit apparaat &mdash; hoedcase, vaste maten · kleur en logo kiezen · prijs &middot; in winkelwagen · <i>andere maat nodig? &rarr; configurator</i> · alternatief &middot; trunccase · alternatief &middot; koffer<span class="vouwmerk">vouw &middot; 900 px &mdash; hieronder moet je scrollen</span></span></li>
     <li><span class="n">06</span><span class="s">Onderbouwing</span><span class="u">waarom deze maten &middot; binnenmaat, schuimdikte, gewicht</span></li>
     <li><span class="n">07</span><span class="s">Veelgestelde vragen</span><span class="u">past een Les Paul Custom hier ook in?</span></li>
     <li><span class="n">08</span><span class="s">Footer</span><span class="u">caseBuilder.com · Proflite BV, Doesburg · +31 (0)575 575734 · flightcases · onderdelen · service · voorwaarden &middot; privacy &middot; taal</span></li>
@@ -6726,24 +6736,27 @@
     <section>
       <div class="sec-head">
         <span class="eyebrow">Waar de content voor is</span>
-        <h2 data-rail="Webshop of custom">Webshop of custom</h2>
-        <p>Één vraag beslist het: <strong>moet er iets aan de case worden aangepast?</strong> Zo niet, dan is het een gewoon product met varianten — kleur kiezen en afrekenen. Zo wel, dan gaat het via de configurator, en dat kan nog steeds meteen in de winkelwagen. <strong>Custom is dus niet hetzelfde als offerte.</strong> Elke route vraagt een ander soort tekst, en dat bepaalt wat hieronder geschreven moet worden.</p>
+        <h2 data-rail="Drie routes">Drie routes, en wij bepalen welke</h2>
+        <p>Niet de klant kiest hoever hij mag aanpassen, maar <strong>CaseBuilder bepaalt dat per product</strong>. Het apparaat dat iemand invult bepaalt de route; het woord &ldquo;niveau&rdquo; krijgt hij nooit te zien. Elke route vraagt een ander soort tekst, en dat bepaalt wat hieronder geschreven moet worden.</p>
       </div>
       <div class="scroller">
         <table class="tpl fixed3">
           <thead><tr><th>Route</th><th>Assortiment</th><th>Bestaat</th></tr></thead>
           <tbody>
-            <tr><td>Webshop<br><span class="note">A · uit voorraad</span></td>
-              <td class="blocks">Onderdelen — 233 SKU's. Aantal kiezen, klaar.</td>
+            <tr><td>Shop<br><span class="note">niveau 1</span></td>
+              <td class="blocks">Onderdelen &mdash; 233 SKU&#39;s. Aantal kiezen, klaar.</td>
               <td><span class="chip chip-keep">nu</span></td></tr>
-            <tr><td>Webshop<br><span class="note">A · uit voorraad</span></td>
-              <td class="blocks">Standaardcases per apparaat — vaste maten, <em>alleen kleur</em>. Bijvoorbeeld een Gibson Les Paul.</td>
+            <tr><td>Shop<br><span class="note">niveau 1</span></td>
+              <td class="blocks">Een vaste case voor &eacute;&eacute;n apparaat: maten liggen vast, je kiest <em>kleur en logo</em>. Een Medusa-product met kleurvarianten, geen configurator, en niet op te schalen naar andere maten. Bijvoorbeeld een Gibson Les Paul.</td>
               <td><span class="chip chip-open">bijna nul</span></td></tr>
-            <tr><td>Custom, direct<br><span class="note">B · zelf configureren</span></td>
-              <td class="blocks">De tien modellen · <code>/case-voor</code> met voorgevulde maten. Maten aanpasbaar, dus custom — maar direct af te rekenen.</td>
+            <tr><td>Configurator<br><span class="note">niveau 2</span></td>
+              <td class="blocks">Maten en ronde of vierkante hoeken. Je begint met de maten van de kist waar je vandaan komt &mdash; een eigen route, geen trede op de productpagina. De configurator draait hiervoor in een beperkte stand.</td>
+              <td><span class="chip chip-open">ontwerp</span></td></tr>
+            <tr><td>Configurator<br><span class="note">niveau 3</span></td>
+              <td class="blocks">Alles aanpasbaar, ook handgrepen, beslag en het slot. Dit is de bestaande configurator van CaseBuilder. Van niveau 2 ga je hierheen zonder opnieuw te beginnen.</td>
               <td><span class="chip chip-keep">nu</span></td></tr>
-            <tr><td>Custom, offerte<br><span class="note">C · case aanvragen</span></td>
-              <td class="blocks">Series, afwijkend werk, laten controleren. Datasheet of schets erin, tekening eruit.</td>
+            <tr><td>Aanvraag<br><span class="note">boven niveau 3</span></td>
+              <td class="blocks">Geen ontwerp: series, afwijkend werk, laten controleren. Datasheet of schets erin, tekening eruit. Zeventig procent van de orders begint hier.</td>
               <td><span class="chip chip-keep">nu</span></td></tr>
           </tbody>
         </table>
@@ -6751,8 +6764,8 @@
 
       <div class="urgent">
         <h3 data-rail="Voorraad bestaat nog niet">Het ontwerp toont voorraad die er nog niet is</h3>
-        <p>De routes A, B en C staan al in de branche- en case-voor-mockups, en de gitaarpagina zet <strong>"uit voorraad" op negen cases</strong>. De sitemap plant <code>/case-voor/{apparaat}</code> als productdetail, <strong>~300 stuks</strong>. Maar standaardcases zijn er vandaag <strong>bijna nul</strong> — dat assortiment moet nog opgebouwd worden. Route A is voor cases dus een <em>plan</em>, geen assortiment; wat er nu écht uit voorraad gaat, zijn de onderdelen.</p>
-        <p>Voor de content betekent dat twee dingen. Het <code>/case-voor</code>-sjabloon moet <strong>vanaf dag één beide uitgangen kunnen</strong> — kleur kiezen bij een standaardcase, configurator bij de rest — met per apparaattype een veld dat zegt welke van de twee het is. Anders moet elke pagina opnieuw zodra er een standaardcase bijkomt. En elke standaardcase vraagt <strong>eigen foto's en een eigen tekst</strong>, dus de shoot groeit mee met het assortiment.</p>
+        <p>De drie routes staan al in de branche- en case-voor-mockups, en de gitaarpagina zet <strong>&quot;uit voorraad&quot; op negen cases</strong>. De sitemap plant <code>/case-voor/{apparaat}</code> als productdetail, <strong>~300 stuks</strong>. Maar vaste cases zijn er vandaag <strong>bijna nul</strong> &mdash; dat assortiment moet nog opgebouwd worden. Niveau 1 is voor cases dus een <em>plan</em>, geen assortiment; wat er nu &eacute;cht uit voorraad gaat, zijn de onderdelen.</p>
+        <p>Voor de content betekent dat twee dingen. Het <code>/case-voor</code>-sjabloon moet <strong>vanaf dag &eacute;&eacute;n twee standen kennen</strong>: is er een ontwerp voor dit apparaat, dan kies je kleur en logo en reken je af; is dat er niet, dan is de enige knop een aanvraag. Daarnaast staat er een uitgang naar de configurator voor wie een andere maat nodig heeft &mdash; die begint met de maten van deze kist, en is dus een eigen route en geen knop op hetzelfde product. Per apparaattype hoort een veld te zeggen welk niveau het is. Anders moet elke pagina opnieuw zodra er een vaste case bijkomt. En elke vaste case vraagt <strong>eigen foto&#39;s en een eigen tekst</strong>, dus de shoot groeit mee met het assortiment.</p>
       </div>
     </section>
 
@@ -7306,13 +7319,28 @@
       <div class="mtiles carousel" id="car-0911-besluiten" tabindex="0" role="group" aria-label="Besloten na de meeting">
         <div class="mt af"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">01</span><h4>Homepage: tegels, USP&rsquo;s en de knop</h4><p>Tegel C wordt <strong>&ldquo;Ik wil advies van een casebouwer&rdquo;</strong>, naar contact. De kop wordt &ldquo;Hoe wil je beginnen?&rdquo; met &eacute;&eacute;n regel per tegel. USP&rsquo;s: snelste, controle, ervaring, prijs. De knop heet <strong>&ldquo;Stuur je schets of maten&rdquo;</strong>; het menu houdt &ldquo;Case aanvragen&rdquo;.</p><a class="live" href="mockups/homepage-v2.html" target="_blank" rel="noopener">homepage &#8599;</a></div><span class="tag">verwerkt</span></div>
         <div class="mt af"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">02</span><h4>Offertepagina</h4><p>Het budgetveld is eruit. Erbij: <strong>wat een case meestal kost</strong> en vier voorbeelden met maat en prijs. De bedragen en cases zijn verzonnen tot CB de echte levert.</p><a class="live" href="mockups/case-aanvragen-v1.html" target="_blank" rel="noopener">case aanvragen &#8599;</a></div><span class="tag">verwerkt &middot; input cb</span></div>
-        <div class="mt af"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">03</span><h4>Probeer het</h4><p>De draaiende kist met drie schuiven en een prijs die meeloopt, <strong>op de homepage en op /flightcases</strong>. De prijsopbouw blijft staan waar hij stond.</p><a class="live" href="mockups/homepage-v2.html" target="_blank" rel="noopener">homepage &#8599;</a><a class="live" href="mockups/flightcases-v2.html" target="_blank" rel="noopener">/flightcases v2 &#8599;</a></div><span class="tag">verwerkt</span></div>
+        <div class="mt af"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">03</span><h4>Probeer het</h4><p>De draaiende kist met drie schuiven en een prijs die meeloopt, <strong>op de homepage en op /flightcases</strong>. De prijsopbouw blijft staan waar hij stond.</p><a class="live" href="mockups/homepage-v2.html" target="_blank" rel="noopener">homepage &#8599;</a><a class="live" href="mockups/flightcases-v1.html" target="_blank" rel="noopener">/flightcases &#8599;</a></div><span class="tag">verwerkt</span></div>
         <div class="mt af"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">04</span><h4>Zoeken loopt nooit dood</h4><p>Suggesties per soort; het label rechts is klikbaar (&ldquo;Backline&rdquo; naast een Gibson). Onderaan altijd drie deuren: <strong>we hebben het, jij maakt het, wij maken het</strong>. &ldquo;av kabel case groot&rdquo; vindt nu iets.</p><a class="live" href="mockups/case-voor-v1.html" target="_blank" rel="noopener">zoeken &#8599;</a></div><span class="tag">verwerkt</span></div>
         <div class="mt af"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">05</span><h4>Verder waar je was</h4><p>Personalisatie met &eacute;&eacute;n regel: wie een product bekeek, ziet het terug op de homepage, met de categorie erboven. <strong>Op de echte site alleen met cookietoestemming.</strong></p><a class="live" href="mockups/homepage-v2.html" target="_blank" rel="noopener">homepage &#8599;</a></div><span class="tag">verwerkt</span></div>
         <div class="mt af"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">06</span><h4>Hulp nodig bij deze case?</h4><p>In L2 en L3 een vak met de case al ingevuld, <strong>naar een expert</strong>. In editor v2 en op de productpagina.</p><a class="live" href="mockups/editor-v2.html#l2" target="_blank" rel="noopener">editor v2 &#8599;</a><a class="live" href="mockups/product-v1.html#l2" target="_blank" rel="noopener">productpagina &#8599;</a></div><span class="tag">verwerkt</span></div>
         <div class="mt loopt"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">07</span><h4>Productpagina met de editor erin</h4><p>E&eacute;n pagina, altijd dezelfde kist. <strong>L1</strong> kleur en logo, <strong>L2</strong> maatknoppen plus een eigen maat, <strong>L3</strong> de volledige configurator in de pagina.</p><a class="live" href="mockups/product-v1.html#l1" target="_blank" rel="noopener">L1 &#8599;</a><a class="live" href="mockups/product-v1.html#l2" target="_blank" rel="noopener">L2 &#8599;</a><a class="live" href="mockups/product-v1.html#l3" target="_blank" rel="noopener">L3 &#8599;</a></div><span class="tag">mockup</span></div>
-        <div class="mt loopt"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">08</span><h4>/flightcases en het menu met beeld</h4><p>Vijf modellen tegelijk, draaiend; klikken maakt er de grote van. Het Flightcases-menu met de modellen als hoofdkolom. <strong>Eerst ter beoordeling</strong>; het echte menu blijft tot akkoord.</p><a class="live" href="mockups/flightcases-v2.html" target="_blank" rel="noopener">/flightcases v2 &#8599;</a></div><span class="tag">mockup</span></div>
+        <div class="mt loopt"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">08</span><h4>/flightcases en het menu met beeld</h4><p>Vijf modellen tegelijk, draaiend; klikken maakt er de grote van. Het Flightcases-menu met de modellen als hoofdkolom. <strong>Eerst ter beoordeling</strong>; het echte menu blijft tot akkoord.</p><a class="live" href="mockups/flightcases-v1.html" target="_blank" rel="noopener">/flightcases &#8599;</a></div><span class="tag">mockup</span></div>
         <div class="mt cb"><div class="mtop"><a class="fase f-cont" href="#content" title="Hoort bij de contentfase">content</a><span class="mn">09</span><h4>Van CaseBuilder nodig</h4><p>Drie of vier echte voorbeeldcases met foto en prijs, de echte bandbreedte, renders uit de configurator, en per categorie of die L1, L2 of L3 is.</p></div><span class="tag">van cb</span></div>
+      </div>
+
+      <div class="carhead"><h3 class="tablabel anch" id="m-2026-09-12-besluiten" data-rail="Besloten 12 sep">Besloten en gebouwd op 12 september<a class="hash" href="#m-2026-09-12-besluiten" aria-label="Link naar deze sectie">#</a></h3><div class="carbtns"><button class="carbtn" type="button" data-car="car-0912-besluiten" data-dir="-1" aria-label="Vorige">&#8592;</button><button class="carbtn" type="button" data-car="car-0912-besluiten" data-dir="1" aria-label="Volgende">&#8594;</button></div></div>
+      <p class="wfnote" style="margin-bottom:14px">Ronde twee en drie van het keuzewerkblad. Alles hieronder is verwerkt in de mockups.</p>
+      <div class="mtiles carousel" id="car-0912-besluiten" tabindex="0" role="group" aria-label="Besloten op 12 september">
+        <div class="mt af"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">01</span><h4>Het slot verhuist naar niveau 3</h4><p>Niveau 2 is maten en hoeken; de deur naar niveau 3 noemt het slot. Zo blijft niveau 2 &eacute;&eacute;n vraag: past dit in mijn maat?</p><a class="live" href="mockups/editor-v2.html#l2" target="_blank" rel="noopener">editor v2 &#8599;</a></div><span class="tag">verwerkt</span></div>
+        <div class="mt af"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">02</span><h4>Niveau 1 heeft twee uitgangen</h4><p>Het aanvraagblok voor wie geen ontwerp heeft, en de regel naar een eigen maat voor wie wel wil aanpassen.</p><a class="live" href="mockups/product-v1.html#l1" target="_blank" rel="noopener">productpagina &#8599;</a></div><span class="tag">verwerkt</span></div>
+        <div class="mt af"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">03</span><h4>/flightcases krijgt twee blokken erbij</h4><p>Wat is een flightcase, en de vijf modellen tegelijk met schuiven; de vergelijkingstabel klikt mee. v1 blijft de pagina, v2 is archief.</p><a class="live" href="mockups/flightcases-v1.html" target="_blank" rel="noopener">flightcases v1 &#8599;</a></div><span class="tag">verwerkt</span></div>
+        <div class="mt af"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">04</span><h4>Het Flightcases-menu toont de modellen</h4><p>Op elke pagina, met per model een stilstaande kist in CSS &mdash; geen foto&#39;s, geen script. Renders van CaseBuilder vervangen die later.</p><a class="live" href="mockups/header-varianten.html" target="_blank" rel="noopener">headervarianten &#8599;</a></div><span class="tag">verwerkt</span></div>
+        <div class="mt af"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">05</span><h4>Niveau 3 draait als iframe</h4><p>De bestaande configurator, ingesloten. CaseBuilder bouwt ons ontwerp na in hun eigen frontend.</p><a class="live" href="mockups/product-v1.html#l3" target="_blank" rel="noopener">productpagina, niveau 3 &#8599;</a></div><span class="tag">verwerkt</span></div>
+        <div class="mt af"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">06</span><h4>&ldquo;We hebben het&rdquo; opent de shop</h4><p>Met je zoekwoord als chip, op het tabblad met de meeste treffers. Bij een tabwissel blijft het zoekwoord staan.</p><a class="live" href="mockups/shop-v1.html?zoek=gitaar" target="_blank" rel="noopener">shop met zoekwoord &#8599;</a></div><span class="tag">verwerkt</span></div>
+        <div class="mt af"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">07</span><h4>&ldquo;Verder waar je was&rdquo; staat in de shop</h4><p>Niet op de homepage: wie terugkomt om te kopen is in de shop, niet op de voordeur.</p></div><span class="tag">verwerkt</span></div>
+        <div class="mt af"><div class="mtop"><a class="fase f-cont" href="#content" title="Hoort bij de contentfase">content</a><span class="mn">08</span><h4>DJ-apparatuur wordt een gewone categorie</h4><p>Onder Backline. Daarmee gaan de 38 categorie&euml;n naar 39, ook in de gedeelde balk.</p></div><span class="tag">verwerkt</span></div>
+        <div class="mt af"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">09</span><h4>Afgevallen versies uit de versiebalk</h4><p>Homepage v3, v10 en v12 en editor v1 staan er niet meer in. De bestanden blijven staan, zodat de afweging leesbaar blijft.</p></div><span class="tag">verwerkt</span></div>
+        <div class="mt af"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">10</span><h4>De pdf&#39;s van de productpagina zijn lichter</h4><p>Per niveau &eacute;&eacute;n pdf, nu 163 tot 179 KB in plaats van 4 tot 8 MB.</p><a class="live" href="mockups/assets/pdf/product-L1.pdf" target="_blank" rel="noopener">product L1 (pdf) &#8599;</a></div><span class="tag">verwerkt</span></div>
       </div>
 
       <div class="carhead"><h3 class="tablabel anch" id="m-2026-09-11-volgende" data-rail="Volgende week">Volgende week<a class="hash" href="#m-2026-09-11-volgende" aria-label="Link naar deze sectie">#</a></h3><div class="carbtns"><button class="carbtn" type="button" data-car="car-0911-volgende" data-dir="-1" aria-label="Vorige">&#8592;</button><button class="carbtn" type="button" data-car="car-0911-volgende" data-dir="1" aria-label="Volgende">&#8594;</button></div></div>
@@ -7617,7 +7645,7 @@
         <div class="mt af"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">02</span><h4>Medusa</h4><p>Webshop-skeleton staat. Stack bevestigd, Magento valt af — pakket B, schone lei en code-first.</p><a class="live" href="https://46.224.236.191.sslip.io/app/login" target="_blank" rel="noopener noreferrer">open de Medusa-admin &#8599;</a></div><span class="tag">afgerond</span></div>
         <div class="mt af"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">03</span><h4>Sanity</h4><p>Basisinrichting staat. De blokkenbibliotheek — circa twaalf on-brand blokken — volgt in oktober.</p><a class="live" href="https://casebuilder-web.vercel.app/studio/" target="_blank" rel="noopener noreferrer">open de Sanity Studio &#8599;</a></div><span class="tag">afgerond</span></div>
         <div class="mt af"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">04</span><h4>Minimale frontend om de configurator te testen</h4><p>Connection test tussen frontend en casebuilder api geslaagd, plus de iframe-embed met POST-integratie. Het technisch risicovolste punt is aangetoond.</p><a class="live" href="https://casebuilder-web.vercel.app" target="_blank" rel="noopener noreferrer">bekijk de testomgeving &#8599;</a></div><span class="tag">afgerond</span></div>
-        <div class="mt deels"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">05</span><h4>Sitemap en sitestructuur</h4><p>386 pagina&#39;s worden er ongeveer 632 over zestien sjablonen &mdash; 533 daarvan zijn productpagina&#39;s. Zeventien besteltaken getoetst tegen de nieuwe boom: zes gaten gevonden, drie opgelost in het ontwerp.</p></div><span class="tag">in review</span></div>
+        <div class="mt deels"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">05</span><h4>Sitemap en sitestructuur</h4><p>386 pagina&#39;s worden er ongeveer 632 over zestien sjablonen &mdash; 533 daarvan zijn productpagina&#39;s. Zeventien besteltaken getoetst tegen de nieuwe boom, inmiddels twintig: zes gaten gevonden, drie opgelost in het ontwerp.</p></div><span class="tag">in review</span></div>
         <div class="mt deels"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">06</span><h4>Wireframes — hoe een contentpagina eruitziet</h4><p>Vijftien sjablonen uitgetekend. Eén sjabloon dekt zeven servicepagina&#39;s: koptekst, tekstkolom uit blokken, sectienavigatie, contactblok. <strong>Wat daarvoor nodig is:</strong> de blokkenbibliotheek plus de teksten.</p></div><span class="tag">in review</span></div>
         <div class="mt deels"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">07</span><h4>Testresultaten</h4><ul><li><strong>Medusa houdt bijna alle grenzen.</strong> Filteren via de database: 82 ms bij 1.019 en 268 ms bij 5.019 producten &mdash; grens 500 ms.</li><li>Admin: 225 ms bij 1.019 en 635 ms bij 5.019, tegen een grens van 2 seconden.</li><li><strong>Eén grens valt bij 5.019:</strong> de catalogus honderd stuks per keer lezen duurt 1.180 ms, tegen een grens van 500 ms.</li><li>Nul fouten, in elke meting.</li><li><strong>Het knelpunt zit in de frontend:</strong> die haalt álle producten op en filtert in het geheugen. Dezelfde vraag duurt via Medusa 82 ms en via de site 1.600 ms.</li><li>De productlijst loopt op met het aantal producten: 1,5 s bij 1.019, 4,5 s bij 3.019 en naar verwachting ~7,5 s bij 5.019.</li><li>Paginatie en filteren in de database lossen het op &mdash; staat al in het categorie-ontwerp.</li></ul><a class="live" href="https://docs.google.com/document/d/1pY7MQxi06DV0y_98nmLTkq7isR0lsShYSuS3cogkq3o/edit" target="_blank" rel="noopener noreferrer">lees het testdocument &#8599;</a></div><span class="tag">in review</span></div>
       </div>
