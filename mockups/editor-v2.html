@@ -20,9 +20,9 @@
      L1  alleen kleur en logo      op de productpagina; een Medusa-
                                    product, geen configurator
      L2  beperkte stand            dezelfde configurator; de template
-                                   zet het model en de vaste onderdelen
-                                   vast, maten, hoeken, slot, kleur en
-                                   logo staan open
+                                   zet het model, het slot en de vaste
+                                   onderdelen vast; maten, hoeken, kleur
+                                   en logo staan open
      L3  volledige stand           dezelfde configurator zonder template
 
    Wat vastligt verdwijnt niet: het staat er als regel "vast in deze
@@ -234,7 +234,7 @@
             <h4>// WAAR GEBRUIK JE HEM VOOR</h4>
             <ul>
               <li><a href="case-voor-v3.html#av-licht">AV &amp; licht<span class="n">142</span></a></li>
-              <li><a href="case-voor-backline-v1.html">Backline &amp; muziek<span class="n">118</span></a></li>
+              <li><a href="case-voor-backline-v1.html">Backline &amp; muziek<span class="n">127</span></a></li>
               <li><a href="case-voor-v3.html#broadcast">Broadcast &amp; camera<span class="n">86</span></a></li>
               <li><a href="case-voor-v3.html#medisch">Medisch &amp; lab<span class="n">64</span></a></li>
               <li><a href="case-voor-v3.html#industrie">Industrie &amp; meettechniek<span class="n">73</span></a></li>
@@ -244,14 +244,18 @@
           </div>
           <div>
             <h4>// MODELLEN</h4>
-            <ul>
-              <li><a href="casetype-rackcase-enkel-deksel-v1.html">Rackcase enkel deksel</a></li>
-              <li><a href="casetype-rackcase-dubbel-deksel-v1.html">Rackcase dubbel deksel</a></li>
-              <li><a href="casetype-trunccase-v1.html">Trunccase</a></li>
-              <li><a href="casetype-hoedcase-v1.html">Hoedcase</a></li>
-              <li><a href="casetype-koffer-v1.html">Koffer</a></li>
-              <li><a href="flightcases-v1.html">Alle modellen &rarr;</a></li>
-            </ul>
+            <!-- Met beeld (besloten 12 september): een model herken je aan
+                 zijn vorm, niet aan zijn naam. Nu de modelfoto's; zodra
+                 CaseBuilder renders uit de configurator kan leveren, zijn
+                 het dezelfde vijf bestanden. -->
+            <div class="modeltegels">
+              <a href="casetype-koffer-v1.html"><img src="assets/flightcase-koffer.jpg" alt="" loading="lazy"><span>Koffer<small>vanaf &euro; 149</small></span></a>
+              <a href="casetype-hoedcase-v1.html"><img src="assets/flightcase-hoedcase.jpg" alt="" loading="lazy"><span>Hoedcase<small>vanaf &euro; 179</small></span></a>
+              <a href="casetype-trunccase-v1.html"><img src="assets/flightcase-trunccase.jpg" alt="" loading="lazy"><span>Trunccase<small>vanaf &euro; 199</small></span></a>
+              <a href="casetype-rackcase-enkel-deksel-v1.html"><img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt="" loading="lazy"><span>Rackcase enkel<small>vanaf &euro; 229</small></span></a>
+              <a href="casetype-rackcase-dubbel-deksel-v1.html"><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt="" loading="lazy"><span>Rackcase dubbel<small>vanaf &euro; 259</small></span></a>
+            </div>
+            <a class="allemodellen" href="flightcases-v1.html">Alle modellen &rarr;</a>
           </div>
           <div class="vlak">
             <b>Zelf configureren</b>
@@ -340,7 +344,7 @@
     </span>
     <!-- Shop: links het overzicht — klik je op Shop zelf, dan kom je daar,
          met alle vaste cases en filters. Onderaan die kolom de weg via je
-         apparaat: de 38 categorieën, waarvandaan je in vier klikken bij het
+         apparaat: de 39 categorieën, waarvandaan je in vier klikken bij het
          apparaat bent. In het midden een paar populaire producten en
          daaronder de populairste onderdelen — kort, want het overzicht en
          de onderdelenpagina zijn één klik verder. Rechts de uitweg voor wie
@@ -359,7 +363,7 @@
               <li><a href="shop-v1.html#medisch">Medisch &amp; lab</a></li>
               <li><a href="shop-v1.html#industrie">Industrie &amp; meettechniek</a></li>
               <li><a href="shop-v1.html#evenement">Evenement &amp; beursbouw</a></li>
-              <li><a href="case-voor-v3.html">Alle 38 categorie&euml;n &rarr;</a></li>
+              <li><a href="case-voor-v3.html">Alle 39 categorie&euml;n &rarr;</a></li>
             </ul>
           </div>
           <div>
@@ -396,7 +400,7 @@
   <div class="wrap">
     <div class="ey ey-dark">// EDITOR &middot; L2 IN DE CONFIGURATOR</div>
     <h1>E&eacute;n configurator, twee standen</h1>
-    <p class="lead">L1 blijft op de productpagina. L2 en L3 zijn dezelfde configurator: in L2 zet een template het model en de vaste onderdelen vast, en staan alleen maten, hoeken, slot, kleur en logo open. In L3 gaat alles open, en wat je al koos blijft staan.</p>
+    <p class="lead">L1 blijft op de productpagina. L2 en L3 zijn dezelfde configurator: in L2 zet een template het model en de vaste onderdelen vast, en staan alleen maten, hoeken, kleur en logo open. In L3 gaat alles open &mdash; ook het slot &mdash; en wat je al koos blijft staan.</p>
     <div class="wissel" data-niveaus role="group" aria-label="Kies een niveau">
       <button type="button" data-n="l1">L1 &middot; Kleur en logo</button>
       <button type="button" data-n="l2">L2 &middot; Beperkte stand</button>
@@ -547,7 +551,7 @@
           <!-- stap 4 -->
           <div data-stap="4">
             <div class="stapkop"><span class="ey ey-dark">// Stap 4 van 5</span><h3>Hardware</h3></div>
-            <div class="blok">
+            <div class="blok" data-open="slot">
               <h4>Slot</h4>
               <div class="keuze" data-keuze="slot">
                 <button type="button" data-w="vlinder">Vlindersluiting<small>standaard</small></button>
@@ -555,6 +559,7 @@
                 <button type="button" data-w="klap">Klapsluiting<small>+ &euro; 6</small></button>
               </div>
             </div>
+            <p class="vastrij" data-vast="slot"><span class="wat">Slot</span><span class="waarde"></span><span class="tag">// vast in deze stand</span></p>
             <div class="blok" data-open="greep">
               <h4>Handgrepen</h4>
               <div class="keuze" data-keuze="greep">
@@ -610,7 +615,7 @@
         </div>
       </div>
 
-      <a class="door" data-toon="l2" href="#l3" data-naar="l3"><b>Meer aanpassen?</b><span>Open de volledige stand: ook model, paneel, handgrepen, wielen en schuim. Je maten, hoeken, slot en kleur blijven staan.</span></a>
+      <a class="door" data-toon="l2" href="#l3" data-naar="l3"><b>Meer aanpassen? Open de volledige stand</b><span>Daar kies je ook het <strong>slot</strong>, het model, het paneel, handgrepen, wielen en schuim. Je maten, hoeken en kleur blijven staan.</span></a>
       <a class="door terug" data-toon="l3" href="#l2" data-naar="l2"><b>&larr; Terug naar de beperkte stand</b><span>Wat de template vastzet, gaat terug naar zijn standaard.</span></a>
     </div>
   </div>
@@ -635,7 +640,6 @@
         <ul>
           <li>Buitenmaten, binnen de grenzen van de template</li>
           <li>Ronde of vierkante hoeken</li>
-          <li>Het slot</li>
           <li>Paneelkleur</li>
           <li>Logo op het deksel</li>
         </ul>
@@ -659,7 +663,7 @@
       </div>
       <div><h5>Offerte aanvragen</h5><a href="case-aanvragen-v1.html">Case aanvragen</a><a href="laten-controleren-v1.html">Maten laten controleren</a><a href="#">Series en staffels</a><a href="#">Zakelijk bestellen</a></div>
       <div><h5>Zelf configureren</h5><a href="configurator-v1.html">Naar de configurator</a><a href="zo-werkt-het-v1.html">Zo werkt het</a><a href="#">Herhaalorder</a><a href="#">Mijn configuraties</a></div>
-      <div><h5>Branches</h5><a href="branche-audio-visueel-v1.html">Audio-visueel en podium</a><a href="branche-broadcast-en-media-v1.html">Broadcast en media</a><a href="branche-industrie-en-machinebouw-v1.html">Industrie en machinebouw</a><a href="branche-meet-en-testapparatuur-v1.html">Meet- en testapparatuur</a><a href="branche-defensie-v1.html">Defensie</a><a href="branche-schaalmodellen-v1.html">Schaalmodellen</a><a href="grote-spelers-v1.html">Inkopen als grote partij</a></div>
+      <div><h5>Branches</h5><a href="branche-audio-visueel-v1.html">Audio-visueel en podium</a><a href="branche-broadcast-en-media-v1.html">Broadcast en media</a><a href="branche-industrie-en-machinebouw-v1.html">Industrie en machinebouw</a><a href="branche-meet-en-testapparatuur-v1.html">Meet- en testapparatuur</a><a href="branche-defensie-v1.html">Defensie</a><a href="branche-schaalmodellen-v1.html">Schaalmodellen</a><a class="anders" href="grote-spelers-v1.html">Inkopen als grote partij &rarr;</a></div>
       <div><h5>Service</h5><a href="service-levertijden-v1.html">Levertijden</a><a href="#">Verzending</a><a href="categorie-v1.html">Onderdelen</a><a href="#">Zaagservice</a><a href="#">Over Proflite</a><a href="contact-v1.html">Contact</a></div>
     </div>
     <div class="bot"><span>KVK 09123456</span><span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span></div>
@@ -707,13 +711,13 @@
   /* De template waarmee de productpagina de configurator opent. Wat in
      `vast` staat, is in de beperkte stand niet te kiezen. */
   var TEMPLATE = { code: 'HC-LP-1060',
-                   vast: { model: 'hoedcase', maat: 'buiten', paneel: '7', greep: 'koffer', wielen: 'geen', schuim: 'geen' },
+                   vast: { model: 'hoedcase', maat: 'buiten', paneel: '7', slot: 'vlinder', greep: 'koffer', wielen: 'geen', schuim: 'geen' },
                    grens: { b: [200, 1400], d: [150, 1000], h: [100, 1000] } };
   var STAPPEN = ['Model', 'Afmetingen', 'Uitvoering', 'Hardware', 'Overzicht'];
   var TEKST = {
     l1: ['// L1 · op de productpagina', 'Kleur en logo',
          'De maten liggen vast: deze case is gebouwd voor één apparaat. Je kiest een paneelkleur en zet je logo op het deksel. Dit is een webshopproduct; de configurator komt er niet aan te pas.'],
-    l2: ['// L2 · de configurator, beperkte stand', 'Maten, hoeken en slot',
+    l2: ['// L2 · de configurator, beperkte stand', 'Maten en hoeken',
          'Dezelfde configurator als L3, geopend met de template van deze kist. Wat je hier niet kiest ligt vast, maar je ziet het wel staan — zodat je weet wat je krijgt.'],
     l3: ['// L3 · de configurator, volledige stand', 'Alles',
          'Dezelfde configurator zonder template: ook model, paneel, handgrepen, wielen en schuim. Wat je in de beperkte stand koos, staat er nog.']

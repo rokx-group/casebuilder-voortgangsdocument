@@ -54,6 +54,7 @@
     { naam: 'Drumhardware',              groep: 'Backline',   pagina: SJABLOON, zoek: ['drum', 'snare', 'bekken', 'hardware'] },
     { naam: 'Keyboards en synths',       groep: 'Backline',   pagina: SJABLOON, zoek: ['keyboard', 'synth', 'piano', 'nord'] },
     { naam: 'Blaasinstrumenten',         groep: 'Backline',   pagina: SJABLOON, zoek: ['trompet', 'saxofoon', 'trombone', 'blaas'] },
+    { naam: 'DJ-apparatuur',            groep: 'Backline',   pagina: SJABLOON, zoek: ['dj', 'controller', 'cdj', 'djm', 'draaitafel', 'mengpaneel', 'pioneer'] },
 
     /* camera en broadcast */
     { naam: 'Camerabodies',              groep: 'Camera',     pagina: SJABLOON, zoek: ['camera', 'body', 'red', 'arri', 'sony fx'] },

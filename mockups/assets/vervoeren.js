@@ -113,7 +113,7 @@
       if (beste && beste.ouder) {
         return { naam: beste.ouder.naam, groep: beste.groep, pagina: beste.ouder.pagina, alles: true };
       }
-      return { naam: 'Alle categorieën bekijken', groep: '38 categorieën', pagina: ALLE, alles: true };
+      return { naam: 'Alle categorieën bekijken', groep: '39 categorieën', pagina: ALLE, alles: true };
     }
 
     /* De drie deuren die er altijd staan. */

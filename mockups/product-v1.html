@@ -24,7 +24,11 @@
                                    eigen product bestaan, plus vrije maten
                                    binnen de grenzen; prijs loopt mee
      L3  alles                     de configurator van CaseBuilder in de
-                                   pagina, in de volledige stand
+                                   pagina, in de volledige stand. Dat is
+                                   een bestaande dienst die we in een
+                                   iframe laden: dit ontwerp gaat naar
+                                   CaseBuilder, zodat zij het in hun eigen
+                                   frontend nabouwen (besloten 12 sept).
 
    Bij L2 en L3 staat "Hulp nodig bij deze case?": een vak met de case
    en een samenvatting al ingevuld, dat naar een expert gaat.
@@ -114,6 +118,12 @@
 .door b{display:block;font-family:var(--disp);text-transform:uppercase;font-size:17px;letter-spacing:.03em;color:var(--dark)}
 .door span{font-size:13.5px;color:var(--mute)}
 .door.wit{background:#fff}
+/* De hele deur is een link; de regel eronder leest als knop, zodat te
+   zien is waar je uitkomt. */
+.door .deurcta{display:block;margin-top:8px;font-family:var(--disp);text-transform:uppercase;font-size:14px;
+  letter-spacing:.05em;color:var(--blue)}
+.naast{font-size:12.5px;color:var(--mute);margin-top:10px}
+.naast a{color:var(--blue);border-bottom:1px solid var(--rule)}
 
 /* Hulp nodig: een knop die een vak openklapt met de case al ingevuld.
    Zelfde knop en vak als in editor-v2. */
@@ -215,7 +225,7 @@
             <h4>// WAAR GEBRUIK JE HEM VOOR</h4>
             <ul>
               <li><a href="case-voor-v3.html#av-licht">AV &amp; licht<span class="n">142</span></a></li>
-              <li><a href="case-voor-backline-v1.html">Backline &amp; muziek<span class="n">118</span></a></li>
+              <li><a href="case-voor-backline-v1.html">Backline &amp; muziek<span class="n">127</span></a></li>
               <li><a href="case-voor-v3.html#broadcast">Broadcast &amp; camera<span class="n">86</span></a></li>
               <li><a href="case-voor-v3.html#medisch">Medisch &amp; lab<span class="n">64</span></a></li>
               <li><a href="case-voor-v3.html#industrie">Industrie &amp; meettechniek<span class="n">73</span></a></li>
@@ -225,14 +235,18 @@
           </div>
           <div>
             <h4>// MODELLEN</h4>
-            <ul>
-              <li><a href="casetype-rackcase-enkel-deksel-v1.html">Rackcase enkel deksel</a></li>
-              <li><a href="casetype-rackcase-dubbel-deksel-v1.html">Rackcase dubbel deksel</a></li>
-              <li><a href="casetype-trunccase-v1.html">Trunccase</a></li>
-              <li><a href="casetype-hoedcase-v1.html">Hoedcase</a></li>
-              <li><a href="casetype-koffer-v1.html">Koffer</a></li>
-              <li><a href="flightcases-v1.html">Alle modellen &rarr;</a></li>
-            </ul>
+            <!-- Met beeld (besloten 12 september): een model herken je aan
+                 zijn vorm, niet aan zijn naam. Nu de modelfoto's; zodra
+                 CaseBuilder renders uit de configurator kan leveren, zijn
+                 het dezelfde vijf bestanden. -->
+            <div class="modeltegels">
+              <a href="casetype-koffer-v1.html"><img src="assets/flightcase-koffer.jpg" alt="" loading="lazy"><span>Koffer<small>vanaf &euro; 149</small></span></a>
+              <a href="casetype-hoedcase-v1.html"><img src="assets/flightcase-hoedcase.jpg" alt="" loading="lazy"><span>Hoedcase<small>vanaf &euro; 179</small></span></a>
+              <a href="casetype-trunccase-v1.html"><img src="assets/flightcase-trunccase.jpg" alt="" loading="lazy"><span>Trunccase<small>vanaf &euro; 199</small></span></a>
+              <a href="casetype-rackcase-enkel-deksel-v1.html"><img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt="" loading="lazy"><span>Rackcase enkel<small>vanaf &euro; 229</small></span></a>
+              <a href="casetype-rackcase-dubbel-deksel-v1.html"><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt="" loading="lazy"><span>Rackcase dubbel<small>vanaf &euro; 259</small></span></a>
+            </div>
+            <a class="allemodellen" href="flightcases-v1.html">Alle modellen &rarr;</a>
           </div>
           <div class="vlak">
             <b>Zelf configureren</b>
@@ -321,7 +335,7 @@
     </span>
     <!-- Shop: links het overzicht — klik je op Shop zelf, dan kom je daar,
          met alle vaste cases en filters. Onderaan die kolom de weg via je
-         apparaat: de 38 categorieën, waarvandaan je in vier klikken bij het
+         apparaat: de 39 categorieën, waarvandaan je in vier klikken bij het
          apparaat bent. In het midden een paar populaire producten en
          daaronder de populairste onderdelen — kort, want het overzicht en
          de onderdelenpagina zijn één klik verder. Rechts de uitweg voor wie
@@ -340,7 +354,7 @@
               <li><a href="shop-v1.html#medisch">Medisch &amp; lab</a></li>
               <li><a href="shop-v1.html#industrie">Industrie &amp; meettechniek</a></li>
               <li><a href="shop-v1.html#evenement">Evenement &amp; beursbouw</a></li>
-              <li><a href="case-voor-v3.html">Alle 38 categorie&euml;n &rarr;</a></li>
+              <li><a href="case-voor-v3.html">Alle 39 categorie&euml;n &rarr;</a></li>
             </ul>
           </div>
           <div>
@@ -439,14 +453,6 @@
               <div class="keuze" data-keuze="hoek">
                 <button type="button" data-w="rond">Rond<small>balhoek &middot; standaard</small></button>
                 <button type="button" data-w="vierkant">Vierkant<small>+ &euro; 14</small></button>
-              </div>
-            </div>
-            <div class="kg" data-toon="l2">
-              <span class="lb">Slot</span>
-              <div class="keuze" data-keuze="slot">
-                <button type="button" data-w="vlinder">Vlinder<small>standaard</small></button>
-                <button type="button" data-w="hangslot">Hangslotoog<small>+ &euro; 9,50</small></button>
-                <button type="button" data-w="klap">Klap<small>+ &euro; 6</small></button>
               </div>
             </div>
             <div class="kg">
@@ -600,10 +606,11 @@
           </div>
 
           <!-- ── L2: door naar de volledige configurator ── -->
-          <a class="door wit" data-toon="l2" data-l3 href="#l3"><b>Meer aanpassen?</b><span>Open de volledige configurator: handgrepen, wielen, schuim, vakverdeling. Je maten, hoeken en kleur gaan mee.</span></a>
+          <a class="door wit" data-toon="l2" data-l3 href="#l3"><b>Meer aanpassen? Open de volledige configurator</b><span>Daar kies je ook het <strong>slot</strong>, handgrepen, wielen, schuim en de vakverdeling. Je maten, hoeken en kleur gaan mee.</span></a>
 
           <!-- ── L1: geen hulpvak, wel de weg naar maatwerk ── -->
-          <a class="door" data-toon="l1" href="case-aanvragen-v1.html"><b>Niet precies wat je zoekt?</b><span>Wij bouwen hem op maat voor je. Stuur een schets, een foto of je maten &mdash; Joran tekent hem uit. &rarr; Case aanvragen</span></a>
+          <a class="door" data-toon="l1" href="case-aanvragen-v1.html"><b>Niet precies wat je zoekt?</b><span>Wij bouwen hem op maat voor je. Stuur een schets, een foto of je maten &mdash; Joran tekent hem uit.</span><span class="deurcta">Case aanvragen &rarr;</span></a>
+          <p class="naast" data-toon="l1">Alleen een andere maat? <a href="#l2">Kies je eigen maten</a> &mdash; je begint met de maten van deze kist.</p>
         </div>
       </div>
     </div>
@@ -622,7 +629,8 @@
         <tr><th>Kiezen</th><td>Kleur, logo, aantal</td><td>+ maten, hoeken, slot</td><td>De configurator in de pagina: model, maten, paneel, hoeken, slot, handgrepen, wielen, schuim</td></tr>
         <tr><th>Andere maten</th><td>Niet op deze pagina</td><td>&ldquo;Ook in&rdquo;-knoppen naar de andere productpagina&rsquo;s, plus een eigen maat binnen de grenzen</td><td>Vrij, binnen de grenzen van de configurator</td></tr>
         <tr><th>Hulp nodig</th><td>&ldquo;Niet precies wat je zoekt?&rdquo; &rarr; case aanvragen</td><td>Vak met de case ingevuld &rarr; een expert</td><td>Zelfde vak, onder de configurator</td></tr>
-        <tr><th>Van CB nodig</th><td colspan="3">Per categorie: het niveau, de maten die als product bestaan, en de grenzen voor een eigen maat. Voor L3: kan de configurator in de pagina draaien in plaats van in een los venster?</td></tr>
+        <tr><th>Hoe het draait</th><td colspan="2">Onze eigen frontend</td><td>De bestaande configurator, in een <strong>iframe</strong> in de pagina. Dit ontwerp gaat naar CaseBuilder; zij bouwen het na in hun frontend, zodat het venster bij de pagina past.</td></tr>
+        <tr><th>Van CB nodig</th><td colspan="3">Per categorie: het niveau, de maten die als product bestaan, en de grenzen voor een eigen maat. Voor L3: het ontwerp nabouwen in de configurator, en hem in een iframe laten draaien in plaats van in een los venster.</td></tr>
       </tbody>
     </table>
   </div>
@@ -637,7 +645,7 @@
       </div>
       <div><h5>Offerte aanvragen</h5><a href="case-aanvragen-v1.html">Case aanvragen</a><a href="laten-controleren-v1.html">Maten laten controleren</a><a href="#">Series en staffels</a><a href="#">Zakelijk bestellen</a></div>
       <div><h5>Zelf configureren</h5><a href="configurator-v1.html">Naar de configurator</a><a href="zo-werkt-het-v1.html">Zo werkt het</a><a href="#">Herhaalorder</a><a href="#">Mijn configuraties</a></div>
-      <div><h5>Branches</h5><a href="branche-audio-visueel-v1.html">Audio-visueel en podium</a><a href="branche-broadcast-en-media-v1.html">Broadcast en media</a><a href="branche-industrie-en-machinebouw-v1.html">Industrie en machinebouw</a><a href="branche-meet-en-testapparatuur-v1.html">Meet- en testapparatuur</a><a href="branche-defensie-v1.html">Defensie</a><a href="branche-schaalmodellen-v1.html">Schaalmodellen</a><a href="grote-spelers-v1.html">Inkopen als grote partij</a></div>
+      <div><h5>Branches</h5><a href="branche-audio-visueel-v1.html">Audio-visueel en podium</a><a href="branche-broadcast-en-media-v1.html">Broadcast en media</a><a href="branche-industrie-en-machinebouw-v1.html">Industrie en machinebouw</a><a href="branche-meet-en-testapparatuur-v1.html">Meet- en testapparatuur</a><a href="branche-defensie-v1.html">Defensie</a><a href="branche-schaalmodellen-v1.html">Schaalmodellen</a><a class="anders" href="grote-spelers-v1.html">Inkopen als grote partij &rarr;</a></div>
       <div><h5>Service</h5><a href="service-levertijden-v1.html">Levertijden</a><a href="#">Verzending</a><a href="categorie-v1.html">Onderdelen</a><a href="#">Zaagservice</a><a href="#">Over Proflite</a><a href="contact-v1.html">Contact</a></div>
     </div>
     <div class="bot"><span>KVK 09123456</span><span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span></div>
