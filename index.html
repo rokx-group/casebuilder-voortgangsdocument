@@ -1324,6 +1324,12 @@
       <span class="eyebrow">CaseBuilder</span>
       <h1>Definitiefase</h1>
       <p class="lede">De architectuur waarop het ontwerp rust: waar de grens ligt tussen wat wij bouwen en wat van CaseBuilder blijft, welke lagen daarbinnen bestaan, en welke keuzes nog openstaan.</p>
+      <div class="urgent" style="margin-top:18px">
+        <h3>Lees dit als het plan van juli, niet als de stand van nu</h3>
+        <p><strong>Plan en werkelijkheid lopen uiteen.</strong> Deze fase beschrijft het advies uit het architectuurvoorstel. Wat er sinds augustus daadwerkelijk staat, wijkt daarvan af &mdash; en dat is bewust:</p>
+        <p><strong>Medusa draait self-hosted</strong> in Docker op een VPS in Neurenberg, niet in Medusa Cloud. Managed hosting is nog een open keuze. <strong>Er is geen eigen middleware</strong>: de site praat rechtstreeks met Medusa, en de prijs van een configuratie halen we server-side op bij de read-API van CaseBuilder. <strong>Er zijn geen koppelingen</strong> met Ridder of cb_core_v2.</p>
+        <p><strong>De betaalprovider is niet gekozen</strong> &mdash; Adyen of Stripe. Tot die keuze valt, loopt afrekenen op de handmatige provider van Medusa en wordt er dus niets afgeschreven. <strong>Een PIM is niet gekozen</strong>; dat hangt aan de vraag of Bol, Amazon en eBay een echt doel zijn. <strong>Een order gaat met de hand naar productie</strong>: een medewerker van CaseBuilder neemt het configuratie-id over uit onze Medusa-admin. Dat is de afspraak, geen gebrek.</p>
+      </div>
       <div class="srcrow">
         <a class="srclink" href="https://docs.google.com/document/d/1i-uPzuidKTSGHmeWRdUQ6MksPGPez4vU/edit" target="_blank" rel="noopener noreferrer"><span class="tag">bron</span> Architectuurvoorstel &rarr;</a>
         <a class="srclink" href="https://docs.google.com/document/d/1AGyHei97i9vNrJOAFBLmV5M_f7SBXMgl/edit" target="_blank" rel="noopener noreferrer"><span class="tag">bron</span> Scenario&#39;s &amp; keuzes &rarr;</a>
@@ -1599,16 +1605,16 @@
     <header class="masthead">
       <span class="eyebrow">CaseBuilder</span>
       <h1>Bouwfase</h1>
-      <p class="lede">Stand van zaken per eind augustus 2026, gelezen van de planning. Groen is af; de rest staat gepland of loopt.</p>
+      <p class="lede">Stand van zaken per 12 september 2026: de planning uit Figma, naast wat er werkelijk in de code staat. Groen is af; de rest staat gepland of loopt.</p>
       <div class="srcrow">
         <a class="srclink" href="https://www.figma.com/board/AcEVUtEcwFhtOzbR7IS9L9/casebuilder?node-id=82-2192" target="_blank" rel="noopener noreferrer"><span class="tag">bron</span> Gantt-chart in Figma →</a>
         <a class="srclink" href="#features"><span class="tag">ook</span> Features &mdash; wat er per blok in moet, met ruimte voor jullie opmerkingen &rarr;</a>
       </div>
       <div class="statwrap">
-        <span class="statcap">Peildatum 27 augustus</span>
+        <span class="statcap">Peildatum 12 september</span>
         <div class="stats">
-          <div class="stat"><span class="n">7</span><span class="l">afgerond</span></div>
-          <div class="stat"><span class="n">8</span><span class="l">loopt in augustus</span><span class="d">deels parallel</span></div>
+          <div class="stat"><span class="n">9</span><span class="l">afgerond</span></div>
+          <div class="stat"><span class="n">4</span><span class="l">loopt</span><span class="d">deels parallel</span></div>
           <div class="stat"><span class="n">10</span><span class="l">milestones</span><span class="d">1 t/m 6</span></div>
           <div class="stat"><span class="n">2</span><span class="l">CB-afhankelijk</span><span class="d">wacht op CaseBuilder</span></div>
         </div>
@@ -1619,17 +1625,17 @@
       <div class="sec-head">
         <span class="eyebrow">Toetsmomenten</span>
         <h2>Milestones</h2>
-        <p>Chronologisch, met de stand per eind augustus. Twee zijn afgerond, drie lopen, één wacht op CaseBuilder.</p>
+        <p>Chronologisch, met de stand per 12 september. Vier zijn afgerond, één loopt, één wacht op CaseBuilder, één vervalt voor de MVP en de rest staat gepland.</p>
       </div>
       <div class="mtiles">
         <div class="mt af"><div class="mtop"><span class="mn">1</span><h4>Tool set-up klaar</h4><p>Vercel-project, Sanity-basisinrichting en de bevestigde stack: Medusa, Sanity, Next.js.</p></div><span class="tag">afgerond</span></div>
-        <div class="mt loopt"><div class="mtop"><span class="mn">2a</span><h4>Minimale frontend om een geconfigureerd product te bestellen</h4><p>Medusa-skeleton plus de configurator-embed met POST-integratie. Loopt in augustus.</p></div><span class="tag">loopt</span></div>
+        <div class="mt af"><div class="mtop"><span class="mn">2a</span><h4>Minimale frontend om een geconfigureerd product te bestellen</h4><p>Gebouwd: productpagina, winkelwagen, afrekenen en de orderpagina staan in de klantrepo (PR #12 en #16). De configurator-embed loopt via <strong>postMessage</strong> &mdash; hij stuurt een configuratie-id, wij halen de prijs server-side op bij de read-API van CaseBuilder. Geen POST-integratie dus.</p></div><span class="tag">afgerond</span></div>
         <div class="mt cb"><div class="mtop"><span class="mn">2b</span><h4>We zien de order terug in het webshopportaal</h4><p>Hangt op het Magento-orderendpoint en de watchdog-koppeling met cb_core_v2 — beide van CaseBuilder.</p></div><span class="tag">wacht op cb</span></div>
         <div class="mt af"><div class="mtop"><span class="mn">3</span><h4>Stresstest — afgerond</h4><p>Medusa blijft binnen alle grenzen; het knelpunt zit in de frontend, die álle producten ophaalt en in het geheugen filtert. De oorzaak is bekend en de drie ingrepen staan vast — dat is <strong>bouwwerk, geen onderzoek meer</strong>.</p></div><span class="tag">afgerond</span></div>
-        <div class="mt af"><div class="mtop"><span class="mn">4</span><h4>Sitemap, wireframes en user flows uitgestippeld</h4><p>Vijftien sjablonen, zeventien besteltaken en de volledige nieuwe boom liggen er.</p></div><span class="tag">afgerond</span></div>
-        <div class="mt loopt"><div class="mtop"><span class="mn">4</span><h4>API en endpoint klaar</h4><p>Casebuilder API skeleton en de API-contracten worden in augustus vastgelegd.</p></div><span class="tag">loopt</span></div>
+        <div class="mt af"><div class="mtop"><span class="mn">4</span><h4>Sitemap, wireframes en user flows uitgestippeld</h4><p>Zestien sjablonen, zeventien besteltaken en de volledige nieuwe boom liggen er; vijftien sjablonen zijn getekend.</p></div><span class="tag">afgerond</span></div>
+        <div class="mt gepland"><div class="mtop"><span class="mn">4</span><h4>API en endpoint klaar</h4><p>De eigen Casebuilder API-middleware uit opdracht 1595 zit <strong>niet</strong> in de MVP: de site praat rechtstreeks met Medusa, en de prijs van een configuratie halen we server-side op bij de read-API van CaseBuilder. Blijft staan als plan voor later.</p></div><span class="tag">vervalt voor mvp</span></div>
         <div class="mt gepland"><div class="mtop"><span class="mn">4</span><h4>Hoofdtemplates staan in de CMS</h4><p>Sanity-templates en de blokkenbibliotheek — oktober.</p></div><span class="tag">gepland</span></div>
-        <div class="mt loopt"><div class="mtop"><span class="mn">5a</span><h4>Designprototype klaar</h4><p>Design frontend loopt; categoriepagina is af, de overige dertien volgen.</p></div><span class="tag">loopt</span></div>
+        <div class="mt loopt"><div class="mtop"><span class="mn">5a</span><h4>Designprototype klaar</h4><p>Twaalf van de zestien sjablonen hebben een ontwerp. Nog niet: formulier, bevestiging, account, checkout en de foutpagina.</p></div><span class="tag">loopt</span></div>
         <div class="mt gepland"><div class="mtop"><span class="mn">5b</span><h4>Website usability-test</h4><p>Nog niet belegd. Vraagt een werkend prototype en deelnemers uit de doelgroep.</p></div><span class="tag">te plannen</span></div>
         <div class="mt gepland"><div class="mtop"><span class="mn">6</span><h4>Eerste contentpagina&#39;s live</h4><p>Vraagt de blokkenbibliotheek én de vertaalbeslissing — beide staan nog open.</p></div><span class="tag">gepland</span></div>
       </div>
@@ -1702,7 +1708,7 @@
 
     <div class="legend">
       <span class="item"><span class="chip chip-keep">af</span> afgerond</span>
-      <span class="item"><span class="chip chip-move">loopt</span> in augustus onderhanden</span>
+      <span class="item"><span class="chip chip-move">loopt</span> onderhanden</span>
       <span class="item"><span class="chip chip-open">gepland</span> staat verderop</span>
       <span class="item"><span class="chip chip-drop">cb</span> hangt op CaseBuilder</span>
     </div>
@@ -1711,13 +1717,13 @@
       <div class="sec-head">
         <span class="eyebrow">Research &amp; discovery · architecture</span>
         <h2>Wat af is</h2>
-        <p>Zeven blokken staan op groen. Daarmee ligt het fundament: het huidige systeem is in kaart, de stack is bevestigd en de verbinding met de casebuilder api is aantoonbaar getest.</p>
+        <p>Zeven blokken staan op groen. Daarmee ligt het fundament: het huidige systeem is in kaart, de stack is bevestigd en de verbinding met de casebuilder api is aantoonbaar getest. In de rij hieronder zijn er sindsdien twee bij gekomen: de webshop en de configurator-embed.</p>
       </div>
       <div class="track">
         <div class="item"><span class="when">jul 1–15</span><span class="what">Stakeholder-interviews en workshops</span><span class="st"><span class="chip chip-keep">af</span></span></div>
         <div class="item"><span class="when">jul 8–22</span><span class="what">Huidig systeem in kaart gebracht<small>Levert de crawl van 386 URL's die onder de ontwerpfase ligt</small></span><span class="st"><span class="chip chip-keep">af</span></span></div>
         <div class="item"><span class="when">jul 20 – aug 13</span><span class="what">Connection test frontend ↔ casebuilder api<small>Via de configurator — het technisch risicovolste punt, en het is aangetoond</small></span><span class="st"><span class="chip chip-keep">af</span></span></div>
-        <div class="item"><span class="when">aug</span><span class="what">Tech stack bevestigd: Medusa, Sanity, PIM</span><span class="st"><span class="chip chip-keep">af</span></span></div>
+        <div class="item"><span class="when">aug</span><span class="what">Tech stack bevestigd: Medusa, Sanity, Next.js<small>Een PIM is nog niet gekozen; dat hangt aan de vraag of Bol, Amazon en eBay een doel zijn</small></span><span class="st"><span class="chip chip-keep">af</span></span></div>
         <div class="item"><span class="when">aug</span><span class="what">Vercel-project opgezet</span><span class="st"><span class="chip chip-keep">af</span></span></div>
         <div class="item"><span class="when">aug</span><span class="what">Sanity CMS basisinrichting</span><span class="st"><span class="chip chip-keep">af</span></span></div>
         <div class="item"><span class="when">jul 15–29</span><span class="what">Tool-evaluatie: PIM, webshop, CMS<small>Levert de twee architectuurdocumenten uit de definitiefase</small></span><span class="st"><span class="chip chip-keep">af</span></span></div>
@@ -1726,19 +1732,19 @@
 
     <section>
       <div class="sec-head">
-        <span class="eyebrow">Augustus</span>
-        <h2>Wat nu loopt</h2>
-        <p>Vier sporen tegelijk: set-up, cms en design, webshop, en de api-contracten. Dit document zit in het eerste blok.</p>
+        <span class="eyebrow">Augustus en september</span>
+        <h2>Wat liep, en waar het staat</h2>
+        <p>Vier sporen tegelijk: set-up, cms en design, webshop, en de api-contracten. Dit document zit in het eerste blok. De webshop en de configurator-embed zijn inmiddels af; het API-skeleton vervalt voor de MVP, en het klantportaal is niet gestart.</p>
       </div>
       <div class="track">
         <div class="item"><span class="when">aug</span><span class="what">User flows, sitemap, wireframes, productcategorieën<small>Dit document — zie de ontwerpfase</small></span><span class="st"><span class="chip chip-move">loopt</span></span></div>
         <div class="item"><span class="when">aug</span><span class="what">Design frontend</span><span class="st"><span class="chip chip-move">loopt</span></span></div>
-        <div class="item"><span class="when">aug</span><span class="what">Casebuilder API skeleton</span><span class="st"><span class="chip chip-move">loopt</span></span></div>
+        <div class="item"><span class="when">aug</span><span class="what">Casebuilder API skeleton<small>Vervalt voor de MVP: geen eigen middleware, de site praat rechtstreeks met Medusa</small></span><span class="st"><span class="chip chip-open">vervalt</span></span></div>
         <div class="item"><span class="when">aug</span><span class="what">Definitieve datastroom-diagram</span><span class="st"><span class="chip chip-move">loopt</span></span></div>
-        <div class="item"><span class="when">aug</span><span class="what">API-contracten casebuilder api vastleggen</span><span class="st"><span class="chip chip-move">loopt</span></span></div>
-        <div class="item"><span class="when">aug</span><span class="what">Medusa webshop skeleton</span><span class="st"><span class="chip chip-move">loopt</span></span></div>
-        <div class="item"><span class="when">aug</span><span class="what">Configurator iframe-embed, POST-integratie<small>De koppeling die van Magento's add-to-cart naar Medusa verhuist</small></span><span class="st"><span class="chip chip-move">loopt</span></span></div>
-        <div class="item"><span class="when">aug</span><span class="what">Prototype klantportaal</span><span class="st"><span class="chip chip-move">loopt</span></span></div>
+        <div class="item"><span class="when">aug</span><span class="what">API-contracten casebuilder api vastleggen<small>Vervalt met het skeleton; wat we nodig hebben staat in de vier vragen aan Gert</small></span><span class="st"><span class="chip chip-open">vervalt</span></span></div>
+        <div class="item"><span class="when">aug</span><span class="what">Medusa webshop skeleton<small>Gebouwd: catalogus, foto's, bedragen, afrekenen en het overzicht met filters (PR #13 t/m #19)</small></span><span class="st"><span class="chip chip-keep">af</span></span></div>
+        <div class="item"><span class="when">aug</span><span class="what">Configurator iframe-embed<small>Gebouwd in PR #12. Geen POST maar postMessage: de configurator stuurt een configuratie-id, wij halen de prijs server-side op</small></span><span class="st"><span class="chip chip-keep">af</span></span></div>
+        <div class="item"><span class="when">aug</span><span class="what">Prototype klantportaal<small>Niet gestart: er is geen account- of portaalroute in de site, alleen de bevestigingspagina van een order</small></span><span class="st"><span class="chip chip-open">niet gestart</span></span></div>
         <div class="item"><span class="when">aug / sep</span><span class="what">Contentstrategie — productcategorieën<small>Hier landt de beslissing over de 38 subcategorieën</small></span><span class="st"><span class="chip chip-move">loopt</span></span></div>
       </div>
     </section>
@@ -1759,7 +1765,7 @@
         <div class="item"><span class="when">nov mid</span><span class="what">Werkend prototype op staging</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
         <div class="item"><span class="when">dec</span><span class="what">Klantportaal custom frontend full build</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
         <div class="item"><span class="when">dec / jan</span><span class="what">Orderproductie-statusupdates van cb_core naar klantportaal<small>E-mail en status — de terugstroom uit het luik</small></span><span class="st"><span class="chip chip-open">gepland</span></span></div>
-        <div class="item"><span class="when">jan</span><span class="what">Stripe payment integration</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
+        <div class="item"><span class="when">jan</span><span class="what">Betaalprovider integreren<small>Adyen of Stripe — nog niet gekozen. Tot dan loopt afrekenen op de handmatige provider van Medusa</small></span><span class="st"><span class="chip chip-open">gepland</span></span></div>
         <div class="item"><span class="when">feb</span><span class="what">Volledige end-to-end test</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
         <div class="item"><span class="when">mrt 8–20</span><span class="what">User acceptance</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
         <div class="item"><span class="when">mrt 20–31</span><span class="what">Performance- en securityreview</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
@@ -1774,7 +1780,7 @@
       <div class="cards">
         <div class="card">
           <h3>De datumlabels lopen niet met de balken mee</h3>
-          <p>Verschillende blokken dragen een label dat niet klopt met hun positie op de tijdlijn — <code>Sep 14–19 Vercel project setup</code> staat groen en dus af, terwijl september nog moet beginnen. Waarschijnlijk zijn balken verschoven zonder dat de labels mee zijn gegaan. <strong>Ik heb de positie aangehouden, niet het label.</strong> Even nalopen voordat iemand hier een planning uit afleidt.</p>
+          <p>Verschillende blokken dragen een label dat niet klopt met hun positie op de tijdlijn — <code>Sep 14–19 Vercel project setup</code> stond al groen en dus af toen september nog moest beginnen. Waarschijnlijk zijn balken verschoven zonder dat de labels mee zijn gegaan. <strong>Ik heb de positie aangehouden, niet het label.</strong> Even nalopen voordat iemand hier een planning uit afleidt.</p>
         </div>
         <div class="card">
           <h3>Twee blokken hangen op CaseBuilder</h3>
@@ -2278,7 +2284,7 @@
     <div class="urgent">
       <h3 data-rail="GTM heeft haast">GTM heeft haast, de rest niet</h3>
       <p>De configurator draait in een popup zonder eigen URL, dus GA ziet nu vrijwel niets van de belangrijkste flow op de site. <strong>Elke week zonder events bouwt een gat op dat later niet te dichten is.</strong> Instrumenteer je nu, dan weet je bij het ontwerpen op welke stap mensen afhaken én heb je een nulmeting. Instrumenteer je pas bij livegang, dan blijft "is het beter geworden?" onbeantwoordbaar. Minimaal nodig: een event per stapovergang plus één op de handoff naar de winkelwagen. De volledige meetlijst staat onder <a href="#feat-analytics">Features &middot; Analytics &amp; tracking</a>.</p>
-      <p>Aangevraagd op <strong>5 augustus</strong>. Vandaag is het 27 augustus.</p>
+      <p>Aangevraagd op <strong>5 augustus</strong>. Vandaag is het 12 september.</p>
     </div>
 
     <h3 class="tablabel" data-rail="Toegang">Toegang die we missen</h3>
@@ -2462,7 +2468,7 @@
     <header class="masthead">
       <span class="eyebrow">CaseBuilder · ontwerpfase</span>
       <h1>Wireframes</h1>
-      <p class="lede">Vijftien sjablonen dekken de hele site. Geen plaatjes maar structuur: wat er op het scherm staat en in welke volgorde. Kies er links één.</p>
+      <p class="lede">Zestien sjablonen dekken de hele site; vijftien zijn er getekend, de foutpagina (404/410) nog niet. Geen plaatjes maar structuur: wat er op het scherm staat en in welke volgorde. Kies er links één.</p>
     </header>
 
     <div class="wflayout">
@@ -3916,7 +3922,7 @@
     <li><span class="n">10</span><span class="s">Slot</span><span class="u">// klaar om te beginnen? · Jouw maten. Tien werkdagen. · begin met configureren en zie binnen een minuut wat je case gaat kosten · Open de configurator &rarr;</span></li>
     <li><span class="n">11</span><span class="s">Footer</span><span class="u">caseBuilder.com · Proflite BV, Doesburg · +31 (0)575 575734 · flightcases · vijf modellen · onderdelen · vijf categorie&euml;n · service · levertijden &middot; verzending &middot; zaagservice &middot; zakelijk &middot; contact · &copy; 2026 Proflite BV &middot; KVK &middot; voorwaarden &middot; privacy &middot; taal</span></li>
   </ol></div>
-  <p class="wfnote">Er liggen zeven versies van deze pagina; de knoppen hierboven schakelen ertussen. <strong>v1</strong> is de basis: één hoofdactie, en de drie manieren om te beginnen als sectie eronder. <strong>v2</strong> en <strong>v3</strong> zijn diezelfde pagina met een bewegende hero — v3 is vijf keer lichter dan v2. <strong>v4, v5 en v6</strong> zijn geen varianten maar drie andere antwoorden op dezelfde vraag: het gereedschap boven de vouw, een ingang per vakgebied, of eerst de fabriek. <strong>v7</strong> is v1 met drie ingangen in de hero, offerte inbegrepen.</p>
+  <p class="wfnote">Acht versies, met de knoppen hierboven. Drie staan hier ingesloten: <strong>v1</strong> is de basis &mdash; &eacute;&eacute;n hoofdactie, en de drie manieren om te beginnen als sectie eronder. <strong>v2</strong> en <strong>v3</strong> zijn diezelfde pagina met een bewegende hero; v3 is vijf keer lichter dan v2. <strong>v4 tot en met v8</strong> openen in een nieuw tabblad. Het zijn geen varianten maar andere antwoorden op dezelfde vraag: het gereedschap boven de vouw (v4), de vloot (v5), eerst de werkplaats (v6), drie ingangen in de hero (v7) en de aanvraag als hoofdrol (v8). De afweging per versie staat in het <a href="mockups/concepten-2sept.html" target="_blank" rel="noopener">versie-overzicht</a>, en naast elkaar op <a href="mockups/homepage-varianten.html" target="_blank" rel="noopener">Homepage beoordelen</a>.</p>
   <p class="wfnote"><strong>Waar het om draait.</strong> Alles wat snel converteert (v4, v7) laat de bezoeker die het vak niet kent in de kou staan; alles wat die bezoeker opvangt (v5, v6) stelt de prijs uit. v5 is strategisch het sterkst omdat het de 533 productpagina&rsquo;s aan het werk zet, maar hangt volledig aan fotografie en een PIM die nog niet gekozen is — vandaar de lege kaders, die staan er met opzet. Eén ding om scherp te houden: v7 zet een offertedeur in een hero die belooft dat er géén offertetraject is. Dat kan, maar alleen als de tekst zegt dat de offerte een document is en geen wachtkamer. De volledige afweging per versie staat in <a class="srclink" href="mockups/concepten-2sept.html" target="_blank" rel="noopener"><span class="tag">mockup</span> het versie-overzicht</a>.</p>
   <div class="dv" data-ver="v1" data-page="home-v1">
   <!-- @gegenereerd:ontwerpweergave-html:home-v1 -->
@@ -6890,7 +6896,7 @@
         <div class="q"><span class="n">06</span><span class="body"><span class="qq">Orderhistorie-migratie is niet belegd</span><span class="why">Zonder historie kan een bestaande klant na livegang niets herbestellen wat vóór de overstap is besteld.</span><span class="src">Magento order-export</span></span></div>
         <div class="q"><span class="n">07</span><span class="body"><span class="qq">Er is geen werkende sitemap.xml</span><span class="why">/sitemap.xml stuurt door naar /nl/sitemap.xml en die geeft een 404. Google is nu volledig op interne links aangewezen. Een correcte sitemap bij livegang is een verbetering op zichzelf.</span><span class="src">bevinding uit de crawl</span></span></div>
         <div class="q"><span class="n">08</span><span class="body"><span class="qq">Twee planningsblokken hangen op CaseBuilder</span><span class="why">Het Magento-orderendpoint en de watchdog-koppeling met cb_core_v2. Milestone 2b hangt eraan.</span><span class="src">gantt · CB-markering</span></span></div>
-        <div class="q"><span class="n">09</span><span class="body"><span class="qq">De configurator-handoff is nog niet tegen Medusa gebouwd</span><span class="why">Nu een custom option in Magento. Straks een custom line item met de configuratie als metadata — plus server-side prijsverificatie, want een prijs uit de browser is nooit te vertrouwen.</span><span class="src">technisch risicovolste punt</span></span></div>
+        <div class="q"><span class="n">09</span><span class="body"><span class="qq">De configurator-handoff tegen Medusa is gebouwd</span><span class="why">Was een custom option in Magento; nu een regel in de winkelwagen met de configuratie als metadata, plus server-side prijscontrole bij de read-API van CaseBuilder &mdash; een prijs uit de browser is nooit te vertrouwen. Gebouwd in PR #12. Wat nog open staat, is de storekey voor de nieuwe shop: 4444 of 6002.</span><span class="src">technisch risicovolste punt</span></span></div>
         <div class="q"><span class="n">10</span><span class="body"><span class="qq">De productlijst wordt één keer ingeladen &mdash; opgelost</span><span class="why">Eenmalige import in Medusa, geen doorlopende synchronisatie. Daarmee is Medusa de bron voor prijs en voorraad van de 233 onderdelen. Resteert één afspraak: wie beheert die na livegang, en waar worden prijswijzigingen doorgevoerd.</span><span class="src">beantwoord door CaseBuilder</span></span></div>
       </div>
     </section>
@@ -6903,7 +6909,7 @@
       <span class="eyebrow">CaseBuilder</span>
       <h1>Features</h1>
       <p class="lede">Zeven blokken, en per blok wat er in zou moeten zitten. Vink af wat akkoord is, laat staan wat dat niet is, en zet eronder waarom &mdash; of wat er mist.</p>
-      <p class="lede">Wat je aanvinkt of typt wordt <strong>meteen bewaard</strong> en is zichtbaar voor iedereen met deze link &mdash; ook voor ons. Je hoeft niets te versturen; onderin de balk staat wanneer het is opgeslagen.</p>
+      <p class="lede">Wat je aanvinkt of typt wordt <strong>meteen bewaard</strong> en is zichtbaar voor iedereen met deze link &mdash; ook voor ons. Je hoeft niets te versturen; onderin de balk staat wanneer het is opgeslagen. <strong>Op de conceptlink</strong> (concept--casebuilder-voortgangsdocument.netlify.app): de publieke link staat sinds 31 augustus stil, want de Netlify-credits zijn op.</p>
     </header>
 
     <div data-checklist="features">
@@ -7590,7 +7596,7 @@
       <p class="wfnote" style="margin-bottom:14px">Zes uitkomsten. De eerste twee houden werk tegen: zonder die beslissing staat het ontwerp stil.</p>
       <div class="mtiles carousel" id="car-0904-uit" tabindex="0" role="group" aria-label="Wat er vrijdag uit moet komen">
         <div class="mt beslissing"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">01</span><h4>Welke homepage</h4><p>Drie richtingen. <strong>Twee knoppen:</strong> snelheid, prijs meteen in beeld. <strong>De werkvloer:</strong> eerst de twijfel wegnemen, eigen fabriek en eigen mensen, prijs pas later. <strong>De aanvraag:</strong> het formulier boven de vouw, want het meeste werk komt nu per mail binnen. <strong>Dit bepaalt de hele pagina, niet alleen het eerste scherm.</strong></p><a class="live" href="mockups/homepage-v1.html" target="_blank" rel="noopener">v1 &middot; twee knoppen &#8599;</a><a class="live" href="mockups/homepage-v6.html" target="_blank" rel="noopener">v6 &middot; de werkvloer &#8599;</a><a class="live" href="mockups/homepage-v8.html" target="_blank" rel="noopener">v8 &middot; de aanvraag &#8599;</a></div><span class="tag">beslissen</span></div>
-        <div class="mt cb"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">02</span><h4>Welke vijf cases komen erbij?</h4><p>Er staan er nu vijf: koffer, hoedcase, trunccase, rackcase enkel en dubbel. Het plan gaat naar tien &mdash; vijf modellen die je <strong>kant-en-klaar</strong> kunt bestellen in plaats van configureren. <strong>Welke vijf?</strong> Die keuze bepaalt de modellenband op de homepage, de overzichtspagina, en waar de ~300 apparaatpagina&#39;s naartoe wijzen. Drie maatstaven: de maat moet vast genoeg zijn om op voorraad te leggen, er moet op gezocht worden, en samen zouden ze een vakgebied moeten dekken dat de huidige vijf laten liggen.</p></div><span class="tag">van cb</span></div>
+        <div class="mt cb"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">02</span><h4>Welke vijf cases komen erbij?</h4><p>Er staan er nu vijf: koffer, hoedcase, trunccase, rackcase enkel en dubbel. Het plan gaat naar tien &mdash; vijf modellen die je <strong>kant-en-klaar</strong> kunt bestellen in plaats van configureren. <strong>Welke vijf?</strong> Die keuze bepaalt de modellenband op de homepage, de overzichtspagina, en waar de ~300 apparaatpagina&#39;s naartoe wijzen. Drie maatstaven: de maat moet vast genoeg zijn om op voorraad te leggen, er moet op gezocht worden, en samen zouden ze een gat moeten dekken dat de huidige vijf laten liggen.</p></div><span class="tag">van cb</span></div>
         <div class="mt beslissing"><div class="mtop"><a class="fase f-cont" href="#content" title="Hoort bij de contentfase">content</a><span class="mn">03</span><h4>Trustpilot of eKomi</h4><p>Twee platforms, twee scores &mdash; 4,68 en 4,63. Er komt er &eacute;&eacute;n op de site, en die keuze geldt daarna overal: homepage, productpagina&#39;s en de kassa.</p></div><span class="tag">beslissen</span></div>
         <div class="mt cb"><div class="mtop"><a class="fase f-cont" href="#content" title="Hoort bij de contentfase">content</a><span class="mn">04</span><h4>Beeldmateriaal</h4><p>Modelfoto&#39;s met dezelfde uitsnede en schaal &mdash; tien in plaats van vijf, plus de videobeelden als het v2 wordt. <strong>Lange doorlooptijd</strong> &mdash; hier hangt de fotoshoot van 233 onderdelen straks achteraan.</p></div><span class="tag">van cb</span></div>
         <div class="mt actie"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">05</span><h4>Groen licht voor de rest</h4><p>Is de homepage akkoord, dan liggen typografie, kleurgebruik en sectieopbouw vast en gaan de overige veertien sjablonen door in het merk. Zo niet, dan corrigeren we hier &mdash; niet vijftien keer verderop.</p><a class="live" href="#wireframes">alle zestien sjablonen &rarr;</a></div><span class="tag">vervolg</span></div>
@@ -7611,9 +7617,9 @@
         <div class="mt af"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">02</span><h4>Medusa</h4><p>Webshop-skeleton staat. Stack bevestigd, Magento valt af — pakket B, schone lei en code-first.</p><a class="live" href="https://46.224.236.191.sslip.io/app/login" target="_blank" rel="noopener noreferrer">open de Medusa-admin &#8599;</a></div><span class="tag">afgerond</span></div>
         <div class="mt af"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">03</span><h4>Sanity</h4><p>Basisinrichting staat. De blokkenbibliotheek — circa twaalf on-brand blokken — volgt in oktober.</p><a class="live" href="https://casebuilder-web.vercel.app/studio/" target="_blank" rel="noopener noreferrer">open de Sanity Studio &#8599;</a></div><span class="tag">afgerond</span></div>
         <div class="mt af"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">04</span><h4>Minimale frontend om de configurator te testen</h4><p>Connection test tussen frontend en casebuilder api geslaagd, plus de iframe-embed met POST-integratie. Het technisch risicovolste punt is aangetoond.</p><a class="live" href="https://casebuilder-web.vercel.app" target="_blank" rel="noopener noreferrer">bekijk de testomgeving &#8599;</a></div><span class="tag">afgerond</span></div>
-        <div class="mt deels"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">05</span><h4>Sitemap en sitestructuur</h4><p>386 pagina&#39;s worden er 330 over zestien sjablonen. Zeventien besteltaken getoetst tegen de nieuwe boom: zes gaten gevonden, drie opgelost in het ontwerp.</p></div><span class="tag">in review</span></div>
+        <div class="mt deels"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">05</span><h4>Sitemap en sitestructuur</h4><p>386 pagina&#39;s worden er ongeveer 632 over zestien sjablonen &mdash; 533 daarvan zijn productpagina&#39;s. Zeventien besteltaken getoetst tegen de nieuwe boom: zes gaten gevonden, drie opgelost in het ontwerp.</p></div><span class="tag">in review</span></div>
         <div class="mt deels"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">06</span><h4>Wireframes — hoe een contentpagina eruitziet</h4><p>Vijftien sjablonen uitgetekend. Eén sjabloon dekt zeven servicepagina&#39;s: koptekst, tekstkolom uit blokken, sectienavigatie, contactblok. <strong>Wat daarvoor nodig is:</strong> de blokkenbibliotheek plus de teksten.</p></div><span class="tag">in review</span></div>
-        <div class="mt deels"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">07</span><h4>Testresultaten</h4><ul><li><strong>Medusa haalt alle grenzen.</strong> Filteren: 82 ms bij 1.000, 164 ms bij 3.000 — grens 500 ms.</li><li>Admin blijft onder 470 ms, tegen een grens van 2 seconden.</li><li>Nul fouten, in elke meting.</li><li><strong>Het knelpunt zit in de frontend:</strong> die haalt álle producten op en filtert in het geheugen.</li><li>27 seconden laadtijd bij 1.000 producten.</li><li>Paginatie en filteren in de database lossen het op — staat al in het categorie-ontwerp.</li></ul><a class="live" href="https://docs.google.com/document/d/1pY7MQxi06DV0y_98nmLTkq7isR0lsShYSuS3cogkq3o/edit" target="_blank" rel="noopener noreferrer">lees het testdocument &#8599;</a></div><span class="tag">in review</span></div>
+        <div class="mt deels"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">07</span><h4>Testresultaten</h4><ul><li><strong>Medusa houdt bijna alle grenzen.</strong> Filteren via de database: 82 ms bij 1.019 en 268 ms bij 5.019 producten &mdash; grens 500 ms.</li><li>Admin: 225 ms bij 1.019 en 635 ms bij 5.019, tegen een grens van 2 seconden.</li><li><strong>Eén grens valt bij 5.019:</strong> de catalogus honderd stuks per keer lezen duurt 1.180 ms, tegen een grens van 500 ms.</li><li>Nul fouten, in elke meting.</li><li><strong>Het knelpunt zit in de frontend:</strong> die haalt álle producten op en filtert in het geheugen. Dezelfde vraag duurt via Medusa 82 ms en via de site 1.600 ms.</li><li>De productlijst loopt op met het aantal producten: 1,5 s bij 1.019, 4,5 s bij 3.019 en naar verwachting ~7,5 s bij 5.019.</li><li>Paginatie en filteren in de database lossen het op &mdash; staat al in het categorie-ontwerp.</li></ul><a class="live" href="https://docs.google.com/document/d/1pY7MQxi06DV0y_98nmLTkq7isR0lsShYSuS3cogkq3o/edit" target="_blank" rel="noopener noreferrer">lees het testdocument &#8599;</a></div><span class="tag">in review</span></div>
       </div>
 
       <div class="carhead"><h3 class="tablabel anch" id="m-2026-08-28-vooruitblik">2 &middot; Vooruitblik<a class="hash" href="#m-2026-08-28-vooruitblik" aria-label="Link naar deze sectie">#</a></h3><div class="carbtns"><button class="carbtn" type="button" data-car="car-vooruitblik" data-dir="-1" aria-label="Vorige">&#8592;</button><button class="carbtn" type="button" data-car="car-vooruitblik" data-dir="1" aria-label="Volgende">&#8594;</button></div></div>
@@ -7623,7 +7629,7 @@
       </div>
       <div class="mtiles carousel" id="car-vooruitblik" tabindex="0" role="group" aria-label="2 &middot; Vooruitblik">
         <div class="mt loopt"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">sep</span><h4>Paginaontwerpen</h4><p>De categoriepagina is af in het merk — DM Sans, Barlow Condensed, cyaan als primaire actie. De overige dertien sjablonen volgen. De header is teruggebracht van drie balken naar twee.</p><a class="live" href="mockups/header-varianten.html" target="_blank" rel="noopener">headervarianten &#8599;</a><a class="live" href="mockups/homepage.html" target="_blank" rel="noopener">homepage-ontwerp &#8599;</a></div><span class="tag">loopt</span></div>
-        <div class="mt loopt"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">sep</span><h4>Bugfixes uit de stresstest</h4><p>Eén oorzaak, drie ingrepen: <strong>paginatie</strong> op de productlijst, <strong>filteren in de database</strong> in plaats van in het geheugen, en <strong>afbeeldingen lazy laden</strong>. Nu haalt de frontend álle producten op in elf verzoeken en sorteert die zelf — 27 seconden bij 1.000 producten. Medusa zelf blijft binnen alle grenzen, dus dit is frontendwerk. De 5.000-meting volgt daarna.</p></div><span class="tag">loopt</span></div>
+        <div class="mt loopt"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">sep</span><h4>Bugfixes uit de stresstest</h4><p>Eén oorzaak, drie ingrepen: <strong>paginatie</strong> op de productlijst, <strong>filteren in de database</strong> in plaats van in het geheugen, en <strong>afbeeldingen lazy laden</strong>. Nu haalt de frontend álle producten op in elf verzoeken en sorteert die zelf. Medusa zelf blijft op één grens na binnen de perken, dus dit is frontendwerk. De meting bij 5.019 producten is op 27 augustus gedaan; sindsdien is er niets aan de site veranderd, en de bovengrens van 2.000 staat nog in de code.</p></div><span class="tag">gepland</span></div>
         <div class="mt gepland"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">sep</span><h4>CI/CD en omgevingen</h4><p>Pipelines, dev-acceptance en productie. Plus de beslissing over de 38 subcategorieën, zodra GA4 er is.</p></div><span class="tag">gepland</span></div>
         <div class="mt gepland"><div class="mtop"><a class="fase f-bouw" href="#bouw" title="Hoort bij de bouwfase">bouw</a><span class="mn">okt</span><h4>Blokkenbibliotheek en Medusa</h4><p>Sanity-templates en de webshop full build. Contentproductie start hier.</p></div><span class="tag">gepland</span></div>
         <div class="mt gepland"><div class="mtop"><a class="fase f-cont" href="#content" title="Hoort bij de contentfase">content</a><span class="mn">nov</span><h4>Contentimport en prototype</h4><p>Werkend prototype op staging — het eerste moment waarop het geheel te zien is.</p></div><span class="tag">gepland</span></div>
@@ -7645,7 +7651,7 @@
         <div class="mt beslissing"><div class="mtop"><a class="fase f-cont" href="#content" title="Hoort bij de contentfase">content</a><span class="mn">08</span><h4>Vertalen we in hoeveel talen?</h4><p>De live site draait <strong>6 talen over 13 landen</strong>, waarbij Engels de terugval is voor vier markten. Volledig vertalen maakt de contentproductie zes keer zo groot, en 96% van dat volume zit in Medusa, niet in Sanity &mdash; <strong>dat trekt de PIM naar voren</strong>. De echte vraag is niet of we vertalen maar of we het huidige aantal aanhouden.</p></div><span class="tag">beslissen</span></div>
         <div class="mt actie"><div class="mtop"><a class="fase f-ont" href="#ontwerp" title="Hoort bij de ontwerpfase">ontwerp</a><span class="mn">09</span><h4>Usability-onderzoek plannen</h4><p>Wanneer, met wie en op welk prototype? Staat als milestone 5b maar is nergens belegd. Vraagt deelnemers uit de doelgroep en dus voorbereidingstijd.</p></div><span class="tag">in te plannen</span></div>
         <div class="mt actie"><div class="mtop"><a class="fase f-cont" href="#content" title="Hoort bij de contentfase">content</a><span class="mn">10</span><h4>Start productcategorieën, content en foto&#39;s</h4><p>De volgorde ligt vast, de startdatum niet. Een fotoshoot van 233 onderdelen met schaalreferentie heeft een lange doorlooptijd — vroeg beleggen.</p></div><span class="tag">in te plannen</span></div>
-          <div class="mt beslissing"><div class="mtop"><a class="fase f-cont" href="#content" title="Hoort bij de contentfase">content</a><span class="mn">11</span><h4>Ontbreekt er een derde as: de toepassing?</h4><p><b>Branche verkoopt, toepassing bouwt.</b> De site heeft nu twee assen: vakgebied (w&aacute;t erin gaat, 533 productpagina&rsquo;s) en branche (wie je bent). Wat de case technisch bepaalt, staat nergens: <i>waarvoor</i> hij gebruikt wordt. Op tour vraagt het zwaarste beslag; een vaste route standaard; demo en klantbezoek een inlay op maat; meesturen met je eigen product OEM-uitvoering in jouw kleur; keuringsplichtig transport een rapport met vastgelegde schokwaarden. Twee klanten in dezelfde branche kunnen dus een totaal andere case nodig hebben &mdash; en twee klanten uit verschillende branches precies dezelfde. <strong>Als deze as erbij komt, raakt dat de categorie&iuml;ndeling en dus het contentwerk v&oacute;&oacute;r het vullen begint.</strong></p><a class="live" href="mockups/grote-spelers-v2.html" target="_blank" rel="noopener">Staat als stap 2 in grote-spelers v2 &#8599;</a></div><span class="tag">beslissen</span></div>
+          <div class="mt beslissing"><div class="mtop"><a class="fase f-cont" href="#content" title="Hoort bij de contentfase">content</a><span class="mn">11</span><h4>Ontbreekt er een derde as: de toepassing?</h4><p><b>Branche verkoopt, toepassing bouwt.</b> De site heeft nu twee assen: vakgebied (w&aacute;t erin gaat, 533 productpagina&rsquo;s) en branche (wie je bent). Wat de case technisch bepaalt, staat nergens: <i>waarvoor</i> hij gebruikt wordt. Op tour vraagt het zwaarste beslag; een vaste route standaard; demo en klantbezoek een inlay op maat; meesturen met je eigen product OEM-uitvoering in jouw kleur; keuringsplichtig transport een rapport met vastgelegde schokwaarden. Twee klanten in dezelfde branche kunnen dus een totaal andere case nodig hebben &mdash; en twee klanten uit verschillende branches precies dezelfde. <strong>Als deze as erbij komt, raakt dat de categorie&iuml;ndeling en dus het contentwerk v&oacute;&oacute;r het vullen begint.</strong></p><a class="live" href="mockups/grote-spelers-v2.html" target="_blank" rel="noopener">Staat als stap 2 in grote-spelers v2 &#8599;</a><p><b>Besloten op 3 september:</b> de derde as komt er. De site heeft drie assen &mdash; <i>route</i> (hoe je koopt), <i>toepassingen</i> (w&aacute;t je vervoert, onder /case-voor) en <i>branches</i> (wie je bent). Het woord &ldquo;vakgebied&rdquo; is geschrapt en /sectoren wordt een 301.</p></div><span class="tag">besloten</span></div>
       </div>
 
       <div class="carhead"><h3 class="tablabel anch" id="m-2026-08-28-tijdlijn">4 &middot; Tijdlijn<a class="hash" href="#m-2026-08-28-tijdlijn" aria-label="Link naar deze sectie">#</a></h3></div>
@@ -7664,7 +7670,7 @@
           <div class="tlwhen">aug</div><div class="tlaxis"></div>
           <div class="tlbody">
             <h4>Stresstest afgerond<span class="tlfase">bouw</span></h4>
-            <p>Medusa haalt alle grenzen &mdash; filteren in 82 ms bij 1.000 en 164 ms bij 3.000 producten, nul fouten. Het knelpunt zit in de frontend. Oorzaak en oplossing liggen vast: pagineren, filteren in de database en afbeeldingen lazy laden.</p>
+            <p>Medusa houdt bijna alle grenzen &mdash; filteren in 82 ms bij 1.019 en 268 ms bij 5.019 producten, nul fouten; alleen de catalogus lezen valt bij 5.019 buiten de grens. Het knelpunt zit in de frontend. Oorzaak en oplossing liggen vast: pagineren, filteren in de database en afbeeldingen lazy laden.</p>
           </div>
         </div>
 
