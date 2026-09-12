@@ -46,6 +46,7 @@ deploy. Zet in het dashboard geen branch deploys aan, anders vervalt dat.
 | | |
 |---|---|
 | `node scripts/bouw-ontwerpweergave.mjs` | bouwt de ingesloten ontwerpweergave in `index.html` uit `mockups/`. Draaien na elke mockupwijziging. |
+| `node scripts/bouw-momentopname.mjs [naam]` | legt de uitgewerkte DOM vast van mockups die hun inhoud met een script opbouwen (de shop, de vergelijktabel). Draaien als zo'n pagina verandert; daarna de ontwerpweergave opnieuw bouwen. Vraagt om Chrome — pad desnoods in `CHROME_PATH`. |
 | `node scripts/bouw-wireframes.mjs` | schrijft per sjabloon een losse wireframepagina op ware grootte, uit `index.html`. |
 | `node scripts/meet-hoogtes.mjs [bestand]` | meet sectiehoogtes in Chrome op 1440 × 900. Niet schatten, meten. |
 

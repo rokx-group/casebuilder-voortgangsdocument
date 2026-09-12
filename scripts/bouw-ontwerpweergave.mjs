@@ -13,14 +13,17 @@
  *
  * Gebruik: node scripts/bouw-ontwerpweergave.mjs
  */
-import { readFileSync, writeFileSync, readdirSync } from "node:fs";
+import { readFileSync, writeFileSync, readdirSync, existsSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { basename, dirname, join } from "node:path";
+import { argv } from "node:process";
 
 const wortel = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DOEL = join(wortel, "index.html");
 const BRAND = join(wortel, "mockups/assets/brand.css");
-const PAGINAS = [
+export const MOMENTOPNAMEN = join(wortel, "mockups/momentopnames");
+export const PAGINAS = [
   { naam: "categorie", bestand: "mockups/categorie.html", overslaan: ["wireframe"] },
   // De wireframe is geen ontwerp; die slaan we hier over.
   { naam: "home", bestand: "mockups/homepage.html", overslaan: ["wireframe"] },
@@ -115,7 +118,7 @@ function schaalIn(css, wortelSel) {
   return uit;
 }
 
-function tussen(tekst, start, eind, wat) {
+export function tussen(tekst, start, eind, wat) {
   // <body> mag attributen dragen (bijv. data-film op de videovarianten);
   // zoek daarom op de opening en spring naar het sluitende haakje.
   let a = tekst.indexOf(start);
@@ -151,8 +154,6 @@ function herschrijfPaden(tekst, map) {
       (_, q, pad) => `url(${q}${voor(pad)}${q})`);
 }
 
-let css = TERUGZET + schaalIn(readFileSync(BRAND, "utf8"), WORTEL);
-const html = {};
 
 /**
  * Varianten: naast `homepage.html` mag `homepage-v6.html` bestaan. Die wordt
@@ -174,7 +175,7 @@ const NIET_RESPONSIEF = [];
 const MOGELIJK_GEMIST = new Map();
 const OPGEPIKT = new Set();
 
-function variantenVan(bestand, naam) {
+export function variantenVan(bestand, naam) {
   if (naam && NIET_RESPONSIEF.includes(naam)) return [{ id: "wireframe", bestand }];
   const map = join(wortel, dirname(bestand));
   const stam = basename(bestand, ".html");
@@ -196,6 +197,61 @@ function variantenVan(bestand, naam) {
   for (const naam of gemist) MOGELIJK_GEMIST.set(naam, stam);
   return uit;
 }
+
+/**
+ * De vingerafdruk van een mockup: het bestand zelf plus elk eigen script en
+ * elke eigen stylesheet die het laadt. Verandert er iets aan de bron, dan
+ * verandert de vingerafdruk, en weet een momentopname dat hij verouderd is.
+ *
+ * Alleen de bestandsnaam hashen zou niet werken: de inhoud van de shop komt
+ * uit een array in een script, dus een wijziging daar verandert de pagina
+ * zonder de HTML aan te raken.
+ */
+export function vingerafdruk(bestand) {
+  const map = dirname(bestand);
+  const bron = readFileSync(join(wortel, bestand), "utf8");
+  const hash = createHash("sha256").update(bron);
+  const verwijzingen = [
+    ...[...bron.matchAll(/<script\b[^>]*\bsrc=["']([^"']+)["']/gi)].map((m) => m[1]),
+    ...[...bron.matchAll(/<link\b[^>]*rel=["']stylesheet["'][^>]*>/gi)]
+      .map((m) => (m[0].match(/href=["']([^"']+)["']/) || [])[1]),
+  ];
+  for (const pad of verwijzingen) {
+    if (!pad || /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(pad)) continue;
+    try { hash.update(readFileSync(join(wortel, map, pad))); } catch { /* ontbreekt: telt als leeg */ }
+  }
+  return hash.digest("hex").slice(0, 16);
+}
+
+const MOMENTKOP = (bestand, afdruk) =>
+  `<!-- momentopname van ${bestand} · vingerafdruk ${afdruk} · gemaakt met scripts/bouw-momentopname.mjs -->`;
+export { MOMENTKOP };
+
+/**
+ * Sommige mockups bouwen hun inhoud op uit een array: de shop maakt zijn
+ * tabbladen, filters en kaarten met een script. De generator neemt alleen
+ * HTML en CSS mee, dus die pagina's stonden leeg in de weergave — een lege
+ * shop met "0 cases", terwijl de mockup zelf er vol staat.
+ *
+ * Daarom mag een pagina een momentopname hebben: de uitgewerkte DOM, gemaakt
+ * door bouw-momentopname.mjs en meegecommit. Die wordt hier gebruikt in
+ * plaats van de kale bron. Meecommitten is belangrijk: zo komt er hetzelfde
+ * document uit, ook op een machine zonder browser.
+ */
+function momentopnameVan(bestand, sleutel) {
+  const pad = join(MOMENTOPNAMEN, basename(bestand));
+  if (!existsSync(pad)) return null;
+  const inhoud = readFileSync(pad, "utf8");
+  const afdruk = (inhoud.match(/vingerafdruk ([0-9a-f]+)/) || [])[1];
+  if (afdruk !== vingerafdruk(bestand)) {
+    console.warn(`  let op: momentopname van ${sleutel} is verouderd — draai scripts/bouw-momentopname.mjs`);
+  }
+  return inhoud.replace(/^<!--[^>]*-->\n?/, "");
+}
+
+export function bouw() {
+let css = TERUGZET + schaalIn(readFileSync(BRAND, "utf8"), WORTEL);
+const html = {};
 
 for (const { naam, bestand, overslaan = [] } of PAGINAS) {
   for (const variant of variantenVan(bestand, naam)) {
@@ -226,9 +282,11 @@ for (const { naam, bestand, overslaan = [] } of PAGINAS) {
       wortelSel
     );
     // Het meetlint hoort bij de losse mockup, niet bij de ingesloten kopie.
-    html[sleutel] = herschrijfPaden(
-      tussen(bron, "<body>", "</body>", `body in ${variant.bestand}`).inhoud, map
-    )
+    // De paden in een momentopname staan al zoals in de mockup, dus ze
+    // worden op dezelfde manier herschreven als die van de bron.
+    const lijf = momentopnameVan(variant.bestand, sleutel)
+      ?? tussen(bron, "<body>", "</body>", `body in ${variant.bestand}`).inhoud;
+    html[sleutel] = herschrijfPaden(lijf, map)
       .replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "")
       .trim();
   }
@@ -263,3 +321,9 @@ for (const sleutel of Object.keys(html)) {
 
 writeFileSync(DOEL, doel);
 console.log(`ontwerpweergave bijgewerkt — ${css.length} tekens css, ${PAGINAS.length} pagina's`);
+}
+
+/* Het bestand is ook een module: bouw-momentopname.mjs leest PAGINAS en
+   variantenVan hieruit, zodat de lijst met sjablonen op één plek staat.
+   Alleen als het rechtstreeks wordt aangeroepen, bouwt het ook. */
+if (argv[1] && fileURLToPath(import.meta.url) === argv[1]) bouw();
