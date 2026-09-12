@@ -10,7 +10,11 @@
 <link rel="stylesheet" href="assets/brand.css">
 <link rel="stylesheet" href="assets/draaikist.css">
 <style>
-/* ── modeloverzicht — paginaspecifiek, bovenop brand.css ── */
+/* ── modeloverzicht — paginaspecifiek, bovenop brand.css ──
+   Besloten 12 september: de kop blijft, daaronder komt een sectie over
+   wat een flightcase is, en daarna staan de vijf modellen tegelijk in
+   beeld — draaiend, met schuiven voor je eigen maat. Die twee blokken
+   kwamen uit flightcases-v2; die pagina is daarmee opgegaan in deze. */
 .ovkop{background:var(--bg);border-bottom:1px solid var(--rule)}
 .ovkop h1{font-size:clamp(34px,4.2vw,54px)}
 .ovkop .lead{margin-top:14px}
@@ -35,6 +39,55 @@
 .geenidee p{font-size:14.5px;color:var(--mute);max-width:56ch;margin-top:6px}
 .geenidee .btn{margin-left:auto}
 
+/* ── wat is een flightcase ─────────────────────────────────── */
+.watis{background:#fff;border-top:1px solid var(--rule)}
+.watis .rij{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:26px}
+.watis .kaart .im{aspect-ratio:4/3;overflow:hidden;background:var(--bg);border:1px solid var(--rule)}
+.watis .kaart img{width:100%;height:100%;object-fit:cover;display:block}
+.watis .wat{display:block;font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:18px;
+  letter-spacing:.03em;color:var(--dark);margin-top:14px}
+.watis .kaart p{font-size:13.5px;color:var(--mute);margin-top:8px;line-height:1.55}
+.watis .noot{font-size:12.5px;color:var(--mute);margin-top:18px}
+
+/* ── de vijf: één groot, vijf klein ────────────────────────── */
+.podium{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;margin-top:30px;
+  background:#fff;border:1px solid var(--rule);padding:22px 28px}
+.podium .kist3d{height:340px}
+.podium .kmaat{display:none}
+.podium h2{font-size:34px}
+.podium .waar{font-size:15.5px;color:var(--mute);margin-top:10px;max-width:46ch}
+.specs{display:grid;grid-template-columns:auto 1fr;border-top:1px solid var(--rule);margin-top:18px}
+.specs dt,.specs dd{padding:9px 0;border-bottom:1px solid var(--rule)}
+.specs dt{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);padding-right:22px}
+.specs dd{font-size:15px;color:var(--ink)}
+.specs dd.prijs{font-family:var(--disp);font-size:22px;font-weight:900;color:var(--dark)}
+.podium .cta{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+/* Probeer het (besloten 11 september, punt 05): de schuiven zetten de
+   grote kist op jouw maat; de prijs loopt mee en zakt nooit onder de
+   vanafprijs van het model. Gedrag: assets/probeer.js. */
+.jouwmaat{margin-top:18px;border-top:1.5px solid var(--dark);padding-top:14px}
+.jouwmaat .kop{display:flex;align-items:baseline;gap:12px;margin-bottom:8px}
+.jouwmaat .kop .ey{margin:0}
+.jouwmaat .kop b{margin-left:auto;font-family:var(--disp);font-size:26px;font-weight:900;color:var(--dark)}
+.jouwmaat .kop small{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--mute)}
+.jouwmaat label{display:grid;grid-template-columns:70px 1fr 60px;align-items:center;gap:10px;font-family:var(--mono);
+  font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+.jouwmaat input[type=range]{accent-color:var(--dark);width:100%}
+.jouwmaat output{font-family:var(--disp);font-size:16px;color:var(--dark);text-align:right}
+
+/* De vijf: allemaal draaiend, allemaal tegelijk. De kist in een tegel
+   vangt geen muis — de hele tegel is de knop. */
+.vijf{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin:18px 0 0;padding-bottom:44px}
+.vijf button{border:1.5px solid var(--rule);background:#fff;padding:0;cursor:pointer;text-align:left;display:flex;flex-direction:column;transition:.14s}
+.vijf button:hover{border-color:var(--dark)}
+.vijf button[aria-pressed="true"]{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(102,196,232,.24)}
+.vijf .beeld{background:var(--bg);height:170px;overflow:hidden;position:relative}
+.vijf .kist3d{height:170px;pointer-events:none}
+.vijf .kmaat{display:none}
+.vijf .naam{padding:12px 14px 14px;display:flex;align-items:baseline;gap:10px}
+.vijf .naam b{font-family:var(--disp);text-transform:uppercase;font-size:17px;letter-spacing:.03em;color:var(--dark)}
+.vijf .naam small{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--mute)}
+.vijf .hint{grid-column:1/-1;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
 /* de vergelijking — bestaat nu nergens */
 .verg{width:100%;border-collapse:collapse;margin-top:26px}
 .verg th,.verg td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--rule);font-size:14px}
@@ -45,7 +98,8 @@
 .verg td.ja{color:#2F7355;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
 .verg td.nee{color:var(--mute);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
 .verg td.prijs{font-family:var(--disp);font-size:19px;font-weight:900;color:var(--dark);letter-spacing:.02em}
-.verg tbody tr:hover{background:var(--bg)}
+.verg tbody tr{cursor:pointer}
+.verg tbody tr:hover,.verg tbody tr.aan{background:var(--lightblue)}
 .scroller{overflow-x:auto}
 
 @media(max-width:1080px){ .modellen{grid-template-columns:repeat(3,1fr)} }
@@ -139,15 +193,17 @@
           <div>
             <h4>// MODELLEN</h4>
             <!-- Met beeld (besloten 12 september): een model herken je aan
-                 zijn vorm, niet aan zijn naam. Nu de modelfoto's; zodra
-                 CaseBuilder renders uit de configurator kan leveren, zijn
-                 het dezelfde vijf bestanden. -->
+                 zijn vorm, niet aan zijn naam. Een stilstaande kist per
+                 model, in CSS — geen foto's, want die hebben vijf
+                 verschillende uitsnedes, en geen script, want dit menu
+                 staat op elke pagina. Zodra CaseBuilder renders uit de
+                 configurator levert, komen die hiervoor in de plaats. -->
             <div class="modeltegels">
-              <a href="casetype-koffer-v1.html"><img src="assets/flightcase-koffer.jpg" alt="" loading="lazy"><span>Koffer<small>vanaf &euro; 149</small></span></a>
-              <a href="casetype-hoedcase-v1.html"><img src="assets/flightcase-hoedcase.jpg" alt="" loading="lazy"><span>Hoedcase<small>vanaf &euro; 179</small></span></a>
-              <a href="casetype-trunccase-v1.html"><img src="assets/flightcase-trunccase.jpg" alt="" loading="lazy"><span>Trunccase<small>vanaf &euro; 199</small></span></a>
-              <a href="casetype-rackcase-enkel-deksel-v1.html"><img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt="" loading="lazy"><span>Rackcase enkel<small>vanaf &euro; 229</small></span></a>
-              <a href="casetype-rackcase-dubbel-deksel-v1.html"><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt="" loading="lazy"><span>Rackcase dubbel<small>vanaf &euro; 259</small></span></a>
+              <a href="casetype-koffer-v1.html"><span class="modelkist" style="--b:46.0px;--h:16.4px;--d:29.6px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Koffer<small>vanaf &euro; 149</small></span></a>
+              <a href="casetype-hoedcase-v1.html"><span class="modelkist" style="--b:46.0px;--h:31.6px;--d:28.8px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Hoedcase<small>vanaf &euro; 179</small></span></a>
+              <a href="casetype-trunccase-v1.html"><span class="modelkist" style="--b:46.0px;--h:34.5px;--d:34.5px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Trunccase<small>vanaf &euro; 199</small></span></a>
+              <a href="casetype-rackcase-enkel-deksel-v1.html"><span class="modelkist" style="--b:46.0px;--h:30.7px;--d:38.3px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Rackcase enkel<small>vanaf &euro; 229</small></span></a>
+              <a href="casetype-rackcase-dubbel-deksel-v1.html"><span class="modelkist" style="--b:44.5px;--h:46.0px;--d:40.8px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Rackcase dubbel<small>vanaf &euro; 259</small></span></a>
             </div>
             <a class="allemodellen" href="flightcases-v1.html">Alle modellen &rarr;</a>
           </div>
@@ -333,6 +389,69 @@
 </div>
 
 
+<!-- ══ WAT IS EEN FLIGHTCASE ═════════════════════════════════════
+     Nieuw op 12 september: tussen de kop en de vijf modellen. Wie hier
+     binnenkomt weet wat hij vervoert, niet waar een kist van gemaakt is.
+     Foto's zijn voorlopig de modelfoto's; detailfoto's van profiel,
+     balhoek en schuim moeten van CaseBuilder komen. ══════════════ -->
+<section class="watis tight">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ey ey-dark">// WAT IS EEN FLIGHTCASE</div>
+      <h2>Multiplex, aluminium profiel en balhoeken</h2>
+      <p class="lead" style="margin-top:10px;max-width:64ch">Een flightcase is een kist van 7 of 9 mm multiplex, gevat in aluminium profiel, met balhoeken op de punten en sluitingen die trillingen aankunnen. Binnenin schuim op maat, buiten beslag dat een val van een laadklep overleeft.</p>
+    </div>
+    <div class="rij">
+      <div class="kaart"><div class="im"><img src="assets/flightcase-trunccase.jpg" alt="Aluminium profiel en balhoeken op een trunccase" loading="lazy"></div>
+        <span class="wat">Profiel en hoeken</span><p>Het aluminium profiel houdt de panelen bij elkaar; de balhoek vangt de klap op het punt waar twee zijden en een rand samenkomen.</p></div>
+      <div class="kaart"><div class="im"><img src="assets/foto-product-drone.jpg" alt="Uitgefreesd schuim in een koffer" loading="lazy"></div>
+        <span class="wat">Schuim op maat</span><p>Plukschuim of uitgefreesd: elk onderdeel krijgt zijn eigen uitsparing, zodat er niets schuift en niets tegen elkaar tikt.</p></div>
+      <div class="kaart"><div class="im"><img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt="19-inch rackcase met afneembaar deksel" loading="lazy"></div>
+        <span class="wat">Deksels en beslag</span><p>Sluitingen, handgrepen en wielen bepalen hoe je hem open- en meekrijgt. Een 19-inch rack heeft andere maten dan een kist voor losse spullen.</p></div>
+    </div>
+    <p class="noot">De foto&rsquo;s hierboven zijn modelfoto&rsquo;s; detailfoto&rsquo;s van profiel, balhoek en schuim komen van CaseBuilder.</p>
+  </div>
+</section>
+
+<!-- ══ DE VIJF, TEGELIJK ═════════════════════════════════════════ -->
+<div class="ovkop kop-laag" id="vijf" style="border-top:1px solid var(--rule)">
+  <div class="wrap">
+    <div class="ey ey-dark">// ALLE VIJF NAAST ELKAAR</div>
+    <h2 style="font-size:clamp(28px,3.4vw,40px);margin-top:10px">Klik een model om het groot te zien</h2>
+    <p class="lead" style="margin-top:10px">Met waar hij voor is, wat hij kost, en de schuiven om je eigen maat te proberen.</p>
+
+    <div class="podium" data-probeer data-vanaf="149">
+      <div class="kistvak">
+        <div class="kist3d" data-draaikist data-vrij="800" data-grootte="250" data-podium title="Sleep om te draaien">
+          <div class="kubus"><div class="zij achter"></div><div class="zij links"></div><div class="zij rechts"></div><div class="zij boven"></div><div class="zij onder"></div><div class="zij voor"></div></div>
+          <div class="grond"></div>
+          <span class="kmaat"></span>
+        </div>
+      </div>
+      <div>
+        <div class="ey ey-dark" data-p-ey></div>
+        <h2 data-p-naam></h2>
+        <p class="waar" data-p-waar></p>
+        <dl class="specs" data-p-specs></dl>
+        <div class="jouwmaat">
+          <div class="kop"><span class="ey ey-dark">// Probeer het &middot; jouw maat</span><b data-probeerprijs></b><small>voorbeeld &middot; excl. btw</small></div>
+          <label>Breedte<input type="range" min="300" max="1400" step="10" value="700" data-schuif="b"><output data-uit="b">700</output></label>
+          <label>Hoogte<input type="range" min="150" max="1000" step="10" value="250" data-schuif="h"><output data-uit="h">250</output></label>
+          <label>Diepte<input type="range" min="200" max="1000" step="10" value="450" data-schuif="d"><output data-uit="d">450</output></label>
+        </div>
+        <div class="cta">
+          <a class="btn btn-pri" data-p-config data-probeerlink data-basis="configurator-v1.html?start=1" href="configurator-v1.html?start=1">Configureer dit model &rarr;</a>
+          <a class="btn btn-out" data-p-meer href="#">Meer over dit model</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="vijf" data-vijf role="group" aria-label="De vijf modellen">
+      <span class="hint">// Klik een model om het groot te zien</span>
+    </div>
+  </div>
+</div>
+
 <section class="veld">
   <div class="wrap">
     <div class="sec-head">
@@ -371,49 +490,6 @@
 </section>
 
 <div class="wrap">
-  <div class="modellen">
-    <a class="mod" href="casetype-koffer-v1.html">
-      <div class="im"><img src="assets/flightcase-koffer.jpg" alt="Koffer"></div>
-      <div class="bd">
-        <h3>Koffer</h3>
-        <p class="waar">Draag je hem met de hand mee? Gitaar, gereedschap, een set microfoons.</p>
-        <div class="pr">vanaf<b>€ 149</b>excl. btw</div>
-      </div>
-    </a>
-    <a class="mod" href="casetype-hoedcase-v1.html">
-      <div class="im"><img src="assets/flightcase-hoedcase.jpg" alt="Hoedcase"></div>
-      <div class="bd">
-        <h3>Hoedcase</h3>
-        <p class="waar">Deksel er helemaal af, dan sta je er met twee handen bij. Voor opbouwen op locatie.</p>
-        <div class="pr">vanaf<b>€ 179</b>excl. btw</div>
-      </div>
-    </a>
-    <a class="mod" href="casetype-trunccase-v1.html">
-      <div class="im"><img src="assets/flightcase-trunccase.jpg" alt="Trunccase"></div>
-      <div class="bd">
-        <h3>Trunccase</h3>
-        <p class="waar">De werkkist: bovendeksel, veel volume, rijdt op wielen. Kabels, statieven, losse spullen.</p>
-        <div class="pr">vanaf<b>€ 199</b>excl. btw</div>
-      </div>
-    </a>
-    <a class="mod" href="casetype-rackcase-enkel-deksel-v1.html">
-      <div class="im"><img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt="Rackcase enkel deksel"></div>
-      <div class="bd">
-        <h3>Rackcase enkel</h3>
-        <p class="waar">19-inch apparatuur die je alleen aan de voorkant bedient. Eén deksel is genoeg.</p>
-        <div class="pr">vanaf<b>€ 229</b>excl. btw</div>
-      </div>
-    </a>
-    <a class="mod" href="casetype-rackcase-dubbel-deksel-v1.html">
-      <div class="im"><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt="Rackcase dubbel deksel"></div>
-      <div class="bd">
-        <h3>Rackcase dubbel</h3>
-        <p class="waar">Moet je er ook achter bij, voor bekabeling? Dan voor- én achterdeksel.</p>
-        <div class="pr">vanaf<b>€ 259</b>excl. btw</div>
-      </div>
-    </a>
-  </div>
-
   <div class="geenidee">
     <div>
       <h3>Weet je het nog niet?</h3>
@@ -437,13 +513,7 @@
         <thead>
           <tr><th>Model</th><th>Waarvoor</th><th>Deksel</th><th>19-inch</th><th>Wielen</th><th>Vanaf</th></tr>
         </thead>
-        <tbody>
-          <tr><th>Koffer</th><td>Met de hand meenemen</td><td>Scharnierend</td><td class="nee">nee</td><td class="nee">zelden</td><td class="prijs">€ 149</td></tr>
-          <tr><th>Hoedcase</th><td>Opbouwen op locatie</td><td>Volledig afneembaar</td><td class="nee">nee</td><td class="ja">optioneel</td><td class="prijs">€ 179</td></tr>
-          <tr><th>Trunccase</th><td>Veel losse spullen</td><td>Bovendeksel</td><td class="nee">nee</td><td class="ja">standaard</td><td class="prijs">€ 199</td></tr>
-          <tr><th>Rackcase enkel</th><td>Alleen voorkant bedienen</td><td>Voordeksel</td><td class="ja">ja</td><td class="ja">optioneel</td><td class="prijs">€ 229</td></tr>
-          <tr><th>Rackcase dubbel</th><td>Ook bekabeling achterin</td><td>Voor én achter</td><td class="ja">ja</td><td class="ja">optioneel</td><td class="prijs">€ 259</td></tr>
-        </tbody>
+        <tbody data-verg></tbody>
       </table>
     </div>
   </div>
@@ -478,6 +548,121 @@
 <script src="assets/navzoek.js"></script>
 <script src="assets/vouw.js"></script>
 <script src="assets/draaikist.js"></script>
+<script src="assets/probeer.js"></script>
+<script>
+/* ══════════════════════════════════════════════════════════════
+   De vijf modellen. Eén lijst, drie plekken: het menu, de tegels en de
+   tabel. De kisten worden hier gebouwd en daarna door draaikist.js
+   aangezet (dat script staat hieronder, na dit blok). Maten en
+   vanafprijzen uit flightcases-v1; maten in mm, breedte × hoogte × diepte.
+   ══════════════════════════════════════════════════════════════ */
+window.MODELLEN = [
+  { naam: 'Koffer', b: 700, h: 250, d: 450, prijs: 149, href: 'casetype-koffer-v1.html',
+    waar: 'Draag je hem met de hand mee? Gitaar, gereedschap, een set microfoons.',
+    kort: 'Met de hand meenemen', deksel: 'Scharnierend', rack: 'nee', wielen: 'zelden' },
+  { naam: 'Hoedcase', b: 800, h: 550, d: 500, prijs: 179, href: 'casetype-hoedcase-v1.html',
+    waar: 'Deksel er helemaal af, dan sta je er met twee handen bij. Voor opbouwen op locatie.',
+    kort: 'Opbouwen op locatie', deksel: 'Volledig afneembaar', rack: 'nee', wielen: 'optioneel' },
+  { naam: 'Trunccase', b: 800, h: 600, d: 600, prijs: 199, href: 'casetype-trunccase-v1.html',
+    waar: 'De werkkist: bovendeksel, veel volume, rijdt op wielen. Kabels, statieven, losse spullen.',
+    kort: 'Veel losse spullen', deksel: 'Bovendeksel', rack: 'nee', wielen: 'standaard' },
+  { naam: 'Rackcase enkel', b: 600, h: 400, d: 500, prijs: 229, href: 'casetype-rackcase-enkel-deksel-v1.html',
+    waar: '19-inch apparatuur die je alleen aan de voorkant bedient. Eén deksel is genoeg.',
+    kort: 'Alleen voorkant bedienen', deksel: 'Voordeksel', rack: 'ja', wielen: 'optioneel' },
+  { naam: 'Rackcase dubbel', b: 600, h: 620, d: 550, prijs: 259, href: 'casetype-rackcase-dubbel-deksel-v1.html',
+    waar: 'Moet je er ook achter bij, voor bekabeling? Dan voor- én achterdeksel.',
+    kort: 'Ook bekabeling achterin', deksel: 'Voor én achter', rack: 'ja', wielen: 'optioneel' }
+];
+
+(function () {
+  function el(tag, cls, tekst) { var e = document.createElement(tag); if (cls) e.className = cls; if (tekst != null) e.textContent = tekst; return e; }
+  /* Eén kist: dezelfde opbouw als in de rest van de mockups. */
+  function kist(attrs) {
+    var k = el('div', 'kist3d');
+    k.setAttribute('data-draaikist', '');
+    Object.keys(attrs).forEach(function (a) { k.setAttribute(a, attrs[a]); });
+    var kubus = el('div', 'kubus');
+    ['achter', 'links', 'rechts', 'boven', 'onder', 'voor'].forEach(function (z) { kubus.appendChild(el('div', 'zij ' + z)); });
+    k.appendChild(kubus);
+    k.appendChild(el('div', 'grond'));
+    k.appendChild(el('span', 'kmaat'));
+    return k;
+  }
+
+  // de vijf tegels: draaiend, elk op een andere hoek
+  var vijf = document.querySelector('[data-vijf]');
+  MODELLEN.forEach(function (m, i) {
+    var b = el('button');
+    b.type = 'button';
+    b.dataset.i = String(i);
+    b.setAttribute('aria-pressed', 'false');
+    var beeld = el('div', 'beeld');
+    beeld.appendChild(kist({ 'data-vrij': '800', 'data-grootte': '118', 'data-hoek': String(-28 + i * 36), 'data-mdl': String(i) }));
+    b.appendChild(beeld);
+    var naam = el('span', 'naam');
+    naam.appendChild(el('b', null, m.naam));
+    naam.appendChild(el('small', null, 'vanaf € ' + m.prijs));
+    b.appendChild(naam);
+    vijf.appendChild(b);
+  });
+
+  // de tabel
+  var verg = document.querySelector('[data-verg]');
+  MODELLEN.forEach(function (m, i) {
+    var tr = el('tr');
+    tr.dataset.i = String(i);
+    tr.appendChild(el('th', null, m.naam));
+    tr.appendChild(el('td', null, m.kort));
+    tr.appendChild(el('td', null, m.deksel));
+    tr.appendChild(el('td', m.rack === 'ja' ? 'ja' : 'nee', m.rack));
+    tr.appendChild(el('td', m.wielen === 'zelden' ? 'nee' : 'ja', m.wielen));
+    tr.appendChild(el('td', 'prijs', '€ ' + m.prijs));
+    verg.appendChild(tr);
+  });
+})();
+</script>
+<script src="assets/draaikist.js"></script>
+<script src="assets/probeer.js"></script>
+<script>
+/* De kisten staan en draaien; nu de maten erin, en het podium. */
+(function () {
+  function q(s) { return document.querySelector(s); }
+  function qa(s) { return Array.prototype.slice.call(document.querySelectorAll(s)); }
+  function maat(k, m) { k.dispatchEvent(new CustomEvent('kist:maat', { detail: { naam: m.naam, b: m.b, h: m.h, d: m.d } })); }
+
+  qa('[data-mdl]').forEach(function (k) { maat(k, MODELLEN[+k.dataset.mdl]); });
+
+  var podium = q('[data-podium]');
+  function kies(i, scrol) {
+    var m = MODELLEN[i];
+    podium.closest('[data-probeer]').dispatchEvent(new CustomEvent('probeer:zet', { detail: {
+      b: m.b, h: m.h, d: m.d, vanaf: m.prijs, naam: m.naam,
+      basis: 'configurator-v1.html?start=1&model=' + encodeURIComponent(m.naam) } }));
+    q('[data-p-ey]').textContent = '// Model ' + (i + 1) + ' van 5';
+    q('[data-p-naam]').textContent = m.naam;
+    q('[data-p-waar]').textContent = m.waar;
+    var dl = q('[data-p-specs]');
+    dl.textContent = '';
+    [['Waarvoor', m.kort], ['Deksel', m.deksel], ['19-inch', m.rack], ['Wielen', m.wielen],
+     ['Voorbeeldmaat', m.b.toLocaleString('nl-NL') + ' × ' + m.h.toLocaleString('nl-NL') + ' × ' + m.d.toLocaleString('nl-NL') + ' mm'],
+     ['Vanaf', '€ ' + m.prijs + ' excl. btw']].forEach(function (r, n, lijst) {
+      var dt = document.createElement('dt'); dt.textContent = r[0];
+      var dd = document.createElement('dd'); dd.textContent = r[1];
+      if (n === lijst.length - 1) dd.className = 'prijs';
+      dl.appendChild(dt); dl.appendChild(dd);
+    });
+    q('[data-p-meer]').href = m.href;
+    q('[data-p-meer]').textContent = 'Meer over de ' + m.naam.toLowerCase();
+    qa('[data-vijf] button').forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.i === i)); });
+    qa('[data-verg] tr').forEach(function (tr) { tr.classList.toggle('aan', +tr.dataset.i === i); });
+    if (scrol) q('#vijf').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  qa('[data-vijf] button').forEach(function (b) { b.addEventListener('click', function () { kies(+b.dataset.i); }); });
+  qa('[data-verg] tr').forEach(function (tr) { tr.addEventListener('click', function () { kies(+tr.dataset.i, true); }); });
+  kies(0);
+})();
+</script>
 <script src="assets/versies.js"></script>
 <script src="assets/hoogtemelder.js"></script>
 </body>

@@ -20,10 +20,10 @@
         model". Nu met de draaiende kist uit assets/draaikist.*; die wordt
         vervangen door echte renders als de configurator ze kan maken.
 
-   Besloten 12 september: de kop van v1 blijft staan, daaronder komt een
-   sectie over wat een flightcase is, en dáéronder het blok met de vijf
-   modellen. Het menu met beeld is akkoord en staat nu in de echte balk
-   (onderdelen/nav.html), dus het voorstel staat hier niet meer.
+   Besloten 12 september: deze twee blokken — "wat is een flightcase" en
+   de vijf modellen tegelijk — staan nu in flightcases-v1, onder de kop
+   die daar al stond. Deze pagina blijft als archief; de versiebalk wijst
+   er niet meer naar. Het menu met beeld staat in de echte balk.
 
    Modellen, maten en vanafprijzen zijn die van flightcases-v1.
    ══════════════════════════════════════════════════════════════ */
@@ -34,23 +34,6 @@
 .review .lab{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan)}
 .review p{font-size:12.5px;color:rgba(255,255,255,.75)}
 
-  padding:14px 0 0}
-/* Het echte menu krijgt zijn kolommen alleen binnen nav.primary
-   (brand.css). Buiten de balk zetten we hetzelfde raster hier neer, met
-   een bredere middenkolom voor de vijf beelden. */
-.menuvoorbeeld .megamenu{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border:0;pointer-events:auto}
-.menuvoorbeeld .megamenu > .wrap{display:grid;grid-template-columns:1fr 1.8fr 1fr;gap:44px;align-items:start;padding-top:18px;padding-bottom:28px}
-.mm-modellen{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
-.mm-modellen a{display:flex;flex-direction:column;border:1px solid var(--rule);background:#fff;transition:.14s}
-.mm-modellen a:hover{border-color:var(--dark)}
-.mm-modellen .beeld{background:var(--bg);height:92px;position:relative;overflow:hidden}
-.mm-modellen .kist3d{height:92px;pointer-events:none}
-.mm-modellen .kmaat,.mm-modellen .grond{display:none}
-.mm-modellen span{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:13px;letter-spacing:.03em;
-  color:var(--dark);padding:7px 8px 8px}
-.mm-modellen small{display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;color:var(--mute);font-weight:500;margin-top:2px}
-.mm-noot{font-size:11.5px;color:var(--mute);margin-top:10px}
-.mm-alle{display:inline-block;margin-top:10px;font-family:var(--disp);text-transform:uppercase;font-size:14px;letter-spacing:.04em;color:var(--blue)}
 
 /* ── de kop van v1: tekst links, de draaiende kist rechts ──── */
 .kopgrid{display:grid;grid-template-columns:1.02fr .98fr;gap:48px;align-items:center}
@@ -175,15 +158,17 @@
           <div>
             <h4>// MODELLEN</h4>
             <!-- Met beeld (besloten 12 september): een model herken je aan
-                 zijn vorm, niet aan zijn naam. Nu de modelfoto's; zodra
-                 CaseBuilder renders uit de configurator kan leveren, zijn
-                 het dezelfde vijf bestanden. -->
+                 zijn vorm, niet aan zijn naam. Een stilstaande kist per
+                 model, in CSS — geen foto's, want die hebben vijf
+                 verschillende uitsnedes, en geen script, want dit menu
+                 staat op elke pagina. Zodra CaseBuilder renders uit de
+                 configurator levert, komen die hiervoor in de plaats. -->
             <div class="modeltegels">
-              <a href="casetype-koffer-v1.html"><img src="assets/flightcase-koffer.jpg" alt="" loading="lazy"><span>Koffer<small>vanaf &euro; 149</small></span></a>
-              <a href="casetype-hoedcase-v1.html"><img src="assets/flightcase-hoedcase.jpg" alt="" loading="lazy"><span>Hoedcase<small>vanaf &euro; 179</small></span></a>
-              <a href="casetype-trunccase-v1.html"><img src="assets/flightcase-trunccase.jpg" alt="" loading="lazy"><span>Trunccase<small>vanaf &euro; 199</small></span></a>
-              <a href="casetype-rackcase-enkel-deksel-v1.html"><img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt="" loading="lazy"><span>Rackcase enkel<small>vanaf &euro; 229</small></span></a>
-              <a href="casetype-rackcase-dubbel-deksel-v1.html"><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt="" loading="lazy"><span>Rackcase dubbel<small>vanaf &euro; 259</small></span></a>
+              <a href="casetype-koffer-v1.html"><span class="modelkist" style="--b:46.0px;--h:16.4px;--d:29.6px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Koffer<small>vanaf &euro; 149</small></span></a>
+              <a href="casetype-hoedcase-v1.html"><span class="modelkist" style="--b:46.0px;--h:31.6px;--d:28.8px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Hoedcase<small>vanaf &euro; 179</small></span></a>
+              <a href="casetype-trunccase-v1.html"><span class="modelkist" style="--b:46.0px;--h:34.5px;--d:34.5px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Trunccase<small>vanaf &euro; 199</small></span></a>
+              <a href="casetype-rackcase-enkel-deksel-v1.html"><span class="modelkist" style="--b:46.0px;--h:30.7px;--d:38.3px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Rackcase enkel<small>vanaf &euro; 229</small></span></a>
+              <a href="casetype-rackcase-dubbel-deksel-v1.html"><span class="modelkist" style="--b:44.5px;--h:46.0px;--d:40.8px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Rackcase dubbel<small>vanaf &euro; 259</small></span></a>
             </div>
             <a class="allemodellen" href="flightcases-v1.html">Alle modellen &rarr;</a>
           </div>
