@@ -39,6 +39,34 @@ const PAGINAS = [
   { naam: "product", bestand: "mockups/product.html", overslaan: ["wireframe"] },
 ];
 
+/**
+ * De wortel staat twee keer in de selector. Dat leest raar, maar het is het
+ * enige wat de ingesloten weergave beschermt tegen de fasepagina zelf.
+ *
+ * index.html heeft eigen opmaak voor `.wrap`, `section`, `h1`, `p`, `.chip`,
+ * `.card` — allemaal namen die in de mockups ook voorkomen. Met één `.dv`
+ * ervoor woog een mockupregel even zwaar als een regel van de fasepagina, en
+ * dan wint de laatste in het bestand. Zo kreeg elke `.wrap` in de weergave
+ * `flex-direction:column` mee: de navigatie klapte over de koptekst heen.
+ * Erger nog waren de eigenschappen die de mockup helemaal niet noemt — de
+ * fasepagina zette ronde hoeken op `.chip`, terwijl het merk geen ronde
+ * hoeken kent. Dat viel niemand op, want de weergave rendert gewoon door.
+ *
+ * `.dv.dv` weegt zwaarder dan elke regel van de fasepagina. Samen met de
+ * terugzetregel hieronder begint elk element in de weergave weer bij de
+ * browserstandaard, en bouwt de mockup zijn eigen opmaak daarbovenop.
+ */
+const WORTEL = ".dv.dv";
+
+/**
+ * Zet alles binnen de weergave terug naar de browserstandaard, vóór de
+ * mockupregels. `revert` rolt alleen de opmaak van de fasepagina terug en
+ * laat de browserstandaard staan, dus een tabel blijft een tabel. De wortel
+ * zelf doet niet mee: die hoort bij de fasepagina (het kader, en
+ * `container-type` waar alle @container-regels op steunen).
+ */
+const TERUGZET = `${WORTEL} *,${WORTEL} *::before,${WORTEL} *::after{all:revert}`;
+
 /** Selectors die geen voorvoegsel krijgen maar een vervanging. */
 const VERVANG = { ":root": "", body: "", html: null };
 
@@ -123,7 +151,7 @@ function herschrijfPaden(tekst, map) {
       (_, q, pad) => `url(${q}${voor(pad)}${q})`);
 }
 
-let css = schaalIn(readFileSync(BRAND, "utf8"), ".dv");
+let css = TERUGZET + schaalIn(readFileSync(BRAND, "utf8"), WORTEL);
 const html = {};
 
 /**
@@ -175,7 +203,7 @@ for (const { naam, bestand, overslaan = [] } of PAGINAS) {
     const sleutel = `${naam}-${variant.id}`;
     OPGEPIKT.add(basename(variant.bestand));
     const bron = readFileSync(join(wortel, variant.bestand), "utf8");
-    const wortelSel = `.dv[data-page="${sleutel}"]`;
+    const wortelSel = `${WORTEL}[data-page="${sleutel}"]`;
     const map = dirname(variant.bestand);
 
     /* Een mockup laadt naast brand.css ook eigen stylesheets — de draaiende
