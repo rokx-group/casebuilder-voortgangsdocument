@@ -35,6 +35,10 @@ export const PAGINAS = [
   { naam: "servicehub", bestand: "mockups/service.html", overslaan: ["wireframe"] },
   { naam: "content", bestand: "mockups/service-levertijden.html", overslaan: ["wireframe"] },
   { naam: "zoekresultaat", bestand: "mockups/zoeken.html", overslaan: ["wireframe"] },
+  // Deze twee hadden al een ontwerp, maar stonden niet in deze lijst: in het
+  // document zag je alleen hun wireframe, terwijl het werk er lag.
+  { naam: "laten-controleren", bestand: "mockups/laten-controleren.html", overslaan: ["wireframe"] },
+  { naam: "configurator", bestand: "mockups/configurator.html", overslaan: ["wireframe"] },
   // Deze drie hebben (nog) geen wireframe; de basis wordt overgeslagen en
   // alleen de ontwerpversies worden opgepikt.
   { naam: "shop", bestand: "mockups/shop.html", overslaan: ["wireframe"] },
