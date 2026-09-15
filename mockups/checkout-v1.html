@@ -1,0 +1,238 @@
+<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder &mdash; /checkout (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   /checkout — winkelwagen, gegevens, betalen
+
+   Eén pagina voor de hele afronding, geen drie losse stappen. Wie
+   afrekent heeft zijn keuze al gemaakt; elke extra pagina is een extra
+   moment om af te haken. De stappenbalk zegt alleen waar je bent.
+
+   Wat deze pagina anders doet dan de oude Magento-checkout:
+
+     prijs        excl. btw is leidend en staat groot, incl. eronder.
+                  Zakelijke klanten rekenen in netto; nu staat het
+                  omgekeerd en dat leest verkeerd voor de hoofddoelgroep.
+     regels       een geconfigureerde case is een regel mét zijn
+                  configuratie-id — dat id is wat de werkplaats gebruikt,
+                  dus het hoort zichtbaar te zijn en niet in metadata weg
+                  te vallen.
+     levertijd    per regel, niet pas op de bevestiging. Onderdelen uit
+                  voorraad gaan morgen weg, een case op maat in tien
+                  werkdagen; samen bepaalt dat wanneer de zending komt.
+     op rekening  alleen voor vaste klanten, dus achter een voorwaarde en
+                  niet als gewone knop tussen de rest.
+
+   Open, en daarom hier als vraag en niet als ontwerp: aanbetaling bij
+   maatwerk (doet CaseBuilder dat vandaag ook?) en of de btw-verlegging
+   voor EU-klanten in deze stap of in het account thuishoort.
+
+   Producten, prijzen, adressen en het configuratie-id zijn verzonnen.
+   ══════════════════════════════════════════════════════════════ */
+
+.stappen{background:var(--bg);border-bottom:1px solid var(--rule)}
+.stappen .wrap{display:flex;gap:0;align-items:center;flex-wrap:wrap}
+.stappen a,.stappen span{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:14px;
+  letter-spacing:.04em;color:var(--rule);padding:14px 0;display:flex;align-items:center;gap:9px}
+.stappen .sep{color:var(--rule);padding:0 14px}
+.stappen .af{color:var(--mute)}
+.stappen .nu{color:var(--dark)}
+.stappen .nu::before,.stappen .af::before{content:"";width:7px;height:7px;background:var(--cyan);flex:none}
+.stappen .af::before{background:var(--rule)}
+
+.uit{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:48px;padding:34px 0 80px;align-items:start}
+@media(max-width:1000px){.uit{grid-template-columns:1fr;gap:32px}}
+
+/* ── de regels ───────────────────────────────────────────────
+   Beeld klein: je weet wat je besteld hebt, je controleert het alleen. */
+.regels{border:1px solid var(--rule);background:#fff}
+.regel{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:20px;padding:20px 22px;border-bottom:1px solid var(--rule)}
+.regel:last-child{border-bottom:0}
+.regel .im{background:var(--bg);border:1px solid var(--rule);aspect-ratio:1}
+.regel h3{font-size:19px}
+.regel .conf{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--blue);margin-top:5px}
+.regel .det{font-size:13.5px;color:var(--mute);margin-top:7px;line-height:1.55}
+.regel .lev{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-top:9px}
+.regel .rechts{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.regel .pr{font-family:var(--disp);font-weight:900;font-size:22px;color:var(--dark)}
+.regel .pr i{display:block;font-style:normal;font-family:var(--body);font-weight:400;font-size:11.5px;color:var(--mute);margin-top:3px}
+.regel .weg{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);border:0;background:none;cursor:pointer;padding:0}
+.regel .weg:hover{color:var(--dark)}
+
+/* ── formulier ───────────────────────────────────────────────── */
+.blok{border:1px solid var(--rule);background:#fff;margin-top:22px}
+.blok > h2{font-size:21px;padding:16px 22px;border-bottom:1px solid var(--rule)}
+.blok .body{padding:20px 22px 24px}
+.rij2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:620px){.rij2{grid-template-columns:1fr}}
+label.veld{display:block;margin-bottom:14px}
+label.veld span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+label.veld input,label.veld select{width:100%;border:1px solid var(--rule);background:#fff;padding:11px 13px;font-family:var(--body);font-size:14.5px;color:var(--ink)}
+label.veld input:focus,label.veld select:focus{outline:2px solid var(--cyan);outline-offset:-1px}
+
+/* ── betaalkeuze ─────────────────────────────────────────────
+   iDEAL bovenaan: ruim zestig procent rekent zo af. Op rekening staat
+   apart, want het geldt niet voor iedereen. */
+.betaal{display:flex;flex-direction:column;gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.betaal label{background:#fff;display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;font-size:15px}
+.betaal label:hover{background:var(--bg)}
+.betaal .bx{width:15px;height:15px;border:1.5px solid var(--rule);border-radius:50%;flex:none}
+.betaal input:checked + .bx{border-color:var(--cyan);box-shadow:inset 0 0 0 3.5px var(--cyan)}
+.betaal input{position:absolute;opacity:0;pointer-events:none}
+.betaal .vw{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+
+/* ── samenvatting ────────────────────────────────────────────
+   Plakt mee: op een lange pagina moet het totaal in beeld blijven. */
+.sam{border:1px solid var(--rule);background:#fff;position:sticky;top:96px}
+.sam h2{font-size:21px;padding:16px 20px;border-bottom:1px solid var(--rule)}
+.sam .body{padding:18px 20px}
+.sam dl{display:grid;grid-template-columns:1fr auto;gap:10px 14px;margin:0;font-size:14.5px}
+.sam dt{color:var(--mute)}
+.sam dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
+.sam .tot{border-top:1px solid var(--rule);margin-top:16px;padding-top:16px}
+.sam .tot dt{color:var(--dark);font-weight:700}
+.sam .tot dd{font-family:var(--disp);font-weight:900;font-size:26px;color:var(--dark)}
+.sam .btw{font-size:12.5px;color:var(--mute);margin-top:4px;text-align:right}
+.sam .btn{width:100%;justify-content:center;margin-top:18px}
+.sam .klein{font-size:12.5px;color:var(--mute);line-height:1.55;margin-top:12px}
+.sam .lever{background:var(--lightblue);box-shadow:inset 3px 0 0 var(--cyan);padding:11px 14px;font-size:13px;color:var(--ink);margin-top:16px}
+</style></head><body>
+
+<header class="main">
+  <div class="wrap">
+    <a class="merk" href="homepage-v2.html" aria-label="Casebuilder.com &mdash; naar de homepage"><img src="assets/woordmerk.svg" alt="Casebuilder.com"></a>
+    <form class="search" onsubmit="return false">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+      <input placeholder="Zoek op case, onderdeel of artikelnummer…" aria-label="Zoeken">
+    </form>
+    <div class="hdr-r">
+      <a href="#" class="stil">Inloggen</a>
+      <a href="#">Winkelwagen</a>
+    </div>
+  </div>
+</header>
+
+<div class="stappen">
+  <div class="wrap">
+    <span class="af">Winkelwagen</span><span class="sep">&rsaquo;</span>
+    <span class="nu">Gegevens en betalen</span><span class="sep">&rsaquo;</span>
+    <span>Bevestiging</span>
+  </div>
+</div>
+
+<div class="wrap uit">
+
+  <div>
+    <div class="regels">
+      <div class="regel">
+        <div class="im"></div>
+        <div>
+          <h3>Hoedcase op maat &mdash; 1.060 &times; 410 &times; 150 mm</h3>
+          <div class="conf">CONFIGURATIE CB-4471-2209</div>
+          <p class="det">Zwart paneel &middot; ronde hoeken &middot; vlinderslot &middot; logo op het deksel. Een casebouwer kijkt mee v&oacute;&oacute;r er gezaagd wordt.</p>
+          <div class="lev">Levertijd 10 werkdagen</div>
+        </div>
+        <div class="rechts">
+          <div class="pr">&euro; 241,00<i>excl. btw &middot; &euro; 291,61 incl.</i></div>
+          <button class="weg" type="button">Verwijderen</button>
+        </div>
+      </div>
+      <div class="regel">
+        <div class="im"></div>
+        <div>
+          <h3>Balhoek medium, verzinkt</h3>
+          <div class="conf">ARTIKELNUMMER EG-0105 &middot; 8 stuks</div>
+          <p class="det">Uit voorraad. Wie v&oacute;&oacute;r 15:00 bestelt, krijgt ze morgen.</p>
+          <div class="lev">Levertijd 1 werkdag</div>
+        </div>
+        <div class="rechts">
+          <div class="pr">&euro; 14,00<i>excl. btw &middot; &euro; 16,94 incl.</i></div>
+          <button class="weg" type="button">Verwijderen</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="blok">
+      <h2>Wie zijn jullie?</h2>
+      <div class="body">
+        <div class="rij2">
+          <label class="veld"><span>Bedrijf</span><input value="Magic FX B.V."></label>
+          <label class="veld"><span>Naam</span><input value="Joran van Heerde"></label>
+        </div>
+        <div class="rij2">
+          <label class="veld"><span>E-mail</span><input value="inkoop@voorbeeld.nl"></label>
+          <label class="veld"><span>Telefoon</span><input value="+31 6 12 34 56 78"></label>
+        </div>
+        <label class="veld"><span>Btw-nummer &mdash; voor zakelijke klanten in de EU</span><input placeholder="NL000000000B01"></label>
+      </div>
+    </div>
+
+    <div class="blok">
+      <h2>Waar gaat het heen?</h2>
+      <div class="body">
+        <div class="rij2">
+          <label class="veld"><span>Adres</span><input value="Havenstraat 12"></label>
+          <label class="veld"><span>Postcode en plaats</span><input value="6981 AB Doesburg"></label>
+        </div>
+        <div class="rij2">
+          <label class="veld"><span>Land</span><select><option>Nederland</option><option>Belgi&euml;</option><option>Duitsland</option></select></label>
+          <label class="veld"><span>Afleveren bij</span><select><option>Hetzelfde adres</option><option>Ander afleveradres</option><option>Zelf ophalen in Doesburg</option></select></label>
+        </div>
+        <label class="veld"><span>Opmerking voor de chauffeur &mdash; optioneel</span><input placeholder="Bijvoorbeeld: laadperron achter, bellen bij aankomst"></label>
+      </div>
+    </div>
+
+    <div class="blok">
+      <h2>Hoe betaal je?</h2>
+      <div class="body">
+        <div class="betaal">
+          <label><input type="radio" name="bet" checked><span class="bx"></span> iDEAL</label>
+          <label><input type="radio" name="bet"><span class="bx"></span> Creditcard</label>
+          <label><input type="radio" name="bet"><span class="bx"></span> Apple&nbsp;Pay of Google&nbsp;Pay</label>
+          <label><input type="radio" name="bet"><span class="bx"></span> Op rekening, 30 dagen<span class="vw">alleen voor vaste klanten</span></label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <aside class="sam">
+    <h2>Je bestelling</h2>
+    <div class="body">
+      <dl>
+        <dt>Cases en onderdelen</dt><dd>&euro; 255,00</dd>
+        <dt>Verzending</dt><dd>&euro; 12,50</dd>
+        <dt>Btw 21%</dt><dd>&euro; 56,18</dd>
+      </dl>
+      <dl class="tot"><dt>Totaal incl. btw</dt><dd>&euro; 323,68</dd></dl>
+      <p class="btw">&euro; 267,50 excl. btw</p>
+      <div class="lever">De hele zending komt in <strong>10 werkdagen</strong>. Wil je de onderdelen eerder? Zet ze in een aparte bestelling, dan gaan ze morgen weg.</div>
+      <a class="btn btn-pri" href="bedankt-v1.html">Bestelling plaatsen &rarr;</a>
+      <p class="klein">Je betaalt pas na deze stap. Bij een case op maat kijkt een casebouwer je configuratie na voordat hij de werkplaats in gaat; klopt er iets niet, dan bellen we.</p>
+    </div>
+  </aside>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="merk"><img src="assets/woordmerk-wit.svg" alt="Casebuilder.com"></div>
+        <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734">+31 (0)575 575734</a></p>
+      </div>
+      <div><h5>Offerte aanvragen</h5><a href="case-aanvragen-v1.html">Case aanvragen</a><a href="laten-controleren-v1.html">Maten laten controleren</a><a href="#" title="/grote-spelers/series — bestaat nog niet als pagina">Series en staffels</a><a href="#" title="/grote-spelers — hier nog zonder eigen instap">Zakelijk bestellen</a></div>
+      <div><h5>Kant en klaar</h5><a href="shop-v1.html">Alle vaste cases</a><a href="case-voor-v3.html">Wat ga je vervoeren?</a><a href="flightcases-v1.html">Flightcases per model</a><a href="categorie-v1.html">Onderdelen</a></div>
+      <div><h5>Zelf configureren</h5><a href="configurator-v1.html">Naar de configurator</a><a href="zo-werkt-het-v1.html">Zo werkt het</a><a href="#" title="/account/orders — achter inloggen">Herhaalorder</a><a href="#" title="/account/configuraties — achter inloggen">Mijn configuraties</a></div>
+      <div><h5>Branches</h5><a href="branche-audio-visueel-v1.html">Audio-visueel en podium</a><a href="branche-broadcast-en-media-v1.html">Broadcast en media</a><a href="branche-industrie-en-machinebouw-v1.html">Industrie en machinebouw</a><a href="branche-meet-en-testapparatuur-v1.html">Meet- en testapparatuur</a><a href="branche-defensie-v1.html">Defensie</a><a href="branche-schaalmodellen-v1.html">Schaalmodellen</a><a href="branches.html">Alle branches</a><a class="anders" href="grote-spelers-v1.html">Inkopen als grote partij &rarr;</a></div>
+      <div><h5>Service</h5><a href="service-levertijden-v1.html">Levertijden</a><a href="#" title="/service/verzending — bestaat nog niet als pagina">Verzending</a><a href="#" title="/service/zaagservice — bestaat nog niet als pagina">Zaagservice</a><a href="over-ons-v1.html">Over Proflite</a><a href="contact-v1.html">Contact</a></div>
+    </div>
+    <div class="bot"><span>KVK 09123456</span><span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span></div>
+  </div>
+</footer>
+
+<script src="assets/navzoek.js"></script>
+<script src="assets/versies.js"></script>
+<script src="assets/hoogtemelder.js"></script></body></html>

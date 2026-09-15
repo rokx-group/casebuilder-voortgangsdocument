@@ -1,0 +1,248 @@
+<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder &mdash; bevestiging (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   Bevestiging — één sjabloon, twee stromen
+
+   Er komen twee soorten "klaar" op deze site: een bestelling is
+   geplaatst, en een aanvraag of controleverzoek is binnen. Dat is
+   hetzelfde sjabloon met een andere invulling, geen twee ontwerpen —
+   de opbouw is telkens: wat er gebeurd is, wat jij nu hebt, en wat wij
+   nu doen.
+
+   Waarom dat derde blok er per se in hoort: een bedankpagina die alleen
+   "dank je wel" zegt, laat iemand met de vraag zitten wanneer hij iets
+   hoort. Dan belt hij. Zet er dus in wanneer, van wie, en waar hij het
+   terugvindt.
+
+   Het nummer staat groot en is te kopiëren: dat is waar hij naar
+   verwijst als hij belt of mailt. Bij een bestelling is het het
+   ordernummer, bij een aanvraag het aanvraagnummer.
+
+   Beide standen staan hier onder elkaar zodat ze te beoordelen zijn;
+   live toont de pagina er één. Nummers, namen en bedragen zijn
+   verzonnen.
+   ══════════════════════════════════════════════════════════════ */
+
+.klaar{background:var(--void);color:#fff;padding:54px 0 48px;position:relative;overflow:hidden}
+.klaar .ruit-aanzet{position:absolute;inset:0;opacity:.5}
+.klaar .wrap{position:relative;z-index:1}
+.klaar .ey{color:var(--cyan)}
+.klaar h1{font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:.02em;
+  font-size:clamp(34px,4.4vw,54px);line-height:.96;color:#fff;margin-top:14px;max-width:18ch}
+.klaar p.lead{color:rgba(255,255,255,.78);font-size:17px;max-width:56ch;margin-top:14px}
+.nummer{display:inline-flex;align-items:center;gap:14px;margin-top:24px;border:1px solid rgba(255,255,255,.25);padding:12px 18px}
+.nummer b{font-family:var(--mono);font-size:19px;letter-spacing:.08em;color:#fff;font-weight:600}
+.nummer span{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+
+.twee{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.85fr);gap:44px;padding:40px 0 26px;align-items:start}
+@media(max-width:1000px){.twee{grid-template-columns:1fr;gap:28px}}
+
+.stap{display:grid;grid-template-columns:34px 1fr;gap:0 18px;padding:18px 0;border-bottom:1px solid var(--rule)}
+.stap:last-child{border-bottom:0}
+.stap .n{font-family:var(--mono);font-size:12px;color:var(--blue);padding-top:3px}
+.stap h3{font-size:19px}
+.stap p{font-size:14.5px;color:var(--mute);line-height:1.6;margin-top:5px}
+.stap .wanneer{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-top:7px;display:block}
+
+.kaart{border:1px solid var(--rule);background:#fff}
+.kaart h2{font-size:20px;padding:15px 20px;border-bottom:1px solid var(--rule)}
+.kaart .body{padding:16px 20px 20px}
+.kaart dl{display:grid;grid-template-columns:1fr auto;gap:9px 14px;margin:0;font-size:14px}
+.kaart dt{color:var(--mute)}
+.kaart dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
+.kaart .conf{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--blue);margin-top:12px}
+.kaart .acties{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+
+.verder{border-top:1px solid var(--rule);padding:30px 0 70px}
+.verder h2{font-size:22px;margin-bottom:14px}
+.deuren{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:820px){.deuren{grid-template-columns:1fr}}
+.deur{border:1px solid var(--rule);background:#fff;padding:18px 20px 20px;display:flex;flex-direction:column;gap:7px}
+.deur b{font-family:var(--disp);text-transform:uppercase;font-size:17px;letter-spacing:.03em;color:var(--dark)}
+.deur p{font-size:13.5px;color:var(--mute);line-height:1.55}
+.deur a{margin-top:auto;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+
+.stand{border-top:2px solid var(--dark);margin-top:40px;padding-top:10px}
+.stand .ey{color:var(--blue)}
+</style></head><body>
+
+<header class="main">
+  <div class="wrap">
+    <a class="merk" href="homepage-v2.html" aria-label="Casebuilder.com &mdash; naar de homepage"><img src="assets/woordmerk.svg" alt="Casebuilder.com"></a>
+    <form class="search" onsubmit="return false">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+      <input placeholder="Zoek op case, onderdeel of artikelnummer…" aria-label="Zoeken">
+    </form>
+    <div class="hdr-r">
+      <a href="#" class="stil">Inloggen</a>
+      <a href="#">Winkelwagen</a>
+    </div>
+  </div>
+</header>
+
+<section class="klaar">
+  <div class="ruit-aanzet"></div>
+  <div class="wrap">
+    <span class="ey">// BESTELLING GEPLAATST</span>
+    <h1>We gaan hem bouwen</h1>
+    <p class="lead">Je bestelling staat klaar in de werkplaats. De bevestiging is onderweg naar inkoop@voorbeeld.nl, met de configuratie erbij.</p>
+    <div class="nummer"><span>Ordernummer</span><b>CB-2026-04871</b></div>
+  </div>
+</section>
+
+<div class="wrap twee">
+  <div>
+    <span class="ey ey-dark">// WAT WIJ NU DOEN</span>
+    <div class="stap">
+      <span class="n">01</span>
+      <div>
+        <h3>Een casebouwer kijkt je configuratie na</h3>
+        <p>Voor er gezaagd wordt. Klopt er iets niet &mdash; een maat die knelt, beslag dat elkaar raakt &mdash; dan bellen we je, en pas daarna gaat hij de werkplaats in.</p>
+        <span class="wanneer">Vandaag of morgen</span>
+      </div>
+    </div>
+    <div class="stap">
+      <span class="n">02</span>
+      <div>
+        <h3>Hij wordt gebouwd in Doesburg</h3>
+        <p>Eigen werkplaats, geen tussenhandel. Je krijgt bericht zodra hij op transport gaat.</p>
+        <span class="wanneer">10 werkdagen</span>
+      </div>
+    </div>
+    <div class="stap">
+      <span class="n">03</span>
+      <div>
+        <h3>De onderdelen gaan apart mee</h3>
+        <p>Die liggen op voorraad. Wil je ze eerder hebben, bel dan even &mdash; dan sturen we ze morgen vooruit.</p>
+        <span class="wanneer">Met dezelfde zending</span>
+      </div>
+    </div>
+  </div>
+
+  <aside class="kaart">
+    <h2>Wat je besteld hebt</h2>
+    <div class="body">
+      <dl>
+        <dt>Hoedcase op maat &middot; 1.060 &times; 410 &times; 150 mm</dt><dd>&euro; 241,00</dd>
+        <dt>Balhoek medium, verzinkt &middot; 8&times;</dt><dd>&euro; 14,00</dd>
+        <dt>Verzending</dt><dd>&euro; 12,50</dd>
+        <dt>Btw 21%</dt><dd>&euro; 56,18</dd>
+        <dt><strong>Totaal incl. btw</strong></dt><dd><strong>&euro; 323,68</strong></dd>
+      </dl>
+      <div class="conf">CONFIGURATIE CB-4471-2209</div>
+      <div class="acties">
+        <a class="btn btn-out btn-sm" href="account-v1.html">Volg je order &rarr;</a>
+        <a class="btn btn-ghost btn-sm" href="#">Factuur (pdf)</a>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<div class="wrap verder">
+  <h2>Terwijl je wacht</h2>
+  <div class="deuren">
+    <div class="deur">
+      <b>Nog een case nodig?</b>
+      <p>Dezelfde kist in een andere maat kost je twee klikken vanaf je order.</p>
+      <a href="account-v1.html">Naar je configuraties &rarr;</a>
+    </div>
+    <div class="deur">
+      <b>Onderdelen bijbestellen</b>
+      <p>Hoeken, sluitingen en wielen liggen op voorraad. V&oacute;&oacute;r 15:00 besteld is morgen in huis.</p>
+      <a href="categorie-v1.html">Naar de onderdelen &rarr;</a>
+    </div>
+    <div class="deur">
+      <b>Iets afwijkends?</b>
+      <p>Een serie, een vreemde vorm of een keuring: stuur je schets of datasheet, dan tekenen wij.</p>
+      <a href="case-aanvragen-v1.html">Case aanvragen &rarr;</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── tweede stand: na een aanvraag of controleverzoek ──────────
+     Zelfde sjabloon, andere invulling. Hier staat geen bedrag maar een
+     belofte met een tijd eraan: dat is wat iemand op dit moment wil
+     weten. Live zie je er één van de twee. -->
+<div class="wrap stand">
+  <span class="ey">// DEZELFDE PAGINA, NA EEN AANVRAAG</span>
+</div>
+
+<section class="klaar">
+  <div class="ruit-aanzet"></div>
+  <div class="wrap">
+    <span class="ey">// AANVRAAG BINNEN</span>
+    <h1>Je krijgt vandaag een tekening</h1>
+    <p class="lead">Je schets staat bij de werkvoorbereiding. Een casebouwer tekent hem uit en stuurt je de tekening met de prijs &mdash; dezelfde werkdag als je v&oacute;&oacute;r 15:00 aanvraagt.</p>
+    <div class="nummer"><span>Aanvraagnummer</span><b>AV-2026-01142</b></div>
+  </div>
+</section>
+
+<div class="wrap twee">
+  <div>
+    <span class="ey ey-dark">// WAT WIJ NU DOEN</span>
+    <div class="stap">
+      <span class="n">01</span>
+      <div>
+        <h3>We lezen je schets en maten</h3>
+        <p>Staat er iets niet in &mdash; gewicht, wat er precies in gaat, hoe vaak hij mee moet &mdash; dan bellen we even. Dat scheelt een ronde.</p>
+        <span class="wanneer">Binnen een paar uur</span>
+      </div>
+    </div>
+    <div class="stap">
+      <span class="n">02</span>
+      <div>
+        <h3>Je krijgt een tekening met prijs</h3>
+        <p>Geen offerte waar je op moet wachten, maar een tekening waar je ja of nee op zegt.</p>
+        <span class="wanneer">Dezelfde werkdag</span>
+      </div>
+    </div>
+    <div class="stap">
+      <span class="n">03</span>
+      <div>
+        <h3>Akkoord? Dan gaat hij in productie</h3>
+        <p>Vanaf je akkoord tien werkdagen. Wijzigingen vooraf kosten niets.</p>
+        <span class="wanneer">10 werkdagen na akkoord</span>
+      </div>
+    </div>
+  </div>
+
+  <aside class="kaart">
+    <h2>Wat je hebt gestuurd</h2>
+    <div class="body">
+      <dl>
+        <dt>Bestand</dt><dd>schets-rack.pdf</dd>
+        <dt>Wat erin gaat</dt><dd>19&quot; rack, 6 HE</dd>
+        <dt>Aantal</dt><dd>4 stuks</dd>
+        <dt>Nodig v&oacute;&oacute;r</dt><dd>12 oktober</dd>
+      </dl>
+      <div class="acties">
+        <a class="btn btn-out btn-sm" href="case-aanvragen-v1.html">Nog iets toevoegen &rarr;</a>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="merk"><img src="assets/woordmerk-wit.svg" alt="Casebuilder.com"></div>
+        <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734">+31 (0)575 575734</a></p>
+      </div>
+      <div><h5>Offerte aanvragen</h5><a href="case-aanvragen-v1.html">Case aanvragen</a><a href="laten-controleren-v1.html">Maten laten controleren</a><a href="#" title="/grote-spelers/series — bestaat nog niet als pagina">Series en staffels</a><a href="#" title="/grote-spelers — hier nog zonder eigen instap">Zakelijk bestellen</a></div>
+      <div><h5>Kant en klaar</h5><a href="shop-v1.html">Alle vaste cases</a><a href="case-voor-v3.html">Wat ga je vervoeren?</a><a href="flightcases-v1.html">Flightcases per model</a><a href="categorie-v1.html">Onderdelen</a></div>
+      <div><h5>Zelf configureren</h5><a href="configurator-v1.html">Naar de configurator</a><a href="zo-werkt-het-v1.html">Zo werkt het</a><a href="#" title="/account/orders — achter inloggen">Herhaalorder</a><a href="#" title="/account/configuraties — achter inloggen">Mijn configuraties</a></div>
+      <div><h5>Branches</h5><a href="branche-audio-visueel-v1.html">Audio-visueel en podium</a><a href="branche-broadcast-en-media-v1.html">Broadcast en media</a><a href="branche-industrie-en-machinebouw-v1.html">Industrie en machinebouw</a><a href="branche-meet-en-testapparatuur-v1.html">Meet- en testapparatuur</a><a href="branche-defensie-v1.html">Defensie</a><a href="branche-schaalmodellen-v1.html">Schaalmodellen</a><a href="branches.html">Alle branches</a><a class="anders" href="grote-spelers-v1.html">Inkopen als grote partij &rarr;</a></div>
+      <div><h5>Service</h5><a href="service-levertijden-v1.html">Levertijden</a><a href="#" title="/service/verzending — bestaat nog niet als pagina">Verzending</a><a href="#" title="/service/zaagservice — bestaat nog niet als pagina">Zaagservice</a><a href="over-ons-v1.html">Over Proflite</a><a href="contact-v1.html">Contact</a></div>
+    </div>
+    <div class="bot"><span>KVK 09123456</span><span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span></div>
+  </div>
+</footer>
+
+<script src="assets/navzoek.js"></script>
+<script src="assets/versies.js"></script>
+<script src="assets/hoogtemelder.js"></script></body></html>

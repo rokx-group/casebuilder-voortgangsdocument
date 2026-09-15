@@ -39,6 +39,13 @@ export const PAGINAS = [
   // document zag je alleen hun wireframe, terwijl het werk er lag.
   { naam: "laten-controleren", bestand: "mockups/laten-controleren.html", overslaan: ["wireframe"] },
   { naam: "configurator", bestand: "mockups/configurator.html", overslaan: ["wireframe"] },
+  // Nieuw op 15 september: de vier sjablonen die alleen als grijze
+  // wireframe bestonden. Ze hebben (nog) geen wireframebestand, dus er is
+  // niets om over te slaan.
+  { naam: "account", bestand: "mockups/account.html", overslaan: ["wireframe"] },
+  { naam: "checkout", bestand: "mockups/checkout.html", overslaan: ["wireframe"] },
+  { naam: "bedankt", bestand: "mockups/bedankt.html", overslaan: ["wireframe"] },
+  { naam: "fout", bestand: "mockups/fout.html", overslaan: ["wireframe"] },
   // Deze drie hebben (nog) geen wireframe; de basis wordt overgeslagen en
   // alleen de ontwerpversies worden opgepikt.
   { naam: "shop", bestand: "mockups/shop.html", overslaan: ["wireframe"] },
