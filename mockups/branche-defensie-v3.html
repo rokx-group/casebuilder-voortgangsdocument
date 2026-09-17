@@ -506,93 +506,140 @@
    vloeien de randen in het vlak in plaats van als een uitgeknipte foto
    op te liggen. Geen witte rand, geen slagschaduw. */
 .vlak2 .object{position:relative;z-index:1;justify-self:center;width:min(430px,35vw)}
-/* ── de plusjes ───────────────────────────────────────────────
-   Vier eigenschappen op één regel, direct onder de kop. Geen kaartjes en
-   geen iconen: het zijn vier woorden die je in één blik leest. */
-/* Krap gehouden. Dit is een balk en geen sectie: hij hoort tegen de kop
-   aan te liggen, niet als eigen blok te lezen. */
-.pluspunten{border-bottom:1px solid var(--rule);background:#fff;padding:0}
-.pluspunten .wrap{display:flex;justify-content:space-between;gap:16px;
-  padding-top:14px;padding-bottom:14px;flex-wrap:wrap}
-.pluspunten span{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--dark)}
-.pluspunten span::before{content:"+";color:var(--blue);margin-right:12px}
+/* De productfoto staat op een grijze studio-achtergrond die lichter is
+   dan dit vlak, dus zonder ingreep ligt er een lichte rechthoek op. Twee
+   dingen samen lossen dat op: de foto wordt donkerder en koeler getrokken
+   zodat zijn achtergrond bijna samenvalt met het vlak, en het masker
+   vloeit ver uit zodat er geen rand overblijft om te zien. */
+.vlak2 .object img{width:100%;height:auto;display:block;
+  filter:brightness(.82) contrast(1.12) saturate(.9);
+  -webkit-mask-image:radial-gradient(ellipse 58% 56% at 50% 50%,#000 34%,rgba(0,0,0,.55) 66%,transparent 92%);
+  mask-image:radial-gradient(ellipse 58% 56% at 50% 50%,#000 34%,rgba(0,0,0,.55) 66%,transparent 92%)}
 
-/* De ring om de case: een instrumentschaal, geen rondje. De buitenring
-   is doorgetrokken, de binnenring gestippeld, en het kruis loopt er aan
-   vier kanten net buiten. Het bijschrift hangt eronder in mono. */
-.baan2{position:absolute;left:50%;top:50%;width:510px;height:510px;transform:translate(-50%,-50%);
-  border:1px solid rgba(102,196,232,.24);border-radius:50%}
-.baan2::before{content:"";position:absolute;inset:35px;border:1px dashed rgba(102,196,232,.18);
-  border-radius:50%}
-.baan2::after{content:"";position:absolute;left:50%;top:-35px;bottom:-35px;
-  border-left:1px solid rgba(102,196,232,.13)}
-.baan2 i{position:absolute;top:50%;left:-50px;right:-50px;
-  border-top:1px solid rgba(102,196,232,.13)}
-.baan2>span{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);white-space:nowrap;
-  font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#9DB7C6}
+.vlak2 .onder{position:absolute;left:32px;bottom:34px;z-index:2;max-width:38ch}
+.vlak2 .onder p{font-size:15px;color:rgba(255,255,255,.76);margin-top:10px}
 
-/* De achtergrondfoto ligt achter alles, ontzadigd zodat hij niet met de
-   case concurreert. De kop staat gecentreerd erboven. */
-.constructie .achter{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  z-index:-3;filter:saturate(.5)}
-.constructie .hfd{text-align:center;margin:clamp(28px,4vw,52px) auto 0}
-.constructie .hfd h2{font-size:clamp(34px,4.4vw,62px);color:#fff;line-height:.96}
-.constructie .hfd h2 span{color:var(--cyan)}
-.constructie .hfd p{max-width:47ch;color:#C9D7DF;font-size:15px;margin:20px auto 0}
+/* ── de andere branches ───────────────────────────────────────
+   Rechts, als lijst. Wie hier op defensie zit maar eigenlijk in de
+   broadcast werkt, hoort dat in één blik te zien en er met één klik
+   heen te kunnen. Op de andere vijf pagina's staat dezelfde lijst met
+   een andere regel gemarkeerd. */
+.vlak2 .andere{position:relative;z-index:2;border-left:1px solid rgba(255,255,255,.2);
+  padding-left:22px}
+.vlak2 .andere .lab{font-family:var(--mono);font-size:9px;letter-spacing:.16em;
+  text-transform:uppercase;color:rgba(255,255,255,.42);margin-bottom:14px}
+.vlak2 .andere a{display:flex;align-items:center;gap:10px;padding:7px 0;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.6);transition:.14s}
+.vlak2 .andere a::before{content:"";width:5px;height:5px;background:rgba(255,255,255,.3);flex:none}
+.vlak2 .andere a:hover{color:#fff}
+.vlak2 .andere a:hover::before{background:var(--cyan)}
+.vlak2 .andere a.hier{color:#fff}
+.vlak2 .andere a.hier::before{background:var(--cyan);width:14px}
 
-/* Het toneel: de ruimte waarin de case en de vier details staan. De
-   hoogte is vast omdat de details er absoluut in geplaatst zijn; onder
-   1000 px wordt het een raster en vervalt die hoogte weer. */
-.toneel{position:relative;height:620px;max-width:1200px;margin:0 auto}
+@media(max-width:900px){
+  .vlak2{min-height:0;padding:40px 0 34px}
+  .vlak2 .binnen{grid-template-columns:1fr;gap:26px}
+  .vlak2 .object{width:min(420px,76vw)}
+  .vlak2 .naam{font-size:clamp(54px,18vw,120px);top:34px;transform:none}
+  .vlak2 .onder{position:static;margin-top:8px}
+  .vlak2 .andere{border-left:0;border-top:1px solid rgba(255,255,255,.2);padding:18px 0 0}
+}
 
-/* De sectie zelf en de donkere laag over de achtergrondfoto. Deze twee
-   regels waren bij een eerdere ingreep meegesneuveld, waardoor het
-   toneel instortte tot vijfentwintig pixels en de foto op volle sterkte
-   doorkwam. */
-.constructie{background:var(--void);color:#fff;position:relative;isolation:isolate;
-  padding:clamp(40px,5vw,64px) 0 0;overflow:hidden}
-.constructie .schaduw{position:absolute;inset:0;z-index:-2;
-  background:linear-gradient(180deg,rgba(6,18,28,.88),rgba(0,38,61,.66) 48%,rgba(6,18,28,.97))}
 
-/* De case zelf: 540 px breed op 43 van boven. Deze twee maten horen bij
-   de vier lijncoördinaten verderop; verander je ze, dan wijzen die
-   lijnen naar niets. */
-.stuk{position:absolute;width:540px;left:50%;top:43px;transform:translateX(-50%);z-index:1}
+/* ══════════════════════════════════════════════════════════════
+   De hangar en de eisen.
 
-/* De uitsnede komt letterlijk uit de aangeleverde variant, en dat is een
-   bewuste correctie op mijn eerdere poging. Ik had de clip-path vervangen
-   door een zacht masker omdat een polygon van zesentwintig punten aan één
-   foto vastzit. Dat klopt, maar ik verkleinde de case er tegelijk bij, en
-   toen klopten de lijncoördinaten niet meer. Vervolgens ging ik die
-   schatten in plaats van meten.
+   Wat hier eerst stond waren drie tekstblokken: "Radarset, 180 kg" met
+   een alinea en drie specificaties eronder. Dat werkte niet, en de
+   reden is niet de opmaak.
 
-   Met een zacht masker zijn de twee niet te verenigen: de lijnen eindigen
-   op veertien en zevenentachtig procent van het fotovlak, en zo ver naar
-   buiten is een uitvloeiende rand al doorzichtig. Een scherpe uitsnede is
-   hier dus de juiste keuze, met de prijs die erbij hoort.
+   Een blok heette een case maar toonde er geen. Zonder beeld van wat er
+   gebouwd is, is het een spec-sheet. De tekst beschreef bovendien het
+   probleem van de klant en niet wat wij ermee deden, en getallen als
+   "buitenmaat 1.240 × 780" zeggen niets tegen iemand die niet weet
+   waarmee hij moet vergelijken. Drie kolommen van gelijke zwaarte maakten
+   het af: als alles even belangrijk is, is niets het.
 
-   Die prijs staat hier zodat niemand er later over struikelt: deze
-   punten horen bij assets/flightcase-trunccase.jpg. Een andere foto
-   vraagt een nieuwe uitsnede én nieuwe eindpunten voor de vier lijnen. */
-.stuk img{width:100%;height:auto;display:block;filter:brightness(1.12);
-  clip-path:polygon(6% 22%,60% 13%,94% 24%,92% 69%,84% 73%,86% 75%,85% 79%,83% 82%,80% 84%,
-    77% 83%,77% 80%,78% 76%,48% 83%,46% 86%,47% 90%,43% 95%,39% 95%,36% 92%,35% 89%,34% 84%,
-    21% 76%,20% 79%,17% 80%,15% 78%,15% 73%,10% 68%)}
+   Nu staat de eis bovenaan, in de woorden van de inkoper. "Twee man,
+   niet vier" is een probleem dat hij herkent; "radarset, 180 kg" is een
+   regel uit een bestellijst. Onder elke eis staat het antwoord, en één
+   som die de ingreep laat zien: 180 kg wordt 2 × 95.
 
-.lijnen{position:absolute;inset:0;width:100%;height:100%;color:rgba(102,196,232,.75);
-  pointer-events:none}
-.merk2{position:absolute;width:205px}
-.merk2 h3{font-size:21px;color:#fff;margin:10px 0}
-.merk2 p{font-size:13px;color:#C7D3DC;line-height:1.7}
-.merk2 .nr{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--cyan);
-  display:inline-block;padding-bottom:9px;border-bottom:1px solid var(--cyan)}
-.m1{left:0;top:112px}.m2{left:0;top:375px}.m3{right:0;top:112px}.m4{right:0;top:375px}
-.constructie .voet{display:flex;justify-content:space-between;align-items:center;gap:25px;
-  border-top:1px solid rgba(102,196,232,.24);padding:22px 0 26px}
-.constructie .voet p{font-size:11px;color:#B1C2CE}
-.constructie .voet a{font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:.09em;
-  text-transform:uppercase;white-space:nowrap;color:var(--cyan)}
+   Die som is het hele punt van het blok. Je leest in één oogopslag wat
+   er veranderd is, en dat is precies wat een case hoort te doen zonder
+   dat er een foto van bestaat.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── de hangar ────────────────────────────────────────────────
+   Breed beeld met de kerngegevens ernaast. Het paneel ligt op het beeld
+   en niet ernaast: zo blijft de foto over de volle breedte doorlopen en
+   is er geen naad. */
+/* Geen sectiemarge: brand.css geeft elke section 88 px boven en onder,
+   en daardoor hing er een blauwe strook boven het beeld. Een beeld over
+   de volle breedte hoort het blok erboven te raken. */
+.hangar{position:relative;background:var(--void);overflow:hidden;padding:0}
+.hangar img{width:100%;height:clamp(340px,44vw,560px);object-fit:cover;display:block}
+.hangar::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(6,18,28,.1) 0%,rgba(6,18,28,.25) 44%,rgba(6,18,28,.94) 82%)}
+.hangar .paneel{position:absolute;right:0;top:0;bottom:0;z-index:2;display:flex;flex-direction:column;
+  justify-content:center;gap:0;width:min(380px,40vw);padding-right:clamp(24px,4vw,64px)}
+.hangar .paneel .rij{border-top:1px solid rgba(255,255,255,.18);padding:14px 0}
+.hangar .paneel .rij:last-child{border-bottom:1px solid rgba(255,255,255,.18)}
+.hangar .paneel b{display:block;font-family:var(--disp);text-transform:uppercase;font-weight:900;
+  font-size:22px;letter-spacing:.03em;color:#fff;line-height:1}
+.hangar .paneel span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:7px}
+/* Eén regel linksboven op het beeld. Hij benoemt de reis die een kist
+   maakt en houdt het bij een constatering: alles wat hier een belofte
+   wordt, moet verderop bewezen worden. */
+.hangar .oneliner{position:absolute;left:clamp(20px,4vw,64px);top:clamp(22px,4vw,54px);z-index:2;
+  max-width:22ch;font-family:var(--disp);text-transform:uppercase;font-weight:700;
+  font-size:clamp(18px,1.9vw,27px);line-height:1.05;letter-spacing:.03em;color:#fff;
+  text-shadow:0 2px 24px rgba(6,18,28,.6)}
+.hangar .oneliner .acc{color:var(--cyan)}
+
+.hangar .bron{position:absolute;left:clamp(16px,3vw,32px);bottom:14px;z-index:2;
+  font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.35)}
+
+/* ── de eisen ─────────────────────────────────────────────────
+   Drie rijen onder elkaar in plaats van drie kolommen naast elkaar. Een
+   eis is een zin, en zinnen lezen naast elkaar slecht. Onder elkaar
+   krijgt elke eis zijn eigen regel en kan de som rechts uitlijnen. */
+.eisen2{background:var(--void);color:#fff;padding:0 0 clamp(50px,7vw,90px)}
+.eisen2 .kopregel{padding-top:clamp(50px,6vw,80px);padding-bottom:clamp(22px,2.6vw,34px)}
+.eisen2 h2{color:#fff}
+.eisen2 .lead{color:rgba(255,255,255,.74);max-width:58ch}
+.eisen2 .rij{display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(24px,4vw,64px);
+  align-items:center;border-top:1px solid rgba(255,255,255,.16);padding:clamp(24px,3vw,38px) 0}
+.eisen2 .rij:last-child{border-bottom:1px solid rgba(255,255,255,.16)}
+.eisen2 .vraag2 h3{color:#fff;font-size:clamp(21px,2.2vw,30px);line-height:1.05;max-width:18ch}
+.eisen2 .vraag2 p{font-size:15px;color:rgba(255,255,255,.74);margin-top:12px;max-width:52ch}
+.eisen2 .vraag2 .wat{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:10px}
+
+/* De som. Twee waarden met een pijl ertussen: links wat erin ging,
+   rechts wat eruit kwam. Groot genoeg om het verhaal te dragen, want
+   wie alleen dit leest weet al wat er is opgelost. */
+.eisen2 .som{display:flex;align-items:center;gap:clamp(12px,2vw,26px);justify-content:flex-start}
+.eisen2 .som .kant{min-width:0}
+.eisen2 .som .kant .v{font-family:var(--disp);text-transform:uppercase;font-weight:900;
+  font-size:clamp(24px,2.8vw,40px);line-height:.95;letter-spacing:.02em;white-space:nowrap}
+.eisen2 .som .voor .v{color:rgba(255,255,255,.4)}
+.eisen2 .som .na .v{color:var(--cyan)}
+.eisen2 .som .kant .l{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.45);margin-top:8px}
+.eisen2 .som .pijl{font-family:var(--mono);font-size:18px;color:rgba(255,255,255,.35);flex:none}
+
+@media(max-width:900px){
+  .hangar .paneel{position:static;width:auto;padding:22px clamp(20px,5vw,32px) 26px;
+    background:var(--void)}
+  .hangar::after{background:linear-gradient(180deg,rgba(6,18,28,.15),rgba(6,18,28,.6))}
+  .hangar img{height:clamp(220px,52vw,340px)}
+  .eisen2 .rij{grid-template-columns:1fr;gap:20px}
+}
+
 
 /* ══════════════════════════════════════════════════════════════
    De vier kisttypen.
@@ -625,6 +672,139 @@
   letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
 @media(max-width:900px){.kisten .vier{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.kisten .vier{grid-template-columns:1fr}}
+
+
+/* ══════════════════════════════════════════════════════════════
+   De klantenstrook.
+
+   De vorm staat er, de namen niet. Twee redenen, en ze wegen allebei.
+
+   Op déze pagina staat drie regels hoger dat wij in dit segment geen
+   opdrachtgevers noemen. Een logomuur eronder spreekt dat tegen, en de
+   inkoper die het leest weet meteen welke van de twee waar is.
+
+   En een logo van een bedrijf is zijn merk. Dat plaatsen mag alleen als
+   dat bedrijf klant is en toestemming heeft gegeven. Namen invullen die
+   goed staan is geen ontwerpkeuze maar een claim, en die valt niet meer
+   te repareren zodra een van die bedrijven hem ziet.
+
+   Wat hier dus staat is de beweging en de maat, met lege plekken. Zodra
+   CaseBuilder zegt welke klanten genoemd mogen worden, vervangen die de
+   vakken. Blijft dat leeg, dan kan de hele strook weg: dat is beter dan
+   vage vormen die nergens op slaan.
+
+   De rij schuift met een animatie en niet met javascript, en hij staat
+   stil bij prefers-reduced-motion. Twee dezelfde helften achter elkaar,
+   zodat de lus onzichtbaar is.
+   ══════════════════════════════════════════════════════════════ */
+.klanten{background:#fff;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  overflow:hidden;padding:26px 0}
+.klanten .lab{text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--mute);margin-bottom:20px}
+.klanten .baan{display:flex;width:max-content;animation:schuif 34s linear infinite}
+.klanten:hover .baan{animation-play-state:paused}
+@keyframes schuif{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.klanten .baan{animation:none}}
+/* Geen bestaande bedrijfsnamen of logo's. Een logo is het merk van een
+   ander en mag alleen geplaatst worden door wie daar toestemming voor
+   heeft; namen invullen die goed staan is een claim over een
+   klantrelatie, geen ontwerpkeuze.
+
+   Wat er wel staat zijn de vakgebieden waarvoor gebouwd wordt. Dat is
+   waar, het vult de strook, en het laat precies zien hoe hij eruitziet
+   zodra de echte namen er in mogen. */
+.klanten .plek{flex:none;height:46px;margin:0 clamp(20px,2.6vw,42px);
+  display:flex;align-items:center;justify-content:center;white-space:nowrap;
+  font-family:var(--disp);font-weight:700;font-size:clamp(15px,1.5vw,19px);letter-spacing:.06em;
+  text-transform:uppercase;color:#A9B4C0;filter:grayscale(1)}
+/* Aan de randen uitvloeien, anders komt de rij er hard in en uit. */
+.klanten{position:relative}
+.klanten::before,.klanten::after{content:"";position:absolute;top:0;bottom:0;width:90px;z-index:2;
+  pointer-events:none}
+.klanten::before{left:0;background:linear-gradient(90deg,#fff,transparent)}
+.klanten::after{right:0;background:linear-gradient(270deg,#fff,transparent)}
+
+
+/* ══════════════════════════════════════════════════════════════
+   Overgenomen uit de aangeleverde variant: de plusjesbalk, de
+   constructie en de specificatie.
+
+   Eén ding is anders gedaan. Die variant snijdt de case uit de foto met
+   een clip-path van zesentwintig punten. Dat werkt precies één keer: bij
+   een andere foto, een andere uitsnede of een ander formaat klopt er
+   niets meer van, en niemand die het later aanraakt weet waar die punten
+   vandaan komen. Hier staat de foto op een donkere achtergrond en die
+   valt met een masker samen met het vlak eronder. Zelfde resultaat,
+   zonder dat het aan die ene afbeelding vastzit.
+
+   De uitklaplijst uit die variant is niet overgenomen. Wat je te melden
+   hebt, meld je; dat was eerder al de conclusie bij het blok hierboven.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── de plusjes ───────────────────────────────────────────────
+   Vier eigenschappen op één regel, direct onder de kop. Geen kaartjes en
+   geen iconen: het zijn vier woorden die je in één blik leest. */
+.pluspunten{border-bottom:1px solid var(--rule);background:#fff}
+/* Krap gehouden. Dit is een balk en geen sectie: hij hoort tegen de kop
+   aan te liggen, niet als eigen blok te lezen. */
+.pluspunten{padding:0}
+.pluspunten .wrap{display:flex;justify-content:space-between;gap:16px;
+  padding-top:14px;padding-bottom:14px;flex-wrap:wrap}
+.pluspunten span{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--dark)}
+.pluspunten span::before{content:"+";color:var(--blue);margin-right:12px}
+
+/* ── de constructie ───────────────────────────────────────────
+   Eén case in het midden, vier details eromheen met een lijn ernaartoe.
+   Dit is het blok dat laat zien dat er over nagedacht is: niet dat de
+   kist goed is, maar wáár hij goed is.
+
+   De lijnen staan in een svg die over het hele vlak ligt. Ze zijn op
+   deze maat getekend, dus onder 1000 px vervallen ze en komen de
+   details onder elkaar te staan. Een lijn die naar de verkeerde plek
+   wijst is erger dan geen lijn. */
+.constructie{background:var(--void);color:#fff;position:relative;isolation:isolate;
+  padding:clamp(40px,5vw,64px) 0 0;overflow:hidden}
+.constructie .achter{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  z-index:-3;filter:saturate(.5)}
+.constructie .schaduw{position:absolute;inset:0;z-index:-2;
+  background:linear-gradient(180deg,rgba(6,18,28,.88),rgba(0,38,61,.66) 48%,rgba(6,18,28,.97))}
+.constructie .hfd{text-align:center;margin:clamp(28px,4vw,52px) auto 0}
+.constructie .hfd h2{font-size:clamp(34px,4.4vw,62px);color:#fff;line-height:.96}
+.constructie .hfd h2 span{color:var(--cyan)}
+.constructie .hfd p{max-width:47ch;color:#C9D7DF;font-size:15px;margin:20px auto 0}
+
+.toneel{position:relative;height:620px;max-width:1200px;margin:0 auto}
+.baan2{position:absolute;left:50%;top:50%;width:510px;height:510px;transform:translate(-50%,-50%);
+  border:1px solid rgba(102,196,232,.24);border-radius:50%}
+.baan2::before{content:"";position:absolute;inset:35px;border:1px dashed rgba(102,196,232,.18);
+  border-radius:50%}
+.baan2::after{content:"";position:absolute;left:50%;top:-35px;bottom:-35px;
+  border-left:1px solid rgba(102,196,232,.13)}
+.baan2 i{position:absolute;top:50%;left:-50px;right:-50px;border-top:1px solid rgba(102,196,232,.13)}
+.baan2>span{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);white-space:nowrap;
+  font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#9DB7C6}
+
+/* De case valt met een masker samen met het vlak; geen uitgeknipte rand. */
+.stuk{position:absolute;width:540px;left:50%;top:43px;transform:translateX(-50%);z-index:1}
+.stuk img{width:100%;height:auto;display:block;filter:brightness(1.12);
+  clip-path:polygon(6% 22%,60% 13%,94% 24%,92% 69%,84% 73%,86% 75%,85% 79%,83% 82%,80% 84%,
+    77% 83%,77% 80%,78% 76%,48% 83%,46% 86%,47% 90%,43% 95%,39% 95%,36% 92%,35% 89%,34% 84%,
+    21% 76%,20% 79%,17% 80%,15% 78%,15% 73%,10% 68%)}
+
+.lijnen{position:absolute;inset:0;width:100%;height:100%;color:rgba(102,196,232,.75);
+  pointer-events:none}
+.merk2{position:absolute;width:205px}
+.merk2 h3{font-size:21px;color:#fff;margin:10px 0}
+.merk2 p{font-size:13px;color:#C7D3DC;line-height:1.7}
+.merk2 .nr{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--cyan);
+  display:inline-block;padding-bottom:9px;border-bottom:1px solid var(--cyan)}
+.m1{left:0;top:112px}.m2{left:0;top:375px}.m3{right:0;top:112px}.m4{right:0;top:375px}
+.constructie .voet{display:flex;justify-content:space-between;align-items:center;gap:25px;
+  border-top:1px solid rgba(102,196,232,.24);padding:22px 0 26px}
+.constructie .voet p{font-size:11px;color:#B1C2CE}
+.constructie .voet a{font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:.09em;
+  text-transform:uppercase;white-space:nowrap;color:var(--cyan)}
 
 /* ── de specificatie ──────────────────────────────────────────
    Vier vragen die beantwoord moeten zijn voor er een offerte kan komen.
