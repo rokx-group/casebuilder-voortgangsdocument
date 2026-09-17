@@ -276,6 +276,82 @@
   .kop4 h1{font-size:clamp(30px,8vw,44px)}
 }
 
+
+/* ══════════════════════════════════════════════════════════════
+   Halve banden: beeld tot de rand, tekst ernaast.
+
+   Het verschil met een kaart is dat er geen marge omheen zit. Een kaart
+   ligt óp de pagina en houdt afstand; deze band ís de pagina over zijn
+   volle breedte, en het beeld loopt tot de rand van het scherm door. Dat
+   is wat een pagina zwaar maakt in plaats van geplakt.
+
+   Twee kolommen zonder tussenruimte, en de tekst krijgt zijn eigen
+   binnenmarge. De foto vult zijn helft met object-fit, dus hij is nooit
+   vervormd en nooit te klein — alleen de uitsnede verschuift.
+
+   Op smal scherm boven elkaar, met het beeld eerst: daar is een halve
+   band niet half maar heel, en dan is beeld-dan-tekst de leesvolgorde.
+   ══════════════════════════════════════════════════════════════ */
+/* Geen sectiemarge: brand.css geeft elke section 88 px boven en onder,
+   en juist die marge maakt van een band een plakplaatje. Een halve band
+   moet het scherm raken, anders is het alsnog een kaart met witruimte. */
+.band{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;background:var(--void);
+  color:#fff;padding:0}
+.band .beeldhelft{position:relative;min-height:clamp(340px,46vw,560px);overflow:hidden}
+/* Eén pixel over de naad heen: bij een oneven kolombreedte rondt de
+   browser de foto naar beneden af en blijft er een haarlijn van het
+   vlak eronder zichtbaar, precies op de rand. */
+.band .beeldhelft img{position:absolute;inset:0;width:calc(100% + 1px);height:100%;object-fit:cover}
+/* Een smalle overgang op de naad, zodat beeld en vlak in elkaar lopen
+   in plaats van tegen elkaar aan te liggen. */
+.band .beeldhelft::after{content:"";position:absolute;inset:0 0 0 auto;width:72px;
+  background:linear-gradient(90deg,rgba(6,18,28,0),rgba(6,18,28,.92))}
+.band .teksthelft{padding:clamp(34px,4vw,62px) clamp(24px,4vw,64px);display:flex;
+  flex-direction:column;justify-content:center}
+.band h2{color:#fff;max-width:21ch}
+.band p.lead{color:rgba(255,255,255,.78);max-width:46ch;margin-top:16px}
+/* Beeld rechts in plaats van links; de overgang draait mee. */
+.band.omgekeerd .beeldhelft{order:2}
+.band.omgekeerd .beeldhelft::after{inset:0 auto 0 0;
+  background:linear-gradient(270deg,rgba(6,18,28,0),var(--void))}
+
+/* Drie getallen onder de tekst. Geen percentage en geen "100%": een
+   getal dat niet te controleren is, is in dit segment een minpunt. */
+.band .cijfers{display:flex;gap:40px;margin-top:34px;flex-wrap:wrap;
+  border-top:1px solid rgba(255,255,255,.18);padding-top:22px}
+.band .cijfers div{min-width:120px}
+.band .cijfers b{display:block;font-family:var(--disp);text-transform:uppercase;font-weight:900;
+  font-size:30px;letter-spacing:.03em;line-height:1;color:var(--cyan)}
+.band .cijfers span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(255,255,255,.66);margin-top:8px}
+
+/* ── de uitspraak ─────────────────────────────────────────────
+   Beeld links, een zin in het midden, de harde punten rechts. De zin is
+   niet verzonnen voor deze pagina: hij staat in de merkdocumentatie als
+   goedgekeurd voorbeeld van de schrijftoon. Een quote bedenken en die
+   aan de klant toeschrijven is precies wat hier niet mag. */
+.uitspraak{display:grid;grid-template-columns:1fr 1.1fr;background:var(--dark);color:#fff;padding:0}
+.uitspraak .beeldhelft{position:relative;min-height:clamp(280px,34vw,420px);overflow:hidden}
+.uitspraak .beeldhelft img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85}
+.uitspraak .inhoud{padding:clamp(34px,4vw,56px) clamp(24px,4vw,56px);display:grid;
+  grid-template-columns:1.25fr 1fr;gap:40px;align-items:center}
+.uitspraak .zin{font-family:var(--disp);text-transform:uppercase;font-weight:700;
+  font-size:clamp(22px,2.3vw,32px);line-height:1.06;letter-spacing:.03em;max-width:20ch}
+.uitspraak .wie{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.55);margin-top:16px}
+.uitspraak ul{list-style:none;margin:0;padding:0}
+.uitspraak li{border-top:1px solid rgba(255,255,255,.18);padding:11px 0;font-size:14.5px;
+  color:rgba(255,255,255,.86)}
+.uitspraak li:first-child{border-top:0}
+
+@media(max-width:900px){
+  .band,.uitspraak{grid-template-columns:1fr}
+  .band.omgekeerd .beeldhelft{order:0}
+  .band .beeldhelft::after,.uitspraak .beeldhelft::after{display:none}
+  .band .beeldhelft,.uitspraak .beeldhelft{min-height:260px}
+  .uitspraak .inhoud{grid-template-columns:1fr;gap:26px}
+}
+
 </style>
 </head>
 <body>
@@ -551,6 +627,32 @@
   </div>
 </section>
 
+
+<!-- ══ DE WERKPLAATS ═══════════════════════════════════════════
+     Halve band: beeld tot de rand, tekst ernaast. Geen kaart met marge
+     eromheen — dat is wat een pagina laat aanvoelen als geplakt.
+
+     De drie getallen zijn met opzet klein en controleerbaar. Een "100%"
+     of een "100+ projecten" is in dit segment een minpunt: een inkoper
+     die het niet kan natrekken, trekt de rest ook in twijfel. ════ -->
+<section class="band">
+  <div class="beeldhelft">
+    <img src="assets/foto-crew.jpg" alt="Drie medewerkers van Casebuilder in de werkplaats in Doesburg">
+  </div>
+  <div class="teksthelft">
+    <div class="ey">// Wie het bouwt</div>
+    <h2>Eén werkplaats, geen tussenschakels</h2>
+    <p class="lead">Wat je bestelt wordt in Doesburg getekend, gezaagd en samengesteld. Dat is geen
+      keurmerk maar een praktisch verschil: bij een afwijking hoef je niet te wachten op een
+      leverancier van een leverancier, en wie je aan de telefoon krijgt loopt langs de kist.</p>
+    <div class="cijfers">
+      <div><b>20+ jaar</b><span>Eigen productie</span></div>
+      <div><b>48 uur</b><span>Offerte, ook op specificatie</span></div>
+      <div><b>1 locatie</b><span>Doesburg</span></div>
+    </div>
+  </div>
+</section>
+
 <!-- ══ UITGEVOERD WERK ═════════════════════════════════════════
      De klantcase van dit segment. Geen naam, geen logo, wel de
      opdracht: wat erin ging, hoeveel, welke eis, wat er gemeten is.
@@ -655,6 +757,30 @@
         <div class="bij"><span>Tekening &middot; rev. C</span><span>Schaal 1:10</span><span>Doesburg</span></div>
       </div>
     </div>
+  </div>
+</section>
+
+
+<!-- ══ DE UITSPRAAK ════════════════════════════════════════════
+     De zin komt uit de merkdocumentatie en is daar goedgekeurd als
+     voorbeeld van de schrijftoon. Niet voor deze pagina bedacht en niet
+     aan een klant toegeschreven: een verzonnen citaat onder een naam is
+     precies wat hier niet kan. ═══════════════════════════════════ -->
+<section class="uitspraak">
+  <div class="beeldhelft">
+    <img src="assets/foto-product-drone.jpg" alt="Koffer met uitgefreesd schuim naast een drone">
+  </div>
+  <div class="inhoud">
+    <div>
+      <p class="zin">Stuur wat je hebt. Een datasheet is genoeg, een foto van een servet ook.</p>
+      <p class="wie">Zo begint zeventig procent van de orders</p>
+    </div>
+    <ul>
+      <li>Val- en trilproef volgens jouw norm</li>
+      <li>Materiaal herleidbaar per charge</li>
+      <li>Tekening met revisie bij de levering</li>
+      <li>Serie of stuk, zelfde tolerantie</li>
+    </ul>
   </div>
 </section>
 
