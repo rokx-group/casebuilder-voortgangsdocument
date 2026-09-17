@@ -715,6 +715,117 @@
 .klanten::before{left:0;background:linear-gradient(90deg,#fff,transparent)}
 .klanten::after{right:0;background:linear-gradient(270deg,#fff,transparent)}
 
+
+/* ══════════════════════════════════════════════════════════════
+   Overgenomen uit de aangeleverde variant: de plusjesbalk, de
+   constructie en de specificatie.
+
+   Eén ding is anders gedaan. Die variant snijdt de case uit de foto met
+   een clip-path van zesentwintig punten. Dat werkt precies één keer: bij
+   een andere foto, een andere uitsnede of een ander formaat klopt er
+   niets meer van, en niemand die het later aanraakt weet waar die punten
+   vandaan komen. Hier staat de foto op een donkere achtergrond en die
+   valt met een masker samen met het vlak eronder. Zelfde resultaat,
+   zonder dat het aan die ene afbeelding vastzit.
+
+   De uitklaplijst uit die variant is niet overgenomen. Wat je te melden
+   hebt, meld je; dat was eerder al de conclusie bij het blok hierboven.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── de plusjes ───────────────────────────────────────────────
+   Vier eigenschappen op één regel, direct onder de kop. Geen kaartjes en
+   geen iconen: het zijn vier woorden die je in één blik leest. */
+.pluspunten{border-bottom:1px solid var(--rule);background:#fff}
+.pluspunten .wrap{display:flex;justify-content:space-between;gap:20px;
+  padding-top:24px;padding-bottom:24px;flex-wrap:wrap}
+.pluspunten span{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--dark)}
+.pluspunten span::before{content:"+";color:var(--blue);margin-right:12px}
+
+/* ── de constructie ───────────────────────────────────────────
+   Eén case in het midden, vier details eromheen met een lijn ernaartoe.
+   Dit is het blok dat laat zien dat er over nagedacht is: niet dat de
+   kist goed is, maar wáár hij goed is.
+
+   De lijnen staan in een svg die over het hele vlak ligt. Ze zijn op
+   deze maat getekend, dus onder 1000 px vervallen ze en komen de
+   details onder elkaar te staan. Een lijn die naar de verkeerde plek
+   wijst is erger dan geen lijn. */
+.constructie{background:var(--void);color:#fff;position:relative;isolation:isolate;
+  padding:clamp(40px,5vw,64px) 0 0;overflow:hidden}
+.constructie .achter{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  z-index:-3;filter:saturate(.5)}
+.constructie .schaduw{position:absolute;inset:0;z-index:-2;
+  background:linear-gradient(180deg,rgba(6,18,28,.88),rgba(0,38,61,.66) 48%,rgba(6,18,28,.97))}
+.constructie .hfd{text-align:center;margin:clamp(28px,4vw,52px) auto 0}
+.constructie .hfd h2{font-size:clamp(34px,4.4vw,62px);color:#fff;line-height:.96}
+.constructie .hfd h2 span{color:var(--cyan)}
+.constructie .hfd p{max-width:47ch;color:#C9D7DF;font-size:15px;margin:20px auto 0}
+
+.toneel{position:relative;height:620px;max-width:1200px;margin:0 auto}
+.baan2{position:absolute;left:50%;top:50%;width:510px;height:510px;transform:translate(-50%,-50%);
+  border:1px solid rgba(102,196,232,.24);border-radius:50%}
+.baan2::before{content:"";position:absolute;inset:35px;border:1px dashed rgba(102,196,232,.18);
+  border-radius:50%}
+.baan2::after{content:"";position:absolute;left:50%;top:-35px;bottom:-35px;
+  border-left:1px solid rgba(102,196,232,.13)}
+.baan2 i{position:absolute;top:50%;left:-50px;right:-50px;border-top:1px solid rgba(102,196,232,.13)}
+.baan2>span{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);white-space:nowrap;
+  font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#9DB7C6}
+
+/* De case valt met een masker samen met het vlak; geen uitgeknipte rand. */
+.stuk{position:absolute;width:440px;left:50%;top:78px;transform:translateX(-50%);z-index:1}
+.stuk img{width:100%;height:auto;display:block;filter:brightness(1.06) contrast(1.06);
+  -webkit-mask-image:radial-gradient(ellipse 60% 58% at 50% 50%,#000 40%,rgba(0,0,0,.5) 72%,transparent 94%);
+  mask-image:radial-gradient(ellipse 60% 58% at 50% 50%,#000 40%,rgba(0,0,0,.5) 72%,transparent 94%)}
+
+.lijnen{position:absolute;inset:0;width:100%;height:100%;color:rgba(102,196,232,.75);
+  pointer-events:none}
+.merk2{position:absolute;width:205px}
+.merk2 h3{font-size:21px;color:#fff;margin:10px 0}
+.merk2 p{font-size:13px;color:#C7D3DC;line-height:1.7}
+.merk2 .nr{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--cyan);
+  display:inline-block;padding-bottom:9px;border-bottom:1px solid var(--cyan)}
+.m1{left:0;top:112px}.m2{left:0;top:375px}.m3{right:0;top:112px}.m4{right:0;top:375px}
+.constructie .voet{display:flex;justify-content:space-between;align-items:center;gap:25px;
+  border-top:1px solid rgba(102,196,232,.24);padding:22px 0 26px}
+.constructie .voet p{font-size:11px;color:#B1C2CE}
+.constructie .voet a{font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:.09em;
+  text-transform:uppercase;white-space:nowrap;color:var(--cyan)}
+
+/* ── de specificatie ──────────────────────────────────────────
+   Vier vragen die beantwoord moeten zijn voor er een offerte kan komen.
+   Dit blok doet iets wat de rest niet doet: het bereidt de bezoeker voor
+   op het gesprek, zodat hij niet met lege handen belt. */
+.spec2{background:var(--bg);border-top:1px solid var(--rule)}
+.spec2 .raster{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(34px,6vw,90px);margin-top:44px}
+.spec2 .intro h2{font-size:clamp(34px,3.8vw,54px);line-height:1;margin:16px 0 20px}
+.spec2 .intro h2 span{color:var(--blue)}
+.spec2 .intro p{max-width:36ch;color:#53626D;font-size:15px;line-height:1.75}
+.spec2 .kop2r{display:grid;grid-template-columns:.9fr 1.1fr;gap:22px;color:var(--blue);
+  font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.12em;
+  padding-bottom:14px;border-bottom:2px solid var(--dark)}
+.spec2 .regel{display:grid;grid-template-columns:.9fr 1.1fr;gap:22px;padding:24px 0;
+  border-bottom:1px solid #CCD9E2}
+.spec2 .regel>div{display:flex;gap:16px;align-items:baseline}
+.spec2 .regel .nr{font-family:var(--mono);font-size:10px;color:var(--blue);flex:none}
+.spec2 .regel h3{font-size:20px;font-weight:700}
+.spec2 .regel p{font-size:13.5px;line-height:1.7;color:#53626D}
+.spec2 .voetnoot{font-size:12px;line-height:1.7;color:#53626D;padding-top:20px;max-width:64ch}
+
+@media(max-width:1000px){
+  .toneel{height:auto;display:grid;grid-template-columns:1fr 1fr;gap:28px 40px;padding:470px 24px 36px}
+  .stuk{top:0}.baan2{top:240px}.lijnen{display:none}
+  .merk2{position:static;width:auto;border-top:1px solid rgba(102,196,232,.24);padding-top:16px}
+  .spec2 .raster{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  .toneel{grid-template-columns:1fr;padding-top:340px}
+  .stuk{width:min(330px,88vw)}.baan2{width:290px;height:290px;top:175px}
+  .spec2 .kop2r{display:none}
+  .spec2 .regel{grid-template-columns:1fr;gap:10px}
+}
+
 </style>
 </head>
 <body>
@@ -953,6 +1064,19 @@
 </section>
 
 
+
+<!-- ══ DE PLUSJES ══════════════════════════════════════════════
+     Vier eigenschappen op één regel, direct onder de kop. Geen kaartjes
+     en geen iconen: vier woorden die je in één blik leest. ════════ -->
+<section class="pluspunten">
+  <div class="wrap">
+    <span>Op maat gemaakt</span>
+    <span>Zelf samenstellen</span>
+    <span>Bouwpakket of kant-en-klaar</span>
+    <span>Eigen productie in Doesburg</span>
+  </div>
+</section>
+
 <!-- ══ 02 · HET STATEMENT ══════════════════════════════════════
      De adempauze. Na een beeld dat het hele scherm vult moet er een
      plek zijn waar niets gebeurt, anders begint de pagina meteen weer
@@ -1060,61 +1184,105 @@
   </div>
 </section>
 
-<!-- ══ DE VIER KISTEN ══════════════════════════════════════════
-     Onder het dossier, omdat daar de vraag opkomt: waar hebben we het
-     over. Vier modellen die in dit vak het meest gebouwd worden.
+<!-- ══ DE CONSTRUCTIE ═════════════════════════════════════════
+     Eén case in het midden, vier details eromheen met een lijn ernaar
+     toe. Dit vervangt de rij van vier modellen: die toonde wélke kisten
+     er zijn, dit toont wáár een kist goed in is. Het tweede is wat een
+     inkoper hier zoekt; het eerste staat in het menu.
 
-     Vier gelijke kaarten kloppen hier wél, anders dan bij de eisen
-     hierboven: dit zijn gelijkwaardige opties waaruit je kiest. ═════ -->
-<section class="kisten">
+     De lijnen zijn op deze maat getekend. Onder 1000 px vervallen ze en
+     komen de details onder elkaar: een lijn die naar de verkeerde plek
+     wijst is erger dan geen lijn. ════════════════════════════════════ -->
+<section class="constructie" aria-labelledby="constructie-kop">
+  <img class="achter" src="assets/defensie-oefening.jpg" alt="" loading="lazy">
+  <div class="schaduw"></div>
   <div class="wrap">
-    <div class="sec-head">
-      <div class="ey ey-dark">// Waar we het over hebben</div>
-      <h2>Vier modellen, vier soorten transport</h2>
-      <p class="lead">De maat volgt jouw apparaat, het model volgt de manier waarop het meegaat.
-        Wat hieronder staat is waar we in dit vak het vaakst mee beginnen.</p>
+    <div class="hfd">
+      <div class="ey">// De constructie &middot; elk detail heeft een taak</div>
+      <h2 id="constructie-kop">Klaar voor transport.<br><span>Tot in de details.</span></h2>
+      <p>Wat er onderweg gebeurt telt mee in het ontwerp. Van het eerste handvat tot het laatste
+        sluitwerk.</p>
     </div>
-    <div class="vier">
-      <a class="kist" href='/mockups/casetype-rackcase-dubbel-deksel-v1'>
-        <div class="im"><img src="assets/def-communicatie.jpg" alt="Apparatuur in geopende transportkisten, met kabels naar buiten"></div>
-        <div class="bd">
-          <span class="mdl">Rackcase, dubbel deksel</span>
-          <h3>Apparatuur die aan blijft staan</h3>
-          <p>Beide deksels eraf, doorvoeren in de zijwand. De set draait in de kist, ook als het
-            deksel dicht moet.</p>
-          <span class="go">Radarsets, verbindingssets &rarr;</span>
+
+    <div class="toneel">
+      <div class="baan2" aria-hidden="true"><i></i><span>CB &middot; transportcase</span></div>
+      <figure class="stuk">
+        <img src="assets/flightcase-trunccase.jpg" width="1020" height="1020" loading="lazy"
+             alt="Trunccase met aluminium profielen, metalen balhoeken, verzonken handgrepen, vlindersloten en zwenkwielen">
+      </figure>
+      <svg class="lijnen" viewBox="0 0 1200 620" fill="none" aria-hidden="true">
+        <!-- De eindpunten liggen binnen het zichtbare deel van de case.
+             Gemeten en niet geschat: de foto vult 380 tot 820 breed en 78
+             tot 518 hoog in deze viewBox, en het masker vaagt daar de
+             buitenste veertig procent van weg. Wie de foto vervangt moet
+             deze vier punten opnieuw nalopen. -->
+        <g stroke="currentColor">
+          <path d="M230 153 H330 L478 258"/>
+          <path d="M230 416 H330 L505 372"/>
+          <path d="M970 153 H870 L716 290"/>
+          <path d="M970 416 H870 L664 452"/>
+        </g>
+        <g fill="currentColor">
+          <circle cx="478" cy="258" r="4"/><circle cx="505" cy="372" r="4"/>
+          <circle cx="716" cy="290" r="4"/><circle cx="664" cy="452" r="4"/>
+        </g>
+      </svg>
+      <div class="merk2 m1"><span class="nr">01</span><h3>Beschermde hoeken</h3>
+        <p>Metalen balhoeken en aluminium profielen vangen de klap op de plek waar een kist het
+          eerst stukgaat.</p></div>
+      <div class="merk2 m2"><span class="nr">02</span><h3>Grip op transport</h3>
+        <p>Verzonken handgrepen klappen terug tegen de wand, zodat er niets achter blijft haken bij
+          het laden.</p></div>
+      <div class="merk2 m3"><span class="nr">03</span><h3>Verzonken sluitwerk</h3>
+        <p>Vlindersloten sluiten het deksel en steken niet uit. Te bedienen met handschoenen aan.</p></div>
+      <div class="merk2 m4"><span class="nr">04</span><h3>Verplaatsen op wielen</h3>
+        <p>Zwenkwielen met rem waar het gewicht erom vraagt. De keuze begint bij tilgrens en
+          ondergrond.</p></div>
+    </div>
+
+    <div class="voet">
+      <p>Afgebeeld: trunccase. De uitvoering wordt afgestemd op jouw toepassing.</p>
+      <a href='/mockups/casetype-trunccase-v1'>Bekijk dit casetype &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DE SPECIFICATIE ═════════════════════════════════════════
+     Vier vragen die beantwoord moeten zijn voor er een offerte kan
+     komen. Dit blok doet iets wat de rest niet doet: het bereidt de
+     bezoeker voor op het gesprek, zodat hij niet met lege handen belt.
+     ════════════════════════════════════════════════════════════════ -->
+<section class="spec2" aria-labelledby="spec-kop">
+  <div class="wrap">
+    <div class="raster">
+      <div class="intro">
+        <div class="ey ey-dark">// De specificatie</div>
+        <h2 id="spec-kop">Een goede case begint met <span>de juiste vragen</span></h2>
+        <p>Maak de omstandigheden concreet. Dan kunnen we bespreken welke constructie past en welke
+          eisen apart beoordeeld moeten worden.</p>
+      </div>
+      <div>
+        <div class="kop2r"><span>Jouw gebruik</span><span>Wat we bespreken</span></div>
+        <div class="regel">
+          <div><span class="nr">01</span><h3>Wat gaat erin?</h3></div>
+          <p>Afmetingen, gewicht, kwetsbare delen en alle accessoires die mee moeten.</p>
         </div>
-      </a>
-      <a class="kist" href='/mockups/casetype-trunccase-v1'>
-        <div class="im"><img src="assets/def-uitrusting.jpg" alt="Persoonlijke uitrusting: helm, vest en handschoenen"></div>
-        <div class="bd">
-          <span class="mdl">Trunccase</span>
-          <h3>Wat met de ploeg meegaat</h3>
-          <p>Stapelbaar, op wielen, deksel er helemaal af. Het werkpaard voor uitrusting die in
-            delen wordt uitgeladen.</p>
-          <span class="go">Veldapparatuur, uitrusting &rarr;</span>
+        <div class="regel">
+          <div><span class="nr">02</span><h3>Hoe reist het mee?</h3></div>
+          <p>Dragen, rollen, stapelen en vastzetten. Ook de ruimte in het voertuig telt mee.</p>
         </div>
-      </a>
-      <a class="kist" href='/mockups/casetype-koffer-v1'>
-        <div class="im"><img src="assets/def-drone.jpg" alt="Drone en losse uitrusting op camouflagemateriaal"></div>
-        <div class="bd">
-          <span class="mdl">Koffer</span>
-          <h3>Klein, los en niet kwijt te raken</h3>
-          <p>E&eacute;n man draagt hem. Uitgefreesd schuim per onderdeel, klimaatdicht, drukventiel
-            waar nodig.</p>
-          <span class="go">Drones, optiek, instrumenten &rarr;</span>
+        <div class="regel">
+          <div><span class="nr">03</span><h3>Welke omgeving?</h3></div>
+          <p>Binnen of buiten, vocht, stof en temperatuur, plus de gevraagde beschermingsklasse.</p>
         </div>
-      </a>
-      <a class="kist" href='/mockups/casetype-hoedcase-v1'>
-        <div class="im"><img src="assets/foto-product-drone.jpg" alt="Geopende koffer met uitgefreesd schuim naast een drone"></div>
-        <div class="bd">
-          <span class="mdl">Hoedcase</span>
-          <h3>Erin leggen, niet erin wurmen</h3>
-          <p>Het deksel gaat er helemaal af, dus je legt het instrument erin. Voor wat te kwetsbaar
-            is om te kantelen.</p>
-          <span class="go">Richtmiddelen, sensoren &rarr;</span>
+        <div class="regel">
+          <div><span class="nr">04</span><h3>Wat moet vastliggen?</h3></div>
+          <p>Aantallen, planning, merking en eventuele normen, beproevingen of documentatie.</p>
         </div>
-      </a>
+        <p class="voetnoot">Een norm of beschermingsklasse is geen standaard producteigenschap. Wat
+          haalbaar is en welke onderbouwing daarbij hoort, stemmen we vooraf af.</p>
+      </div>
+    </div>
   </div>
 </section>
 

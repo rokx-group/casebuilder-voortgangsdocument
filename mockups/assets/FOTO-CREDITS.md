@@ -17,3 +17,5 @@ Bij livegang vervangen door eigen fotografie.
   suggereert een levering die er niet is.
 - **hangar** — gegenereerd beeld, aangeleverd door Rokx. Staat op de pagina als sfeer
   en nergens als bewijs; dat staat er ook bij.
+- **defensie-oefening** — "Combined Operations Dutch and German armies" · Floris Oosterveld · CC BY 2.0 · <https://commons.wikimedia.org/wiki/File:Combined_Operations_Dutch_and_German_armies.jpg>
+- **defensie-verbinding** — "Exercise Allied Spirit I" · Gertrud Zach / U.S. Army · publiek domein · <https://commons.wikimedia.org/wiki/File:Exercise_Allied_Spirit_I_150120-A-HE359-239.jpg>
