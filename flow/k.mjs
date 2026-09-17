@@ -1,0 +1,16 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch();
+const p = await b.newPage({ viewportSize: { width: 1440, height: 900 } });
+const fouten = [], kapot = [];
+p.on('pageerror', e => fouten.push(e.message));
+p.on('response', r => { if (r.status() >= 400) kapot.push(r.url().split('/').pop()); });
+await p.goto('http://localhost:8899/mockups/branche-defensie-v3.html');
+await p.waitForTimeout(800);
+console.log('kisten:', await p.locator('.kisten .kist').count(), '| oneliner:', await p.locator('.hangar .oneliner').count());
+await p.locator('.hangar').scrollIntoViewIfNeeded(); await p.waitForTimeout(400);
+await p.screenshot({ path: process.argv[2] + '/hangar2.png' });
+await p.locator('.kisten').scrollIntoViewIfNeeded(); await p.waitForTimeout(400);
+await p.screenshot({ path: process.argv[2] + '/kisten.png' });
+console.log(kapot.length ? 'ONTBREEKT: ' + [...new Set(kapot)].join(', ') : 'geen 404s');
+console.log(fouten.length ? 'JS-FOUTEN: ' + fouten.join(' | ') : 'geen javascriptfouten');
+await b.close();

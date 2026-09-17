@@ -567,7 +567,10 @@
    Breed beeld met de kerngegevens ernaast. Het paneel ligt op het beeld
    en niet ernaast: zo blijft de foto over de volle breedte doorlopen en
    is er geen naad. */
-.hangar{position:relative;background:var(--void);overflow:hidden}
+/* Geen sectiemarge: brand.css geeft elke section 88 px boven en onder,
+   en daardoor hing er een blauwe strook boven het beeld. Een beeld over
+   de volle breedte hoort het blok erboven te raken. */
+.hangar{position:relative;background:var(--void);overflow:hidden;padding:0}
 .hangar img{width:100%;height:clamp(340px,44vw,560px);object-fit:cover;display:block}
 .hangar::after{content:"";position:absolute;inset:0;
   background:linear-gradient(90deg,rgba(6,18,28,.1) 0%,rgba(6,18,28,.25) 44%,rgba(6,18,28,.94) 82%)}
@@ -579,6 +582,15 @@
   font-size:22px;letter-spacing:.03em;color:#fff;line-height:1}
 .hangar .paneel span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
   text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:7px}
+/* Eén regel linksboven op het beeld. Hij benoemt de reis die een kist
+   maakt en houdt het bij een constatering: alles wat hier een belofte
+   wordt, moet verderop bewezen worden. */
+.hangar .oneliner{position:absolute;left:clamp(20px,4vw,64px);top:clamp(22px,4vw,54px);z-index:2;
+  max-width:22ch;font-family:var(--disp);text-transform:uppercase;font-weight:700;
+  font-size:clamp(18px,1.9vw,27px);line-height:1.05;letter-spacing:.03em;color:#fff;
+  text-shadow:0 2px 24px rgba(6,18,28,.6)}
+.hangar .oneliner .acc{color:var(--cyan)}
+
 .hangar .bron{position:absolute;left:clamp(16px,3vw,32px);bottom:14px;z-index:2;
   font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;
   color:rgba(255,255,255,.35)}
@@ -619,6 +631,34 @@
   .hangar img{height:clamp(220px,52vw,340px)}
   .eisen2 .rij{grid-template-columns:1fr;gap:20px}
 }
+
+
+/* ══════════════════════════════════════════════════════════════
+   De vier kisttypen.
+
+   Staat onder het dossier omdat het daar de vraag beantwoordt die dan
+   opkomt: waar hébben we het over. Vier modellen die in dit vak het
+   meest gebouwd worden, met per model waarvoor.
+
+   Vier gelijke kaarten zou hier wél kloppen, anders dan bij de eisen
+   hierboven: dit zijn gelijkwaardige opties waaruit je kiest, geen
+   verhalen die om elkaars aandacht vechten. Een rij is precies de goede
+   vorm voor een keuze.
+   ══════════════════════════════════════════════════════════════ */
+.kisten{background:var(--bg);border-top:1px solid var(--rule)}
+.kisten .vier{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);
+  border:1px solid var(--rule);margin-top:30px}
+.kisten .kist{background:#fff;display:flex;flex-direction:column;transition:.14s}
+.kisten .kist:hover{background:var(--lichtblauw,#E6EFF6)}
+.kisten .kist .im{aspect-ratio:4/3;overflow:hidden;background:var(--bg)}
+.kisten .kist .im img{width:100%;height:100%;object-fit:cover}
+.kisten .kist .bd{padding:16px 18px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
+.kisten .kist h3{font-size:17px;line-height:1.15}
+.kisten .kist p{font-size:13.5px;color:var(--mute);line-height:1.5}
+.kisten .kist .go{margin-top:auto;padding-top:10px;font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+@media(max-width:900px){.kisten .vier{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.kisten .vier{grid-template-columns:1fr}}
 
 </style>
 </head>
@@ -882,6 +922,7 @@
      een laadperron of een werkplaats zijn, wisselt dit bestand. ════ -->
 <section class="hangar">
   <img src="assets/foto-hangar.jpg" alt="" aria-hidden="true">
+  <p class="oneliner">Van Doesburg<br>naar <span class="acc">het veld</span></p>
   <div class="paneel">
     <div class="rij"><b>Doesburg</b><span>Eigen productie, niets buiten de EU</span></div>
     <div class="rij"><b>48 uur</b><span>Offerte, ook op specificatie</span></div>
@@ -978,7 +1019,59 @@
   </div>
 </section>
 
-<!-- ══ 06 · DE AANVRAAG ════════════════════════════════════════ -->
+
+<!-- ══ DE VIER KISTEN ══════════════════════════════════════════
+     Onder het dossier, omdat daar de vraag opkomt: waar hebben we het
+     over. Vier modellen die in dit vak het meest gebouwd worden.
+
+     Vier gelijke kaarten kloppen hier wél, anders dan bij de eisen
+     hierboven: dit zijn gelijkwaardige opties waaruit je kiest. ═════ -->
+<section class="kisten">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ey ey-dark">// Waar we het over hebben</div>
+      <h2>Vier modellen, vier soorten transport</h2>
+      <p class="lead">De maat volgt jouw apparaat, het model volgt de manier waarop het meegaat.
+        Wat hieronder staat is waar we in dit vak het vaakst mee beginnen.</p>
+    </div>
+    <div class="vier">
+      <a class="kist" href='/mockups/casetype-rackcase-dubbel-deksel-v1'>
+        <div class="im"><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt="Rackcase met dubbel deksel"></div>
+        <div class="bd">
+          <h3>Rackcase, dubbel deksel</h3>
+          <p>Apparatuur die in de kist blijft draaien. Beide deksels eraf, doorvoeren in de zijwand.</p>
+          <span class="go">Radarsets, verbindingssets &rarr;</span>
+        </div>
+      </a>
+      <a class="kist" href='/mockups/casetype-trunccase-v1'>
+        <div class="im"><img src="assets/flightcase-trunccase.jpg" alt="Trunccase"></div>
+        <div class="bd">
+          <h3>Trunccase</h3>
+          <p>Stapelbaar, op wielen, met een deksel dat er helemaal af gaat. Het werkpaard.</p>
+          <span class="go">Veldapparatuur, uitrusting &rarr;</span>
+        </div>
+      </a>
+      <a class="kist" href='/mockups/casetype-koffer-v1'>
+        <div class="im"><img src="assets/flightcase-koffer.jpg" alt="Koffer"></div>
+        <div class="bd">
+          <h3>Koffer</h3>
+          <p>Eén man draagt hem. Uitgefreesd schuim, klimaatdicht, drukventiel waar nodig.</p>
+          <span class="go">Optiek, meetinstrumenten &rarr;</span>
+        </div>
+      </a>
+      <a class="kist" href='/mockups/casetype-hoedcase-v1'>
+        <div class="im"><img src="assets/flightcase-hoedcase.jpg" alt="Hoedcase"></div>
+        <div class="bd">
+          <h3>Hoedcase</h3>
+          <p>Deksel er helemaal af, dus je legt erin in plaats van erin te wurmen. Voor wat kwetsbaar is.</p>
+          <span class="go">Richtmiddelen, sensoren &rarr;</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 07 · DE AANVRAAG ════════════════════════════════════════ -->
 <section class="slot3" id="aanvraag">
   <div class="wrap">
     <div class="grid">
