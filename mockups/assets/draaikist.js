@@ -25,100 +25,130 @@
    het label, de knop en de kist niet uit elkaar lopen — er is één bron.
    Staat er een data-href bij, dan loopt een knop met data-kistlink mee
    naar dat adres: dan is de kist geen plaatje maar een keuze.
+
+   Meer kisten op één pagina kan (het modeloverzicht met vijf naast
+   elkaar): elke [data-draaikist] krijgt zijn eigen staat. Per kist, alle
+   drie optioneel:
+     data-hoek="-28"    beginhoek, zodat vijf kisten niet in de maat
+                        meedraaien
+     data-grootte="240" hoeveel pixels de grootste maat beslaat
+     data-stil          niet vanzelf draaien (voor een menu: dat moet
+                        meteen openstaan, niet bewegen)
    ══════════════════════════════════════════════════════════════ */
 (function () {
-  var kist = document.querySelector('[data-draaikist]');
-  if (!kist) return;
+  var STIL = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  var vlak = kist.querySelector('.kubus');
-  var label = kist.querySelector('.kmaat');
-  if (!vlak) return;
+  function start(kist) {
+    var vlak = kist.querySelector('.kubus');
+    var label = kist.querySelector('.kmaat');
+    if (!vlak) return;
 
-  var knoppen = Array.prototype.slice.call(kist.parentNode.querySelectorAll('[data-maat]'));
-  var koppeling = kist.parentNode.parentNode.querySelector('[data-kistlink]');
+    var knoppen = Array.prototype.slice.call(kist.parentNode.querySelectorAll('[data-maat]'));
+    var koppeling = kist.parentNode.parentNode.querySelector('[data-kistlink]');
 
-  /* breedte × hoogte × diepte in mm, uit de knoppen zelf */
-  var MATEN = knoppen.map(function (k) {
-    var mm = (k.dataset.mm || '').split(/[x×]/).map(Number);
-    return { naam: k.dataset.naam || k.textContent.trim(), b: mm[0], h: mm[1], d: mm[2], href: k.dataset.href };
-  }).filter(function (m) { return m.b && m.h && m.d; });
-  if (!MATEN.length) return;
+    /* breedte × hoogte × diepte in mm, uit de knoppen zelf */
+    var MATEN = knoppen.map(function (k) {
+      var mm = (k.dataset.mm || '').split(/[x×]/).map(Number);
+      return { naam: k.dataset.naam || k.textContent.trim(), b: mm[0], h: mm[1], d: mm[2], href: k.dataset.href };
+    }).filter(function (m) { return m.b && m.h && m.d; });
+    /* Vrije maat (data-vrij): de pagina zet de maten zelf, via het event
+       'kist:maat', in plaats van via knoppen. Dan is er geen reeks om
+       doorheen te wisselen, en bepaalt data-vrij de grootste maat in mm
+       waarop de schaal wordt afgesteld. */
+    var vrij = kist.hasAttribute('data-vrij');
+    if (!MATEN.length && !vrij) return;
 
-  /* De grootste kist bepaalt de schaal, zodat geen enkele maat buiten
-     het kader valt en ze onderling vergelijkbaar blijven. */
-  var GROOTSTE = Math.max.apply(null, MATEN.map(function (m) { return Math.max(m.b, m.h, m.d); }));
-  var SCHAAL = 240 / GROOTSTE;
-  var WISSEL = 4200;         /* hoe lang een maat blijft staan */
+    /* De grootste kist bepaalt de schaal, zodat geen enkele maat buiten
+       het kader valt en ze onderling vergelijkbaar blijven. */
+    var GROOTSTE = vrij ? (Number(kist.getAttribute('data-vrij')) || 1400)
+                 : Math.max.apply(null, MATEN.map(function (m) { return Math.max(m.b, m.h, m.d); }));
+    var SCHAAL = (Number(kist.getAttribute('data-grootte')) || 240) / GROOTSTE;
+    var WISSEL = 4200;         /* hoe lang een maat blijft staan */
+    var stil = STIL || kist.hasAttribute('data-stil');
 
-  function toon(m, n) {
-    knoppen.forEach(function (k, j) { k.classList.toggle('aan', j === n); });
-    if (koppeling && m.href) {
-      koppeling.setAttribute('href', m.href);
-      koppeling.textContent = 'Bekijk de ' + m.naam.toLowerCase() + ' \u2192';
+    function toon(m, n) {
+      knoppen.forEach(function (k, j) { k.classList.toggle('aan', j === n); });
+      if (koppeling && m.href) {
+        koppeling.setAttribute('href', m.href);
+        koppeling.textContent = 'Bekijk de ' + m.naam.toLowerCase() + ' →';
+      }
+      vlak.style.setProperty('--b', (m.b * SCHAAL).toFixed(1) + 'px');
+      vlak.style.setProperty('--h', (m.h * SCHAAL).toFixed(1) + 'px');
+      vlak.style.setProperty('--d', (m.d * SCHAAL).toFixed(1) + 'px');
+      if (label) {
+        label.textContent = (m.naam ? m.naam + ' · ' : '') + m.b.toLocaleString('nl-NL') + ' × ' +
+          m.h.toLocaleString('nl-NL') + ' × ' + m.d.toLocaleString('nl-NL') + ' mm';
+      }
     }
-    vlak.style.setProperty('--b', (m.b * SCHAAL).toFixed(1) + 'px');
-    vlak.style.setProperty('--h', (m.h * SCHAAL).toFixed(1) + 'px');
-    vlak.style.setProperty('--d', (m.d * SCHAAL).toFixed(1) + 'px');
-    if (label) {
-      label.textContent = m.naam + ' · ' + m.b.toLocaleString('nl-NL') + ' × ' +
-        m.h.toLocaleString('nl-NL') + ' × ' + m.d.toLocaleString('nl-NL') + ' mm';
+
+    var i = 0;
+    if (MATEN.length) toon(MATEN[0], 0);
+
+    var wisselaar = null;
+    function startWisselen() {
+      if (stil || wisselaar) return;
+      wisselaar = setInterval(function () { i = (i + 1) % MATEN.length; toon(MATEN[i], i); }, WISSEL);
     }
-  }
+    function stopWisselen() { clearInterval(wisselaar); wisselaar = null; }
+    if (MATEN.length > 1) startWisselen();
 
-  var i = 0;
-  toon(MATEN[0], 0);
+    /* ── draaien ─────────────────────────────────────────────
+       Vanzelf, tot de bezoeker hem vastpakt. Dan neemt hij het over en
+       blijft de kist staan waar hij hem laat — een object dat terugspringt
+       zodra je loslaat, voelt alsof je er niet echt aan mag zitten. */
+    var hoek = kist.hasAttribute('data-hoek') ? Number(kist.getAttribute('data-hoek')) : -28;
+    var kanteling = -14, sleept = false, vorigeX = 0, vorigeY = 0, laatste = 0;
 
-  var stil = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var wisselaar = null;
-  function startWisselen() {
-    if (stil || wisselaar) return;
-    wisselaar = setInterval(function () { i = (i + 1) % MATEN.length; toon(MATEN[i], i); }, WISSEL);
-  }
-  function stopWisselen() { clearInterval(wisselaar); wisselaar = null; }
-  startWisselen();
-
-  /* ── draaien ───────────────────────────────────────────────
-     Vanzelf, tot de bezoeker hem vastpakt. Dan neemt hij het over en
-     blijft de kist staan waar hij hem laat — een object dat terugspringt
-     zodra je loslaat, voelt alsof je er niet echt aan mag zitten. */
-  var hoek = -28, kanteling = -14, sleept = false, vorigeX = 0, vorigeY = 0, laatste = 0;
-
-  function zet() { vlak.style.transform = 'rotateX(' + kanteling + 'deg) rotateY(' + hoek + 'deg)'; }
-  zet();
-
-  function tik(nu) {
-    if (!sleept && !stil) {
-      if (laatste) hoek += (nu - laatste) * 0.012;   /* ±26 seconden per omwenteling */
-      zet();
-    }
-    laatste = nu;
-    requestAnimationFrame(tik);
-  }
-  requestAnimationFrame(tik);
-
-  kist.addEventListener('pointerdown', function (e) {
-    sleept = true; vorigeX = e.clientX; vorigeY = e.clientY;
-    kist.setPointerCapture(e.pointerId);
-    kist.classList.add('pakt');
-    stopWisselen();
-  });
-  kist.addEventListener('pointermove', function (e) {
-    if (!sleept) return;
-    hoek += (e.clientX - vorigeX) * 0.5;
-    kanteling = Math.max(-62, Math.min(62, kanteling - (e.clientY - vorigeY) * 0.35));
-    vorigeX = e.clientX; vorigeY = e.clientY;
+    function zet() { vlak.style.transform = 'rotateX(' + kanteling + 'deg) rotateY(' + hoek + 'deg)'; }
     zet();
-  });
-  ['pointerup', 'pointercancel'].forEach(function (naam) {
-    kist.addEventListener(naam, function () { sleept = false; kist.classList.remove('pakt'); });
-  });
 
-  /* Klikken op de maatknoppen zet hem op die maat en stopt het wisselen:
-     wie zelf kiest, wil niet dat het ding weer verspringt. */
-  knoppen.forEach(function (knop, n) {
-    knop.addEventListener('click', function () {
+    if (!stil) {
+      var tik = function (nu) {
+        if (!sleept) {
+          if (laatste) hoek += (nu - laatste) * 0.012;   /* ±26 seconden per omwenteling */
+          zet();
+        }
+        laatste = nu;
+        requestAnimationFrame(tik);
+      };
+      requestAnimationFrame(tik);
+    }
+
+    kist.addEventListener('pointerdown', function (e) {
+      sleept = true; vorigeX = e.clientX; vorigeY = e.clientY;
+      kist.setPointerCapture(e.pointerId);
+      kist.classList.add('pakt');
       stopWisselen();
-      i = n; toon(MATEN[n], n);
     });
-  });
+    kist.addEventListener('pointermove', function (e) {
+      if (!sleept) return;
+      hoek += (e.clientX - vorigeX) * 0.5;
+      kanteling = Math.max(-62, Math.min(62, kanteling - (e.clientY - vorigeY) * 0.35));
+      vorigeX = e.clientX; vorigeY = e.clientY;
+      zet();
+    });
+    ['pointerup', 'pointercancel'].forEach(function (naam) {
+      kist.addEventListener(naam, function () { sleept = false; kist.classList.remove('pakt'); });
+    });
+
+    /* Klikken op de maatknoppen zet hem op die maat en stopt het wisselen:
+       wie zelf kiest, wil niet dat het ding weer verspringt. */
+    knoppen.forEach(function (knop, n) {
+      knop.addEventListener('click', function () {
+        stopWisselen();
+        i = n; toon(MATEN[n], n);
+      });
+    });
+    /* Maat van buitenaf zetten — voor de editor en de productpagina.
+       Wisselen stopt: wie maten intypt, wil niet dat de kist naar een
+       voorbeeldmaat springt. */
+    kist.addEventListener('kist:maat', function (e) {
+      var m = e.detail || {};
+      if (!(m.b && m.h && m.d)) return;
+      stopWisselen();
+      toon({ naam: m.naam || '', b: m.b, h: m.h, d: m.d }, -1);
+    });
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-draaikist]'), start);
 })();

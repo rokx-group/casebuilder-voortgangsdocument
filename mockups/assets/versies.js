@@ -22,11 +22,12 @@
        erbij — maar in deze balk stonden twaalf knoppen waarvan er acht
        niet meer ter discussie staan, en dan is de balk een archief in
        plaats van een keuze. */
+    /* Besloten 12 september: alleen de twee die nog meedoen. v3, v10 en v12
+       blijven als bestand bestaan — oude links werken, en de afweging staat
+       in homepage-varianten onder de afvallers. */
     'homepage': [
-      { id: 'v1', bestand: 'homepage-v1.html', label: 'v1' },
-      { id: 'v3', bestand: 'homepage-v3.html', label: 'v3 (video)' },
-      { id: 'v10', bestand: 'homepage-v10.html', label: 'v10 (video)' },
-      { id: 'v12', bestand: 'homepage-v12.html', label: 'v12 (zoekveld)' }
+      { id: 'v1', bestand: 'homepage-v1.html', label: 'v1 · stilstaand' },
+      { id: 'v2', bestand: 'homepage-v2.html', label: 'v2 · film' }
     ],
     'categorie': [
       { id: 'wireframe', bestand: 'categorie.html', label: 'wireframe' },
@@ -94,6 +95,13 @@
     'configurator': [
       { id: 'wireframe', bestand: 'configurator.html', label: 'wireframe' },
       { id: 'v1', bestand: 'configurator-v1.html', label: 'v1 · eigen pagina' }
+    ],
+    // L1-L3. v1 had een eigen L2-editor; op 11 september besloten dat L2
+    // de configurator in een beperkte stand wordt (v2).
+    /* editor v1 (de eigen L2-editor) is afgevallen op 11 september en staat
+       niet meer in de balk; het bestand blijft. */
+    'editor': [
+      { id: 'v2', bestand: 'editor-v2.html', label: 'v2 · L2 in de configurator' }
     ],
     // Nieuw: het branche-overzicht heeft nog geen wireframe, alleen een
     // ontwerp. De reeks staat er vast in zodat de knop meegroeit.

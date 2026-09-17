@@ -20,6 +20,10 @@
  * tot ze eigen inhoud hebben. Zodra een categorie een eigen pagina krijgt,
  * verandert hier één regel.
  *
+ * `ouder` zet een apparaat onder zijn categorie: wie "gibson" typt krijgt
+ * het apparaat zelf, en onderaan de lijst "alle gitaarcases" in plaats van
+ * het algemene overzicht. Alleen voor apparaten met een eigen pagina.
+ *
  * `zoek` zijn de woorden die iemand intypt en die niet in de naam staan.
  * Merknamen horen daar thuis: wie "les paul" typt zoekt geen categorie maar
  * zijn eigen gitaar, en moet toch ergens landen.
@@ -41,7 +45,8 @@
     { naam: 'Mengtafels',                groep: 'Audio',      pagina: SJABLOON, zoek: ['mengtafel', 'mixer', 'midas', 'm32', 'x32', 'console', 'foh'] },
     { naam: 'Kabelhaspels en multicore', groep: 'Audio',      pagina: SJABLOON, zoek: ['kabel', 'haspel', 'multicore', 'stagebox'] },
     { naam: 'Elektrische gitaren',       groep: 'Backline',   pagina: 'case-voor-gitaar-v1.html', zoek: ['gitaar', 'guitar', 'stratocaster', 'telecaster'] },
-    { naam: 'Gibson Les Paul',           groep: 'Backline',   pagina: 'case-voor-gibson-les-paul-v1.html', zoek: ['les paul', 'lespaul', 'gibson'] },
+    { naam: 'Gibson Les Paul',           groep: 'Backline',   pagina: 'case-voor-gibson-les-paul-v2.html', zoek: ['les paul', 'lespaul', 'gibson'],
+      ouder: { naam: 'Alle gitaarcases bekijken', pagina: 'case-voor-gitaar-v2.html' } },
     { naam: 'Basgitaren',                groep: 'Backline',   pagina: SJABLOON, zoek: ['bas', 'basgitaar', 'precision', 'jazz bass'] },
     { naam: 'Akoestische gitaren',       groep: 'Backline',   pagina: SJABLOON, zoek: ['akoestisch', 'western', 'klassieke gitaar'] },
     { naam: 'Versterkers en cabinets',   groep: 'Backline',   pagina: SJABLOON, zoek: ['versterker', 'amp', 'cabinet', 'combo', 'head'] },
@@ -49,6 +54,7 @@
     { naam: 'Drumhardware',              groep: 'Backline',   pagina: SJABLOON, zoek: ['drum', 'snare', 'bekken', 'hardware'] },
     { naam: 'Keyboards en synths',       groep: 'Backline',   pagina: SJABLOON, zoek: ['keyboard', 'synth', 'piano', 'nord'] },
     { naam: 'Blaasinstrumenten',         groep: 'Backline',   pagina: SJABLOON, zoek: ['trompet', 'saxofoon', 'trombone', 'blaas'] },
+    { naam: 'DJ-apparatuur',            groep: 'Backline',   pagina: SJABLOON, zoek: ['dj', 'controller', 'cdj', 'djm', 'draaitafel', 'mengpaneel', 'pioneer'] },
 
     /* camera en broadcast */
     { naam: 'Camerabodies',              groep: 'Camera',     pagina: SJABLOON, zoek: ['camera', 'body', 'red', 'arri', 'sony fx'] },
@@ -105,23 +111,28 @@
       .trim();
   };
 
-  /**
-   * Zoekt in de lijst. Volgorde is: precies goed, dan wat ermee begint,
-   * dan wat het bevat — anders staat "Basgitaren" boven "Gitaar" als je
-   * "gitaar" typt, en dat leest als een fout.
-   */
-  window.TOEPASSINGEN_ZOEK = function (vraag, max) {
-    var q = window.TOEPASSINGEN_NORM(vraag);
-    if (q.length < 2) return [];
+  /* Woorden die niets zeggen over wát je vervoert. Wie "av kabel case
+     groot" typt, zoekt op av en kabel; "case" en "groot" zou elke regel
+     wel of geen enkele raken. */
+  var VULWOORDEN = ['case', 'cases', 'flightcase', 'flightcases', 'kist', 'voor', 'een', 'de', 'het', 'en', 'met',
+                    'mijn', 'groot', 'grote', 'klein', 'kleine', 'nieuw', 'nieuwe'];
 
+  /* Score per regel: precies goed, dan wat ermee begint, dan wat het
+     bevat — anders staat "Basgitaren" boven "Gitaar" als je "gitaar"
+     typt, en dat leest als een fout. Bij losse woorden telt een kort
+     woord (av, tv) alleen als het precies klopt of vooraan staat: "av"
+     zit ook midden in woorden die er niets mee te maken hebben. */
+  function rangschik(woorden, perWoord) {
     var treffers = [];
     window.TOEPASSINGEN.forEach(function (t, plek) {
-      var termen = [t.naam].concat(t.zoek || []);
+      var termen = [t.naam].concat(t.zoek || []).map(window.TOEPASSINGEN_NORM);
       var beste = 0;
-      termen.forEach(function (term) {
-        var n = window.TOEPASSINGEN_NORM(term);
-        var score = n === q ? 3 : n.indexOf(q) === 0 ? 2 : n.indexOf(q) > -1 ? 1 : 0;
-        if (score > beste) beste = score;
+      woorden.forEach(function (w) {
+        termen.forEach(function (n) {
+          var score = n === w ? 3 : n.indexOf(w) === 0 ? 2 : n.indexOf(w) > -1 ? 1 : 0;
+          if (perWoord && w.length < 4 && score < 2) score = 0;
+          if (score > beste) beste = score;
+        });
       });
       if (beste) treffers.push({ toepassing: t, score: beste, plek: plek });
     });
@@ -133,6 +144,24 @@
       if (b.score !== a.score) return b.score - a.score;
       return a.plek - b.plek;
     });
+    return treffers;
+  }
+
+  /**
+   * Zoekt in de lijst. Eerst op de hele zin; levert dat niets op en zijn
+   * het meer woorden, dan per woord, zonder de vulwoorden. Zo landt
+   * "av kabel case groot" bij kabelhaspels en de AV-branche in plaats van
+   * nergens.
+   */
+  window.TOEPASSINGEN_ZOEK = function (vraag, max) {
+    var q = window.TOEPASSINGEN_NORM(vraag);
+    if (q.length < 2) return [];
+
+    var treffers = rangschik([q], false);
+    if (!treffers.length && q.indexOf(' ') > -1) {
+      var woorden = q.split(' ').filter(function (w) { return w.length >= 2 && VULWOORDEN.indexOf(w) < 0; });
+      if (woorden.length) treffers = rangschik(woorden, true);
+    }
 
     return treffers.slice(0, max || 6).map(function (r) { return r.toepassing; });
   };

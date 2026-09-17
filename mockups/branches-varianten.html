@@ -123,28 +123,34 @@ body.focusmodus .demo:not(.aan){cursor:default}
   color:var(--mute);padding:9px 16px;border-bottom:2px solid transparent}
 .subtabs a:hover{color:var(--dark)}
 .subtabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+
+/* tabbalk: alle tabs staan op elke pagina, en ze breken af naar een tweede
+   regel als ze niet op één passen. */
+.tabs{flex-wrap:wrap}
 </style></head><body><div class="vgl">
   <div class="tabs">
-    <a href="header-varianten.html">Header</a>
-    <a href="hero-voorstellen.html">Hero</a>
-    <a href="homepage-varianten.html">Homepage</a>
-    <a href="case-aanvragen-varianten.html">Case aanvragen</a>
-    <a href="case-voor-varianten.html">/case-voor</a>
-    <a href="flightcases-varianten.html">/flightcases</a>
-    <a href="groot-zakelijk-varianten.html">/groot-zakelijk</a>
-    <a href="branches-varianten.html" class="on">Kopkeuze</a>
-    <a href="service-varianten.html">/service</a>
-    <a href="zoeken-varianten.html">/zoeken</a>
-    <a href="faq-varianten.html">FAQ</a>
-    <a href="footer-varianten.html">Footer</a>
+    <a href='/mockups/header-varianten'>Header</a>
+    <a href='/mockups/hero-voorstellen'>Hero</a>
+    <a href='/mockups/homepage-varianten'>Homepage</a>
+    <a href='/mockups/case-aanvragen-varianten'>Case aanvragen</a>
+    <a href='/mockups/case-voor-varianten'>/case-voor</a>
+    <a href='/mockups/flightcases-varianten'>/flightcases</a>
+    <a href='/mockups/editor-varianten'>Editor</a>
+    <a href='/mockups/groot-zakelijk-varianten'>/groot-zakelijk</a>
+    <a class='on' href='/mockups/branches-varianten'>Kopkeuze</a>
+    <a href='/mockups/service-varianten'>/service</a>
+    <a href='/mockups/shop-varianten'>/shop</a>
+    <a href='/mockups/zoeken-varianten'>/zoeken</a>
+    <a href='/mockups/faq-varianten'>FAQ</a>
+    <a href='/mockups/footer-varianten'>Footer</a>
   </div>
   <div class="inleiding"><h2>Drie koppen voor dezelfde pagina</h2>
-    <p><b>Het verschil zit alleen boven de vouw.</b> v1 donker met de fotostrook, v2 wit zonder beeld, v3 donker waarbij de vier feiten de kop afsluiten in plaats van er als lichte band onder te staan. De rest van de pagina is identiek, dus de kaders hieronder tonen <b>alleen de kop</b> — drie keer dezelfde pagina eronder leest als drie keer scrollen naar hetzelfde. <a href="branches.html" target="_blank" rel="noopener">De hele pagina staat een klik verderop.</a></p></div>
-  <div class="kop"><span class="nr">// V1</span><h3>Donkere kop met fotostrook</h3><span class="gekozen">&#10003; geselecteerd voor nu</span><span class="rechts"><a class="volledig" href="branches.html" target="_blank" rel="noopener">Volledig scherm &#8599;</a></span></div>
+    <p><b>Het verschil zit alleen boven de vouw.</b> v1 donker met de fotostrook, v2 wit zonder beeld, v3 donker waarbij de vier feiten de kop afsluiten in plaats van er als lichte band onder te staan. De rest van de pagina is identiek, dus de kaders hieronder tonen <b>alleen de kop</b> — drie keer dezelfde pagina eronder leest als drie keer scrollen naar hetzelfde. <a href='/mockups/branches' rel='noopener' target='_blank'>De hele pagina staat een klik verderop.</a></p></div>
+  <div class="kop"><span class="nr">// V1</span><h3>Donkere kop met fotostrook</h3><span class="gekozen">&#10003; geselecteerd voor nu</span><span class="rechts"><a class='volledig' href='/mockups/branches' rel='noopener' target='_blank'>Volledig scherm &#8599;</a></span></div>
   <div class="beoordeel"><div class="demo gekozen"><div class="balk">v1 &middot; donkere kop met fotostrook</div><div class="venster" data-schaal=".95" data-hoogte="745"><div class="houder"><iframe src="branches.html" title="v1" loading="lazy"></iframe></div></div></div></div>
-  <div class="kop" style="margin-top:34px"><span class="nr">// V2</span><h3>Witte kop, geen beeld</h3><span class="rechts"><a class="volledig" href="branches-v2.html" target="_blank" rel="noopener">Volledig scherm &#8599;</a></span></div>
+  <div class="kop" style="margin-top:34px"><span class="nr">// V2</span><h3>Witte kop, geen beeld</h3><span class="rechts"><a class='volledig' href='/mockups/branches-v2' rel='noopener' target='_blank'>Volledig scherm &#8599;</a></span></div>
   <div class="beoordeel"><div class="demo"><div class="balk" style="background:var(--dark);color:#fff">v2 &middot; witte kop, geen beeld</div><div class="venster" data-schaal=".95" data-hoogte="745"><div class="houder"><iframe src="branches-v2.html" title="v2" loading="lazy"></iframe></div></div></div></div>
-  <div class="kop" style="margin-top:34px"><span class="nr">// V3</span><h3>Kop en belofte als één vlak</h3><span class="rechts"><a class="volledig" href="branches-v3.html" target="_blank" rel="noopener">Volledig scherm &#8599;</a></span></div>
+  <div class="kop" style="margin-top:34px"><span class="nr">// V3</span><h3>Kop en belofte als één vlak</h3><span class="rechts"><a class='volledig' href='/mockups/branches-v3' rel='noopener' target='_blank'>Volledig scherm &#8599;</a></span></div>
   <div class="beoordeel"><div class="demo"><div class="balk" style="background:var(--dark);color:#fff">v3 &middot; kop en belofte als één vlak</div><div class="venster" data-schaal=".95" data-hoogte="745"><div class="houder"><iframe src="branches-v3.html" title="v3" loading="lazy"></iframe></div></div></div></div>
   <div class="kop" style="margin-top:34px"><span class="nr">// AANTEKENINGEN</span><h3>De afweging</h3></div>
   <div class="notities">

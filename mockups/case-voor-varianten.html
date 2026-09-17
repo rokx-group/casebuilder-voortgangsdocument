@@ -126,6 +126,10 @@ body.focusmodus .demo:not(.aan){cursor:default}
   color:var(--mute);padding:9px 16px;border-bottom:2px solid transparent}
 .subtabs a:hover{color:var(--dark)}
 .subtabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+
+/* tabbalk: alle tabs staan op elke pagina, en ze breken af naar een tweede
+   regel als ze niet op één passen. */
+.tabs{flex-wrap:wrap}
 </style>
 </head>
 <body>
@@ -133,23 +137,25 @@ body.focusmodus .demo:not(.aan){cursor:default}
 <div class="vgl">
 
   <div class="tabs">
-    <a href="header-varianten.html">Header</a>
-    <a href="hero-voorstellen.html">Hero</a>
-    <a href="homepage-varianten.html">Homepage</a>
-    <a href="case-aanvragen-varianten.html">Case aanvragen</a>
-    <a href="case-voor-varianten.html" class="on">/case-voor</a>
-    <a href="flightcases-varianten.html">/flightcases</a>
-    <a href="groot-zakelijk-varianten.html">/groot-zakelijk</a>
-    <a href="branches-varianten.html">Kopkeuze</a>
-    <a href="service-varianten.html">/service</a>
-    <a href="zoeken-varianten.html">/zoeken</a>
-    <a href="faq-varianten.html">FAQ</a>
-    <a href="footer-varianten.html">Footer</a>
+    <a href='/mockups/header-varianten'>Header</a>
+    <a href='/mockups/hero-voorstellen'>Hero</a>
+    <a href='/mockups/homepage-varianten'>Homepage</a>
+    <a href='/mockups/case-aanvragen-varianten'>Case aanvragen</a>
+    <a class='on' href='/mockups/case-voor-varianten'>/case-voor</a>
+    <a href='/mockups/flightcases-varianten'>/flightcases</a>
+    <a href='/mockups/editor-varianten'>Editor</a>
+    <a href='/mockups/groot-zakelijk-varianten'>/groot-zakelijk</a>
+    <a href='/mockups/branches-varianten'>Kopkeuze</a>
+    <a href='/mockups/service-varianten'>/service</a>
+    <a href='/mockups/shop-varianten'>/shop</a>
+    <a href='/mockups/zoeken-varianten'>/zoeken</a>
+    <a href='/mockups/faq-varianten'>FAQ</a>
+    <a href='/mockups/footer-varianten'>Footer</a>
   </div>
 
   <div class="subtabs"><span class="pad">&#8627; binnen /case-voor</span>
-    <a href="case-voor-categorie-varianten.html">Productcategorie</a>
-    <a href="case-voor-detail-varianten.html">Productdetail</a>
+    <a href='/mockups/case-voor-categorie-varianten'>Productcategorie</a>
+    <a href='/mockups/case-voor-detail-varianten'>Productdetail</a>
   </div>
 
   <div class="inleiding">
@@ -163,7 +169,7 @@ body.focusmodus .demo:not(.aan){cursor:default}
     <span class="gekozen">&#10003; geselecteerd voor nu</span>
     <span>
       <span class="hgt">533 cases · 38 categorieën · 6 toepassingen</span>
-      <a class="volledig" href="case-voor-v1.html" target="_blank" rel="noopener">Volledig scherm &#8599;</a>
+      <a class='volledig' href='/mockups/case-voor-v1' rel='noopener' target='_blank'>Volledig scherm &#8599;</a>
     </span>
   </div>
 

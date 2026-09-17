@@ -141,6 +141,10 @@ body.focusmodus .demo:not(.aan){cursor:default}
   color:var(--mute);padding:9px 16px;border-bottom:2px solid transparent}
 .subtabs a:hover{color:var(--dark)}
 .subtabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+
+/* tabbalk: alle tabs staan op elke pagina, en ze breken af naar een tweede
+   regel als ze niet op één passen. */
+.tabs{flex-wrap:wrap}
 </style>
 </head>
 <body>
@@ -148,22 +152,24 @@ body.focusmodus .demo:not(.aan){cursor:default}
 <div class="vgl">
 
   <div class="tabs">
-    <a href="header-varianten.html">Header</a>
-    <a href="hero-voorstellen.html">Hero</a>
-    <a href="homepage-varianten.html">Homepage</a>
-    <a href="case-aanvragen-varianten.html">Case aanvragen</a>
-    <a href="case-voor-varianten.html">/case-voor</a>
-    <a href="flightcases-varianten.html" class="on">/flightcases</a>
-    <a href="groot-zakelijk-varianten.html">/groot-zakelijk</a>
-    <a href="branches-varianten.html">Kopkeuze</a>
-    <a href="service-varianten.html">/service</a>
-    <a href="zoeken-varianten.html">/zoeken</a>
-    <a href="faq-varianten.html">FAQ</a>
-    <a href="footer-varianten.html">Footer</a>
+    <a href='/mockups/header-varianten'>Header</a>
+    <a href='/mockups/hero-voorstellen'>Hero</a>
+    <a href='/mockups/homepage-varianten'>Homepage</a>
+    <a href='/mockups/case-aanvragen-varianten'>Case aanvragen</a>
+    <a href='/mockups/case-voor-varianten'>/case-voor</a>
+    <a class='on' href='/mockups/flightcases-varianten'>/flightcases</a>
+    <a href='/mockups/editor-varianten'>Editor</a>
+    <a href='/mockups/groot-zakelijk-varianten'>/groot-zakelijk</a>
+    <a href='/mockups/branches-varianten'>Kopkeuze</a>
+    <a href='/mockups/service-varianten'>/service</a>
+    <a href='/mockups/shop-varianten'>/shop</a>
+    <a href='/mockups/zoeken-varianten'>/zoeken</a>
+    <a href='/mockups/faq-varianten'>FAQ</a>
+    <a href='/mockups/footer-varianten'>Footer</a>
   </div>
 
   <div class="subtabs"><span class="pad">&#8627; binnen /flightcases</span>
-    <a href="configurator-varianten.html">/configurator</a>
+    <a href='/mockups/configurator-varianten'>/configurator</a>
   </div>
 
   <div class="inleiding">
@@ -177,7 +183,7 @@ body.focusmodus .demo:not(.aan){cursor:default}
     <span class="gekozen">&#10003; geselecteerd voor nu</span>
     <span>
       <span class="hgt">/flightcases · sjabloon overzicht</span>
-      <a class="volledig" href="flightcases-v1.html" target="_blank" rel="noopener">Volledig scherm &#8599;</a>
+      <a class='volledig' href='/mockups/flightcases-v1' rel='noopener' target='_blank'>Volledig scherm &#8599;</a>
     </span>
   </div>
 
@@ -242,31 +248,31 @@ body.focusmodus .demo:not(.aan){cursor:default}
 
   <div class="vijf">
     <div class="demo">
-      <a class="balk" href="casetype-koffer-v1.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">01 · Koffer<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
+      <a class='balk' href='/mockups/casetype-koffer-v1' rel='noopener' style='background:var(--dark);color:#fff' target='_blank'>01 · Koffer<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
       <div class="venster" data-schaal=".32"><div class="houder">
         <iframe src="casetype-koffer-v1.html" title="01 · Koffer" loading="lazy"></iframe>
       </div></div>
     </div>
     <div class="demo">
-      <a class="balk" href="casetype-hoedcase-v1.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">02 · Hoedcase<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
+      <a class='balk' href='/mockups/casetype-hoedcase-v1' rel='noopener' style='background:var(--dark);color:#fff' target='_blank'>02 · Hoedcase<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
       <div class="venster" data-schaal=".32"><div class="houder">
         <iframe src="casetype-hoedcase-v1.html" title="02 · Hoedcase" loading="lazy"></iframe>
       </div></div>
     </div>
     <div class="demo">
-      <a class="balk" href="casetype-trunccase-v1.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">03 · Trunccase<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
+      <a class='balk' href='/mockups/casetype-trunccase-v1' rel='noopener' style='background:var(--dark);color:#fff' target='_blank'>03 · Trunccase<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
       <div class="venster" data-schaal=".32"><div class="houder">
         <iframe src="casetype-trunccase-v1.html" title="03 · Trunccase" loading="lazy"></iframe>
       </div></div>
     </div>
     <div class="demo">
-      <a class="balk" href="casetype-v1.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">04 · Rackcase enkel<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
+      <a class='balk' href='/mockups/casetype-v1' rel='noopener' style='background:var(--dark);color:#fff' target='_blank'>04 · Rackcase enkel<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
       <div class="venster" data-schaal=".32"><div class="houder">
         <iframe src="casetype-v1.html" title="04 · Rackcase enkel" loading="lazy"></iframe>
       </div></div>
     </div>
     <div class="demo">
-      <a class="balk" href="casetype-rackcase-dubbel-deksel-v1.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">05 · Rackcase dubbel<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
+      <a class='balk' href='/mockups/casetype-rackcase-dubbel-deksel-v1' rel='noopener' style='background:var(--dark);color:#fff' target='_blank'>05 · Rackcase dubbel<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
       <div class="venster" data-schaal=".32"><div class="houder">
         <iframe src="casetype-rackcase-dubbel-deksel-v1.html" title="05 · Rackcase dubbel" loading="lazy"></iframe>
       </div></div>

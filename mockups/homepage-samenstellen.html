@@ -147,27 +147,33 @@ body{background:#EDF0F4}
 .genkader .houder{width:100%;height:2380px;overflow:hidden}
 .genkader iframe{width:1440px;height:3700px;border:0;display:block;
   transform:scale(.643);transform-origin:top left}
+
+/* tabbalk: alle tabs staan op elke pagina, en ze breken af naar een tweede
+   regel als ze niet op één passen. */
+.tabs{flex-wrap:wrap}
 </style>
 </head>
 <body>
 <div class="vgl">
   <div class="tabs">
-    <a href="header-varianten.html">Header</a>
-    <a href="hero-voorstellen.html">Hero</a>
-    <a href="homepage-varianten.html" class="tak">Homepage</a>
-    <a href="case-aanvragen-varianten.html">Case aanvragen</a>
-    <a href="case-voor-varianten.html">/case-voor</a>
-    <a href="flightcases-varianten.html">/flightcases</a>
-    <a href="groot-zakelijk-varianten.html">/groot-zakelijk</a>
-    <a href="branches-varianten.html">Kopkeuze</a>
-    <a href="service-varianten.html">/service</a>
-    <a href="zoeken-varianten.html">/zoeken</a>
-    <a href="faq-varianten.html">FAQ</a>
-    <a href="footer-varianten.html">Footer</a>
+    <a href='/mockups/header-varianten'>Header</a>
+    <a href='/mockups/hero-voorstellen'>Hero</a>
+    <a class='tak' href='/mockups/homepage-varianten'>Homepage</a>
+    <a href='/mockups/case-aanvragen-varianten'>Case aanvragen</a>
+    <a href='/mockups/case-voor-varianten'>/case-voor</a>
+    <a href='/mockups/flightcases-varianten'>/flightcases</a>
+    <a href='/mockups/editor-varianten'>Editor</a>
+    <a href='/mockups/groot-zakelijk-varianten'>/groot-zakelijk</a>
+    <a href='/mockups/branches-varianten'>Kopkeuze</a>
+    <a href='/mockups/service-varianten'>/service</a>
+    <a href='/mockups/shop-varianten'>/shop</a>
+    <a href='/mockups/zoeken-varianten'>/zoeken</a>
+    <a href='/mockups/faq-varianten'>FAQ</a>
+    <a href='/mockups/footer-varianten'>Footer</a>
   </div>
 
   <div class="subtabs"><span class="pad">&#8627; binnen Homepage</span>
-    <a href="homepage-samenstellen.html" class="on">Samenstellen</a>
+    <a class='on' href='/mockups/homepage-samenstellen'>Samenstellen</a>
   </div>
   <div class="inleiding">
     <h2>Stel je eigen homepage samen</h2>
@@ -197,49 +203,49 @@ body{background:#EDF0F4}
     <div class="opties">
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v1-hero" data-bron="v1" data-kort="foto met twee knoppen">
-        <span class="tk"><b>Foto en twee knoppen</b><span class="bron">v1</span><a href="homepage-v1.html" target="_blank" rel="noopener" title="Open v1 volledig">&#8599;</a></span>
+        <span class="tk"><b>Foto en twee knoppen</b><span class="bron">v1</span><a href='/mockups/homepage-v1' rel='noopener' target='_blank' title='Open v1 volledig'>&#8599;</a></span>
         <span class="wat">Millimeterwerk, de snelste van Nederland. Stilstaand beeld, configureren of zoeken op wat je vervoert.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v1.html?uitsnede=hero" title="v1 &middot; Foto en twee knoppen" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v2-hero" data-bron="v2" data-kort="video">
-        <span class="tk"><b>Zelfde kop, doorlopende video</b><span class="bron">v2</span><a href="homepage-v2.html" target="_blank" rel="noopener" title="Open v2 volledig">&#8599;</a></span>
+        <span class="tk"><b>Zelfde kop, doorlopende video</b><span class="bron">v2</span><a href='/mockups/homepage-v2' rel='noopener' target='_blank' title='Open v2 volledig'>&#8599;</a></span>
         <span class="wat">Dezelfde compositie als v1, maar de werkvloer beweegt achter de tekst.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v2.html?uitsnede=hero" title="v2 &middot; Zelfde kop, doorlopende video" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v3-hero" data-bron="v3" data-kort="video, tweede film">
-        <span class="tk"><b>Zelfde kop, andere film</b><span class="bron">v3</span><a href="homepage-v3.html" target="_blank" rel="noopener" title="Open v3 volledig">&#8599;</a></span>
+        <span class="tk"><b>Zelfde kop, andere film</b><span class="bron">v3</span><a href='/mockups/homepage-v3' rel='noopener' target='_blank' title='Open v3 volledig'>&#8599;</a></span>
         <span class="wat">Als v2, met een andere opname. Deze twee kies je op de film, niet op de opmaak.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v3.html?uitsnede=hero" title="v3 &middot; Zelfde kop, andere film" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v4-hero" data-bron="v4" data-kort="configurator in de hero">
-        <span class="tk"><b>Configurator meteen in beeld</b><span class="bron">v4</span><a href="homepage-v4.html" target="_blank" rel="noopener" title="Open v4 volledig">&#8599;</a></span>
+        <span class="tk"><b>Configurator meteen in beeld</b><span class="bron">v4</span><a href='/mockups/homepage-v4' rel='noopener' target='_blank' title='Open v4 volledig'>&#8599;</a></span>
         <span class="wat">Jouw maten, nu een prijs. Stap 1 staat ingevuld en het bedrag staat er al.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v4.html?uitsnede=hero" title="v4 &middot; Configurator meteen in beeld" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v5-hero" data-bron="v5" data-kort="zoekveld">
-        <span class="tk"><b>Zoekveld</b><span class="bron">v5</span><a href="homepage-v5.html" target="_blank" rel="noopener" title="Open v5 volledig">&#8599;</a></span>
+        <span class="tk"><b>Zoekveld</b><span class="bron">v5</span><a href='/mockups/homepage-v5' rel='noopener' target='_blank' title='Open v5 volledig'>&#8599;</a></span>
         <span class="wat">Wat ga je vervoeren? Kort gehouden, zodat de eerste toepassing nog boven de vouw begint.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v5.html?uitsnede=hero" title="v5 &middot; Zoekveld" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v6-hero" data-bron="v6" data-kort="werkvloer, tekst onderin">
-        <span class="tk"><b>De werkvloer</b><span class="bron">v6</span><a href="homepage-v6.html" target="_blank" rel="noopener" title="Open v6 volledig">&#8599;</a></span>
+        <span class="tk"><b>De werkvloer</b><span class="bron">v6</span><a href='/mockups/homepage-v6' rel='noopener' target='_blank' title='Open v6 volledig'>&#8599;</a></span>
         <span class="wat">Wij bouwen ze zelf. Het beeld krijgt de bovenkant, de tekst staat onderin.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v6.html?uitsnede=hero" title="v6 &middot; De werkvloer" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v7-hero" data-bron="v7" data-kort="drie ingangen">
-        <span class="tk"><b>Drie ingangen in de hero</b><span class="bron">v7</span><a href="homepage-v7.html" target="_blank" rel="noopener" title="Open v7 volledig">&#8599;</a></span>
+        <span class="tk"><b>Drie ingangen in de hero</b><span class="bron">v7</span><a href='/mockups/homepage-v7' rel='noopener' target='_blank' title='Open v7 volledig'>&#8599;</a></span>
         <span class="wat">Configureren, offerte of zoeken op wat je vervoert &mdash; de routekeuze staat boven de vouw.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v7.html?uitsnede=hero" title="v7 &middot; Drie ingangen in de hero" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v8-hero" data-bron="v8" data-kort="aanvraagformulier">
-        <span class="tk"><b>Aanvraagformulier met velden</b><span class="bron">v8</span><a href="homepage-v8.html" target="_blank" rel="noopener" title="Open v8 volledig">&#8599;</a></span>
+        <span class="tk"><b>Aanvraagformulier met velden</b><span class="bron">v8</span><a href='/mockups/homepage-v8' rel='noopener' target='_blank' title='Open v8 volledig'>&#8599;</a></span>
         <span class="wat">Je weet wat erin moet. De velden zelf, niet een knop naar een contactformulier.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v8.html?uitsnede=hero" title="v8 &middot; Aanvraagformulier met velden" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
@@ -254,19 +260,19 @@ body{background:#EDF0F4}
     <div class="opties">
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v7-belofte" data-bron="v7" data-kort="vier feiten in mono">
-        <span class="tk"><b>Vier feiten in mono op donker</b><span class="bron">v7</span><a href="homepage-v7.html" target="_blank" rel="noopener" title="Open v7 volledig">&#8599;</a></span>
+        <span class="tk"><b>Vier feiten in mono op donker</b><span class="bron">v7</span><a href='/mockups/homepage-v7' rel='noopener' target='_blank' title='Open v7 volledig'>&#8599;</a></span>
         <span class="wat">Levertijd, prijs, uitvoering, controle. Smal en donker, sluit aan op de hero erboven.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v7.html?uitsnede=belofte" title="v7 &middot; Vier feiten in mono op donker" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v8-belofte" data-bron="v8" data-kort="vier feiten, tekening eerst">
-        <span class="tk"><b>Vier feiten, tekening eerst</b><span class="bron">v8</span><a href="homepage-v8.html" target="_blank" rel="noopener" title="Open v8 volledig">&#8599;</a></span>
+        <span class="tk"><b>Vier feiten, tekening eerst</b><span class="bron">v8</span><a href='/mockups/homepage-v8' rel='noopener' target='_blank' title='Open v8 volledig'>&#8599;</a></span>
         <span class="wat">Zelfde band, maar begint bij &lsquo;tekening zelfde werkdag&rsquo; in plaats van bij de levertijd.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v8.html?uitsnede=belofte" title="v8 &middot; Vier feiten, tekening eerst" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v6-belofte" data-bron="v6" data-kort="vier grote getallen">
-        <span class="tk"><b>Vier grote getallen</b><span class="bron">v6</span><a href="homepage-v6.html" target="_blank" rel="noopener" title="Open v6 volledig">&#8599;</a></span>
+        <span class="tk"><b>Vier grote getallen</b><span class="bron">v6</span><a href='/mockups/homepage-v6' rel='noopener' target='_blank' title='Open v6 volledig'>&#8599;</a></span>
         <span class="wat">20+ jaar &middot; &plusmn; 1 mm &middot; 10 &middot; 533, elk met een onderregel. De werktolerantie is het enige feit dat een concurrent niet kan overschrijven.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v6.html?uitsnede=belofte" title="v6 &middot; Vier grote getallen" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
@@ -287,25 +293,25 @@ body{background:#EDF0F4}
     <div class="opties">
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v1-routes" data-bron="v1" data-kort="drie manieren (A/B/C)">
-        <span class="tk"><b>Drie manieren</b><span class="bron">v1</span><a href="homepage-v1.html" target="_blank" rel="noopener" title="Open v1 volledig">&#8599;</a></span>
+        <span class="tk"><b>Drie manieren</b><span class="bron">v1</span><a href='/mockups/homepage-v1' rel='noopener' target='_blank' title='Open v1 volledig'>&#8599;</a></span>
         <span class="wat">Ik weet wat ik nodig heb &middot; ik weet wat ik moet beschermen &middot; ik weet het nog niet. Nu drie even zware deuren.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v1.html?uitsnede=routes" title="v1 &middot; Drie manieren" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v5-branches" data-bron="v5" data-kort="kies je branche">
-        <span class="tk"><b>Kies je branche</b><span class="bron">v5</span><a href="homepage-v5.html" target="_blank" rel="noopener" title="Open v5 volledig">&#8599;</a></span>
+        <span class="tk"><b>Kies je branche</b><span class="bron">v5</span><a href='/mockups/homepage-v5' rel='noopener' target='_blank' title='Open v5 volledig'>&#8599;</a></span>
         <span class="wat">Zes branchekaarten met aantal toepassingen en &lsquo;vaak gevraagd&rsquo;. Werkt voor wie zijn vak kent maar de casetypes niet.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v5.html?uitsnede=branches" title="v5 &middot; Kies je branche" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v4-omweg" data-bron="v4" data-kort="smalle objectrij">
-        <span class="tk"><b>Smalle objectrij</b><span class="bron">v4</span><a href="homepage-v4.html" target="_blank" rel="noopener" title="Open v4 volledig">&#8599;</a></span>
+        <span class="tk"><b>Smalle objectrij</b><span class="bron">v4</span><a href='/mockups/homepage-v4' rel='noopener' target='_blank' title='Open v4 volledig'>&#8599;</a></span>
         <span class="wat">&Eacute;&eacute;n regel voor wie geen maten heeft: zes objecten en een link naar alle 38.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v4.html?uitsnede=omweg" title="v4 &middot; Smalle objectrij" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v8-zelfdoen" data-bron="v8" data-kort="weet je je maten al">
-        <span class="tk"><b>Weet je je maten al?</b><span class="bron">v8</span><a href="homepage-v8.html" target="_blank" rel="noopener" title="Open v8 volledig">&#8599;</a></span>
+        <span class="tk"><b>Weet je je maten al?</b><span class="bron">v8</span><a href='/mockups/homepage-v8' rel='noopener' target='_blank' title='Open v8 volledig'>&#8599;</a></span>
         <span class="wat">De configurator als tweede ingang, n&aacute; de aanvraag. Model, maten, afwerking, prijs.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v8.html?uitsnede=zelfdoen" title="v8 &middot; Weet je je maten al?" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
@@ -326,19 +332,19 @@ body{background:#EDF0F4}
     <div class="opties">
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v1-proces" data-bron="v1" data-kort="van maat naar kade">
-        <span class="tk"><b>Van maat naar kade</b><span class="bron">v1</span><a href="homepage-v1.html" target="_blank" rel="noopener" title="Open v1 volledig">&#8599;</a></span>
+        <span class="tk"><b>Van maat naar kade</b><span class="bron">v1</span><a href='/mockups/homepage-v1' rel='noopener' target='_blank' title='Open v1 volledig'>&#8599;</a></span>
         <span class="wat">Vier stappen, met de gratis maatcontrole als losse actie ernaast.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v1.html?uitsnede=proces" title="v1 &middot; Van maat naar kade" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v6-proces" data-bron="v6" data-kort="van tekening naar kist">
-        <span class="tk"><b>Van tekening naar kist</b><span class="bron">v6</span><a href="homepage-v6.html" target="_blank" rel="noopener" title="Open v6 volledig">&#8599;</a></span>
+        <span class="tk"><b>Van tekening naar kist</b><span class="bron">v6</span><a href='/mockups/homepage-v6' rel='noopener' target='_blank' title='Open v6 volledig'>&#8599;</a></span>
         <span class="wat">Vier stappen met per stap een harde detailregel: afkeur v&oacute;&oacute;r productie, &plusmn; 1 mm, met de hand, levering op afroep.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v6.html?uitsnede=proces" title="v6 &middot; Van tekening naar kist" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v8-proces" data-bron="v8" data-kort="van een half verhaal">
-        <span class="tk"><b>Van een half verhaal naar een kist</b><span class="bron">v8</span><a href="homepage-v8.html" target="_blank" rel="noopener" title="Open v8 volledig">&#8599;</a></span>
+        <span class="tk"><b>Van een half verhaal naar een kist</b><span class="bron">v8</span><a href='/mockups/homepage-v8' rel='noopener' target='_blank' title='Open v8 volledig'>&#8599;</a></span>
         <span class="wat">Vier stappen vanaf de aanvraag: stuur wat je hebt, tekening met prijs, jij geeft akkoord, dag 10.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v8.html?uitsnede=proces" title="v8 &middot; Van een half verhaal naar een kist" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
@@ -359,25 +365,25 @@ body{background:#EDF0F4}
     <div class="opties">
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v1-modellen" data-bron="v1" data-kort="vijf kaarten, prijs klein">
-        <span class="tk"><b>Vijf modelkaarten, prijs klein</b><span class="bron">v1</span><a href="homepage-v1.html" target="_blank" rel="noopener" title="Open v1 volledig">&#8599;</a></span>
+        <span class="tk"><b>Vijf modelkaarten, prijs klein</b><span class="bron">v1</span><a href='/mockups/homepage-v1' rel='noopener' target='_blank' title='Open v1 volledig'>&#8599;</a></span>
         <span class="wat">Alles op maat, vanaf een vaste basisprijs. Het bedrag staat in de onderregel.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v1.html?uitsnede=modellen" title="v1 &middot; Vijf modelkaarten, prijs klein" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v6-modellen" data-bron="v4/v6" data-kort="vijf kaarten, prijs groot">
-        <span class="tk"><b>Vijf modelkaarten, prijs groot</b><span class="bron">v4/v6</span><a href="homepage-v6.html" target="_blank" rel="noopener" title="Open v4/v6 volledig">&#8599;</a></span>
+        <span class="tk"><b>Vijf modelkaarten, prijs groot</b><span class="bron">v4/v6</span><a href='/mockups/homepage-v6' rel='noopener' target='_blank' title='Open v4/v6 volledig'>&#8599;</a></span>
         <span class="wat">Zelfde vijf, maar het bedrag krijgt gewicht. v4 en v6 gebruiken deze band allebei, letterlijk gelijk.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v6.html?uitsnede=modellen" title="v4/v6 &middot; Vijf modelkaarten, prijs groot" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v8-modellen" data-bron="v8" data-kort="vijf modellen, alles op maat">
-        <span class="tk"><b>Vijf modellen, alles op maat</b><span class="bron">v8</span><a href="homepage-v8.html" target="_blank" rel="noopener" title="Open v8 volledig">&#8599;</a></span>
+        <span class="tk"><b>Vijf modellen, alles op maat</b><span class="bron">v8</span><a href='/mockups/homepage-v8' rel='noopener' target='_blank' title='Open v8 volledig'>&#8599;</a></span>
         <span class="wat">Zelfde kaarten, andere kop: het assortiment als naslag, niet als aanbod.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v8.html?uitsnede=modellen" title="v8 &middot; Vijf modellen, alles op maat" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v5-modellen" data-bron="v5" data-kort="klein als naslag">
-        <span class="tk"><b>Klein, als naslag onderaan</b><span class="bron">v5</span><a href="homepage-v5.html" target="_blank" rel="noopener" title="Open v5 volledig">&#8599;</a></span>
+        <span class="tk"><b>Klein, als naslag onderaan</b><span class="bron">v5</span><a href='/mockups/homepage-v5' rel='noopener' target='_blank' title='Open v5 volledig'>&#8599;</a></span>
         <span class="wat">Bewust gedegradeerd: in v5 zijn de toepassingen het assortiment en zijn de modelnamen alleen naslag.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v5.html?uitsnede=modellen" title="v5 &middot; Klein, als naslag onderaan" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
@@ -398,37 +404,37 @@ body{background:#EDF0F4}
     <div class="opties">
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v1-vertrouwen" data-bron="v1" data-kort="strip van vier">
-        <span class="tk"><b>Strip van vier</b><span class="bron">v1</span><a href="homepage-v1.html" target="_blank" rel="noopener" title="Open v1 volledig">&#8599;</a></span>
+        <span class="tk"><b>Strip van vier</b><span class="bron">v1</span><a href='/mockups/homepage-v1' rel='noopener' target='_blank' title='Open v1 volledig'>&#8599;</a></span>
         <span class="wat">20+ jaar &middot; 10 werkdagen &middot; op rekening &middot; eigen werkplaats.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v1.html?uitsnede=vertrouwen" title="v1 &middot; Strip van vier" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v5-vertrouwen" data-bron="v5" data-kort="strip van vier (mono)">
-        <span class="tk"><b>Strip van vier, mono-onderregels</b><span class="bron">v5</span><a href="homepage-v5.html" target="_blank" rel="noopener" title="Open v5 volledig">&#8599;</a></span>
+        <span class="tk"><b>Strip van vier, mono-onderregels</b><span class="bron">v5</span><a href='/mockups/homepage-v5' rel='noopener' target='_blank' title='Open v5 volledig'>&#8599;</a></span>
         <span class="wat">Zelfde idee, andere volgorde en toon: 10 werkdagen voorop, onderregels in mono.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v5.html?uitsnede=vertrouwen" title="v5 &middot; Strip van vier, mono-onderregels" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v4-bewijs" data-bron="v4" data-kort="vier argumentkaarten">
-        <span class="tk"><b>Vier argumentkaarten</b><span class="bron">v4</span><a href="homepage-v4.html" target="_blank" rel="noopener" title="Open v4 volledig">&#8599;</a></span>
+        <span class="tk"><b>Vier argumentkaarten</b><span class="bron">v4</span><a href='/mockups/homepage-v4' rel='noopener' target='_blank' title='Open v4 volledig'>&#8599;</a></span>
         <span class="wat">Een prijs zonder offerte is geen gok: eigen fabriek, elke tekening gezien, bouwpakket, bijbestellen blijft kloppen.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v4.html?uitsnede=bewijs" title="v4 &middot; Vier argumentkaarten" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v4-klanten" data-bron="v4" data-kort="klantlogo&rsquo;s en citaat">
-        <span class="tk"><b>Klantlogo&rsquo;s en citaat</b><span class="bron">v4</span><a href="homepage-v4.html" target="_blank" rel="noopener" title="Open v4 volledig">&#8599;</a></span>
+        <span class="tk"><b>Klantlogo&rsquo;s en citaat</b><span class="bron">v4</span><a href='/mockups/homepage-v4' rel='noopener' target='_blank' title='Open v4 volledig'>&#8599;</a></span>
         <span class="wat">De plek voor namen. Nu nog zes keer &lsquo;logo ontbreekt&rsquo; en een citaat dat nog opgehaald moet worden.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v4.html?uitsnede=klanten" title="v4 &middot; Klantlogo&rsquo;s en citaat" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v6-prijsopbouw" data-bron="v6" data-kort="prijs uitgesplitst">
-        <span class="tk"><b>Prijs uitgesplitst</b><span class="bron">v6</span><a href="homepage-v6.html" target="_blank" rel="noopener" title="Open v6 volledig">&#8599;</a></span>
+        <span class="tk"><b>Prijs uitgesplitst</b><span class="bron">v6</span><a href='/mockups/homepage-v6' rel='noopener' target='_blank' title='Open v6 volledig'>&#8599;</a></span>
         <span class="wat">&euro; 229 + 118 + 45 + 20,50 = &euro; 412,50. Laat zien dat de prijs geen schatting is.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v6.html?uitsnede=prijsopbouw" title="v6 &middot; Prijs uitgesplitst" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v8-zakelijk" data-bron="v8" data-kort="zakelijk en series">
-        <span class="tk"><b>Zakelijk: series en herhaalorders</b><span class="bron">v8</span><a href="homepage-v8.html" target="_blank" rel="noopener" title="Open v8 volledig">&#8599;</a></span>
+        <span class="tk"><b>Zakelijk: series en herhaalorders</b><span class="bron">v8</span><a href='/mockups/homepage-v8' rel='noopener' target='_blank' title='Open v8 volledig'>&#8599;</a></span>
         <span class="wat">Staffelprijs vanaf tien kisten, bewaarde tekening, op rekening, eigen huisstijl.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v8.html?uitsnede=zakelijk" title="v8 &middot; Zakelijk: series en herhaalorders" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
@@ -443,43 +449,43 @@ body{background:#EDF0F4}
     <div class="opties">
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v6-huisstijl" data-bron="v6" data-kort="kleur en logo">
-        <span class="tk"><b>Kleur en logo</b><span class="bron">v6</span><a href="homepage-v6.html" target="_blank" rel="noopener" title="Open v6 volledig">&#8599;</a></span>
+        <span class="tk"><b>Kleur en logo</b><span class="bron">v6</span><a href='/mockups/homepage-v6' rel='noopener' target='_blank' title='Open v6 volledig'>&#8599;</a></span>
         <span class="wat">Negen stalen, zeefdruk vanaf &eacute;&eacute;n stuk. Voor een verhuurbedrijf geen extraatje: die kist staat elk weekend op een podium.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v6.html?uitsnede=huisstijl" title="v6 &middot; Kleur en logo" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v1-onderdelen" data-bron="v1" data-kort="onderdelen, uitgebreid">
-        <span class="tk"><b>Onderdelen, uitgebreid</b><span class="bron">v1</span><a href="homepage-v1.html" target="_blank" rel="noopener" title="Open v1 volledig">&#8599;</a></span>
+        <span class="tk"><b>Onderdelen, uitgebreid</b><span class="bron">v1</span><a href='/mockups/homepage-v1' rel='noopener' target='_blank' title='Open v1 volledig'>&#8599;</a></span>
         <span class="wat">Acht categorie&euml;n, plus bouwpakket, zaagservice en bestellen op artikelnummer.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v1.html?uitsnede=onderdelen" title="v1 &middot; Onderdelen, uitgebreid" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v8-onderdelen" data-bron="v8" data-kort="onderdelen, compact">
-        <span class="tk"><b>Onderdelen, compact</b><span class="bron">v8</span><a href="homepage-v8.html" target="_blank" rel="noopener" title="Open v8 volledig">&#8599;</a></span>
+        <span class="tk"><b>Onderdelen, compact</b><span class="bron">v8</span><a href='/mockups/homepage-v8' rel='noopener' target='_blank' title='Open v8 volledig'>&#8599;</a></span>
         <span class="wat">Zelfde aanbod in &eacute;&eacute;n smalle band. Bewust laag op de pagina.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v8.html?uitsnede=onderdelen" title="v8 &middot; Onderdelen, compact" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v5-eencase" data-bron="v5" data-kort="&eacute;&eacute;n instrument">
-        <span class="tk"><b>&Eacute;&eacute;n instrument</b><span class="bron">v5</span><a href="homepage-v5.html" target="_blank" rel="noopener" title="Open v5 volledig">&#8599;</a></span>
+        <span class="tk"><b>&Eacute;&eacute;n instrument</b><span class="bron">v5</span><a href='/mockups/homepage-v5' rel='noopener' target='_blank' title='Open v5 volledig'>&#8599;</a></span>
         <span class="wat">Zes objecten met vanafprijs, en een link naar alle 38. De particulier, n&aacute; de vakman.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v5.html?uitsnede=eencase" title="v5 &middot; &Eacute;&eacute;n instrument" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v6-eencase" data-bron="v6" data-kort="ook &eacute;&eacute;n case">
-        <span class="tk"><b>&Eacute;&eacute;n case? Ook goed.</b><span class="bron">v6</span><a href="homepage-v6.html" target="_blank" rel="noopener" title="Open v6 volledig">&#8599;</a></span>
+        <span class="tk"><b>&Eacute;&eacute;n case? Ook goed.</b><span class="bron">v6</span><a href='/mockups/homepage-v6' rel='noopener' target='_blank' title='Open v6 volledig'>&#8599;</a></span>
         <span class="wat">Zelfde objecten, maar met een zin die het verschil in ordergrootte benoemt in plaats van wegpoetst.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v6.html?uitsnede=eencase" title="v6 &middot; &Eacute;&eacute;n case? Ook goed." tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v5-geenmatch" data-bron="v5" data-kort="geen match, we meten het in">
-        <span class="tk"><b>Staat je object er niet bij</b><span class="bron">v5</span><a href="homepage-v5.html" target="_blank" rel="noopener" title="Open v5 volledig">&#8599;</a></span>
+        <span class="tk"><b>Staat je object er niet bij</b><span class="bron">v5</span><a href='/mockups/homepage-v5' rel='noopener' target='_blank' title='Open v5 volledig'>&#8599;</a></span>
         <span class="wat">Vangt op wie niets herkent: alles is toch al maatwerk, jouw maat is alleen een ander getal.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v5.html?uitsnede=geenmatch" title="v5 &middot; Staat je object er niet bij" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v1-herhaalorder" data-bron="v1" data-kort="welkom terug">
-        <span class="tk"><b>Welkom terug</b><span class="bron">v1</span><a href="homepage-v1.html" target="_blank" rel="noopener" title="Open v1 volledig">&#8599;</a></span>
+        <span class="tk"><b>Welkom terug</b><span class="bron">v1</span><a href='/mockups/homepage-v1' rel='noopener' target='_blank' title='Open v1 volledig'>&#8599;</a></span>
         <span class="wat">De vorige bestelling met maten en aantal, plus &eacute;&eacute;n knop om hem opnieuw te bestellen.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v1.html?uitsnede=herhaalorder" title="v1 &middot; Welkom terug" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
@@ -494,31 +500,31 @@ body{background:#EDF0F4}
     <div class="opties">
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v1-slot" data-bron="v1" data-kort="naar de configurator">
-        <span class="tk"><b>Jouw maten. Jouw kist.</b><span class="bron">v1</span><a href="homepage-v1.html" target="_blank" rel="noopener" title="Open v1 volledig">&#8599;</a></span>
+        <span class="tk"><b>Jouw maten. Jouw kist.</b><span class="bron">v1</span><a href='/mockups/homepage-v1' rel='noopener' target='_blank' title='Open v1 volledig'>&#8599;</a></span>
         <span class="wat">Eindigt bij de configurator, met de belofte nog eens als kop.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v1.html?uitsnede=slot" title="v1 &middot; Jouw maten. Jouw kist." tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v4-slot" data-bron="v4" data-kort="vul je maten in">
-        <span class="tk"><b>Vul je maten in</b><span class="bron">v4</span><a href="homepage-v4.html" target="_blank" rel="noopener" title="Open v4 volledig">&#8599;</a></span>
+        <span class="tk"><b>Vul je maten in</b><span class="bron">v4</span><a href='/mockups/homepage-v4' rel='noopener' target='_blank' title='Open v4 volledig'>&#8599;</a></span>
         <span class="wat">Zelfde route, kortere belofte: vijf stappen en je zit nergens aan vast.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v4.html?uitsnede=slot" title="v4 &middot; Vul je maten in" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v5-slot" data-bron="v5" data-kort="bel een casebouwer">
-        <span class="tk"><b>Bel een casebouwer</b><span class="bron">v5</span><a href="homepage-v5.html" target="_blank" rel="noopener" title="Open v5 volledig">&#8599;</a></span>
+        <span class="tk"><b>Bel een casebouwer</b><span class="bron">v5</span><a href='/mockups/homepage-v5' rel='noopener' target='_blank' title='Open v5 volledig'>&#8599;</a></span>
         <span class="wat">Eindigt bij een telefoonnummer. E&eacute;n telefoontje is sneller dan een uur zoeken.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v5.html?uitsnede=slot" title="v5 &middot; Bel een casebouwer" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v6-slot" data-bron="v6" data-kort="kom gerust langs">
-        <span class="tk"><b>Kom gerust langs</b><span class="bron">v6</span><a href="homepage-v6.html" target="_blank" rel="noopener" title="Open v6 volledig">&#8599;</a></span>
+        <span class="tk"><b>Kom gerust langs</b><span class="bron">v6</span><a href='/mockups/homepage-v6' rel='noopener' target='_blank' title='Open v6 volledig'>&#8599;</a></span>
         <span class="wat">Eindigt in Doesburg. Zien hoe het gemaakt wordt helpt meer dan welke productfoto ook.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v6.html?uitsnede=slot" title="v6 &middot; Kom gerust langs" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>
       <div class="optie" role="button" tabindex="0" aria-pressed="false"
            data-id="v8-slot" data-bron="v8" data-kort="stuur het gewoon op">
-        <span class="tk"><b>Stuur het gewoon op</b><span class="bron">v8</span><a href="homepage-v8.html" target="_blank" rel="noopener" title="Open v8 volledig">&#8599;</a></span>
+        <span class="tk"><b>Stuur het gewoon op</b><span class="bron">v8</span><a href='/mockups/homepage-v8' rel='noopener' target='_blank' title='Open v8 volledig'>&#8599;</a></span>
         <span class="wat">Eindigt bij de aanvraag: een foto van je apparatuur is genoeg om te beginnen.</span>
         <span class="venster" data-schaal=".25"><span class="houder"><iframe data-src="homepage-v8.html?uitsnede=slot" title="v8 &middot; Stuur het gewoon op" tabindex="-1" scrolling="no"></iframe></span></span>
       </div>

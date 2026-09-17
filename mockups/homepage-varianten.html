@@ -19,8 +19,12 @@
    De indeling ís de vergelijking. Elke rij stelt een andere vraag, en
    binnen een rij zijn de versies elkaars alternatief:
 
-     rij 1  v1, v3         dezelfde hero, stilstaand tegen film
-     rij 2  v10            dezelfde hero, de pagina eronder uitgewerkt
+     rij 1  v1, v2         dezelfde pagina, stilstaand tegen film
+     rij 2  v9             alternatief: drie deuren in de hero
+
+   Alles onder de hero komt uit mockups/onderdelen/homepage-onder.html
+   en wordt door scripts/bouw-onderdelen.mjs in beide bijgeschreven. Ze
+   kunnen daar dus niet meer uit elkaar lopen.
 
    De vergelijking is samengekomen: alle drie hebben inmiddels dezelfde
    kop en dezelfde twee knoppen. Wat er nog te kiezen valt is beeld tegen
@@ -230,6 +234,10 @@ body.focusmodus .demo:not(.aan){cursor:default}
   color:var(--mute);padding:9px 16px;border-bottom:2px solid transparent}
 .subtabs a:hover{color:var(--dark)}
 .subtabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+
+/* tabbalk: alle tabs staan op elke pagina, en ze breken af naar een tweede
+   regel als ze niet op één passen. */
+.tabs{flex-wrap:wrap}
 </style>
 </head>
 <body>
@@ -237,27 +245,29 @@ body.focusmodus .demo:not(.aan){cursor:default}
 <div class="vgl">
 
   <div class="tabs">
-    <a href="header-varianten.html">Header</a>
-    <a href="hero-voorstellen.html">Hero</a>
-    <a href="homepage-varianten.html" class="on">Homepage</a>
-    <a href="case-aanvragen-varianten.html">Case aanvragen</a>
-    <a href="case-voor-varianten.html">/case-voor</a>
-    <a href="flightcases-varianten.html">/flightcases</a>
-    <a href="groot-zakelijk-varianten.html">/groot-zakelijk</a>
-    <a href="branches-varianten.html">Kopkeuze</a>
-    <a href="service-varianten.html">/service</a>
-    <a href="zoeken-varianten.html">/zoeken</a>
-    <a href="faq-varianten.html">FAQ</a>
-    <a href="footer-varianten.html">Footer</a>
+    <a href='/mockups/header-varianten'>Header</a>
+    <a href='/mockups/hero-voorstellen'>Hero</a>
+    <a class='on' href='/mockups/homepage-varianten'>Homepage</a>
+    <a href='/mockups/case-aanvragen-varianten'>Case aanvragen</a>
+    <a href='/mockups/case-voor-varianten'>/case-voor</a>
+    <a href='/mockups/flightcases-varianten'>/flightcases</a>
+    <a href='/mockups/editor-varianten'>Editor</a>
+    <a href='/mockups/groot-zakelijk-varianten'>/groot-zakelijk</a>
+    <a href='/mockups/branches-varianten'>Kopkeuze</a>
+    <a href='/mockups/service-varianten'>/service</a>
+    <a href='/mockups/shop-varianten'>/shop</a>
+    <a href='/mockups/zoeken-varianten'>/zoeken</a>
+    <a href='/mockups/faq-varianten'>FAQ</a>
+    <a href='/mockups/footer-varianten'>Footer</a>
   </div>
 
   <div class="subtabs"><span class="pad">&#8627; binnen Homepage</span>
-    <a href="homepage-samenstellen.html">Samenstellen</a>
+    <a href='/mockups/homepage-samenstellen'>Samenstellen</a>
   </div>
 
   <div class="inleiding">
     <h2>Drie in beeld, negen opzij</h2>
-    <p><b>Anders dan bij de andere tabs is hier nog niets geselecteerd.</b> Daarom staan ze even groot: je vergelijkt composities boven de vouw, je leest geen pagina&rsquo;s. Elk kader schuift, en het pijltje in de balk opent die versie volledig. Er is nog &eacute;&eacute;n hero over: dezelfde kop en dezelfde twee knoppen in alle drie. <b>Rij&nbsp;1</b> is die hero stilstaand (v1) tegen bewegend (v3); <b>rij&nbsp;2</b> is dezelfde hero op een veel verder uitgewerkte pagina. De keuze gaat dus niet meer over de kop maar over twee dingen: beeld of film, en hoeveel pagina eronder. De negen eronder zijn niet allemaal afgevallen &mdash; vier leven elders door, en dat staat er per stuk bij. De afweging per versie staat in <a href="concepten-2sept.html" target="_blank" rel="noopener">het versie-overzicht</a>.</p>
+    <p><b>Anders dan bij de andere tabs is hier nog niets geselecteerd.</b> Daarom staan ze even groot: je vergelijkt composities boven de vouw, je leest geen pagina&rsquo;s. Elk kader schuift, en het pijltje in de balk opent die versie volledig. Wat hier beslist wordt is het homepage-ontwerp. <b>Rij&nbsp;1</b> is het uitgangspunt: v1 en v2 zijn dezelfde pagina, met dezelfde kop, knoppen, USP&rsquo;s en &mdash; gedeeld &mdash; dezelfde inhoud onder de hero; alleen het beeld verschilt. <b>Rij&nbsp;2</b> is v9 als alternatief: drie deuren in de hero. De negen eronder zijn niet allemaal afgevallen: v10 is de bron van de gedeelde inhoud, en een paar leven elders door. De afweging per versie staat in <a href='/mockups/concepten-2sept' rel='noopener' target='_blank'>het versie-overzicht</a>.</p>
   </div>
 
   <div class="kop">
@@ -278,32 +288,34 @@ body.focusmodus .demo:not(.aan){cursor:default}
 
   <div class="groepkop">
     <span class="gn">// RIJ 1</span>
-    <b>Snelheid, branche, twee knoppen</b>
+    <b>Stilstaand of film</b>
+    <span class="gu">Dezelfde pagina, van de kop tot de footer. Alles onder de hero is gedeeld (mockups/onderdelen/homepage-onder.html), dus het enige wat hier verschilt is het beeld achter de kop.</span>
   </div>
   <div class="beoordeel">
     <div class="demo">
-      <a class="balk" href="homepage-v1.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">v1 &middot; Millimeterwerk, de snelste van Nederland<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
+      <a class='balk' href='/mockups/homepage-v1' rel='noopener' style='background:var(--dark);color:#fff' target='_blank'>v1 &middot; Stilstaand beeld<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
       <div class="venster" data-schaal=".31"><div class="houder">
         <iframe src="homepage-v1.html" title="Homepage v1" loading="lazy"></iframe>
       </div></div>
     </div>
     <div class="demo">
-      <a class="balk" href="homepage-v3.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">v3 (video) &middot; Millimeterwerk, de snelste van Nederland<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
+      <a class='balk' href='/mockups/homepage-v2' rel='noopener' style='background:var(--dark);color:#fff' target='_blank'>v2 (video) &middot; Film<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
       <div class="venster" data-schaal=".31"><div class="houder">
-        <iframe src="homepage-v3.html" title="Homepage v3 (video)" loading="lazy"></iframe>
+        <iframe src="homepage-v2.html" title="Homepage v2 (video)" loading="lazy"></iframe>
       </div></div>
     </div>
   </div>
 
   <div class="groepkop">
     <span class="gn">// RIJ 2</span>
-    <b>Film in de hero, de pagina eronder uitgewerkt</b>
+    <b>Alternatief</b>
+    <span class="gu">Drie deuren in de hero in plaats van twee knoppen, op film. De pagina eronder is die van v9 zelf en niet de gedeelde, dus vergelijk hier vooral de hero.</span>
   </div>
   <div class="beoordeel">
     <div class="demo">
-      <a class="balk" href="homepage-v10.html" target="_blank" rel="noopener" style="background:var(--dark);color:#fff">v10 (video) &middot; Millimeterwerk, de snelste van Nederland<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
+      <a class='balk' href='/mockups/homepage-v9' rel='noopener' style='background:var(--dark);color:#fff' target='_blank'>v9 (video) &middot; Drie deuren<span class="vs">volledig scherm</span><span class="pijl" aria-hidden="true">&#8599;</span></a>
       <div class="venster" data-schaal=".31"><div class="houder">
-        <iframe src="homepage-v10.html" title="Homepage v10 (video)" loading="lazy"></iframe>
+        <iframe src="homepage-v9.html" title="Homepage v9 (video)" loading="lazy"></iframe>
       </div></div>
     </div>
   </div>
@@ -349,14 +361,15 @@ body.focusmodus .demo:not(.aan){cursor:default}
   <details class="specdet opzijdet">
     <summary>Opzij gezet<span class="aantal">9 versies</span></summary>
   <div class="opzij">
-    <a href="homepage-v9.html" target="_blank" rel="noopener"><b>v9 &middot; Drie deuren in de hero</b><i>volledig scherm &#8599;</i></a>
-    <a href="homepage-v11.html" target="_blank" rel="noopener"><b>v11 &middot; De lichte hero</b><i>volledig scherm &#8599;</i></a>
-    <a href="homepage-v2.html" target="_blank" rel="noopener"><b>v2 &middot; De tweede film</b><i>volledig scherm &#8599;</i></a>
-    <a href="homepage-v5.html" target="_blank" rel="noopener"><b>v5 &middot; Wat ga je vervoeren?</b><i>volledig scherm &#8599;</i></a>
-    <a href="homepage-v4.html" target="_blank" rel="noopener"><b>v4 &middot; Jouw maten, nu een prijs</b><i>volledig scherm &#8599;</i></a>
-    <a href="homepage-v8.html" target="_blank" rel="noopener"><b>v8 &middot; Je weet wat erin moet</b><i>volledig scherm &#8599;</i></a>
-    <a href="homepage-v7.html" target="_blank" rel="noopener"><b>v7 &middot; Millimeterwerk, de snelste van Nederland</b><i>volledig scherm &#8599;</i></a>
-    <a href="homepage-v6.html" target="_blank" rel="noopener"><b>v6 &middot; Wij bouwen ze zelf</b><i>volledig scherm &#8599;</i></a>
+    <a href='/mockups/homepage-v10' rel='noopener' target='_blank'><b>v10 &middot; De samenstelling</b><i>volledig scherm &#8599;</i></a>
+    <a href='/mockups/homepage-v3' rel='noopener' target='_blank'><b>v3 &middot; Film, korte pagina</b><i>volledig scherm &#8599;</i></a>
+    <a href='/mockups/homepage-v12' rel='noopener' target='_blank'><b>v12 &middot; Meteen zoeken uit de CTA</b><i>volledig scherm &#8599;</i></a>
+    <a href='/mockups/homepage-v11' rel='noopener' target='_blank'><b>v11 &middot; De lichte hero</b><i>volledig scherm &#8599;</i></a>
+    <a href='/mockups/homepage-v5' rel='noopener' target='_blank'><b>v5 &middot; Wat ga je vervoeren?</b><i>volledig scherm &#8599;</i></a>
+    <a href='/mockups/homepage-v4' rel='noopener' target='_blank'><b>v4 &middot; Jouw maten, nu een prijs</b><i>volledig scherm &#8599;</i></a>
+    <a href='/mockups/homepage-v8' rel='noopener' target='_blank'><b>v8 &middot; Je weet wat erin moet</b><i>volledig scherm &#8599;</i></a>
+    <a href='/mockups/homepage-v7' rel='noopener' target='_blank'><b>v7 &middot; Millimeterwerk, de snelste van Nederland</b><i>volledig scherm &#8599;</i></a>
+    <a href='/mockups/homepage-v6' rel='noopener' target='_blank'><b>v6 &middot; Wij bouwen ze zelf</b><i>volledig scherm &#8599;</i></a>
     </div>
   </details>
 
@@ -364,7 +377,7 @@ body.focusmodus .demo:not(.aan){cursor:default}
     <span class="nr">// MIX EN MATCH</span>
     <h3>Stel je eigen homepage samen</h3>
   </div>
-  <a class="naarsamen" href="homepage-samenstellen.html">
+  <a class='naarsamen' href='/mockups/homepage-samenstellen'>
     <span class="lb">// Acht banden &middot; 44 uitsnedes</span>
     <b>De pagina uit elkaar, band voor band</b>
     <span class="uitleg">De keuze valt zelden op &eacute;&eacute;n versie in zijn geheel: de belofte-band van de een onder de hero van de ander. Op de samenstelpagina kies je per band uit de uitsnedes die er in deze acht versies voor bestaan &mdash; met het echte ontwerp in beeld, niet een omschrijving ervan. Onderaan staat je keuze als tekst die je kunt doorsturen.</span>

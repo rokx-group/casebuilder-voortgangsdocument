@@ -118,25 +118,31 @@ body.focusmodus .demo:not(.aan){cursor:default}
   color:var(--mute);padding:9px 16px;border-bottom:2px solid transparent}
 .subtabs a:hover{color:var(--dark)}
 .subtabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+
+/* tabbalk: alle tabs staan op elke pagina, en ze breken af naar een tweede
+   regel als ze niet op één passen. */
+.tabs{flex-wrap:wrap}
 </style>
 </head><body><div class="vgl">
   <div class="tabs">
-    <a href="header-varianten.html">Header</a>
-    <a href="hero-voorstellen.html">Hero</a>
-    <a href="homepage-varianten.html">Homepage</a>
-    <a href="case-aanvragen-varianten.html" class="on">Case aanvragen</a>
-    <a href="case-voor-varianten.html">/case-voor</a>
-    <a href="flightcases-varianten.html">/flightcases</a>
-    <a href="groot-zakelijk-varianten.html">/groot-zakelijk</a>
-    <a href="branches-varianten.html">Kopkeuze</a>
-    <a href="service-varianten.html">/service</a>
-    <a href="zoeken-varianten.html">/zoeken</a>
-    <a href="faq-varianten.html">FAQ</a>
-    <a href="footer-varianten.html">Footer</a>
+    <a href='/mockups/header-varianten'>Header</a>
+    <a href='/mockups/hero-voorstellen'>Hero</a>
+    <a href='/mockups/homepage-varianten'>Homepage</a>
+    <a class='on' href='/mockups/case-aanvragen-varianten'>Case aanvragen</a>
+    <a href='/mockups/case-voor-varianten'>/case-voor</a>
+    <a href='/mockups/flightcases-varianten'>/flightcases</a>
+    <a href='/mockups/editor-varianten'>Editor</a>
+    <a href='/mockups/groot-zakelijk-varianten'>/groot-zakelijk</a>
+    <a href='/mockups/branches-varianten'>Kopkeuze</a>
+    <a href='/mockups/service-varianten'>/service</a>
+    <a href='/mockups/shop-varianten'>/shop</a>
+    <a href='/mockups/zoeken-varianten'>/zoeken</a>
+    <a href='/mockups/faq-varianten'>FAQ</a>
+    <a href='/mockups/footer-varianten'>Footer</a>
   </div>
   <div class="inleiding"><h2>Waar "Case aanvragen" heen gaat</h2>
     <p><b>Naar <code>/service/offerte</code> &mdash; de RFQ-route, klantreis C.</b> Het aanvraagpaneel van homepage-v8 als eigen pagina: velden, sleepzone, en een naam met een gezicht. Dit is de route waarlangs zeventig procent van de orders binnenkomt, dus hij verdient een adres en geen popup.</p></div>
-  <div class="kop"><span class="nr">// V1</span><h3>Je weet wat erin moet. Wij weten hoe.</h3><span class="gekozen">&#10003; geselecteerd voor nu</span><span class="rechts"><span class="hgt">/service/offerte &middot; sjabloon formulier</span><a class="volledig" href="case-aanvragen-v1.html" target="_blank" rel="noopener">Volledig scherm &#8599;</a></span></div>
+  <div class="kop"><span class="nr">// V1</span><h3>Je weet wat erin moet. Wij weten hoe.</h3><span class="gekozen">&#10003; geselecteerd voor nu</span><span class="rechts"><span class="hgt">/service/offerte &middot; sjabloon formulier</span><a class='volledig' href='/mockups/case-aanvragen-v1' rel='noopener' target='_blank'>Volledig scherm &#8599;</a></span></div>
   <div class="beoordeel"><div class="demo gekozen"><div class="balk">Geselecteerd voor nu &mdash; op 95% · het kader schuift</div><div class="venster" data-schaal=".95"><div class="houder"><iframe src="case-aanvragen-v1.html" title="/service/offerte" loading="lazy"></iframe></div></div></div></div>
   <div class="kop" style="margin-top:34px"><span class="nr">// AANTEKENINGEN</span><h3>Besloten en open</h3></div>
   <div class="notities">

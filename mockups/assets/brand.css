@@ -15,6 +15,10 @@
   --wrap:1280px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
+/* Het hidden-attribuut moet winnen van elke display-regel. Zonder dit
+   bleef een blok met display:flex gewoon staan als een script het
+   verborg — het attribuut stond erop, de pagina toonde het toch. */
+[hidden]{display:none!important}
 html{scroll-behavior:smooth}
 body{font-family:var(--body);color:var(--ink);background:var(--white);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
@@ -297,11 +301,18 @@ section.tight{padding:56px 0}
 
 /* footer */
 footer{background:var(--void);color:rgba(255,255,255,.66);padding:64px 0 30px}
-footer .cols{display:grid;grid-template-columns:1.3fr repeat(4,1fr);gap:36px}
+/* Vijf kolommen sinds de koopkant erbij kwam; de tussenruimte moest
+   mee omlaag, anders wordt "Industrie en machinebouw" drie regels. */
+footer .cols{display:grid;grid-template-columns:1.15fr repeat(5,1fr);gap:26px}
 footer h5{font-size:15px;letter-spacing:.06em;color:#fff;font-weight:700;
   border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:9px;margin-bottom:15px}
 footer a{display:block;padding:5px 0;font-size:14px}
 footer a:hover{color:var(--cyan)}
+/* "Inkopen als grote partij" staat in het rijtje branches maar is er geen:
+   het is een manier van kopen. Een streep erboven en een pijl erachter,
+   zodat het als iets anders leest. */
+footer .cols a.anders{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.18);color:var(--cyan)}
+footer .cols a.anders:hover{color:#fff}
 footer .adr{font-size:14px;line-height:1.8}
 footer .adr a,footer .bot a{display:inline;padding:0}
 /* De onderregel is mono 10px; zonder dit erven de links de 14px van
@@ -418,15 +429,45 @@ nav.primary .megamenu .wrap{display:grid;grid-template-columns:1.15fr 1fr 1fr;ga
 .megamenu li a .n{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--rule)}
 /* Zelf configureren is geen link tussen de andere: het is de route die
    hier vandaan het meeste oplevert, dus die krijgt een vlak. */
-.megamenu .zelf{background:var(--lightblue);padding:22px 22px 24px;border:1px solid var(--rule)}
-.megamenu .zelf b{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:19px;
+/* Een tweede kop in dezelfde kolom (Service: bestellen, dan over ons)
+   heeft lucht nodig; de eerste staat al bovenaan. */
+.megamenu ul + h4{margin-top:22px}
+/* Modellen met beeld in het megamenu (besloten 12 september). Een kleine
+   stilstaande kist per model: dezelfde vorm en uitsnede voor alle vijf,
+   en de maatverhouding klopt — de koffer is plat, de trunccase kubisch.
+   Bewust hier en niet uit draaikist.css: dit menu staat op élke pagina,
+   dus het mag geen extra bestand of script kosten. De grote, draaiende
+   kist blijft in assets/draaikist.*. */
+.megamenu .modelkist{display:block;height:64px;position:relative;background:var(--bg);
+  border-bottom:1px solid var(--rule);perspective:420px}
+.megamenu .modelkist .kb{position:absolute;left:50%;top:54%;width:0;height:0;
+  transform-style:preserve-3d;transform:rotateX(-14deg) rotateY(-32deg)}
+.megamenu .modelkist i{position:absolute;left:50%;top:50%;box-sizing:border-box;
+  background:var(--void);border:1.5px solid #b2babf;box-shadow:inset 0 0 10px rgba(0,0,0,.5)}
+.megamenu .modelkist .v{width:var(--b);height:var(--h);transform:translate(-50%,-50%) translateZ(calc(var(--d) / 2))}
+.megamenu .modelkist .l{width:var(--d);height:var(--h);transform:translate(-50%,-50%) rotateY(-90deg) translateZ(calc(var(--b) / 2))}
+.megamenu .modelkist .r{width:var(--d);height:var(--h);transform:translate(-50%,-50%) rotateY(90deg) translateZ(calc(var(--b) / 2))}
+.megamenu .modelkist .bo{width:var(--b);height:var(--d);transform:translate(-50%,-50%) rotateX(90deg) translateZ(calc(var(--h) / 2))}
+.megamenu .modeltegels{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.megamenu .modeltegels a{display:flex;flex-direction:column;border:1px solid var(--rule);background:#fff;height:auto;padding:0}
+.megamenu .modeltegels a:hover{border-color:var(--dark)}
+.megamenu .modeltegels span{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:13px;
+  letter-spacing:.03em;color:var(--dark);padding:7px 8px 8px}
+.megamenu .modeltegels small{display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;
+  color:var(--mute);font-weight:500;margin-top:2px}
+.megamenu .allemodellen{display:inline-block;margin-top:12px;font-family:var(--disp);text-transform:uppercase;
+  font-size:15px;letter-spacing:.04em;color:var(--blue);height:auto;border:0;padding:0}
+/* Het uitgelichte vlak rechts in elk menu. Heette .zelf toen alleen
+   Flightcases een menu had en dat vlak "Zelf configureren" was. */
+.megamenu .vlak{background:var(--lightblue);padding:22px 22px 24px;border:1px solid var(--rule)}
+.megamenu .vlak b{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:19px;
   letter-spacing:.03em;color:var(--dark);display:block;line-height:1.1}
-.megamenu .zelf p{font-size:14px;color:var(--mute);margin:9px 0 16px}
+.megamenu .vlak p{font-size:14px;color:var(--mute);margin:9px 0 16px}
 /* nav.primary a zet de kleur op var(--dark) en is specifieker dan
    .btn-dark, dus de knoptekst werd donker op een donkere knop: een leeg
    vlak. Dezelfde reden voor height: de balk zet links op height:100%. */
-nav.primary .megamenu .zelf .btn-dark{color:#fff;height:auto}
-.megamenu .zelf .btn{padding:12px 20px;font-size:14px}
+nav.primary .megamenu .vlak .btn-dark{color:#fff;height:auto}
+.megamenu .vlak .btn{padding:12px 20px;font-size:14px}
 
 @media(prefers-reduced-motion:reduce){ .megamenu{transition:none} }
 /* Op een telefoon geen zwevend paneel: het klapt daar gewoon in de

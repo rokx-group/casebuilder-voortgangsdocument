@@ -1,0 +1,987 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — productpagina v1, L1, L2 en L3 (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<link rel="stylesheet" href="assets/draaikist.css">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   Productpagina v1 — de editor zit in de pagina
+
+   Besproken op 11 september. De productpagina laadt altijd dezelfde
+   kist: de flightcase die je koopt, draaiend, met wat je kiest erop.
+   Welke opties er staan, hangt af van het niveau dat CaseBuilder per
+   categorie opgeeft:
+
+     L1  kleur en logo             vaste maten; niet wat je zoekt?
+                                   dan bouwen we hem op maat (aanvraag)
+     L2  + maten, hoeken, slot     "ook in"-knoppen voor de maten die als
+                                   eigen product bestaan, plus vrije maten
+                                   binnen de grenzen; prijs loopt mee
+     L3  alles                     de configurator van CaseBuilder in de
+                                   pagina, in de volledige stand. Dat is
+                                   een bestaande dienst die we in een
+                                   iframe laden: dit ontwerp gaat naar
+                                   CaseBuilder, zodat zij het in hun eigen
+                                   frontend nabouwen (besloten 12 sept).
+
+   Bij L2 en L3 staat "Hulp nodig bij deze case?": een vak met de case
+   en een samenvatting al ingevuld, dat naar een expert gaat.
+
+   Elke maat die als product bestaat heeft een eigen pagina (80×80×80
+   en 100×60×60 staan allebei in de shop); de knoppen wisselen tussen
+   die pagina's. Een maat daartussen is "eigen maat" op dezelfde pagina.
+
+   Opbouw overgenomen van case-voor-gibson-les-paul-v2 (de L1-pagina);
+   de kist uit assets/draaikist.*, het configuratorvenster uit editor-v2.
+   L2 en L3 rekenen met dezelfde prijsregel. Prijzen, toeslagen, grenzen
+   en de case-ID's zijn voorbeelden.
+   ══════════════════════════════════════════════════════════════ */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* De wissel bovenaan hoort bij de review, niet bij de pagina. */
+.review{background:var(--dark);color:#fff}
+.review .wrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
+.review .lab{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan)}
+.review .wissel{display:flex;gap:6px;flex-wrap:wrap}
+.review .wissel button{background:transparent;border:1px solid rgba(255,255,255,.3);color:#fff;cursor:pointer;
+  font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:14px;letter-spacing:.04em;padding:7px 12px}
+.review .wissel button[aria-pressed="true"]{background:var(--cyan);border-color:var(--cyan);color:var(--void)}
+.review .uitleg{font-size:12.5px;color:rgba(255,255,255,.7);margin-left:auto}
+
+.reskop h1{font-size:clamp(30px,3.8vw,46px);max-width:24ch}
+.reskop .lead{margin-top:14px;max-width:64ch}
+.advies{padding:26px 0 0}
+.advies .top{border:1.5px solid var(--dark);background:#fff;display:flex;flex-direction:column}
+/* Alleen de balk zelf: een .lab dieper in het blok (prijs, hulpvak) is
+   een gewoon label, geen balk. */
+.advies .top > .lab{background:var(--dark);color:#fff;font-family:var(--mono);font-size:10px;
+  letter-spacing:.16em;text-transform:uppercase;padding:9px 20px}
+.advies .top .bd{padding:26px 28px 28px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;align-items:start}
+/* In L3 krijgt de configurator de ruimte: er staat een stappenbalk in. */
+.advies .top .bd.breed{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:32px}
+
+/* De kist in plaats van de foto: dezelfde kist als op /flightcases en
+   in de editor, zodat wat je kiest meteen te zien is. */
+.beeld{background:var(--bg);border:1px solid var(--rule);position:sticky;top:96px}
+.beeld .kist3d{height:380px}
+.beeld .kmaat{display:none}
+.beeld .sc{display:flex;align-items:center;gap:8px;padding:8px 12px;border-top:1px solid var(--rule);background:#fff;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dark)}
+.beeld .sc i{display:block;width:40px;height:2px;background:var(--dark)}
+.beeld .sc span{margin-left:auto;color:var(--mute)}
+
+.koop h2{font-size:28px}
+.koop .maten{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--mute);margin-top:10px}
+.koop > p{font-size:15px;color:var(--mute);margin-top:12px}
+.koop .pr{font-family:var(--disp);font-size:30px;font-weight:900;color:var(--dark);margin-top:16px}
+.koop .pr small{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--mute);display:block;margin-top:3px;font-weight:400}
+
+.kies{display:flex;flex-direction:column;gap:16px;margin:18px 0 16px;padding-top:16px;border-top:1px solid var(--rule)}
+.kg{display:grid;grid-template-columns:78px 1fr;gap:12px;align-items:start}
+.kg > .lb{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);padding-top:9px}
+.stalen{display:flex;gap:8px;flex-wrap:wrap;padding-top:3px}
+.stalen button{width:26px;height:26px;border:1.5px solid var(--rule);cursor:pointer;padding:0}
+.stalen button[aria-pressed="true"]{outline:2px solid var(--cyan);outline-offset:2px}
+.upload{border:1.5px dashed var(--rule);padding:10px 14px;display:flex;flex-direction:column;gap:2px;cursor:pointer;background:var(--bg)}
+.upload:hover{border-color:var(--blue)}
+.upload span{font-family:var(--disp);text-transform:uppercase;font-size:14px;letter-spacing:.04em;color:var(--dark)}
+.upload small{font-size:12px;color:var(--mute)}
+.aantal{width:80px;border:1.5px solid var(--rule);padding:8px 10px;font-family:var(--body);font-size:15px}
+
+.keuze{display:flex;gap:8px;flex-wrap:wrap}
+.keuze button{border:1.5px solid var(--rule);background:#fff;padding:8px 12px;cursor:pointer;display:flex;flex-direction:column;
+  align-items:flex-start;gap:2px;font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:14px;
+  letter-spacing:.03em;color:var(--dark);text-align:left}
+.keuze button small{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--mute);font-weight:500}
+.keuze button:hover{border-color:var(--dark)}
+.keuze button[aria-pressed="true"]{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(102,196,232,.22)}
+.keuze.modellen5{display:grid;grid-template-columns:repeat(5,1fr)}
+
+.maten3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.maten3 label{display:flex;flex-direction:column;gap:5px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--mute)}
+.maten3 input{height:42px;border:1.5px solid var(--rule);padding:0 10px;font-family:var(--disp);font-size:19px;
+  font-weight:700;color:var(--dark);width:100%;background:#fff}
+.maten3 input:focus{outline:0;border-color:var(--dark)}
+.hint{font-size:12px;color:var(--mute);margin-top:6px}
+
+/* Doorgangen: lichtblauw, zoals de uitweg op /flightcases, /shop en
+   in de editor. */
+.door{display:block;margin-top:14px;border:1px solid var(--rule);background:var(--lightblue);padding:14px 16px;transition:.14s}
+.door:hover{border-color:var(--dark)}
+.door b{display:block;font-family:var(--disp);text-transform:uppercase;font-size:17px;letter-spacing:.03em;color:var(--dark)}
+.door span{font-size:13.5px;color:var(--mute)}
+.door.wit{background:#fff}
+/* De hele deur is een link; de regel eronder leest als knop, zodat te
+   zien is waar je uitkomt. */
+.door .deurcta{display:block;margin-top:8px;font-family:var(--disp);text-transform:uppercase;font-size:14px;
+  letter-spacing:.05em;color:var(--blue)}
+.naast{font-size:12.5px;color:var(--mute);margin-top:10px}
+.naast a{color:var(--blue);border-bottom:1px solid var(--rule)}
+
+/* Hulp nodig: een knop die een vak openklapt met de case al ingevuld.
+   Zelfde knop en vak als in editor-v2. */
+.hulpknop{margin-top:10px;width:100%;justify-content:center}
+.hulp{margin-top:10px;border:1.5px solid var(--dark);padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.hulp .lab{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.hulp .id{font-family:var(--mono);font-size:10px;letter-spacing:.08em;background:var(--lightblue);color:var(--dark);padding:8px 10px;line-height:1.6}
+.hulp textarea{border:1.5px solid var(--rule);padding:10px 12px;font-family:var(--body);font-size:14px;min-height:70px;resize:vertical}
+.hulp textarea:focus{outline:0;border-color:var(--dark)}
+.hulp .up{border:1.5px dashed var(--rule);padding:8px 12px;font-size:12.5px;color:var(--mute);background:var(--bg);cursor:pointer}
+.hulp .btn{align-self:flex-start}
+.hulp .klaar{font-size:13px;color:var(--dark)}
+
+/* ── L3: het configuratorvenster, zoals in editor-v2 ─────────── */
+.cfg{border:1.5px solid var(--dark);background:#fff;margin-top:18px}
+.cfg .tkop{background:var(--dark);color:#fff;padding:12px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.cfg .tkop b{font-family:var(--disp);text-transform:uppercase;font-size:17px;letter-spacing:.03em}
+.cfg .stand{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;padding:5px 9px;background:var(--cyan);color:var(--void)}
+.cfg .ref{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:rgba(255,255,255,.6)}
+.stappen{display:flex;align-items:center;padding:14px 18px;border-bottom:1px solid var(--rule);overflow-x:auto}
+.stap{display:flex;align-items:center;gap:7px;flex:none;background:none;border:0;padding:0;cursor:pointer}
+.stap .bol{width:26px;height:26px;border:1.5px solid var(--rule);display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:11px;color:var(--mute);background:#fff}
+.stap .lb{font-family:var(--disp);text-transform:uppercase;font-size:13.5px;letter-spacing:.04em;color:var(--mute)}
+.stap:hover .lb{color:var(--dark)}
+.stap.gedaan .bol{border-color:var(--dark);color:var(--dark)}
+.stap[aria-current="step"] .bol{background:var(--dark);border-color:var(--dark);color:#fff}
+.stap[aria-current="step"] .lb{color:var(--dark)}
+.stappen .lijn{flex:1 1 22px;min-width:6px;max-width:34px;height:1px;background:var(--rule);margin:0 6px}
+.tbody{padding:18px 18px 4px}
+.tbody .stapkop .ey{display:block;margin-bottom:4px}
+.tbody .stapkop h3{font-size:22px;margin-bottom:4px}
+.blok{border-top:1px solid var(--rule);padding:14px 0 16px}
+.stapkop + .blok{margin-top:10px}
+.blok h4{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-weight:500;margin-bottom:10px}
+.tvoet{border-top:1px solid var(--rule);background:var(--bg);padding:12px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.tvoet .lab{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.tvoet b{display:block;font-family:var(--disp);font-size:26px;font-weight:900;color:var(--dark);line-height:1;margin-top:4px}
+.tvoet .knoppen{margin-left:auto;display:flex;gap:8px}
+.samen{display:grid;grid-template-columns:auto 1fr;border-top:1px solid var(--rule);margin:12px 0 18px}
+.samen dt,.samen dd{padding:8px 0;border-bottom:1px solid var(--rule)}
+.samen dt{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);padding-right:20px}
+.samen dd{font-size:14px;color:var(--ink)}
+
+.waarom{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:34px}
+.waarom > div{background:#fff;padding:22px 24px}
+.waarom .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+.waarom .v{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:20px;letter-spacing:.03em;color:var(--dark);margin-top:6px}
+.waarom p{font-size:13.5px;color:var(--mute);margin-top:6px}
+
+/* ── voor de review: wat er per niveau op de pagina staat ──── */
+.matrix{margin-top:22px;overflow-x:auto;border:1px solid var(--rule);background:#fff}
+.matrix table{border-collapse:collapse;width:100%;min-width:760px;font-size:14px}
+.matrix th,.matrix td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--rule);vertical-align:top}
+.matrix thead th{font-family:var(--disp);text-transform:uppercase;font-size:16px;letter-spacing:.03em;color:var(--dark);background:var(--bg)}
+.matrix tbody th{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-weight:500;width:150px}
+.matrix td{color:var(--ink)}
+.matrix tr:last-child th,.matrix tr:last-child td{border-bottom:0}
+
+@media(max-width:1080px){.advies .top .bd,.advies .top .bd.breed{grid-template-columns:1fr;gap:28px}.beeld{position:static}
+  .waarom{grid-template-columns:1fr}.keuze.modellen5{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+
+<header class="main">
+  <div class="wrap">
+    <a aria-label='Casebuilder.com &mdash; naar de homepage' class='merk' href='/mockups/homepage-v2'><img src="assets/woordmerk.svg" alt="Casebuilder.com"></a>
+    <form class="search" onsubmit="return false">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+      <input placeholder="Zoek op case, onderdeel of artikelnummer…" aria-label="Zoeken">
+    </form>
+    <div class="hdr-r">
+      <a href="#" class="stil">Inloggen</a>
+      <a href="#">Winkelwagen</a>
+    </div>
+  </div>
+</header>
+
+<nav class="primary">
+  <div class="wrap">
+    <a href='/mockups/case-aanvragen-v1'>Case aanvragen</a>
+    <a href='/mockups/case-voor-v1'>Wat ga je vervoeren?</a>
+
+    <!-- Flightcases draagt nu drie ingangen tegelijk: waarvoor, welk
+         model, en zelf bouwen. Zelf configureren stond hiervoor los in
+         de balk; als top-level item concurreerde het met Flightcases
+         terwijl het er een onderdeel van is.
+
+         "Waarvoor" zijn de zes toepassingen (wat je vervoert), niet de
+         branches (wie je bent): die hebben hun eigen menu, en dezelfde zes
+         markten twee keer in de balk zei niets extra's. Backline heeft al
+         een eigen pagina; de rest wijst hun vak in de index aan. -->
+    <span class="heeft-menu">
+      <a href='/mockups/flightcases-v1'>Flightcases</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// WAAR GEBRUIK JE HEM VOOR</h4>
+            <ul>
+              <li><a href='/mockups/case-voor-v3#av-licht'>AV &amp; licht<span class="n">142</span></a></li>
+              <li><a href='/mockups/case-voor-backline-v1'>Backline &amp; muziek<span class="n">127</span></a></li>
+              <li><a href='/mockups/case-voor-v3#broadcast'>Broadcast &amp; camera<span class="n">86</span></a></li>
+              <li><a href='/mockups/case-voor-v3#medisch'>Medisch &amp; lab<span class="n">64</span></a></li>
+              <li><a href='/mockups/case-voor-v3#industrie'>Industrie &amp; meettechniek<span class="n">73</span></a></li>
+              <li><a href='/mockups/case-voor-v3#evenement'>Evenement &amp; beursbouw<span class="n">50</span></a></li>
+              <li><a href='/mockups/case-voor-v3#alle-categorieen'>Alle toepassingen &rarr;</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// MODELLEN</h4>
+            <!-- Met beeld (besloten 12 september): een model herken je aan
+                 zijn vorm, niet aan zijn naam. Een stilstaande kist per
+                 model, in CSS — geen foto's, want die hebben vijf
+                 verschillende uitsnedes, en geen script, want dit menu
+                 staat op elke pagina. Zodra CaseBuilder renders uit de
+                 configurator levert, komen die hiervoor in de plaats. -->
+            <div class="modeltegels">
+              <a href='/mockups/casetype-koffer-v1'><span class="modelkist" style="--b:46.0px;--h:16.4px;--d:29.6px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Koffer<small>vanaf &euro; 149</small></span></a>
+              <a href='/mockups/casetype-hoedcase-v1'><span class="modelkist" style="--b:46.0px;--h:31.6px;--d:28.8px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Hoedcase<small>vanaf &euro; 179</small></span></a>
+              <a href='/mockups/casetype-trunccase-v1'><span class="modelkist" style="--b:46.0px;--h:34.5px;--d:34.5px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Trunccase<small>vanaf &euro; 199</small></span></a>
+              <a href='/mockups/casetype-rackcase-enkel-deksel-v1'><span class="modelkist" style="--b:46.0px;--h:30.7px;--d:38.3px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Rackcase enkel<small>vanaf &euro; 229</small></span></a>
+              <a href='/mockups/casetype-rackcase-dubbel-deksel-v1'><span class="modelkist" style="--b:44.5px;--h:46.0px;--d:40.8px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Rackcase dubbel<small>vanaf &euro; 259</small></span></a>
+            </div>
+            <a class='allemodellen' href='/mockups/flightcases-v1'>Alle modellen &rarr;</a>
+          </div>
+          <div class="vlak">
+            <b>Zelf configureren</b>
+            <p>Jouw maten invullen en de prijs zien terwijl je typt. Een casebouwer kijkt je opgave na voordat we zagen.</p>
+            <a class='btn btn-dark' href='/mockups/configurator-v1'>Start met configureren &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </span>
+
+    <!-- Branches: wie je bent. Links de zes markten met een eigen pagina,
+         in het midden de manieren van inkopen voor grote partijen — dat is
+         dezelfde koper in een andere rol (zie /grote-spelers), niet een
+         zevende markt. Rechts de opvang voor wie zichzelf er niet in ziet. -->
+    <span class="heeft-menu">
+      <a href='/mockups/branches'>Branches</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// ZES MARKTEN</h4>
+            <ul>
+              <li><a href='/mockups/branche-audio-visueel-v1'>Audio-visueel en podium<span class="n">22</span></a></li>
+              <li><a href='/mockups/branche-broadcast-en-media-v1'>Broadcast en media<span class="n">9</span></a></li>
+              <li><a href='/mockups/branche-industrie-en-machinebouw-v1'>Industrie en machinebouw<span class="n">14</span></a></li>
+              <li><a href='/mockups/branche-meet-en-testapparatuur-v1'>Meet- en testapparatuur<span class="n">11</span></a></li>
+              <li><a href='/mockups/branche-defensie-v1'>Defensie<span class="n">7</span></a></li>
+              <li><a href='/mockups/branche-schaalmodellen-v1'>Schaalmodellen<span class="n">5</span></a></li>
+              <li><a href='/mockups/branches'>Alle branches &rarr;</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// INKOPEN ALS GROTE PARTIJ</h4>
+            <ul>
+              <li><a href='/mockups/speler-defensie-en-overheid-v1'>Defensie en overheid</a></li>
+              <li><a href='/mockups/speler-oem-en-series-v1'>OEM en series</a></li>
+              <li><a href='/mockups/speler-verhuur-en-touring-v1'>Verhuur en touring</a></li>
+              <li><a href='/mockups/speler-omroep-en-studio-v1'>Omroep en studio</a></li>
+              <li><a href='/mockups/speler-netbeheer-en-energie-v1'>Netbeheer en energie</a></li>
+              <li><a href='/mockups/grote-spelers-v1'>Hoe je bij ons inkoopt &rarr;</a></li>
+            </ul>
+          </div>
+          <div class="vlak">
+            <b>Staat je markt er niet bij?</b>
+            <p>We bouwen ook voor winkelinrichting, IT-racks en medisch en lab &mdash; alleen nog zonder eigen pagina. Vertel wat je vervoert, dan tekenen we het.</p>
+            <a class='btn btn-dark' href='/mockups/case-aanvragen-v1'>Case aanvragen &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </span>
+
+    <!-- Service: alles rond bestellen en daarna. Het vlak is de telefoon,
+         want direct advies is wat een servicepagina het vaakst oplevert. -->
+    <span class="heeft-menu">
+      <a href='/mockups/service-hub-v1'>Service</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// BESTELLEN EN LEVEREN</h4>
+            <ul>
+              <li><a href='/mockups/zo-werkt-het-v1'>Zo werkt het</a></li>
+              <li><a href='/mockups/service-levertijden-v1'>Levertijden</a></li>
+              <li><a href="#">Verzending</a></li>
+              <li><a href='/mockups/laten-controleren-v1'>Maten laten controleren</a></li>
+              <li><a href="#">Veelgestelde vragen</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// ZELF BOUWEN</h4>
+            <ul>
+              <li><a href='/mockups/categorie-v1'>Onderdelen</a></li>
+              <li><a href="#">Zaagservice</a></li>
+            </ul>
+            <h4>// OVER ONS</h4>
+            <ul>
+              <li><a href='/mockups/over-ons-v1'>Over Proflite</a></li>
+              <li><a href='/mockups/contact-v1'>Contact</a></li>
+            </ul>
+          </div>
+          <div class="vlak">
+            <b>Direct advies</b>
+            <p>+31 (0)575 575734 &mdash; je belt met iemand uit de werkplaats in Doesburg, niet met een callcenter.</p>
+            <a class='btn btn-dark' href='/mockups/contact-v1'>Stuur een bericht &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </span>
+    <!-- Shop: links het overzicht — klik je op Shop zelf, dan kom je daar,
+         met alle vaste cases en filters. Onderaan die kolom de weg via je
+         apparaat: de 39 categorieën, waarvandaan je in vier klikken bij het
+         apparaat bent. In het midden een paar populaire producten en
+         daaronder de populairste onderdelen — kort, want het overzicht en
+         de onderdelenpagina zijn één klik verder. Rechts de uitweg voor wie
+         een andere maat nodig heeft.
+         Shop staat achteraan: wie het assortiment zoekt weet dat al. -->
+    <span class="heeft-menu">
+      <a class='on' href='/mockups/shop-v1'>Shop</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// ALLE VASTE CASES, MET FILTERS</h4>
+            <ul>
+              <li><a href='/mockups/shop-v1#av-licht'>AV &amp; licht</a></li>
+              <li><a href='/mockups/shop-v1#backline'>Backline &amp; muziek</a></li>
+              <li><a href='/mockups/shop-v1#broadcast'>Broadcast &amp; camera</a></li>
+              <li><a href='/mockups/shop-v1#medisch'>Medisch &amp; lab</a></li>
+              <li><a href='/mockups/shop-v1#industrie'>Industrie &amp; meettechniek</a></li>
+              <li><a href='/mockups/shop-v1#evenement'>Evenement &amp; beursbouw</a></li>
+              <li><a href='/mockups/case-voor-v3'>Alle 39 categorie&euml;n &rarr;</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// POPULAIRE PRODUCTEN</h4>
+            <ul>
+              <li><a href='/mockups/case-voor-gibson-les-paul-v2'>Gibson Les Paul Standard</a></li>
+              <li><a href='/mockups/case-voor-gibson-les-paul-v2' title='/product — hier nog de Les Paul-pagina'>Pioneer DDJ-FLX10</a></li>
+              <li><a href='/mockups/case-voor-gibson-les-paul-v2' title='/product — hier nog de Les Paul-pagina'>Robe Robin 600 LEDWash, duo</a></li>
+              <li><a href='/mockups/case-voor-gibson-les-paul-v2' title='/product — hier nog de Les Paul-pagina'>Sony FX6</a></li>
+            </ul>
+            <h4>// POPULAIRE ONDERDELEN</h4>
+            <ul>
+              <li><a href='/mockups/categorie-v1'>Balhoeken</a></li>
+              <li><a href='/mockups/categorie-v1' title='/onderdelen/{categorie} — hier nog het balhoeken-sjabloon'>Vlindersluitingen</a></li>
+              <li><a href='/mockups/categorie-v1' title='/onderdelen/{categorie} — hier nog het balhoeken-sjabloon'>Handgrepen</a></li>
+              <li><a href='/mockups/categorie-v1'>Alle onderdelen &rarr;</a></li>
+            </ul>
+          </div>
+          <div class="vlak">
+            <b>Andere maat nodig?</b>
+            <p>Kies je eigen afmetingen, ronde of vierkante hoeken en een slot. Wil je meer, dan ga je vanuit daar door naar de volledige editor.</p>
+            <a class='btn btn-dark' href='/mockups/editor-v2#l2'>Op jouw maat &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </span>
+    <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#">NL &#9662;</a></div>
+  </div>
+</nav>
+
+<div class="review">
+  <div class="wrap">
+    <span class="lab">// Mockup &middot; drie producten</span>
+    <div class="wissel" data-producten role="group" aria-label="Kies een product">
+      <button type="button" data-p="l1">L1 &middot; Hoedcase Les Paul</button>
+      <button type="button" data-p="l2">L2 &middot; Trunccase 80&times;80&times;80</button>
+      <button type="button" data-p="l3">L3 &middot; Rackcase, alles op maat</button>
+    </div>
+    <span class="uitleg">Zelfde pagina, zelfde kist. Welke opties er staan, bepaalt CB per categorie.</span>
+  </div>
+</div>
+
+<div class="crumbs"><div class="wrap" data-crumbs></div></div>
+
+<div class="wrap">
+  <div class="reskop kop-laag">
+    <div class="ey ey-dark" data-ey></div>
+    <h1 data-h1></h1>
+    <p class="lead" data-lead></p>
+  </div>
+
+  <div class="advies">
+    <div class="top">
+      <div class="lab" data-balk></div>
+      <div class="bd" data-bd>
+        <div class="beeld">
+          <div class="kistvak">
+            <div class="kist3d" data-draaikist data-vrij="1400" title="Sleep om te draaien">
+              <div class="kubus" data-kubus>
+                <div class="zij achter"></div>
+                <div class="zij links"></div>
+                <div class="zij rechts"></div>
+                <div class="zij boven"></div>
+                <div class="zij onder"></div>
+                <div class="zij voor"><img class="logo" data-logo alt="" hidden><span class="slot" data-slot></span></div>
+              </div>
+              <div class="grond"></div>
+              <span class="kmaat"></span>
+            </div>
+          </div>
+          <div class="sc"><i></i><b data-schaal></b><span>sleep om te draaien</span></div>
+        </div>
+
+        <div class="koop">
+          <h2 data-h2></h2>
+          <div class="maten" data-maten></div>
+          <p data-tekst></p>
+          <div class="pr" data-toon="l1 l2"><span data-prijs></span><small data-prijslab></small></div>
+
+          <!-- ── L1 en L2: de keuzes in de pagina ── -->
+          <div class="kies" data-toon="l1 l2">
+            <div class="kg" data-toon="l2">
+              <span class="lb">Maat</span>
+              <div>
+                <div class="keuze" data-maatknoppen role="group" aria-label="Maten"></div>
+                <div class="maten3">
+                  <label>Breedte<input type="number" data-veld="b" step="10" inputmode="numeric"></label>
+                  <label>Diepte<input type="number" data-veld="d" step="10" inputmode="numeric"></label>
+                  <label>Hoogte<input type="number" data-veld="h" step="10" inputmode="numeric"></label>
+                </div>
+                <p class="hint" data-grens></p>
+              </div>
+            </div>
+            <div class="kg" data-toon="l2">
+              <span class="lb">Hoeken</span>
+              <div class="keuze" data-keuze="hoek">
+                <button type="button" data-w="rond">Rond<small>balhoek &middot; standaard</small></button>
+                <button type="button" data-w="vierkant">Vierkant<small>+ &euro; 14</small></button>
+              </div>
+            </div>
+            <div class="kg">
+              <span class="lb">Kleur</span>
+              <div><div class="stalen" data-stalen role="group" aria-label="Paneelkleur"></div><p class="hint" data-kleurnaam></p></div>
+            </div>
+            <div class="kg">
+              <span class="lb">Logo</span>
+              <label class="upload">
+                <input type="file" accept="image/png,image/svg+xml,image/jpeg" class="sr" data-upload>
+                <span data-uploadtekst>Upload je logo</span>
+                <small>SVG, PNG of JPG &middot; wij zetten hem op het deksel</small>
+              </label>
+            </div>
+            <div class="kg">
+              <span class="lb">Aantal</span>
+              <input class="aantal" type="number" value="1" min="1" aria-label="Aantal">
+            </div>
+          </div>
+
+          <a class="btn btn-pri" data-toon="l1 l2" href="#" style="width:100%;justify-content:center">In winkelwagen &rarr;</a>
+
+          <!-- ── L3: de configurator van CaseBuilder, volledige stand ── -->
+          <div class="cfg" data-toon="l3">
+            <div class="tkop"><b>Configurator</b><span class="stand">Volledige stand</span><span class="ref" data-ref></span></div>
+            <div class="stappen" role="group" aria-label="Stappen">
+              <button type="button" class="stap" data-stapknop="1"><span class="bol">1</span><span class="lb">Model</span></button><span class="lijn"></span>
+              <button type="button" class="stap" data-stapknop="2"><span class="bol">2</span><span class="lb">Afmetingen</span></button><span class="lijn"></span>
+              <button type="button" class="stap" data-stapknop="3"><span class="bol">3</span><span class="lb">Uitvoering</span></button><span class="lijn"></span>
+              <button type="button" class="stap" data-stapknop="4"><span class="bol">4</span><span class="lb">Hardware</span></button><span class="lijn"></span>
+              <button type="button" class="stap" data-stapknop="5"><span class="bol">5</span><span class="lb">Overzicht</span></button>
+            </div>
+            <div class="tbody">
+              <div data-stap="1">
+                <div class="stapkop"><span class="ey ey-dark">// Stap 1 van 5</span><h3>Welk model wordt het?</h3></div>
+                <div class="blok">
+                  <div class="keuze modellen5" data-keuze="model">
+                    <button type="button" data-w="koffer">Koffer<small>draagbaar</small></button>
+                    <button type="button" data-w="hoedcase">Hoedcase<small>los deksel</small></button>
+                    <button type="button" data-w="trunccase">Trunccase<small>bovendeksel</small></button>
+                    <button type="button" data-w="rack1">Rack enkel<small>19 inch</small></button>
+                    <button type="button" data-w="rack2">Rack dubbel<small>19 inch</small></button>
+                  </div>
+                </div>
+              </div>
+              <div data-stap="2">
+                <div class="stapkop"><span class="ey ey-dark">// Stap 2 van 5</span><h3>Afmetingen</h3></div>
+                <div class="blok">
+                  <h4>Buitenmaten in mm</h4>
+                  <div class="maten3">
+                    <label>Breedte<input type="number" data-veld="b" step="10" inputmode="numeric"></label>
+                    <label>Diepte<input type="number" data-veld="d" step="10" inputmode="numeric"></label>
+                    <label>Hoogte<input type="number" data-veld="h" step="10" inputmode="numeric"></label>
+                  </div>
+                  <p class="hint" data-grens></p>
+                </div>
+                <div class="blok">
+                  <h4>Maatvoering</h4>
+                  <div class="keuze" data-keuze="maat">
+                    <button type="button" data-w="buiten">Buitenmaten<small>standaard</small></button>
+                    <button type="button" data-w="binnen">Binnenmaten<small>wij rekenen de wand erbij</small></button>
+                  </div>
+                </div>
+              </div>
+              <div data-stap="3">
+                <div class="stapkop"><span class="ey ey-dark">// Stap 3 van 5</span><h3>Uitvoering</h3></div>
+                <div class="blok">
+                  <h4>Hoeken</h4>
+                  <div class="keuze" data-keuze="hoek">
+                    <button type="button" data-w="rond">Ronde hoeken<small>balhoek &middot; standaard</small></button>
+                    <button type="button" data-w="vierkant">Vierkante hoeken<small>+ &euro; 14</small></button>
+                  </div>
+                </div>
+                <div class="blok">
+                  <h4>Paneel</h4>
+                  <div class="keuze" data-keuze="paneel">
+                    <button type="button" data-w="7">7 mm multiplex<small>standaard</small></button>
+                    <button type="button" data-w="9">9 mm multiplex<small>+ &euro; 18</small></button>
+                  </div>
+                </div>
+                <div class="blok">
+                  <h4>Paneelkleur</h4>
+                  <div class="stalen" data-stalen role="group" aria-label="Paneelkleur"></div>
+                  <p class="hint" data-kleurnaam></p>
+                </div>
+                <div class="blok">
+                  <h4>Logo</h4>
+                  <label class="upload">
+                    <input type="file" accept="image/png,image/svg+xml,image/jpeg" class="sr" data-upload>
+                    <span data-uploadtekst>Upload je logo</span>
+                    <small>SVG, PNG of JPG &middot; wij zetten hem op het deksel</small>
+                  </label>
+                </div>
+              </div>
+              <div data-stap="4">
+                <div class="stapkop"><span class="ey ey-dark">// Stap 4 van 5</span><h3>Hardware</h3></div>
+                <div class="blok">
+                  <h4>Slot</h4>
+                  <div class="keuze" data-keuze="slot">
+                    <button type="button" data-w="vlinder">Vlindersluiting<small>standaard</small></button>
+                    <button type="button" data-w="hangslot">Met hangslotoog<small>+ &euro; 9,50</small></button>
+                    <button type="button" data-w="klap">Klapsluiting<small>+ &euro; 6</small></button>
+                  </div>
+                </div>
+                <div class="blok">
+                  <h4>Handgrepen</h4>
+                  <div class="keuze" data-keuze="greep">
+                    <button type="button" data-w="koffer">2&times; koffergreep<small>standaard</small></button>
+                    <button type="button" data-w="inbouw">2&times; inbouwgreep<small>+ &euro; 12</small></button>
+                  </div>
+                </div>
+                <div class="blok">
+                  <h4>Wielen</h4>
+                  <div class="keuze" data-keuze="wielen">
+                    <button type="button" data-w="geen">Geen wielen<small>standaard</small></button>
+                    <button type="button" data-w="zwenk">4 zwenkwielen<small>2 met rem &middot; + &euro; 48</small></button>
+                  </div>
+                </div>
+                <div class="blok">
+                  <h4>Schuim</h4>
+                  <div class="keuze" data-keuze="schuim">
+                    <button type="button" data-w="geen">Geen schuim<small>standaard</small></button>
+                    <button type="button" data-w="pluk">Plukschuim<small>bodem en deksel &middot; + &euro; 35</small></button>
+                  </div>
+                </div>
+              </div>
+              <div data-stap="5">
+                <div class="stapkop"><span class="ey ey-dark">// Stap 5 van 5</span><h3>Overzicht</h3></div>
+                <dl class="samen" data-samen></dl>
+              </div>
+            </div>
+            <div class="tvoet">
+              <div><span class="lab">Voorbeeldprijs &middot; verandert mee &middot; excl. btw</span><b data-cfgprijs></b></div>
+              <div class="knoppen">
+                <button type="button" class="btn btn-out btn-sm" data-vorige>&larr; Vorige</button>
+                <button type="button" class="btn btn-dark btn-sm" data-volgende></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── L2 en L3: hulp nodig ── -->
+          <button type="button" class="btn btn-out btn-sm hulpknop" data-toon="l2 l3" data-hulpknop aria-expanded="false" aria-controls="hulp">Hulp nodig bij deze case?</button>
+          <div class="hulp" id="hulp" data-hulp hidden>
+            <span class="lab">// Vraag een expert &middot; met deze case erbij</span>
+            <div class="id" data-hulpid></div>
+            <label class="sr" for="hulpvraag">Wat wil je anders?</label>
+            <textarea id="hulpvraag" placeholder="Bijvoorbeeld: help, ik wil een zijvak rechts"></textarea>
+            <label class="up">+ Schets, foto of datasheet toevoegen<input type="file" class="sr"></label>
+            <button type="button" class="btn btn-dark btn-sm" data-hulpstuur>Stuur naar een expert &rarr;</button>
+            <p class="klaar" data-hulpklaar hidden>Verstuurd (mockup). Een expert antwoordt dezelfde werkdag, met deze case als uitgangspunt.</p>
+          </div>
+
+          <!-- ── L2: door naar de volledige configurator ── -->
+          <a class="door wit" data-toon="l2" data-l3 href="#l3"><b>Meer aanpassen? Open de volledige configurator</b><span>Daar kies je ook het <strong>slot</strong>, handgrepen, wielen, schuim en de vakverdeling. Je maten, hoeken en kleur gaan mee.</span></a>
+
+          <!-- ── L1: geen hulpvak, wel de weg naar maatwerk ── -->
+          <a class='door' data-toon='l1' href='/mockups/case-aanvragen-v1'><b>Niet precies wat je zoekt?</b><span>Wij bouwen hem op maat voor je. Stuur een schets, een foto of je maten &mdash; Joran tekent hem uit.</span><span class="deurcta">Case aanvragen &rarr;</span></a>
+          <p class="naast" data-toon="l1">Alleen een andere maat? <a href="#l2">Kies je eigen maten</a> &mdash; je begint met de maten van deze kist.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="waarom" data-waarom></div>
+
+  <div class="ey ey-dark" style="margin-top:54px">// VOOR DE REVIEW &middot; WAT ER PER NIVEAU OP DE PRODUCTPAGINA STAAT</div>
+  <h2 style="font-size:30px;margin:12px 0 0">E&eacute;n pagina, drie niveaus</h2>
+  <p style="font-size:15px;color:var(--mute);margin-top:10px;max-width:70ch">De kist is altijd dezelfde. CaseBuilder geeft per categorie op of die L1, L2 of L3 is, en de pagina toont de opties die daarbij horen.</p>
+  <div class="matrix">
+    <table>
+      <thead><tr><th></th><th>L1 &middot; vast</th><th>L2 &middot; op maat</th><th>L3 &middot; alles</th></tr></thead>
+      <tbody>
+        <tr><th>De kist</th><td>Draait, met je kleur en logo</td><td>Draait, en groeit mee met je maten</td><td>Draait, en volgt elke keuze in de configurator</td></tr>
+        <tr><th>Kiezen</th><td>Kleur, logo, aantal</td><td>+ maten, hoeken, slot</td><td>De configurator in de pagina: model, maten, paneel, hoeken, slot, handgrepen, wielen, schuim</td></tr>
+        <tr><th>Andere maten</th><td>Niet op deze pagina</td><td>&ldquo;Ook in&rdquo;-knoppen naar de andere productpagina&rsquo;s, plus een eigen maat binnen de grenzen</td><td>Vrij, binnen de grenzen van de configurator</td></tr>
+        <tr><th>Hulp nodig</th><td>&ldquo;Niet precies wat je zoekt?&rdquo; &rarr; case aanvragen</td><td>Vak met de case ingevuld &rarr; een expert</td><td>Zelfde vak, onder de configurator</td></tr>
+        <tr><th>Hoe het draait</th><td colspan="2">Onze eigen frontend</td><td>De bestaande configurator, in een <strong>iframe</strong> in de pagina. Dit ontwerp gaat naar CaseBuilder; zij bouwen het na in hun frontend, zodat het venster bij de pagina past.</td></tr>
+        <tr><th>Van CB nodig</th><td colspan="3">Per categorie: het niveau, de maten die als product bestaan, en de grenzen voor een eigen maat. Voor L3: het ontwerp nabouwen in de configurator, en hem in een iframe laten draaien in plaats van in een los venster.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="merk"><img src="assets/woordmerk-wit.svg" alt="Casebuilder.com"></div>
+        <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734">+31 (0)575 575734</a></p>
+      </div>
+      <div><h5>Offerte aanvragen</h5><a href='/mockups/case-aanvragen-v1'>Case aanvragen</a><a href='/mockups/laten-controleren-v1'>Maten laten controleren</a><a href="#" title="/grote-spelers/series — bestaat nog niet als pagina">Series en staffels</a><a href="#" title="/grote-spelers — hier nog zonder eigen instap">Zakelijk bestellen</a></div>
+      <div><h5>Kant en klaar</h5><a href='/mockups/shop-v1'>Alle vaste cases</a><a href='/mockups/case-voor-v3'>Wat ga je vervoeren?</a><a href='/mockups/flightcases-v1'>Flightcases per model</a><a href='/mockups/categorie-v1'>Onderdelen</a></div>
+      <div><h5>Zelf configureren</h5><a href='/mockups/configurator-v1'>Naar de configurator</a><a href='/mockups/zo-werkt-het-v1'>Zo werkt het</a><a href="#" title="/account/orders — achter inloggen">Herhaalorder</a><a href="#" title="/account/configuraties — achter inloggen">Mijn configuraties</a></div>
+      <div><h5>Branches</h5><a href='/mockups/branche-audio-visueel-v1'>Audio-visueel en podium</a><a href='/mockups/branche-broadcast-en-media-v1'>Broadcast en media</a><a href='/mockups/branche-industrie-en-machinebouw-v1'>Industrie en machinebouw</a><a href='/mockups/branche-meet-en-testapparatuur-v1'>Meet- en testapparatuur</a><a href='/mockups/branche-defensie-v1'>Defensie</a><a href='/mockups/branche-schaalmodellen-v1'>Schaalmodellen</a><a href='/mockups/branches'>Alle branches</a><a class='anders' href='/mockups/grote-spelers-v1'>Inkopen als grote partij &rarr;</a></div>
+      <div><h5>Service</h5><a href='/mockups/service-levertijden-v1'>Levertijden</a><a href="#" title="/service/verzending — bestaat nog niet als pagina">Verzending</a><a href="#" title="/service/zaagservice — bestaat nog niet als pagina">Zaagservice</a><a href='/mockups/over-ons-v1'>Over Proflite</a><a href='/mockups/contact-v1'>Contact</a></div>
+    </div>
+    <div class="bot"><span>KVK 09123456</span><span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span></div>
+  </div>
+</footer>
+
+<script src="assets/laatst.js"></script>
+<script src="assets/draaikist.js"></script>
+<script>
+/* ══════════════════════════════════════════════════════════════
+   De productpagina. Eén staat voor alle drie de producten; het product
+   bepaalt welke opties er staan (data-toon). Keuzegroepen, maatvelden,
+   kleuren en logo-uploads kunnen dubbel voorkomen (in de pagina bij L2,
+   in het configuratorvenster bij L3) en lezen en schrijven dezelfde
+   staat. De kist via kist:maat, --paneel en twee klassen. Het logo blijft
+   in de browser; alles wat de bezoeker typt gaat via textContent en value.
+   ══════════════════════════════════════════════════════════════ */
+(function () {
+  function q(s) { return document.querySelector(s); }
+  function qa(s) { return Array.prototype.slice.call(document.querySelectorAll(s)); }
+
+  var kist = q('[data-draaikist]'), kubus = q('[data-kubus]'), logo = q('[data-logo]'), slotEl = q('[data-slot]');
+  var KLEUREN = [['Zwart','#1A1A1A'],['Navy','#003352'],['Rood','#8C1A1A'],['Groen','#1F5133'],
+                 ['Oranje','#C8781A'],['Grijs','#B8B8B8'],['Ivoor','#E8E4DC'],['Paars','#4A3B6B']];
+  var NAMEN = {
+    model:  { koffer: 'Koffer', hoedcase: 'Hoedcase', trunccase: 'Trunccase', rack1: 'Rackcase enkel deksel', rack2: 'Rackcase dubbel deksel' },
+    maat:   { buiten: 'Buitenmaten', binnen: 'Binnenmaten' },
+    hoek:   { rond: 'Ronde hoeken', vierkant: 'Vierkante hoeken' },
+    paneel: { '7': '7 mm multiplex', '9': '9 mm multiplex' },
+    slot:   { vlinder: 'Vlindersluiting', hangslot: 'Vlindersluiting met hangslotoog', klap: 'Klapsluiting' },
+    greep:  { koffer: '2× koffergreep', inbouw: '2× inbouwgreep' },
+    wielen: { geen: 'Geen wielen', zwenk: '4 zwenkwielen, 2 met rem' },
+    schuim: { geen: 'Geen schuim', pluk: 'Plukschuim in bodem en deksel' }
+  };
+  var TOESLAG = { hoek: { vierkant: 14 }, slot: { hangslot: 9.5, klap: 6 }, paneel: { '9': 18 },
+                  greep: { inbouw: 12 }, wielen: { zwenk: 48 }, schuim: { pluk: 35 } };
+  var STAPPEN = ['Model', 'Afmetingen', 'Uitvoering', 'Hardware', 'Overzicht'];
+  var STANDAARD = { hoek: 'rond', slot: 'vlinder', maat: 'buiten', paneel: '7', greep: 'koffer', wielen: 'geen', schuim: 'geen' };
+
+  var PRODUCTEN = {
+    l1: {
+      crumbs: [['shop-v1.html', 'Shop'], ['shop-v1.html#backline', 'Backline & muziek'], [null, 'Gibson Les Paul Standard']],
+      ey: '// CASE VOOR EEN APPARAAT', h1: 'Flightcase voor een Gibson Les Paul',
+      lead: 'Een Les Paul is 1.000 mm lang, 350 breed en 90 dik, met een massieve mahonie body van ruim vier kilo. Het gewicht zit in de kast, de kwetsbaarheid in de hals.',
+      balk: '// VASTE CASE VOOR DIT INSTRUMENT', model: 'hoedcase', naam: 'Hoedcase', b: 1060, d: 410, h: 150, prijs: 214.80, id: '4LP1-0060',
+      tekst: 'Deksel er helemaal af, dus je legt de gitaar erin in plaats van hem erin te wurmen. De uitsparing ondersteunt de hals onder de kopplaat, waar een Les Paul het snelst breekt.',
+      maten: 'binnenmaat 1.010 × 360 × 100 · schuim 25 mm rondom',
+      waarom: [['// BINNENMAAT', '1.010 × 360 × 100', 'Instrument plus 5 mm speling, zodat het schuim het werk doet en niet de kast.'],
+               ['// SCHUIMDIKTE', '25 mm rondom', 'Genoeg voor busvervoer. Ga je vliegen, vraag dan naar 40 mm.'],
+               ['// GEWICHT', 'Circa 9 kg leeg', 'Met gitaar rond de 13 kg.']]
+    },
+    l2: {
+      crumbs: [['shop-v1.html', 'Shop'], ['shop-v1.html#av-licht', 'AV & licht'], [null, 'Trunccase']],
+      ey: '// TRUNCCASE · OP JOUW MAAT TE MAKEN', h1: 'Trunccase, de universele kist',
+      lead: 'Een kist met een bovendeksel voor alles wat niet in een rack of een koffer past: kabels, statieven, losse armaturen. Staat in twee maten in de shop, en is op maat te maken.',
+      balk: '// TRUNCCASE · IN TWEE MATEN OF OP MAAT', model: 'trunccase', naam: 'Trunccase', b: 800, d: 800, h: 800, id: '9P4C-2210',
+      maatfamilie: [[800, 800, 800], [1000, 600, 600]],
+      grens: { b: [400, 1400], d: [300, 1000], h: [300, 1000] },
+      tekst: 'Bovendeksel met twee vlindersluitingen, vier zwenkwielen onder, handgrepen aan de korte kanten. Kies een van de twee standaardmaten of vul je eigen maten in.',
+      waarom: [['// MATEN', 'Twee standaard, of eigen', 'Een standaardmaat is sneller leverbaar; een eigen maat maken we binnen de grenzen hieronder.'],
+               ['// PANEEL', '7 mm multiplex', 'Met aluminium profiel en balhoeken. Zwaarder nodig? Open de volledige configurator.'],
+               ['// HULP', 'Een expert kijkt mee', 'Twijfel je over een vak of een maat? Stuur je case met een vraag, dan tekenen wij het uit.']]
+    },
+    l3: {
+      crumbs: [['shop-v1.html', 'Shop'], ['shop-v1.html#broadcast', 'Broadcast & camera'], [null, 'Rackcase dubbel deksel']],
+      ey: '// RACKCASE · ALLES OP MAAT', h1: 'Rackcase met voor- en achterdeksel',
+      lead: 'Voor 19-inch apparatuur die van twee kanten bereikbaar moet zijn: een regiekoffer, een versterkerrack, een switcher met kabels achterop. Hier stel je alles zelf samen.',
+      balk: '// DE CONFIGURATOR VAN CASEBUILDER · VOLLEDIGE STAND', model: 'rack2', naam: 'Rackcase dubbel deksel', b: 600, d: 620, h: 550, id: '2RK8-7731',
+      grens: { b: [300, 1400], d: [300, 1000], h: [200, 1000] },
+      tekst: 'Dit is de configurator zoals CaseBuilder hem nu heeft, in de pagina in plaats van in een los venster. Wat je kiest, zie je links aan de kist.',
+      waarom: [['// MODEL', 'Rackcase dubbel deksel', '19 inch, voor- én achterdeksel. Een ander model kiezen kan in stap 1.'],
+               ['// ALLES OP MAAT', 'Maten, beslag, schuim', 'Paneeldikte, handgrepen, wielen en schuim; de prijs loopt mee.'],
+               ['// HULP', 'Een expert kijkt mee', 'Kom je er niet uit? Stuur je case met een vraag, dan tekenen wij het uit.']]
+    }
+  };
+
+  var staat = { p: 'l1', stap: 1, kleur: 0, b: 0, d: 0, h: 0, model: 'hoedcase', logoNaam: '' };
+  Object.keys(STANDAARD).forEach(function (k) { staat[k] = STANDAARD[k]; });
+
+  function euro(x) { return '€ ' + x.toFixed(2).replace('.', ','); }
+  function mm(x) { return Number(x).toLocaleString('nl-NL'); }
+  function cm(x) { return String(Math.round(x / 10)); }
+  function P() { return PRODUCTEN[staat.p]; }
+  function opMaat() { return staat.p !== 'l1'; }
+
+  /* Voorbeeldprijs voor L2 en L3, met dezelfde regel: basis plus
+     paneeloppervlak plus de toeslagen. De echte komt uit de configurator. */
+  function prijsOpMaat() {
+    var opp = 2 * (staat.b * staat.h + staat.b * staat.d + staat.h * staat.d) / 1e6;
+    var p = 60 + opp * 60;
+    Object.keys(TOESLAG).forEach(function (k) { p += TOESLAG[k][staat[k]] || 0; });
+    return Math.round(p * 20) / 20;
+  }
+  function standaardIndex() {
+    var fam = P().maatfamilie || [];
+    for (var i = 0; i < fam.length; i++) if (fam[i][0] === staat.b && fam[i][1] === staat.d && fam[i][2] === staat.h) return i;
+    return -1;
+  }
+
+  /* Kleurknoppen, in elk vak dat erom vraagt (de pagina en stap 3). */
+  qa('[data-stalen]').forEach(function (vak) {
+    KLEUREN.forEach(function (k, i) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.style.background = k[1]; b.title = k[0]; b.setAttribute('aria-label', k[0]);
+      b.addEventListener('click', function () { staat.kleur = i; teken(); });
+      vak.appendChild(b);
+    });
+  });
+
+  /* Maatknoppen per product: de maten die als eigen product bestaan,
+     plus "eigen maat". */
+  function bouwMaatknoppen() {
+    var vak = q('[data-maatknoppen]');
+    vak.textContent = '';
+    (P().maatfamilie || []).forEach(function (m, i) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.dataset.i = String(i);
+      b.textContent = cm(m[0]) + '×' + cm(m[1]) + '×' + cm(m[2]);
+      var s = document.createElement('small'); s.textContent = i === 0 ? 'deze pagina' : 'eigen productpagina';
+      b.appendChild(s);
+      b.addEventListener('click', function () { staat.b = m[0]; staat.d = m[1]; staat.h = m[2]; teken(); });
+      vak.appendChild(b);
+    });
+    var e = document.createElement('button');
+    e.type = 'button'; e.dataset.i = 'eigen'; e.textContent = 'Eigen maat';
+    var s = document.createElement('small'); s.textContent = 'vul hieronder in'; e.appendChild(s);
+    e.addEventListener('click', function () { q('.kies [data-veld="b"]').focus(); });
+    vak.appendChild(e);
+  }
+
+  function crumbs() {
+    var vak = q('[data-crumbs]');
+    vak.textContent = '';
+    P().crumbs.forEach(function (c, i) {
+      if (i) { var sep = document.createElement('span'); sep.className = 'sep'; sep.textContent = '/'; vak.appendChild(sep); }
+      var el = document.createElement(c[0] ? 'a' : 'span');
+      if (c[0]) el.href = c[0];
+      el.textContent = c[1];
+      vak.appendChild(el);
+    });
+  }
+
+  function waarom() {
+    var vak = q('[data-waarom]');
+    vak.textContent = '';
+    P().waarom.forEach(function (w) {
+      var d = document.createElement('div');
+      [['k', w[0]], ['v', w[1]], [null, w[2]]].forEach(function (x) {
+        var el = document.createElement(x[0] ? 'div' : 'p');
+        if (x[0]) el.className = x[0];
+        el.textContent = x[1];
+        d.appendChild(el);
+      });
+      vak.appendChild(d);
+    });
+  }
+
+  function samenvatting() {
+    var dl = q('[data-samen]');
+    dl.textContent = '';
+    [['Model', NAMEN.model[staat.model]],
+     ['Maten', mm(staat.b) + ' × ' + mm(staat.d) + ' × ' + mm(staat.h) + ' mm'],
+     ['Maatvoering', NAMEN.maat[staat.maat]],
+     ['Hoeken', NAMEN.hoek[staat.hoek]],
+     ['Paneel', NAMEN.paneel[staat.paneel]],
+     ['Kleur', KLEUREN[staat.kleur][0]],
+     ['Logo', staat.logoNaam || 'Geen'],
+     ['Slot', NAMEN.slot[staat.slot]],
+     ['Handgrepen', NAMEN.greep[staat.greep]],
+     ['Wielen', NAMEN.wielen[staat.wielen]],
+     ['Schuim', NAMEN.schuim[staat.schuim]]
+    ].forEach(function (r) {
+      var dt = document.createElement('dt'); dt.textContent = r[0];
+      var dd = document.createElement('dd'); dd.textContent = r[1];
+      dl.appendChild(dt); dl.appendChild(dd);
+    });
+  }
+
+  function teken() {
+    var p = P(), l2 = staat.p === 'l2', l3 = staat.p === 'l3';
+    qa('[data-producten] button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.p === staat.p)); });
+    qa('[data-toon]').forEach(function (el) { el.hidden = el.dataset.toon.split(' ').indexOf(staat.p) < 0; });
+    q('[data-bd]').classList.toggle('breed', l3);
+    q('[data-ey]').textContent = p.ey;
+    q('[data-h1]').textContent = p.h1;
+    q('[data-lead]').textContent = p.lead;
+    q('[data-balk]').textContent = p.balk;
+    q('[data-tekst]').textContent = p.tekst;
+
+    var si = standaardIndex();
+    var maat = mm(staat.b) + ' × ' + mm(staat.d) + ' × ' + mm(staat.h) + ' mm';
+    q('[data-h2]').textContent = l3 ? NAMEN.model[staat.model] + ', ' + maat
+      : l2 && si < 0 ? p.naam + ' op maat, ' + maat : p.naam + ', ' + maat;
+    q('[data-maten]').textContent = l3 ? 'buitenmaat · alles aan te passen in de configurator hieronder'
+      : l2 ? 'buitenmaat · 7 mm multiplex · ' + (si < 0 ? 'eigen maat' : 'standaardmaat, ook los in de shop')
+      : p.maten;
+    q('[data-prijs]').textContent = euro(opMaat() ? prijsOpMaat() : p.prijs);
+    q('[data-prijslab]').textContent = l2 ? 'excl. btw · voorbeeldprijs, verandert mee met je keuzes' : 'excl. btw · maten liggen vast';
+    q('[data-schaal]').textContent = mm(staat.b) + ' mm buitenmaat';
+
+    // de kist
+    kist.dispatchEvent(new CustomEvent('kist:maat', { detail: { naam: '', b: staat.b, h: staat.h, d: staat.d } }));
+    kubus.style.setProperty('--paneel', KLEUREN[staat.kleur][1]);
+    kubus.classList.toggle('hoek-vierkant', opMaat() && staat.hoek === 'vierkant');
+    slotEl.className = 'slot' + (opMaat() && staat.slot !== 'vlinder' ? ' ' + staat.slot : '');
+
+    // keuzes, overal waar ze staan
+    qa('[data-kleurnaam]').forEach(function (el) { el.textContent = KLEUREN[staat.kleur][0]; });
+    qa('[data-stalen]').forEach(function (vak) {
+      Array.prototype.forEach.call(vak.children, function (b, i) { b.setAttribute('aria-pressed', String(i === staat.kleur)); });
+    });
+    qa('[data-keuze]').forEach(function (g) {
+      Array.prototype.forEach.call(g.querySelectorAll('button'), function (b) {
+        b.setAttribute('aria-pressed', String(b.dataset.w === staat[g.dataset.keuze]));
+      });
+    });
+    qa('[data-maatknoppen] button').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.i === (si < 0 ? 'eigen' : String(si))));
+    });
+    if (p.grens) {
+      var g = p.grens;
+      var grenstekst = 'Breedte ' + mm(g.b[0]) + '–' + mm(g.b[1]) + ' · diepte ' + mm(g.d[0]) + '–' + mm(g.d[1]) +
+        ' · hoogte ' + mm(g.h[0]) + '–' + mm(g.h[1]) + ' mm.' + (l2 ? ' Een maat tussen de standaardmaten in kan ook.' : '');
+      qa('[data-grens]').forEach(function (el) { el.textContent = grenstekst; });
+      qa('[data-veld]').forEach(function (inp) {
+        var k = inp.dataset.veld;
+        inp.min = g[k][0]; inp.max = g[k][1];
+        if (document.activeElement !== inp) inp.value = staat[k];
+      });
+    }
+
+    // L3: het configuratorvenster
+    q('[data-ref]').textContent = '// concept ' + p.id + ' · automatisch bewaard';
+    qa('[data-stapknop]').forEach(function (b) {
+      var i = +b.dataset.stapknop;
+      if (i === staat.stap) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+      b.classList.toggle('gedaan', i < staat.stap);
+    });
+    qa('[data-stap]').forEach(function (d) { d.hidden = +d.dataset.stap !== staat.stap; });
+    q('[data-vorige]').hidden = staat.stap <= 1;
+    q('[data-volgende]').textContent = staat.stap < 5 ? 'Volgende: ' + STAPPEN[staat.stap].toLowerCase() + ' →' : 'In winkelwagen →';
+    q('[data-cfgprijs]').textContent = euro(prijsOpMaat());
+    samenvatting();
+
+    // hulpvak: de case zoals hij nu is
+    q('[data-hulpid]').textContent = 'Case ' + p.id + ' · ' + NAMEN.model[staat.model].toLowerCase() + ' ' + maat + ' · ' +
+      NAMEN.hoek[staat.hoek].toLowerCase() + ' · ' + NAMEN.slot[staat.slot].toLowerCase() + ' · ' + KLEUREN[staat.kleur][0].toLowerCase() +
+      (l3 ? ' · ' + NAMEN.paneel[staat.paneel] + ' · ' + NAMEN.greep[staat.greep] + ' · ' + NAMEN.wielen[staat.wielen].toLowerCase() +
+            ' · ' + NAMEN.schuim[staat.schuim].toLowerCase() : '') +
+      (staat.logoNaam ? ' · logo ' + staat.logoNaam : '');
+
+    if (location.hash !== '#' + staat.p) history.replaceState(null, '', '#' + staat.p);
+  }
+
+  /* Ander product: de maten en keuzes van dat product, de kleur blijft.
+     Van L2 naar L3 ("Meer aanpassen?") gaan de maten, hoeken, slot en
+     kleur mee; dat is dezelfde case, verder uitgewerkt. */
+  function kiesProduct(p, meenemen) {
+    if (!PRODUCTEN[p]) return;
+    var nieuw = PRODUCTEN[p];
+    staat.p = p;
+    staat.stap = 1;
+    if (!meenemen) {
+      staat.b = nieuw.b; staat.d = nieuw.d; staat.h = nieuw.h;
+      Object.keys(STANDAARD).forEach(function (k) { staat[k] = STANDAARD[k]; });
+      staat.model = nieuw.model;
+    } else {
+      staat.stap = 4;   // de maten liggen er al; verder bij het beslag
+    }
+    q('[data-hulp]').hidden = true;
+    q('[data-hulpknop]').setAttribute('aria-expanded', 'false');
+    bouwMaatknoppen(); crumbs(); waarom(); teken();
+    // verder waar je was (assets/laatst.js): dit product, en de categorie erboven
+    if (window.cbOnthoud) window.cbOnthoud({ naam: nieuw.crumbs[2][1], pagina: 'product-v1.html#' + p,
+      categorie: nieuw.crumbs[1][1], categoriepagina: nieuw.crumbs[1][0] });
+  }
+
+  qa('[data-producten] button').forEach(function (b) { b.addEventListener('click', function () { kiesProduct(b.dataset.p); }); });
+  q('[data-l3]').addEventListener('click', function (e) { e.preventDefault(); kiesProduct('l3', true); });
+  qa('[data-keuze] button').forEach(function (b) {
+    b.addEventListener('click', function () { staat[b.parentNode.dataset.keuze] = b.dataset.w; teken(); });
+  });
+  qa('[data-stapknop]').forEach(function (b) {
+    b.addEventListener('click', function () { staat.stap = +b.dataset.stapknop; teken(); });
+  });
+  q('[data-vorige]').addEventListener('click', function () { staat.stap = Math.max(1, staat.stap - 1); teken(); });
+  q('[data-volgende]').addEventListener('click', function () { if (staat.stap < 5) { staat.stap++; teken(); } });
+
+  /* Maten: meetekenen binnen de grenzen, bij het verlaten terugzetten
+     naar de dichtstbijzijnde maat die kan — zoals in de editor. */
+  qa('[data-veld]').forEach(function (inp) {
+    var k = inp.dataset.veld;
+    inp.addEventListener('input', function () {
+      var g = P().grens, w = parseInt(inp.value, 10);
+      if (g && w >= g[k][0] && w <= g[k][1]) { staat[k] = w; teken(); }
+    });
+    inp.addEventListener('change', function () {
+      var g = P().grens, w = parseInt(inp.value, 10);
+      if (!g) return;
+      staat[k] = Math.max(g[k][0], Math.min(g[k][1], isNaN(w) ? staat[k] : w));
+      inp.value = staat[k];
+      teken();
+    });
+  });
+
+  var vorigeUrl = null;
+  qa('[data-upload]').forEach(function (inp) {
+    inp.addEventListener('change', function (e) {
+      var f = e.target.files && e.target.files[0];
+      if (!f || !/^image\//.test(f.type)) return;
+      if (vorigeUrl) URL.revokeObjectURL(vorigeUrl);
+      vorigeUrl = URL.createObjectURL(f);
+      logo.src = vorigeUrl; logo.hidden = false;
+      staat.logoNaam = f.name;
+      qa('[data-uploadtekst]').forEach(function (el) { el.textContent = f.name; });
+      teken();
+    });
+  });
+
+  var hulpknop = q('[data-hulpknop]');
+  hulpknop.addEventListener('click', function () {
+    var vak = q('[data-hulp]');
+    vak.hidden = !vak.hidden;
+    hulpknop.setAttribute('aria-expanded', String(!vak.hidden));
+    if (!vak.hidden) q('#hulpvraag').focus();
+  });
+  q('[data-hulpstuur]').addEventListener('click', function () { q('[data-hulpklaar]').hidden = false; });
+
+  function uitHash() { var p = location.hash.slice(1); kiesProduct(PRODUCTEN[p] ? p : 'l1'); }
+  addEventListener('hashchange', function () { if (location.hash.slice(1) !== staat.p) uitHash(); });
+  uitHash();
+})();
+</script>
+<script src="assets/vouw.js"></script>
+</body>
+</html>

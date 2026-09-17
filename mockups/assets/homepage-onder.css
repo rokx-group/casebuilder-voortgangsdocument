@@ -231,3 +231,20 @@
   .assure .steps{padding-left:20px}
   .eencase .obj{grid-template-columns:1fr}
 }
+
+/* ── Probeer het, onder de prijsopbouw (besloten 11 september) ──
+   Een witte kaart over de volle breedte: de kist links, de schuiven en
+   de prijs rechts. De kist zelf komt uit assets/draaikist.css. */
+.probeer{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-top:40px;
+  background:#fff;border:1px solid var(--rule);padding:24px 28px}
+.probeer .kist3d{height:280px}
+.probeer .kmaat{display:none}
+.probeer h3{font-size:24px;margin:10px 0 16px}
+.probeer label{display:grid;grid-template-columns:80px 1fr 70px;align-items:center;gap:12px;font-family:var(--mono);
+  font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-bottom:10px}
+.probeer input[type=range]{accent-color:var(--dark);width:100%}
+.probeer output{font-family:var(--disp);font-size:18px;color:var(--dark);text-align:right}
+.probeer .pr{font-family:var(--disp);font-size:32px;font-weight:900;color:var(--dark);margin:14px 0 16px}
+.probeer .pr small{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--mute);font-weight:500;margin-left:8px}
+@media(max-width:900px){.probeer{grid-template-columns:1fr}}
+

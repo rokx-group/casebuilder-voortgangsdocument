@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder &mdash; shop beoordelen (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   /shop beoordelen
+
+   De shop is niveau 1: vaste cases voor één apparaat, alleen kleur en
+   logo, plus de onderdelen. Twee pagina's, in de volgorde waarin je ze
+   tegenkomt:
+
+     rij 1  het shopoverzicht     shop-v1: per toepassing, met filters
+     rij 2  de productpagina      case-voor-gibson-les-paul-v2: kleur,
+                                  logo, in winkelwagen
+
+   Er is nog maar één versie van elk, dus hier valt nog niets te kiezen
+   tussen varianten; de tab is er om ze te bekijken en te bespreken. Komt
+   er een tweede versie, dan komt die in dezelfde rij ernaast.
+
+   Op 66% past een venster van 1440 in 950 px, en de pagina blijft
+   leesbaar. De schaal staat op drie plekken en moet gelijk blijven: in
+   .houder, in de iframe, en in data-schaal (kaderhoogte.js).
+   ══════════════════════════════════════════════════════════════ */
+body{background:#EDF0F4}
+.vgl{max-width:1440px;margin:0 auto;padding:0 24px 90px}
+.inleiding{max-width:82ch;margin:0 0 10px}
+.inleiding h2{font-size:26px;margin-bottom:8px}
+.inleiding p{font-size:14px;color:var(--mute);line-height:1.65}
+.inleiding p+p{margin-top:8px}
+.inleiding p b{color:var(--ink)}
+
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--rule);margin:0 0 26px;flex-wrap:wrap}
+.tabs a{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mute);padding:16px 20px 13px;border-bottom:3px solid transparent;margin-bottom:-1px}
+.tabs a:hover{color:var(--dark)}
+.tabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+
+.groepkop{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:34px 0 12px}
+.groepkop .gn{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--blue);flex:none}
+.groepkop b{font-family:var(--disp);text-transform:uppercase;font-size:20px;letter-spacing:.03em;
+  color:var(--dark);flex:none}
+.groepkop span.gu{font-size:13.5px;color:var(--mute)}
+
+/* ── één kader per rij, bijna op maat ──────────────────────── */
+.enkel{max-width:952px}
+.demo{border:1px solid var(--rule);background:#fff;box-shadow:0 1px 3px rgba(0,40,70,.07);overflow:hidden}
+.demo .balk{display:flex;align-items:center;gap:8px;text-decoration:none;cursor:pointer;transition:background .12s;
+  background:var(--dark);color:#fff;font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+  text-transform:uppercase;font-weight:600;padding:7px 14px}
+.demo .balk .vs{margin-left:auto;max-width:0;overflow:hidden;white-space:nowrap;opacity:0;
+  transition:opacity .12s,max-width .12s;font-size:9px;letter-spacing:.12em}
+.demo a.balk:hover .vs{opacity:.85;max-width:16ch}
+.demo a.balk:hover{background:var(--blue)}
+.demo a.balk:focus-visible{outline:2px solid var(--cyan);outline-offset:-2px}
+.demo .toel{padding:10px 14px 12px;font-size:13px;line-height:1.5;color:var(--mute);border-top:1px solid var(--rule);margin:0}
+.demo .toel b{color:var(--ink)}
+.venster{height:760px;overflow:auto;background:var(--bg)}
+.houder{width:950px;height:2640px}
+.venster iframe{width:1440px;height:4000px;border:0;display:block;transform:scale(.66);transform-origin:top left}
+
+/* ── focusmodus (assets/focus.js) ──────────────────────────── */
+.dim{position:fixed;inset:0;background:rgba(11,26,38,.62);z-index:50;opacity:0;pointer-events:none;transition:opacity .14s}
+body.focusmodus .dim{opacity:1;pointer-events:auto}
+.demo.aan{position:relative;z-index:60}
+.demo{cursor:zoom-in}
+.demo.aan{cursor:zoom-out}
+body.focusmodus .demo:not(.aan){cursor:default}
+.demo a,.demo iframe{cursor:auto}
+@media (prefers-reduced-motion: reduce){ .dim{transition:none} }
+
+.tabs a.tak{color:var(--dark)}
+.subtabs{display:flex;align-items:baseline;gap:0;margin:-20px 0 26px;flex-wrap:wrap}
+.subtabs .pad{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);padding:9px 14px 9px 2px}
+.subtabs a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);padding:9px 16px;border-bottom:2px solid transparent}
+.subtabs a:hover{color:var(--dark)}
+.subtabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+
+/* tabbalk: alle tabs staan op elke pagina, en ze breken af naar een tweede
+   regel als ze niet op één passen. */
+.tabs{flex-wrap:wrap}
+</style>
+</head><body>
+
+<div class="vgl">
+
+  <div class="tabs">
+    <a href='/mockups/header-varianten'>Header</a>
+    <a href='/mockups/hero-voorstellen'>Hero</a>
+    <a href='/mockups/homepage-varianten'>Homepage</a>
+    <a href='/mockups/case-aanvragen-varianten'>Case aanvragen</a>
+    <a href='/mockups/case-voor-varianten'>/case-voor</a>
+    <a href='/mockups/flightcases-varianten'>/flightcases</a>
+    <a href='/mockups/editor-varianten'>Editor</a>
+    <a href='/mockups/groot-zakelijk-varianten'>/groot-zakelijk</a>
+    <a href='/mockups/branches-varianten'>Kopkeuze</a>
+    <a href='/mockups/service-varianten'>/service</a>
+    <a class='on' href='/mockups/shop-varianten'>/shop</a>
+    <a href='/mockups/zoeken-varianten'>/zoeken</a>
+    <a href='/mockups/faq-varianten'>FAQ</a>
+    <a href='/mockups/footer-varianten'>Footer</a>
+  </div>
+
+  <div class="inleiding">
+    <h2>De shop: vaste cases, kleur en logo</h2>
+    <p>Niveau 1: een case voor één apparaat met vaste maten. Je kiest kleur en logo en rekent direct af; het is een Medusa-product, geen configurator. Wie een andere maat nodig heeft, gaat naar de configurator (L2), met de maten van deze kist als begin. De onderdelen horen ook bij de shop.</p>
+    <p><b>Klik op Shop in het menu</b> en je komt op het overzicht: alle vaste cases per toepassing, met filters. Categorie en merk worden per tabblad bewaard; model, prijs, levertijd, aanpasbaar en branche lopen mee. Het pad via Wat ga je vervoeren? (toepassing &rarr; categorie &rarr; apparaat) blijft, als tweede weg in het Shop-menu.</p>
+  </div>
+
+  <div class="groepkop">
+    <span class="gn">// RIJ 1</span>
+    <b>Shopoverzicht</b>
+    <span class="gu">/shop &middot; per toepassing, met filters</span>
+  </div>
+  <div class="enkel">
+    <div class="demo">
+      <a class='balk' href='/mockups/shop-v1' rel='noopener' target='_blank'>v1 &middot; shop-v1<span class="vs">volledig scherm</span><span aria-hidden="true">&#8599;</span></a>
+      <div class="venster" data-schaal=".66"><div class="houder">
+        <iframe src="shop-v1.html" title="Shopoverzicht v1" loading="lazy"></iframe>
+      </div></div>
+      <p class="toel">Alle producten, merken, prijzen en voorraad zijn verzonnen; de tekeningen zijn illustraties, geen foto&rsquo;s. Vandaag zijn er vrijwel geen vaste cases, dus het echte assortiment moet nog worden opgebouwd.</p>
+    </div>
+  </div>
+
+  <div class="groepkop">
+    <span class="gn">// RIJ 2</span>
+    <b>Productpagina</b>
+    <span class="gu">/case-voor/{apparaat} &middot; kleur, logo, in winkelwagen</span>
+  </div>
+  <div class="enkel">
+    <div class="demo">
+      <a class='balk' href='/mockups/case-voor-gibson-les-paul-v2' rel='noopener' target='_blank'>v2 &middot; case-voor-gibson-les-paul-v2<span class="vs">volledig scherm</span><span aria-hidden="true">&#8599;</span></a>
+      <div class="venster" data-schaal=".66"><div class="houder">
+        <iframe src="case-voor-gibson-les-paul-v2.html" title="Productpagina v2" loading="lazy"></iframe>
+      </div></div>
+      <p class="toel">Elke kaart in het shopoverzicht linkt voorlopig naar deze ene uitgewerkte productpagina.</p>
+    </div>
+  </div>
+
+</div>
+
+<script src="assets/kaderhoogte.js"></script>
+<script src="assets/focus.js"></script>
+</body>
+</html>

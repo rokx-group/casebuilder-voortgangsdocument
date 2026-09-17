@@ -130,6 +130,10 @@ body.focusmodus .demo:not(.aan){cursor:default}
   color:var(--mute);padding:9px 16px;border-bottom:2px solid transparent}
 .subtabs a:hover{color:var(--dark)}
 .subtabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+
+/* tabbalk: alle tabs staan op elke pagina, en ze breken af naar een tweede
+   regel als ze niet op één passen. */
+.tabs{flex-wrap:wrap}
 </style>
 </head>
 <body>
@@ -137,22 +141,24 @@ body.focusmodus .demo:not(.aan){cursor:default}
 <div class="vgl">
 
   <div class="tabs">
-    <a href="header-varianten.html">Header</a>
-    <a href="hero-voorstellen.html">Hero</a>
-    <a href="homepage-varianten.html">Homepage</a>
-    <a href="case-aanvragen-varianten.html">Case aanvragen</a>
-    <a href="case-voor-varianten.html">/case-voor</a>
-    <a href="flightcases-varianten.html" class="tak">/flightcases</a>
-    <a href="groot-zakelijk-varianten.html">/groot-zakelijk</a>
-    <a href="branches-varianten.html">Kopkeuze</a>
-    <a href="service-varianten.html">/service</a>
-    <a href="zoeken-varianten.html">/zoeken</a>
-    <a href="faq-varianten.html">FAQ</a>
-    <a href="footer-varianten.html">Footer</a>
+    <a href='/mockups/header-varianten'>Header</a>
+    <a href='/mockups/hero-voorstellen'>Hero</a>
+    <a href='/mockups/homepage-varianten'>Homepage</a>
+    <a href='/mockups/case-aanvragen-varianten'>Case aanvragen</a>
+    <a href='/mockups/case-voor-varianten'>/case-voor</a>
+    <a class='tak' href='/mockups/flightcases-varianten'>/flightcases</a>
+    <a href='/mockups/editor-varianten'>Editor</a>
+    <a href='/mockups/groot-zakelijk-varianten'>/groot-zakelijk</a>
+    <a href='/mockups/branches-varianten'>Kopkeuze</a>
+    <a href='/mockups/service-varianten'>/service</a>
+    <a href='/mockups/shop-varianten'>/shop</a>
+    <a href='/mockups/zoeken-varianten'>/zoeken</a>
+    <a href='/mockups/faq-varianten'>FAQ</a>
+    <a href='/mockups/footer-varianten'>Footer</a>
   </div>
 
   <div class="subtabs"><span class="pad">&#8627; binnen /flightcases</span>
-    <a href="configurator-varianten.html" class="on">/configurator</a>
+    <a class='on' href='/mockups/configurator-varianten'>/configurator</a>
   </div>
 
   <div class="inleiding">
@@ -203,8 +209,8 @@ body.focusmodus .demo:not(.aan){cursor:default}
     <span class="nr">// AANTEKENINGEN</span>
     <h3>Wat er nog open staat</h3>
     <span>
-      <a class="volledig" href="configurator-v1.html" target="_blank" rel="noopener">A volledig scherm &#8599;</a>
-      <a class="volledig" href="configurator-v1.html?start=1" target="_blank" rel="noopener">B volledig scherm &#8599;</a>
+      <a class='volledig' href='/mockups/configurator-v1' rel='noopener' target='_blank'>A volledig scherm &#8599;</a>
+      <a class='volledig' href='/mockups/configurator-v1?start=1' rel='noopener' target='_blank'>B volledig scherm &#8599;</a>
     </span>
   </div>
 

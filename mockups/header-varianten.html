@@ -173,24 +173,38 @@ body.focusmodus .demo:not(.aan){cursor:default}
   color:var(--mute);padding:9px 16px;border-bottom:2px solid transparent}
 .subtabs a:hover{color:var(--dark)}
 .subtabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+
+/* Het Shop-menu staat hier open onder de gekozen balk, als plaat. Zelfde
+   markup als de echte balk; alleen het open- en dichtklappen staat uit. */
+.h-shoppaneel{border-top:1px solid var(--rule);background:#fff}
+.h-shoppaneel .lab{display:block;padding:10px 32px 0;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--blue)}
+.h-shoppaneel .megamenu.vast{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border:0}
+.demo.va .h-nav a[href="shop-v1.html"]{box-shadow:inset 0 -3px 0 var(--cyan)}
+
+/* tabbalk: alle tabs staan op elke pagina, en ze breken af naar een tweede
+   regel als ze niet op één passen. */
+.tabs{flex-wrap:wrap}
 </style>
 </head>
 <body>
 <div class="vgl">
 
   <div class="tabs">
-    <a href="header-varianten.html" class="on">Header</a>
-    <a href="hero-voorstellen.html">Hero</a>
-    <a href="homepage-varianten.html">Homepage</a>
-    <a href="case-aanvragen-varianten.html">Case aanvragen</a>
-    <a href="case-voor-varianten.html">/case-voor</a>
-    <a href="flightcases-varianten.html">/flightcases</a>
-    <a href="groot-zakelijk-varianten.html">/groot-zakelijk</a>
-    <a href="branches-varianten.html">Kopkeuze</a>
-    <a href="service-varianten.html">/service</a>
-    <a href="zoeken-varianten.html">/zoeken</a>
-    <a href="faq-varianten.html">FAQ</a>
-    <a href="footer-varianten.html">Footer</a>
+    <a class='on' href='/mockups/header-varianten'>Header</a>
+    <a href='/mockups/hero-voorstellen'>Hero</a>
+    <a href='/mockups/homepage-varianten'>Homepage</a>
+    <a href='/mockups/case-aanvragen-varianten'>Case aanvragen</a>
+    <a href='/mockups/case-voor-varianten'>/case-voor</a>
+    <a href='/mockups/flightcases-varianten'>/flightcases</a>
+    <a href='/mockups/editor-varianten'>Editor</a>
+    <a href='/mockups/groot-zakelijk-varianten'>/groot-zakelijk</a>
+    <a href='/mockups/branches-varianten'>Kopkeuze</a>
+    <a href='/mockups/service-varianten'>/service</a>
+    <a href='/mockups/shop-varianten'>/shop</a>
+    <a href='/mockups/zoeken-varianten'>/zoeken</a>
+    <a href='/mockups/faq-varianten'>FAQ</a>
+    <a href='/mockups/footer-varianten'>Footer</a>
   </div>
 
   <div class="inleiding">
@@ -217,9 +231,9 @@ body.focusmodus .demo:not(.aan){cursor:default}
       <div class="wrap">
         <div class="h-logo"><img src="assets/woordmerk.svg" alt="Casebuilder.com"></div>
         <div class="h-nav-inline">
-          <a href="case-aanvragen-v1.html">Case aanvragen</a><a href="case-voor-v1.html">Wat ga je vervoeren?</a>
-          <a href="configurator-v1.html">Zelf configureren</a><a href="flightcases-v1.html">Flightcases</a>
-          <a href="branches.html">Branches</a><a href="service-hub-v1.html">Service</a>
+          <a href='/mockups/case-aanvragen-v1'>Case aanvragen</a><a href='/mockups/case-voor-v1'>Wat ga je vervoeren?</a>
+          <a href='/mockups/flightcases-v1'>Flightcases</a>
+          <a href='/mockups/branches'>Branches</a><a href='/mockups/service-hub-v1'>Service</a><a href='/mockups/shop-v1'>Shop</a>
         </div>
         <div class="h-acties">
           <a href="#" class="h-icoon stil"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg> Zoeken</a>
@@ -234,12 +248,13 @@ body.focusmodus .demo:not(.aan){cursor:default}
 
   <div class="kop gekozen"><span class="nr">// 2 BALKEN</span><h3>Twee balken</h3><span class="gekozen">&#10003; geselecteerd voor nu</span><span class="hgt">122 px chrome · −28%</span></div>
   <details class="specdet">
-    <summary>Details<span class="aantal">9 punten</span></summary>
+    <summary>Details<span class="aantal">10 punten</span></summary>
     <p class="uitleg">De utility-balk verdwijnt; taal en inloggen schuiven naar rechts in de hoofdbalk, de merkregel naar de footer. <b>De offerteknop is er later uit gehaald</b> — een header vol acties maakt geen van alle belangrijk, en de belofte staat nu in de pagina zelf, bij &quot;laten controleren&quot;. Winkelwagen krijgt een telbadge in plaats van een tweede regel. De navigatie houdt één gewicht en één actief-signaal (cyaan streep). Alleen het logo blijft 900-condensed; alles rechts is DM Sans en wijkt terug.</p>
     <dl class="spec">
     <dt>Hoogte</dt><dd><b>122 px</b> in twee balken &mdash; er blijft <span class="let">638 px</span> over voor de pagina</dd>
     <dt>Zoeken</dt><dd>Veld altijd zichtbaar, tot 460 px breed. Wie een artikelnummer heeft, typt het meteen</dd>
-    <dt>Navigatie</dt><dd>Vier items in een eigen balk; er is ruimte tot ongeveer zes</dd>
+    <dt>Navigatie</dt><dd>Zes items in een eigen balk &mdash; daar houdt de ruimte op. Zelf configureren zit onder Flightcases</dd>
+    <dt>Shop</dt><dd>Klik gaat naar het overzicht met alle vaste cases en filters. Onderaan die kolom de 39 categorie&euml;n, voor wie bij zijn apparaat begint. In het midden een paar populaire producten en daaronder de populairste onderdelen, rechts de uitweg naar een andere maat</dd>
     <dt>Actief item</dt><dd>Cyaan streep van 3 px onder het label &mdash; &eacute;&eacute;n signaal, geen tweede kleur</dd>
     <dt>Rechtsboven</dt><dd>Inloggen en winkelwagen met telbadge, in DM Sans zodat ze terugwijken</dd>
     <dt>Taal</dt><dd>NL &#9662; rechts in de navigatiebalk &mdash; zichtbaar zonder klik</dd>
@@ -265,12 +280,52 @@ body.focusmodus .demo:not(.aan){cursor:default}
     </div>
     <nav class="h-nav">
       <div class="wrap">
-        <a href="case-aanvragen-v1.html">Case aanvragen</a><a href="case-voor-v1.html">Wat ga je vervoeren?</a>
-        <a href="configurator-v1.html">Zelf configureren</a><a href="flightcases-v1.html">Flightcases</a>
-        <a href="branches.html">Branches</a><a href="service-hub-v1.html">Service</a>
+        <a href='/mockups/case-aanvragen-v1'>Case aanvragen</a><a href='/mockups/case-voor-v1'>Wat ga je vervoeren?</a>
+        <a href='/mockups/flightcases-v1'>Flightcases</a>
+        <a href='/mockups/branches'>Branches</a><a href='/mockups/service-hub-v1'>Service</a><a href='/mockups/shop-v1'>Shop</a>
         <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#" class="stil">NL ▾</a></div>
       </div>
     </nav>
+    <div class="h-shoppaneel">
+      <span class="lab">// Shop, opengeklapt &mdash; het overzicht, populaire producten en onderdelen</span>
+      <div class="megamenu vast">
+        <div class="wrap">
+          <div>
+            <h4>// ALLE VASTE CASES, MET FILTERS</h4>
+            <ul>
+              <li><a href='/mockups/shop-v1#av-licht'>AV &amp; licht</a></li>
+              <li><a href='/mockups/shop-v1#backline'>Backline &amp; muziek</a></li>
+              <li><a href='/mockups/shop-v1#broadcast'>Broadcast &amp; camera</a></li>
+              <li><a href='/mockups/shop-v1#medisch'>Medisch &amp; lab</a></li>
+              <li><a href='/mockups/shop-v1#industrie'>Industrie &amp; meettechniek</a></li>
+              <li><a href='/mockups/shop-v1#evenement'>Evenement &amp; beursbouw</a></li>
+              <li><a href='/mockups/case-voor-v3'>Alle 39 categorie&euml;n &rarr;</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// POPULAIRE PRODUCTEN</h4>
+            <ul>
+              <li><a href='/mockups/case-voor-gibson-les-paul-v2'>Gibson Les Paul Standard</a></li>
+              <li><a href='/mockups/case-voor-gibson-les-paul-v2' title='/product — hier nog de Les Paul-pagina'>Pioneer DDJ-FLX10</a></li>
+              <li><a href='/mockups/case-voor-gibson-les-paul-v2' title='/product — hier nog de Les Paul-pagina'>Robe Robin 600 LEDWash, duo</a></li>
+              <li><a href='/mockups/case-voor-gibson-les-paul-v2' title='/product — hier nog de Les Paul-pagina'>Sony FX6</a></li>
+            </ul>
+            <h4>// POPULAIRE ONDERDELEN</h4>
+            <ul>
+              <li><a href='/mockups/categorie-v1'>Balhoeken</a></li>
+              <li><a href='/mockups/categorie-v1' title='/onderdelen/{categorie} — hier nog het balhoeken-sjabloon'>Vlindersluitingen</a></li>
+              <li><a href='/mockups/categorie-v1' title='/onderdelen/{categorie} — hier nog het balhoeken-sjabloon'>Handgrepen</a></li>
+              <li><a href='/mockups/categorie-v1'>Alle onderdelen &rarr;</a></li>
+            </ul>
+          </div>
+          <div class="vlak">
+            <b>Andere maat nodig?</b>
+            <p>Kies je eigen afmetingen, ronde of vierkante hoeken en een slot. Wil je meer, dan ga je vanuit daar door naar de volledige editor.</p>
+            <a class='btn btn-dark' href='/mockups/editor-v2#l2'>Op jouw maat &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </div>
     <div class="vulling">PAGINA-INHOUD</div>
   </div>
 
@@ -308,9 +363,9 @@ body.focusmodus .demo:not(.aan){cursor:default}
     </div>
     <nav class="h-nav">
       <div class="wrap">
-        <a href="case-aanvragen-v1.html">Case aanvragen</a><a href="case-voor-v1.html">Wat ga je vervoeren?</a>
-        <a href="configurator-v1.html">Zelf configureren</a><a href="flightcases-v1.html">Flightcases</a>
-        <a href="branches.html">Branches</a><a href="service-hub-v1.html">Service</a>
+        <a href='/mockups/case-aanvragen-v1'>Case aanvragen</a><a href='/mockups/case-voor-v1'>Wat ga je vervoeren?</a>
+        <a href='/mockups/flightcases-v1'>Flightcases</a>
+        <a href='/mockups/branches'>Branches</a><a href='/mockups/service-hub-v1'>Service</a><a href='/mockups/shop-v1'>Shop</a>
         <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span></div>
       </div>
     </nav>

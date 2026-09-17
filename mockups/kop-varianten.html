@@ -57,10 +57,50 @@ body{background:#EDF0F4}
   color:var(--dark);margin:0 0 8px}
 .slot p{font-size:14.5px;color:var(--mute);line-height:1.6;max-width:74ch;margin:0 0 10px}
 .slot p b{color:var(--ink)}
+
+/* Deze pagina stond eerst buiten de reeks en had daardoor geen tabbalk: je
+   kwam hier binnen en kon nergens heen. De opmaak is dezelfde als op de
+   andere vergelijkpagina's; de balk zelf komt uit scripts/bouw-tabbalk.py. */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--rule);margin:0 0 26px}
+.tabs a{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mute);padding:16px 20px 13px;border-bottom:3px solid transparent;margin-bottom:-1px}
+.tabs a:hover{color:var(--dark)}
+.tabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+
+.tabs a.tak{color:var(--dark)}
+.subtabs{display:flex;align-items:baseline;gap:0;margin:-20px 0 26px;flex-wrap:wrap}
+.subtabs .pad{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);padding:9px 14px 9px 2px}
+.subtabs a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);padding:9px 16px;border-bottom:2px solid transparent}
+.subtabs a:hover{color:var(--dark)}
+.subtabs a.on{color:var(--dark);border-bottom-color:var(--cyan);font-weight:600}
+
+/* tabbalk: alle tabs staan op elke pagina, en ze breken af naar een tweede
+   regel als ze niet op één passen. */
+.tabs{flex-wrap:wrap}
 </style>
 </head><body>
 
 <div class="vgl">
+
+  <div class="tabs">
+    <a href='/mockups/header-varianten'>Header</a>
+    <a href='/mockups/hero-voorstellen'>Hero</a>
+    <a href='/mockups/homepage-varianten'>Homepage</a>
+    <a href='/mockups/case-aanvragen-varianten'>Case aanvragen</a>
+    <a href='/mockups/case-voor-varianten'>/case-voor</a>
+    <a href='/mockups/flightcases-varianten'>/flightcases</a>
+    <a href='/mockups/editor-varianten'>Editor</a>
+    <a href='/mockups/groot-zakelijk-varianten'>/groot-zakelijk</a>
+    <a href='/mockups/branches-varianten'>Kopkeuze</a>
+    <a href='/mockups/service-varianten'>/service</a>
+    <a href='/mockups/shop-varianten'>/shop</a>
+    <a href='/mockups/zoeken-varianten'>/zoeken</a>
+    <a href='/mockups/faq-varianten'>FAQ</a>
+    <a href='/mockups/footer-varianten'>Footer</a>
+  </div>
+
   <div class="kop" style="margin-top:34px">
     <span class="nr">// KOP EN NAVIGATIE</span>
     <h3>Wat blijft er staan bij het scrollen</h3>
@@ -71,7 +111,7 @@ body{background:#EDF0F4}
   </div>
 
   <div class="optie">
-    <a class="balk" href="kop-optie-a.html" target="_blank" rel="noopener"><span class="letter">A</span> Monogram links in de navbalk<span class="vs">volledig scherm &#8599;</span></a>
+    <a class='balk' href='/mockups/kop-optie-a' rel='noopener' target='_blank'><span class="letter">A</span> Monogram links in de navbalk<span class="vs">volledig scherm &#8599;</span></a>
     <div class="uit">
       <div class="venster"><iframe src="kop-optie-a.html" title="Optie A"></iframe></div>
       <div class="oordeel">
@@ -84,7 +124,7 @@ body{background:#EDF0F4}
   </div>
 
   <div class="optie">
-    <a class="balk" href="kop-optie-b.html" target="_blank" rel="noopener"><span class="letter">B</span> E&eacute;n balk die krimpt van 120 naar 46&nbsp;px<span class="vs">volledig scherm &#8599;</span></a>
+    <a class='balk' href='/mockups/kop-optie-b' rel='noopener' target='_blank'><span class="letter">B</span> E&eacute;n balk die krimpt van 120 naar 46&nbsp;px<span class="vs">volledig scherm &#8599;</span></a>
     <div class="uit">
       <div class="venster"><iframe src="kop-optie-b.html" title="Optie B"></iframe></div>
       <div class="oordeel">
@@ -96,7 +136,7 @@ body{background:#EDF0F4}
   </div>
 
   <div class="optie">
-    <a class="balk" href="kop-optie-c.html" target="_blank" rel="noopener"><span class="letter">C</span> Monogram rechts, als terug-naar-boven<span class="vs">volledig scherm &#8599;</span></a>
+    <a class='balk' href='/mockups/kop-optie-c' rel='noopener' target='_blank'><span class="letter">C</span> Monogram rechts, als terug-naar-boven<span class="vs">volledig scherm &#8599;</span></a>
     <div class="uit">
       <div class="venster"><iframe src="kop-optie-c.html" title="Optie C"></iframe></div>
       <div class="oordeel">
