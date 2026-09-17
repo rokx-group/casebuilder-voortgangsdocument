@@ -1,0 +1,5 @@
+# Buildoutput. Wordt uit src gemaakt met `npm run build`, dus in git zou
+# hij alleen maar uit de pas lopen met de bron ernaast.
+dist/
+node_modules/
+tsconfig.tsbuildinfo

@@ -1,0 +1,28 @@
+{
+  "name": "casebuilder-flow",
+  "private": true,
+  "type": "module",
+  "description": "De doorloop van /case-voor: zoeken en uitkomen waar je moet zijn. Staat los van de statische mockups ernaast.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "biome check src",
+    "fix": "biome check --write src"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.9.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.2.0",
+    "@tailwindcss/vite": "4.3.3",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "tailwindcss": "4.3.3",
+    "typescript": "^5.9.0",
+    "vite": "^7.1.0"
+  }
+}

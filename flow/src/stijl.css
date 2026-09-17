@@ -1,0 +1,226 @@
+/* Overgenomen uit de echte site: casebuilder/apps/web/src/app/globals.css.
+   Bewust een kopie en geen tweede ontwerp: daar staan de merkwaarden die
+   tegen het brandbook zijn geverifieerd, inclusief de twee contrast-
+   correcties. De mockups ernaast gebruiken nog de oude waarden
+   (--mute #6B7480, --blue #0066A8) en die halen de teksteis niet.
+
+   Eén verschil met de bron: daar komen de fonts uit next/font, hier uit
+   Google Fonts via index.html. De rollen en namen zijn identiek, zodat
+   een component uit deze app zonder aanpassing in de site past. */
+
+@import "tailwindcss";
+
+/* Bron van waarheid: brandbook/CB-Brandbook-final.pdf, geverifieerd
+   en samengevat in _kennis/merk.md. De typeschaal komt uit
+   CB-Brandrichtlijnen.pdf en is ontworpen voor A4 liggend, 1123 px breed.
+   Vertaald naar een desktopreferentie van 1440 px met factor 1,282. */
+
+@theme inline {
+  --font-display: "Barlow Condensed", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+@theme {
+  /* Acht kleuren, hoofdstuk 17. Meer zijn het er niet.
+     Blauw doet het werk, de rest is ruis. */
+  --color-navy: #003352;
+  --color-signaal: #0393d1;
+  --color-inkt: #1a1a1a;
+  --color-vlak: #f2f5f9;
+  --color-lichtblauw: #e6eff6;
+  --color-lijn: #d9dee5;
+
+  /* Twee afwijkingen van de brandbook, en waarom.
+
+     Signaalblauw #0393D1 haalt op wit 3,44:1. De norm voor tekst is
+     4,5:1 en die is sinds 28 juni 2025 wettelijk via de European
+     Accessibility Act. Als vlak, lijn of raster blijft #0393D1 staan,
+     want daar geldt de teksteis niet. Voor tekst zijn er twee
+     varianten: diep voor op licht, helder voor op navy.
+
+     Gedempt stond op #6B7480. Dat haalt op wit 4,74:1 maar zakt op
+     vlak naar 4,33 en op lichtblauw naar 4,07. Omdat label en caption
+     juist op die vlakken staan, is de tint verdiept tot #5F6873. Die
+     haalt op alle drie de achtergronden, en het verschil is met het
+     oog niet te zien. */
+  --color-signaal-diep: #0276a8;
+  --color-signaal-helder: #2ba9dd;
+  --color-gedempt: #5f6873;
+
+  /* De acht typerollen uit de brandrichtlijnen. De displayrollen schalen
+     mee met het scherm, de tekstrollen staan vast. Een kop van 90 px op
+     een telefoon werkt niet, een lopende regel die meeschaalt kost meer
+     dan het oplevert. */
+  --text-display: clamp(3rem, 6.25vw, 5.625rem);
+  --text-title: clamp(2.5rem, 5.14vw, 4.625rem);
+  --text-sectie: clamp(1.75rem, 2.78vw, 2.5rem);
+  --text-lead: clamp(1.25rem, 1.67vw, 1.5rem);
+  --text-body: 1.125rem;
+  --text-klein: 1rem;
+  --text-label: 0.8125rem;
+  --text-caption: 0.75rem;
+
+  /* Systeemmaten, hoofdstuk 05 van de brandrichtlijnen. */
+  --cel: 28px;
+  --beslag-arm: 26px;
+  --beslag-dikte: 1.5px;
+  --beslag-inset: 30px;
+
+  --tracking-display: 0.03em;
+  --tracking-label: 0.18em;
+  --leading-body: 1.55;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+
+  body {
+    background-color: #ffffff;
+    color: var(--color-inkt);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+  }
+
+  /* Koppen zijn navy, op donker uitgekeerd naar wit. Nooit zwart.
+     Altijd hoofdletters. 900 voor claims, 700 voor subkoppen. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--color-navy);
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-display);
+    text-wrap: balance;
+  }
+
+  h1 {
+    font-size: var(--text-title);
+    font-weight: 900;
+    line-height: 0.88;
+  }
+
+  h2 {
+    font-size: var(--text-sectie);
+    font-weight: 700;
+    line-height: 0.95;
+  }
+
+  h3 {
+    font-size: var(--text-lead);
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  /* Geen schuingedrukte tekst in dit merk. */
+  em,
+  i {
+    font-style: normal;
+  }
+
+  /* Zichtbare focus voor wie met het toetsenbord navigeert, WCAG 2.4.7.
+     Navy is het merkaccent en haalt op elke achtergrond in dit palet
+     ruim de 3:1 die voor een focusindicator geldt. De witte binnenrand
+     houdt hem leesbaar zodra de focus op een navy vlak valt. */
+  :focus-visible {
+    outline: 2px solid var(--color-navy);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px #ffffff;
+    border-radius: 1px;
+  }
+
+  /* Wie de muis gebruikt krijgt geen ring te zien. */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+/* Mono is altijd hoofdletters met ruime letterafstand. Zonder
+   uitzondering. Het //-voorvoegsel alleen bij labels, maten, codes
+   en serienummers, nooit boven een kop of in lopende tekst. */
+@utility label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 500;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--color-gedempt);
+}
+
+@utility caption {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  font-weight: 500;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--color-gedempt);
+  font-variant-numeric: tabular-nums;
+}
+
+@utility display-xl {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: 900;
+  line-height: 0.86;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-display);
+}
+
+/* Het raster. Een recht vierkant grid van 28 px, lijn 1 px, in navy.
+   Geen diagonaal patroon: dit is ruitjespapier, de technische tekening
+   waarop alles staat. De halve pixel houdt de lijn scherp. */
+@utility ruit {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Cpath d='M0.5 0V28M0 27.5H28' stroke='%23003352' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+@utility ruit-licht {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Cpath d='M0.5 0V28M0 27.5H28' stroke='%230393D1' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* Respecteer de systeemvoorkeur voor minder beweging, WCAG 2.3.3.
+   Bewust buiten @layer: ongelaagde CSS wint van elke laag, ook van de
+   utilities van Tailwind. Daarmee hoeft hier geen !important te staan
+   om alsnog de bovenhand te krijgen. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
+    scroll-behavior: auto;
+  }
+}
+
+/* Een vlak met ruitjespapier eronder.
+
+   Het raster zelf staat in de utility `ruit` hierboven, op volle sterkte.
+   Zo hoort het ook: dat is de tekening. Maar als achtergrond van een blok
+   met tekst erop moet het gedoseerd worden, anders leest de lijn door de
+   letters heen en wint het papier van wat erop staat. De echte site zet
+   het op veertien procent (zie opengraph-image.tsx) en dat is hier
+   overgenomen.
+
+   Als eigen laag achter de inhoud, niet als doorzichtige achtergrond van
+   het blok zelf: anders vervaagt de tekst mee. */
+.ruitvlak {
+  position: relative;
+  isolation: isolate;
+}
+
+.ruitvlak::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.14;
+  @apply ruit;
+}
