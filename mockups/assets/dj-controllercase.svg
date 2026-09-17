@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="Flightcase voor een DJ-controller">
+  <!-- Illustratie, geen productfoto. Vervangen door eigen fotografie bij livegang. -->
+  <defs>
+    <radialGradient id="achter" cx="50%" cy="38%" r="75%"><stop offset="0" stop-color="#3b4248"/><stop offset="1" stop-color="#14181b"/></radialGradient>
+    <linearGradient id="boven" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a3034"/><stop offset="1" stop-color="#15191c"/></linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#achter)"/>
+  <ellipse cx="310" cy="438" rx="250" ry="26" fill="#000" opacity=".38"/>
+  <polygon points="92,300 508,300 562,228 146,228" fill="url(#boven)" stroke="#b2babf" stroke-width="6" stroke-linejoin="round"/>
+  <polygon points="508,300 562,228 562,332 508,404" fill="#101315" stroke="#b2babf" stroke-width="6" stroke-linejoin="round"/>
+  <rect x="92" y="300" width="416" height="104" fill="#15191c" stroke="#b2babf" stroke-width="6"/>
+  <line x1="95" y1="336" x2="505" y2="336" stroke="#b2babf" stroke-width="4"/>
+  <g fill="#cfd5d9">
+    <circle cx="92" cy="300" r="9"/><circle cx="508" cy="300" r="9"/><circle cx="92" cy="404" r="9"/><circle cx="508" cy="404" r="9"/>
+    <circle cx="146" cy="228" r="8"/><circle cx="562" cy="228" r="8"/><circle cx="562" cy="332" r="8"/>
+  </g>
+  <g fill="#c3cacf">
+    <rect x="150" y="326" width="34" height="20" rx="3"/><rect x="416" y="326" width="34" height="20" rx="3"/>
+  </g>
+  <rect x="262" y="366" width="76" height="16" rx="3" fill="#9aa3a9"/>
+  <g opacity=".5" fill="none" stroke="#5d676e" stroke-width="3">
+    <ellipse cx="250" cy="262" rx="44" ry="15"/><ellipse cx="420" cy="262" rx="44" ry="15"/>
+  </g>
+</svg>

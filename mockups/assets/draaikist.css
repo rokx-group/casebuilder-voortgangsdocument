@@ -1,0 +1,84 @@
+/* ══════════════════════════════════════════════════════════════
+   De draaiende kist — gedeeld
+
+   Stond op het modeloverzicht (flightcases-v1) en wordt nu ook in de
+   editor gebruikt. Eén kist, zodat een flightcase er op de hele site
+   hetzelfde uitziet: hetzelfde paneel, hetzelfde profiel, dezelfde
+   hoeken. Het gedrag staat in assets/draaikist.js.
+
+   Twee dingen zijn instelbaar vanuit de pagina:
+     --paneel    de paneelkleur (standaard zwart)
+     --profiel   de kleur van het aluminium profiel
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── de draaiende kist ────────────────────────────────────────
+   Een flightcase is een balk, dus een balk in CSS-3D is geen namaak van
+   het product maar het product zelf. Twee dingen die een fotospin niet
+   heeft: hij draait op élke hoek, en zijn afmetingen zijn getallen —
+   de kist wordt breder omdat de breedte verandert, niet omdat er een
+   andere foto laadt. De maten komen uit assets/draaikist.js. */
+.kistvak{display:flex;flex-direction:column;align-items:center;gap:18px}
+.kist3d{position:relative;width:100%;height:330px;perspective:1400px;cursor:grab;
+  touch-action:none;user-select:none}
+.kist3d.pakt{cursor:grabbing}
+.kubus{position:absolute;left:50%;top:47%;width:0;height:0;transform-style:preserve-3d}
+
+/* Elk vlak: zwart paneel met een aluminium profiel eromheen en balhoeken
+   op de vier punten — dat profiel en die hoeken zijn wat een flightcase
+   een flightcase maakt. */
+.zij{position:absolute;left:50%;top:50%;box-sizing:border-box;
+  background:
+    radial-gradient(circle at 8px 8px, #cfd5d9 3.5px, transparent 4px),
+    radial-gradient(circle at calc(100% - 8px) 8px, #cfd5d9 3.5px, transparent 4px),
+    radial-gradient(circle at 8px calc(100% - 8px), #cfd5d9 3.5px, transparent 4px),
+    radial-gradient(circle at calc(100% - 8px) calc(100% - 8px), #cfd5d9 3.5px, transparent 4px),
+    linear-gradient(125deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 42%),
+    var(--paneel,#15191c);
+  border:3px solid var(--profiel,#b2babf);
+  box-shadow:inset 0 0 34px rgba(0,0,0,.62);
+  transition:width .75s cubic-bezier(.4,0,.2,1), height .75s cubic-bezier(.4,0,.2,1),
+             transform .75s cubic-bezier(.4,0,.2,1)}
+.voor  {width:var(--b);height:var(--h);transform:translate(-50%,-50%) translateZ(calc(var(--d) / 2))}
+.achter{width:var(--b);height:var(--h);transform:translate(-50%,-50%) rotateY(180deg) translateZ(calc(var(--d) / 2))}
+.links {width:var(--d);height:var(--h);transform:translate(-50%,-50%) rotateY(-90deg) translateZ(calc(var(--b) / 2))}
+.rechts{width:var(--d);height:var(--h);transform:translate(-50%,-50%) rotateY(90deg) translateZ(calc(var(--b) / 2))}
+.boven {width:var(--b);height:var(--d);transform:translate(-50%,-50%) rotateX(90deg) translateZ(calc(var(--h) / 2))}
+.onder {width:var(--b);height:var(--d);transform:translate(-50%,-50%) rotateX(-90deg) translateZ(calc(var(--h) / 2))}
+/* De greep op het voorpaneel: zonder dat leest de balk als een doos. */
+.voor::after{content:"";position:absolute;left:50%;top:50%;width:78px;height:19px;
+  transform:translate(-50%,-50%);background:#9aa3a9;
+  box-shadow:inset 0 2px 3px rgba(255,255,255,.35), inset 0 -2px 4px rgba(0,0,0,.5)}
+/* Schaduw op de vloer, plat gedraaid zodat hij met de kist meedraait. */
+.grond{position:absolute;left:50%;top:76%;width:300px;height:70px;transform:translate(-50%,-50%);
+  background:radial-gradient(ellipse at center, rgba(0,51,82,.26) 0%, rgba(0,51,82,0) 68%);
+  pointer-events:none}
+.kmaat{position:absolute;left:50%;bottom:0;transform:translateX(-50%);background:var(--dark);color:#fff;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;
+  padding:7px 12px;white-space:nowrap}
+.maatknoppen{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.maatknoppen button{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  padding:7px 12px;border:1px solid var(--rule);background:#fff;color:var(--mute);cursor:pointer}
+.maatknoppen button:hover{border-color:var(--dark);color:var(--dark)}
+.maatknoppen button.aan{background:var(--dark);border-color:var(--dark);color:#fff}
+
+/* ── varianten voor de editor ─────────────────────────────────
+   Vierkante hoeken: vier blokjes op de punten in plaats van vier bollen.
+   Het is dezelfde plek als de balhoek — alleen de vorm verschilt, en
+   dat is precies de keuze die de klant maakt. */
+.kubus.hoek-vierkant .zij{
+  background:
+    linear-gradient(#cfd5d9,#cfd5d9) left 3px top 3px / 11px 11px no-repeat,
+    linear-gradient(#cfd5d9,#cfd5d9) right 3px top 3px / 11px 11px no-repeat,
+    linear-gradient(#cfd5d9,#cfd5d9) left 3px bottom 3px / 11px 11px no-repeat,
+    linear-gradient(#cfd5d9,#cfd5d9) right 3px bottom 3px / 11px 11px no-repeat,
+    linear-gradient(125deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 42%),
+    var(--paneel,#15191c)}
+/* Logo op het voorpaneel, boven de greep. */
+.zij.voor .logo{position:absolute;left:50%;top:16%;transform:translateX(-50%);max-width:46%;max-height:28%;
+  object-fit:contain;pointer-events:none}
+/* Het slot op de naad van het deksel, bovenaan het voorpaneel. */
+.zij.voor .slot{position:absolute;left:50%;top:5px;transform:translateX(-50%);width:30px;height:12px;
+  background:#9aa3a9;box-shadow:inset 0 1px 2px rgba(255,255,255,.35), inset 0 -1px 3px rgba(0,0,0,.5)}
+.zij.voor .slot.hangslot::after{content:"";position:absolute;left:50%;top:100%;width:10px;height:8px;
+  transform:translateX(-50%);border:2px solid #9aa3a9;border-top:0}
+.zij.voor .slot.klap{width:20px;height:17px}
