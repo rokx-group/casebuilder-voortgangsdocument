@@ -352,6 +352,63 @@
   .uitspraak .inhoud{grid-template-columns:1fr;gap:26px}
 }
 
+
+/* ══════════════════════════════════════════════════════════════
+   Uitgevoerd werk: drie opdrachten, alles open.
+
+   Stond hier als uitklaplijst. Dat is content wegstoppen achter een
+   handeling, en een inkoper die de details niet ziet heeft geen reden
+   om door te lezen. Wat je te melden hebt, meld je.
+
+   Op donker, want drie lichte blokken achter elkaar maken de pagina één
+   lange witte baan. De afwisseling licht-donker is wat een pagina ritme
+   geeft; zonder die wisseling leest alles als hetzelfde.
+   ══════════════════════════════════════════════════════════════ */
+.werk2{background:var(--void);color:#fff;padding:0 0 clamp(40px,6vw,88px)}
+.werk2 .kopregel{padding-top:clamp(56px,7vw,96px);padding-bottom:clamp(26px,3vw,40px)}
+.werk2 h2{color:#fff}
+.werk2 .lead{color:rgba(255,255,255,.76);max-width:62ch}
+
+.opdracht{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;
+  border-top:1px solid rgba(255,255,255,.14)}
+.opdracht .beeldhelft{position:relative;min-height:clamp(300px,34vw,460px);overflow:hidden}
+.opdracht .beeldhelft img{position:absolute;inset:0;width:calc(100% + 1px);height:100%;object-fit:cover}
+.opdracht.omgekeerd .beeldhelft{order:2}
+.opdracht .teksthelft{padding:clamp(30px,3.6vw,54px) clamp(24px,4vw,64px);display:flex;
+  flex-direction:column;justify-content:center}
+.opdracht .nr{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--cyan)}
+.opdracht h3{color:#fff;font-size:clamp(20px,2vw,27px);margin-top:10px}
+.opdracht p{font-size:15px;color:rgba(255,255,255,.76);margin-top:14px;max-width:56ch}
+.opdracht dl{margin:24px 0 0;display:grid;grid-template-columns:auto 1fr;gap:0 20px;align-items:baseline}
+.opdracht dt{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);padding:10px 0;border-top:1px solid rgba(255,255,255,.14)}
+.opdracht dd{margin:0;font-size:14.5px;color:#fff;padding:10px 0;
+  border-top:1px solid rgba(255,255,255,.14)}
+
+/* ── ruit aan de randen ───────────────────────────────────────
+   Het raster hoort bij het merk, maar een heel vlak ruitjespapier achter
+   een tekst maakt hem onleesbaar. Daarom alleen aan de buitenrand van
+   het tekstvlak: een strook van 96 px die naar niets uitvloeit. Genoeg
+   om te zien dat het er is, te weinig om te storen. */
+.band .teksthelft,.opdracht .teksthelft{position:relative;isolation:isolate}
+.band .teksthelft::before,.opdracht .teksthelft::before{content:"";position:absolute;
+  inset:0 0 0 auto;width:96px;z-index:-1;opacity:.5;
+  -webkit-mask-image:linear-gradient(270deg,#000,transparent);
+  mask-image:linear-gradient(270deg,#000,transparent);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Cpath d='M0.5 0V28M0 27.5H28' stroke='%230393D1' stroke-width='1' fill='none'/%3E%3C/svg%3E")}
+/* Bij een omgekeerde rij zit de buitenrand links. */
+.opdracht.omgekeerd .teksthelft::before,.band.omgekeerd .teksthelft::before{inset:0 auto 0 0;
+  -webkit-mask-image:linear-gradient(90deg,#000,transparent);
+  mask-image:linear-gradient(90deg,#000,transparent)}
+
+@media(max-width:900px){
+  .opdracht{grid-template-columns:1fr}
+  .opdracht.omgekeerd .beeldhelft{order:0}
+  .opdracht .beeldhelft{min-height:240px}
+  .opdracht dl{grid-template-columns:1fr}
+  .opdracht dd{border-top:0;padding-top:0}
+}
+
 </style>
 </head>
 <body>
@@ -654,86 +711,73 @@
 </section>
 
 <!-- ══ UITGEVOERD WERK ═════════════════════════════════════════
-     De klantcase van dit segment. Geen naam, geen logo, wel de
-     opdracht: wat erin ging, hoeveel, welke eis, wat er gemeten is.
+     Drie opdrachten, elk met beeld. Ze stonden hier als uitklaplijst;
+     dat is content wegstoppen achter een handeling, en wie de details
+     niet ziet heeft geen reden om verder te lezen. Nu staat alles open.
 
-     LET OP: de opdrachten hieronder zijn illustratief. Ze moeten één
-     voor één door CaseBuilder bevestigd worden voordat deze pagina
-     naar buiten gaat, inclusief de normaanduidingen. ═══════════ -->
-<section class="werk" id="werk">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="ey ey-dark">// In plaats van klantverhalen</div>
-      <h2>Wat we bouwden, zonder te zeggen voor wie</h2>
-      <p class="lead">In dit segment noemen wij geen opdrachtgevers, en onze klanten geven geen
-        citaten. Wat we wél kunnen laten zien is de opdracht zelf: de eis die erin ging, de serie
-        die eruit kwam en wat daarvan is vastgelegd.</p>
-    </div>
-
-    <div class="lijst">
-      <details>
-        <summary>
-          <span class="nr">// 01</span>
-          <h3>Radarset, 180 kg, serie van 12</h3>
-          <span class="kort">Val- en trilproef &middot; drukventiel</span>
-          <span class="tk" aria-hidden="true"></span>
-        </summary>
-        <div class="uit">
-          <p>Een set die op een voertuig meerijdt en op locatie in twee delen wordt uitgeladen.
-            Het zwaartepunt lag hoog, dus de indeling volgt de tilpunten en niet de buitenmaat:
-            twee kisten van elk onder de honderd kilo in plaats van één die met vier man moet.
-            De elektronica staat op een schokgedempt frame, los van de buitenwand.</p>
-          <dl>
-            <dt>Aantal</dt><dd>12, in twee leveringen</dd>
-            <dt>Buitenmaat</dt><dd>1.240 &times; 780 &times; 620 mm</dd>
-            <dt>Getest op</dt><dd>Val- en trilproef volgens de opgegeven norm</dd>
-            <dt>Meegeleverd</dt><dd>Meetrapport, materiaalcertificaten, tekening rev. C</dd>
-          </dl>
-        </div>
-      </details>
-
-      <details>
-        <summary>
-          <span class="nr">// 02</span>
-          <h3>Optische richtmiddelen, uitgefreesd schuim</h3>
-          <span class="kort">Klimaatklasse &middot; merking gefreesd</span>
-          <span class="tk" aria-hidden="true"></span>
-        </summary>
-        <div class="uit">
-          <p>Zes instrumenten in één kist, elk in een eigen uitsparing zodat bij het inpakken
-            zichtbaar is wat er ontbreekt. Het schuim is uitgefreesd op de tekening van de klant,
-            niet op een afdruk van het instrument: dat laatste geeft speling zodra er een revisie
-            komt. De merking is in de wand gefreesd volgens hun eigen codering.</p>
-          <dl>
-            <dt>Aantal</dt><dd>40</dd>
-            <dt>Interieur</dt><dd>Uitgefreesd PE, 40 mm, per instrument een eigen vak</dd>
-            <dt>Afdichting</dt><dd>Stof- en waterdicht, drukventiel</dd>
-            <dt>Meegeleverd</dt><dd>Certificaat per charge, tekening, afwijkingenlijst</dd>
-          </dl>
-        </div>
-      </details>
-
-      <details>
-        <summary>
-          <span class="nr">// 03</span>
-          <h3>Verbindingsset met kabelvak en aarding</h3>
-          <span class="kort">In bedrijf te gebruiken &middot; deksel dicht</span>
-          <span class="tk" aria-hidden="true"></span>
-        </summary>
-        <div class="uit">
-          <p>Deze kist gaat op locatie niet open maar aan: de set draait in de kist, met doorvoeren
-            in de zijwand en een aardingsdoorvoer onderin. Het deksel blijft dicht, ook in de regen.
-            Het kabelvak zit achter een eigen klep zodat de kabels erin blijven bij transport.</p>
-          <dl>
-            <dt>Aantal</dt><dd>8</dd>
-            <dt>Bijzonder</dt><dd>Doorvoeren op werkhoogte, aarding onderin</dd>
-            <dt>Getest op</dt><dd>Regenproef met deksel dicht en kabels aangesloten</dd>
-            <dt>Meegeleverd</dt><dd>Meetrapport, tekening rev. B, onderhoudsinstructie</dd>
-          </dl>
-        </div>
-      </details>
-    </div>
+     Om de beurt beeld links en beeld rechts, zodat drie rijen onder
+     elkaar niet als een tabel lezen. ════════════════════════════════ -->
+<section class="werk2" id="werk">
+  <div class="wrap kopregel">
+    <div class="ey">// In plaats van klantverhalen</div>
+    <h2>Wat we bouwden, zonder te zeggen voor wie</h2>
+    <p class="lead">In dit segment noemen wij geen opdrachtgevers, en onze klanten geven geen
+      citaten. Wat we w&eacute;l kunnen laten zien is de opdracht zelf: de eis die erin ging, de
+      serie die eruit kwam en wat daarvan is vastgelegd.</p>
   </div>
+
+  <article class="opdracht">
+    <div class="beeldhelft"><img src="assets/foto-f16.jpg" alt="F-16 in de lucht"></div>
+    <div class="teksthelft">
+      <div class="nr">// 01</div>
+      <h3>Radarset, 180 kg, serie van 12</h3>
+      <p>Een set die op een voertuig meerijdt en op locatie in twee delen wordt uitgeladen. Het
+        zwaartepunt lag hoog, dus de indeling volgt de tilpunten en niet de buitenmaat: twee
+        kisten van elk onder de honderd kilo in plaats van &eacute;&eacute;n die met vier man
+        moet. De elektronica staat op een schokgedempt frame, los van de buitenwand.</p>
+      <dl>
+        <dt>Aantal</dt><dd>12, in twee leveringen</dd>
+        <dt>Buitenmaat</dt><dd>1.240 &times; 780 &times; 620 mm</dd>
+        <dt>Getest op</dt><dd>Val- en trilproef volgens de opgegeven norm</dd>
+        <dt>Meegeleverd</dt><dd>Meetrapport, materiaalcertificaten, tekening rev. C</dd>
+      </dl>
+    </div>
+  </article>
+
+  <article class="opdracht omgekeerd">
+    <div class="beeldhelft"><img src="assets/foto-product-drone.jpg" alt="Koffer met uitgefreesd schuim naast een drone"></div>
+    <div class="teksthelft">
+      <div class="nr">// 02</div>
+      <h3>Optische richtmiddelen, uitgefreesd schuim</h3>
+      <p>Zes instrumenten in &eacute;&eacute;n kist, elk in een eigen uitsparing zodat bij het
+        inpakken zichtbaar is wat er ontbreekt. Het schuim is uitgefreesd op de tekening van de
+        klant, niet op een afdruk van het instrument: dat laatste geeft speling zodra er een
+        revisie komt. De merking is in de wand gefreesd volgens hun eigen codering.</p>
+      <dl>
+        <dt>Aantal</dt><dd>40</dd>
+        <dt>Interieur</dt><dd>Uitgefreesd PE, 40 mm, per instrument een eigen vak</dd>
+        <dt>Afdichting</dt><dd>Stof- en waterdicht, drukventiel</dd>
+        <dt>Meegeleverd</dt><dd>Certificaat per charge, tekening, afwijkingenlijst</dd>
+      </dl>
+    </div>
+  </article>
+
+  <article class="opdracht">
+    <div class="beeldhelft"><img src="assets/foto-meet-en-testapparatuur.jpg" alt="Flightcase op wielen met apparatuur, in bedrijf"></div>
+    <div class="teksthelft">
+      <div class="nr">// 03</div>
+      <h3>Verbindingsset met kabelvak en aarding</h3>
+      <p>Deze kist gaat op locatie niet open maar aan: de set draait in de kist, met doorvoeren in
+        de zijwand en een aardingsdoorvoer onderin. Het deksel blijft dicht, ook in de regen. Het
+        kabelvak zit achter een eigen klep zodat de kabels erin blijven bij transport.</p>
+      <dl>
+        <dt>Aantal</dt><dd>8</dd>
+        <dt>Bijzonder</dt><dd>Doorvoeren op werkhoogte, aarding onderin</dd>
+        <dt>Getest op</dt><dd>Regenproef met deksel dicht en kabels aangesloten</dd>
+        <dt>Meegeleverd</dt><dd>Meetrapport, tekening rev. B, onderhoudsinstructie</dd>
+      </dl>
+    </div>
+  </article>
 </section>
 
 <!-- ══ HET DOSSIER ═════════════════════════════════════════════ -->
