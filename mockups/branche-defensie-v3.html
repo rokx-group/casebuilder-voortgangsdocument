@@ -447,6 +447,102 @@
   .uitleg .kolommen{columns:1}
 }
 
+
+/* ══════════════════════════════════════════════════════════════
+   Het branchevlak: één object, de naam erachter, de andere branches
+   ernaast.
+
+   Het principe komt uit een game-interface die als referentie is
+   aangedragen: een groot object vooraan, enorme typografie die er
+   achterlangs loopt, en rechts een lijst om tussen de varianten te
+   wisselen. Dat laatste is hier geen versiering maar navigatie — de zes
+   branches staan er, en dit vlak werkt daardoor op alle zes met alleen
+   een andere foto en een andere naam.
+
+   Wat er níét van overgenomen is: de diagonalen, de gele accenten en de
+   interface-onderdelen van dat spel. Dat is hun vormtaal en niet die van
+   CaseBuilder, en een game-look op een leverancierspagina in dit segment
+   werkt tegen je.
+
+   Het object is een case en geen mens. Dat is wat hier verkocht wordt,
+   en het is het enige beeld dat op alle zes de branches klopt.
+   ══════════════════════════════════════════════════════════════ */
+.vlak2{position:relative;background:var(--void);color:#fff;overflow:hidden;
+  min-height:clamp(520px,64vh,680px);display:flex;align-items:center}
+
+/* De sfeerfoto ligt ver naar achteren. Hij moet de wereld van de
+   bezoeker oproepen, niet de aandacht pakken: alles wat je ervan leest
+   gaat ten koste van de naam en het object ervoor. */
+.vlak2 .sfeer{position:absolute;inset:0}
+.vlak2 .sfeer img{width:100%;height:100%;object-fit:cover;opacity:.26;
+  filter:grayscale(.3) contrast(1.05)}
+.vlak2 .sfeer::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,var(--void) 4%,rgba(6,18,28,.55) 46%,rgba(6,18,28,.9) 100%)}
+
+.vlak2 .binnen{position:relative;width:100%;max-width:var(--wrap);margin:0 auto;padding:0 32px;
+  display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:40px;align-items:center}
+
+/* ── de naam achter het object ────────────────────────────────
+   Zo groot als het vlak toelaat en met een lage dekking: hij is de
+   achtergrond, niet de kop. De echte kop van de pagina staat in de hero;
+   deze regel is er om de branche te benoemen zonder een tweede h1.
+
+   clamp() op vw zodat hij meeschaalt met het venster en nooit afbreekt.
+   Eén woord, want twee woorden op deze maat passen nergens. */
+/* Gecentreerd en niet links: links uitgelijnd liep een lang woord als
+   "schaalmodellen" het vlak uit, en dan las er nog maar de helft. De
+   maat schaalt mee met de breedte én met het aantal letters, zodat
+   elke branchenaam past zonder dat iemand hem hier hoeft na te meten. */
+.vlak2 .naam{position:absolute;left:50%;top:50%;transform:translate(-50%,-56%);z-index:0;
+  font-family:var(--disp);font-weight:900;text-transform:uppercase;letter-spacing:.01em;
+  font-size:min(15vw,calc(115vw / var(--letters,9)));line-height:.8;
+  color:rgba(255,255,255,.085);white-space:nowrap;pointer-events:none;user-select:none}
+
+/* ── het object ───────────────────────────────────────────────
+   De case staat al op een donkere achtergrond, dus met een masker
+   vloeien de randen in het vlak in plaats van als een uitgeknipte foto
+   op te liggen. Geen witte rand, geen slagschaduw. */
+.vlak2 .object{position:relative;z-index:1;justify-self:center;width:min(430px,35vw)}
+/* De productfoto staat op een grijze studio-achtergrond die lichter is
+   dan dit vlak, dus zonder ingreep ligt er een lichte rechthoek op. Twee
+   dingen samen lossen dat op: de foto wordt donkerder en koeler getrokken
+   zodat zijn achtergrond bijna samenvalt met het vlak, en het masker
+   vloeit ver uit zodat er geen rand overblijft om te zien. */
+.vlak2 .object img{width:100%;height:auto;display:block;
+  filter:brightness(.82) contrast(1.12) saturate(.9);
+  -webkit-mask-image:radial-gradient(ellipse 58% 56% at 50% 50%,#000 34%,rgba(0,0,0,.55) 66%,transparent 92%);
+  mask-image:radial-gradient(ellipse 58% 56% at 50% 50%,#000 34%,rgba(0,0,0,.55) 66%,transparent 92%)}
+
+.vlak2 .onder{position:absolute;left:32px;bottom:34px;z-index:2;max-width:38ch}
+.vlak2 .onder p{font-size:15px;color:rgba(255,255,255,.76);margin-top:10px}
+
+/* ── de andere branches ───────────────────────────────────────
+   Rechts, als lijst. Wie hier op defensie zit maar eigenlijk in de
+   broadcast werkt, hoort dat in één blik te zien en er met één klik
+   heen te kunnen. Op de andere vijf pagina's staat dezelfde lijst met
+   een andere regel gemarkeerd. */
+.vlak2 .andere{position:relative;z-index:2;border-left:1px solid rgba(255,255,255,.2);
+  padding-left:22px}
+.vlak2 .andere .lab{font-family:var(--mono);font-size:9px;letter-spacing:.16em;
+  text-transform:uppercase;color:rgba(255,255,255,.42);margin-bottom:14px}
+.vlak2 .andere a{display:flex;align-items:center;gap:10px;padding:7px 0;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.6);transition:.14s}
+.vlak2 .andere a::before{content:"";width:5px;height:5px;background:rgba(255,255,255,.3);flex:none}
+.vlak2 .andere a:hover{color:#fff}
+.vlak2 .andere a:hover::before{background:var(--cyan)}
+.vlak2 .andere a.hier{color:#fff}
+.vlak2 .andere a.hier::before{background:var(--cyan);width:14px}
+
+@media(max-width:900px){
+  .vlak2{min-height:0;padding:40px 0 34px}
+  .vlak2 .binnen{grid-template-columns:1fr;gap:26px}
+  .vlak2 .object{width:min(420px,76vw)}
+  .vlak2 .naam{font-size:clamp(54px,18vw,120px);top:34px;transform:none}
+  .vlak2 .onder{position:static;margin-top:8px}
+  .vlak2 .andere{border-left:0;border-top:1px solid rgba(255,255,255,.2);padding:18px 0 0}
+}
+
 </style>
 </head>
 <body>
@@ -707,7 +803,34 @@
      segment noemen wij geen opdrachtgevers; wat wel gedeeld kan worden
      is de opdracht zelf. ══════════════════════════════════════════ -->
 <section class="werk3" id="werk">
-  <div class="vlak"><img src="assets/foto-defensie.jpg" alt="Flightcases geladen in een vrachtwagen voor het pand in Doesburg"></div>
+  <!-- Het branchevlak. De vrachtwagenfoto die hier stond haalde de sfeer
+       weg: een grijze parkeerplaats bij daglicht na een hero vol beeld.
+       Dit vlak doet drie dingen tegelijk — het benoemt de branche, het
+       toont wat er verkocht wordt, en het is de doorstap naar de vijf
+       andere branches. -->
+  <div class="vlak2">
+    <div class="sfeer"><img src="assets/foto-defensie-konvooi.jpg" alt="" aria-hidden="true"></div>
+    <span class="naam" style="--letters:8" aria-hidden="true">Defensie</span>
+    <div class="binnen">
+      <div class="object">
+        <img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt="Rackcase met dubbel deksel op zwenkwielen">
+      </div>
+      <nav class="andere" aria-label="Andere branches">
+        <div class="lab">// Branches</div>
+        <a class="hier" href='/mockups/branche-defensie-v3'>Defensie</a>
+        <a href='/mockups/branche-audio-visueel-v1'>Audio-visueel</a>
+        <a href='/mockups/branche-broadcast-en-media-v1'>Broadcast en media</a>
+        <a href='/mockups/branche-industrie-en-machinebouw-v1'>Industrie</a>
+        <a href='/mockups/branche-meet-en-testapparatuur-v1'>Meet en test</a>
+        <a href='/mockups/branche-schaalmodellen-v1'>Schaalmodellen</a>
+      </nav>
+    </div>
+    <div class="onder">
+      <div class="ey">// Wat hier in gaat</div>
+      <p>Veldapparatuur, optiek, communicatie en munitietransport. De maat volgt het apparaat,
+        de bouw volgt de eis.</p>
+    </div>
+  </div>
   <div class="wrap kopregel">
     <div class="ey">// In plaats van klantverhalen</div>
     <h2>Wat we bouwden, zonder te zeggen voor wie</h2>

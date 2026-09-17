@@ -1,0 +1,11 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch();
+const p = await b.newPage({ viewportSize: { width: 1440, height: 950 } });
+const fouten = []; p.on('pageerror', e => fouten.push(e.message));
+await p.goto('http://localhost:8899/mockups/branche-defensie-v3.html');
+await p.waitForTimeout(900);
+console.log('branchelinks:', await p.locator('.vlak2 .andere a').count());
+await p.locator('.vlak2').scrollIntoViewIfNeeded(); await p.waitForTimeout(500);
+await p.screenshot({ path: process.argv[2] + '/vlak2.png' });
+console.log(fouten.length ? 'JS-FOUTEN: ' + fouten.join(' | ') : 'geen javascriptfouten');
+await b.close();
