@@ -19,3 +19,4 @@ Bij livegang vervangen door eigen fotografie.
   en nergens als bewijs; dat staat er ook bij.
 - **defensie-oefening** — "Combined Operations Dutch and German armies" · Floris Oosterveld · CC BY 2.0 · <https://commons.wikimedia.org/wiki/File:Combined_Operations_Dutch_and_German_armies.jpg>
 - **defensie-verbinding** — "Exercise Allied Spirit I" · Gertrud Zach / U.S. Army · publiek domein · <https://commons.wikimedia.org/wiki/File:Exercise_Allied_Spirit_I_150120-A-HE359-239.jpg>
+- **defensie-leger** — gegenereerd beeld, aangeleverd door Rokx. Sfeerbeeld bij de eisen op `/branches/defensie`; het bijschrift zegt erbij dat het geen eigen opdracht is.

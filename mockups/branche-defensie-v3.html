@@ -847,8 +847,10 @@
   align-items:stretch;margin-top:clamp(26px,3vw,44px)}
 .eisen2 .fotokant{position:relative;align-self:stretch;min-height:clamp(420px,52vw,660px);
   background:var(--dark);overflow:hidden}
+/* Staand beeld in een hoge kolom: de uitsnede zakt naar onderen zodat
+   de kisten in beeld blijven en niet de lege hangar erboven. */
 .eisen2 .fotokant img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  object-position:48% 50%;filter:saturate(.6)}
+  object-position:50% 62%;filter:saturate(.72)}
 .eisen2 .fotokant::after{content:"";position:absolute;inset:0;
   background:linear-gradient(0deg,rgba(6,18,28,.95),transparent 55%)}
 .eisen2 .fotokant figcaption{position:absolute;left:28px;right:28px;bottom:28px;z-index:1;
@@ -1213,10 +1215,10 @@
   <div class="wrap">
     <div class="indeling">
       <figure class="fotokant">
-        <img src="assets/defensie-verbinding.jpg" width="1280" height="852" loading="lazy"
-             alt="Militairen werken met verbindingsapparatuur tijdens een oefening">
+        <img src="assets/defensie-leger.jpg" width="1130" height="1500" loading="lazy"
+             alt="Gestapelde transportkisten op wielen in een hangar, met iemand die er een draagt">
         <figcaption><b>In het veld telt elk onderdeel</b>
-          <small>Oefening Allied Spirit &middot; Hohenfels &middot; sfeerbeeld, geen eigen opdracht</small></figcaption>
+          <small>Sfeerbeeld &middot; gegenereerd &middot; geen eigen opdracht</small></figcaption>
       </figure>
       <div class="inhoudkant">
 <div class="rij">
