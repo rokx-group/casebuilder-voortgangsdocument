@@ -506,6 +506,18 @@
    vloeien de randen in het vlak in plaats van als een uitgeknipte foto
    op te liggen. Geen witte rand, geen slagschaduw. */
 .vlak2 .object{position:relative;z-index:1;justify-self:center;width:min(430px,35vw)}
+/* ── de plusjes ───────────────────────────────────────────────
+   Vier eigenschappen op één regel, direct onder de kop. Geen kaartjes en
+   geen iconen: het zijn vier woorden die je in één blik leest. */
+/* Krap gehouden. Dit is een balk en geen sectie: hij hoort tegen de kop
+   aan te liggen, niet als eigen blok te lezen. */
+.pluspunten{border-bottom:1px solid var(--rule);background:#fff;padding:0}
+.pluspunten .wrap{display:flex;justify-content:space-between;gap:16px;
+  padding-top:14px;padding-bottom:14px;flex-wrap:wrap}
+.pluspunten span{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--dark)}
+.pluspunten span::before{content:"+";color:var(--blue);margin-right:12px}
+
 /* De ring om de case: een instrumentschaal, geen rondje. De buitenring
    is doorgetrokken, de binnenring gestippeld, en het kruis loopt er aan
    vier kanten net buiten. Het bijschrift hangt eronder in mono. */
@@ -581,6 +593,38 @@
 .constructie .voet p{font-size:11px;color:#B1C2CE}
 .constructie .voet a{font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:.09em;
   text-transform:uppercase;white-space:nowrap;color:var(--cyan)}
+
+/* ══════════════════════════════════════════════════════════════
+   De vier kisttypen.
+
+   Staat onder het dossier omdat het daar de vraag beantwoordt die dan
+   opkomt: waar hébben we het over. Vier modellen die in dit vak het
+   meest gebouwd worden, met per model waarvoor.
+
+   Vier gelijke kaarten zou hier wél kloppen, anders dan bij de eisen
+   hierboven: dit zijn gelijkwaardige opties waaruit je kiest, geen
+   verhalen die om elkaars aandacht vechten. Een rij is precies de goede
+   vorm voor een keuze.
+   ══════════════════════════════════════════════════════════════ */
+.kisten{background:var(--bg);border-top:1px solid var(--rule)}
+.kisten .vier{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);
+  border:1px solid var(--rule);margin-top:30px}
+.kisten .kist{background:#fff;display:flex;flex-direction:column;transition:.14s}
+.kisten .kist:hover{background:var(--lichtblauw,#E6EFF6)}
+.kisten .kist .im{aspect-ratio:4/3;overflow:hidden;background:var(--bg)}
+.kisten .kist .im img{width:100%;height:100%;object-fit:cover}
+.kisten .kist .bd{padding:16px 18px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
+/* Het model als label boven de kop, want de kop gaat over wat je
+   vervoert en niet over hoe de kist heet. Wie een naam zoekt vindt hem
+   er nog steeds; wie zijn probleem zoekt leest eerst de kop. */
+.kisten .kist .mdl{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--blue)}
+.kisten .kist h3{font-size:17px;line-height:1.15}
+.kisten .kist p{font-size:13.5px;color:var(--mute);line-height:1.5}
+.kisten .kist .go{margin-top:auto;padding-top:10px;font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+@media(max-width:900px){.kisten .vier{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.kisten .vier{grid-template-columns:1fr}}
 
 /* ── de specificatie ──────────────────────────────────────────
    Vier vragen die beantwoord moeten zijn voor er een offerte kan komen.
