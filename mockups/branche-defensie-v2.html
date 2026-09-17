@@ -220,85 +220,60 @@
 }
 
 /* ══════════════════════════════════════════════════════════════
-   De kop, tweede opzet: tekst links, kaarten rechts.
+   De kop: één beeld, één zin.
 
-   Waarom niet gecentreerd met twee knoppen eronder, zoals eerst
-   voorgesteld: dat is de meest voorspelbare hero die er is, en de
-   kwaliteitslat sluit hem uit. Links zwaar, rechts licht geeft dezelfde
-   informatie met spanning erin, en de kaarten doen bovendien werk: ze
-   laten meteen zien wát we voor dit vak bouwen.
+   De vorige opzet had tekst links en vijf kaarten rechts. Dat werd te
+   druk: de kaarten vochten met het beeld en met de kop, en dan leest een
+   openingsbeeld als een collage. Wat die kaarten lieten zien hoort
+   verderop thuis, waar er ruimte voor is.
 
-   Het beeld is een foto en geen film. De twee films die er liggen zijn
-   generieke industriestock — een fabriekshal en een bedrijventerrein in
-   de mist — en die horen bij geen van beide bij CaseBuilder. De foto die
-   er wél is, is hun eigen vrachtwagen met hun eigen cases voor hun eigen
-   pand. Die wint van elke stockfilm. Hij beweegt langzaam in, zodat er
-   toch leven in de kop zit.
+   Wat overblijft is het beeld en één zin. Die zin moet dan wel kloppen,
+   want er staat verder niets om op terug te vallen.
+
+   Gecentreerd, en dat is bewust anders dan de vorige ronde. De
+   kwaliteitslat sluit de gecentreerde hero uit met "titel, ondertitel en
+   twee knoppen eronder": voorspelbaar omdat er drie dingen onder elkaar
+   hangen. Hier hangt er één ding. Zonder ondertitel en zonder knoppenrij
+   is het geen sjabloon maar een titelkaart, en die mag in het midden.
    ══════════════════════════════════════════════════════════════ */
-.kop3{position:relative;background:var(--void);color:#fff;overflow:hidden;
-  min-height:clamp(560px,76vh,760px);display:flex;align-items:center}
-.kop3 .beeld{position:absolute;inset:0}
-.kop3 .beeld img{width:100%;height:100%;object-fit:cover;
-  animation:kop3in 26s ease-out forwards}
-/* Langzaam in, één keer. Een lus zou terugspringen en dat valt op. */
-@keyframes kop3in{from{transform:scale(1.06)}to{transform:scale(1.14)}}
-@media(prefers-reduced-motion:reduce){.kop3 .beeld img{animation:none;transform:scale(1.06)}}
+.kop4{position:relative;background:var(--void);color:#fff;overflow:hidden;
+  height:clamp(520px,92vh,900px);display:flex;align-items:center;justify-content:center}
 
-/* Van links donker naar rechts open: de tekst staat links en moet
-   leesbaar zijn, de kaarten rechts mogen het beeld laten zien. */
-.kop3 .scrim{position:absolute;inset:0;
-  background:linear-gradient(94deg,rgba(6,18,28,.94) 0%,rgba(6,18,28,.82) 34%,rgba(6,18,28,.42) 62%,rgba(6,18,28,.5) 100%)}
+/* De film vult het vlak. Een ingesloten speler ligt vast op 16:9 en is
+   niet bij te snijden zoals een eigen bestand, dus rekken we hem op tot
+   de kortste zijde past en loopt de rest buiten beeld. Vandaar twee
+   maten: breed genoeg voor een breed scherm, hoog genoeg voor een hoog. */
+.kop4 .film{position:absolute;inset:0;overflow:hidden}
+.kop4 .film iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:100vw;height:56.25vw;min-height:100%;min-width:177.78vh;border:0;pointer-events:none}
 
-.kop3 .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.02fr);
-  gap:48px;align-items:center;padding-top:56px;padding-bottom:56px;width:100%}
-.kop3 h1{font-size:clamp(34px,4.5vw,62px);color:#fff;line-height:.9;max-width:14ch;margin-top:16px}
-.kop3 h1 .acc{color:var(--cyan)}
-.kop3 p.lead{color:rgba(255,255,255,.84);font-size:17.5px;max-width:46ch;margin-top:18px}
-.kop3 .acties{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
-.kop3 .bron{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
-  color:rgba(255,255,255,.38);margin-top:26px}
+/* Zwaar genoeg om witte tekst op elk frame leesbaar te houden. Een film
+   wisselt van helderheid, dus deze laag moet werken op het lichtste
+   beeld en niet op het gemiddelde. In het midden iets dichter, want daar
+   staat de zin. */
+.kop4 .scrim{position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 50%,rgba(6,18,28,.74) 0%,rgba(6,18,28,.6) 55%,rgba(6,18,28,.8) 100%)}
 
-/* ── de kaarten ───────────────────────────────────────────────
-   Wat we voor dit vak bouwen, in beeld. Portret, want een case staat
-   rechtop in een rij en een liggende kaart leest als een artikel.
+.kop4 .wrap{position:relative;text-align:center}
+.kop4 .ey{color:var(--cyan)}
+.kop4 h1{font-size:clamp(36px,5.4vw,80px);color:#fff;line-height:.9;margin:18px auto 0;max-width:19ch}
+.kop4 h1 .acc{color:var(--cyan)}
 
-   Schuiven met scroll-snap in plaats van een carrousel-bibliotheek:
-   het werkt met een veegbeweging, met de pijltjes, met het wiel en met
-   het toetsenbord, en er is niets dat stuk kan gaan. De knoppen
-   schuiven één kaartbreedte op. */
-.kop3 .kaarten{position:relative;min-width:0}
-.kop3 .spoor{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
-  scroll-behavior:smooth;padding-bottom:4px;scrollbar-width:none}
-.kop3 .spoor::-webkit-scrollbar{display:none}
-.kop3 .kaart{flex:0 0 clamp(168px,21vw,214px);scroll-snap-align:start;position:relative;
-  aspect-ratio:3/4.1;overflow:hidden;background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.2);transition:border-color .16s}
-.kop3 .kaart:hover{border-color:var(--cyan)}
-.kop3 .kaart img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
-.kop3 .kaart:hover img{transform:scale(1.05)}
-/* De tekst ligt op het beeld en heeft zijn eigen verloop nodig, anders
-   valt hij weg op een lichte foto. */
-.kop3 .kaart .op{position:absolute;inset:auto 0 0 0;padding:52px 16px 14px;
-  background:linear-gradient(180deg,rgba(6,18,28,0) 0%,rgba(6,18,28,.86) 62%)}
-/* Allebei als blok: als span naast elkaar lopen naam en bijschrift in
-   elkaar over zodra de naam op twee regels komt. */
-.kop3 .kaart .op{display:block}
-.kop3 .kaart .nm{display:block;font-family:var(--disp);text-transform:uppercase;font-weight:700;
-  font-size:15px;letter-spacing:.03em;line-height:1.08;color:#fff}
-.kop3 .kaart .su{display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;
-  text-transform:uppercase;color:rgba(255,255,255,.66);margin-top:6px}
+/* Een aanwijzing dat er meer is, en niet meer dan dat. Het streepje zakt
+   en komt terug: genoeg om op te vallen, te weinig om af te leiden. */
+.kop4 .verder{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.5)}
+.kop4 .verder i{display:block;width:1px;height:34px;background:rgba(255,255,255,.45);
+  animation:zak 2.4s ease-in-out infinite}
+@keyframes zak{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1)}}
+.kop4 .verder i{transform-origin:top}
+@media(prefers-reduced-motion:reduce){.kop4 .verder i{animation:none}}
 
-.kop3 .stuur{display:flex;gap:8px;margin-top:16px;align-items:center}
-.kop3 .stuur button{width:42px;height:42px;border:1px solid rgba(255,255,255,.32);background:transparent;
-  color:#fff;cursor:pointer;font-size:16px;line-height:1;transition:.15s}
-.kop3 .stuur button:hover{border-color:var(--cyan);color:var(--cyan)}
-.kop3 .stuur .tel{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
-  color:rgba(255,255,255,.5);margin-left:8px}
-
-@media(max-width:1000px){
-  .kop3 .wrap{grid-template-columns:1fr;gap:34px;padding-top:44px;padding-bottom:44px}
-  .kop3 .scrim{background:linear-gradient(180deg,rgba(6,18,28,.72) 0%,rgba(6,18,28,.88) 100%)}
-  .kop3 .kaart{flex:0 0 156px}
+@media(max-width:760px){
+  .kop4{height:clamp(440px,78vh,640px)}
+  .kop4 h1{font-size:clamp(30px,8vw,44px)}
 }
 
 </style>
@@ -511,57 +486,29 @@
 </div>
 
 <!-- ══ DE KOP ══════════════════════════════════════════════════
-     Tekst links, kaarten rechts, over een beeld dat van CaseBuilder
-     zelf is: hun vrachtwagen, hun cases, hun pand. De kaarten tonen
-     wat we voor dit vak bouwen en zijn te schuiven. ═══════════════ -->
-<section class="kop3">
-  <div class="beeld">
-    <img src="assets/foto-defensie.jpg" alt="" aria-hidden="true">
+     Eén beeld over het hele scherm, één zin erin, en verder niets.
+
+     De film is een ingesloten YouTube-video en geen eigen bestand: hij
+     is van iemand anders en mag niet worden meegeleverd. Daarom via de
+     speler, zonder geluid, zonder knoppen, en via het domein dat geen
+     cookies zet.
+
+     Voor livegang hoort hier eigen beeld te staan. Twee redenen: een
+     film van een ander is een film van een ander, en een ingesloten
+     speler kun je niet bijsnijden — je ziet altijd iets meer of minder
+     dan je wil. ═══════════════════════════════════════════════════ -->
+<section class="kop4">
+  <div class="film">
+    <iframe
+      src="https://www.youtube-nocookie.com/embed/i3FH0-ggKmw?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=i3FH0-ggKmw&amp;controls=0&amp;rel=0&amp;modestbranding=1&amp;playsinline=1&amp;disablekb=1&amp;iv_load_policy=3"
+      title="Sfeerbeeld defensie" allow="autoplay; encrypted-media" tabindex="-1" aria-hidden="true"></iframe>
   </div>
   <div class="scrim"></div>
   <div class="wrap">
-    <div>
-      <div class="ey">// Defensie, veiligheid en overheid</div>
-      <h1>Flightcases voor <span class="acc">defensie</span>, gebouwd naar specificatie</h1>
-      <p class="lead">Materiaalkeuze, documentatie en keuring liggen vast v&oacute;&oacute;r de eerste
-        zaagsnede. Wij bouwen naar jouw eis en leveren het dossier mee.</p>
-      <div class="acties">
-        <a class="btn btn-pri" href="#aanvraag">Stuur je specificatie</a>
-        <a class="btn btn-ghost" href="#werk">Bekijk uitgevoerd werk</a>
-      </div>
-      <p class="bron">Eigen productie in Doesburg &middot; offerte binnen 48 uur</p>
-    </div>
-
-    <div class="kaarten">
-      <div class="spoor" data-spoor tabindex="0" aria-label="Wat we voor dit vak bouwen">
-        <a class="kaart" href='/mockups/case-voor-gitaar-v1'>
-          <img src="assets/foto-product-drone.jpg" alt="Koffer met uitgefreesd schuim naast een drone">
-          <span class="op"><span class="nm">Drone en sensorkop</span><span class="su">Uitgefreesd schuim</span></span>
-        </a>
-        <a class="kaart" href='/mockups/case-voor-gitaar-v1'>
-          <img src="assets/foto-meet-en-testapparatuur.jpg" alt="Grote flightcase op wielen met meetapparatuur">
-          <span class="op"><span class="nm">Meetapparatuur</span><span class="su">Op wielen, in bedrijf</span></span>
-        </a>
-        <a class="kaart" href='/mockups/casetype-rackcase-dubbel-deksel-v1'>
-          <img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt="Rackcase met dubbel deksel">
-          <span class="op"><span class="nm">Radarset in rack</span><span class="su">Dubbel deksel</span></span>
-        </a>
-        <a class="kaart" href='/mockups/casetype-trunccase-v1'>
-          <img src="assets/flightcase-trunccase.jpg" alt="Trunccase">
-          <span class="op"><span class="nm">Veldapparatuur</span><span class="su">Trunccase, stapelbaar</span></span>
-        </a>
-        <a class="kaart" href='/mockups/casetype-koffer-v1'>
-          <img src="assets/flightcase-koffer.jpg" alt="Koffer">
-          <span class="op"><span class="nm">Optisch richtmiddel</span><span class="su">Koffer, klimaatdicht</span></span>
-        </a>
-      </div>
-      <div class="stuur">
-        <button type="button" data-spoor-terug aria-label="Vorige">&larr;</button>
-        <button type="button" data-spoor-verder aria-label="Volgende">&rarr;</button>
-        <span class="tel" data-spoor-tel></span>
-      </div>
-    </div>
+    <div class="ey">// Defensie, veiligheid en overheid</div>
+    <h1>Flightcases voor <span class="acc">defensie</span>, gebouwd naar specificatie</h1>
   </div>
+  <div class="verder"><i></i>Lees verder</div>
 </section>
 
 <!-- ══ KENTALLEN ═══════════════════════════════════════════════
@@ -842,7 +789,6 @@
 <script src="assets/versies.js"></script>
 <script src="assets/hoogtemelder.js"></script>
 <script src="assets/vervoeren.js"></script>
-<script src="assets/spoor.js"></script>
 
 
 
