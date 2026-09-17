@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/brand.css">
+<link rel="stylesheet" href="assets/hero-veld.css">
 <style>
 /* ══════════════════════════════════════════════════════════════
    /case-voor — de ingang "wat ga je vervoeren?"
@@ -536,28 +537,37 @@
     <div class="ey">// 533 CASES · 38 CATEGORIEËN · ALLES OOK OP MAAT</div>
     <h1>Wat ga je <span class="acc">vervoeren?</span></h1>
     <p class="sub">Zeg wat erin gaat, dan bepalen wij de maten. Je hoeft niet te weten hoe een flightcase heet.</p>
-    <div class="deuren">
-      <a class="deur pri" href="#alle-categorieen" data-naar-zoek>
-        <div class="n">// 01</div>
-        <h3>Zoek je apparaat op</h3>
-        <p>Zes toepassingen, achtendertig categorie&euml;n. Per categorie weten we welke maten gangbaar zijn en welk schuim erin hoort.</p>
-        <div class="bij">// 542 cases &middot; 39 categorie&euml;n</div>
-        <div class="go">Alle categorie&euml;n &rarr;</div>
-      </a>
-      <a class='deur' href='/mockups/configurator-v1'>
-        <div class="n">// 02</div>
-        <h3>Ik weet mijn maten al</h3>
-        <p>Dan hoef je niet te zoeken. Vijf stappen in de configurator, prijs meteen in beeld.</p>
-        <div class="bij">// ook op rekening, ook bij &eacute;&eacute;n stuk</div>
-        <div class="go">Naar de configurator &rarr;</div>
-      </a>
-      <a class='deur' href='/mockups/case-aanvragen-v1'>
-        <div class="n">// 03</div>
-        <h3>Staat het er niet bij</h3>
-        <p>Stuur een schets, een datasheet of een foto. Je krijgt dezelfde werkdag een tekening met prijs terug.</p>
-        <div class="bij">// zo begint zeventig procent van de orders</div>
-        <div class="go">Case aanvragen &rarr;</div>
-      </a>
+    <!-- De opzet van de homepage-hero: één primaire handeling en daarnaast
+         het veld waarin je zegt wat je bij je hebt. De drie deuren die hier
+         stonden zijn eruit; ze vroegen een keuze voordat de bezoeker iets
+         had gezegd, en die keuze kan het veld zelf maken.
+
+         Let op het verschil met de balk verderop: dit veld stuurt je naar
+         een bestemming, die balk filtert de index op deze pagina. Twee
+         velden met hetzelfde uiterlijk en een andere taak zou verwarren,
+         daarom staat dit er als knop die openklapt en niet als zoekbalk. -->
+    <div class="cta">
+      <a class='btn btn-pri' href='/mockups/case-aanvragen-v1'>Stuur je schets of maten &rarr;</a>
+      <div class="tweede">
+        <div class="vervoer" data-vervoer>
+          <button type="button" class="vervoer-knop" aria-expanded="false" aria-controls="vervoer-veld">Wat ga je vervoeren?</button>
+          <div class="vervoer-veld" id="vervoer-veld">
+            <input type="text" autocomplete="off" spellcheck="false"
+                   role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="vervoer-lijst"
+                   aria-label="Wat ga je vervoeren?"
+                   placeholder="Bijvoorbeeld: mengtafel Midas M32">
+            <button type="button" class="vervoer-ga" aria-label="Zoeken">&rarr;</button>
+          </div>
+          <ul class="vervoer-lijst" id="vervoer-lijst" role="listbox" aria-label="Toepassingen" hidden></ul>
+        </div>
+      </div>
+    </div>
+    <div class="specs">
+      <div><div class="k">// CATEGORIE&Euml;N</div><div class="v">39 in zes toepassingen</div></div>
+      <div><div class="k">// OOK OP MAAT</div><div class="v">Vijf stappen in de configurator</div></div>
+      <div><div class="k">// STAAT HET ER NIET BIJ</div><div class="v">Zo begint zeventig procent</div></div>
+      <div><div class="k">// LEVERTIJD</div><div class="v">Zo snel als tien werkdagen</div></div>
+    </div>
     </div>
   </div>
 </div>
@@ -778,6 +788,7 @@
 <script src="assets/navzoek.js"></script>
 <script src="assets/vouw.js"></script>
 <script src="assets/toepassingen.js"></script>
+<script src="assets/vervoeren.js"></script>
 <script src="assets/categoriezoek.js"></script>
 <script src="assets/versies.js"></script>
 <script src="assets/hoogtemelder.js"></script>
