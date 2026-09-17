@@ -248,7 +248,7 @@
    beeld en niet op het gemiddelde. In het midden iets dichter, want daar
    staat de zin. */
 .kop4 .scrim{position:absolute;inset:0;
-  background:radial-gradient(ellipse at 50% 50%,rgba(6,18,28,.74) 0%,rgba(6,18,28,.6) 55%,rgba(6,18,28,.8) 100%)}
+  background:radial-gradient(ellipse at 50% 50%,rgba(6,18,28,.62) 0%,rgba(6,18,28,.5) 55%,rgba(6,18,28,.78) 100%)}
 
 .kop4 .wrap{position:relative;text-align:center}
 .kop4 .ey{color:var(--cyan)}
@@ -922,6 +922,26 @@
 .beeldbron{background:var(--void);color:#8FA3B4;font-size:10px;line-height:1.7;
   padding:14px 0;border-bottom:1px solid rgba(102,196,232,.24)}
 .beeldbron a{text-decoration:underline;text-underline-offset:3px}
+
+/* ── het hero-beeld ───────────────────────────────────────────
+   Een foto en geen ingesloten film. De aangedragen video is een
+   bedrijfsfilm van een Amerikaans productiebedrijf: hij toont een
+   luchtfoto van een stad, en bij het starten verschijnt hun logo met de
+   titel erbij. Dat is andermans merk op deze pagina, en het gaat niet
+   over waar de pagina over gaat.
+
+   Deze foto wel. Hij vult het hele vlak en zoomt langzaam in, zodat er
+   beweging in de kop zit zonder dat er beeld geleend wordt dat niet
+   klopt. Bij prefers-reduced-motion staat hij stil.
+
+   Let op: dit beeld staat onder CC BY-SA. De regel met bron en licentie
+   boven de voet hoort bij deze foto en kan niet weg zolang hij er staat. */
+.kop4 .beeldvlak{position:absolute;inset:0;overflow:hidden}
+.kop4 .beeldvlak img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;
+  animation:kop4in 30s ease-out forwards}
+@keyframes kop4in{from{transform:scale(1.04)}to{transform:scale(1.13)}}
+@media(prefers-reduced-motion:reduce){.kop4 .beeldvlak img{animation:none;transform:scale(1.04)}}
+
 </style>
 </head>
 <body>
@@ -1145,10 +1165,8 @@
      speler kun je niet bijsnijden — je ziet altijd iets meer of minder
      dan je wil. ═══════════════════════════════════════════════════ -->
 <section class="kop4">
-  <div class="film">
-    <iframe
-      src="https://www.youtube-nocookie.com/embed/6_GvJoC-Y24?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=6_GvJoC-Y24&amp;controls=0&amp;rel=0&amp;modestbranding=1&amp;playsinline=1&amp;disablekb=1&amp;iv_load_policy=3"
-      title="Sfeerbeeld audio-visueel" allow="autoplay; encrypted-media" tabindex="-1" aria-hidden="true"></iframe>
+  <div class="beeldvlak">
+    <img src="assets/av-tv-show.jpg" alt="" aria-hidden="true">
   </div>
   <div class="scrim"></div>
   <div class="wrap">
