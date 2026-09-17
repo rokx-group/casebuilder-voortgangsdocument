@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flightcases voor defensie op specificatie | Casebuilder</title>
+<meta name="description" content="Transportkisten voor defensie, gebouwd naar jouw specificatie. Val- en trilproef volgens de opgegeven norm, materiaal herleidbaar per charge, dossier bij elke levering. Eigen productie in Doesburg.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<link rel="stylesheet" href="assets/hero-veld.css">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   /branches/defensie — v2
+
+   Wat deze versie anders wil dan v1: v1 vertelt wat we doen, deze moet
+   laten zien dat we het al doen. Voor een inkoper bij defensie is dat
+   een ander soort bewijs dan een logo-muur, want in dit segment noemt
+   niemand zijn klanten. Wat je wél kunt laten zien is het dossier: de
+   norm, de meting, de charge, de revisie. Papier is hier het bewijs.
+
+   Drie dingen sturen de vorm.
+
+   Rust boven dichtheid. Een pagina die zich met grote leveranciers wil
+   meten heeft minder blokken nodig, niet meer. Elk blok krijgt ruimte
+   en één taak. Wie alles tegelijk roept, klinkt klein.
+
+   Getallen boven bijvoeglijke naamwoorden. Nergens "hoogwaardig" of
+   "robuust". Wel 180 kilo, 12 exemplaren, 40 mm schuim, ±1 mm.
+
+   Papier als beeld. Het merk heeft ruitjespapier als raster; hier komt
+   daar de tekening bij. Een uitsnede van een technische tekening zegt
+   in dit segment meer dan een sfeerfoto.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── de kop ───────────────────────────────────────────────────
+   Beeld over de volle breedte, tekst in de onderste helft. v1 zette
+   tekst en beeld naast elkaar in twee kolommen; dat leest als een
+   brochure. Eén vlak met de tekst erin leest als een omslag. */
+.kop2{position:relative;background:var(--void);color:#fff;overflow:hidden;min-height:clamp(440px,58vh,620px);
+  display:flex;align-items:flex-end}
+.kop2 .film{position:absolute;inset:0}
+.kop2 .film video,.kop2 .film img{width:100%;height:100%;object-fit:cover}
+.kop2 .film img{position:absolute;inset:0}
+/* Donker genoeg om witte tekst op elke frame leesbaar te houden, licht
+   genoeg om het beeld te laten zien. Van onderaf, want daar staat de
+   tekst. */
+.kop2 .scrim{position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(6,18,28,.42) 0%,rgba(6,18,28,.58) 45%,rgba(6,18,28,.92) 100%)}
+.kop2 .wrap{position:relative;padding-top:80px;padding-bottom:44px;width:100%}
+.kop2 h1{font-size:clamp(34px,4.6vw,60px);color:#fff;line-height:.92;max-width:17ch;margin-top:14px}
+.kop2 h1 .acc{color:var(--cyan)}
+.kop2 p.lead{color:rgba(255,255,255,.84);font-size:17.5px;max-width:52ch;margin-top:16px}
+.kop2 .acties{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap;align-items:center}
+.kop2 .bron{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.4);margin-top:22px}
+
+/* ── de balk met kentallen ────────────────────────────────────
+   Vier feiten, geen claims. Ze staan op een eigen witte balk en niet in
+   de kop, zodat ze te lezen zijn zonder beeld eronder. */
+.kentallen{border-bottom:1px solid var(--rule);background:#fff}
+.kentallen .row{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.kentallen .it{padding:26px 28px 26px 0;border-right:1px solid var(--rule)}
+.kentallen .it:last-child{border-right:0}
+.kentallen .it b{display:block;font-family:var(--disp);text-transform:uppercase;font-weight:900;
+  font-size:26px;letter-spacing:.03em;color:var(--dark);line-height:1}
+.kentallen .it span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mute);margin-top:8px}
+
+/* ── uitgevoerd werk ──────────────────────────────────────────
+   De klantcase van dit segment: geen naam, wel de opdracht. Wat erin
+   ging, hoeveel, welke eis, wat er is gemeten. Dat is controleerbaar
+   en het is het enige wat hier gedeeld mag worden.
+
+   Uitklapbaar, want de inkoper die dit leest wil de details en de rest
+   niet. Met <details> en niet met javascript: het werkt dan ook als er
+   iets misgaat, en de browser regelt de toegankelijkheid. */
+.werk{background:var(--bg)}
+.werk .lijst{margin-top:34px;border-top:1.5px solid var(--dark)}
+.werk details{border-bottom:1px solid var(--rule);background:#fff}
+.werk summary{display:flex;gap:22px;align-items:baseline;padding:22px 24px;cursor:pointer;
+  list-style:none;flex-wrap:wrap}
+.werk summary::-webkit-details-marker{display:none}
+.werk summary .nr{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--blue);
+  flex:none;width:34px}
+.werk summary h3{font-size:20px;flex:1;min-width:240px}
+.werk summary .kort{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--mute)}
+/* Het plusje draait naar een min als het openstaat. Geen icoon uit een
+   set: twee lijnen, dezelfde dikte als het beslag. */
+.werk summary .tk{flex:none;width:14px;height:14px;position:relative;margin-left:auto}
+.werk summary .tk::before,.werk summary .tk::after{content:"";position:absolute;background:var(--dark);
+  transition:transform .18s}
+.werk summary .tk::before{left:0;right:0;top:6px;height:1.5px}
+.werk summary .tk::after{top:0;bottom:0;left:6px;width:1.5px}
+.werk details[open] summary .tk::after{transform:scaleY(0)}
+.werk .uit{padding:0 24px 26px 80px;display:grid;grid-template-columns:1.2fr 1fr;gap:38px}
+.werk .uit p{font-size:15px;color:var(--ink);max-width:62ch}
+.werk .uit dl{margin:0;border-top:1px solid var(--rule)}
+.werk .uit dt{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);padding-top:12px}
+.werk .uit dd{margin:2px 0 12px;font-size:14.5px;color:var(--dark);border-bottom:1px solid var(--rule);
+  padding-bottom:12px}
+.werk .uit dd:last-child{border-bottom:0}
+
+/* ── het dossier ──────────────────────────────────────────────
+   Wat je meekrijgt, als lijst met een tekeninguitsnede ernaast. Dit is
+   in dit segment het echte verkoopargument: niet dat de kist goed is,
+   maar dat je kunt aantonen dát hij goed is. */
+.dossier{background:var(--void);color:#fff}
+.dossier .grid{display:grid;grid-template-columns:1fr 1.05fr;gap:60px;align-items:center}
+.dossier h2{color:#fff}
+.dossier p.lead{color:rgba(255,255,255,.78);max-width:46ch;margin-top:14px}
+.dossier ol{list-style:none;margin:28px 0 0;padding:0;counter-reset:d}
+.dossier li{counter-increment:d;border-top:1px solid rgba(255,255,255,.16);padding:14px 0 14px 44px;
+  position:relative}
+.dossier li::before{content:"0" counter(d);position:absolute;left:0;top:15px;font-family:var(--mono);
+  font-size:10px;letter-spacing:.14em;color:var(--cyan)}
+.dossier li b{display:block;font-family:var(--disp);text-transform:uppercase;font-weight:700;
+  font-size:17px;letter-spacing:.03em}
+.dossier li span{display:block;font-size:14px;color:rgba(255,255,255,.62);margin-top:3px}
+/* De tekening. Ruitjespapier met een uitsnede erop, in plaats van een
+   foto: een tekening is hier het product waar het over gaat. */
+.dossier .blad{background:#fff;padding:30px;position:relative}
+.dossier .blad .vel{aspect-ratio:4/3;background:var(--bg);position:relative;overflow:hidden}
+.dossier .blad .vel img{width:100%;height:100%;object-fit:cover}
+.dossier .blad .bij{display:flex;justify-content:space-between;gap:16px;margin-top:16px;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+
+/* ── het proces ───────────────────────────────────────────────
+   Vier stappen met een doorlooptijd erbij. De tijd is wat een inkoper
+   zoekt; de stappen zijn waarom die tijd klopt. */
+.proces .stappen{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:34px;
+  border-top:1.5px solid var(--dark)}
+.proces .st{padding:22px 26px 26px 0;border-right:1px solid var(--rule)}
+.proces .st:last-child{border-right:0}
+.proces .st .n{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--blue)}
+.proces .st h3{font-size:18px;margin-top:10px}
+.proces .st p{font-size:14.5px;color:var(--mute);margin-top:8px}
+.proces .st .tijd{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dark);margin-top:12px;border-top:1px solid var(--rule);padding-top:10px}
+
+/* ── vragen ───────────────────────────────────────────────────
+   Echte vragen van inkopers, niet de vragen die goed uitkomen. Ze staan
+   er ook omdat Google ze als losse resultaten kan tonen; daarvoor zit
+   de opmaak in JSON-LD onderaan de pagina. */
+.vragen details{border-bottom:1px solid var(--rule)}
+.vragen summary{padding:18px 0;cursor:pointer;list-style:none;display:flex;gap:18px;align-items:baseline}
+.vragen summary::-webkit-details-marker{display:none}
+.vragen summary h3{font-size:18px;flex:1}
+.vragen summary .tk{flex:none;font-family:var(--mono);font-size:14px;color:var(--blue)}
+.vragen details[open] summary .tk{color:var(--mute)}
+.vragen .antw{padding:0 0 20px 36px;font-size:15px;color:var(--ink);max-width:76ch}
+
+/* ── aanvraag met een gezicht ─────────────────────────────────
+   Een formulier zonder mens erbij is in dit segment een drempel. Wie
+   een specificatie deelt wil weten aan wie. De naam is een placeholder
+   tot CaseBuilder zegt wie het is. */
+.slot2{background:var(--bg);border-top:1px solid var(--rule)}
+.slot2 .grid{display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:start}
+.slot2 .kaart{background:#fff;border:1.5px solid var(--dark);padding:28px}
+.slot2 .kaart .wie{display:flex;gap:16px;align-items:center}
+.slot2 .kaart .portret{width:58px;height:58px;background:var(--bg);border:1px solid var(--rule);flex:none}
+.slot2 .kaart .naam b{display:block;font-family:var(--disp);text-transform:uppercase;font-weight:700;
+  font-size:18px;letter-spacing:.03em;color:var(--dark)}
+.slot2 .kaart .naam span{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mute)}
+.slot2 .kaart .regel{margin-top:20px;border-top:1px solid var(--rule);padding-top:16px;font-size:15px}
+.slot2 .nda{display:flex;gap:10px;align-items:flex-start;margin-top:18px;padding:14px;
+  background:var(--lightblue);font-size:14px}
+.slot2 .nda input{margin-top:3px;flex:none}
+
+@media(max-width:1000px){
+  .kentallen .row{grid-template-columns:repeat(2,1fr)}
+  .kentallen .it{padding-right:20px}
+  .kentallen .it:nth-child(2){border-right:0}
+  .dossier .grid,.slot2 .grid{grid-template-columns:1fr;gap:34px}
+  .proces .stappen{grid-template-columns:repeat(2,1fr)}
+  .werk .uit{grid-template-columns:1fr;gap:22px;padding-left:24px}
+}
+@media(max-width:620px){
+  .kentallen .row{grid-template-columns:1fr}
+  .kentallen .it{border-right:0;border-bottom:1px solid var(--rule)}
+  .proces .stappen{grid-template-columns:1fr}
+  .proces .st{border-right:0;border-bottom:1px solid var(--rule)}
+}
+
+/* ── de eisen en de toepassingen ──────────────────────────────
+   Zelfde blokken als in v1, maar met h3 in plaats van b. Dat is geen
+   opmaakkwestie: een koppenstructuur die klopt is precies wat een
+   zoekmachine van een branchepagina leest, en een schermlezer ook.
+   Vijf eisen in plaats van vier, want de levering is in dit segment
+   een eis en geen bijzaak. */
+.eisenrij{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--rule);
+  border:1px solid var(--rule);margin-top:30px}
+.eis{background:#fff;padding:20px 22px 24px;display:flex;flex-direction:column;gap:8px}
+.eis .n{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.eis h3{font-size:19px;line-height:1.1}
+.eis p{font-size:13.5px;color:var(--mute);line-height:1.5}
+
+.toep{background:var(--dark);color:#fff}
+.toep h2,.toep .lead{color:#fff}
+.toep .lead{color:rgba(255,255,255,.78)}
+.toeprij{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:30px}
+.tp{border:1px solid rgba(255,255,255,.24);padding:18px 20px 20px;display:flex;flex-direction:column;
+  gap:7px;transition:.14s;background:rgba(255,255,255,.04)}
+.tp:hover{border-color:var(--cyan)}
+.tp h3{font-size:17px;line-height:1.1;color:#fff}
+.tp p{font-size:13px;color:rgba(255,255,255,.72);line-height:1.45}
+.tp .go{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--cyan);margin-top:auto;padding-top:10px}
+
+@media(max-width:1000px){
+  .eisenrij{grid-template-columns:repeat(2,1fr)}
+  .toeprij{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:620px){
+  .eisenrij,.toeprij{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header class="main">
+  <div class="wrap">
+    <a aria-label='Casebuilder.com &mdash; naar de homepage' class='merk' href='/mockups/homepage-v2'><img src="assets/woordmerk.svg" alt="Casebuilder.com"></a>
+    <form class="search" onsubmit="return false">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+      <input placeholder="Zoek op case, onderdeel of artikelnummer…" aria-label="Zoeken">
+    </form>
+    <div class="hdr-r">
+      <a href="#" class="stil">Inloggen</a>
+      <a href="#">Winkelwagen</a>
+    </div>
+  </div>
+</header>
+
+<nav class="primary">
+  <div class="wrap">
+    <a href='/mockups/case-aanvragen-v1'>Case aanvragen</a>
+    <a href='/mockups/case-voor-v1'>Wat ga je vervoeren?</a>
+
+    <!-- Flightcases draagt nu drie ingangen tegelijk: waarvoor, welk
+         model, en zelf bouwen. Zelf configureren stond hiervoor los in
+         de balk; als top-level item concurreerde het met Flightcases
+         terwijl het er een onderdeel van is.
+
+         "Waarvoor" zijn de zes toepassingen (wat je vervoert), niet de
+         branches (wie je bent): die hebben hun eigen menu, en dezelfde zes
+         markten twee keer in de balk zei niets extra's. Backline heeft al
+         een eigen pagina; de rest wijst hun vak in de index aan. -->
+    <span class="heeft-menu">
+      <a href='/mockups/flightcases-v1'>Flightcases</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// WAAR GEBRUIK JE HEM VOOR</h4>
+            <ul>
+              <li><a href='/mockups/case-voor-v3#av-licht'>AV &amp; licht<span class="n">142</span></a></li>
+              <li><a href='/mockups/case-voor-backline-v1'>Backline &amp; muziek<span class="n">127</span></a></li>
+              <li><a href='/mockups/case-voor-v3#broadcast'>Broadcast &amp; camera<span class="n">86</span></a></li>
+              <li><a href='/mockups/case-voor-v3#medisch'>Medisch &amp; lab<span class="n">64</span></a></li>
+              <li><a href='/mockups/case-voor-v3#industrie'>Industrie &amp; meettechniek<span class="n">73</span></a></li>
+              <li><a href='/mockups/case-voor-v3#evenement'>Evenement &amp; beursbouw<span class="n">50</span></a></li>
+              <li><a href='/mockups/case-voor-v3#alle-categorieen'>Alle toepassingen &rarr;</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// MODELLEN</h4>
+            <!-- Met beeld (besloten 12 september): een model herken je aan
+                 zijn vorm, niet aan zijn naam. Een stilstaande kist per
+                 model, in CSS — geen foto's, want die hebben vijf
+                 verschillende uitsnedes, en geen script, want dit menu
+                 staat op elke pagina. Zodra CaseBuilder renders uit de
+                 configurator levert, komen die hiervoor in de plaats. -->
+            <div class="modeltegels">
+              <a href='/mockups/casetype-koffer-v1'><span class="modelkist" style="--b:46.0px;--h:16.4px;--d:29.6px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Koffer<small>vanaf &euro; 149</small></span></a>
+              <a href='/mockups/casetype-hoedcase-v1'><span class="modelkist" style="--b:46.0px;--h:31.6px;--d:28.8px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Hoedcase<small>vanaf &euro; 179</small></span></a>
+              <a href='/mockups/casetype-trunccase-v1'><span class="modelkist" style="--b:46.0px;--h:34.5px;--d:34.5px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Trunccase<small>vanaf &euro; 199</small></span></a>
+              <a href='/mockups/casetype-rackcase-enkel-deksel-v1'><span class="modelkist" style="--b:46.0px;--h:30.7px;--d:38.3px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Rackcase enkel<small>vanaf &euro; 229</small></span></a>
+              <a href='/mockups/casetype-rackcase-dubbel-deksel-v1'><span class="modelkist" style="--b:44.5px;--h:46.0px;--d:40.8px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Rackcase dubbel<small>vanaf &euro; 259</small></span></a>
+            </div>
+            <a class='allemodellen' href='/mockups/flightcases-v1'>Alle modellen &rarr;</a>
+          </div>
+          <div class="vlak">
+            <b>Zelf configureren</b>
+            <p>Jouw maten invullen en de prijs zien terwijl je typt. Een casebouwer kijkt je opgave na voordat we zagen.</p>
+            <a class='btn btn-dark' href='/mockups/configurator-v1'>Start met configureren &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </span>
+
+    <!-- Branches: wie je bent. Links de zes markten met een eigen pagina,
+         in het midden de manieren van inkopen voor grote partijen — dat is
+         dezelfde koper in een andere rol (zie /grote-spelers), niet een
+         zevende markt. Rechts de opvang voor wie zichzelf er niet in ziet. -->
+    <span class="heeft-menu">
+      <a class='on' href='/mockups/branches'>Branches</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// ZES MARKTEN</h4>
+            <ul>
+              <li><a href='/mockups/branche-audio-visueel-v1'>Audio-visueel en podium<span class="n">22</span></a></li>
+              <li><a href='/mockups/branche-broadcast-en-media-v1'>Broadcast en media<span class="n">9</span></a></li>
+              <li><a href='/mockups/branche-industrie-en-machinebouw-v1'>Industrie en machinebouw<span class="n">14</span></a></li>
+              <li><a href='/mockups/branche-meet-en-testapparatuur-v1'>Meet- en testapparatuur<span class="n">11</span></a></li>
+              <li><a href='/mockups/branche-defensie-v1'>Defensie<span class="n">7</span></a></li>
+              <li><a href='/mockups/branche-schaalmodellen-v1'>Schaalmodellen<span class="n">5</span></a></li>
+              <li><a href='/mockups/branches'>Alle branches &rarr;</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// INKOPEN ALS GROTE PARTIJ</h4>
+            <ul>
+              <li><a href='/mockups/speler-defensie-en-overheid-v1'>Defensie en overheid</a></li>
+              <li><a href='/mockups/speler-oem-en-series-v1'>OEM en series</a></li>
+              <li><a href='/mockups/speler-verhuur-en-touring-v1'>Verhuur en touring</a></li>
+              <li><a href='/mockups/speler-omroep-en-studio-v1'>Omroep en studio</a></li>
+              <li><a href='/mockups/speler-netbeheer-en-energie-v1'>Netbeheer en energie</a></li>
+              <li><a href='/mockups/grote-spelers-v1'>Hoe je bij ons inkoopt &rarr;</a></li>
+            </ul>
+          </div>
+          <div class="vlak">
+            <b>Staat je markt er niet bij?</b>
+            <p>We bouwen ook voor winkelinrichting, IT-racks en medisch en lab &mdash; alleen nog zonder eigen pagina. Vertel wat je vervoert, dan tekenen we het.</p>
+            <a class='btn btn-dark' href='/mockups/case-aanvragen-v1'>Case aanvragen &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </span>
+
+    <!-- Service: alles rond bestellen en daarna. Het vlak is de telefoon,
+         want direct advies is wat een servicepagina het vaakst oplevert. -->
+    <span class="heeft-menu">
+      <a href='/mockups/service-hub-v1'>Service</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// BESTELLEN EN LEVEREN</h4>
+            <ul>
+              <li><a href='/mockups/zo-werkt-het-v1'>Zo werkt het</a></li>
+              <li><a href='/mockups/service-levertijden-v1'>Levertijden</a></li>
+              <li><a href="#">Verzending</a></li>
+              <li><a href='/mockups/laten-controleren-v1'>Maten laten controleren</a></li>
+              <li><a href="#">Veelgestelde vragen</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// ZELF BOUWEN</h4>
+            <ul>
+              <li><a href='/mockups/categorie-v1'>Onderdelen</a></li>
+              <li><a href="#">Zaagservice</a></li>
+            </ul>
+            <h4>// OVER ONS</h4>
+            <ul>
+              <li><a href='/mockups/over-ons-v1'>Over Proflite</a></li>
+              <li><a href='/mockups/contact-v1'>Contact</a></li>
+            </ul>
+          </div>
+          <div class="vlak">
+            <b>Direct advies</b>
+            <p>+31 (0)575 575734 &mdash; je belt met iemand uit de werkplaats in Doesburg, niet met een callcenter.</p>
+            <a class='btn btn-dark' href='/mockups/contact-v1'>Stuur een bericht &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </span>
+    <!-- Shop: links het overzicht — klik je op Shop zelf, dan kom je daar,
+         met alle vaste cases en filters. Onderaan die kolom de weg via je
+         apparaat: de 39 categorieën, waarvandaan je in vier klikken bij het
+         apparaat bent. In het midden een paar populaire producten en
+         daaronder de populairste onderdelen — kort, want het overzicht en
+         de onderdelenpagina zijn één klik verder. Rechts de uitweg voor wie
+         een andere maat nodig heeft.
+         Shop staat achteraan: wie het assortiment zoekt weet dat al. -->
+    <span class="heeft-menu">
+      <a href='/mockups/shop-v1'>Shop</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// ALLE VASTE CASES, MET FILTERS</h4>
+            <ul>
+              <li><a href='/mockups/shop-v1#av-licht'>AV &amp; licht</a></li>
+              <li><a href='/mockups/shop-v1#backline'>Backline &amp; muziek</a></li>
+              <li><a href='/mockups/shop-v1#broadcast'>Broadcast &amp; camera</a></li>
+              <li><a href='/mockups/shop-v1#medisch'>Medisch &amp; lab</a></li>
+              <li><a href='/mockups/shop-v1#industrie'>Industrie &amp; meettechniek</a></li>
+              <li><a href='/mockups/shop-v1#evenement'>Evenement &amp; beursbouw</a></li>
+              <li><a href='/mockups/case-voor-v3'>Alle 39 categorie&euml;n &rarr;</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// POPULAIRE PRODUCTEN</h4>
+            <ul>
+              <li><a href='/mockups/case-voor-gibson-les-paul-v2'>Gibson Les Paul Standard</a></li>
+              <li><a href='/mockups/case-voor-gibson-les-paul-v2' title='/product — hier nog de Les Paul-pagina'>Pioneer DDJ-FLX10</a></li>
+              <li><a href='/mockups/case-voor-gibson-les-paul-v2' title='/product — hier nog de Les Paul-pagina'>Robe Robin 600 LEDWash, duo</a></li>
+              <li><a href='/mockups/case-voor-gibson-les-paul-v2' title='/product — hier nog de Les Paul-pagina'>Sony FX6</a></li>
+            </ul>
+            <h4>// POPULAIRE ONDERDELEN</h4>
+            <ul>
+              <li><a href='/mockups/categorie-v1'>Balhoeken</a></li>
+              <li><a href='/mockups/categorie-v1' title='/onderdelen/{categorie} — hier nog het balhoeken-sjabloon'>Vlindersluitingen</a></li>
+              <li><a href='/mockups/categorie-v1' title='/onderdelen/{categorie} — hier nog het balhoeken-sjabloon'>Handgrepen</a></li>
+              <li><a href='/mockups/categorie-v1'>Alle onderdelen &rarr;</a></li>
+            </ul>
+          </div>
+          <div class="vlak">
+            <b>Andere maat nodig?</b>
+            <p>Kies je eigen afmetingen, ronde of vierkante hoeken en een slot. Wil je meer, dan ga je vanuit daar door naar de volledige editor.</p>
+            <a class='btn btn-dark' href='/mockups/editor-v2#l2'>Op jouw maat &rarr;</a>
+          </div>
+        </div>
+      </div><!-- /megamenu -->
+    </span>
+    <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#">NL &#9662;</a></div>
+  </div>
+</nav>
+
+<div class="crumbs donker">
+  <div class="wrap">
+    <a href="#">Home</a><span class="sep">/</span>
+    <a href='/mockups/branches'>Branches</a><span class="sep">/</span>
+    <span>Defensie</span>
+  </div>
+</div>
+
+<!-- ══ DE KOP ══════════════════════════════════════════════════
+     Eén vlak met beeld en de tekst in de onderste helft. De film is
+     hero-v3, een plaatsvervanger: er bestaat geen defensiebeeld van
+     CaseBuilder. Zodra dat er is wisselt alleen deze bron. ══════ -->
+<section class="kop2">
+  <div class="film">
+    <video autoplay muted loop playsinline preload="none"
+           poster="assets/hero-v3-poster.jpg" aria-hidden="true" tabindex="-1">
+      <source src="assets/hero-v3.webm" type="video/webm">
+      <source src="assets/hero-v3.mp4" type="video/mp4">
+    </video>
+    <img src="assets/hero-v3-poster.jpg" alt="" aria-hidden="true">
+  </div>
+  <div class="scrim"></div>
+  <div class="wrap">
+    <div class="ey">// Defensie, veiligheid en overheid</div>
+    <h1>Flightcases voor <span class="acc">defensie</span>, gebouwd naar specificatie</h1>
+    <p class="lead">Materiaalkeuze, documentatie en keuring liggen vast vóór de eerste zaagsnede.
+      Wij bouwen naar jouw eis en leveren het dossier mee.</p>
+    <div class="acties">
+      <a class="btn btn-pri" href="#aanvraag">Stuur je specificatie</a>
+      <a class="btn btn-ghost" href="#werk">Bekijk uitgevoerd werk</a>
+    </div>
+    <p class="bron">Beeld is plaatsvervangend &middot; eigen opnamen volgen</p>
+  </div>
+</section>
+
+<!-- ══ KENTALLEN ═══════════════════════════════════════════════
+     Vier feiten, geen claims. Wat hier staat moet CaseBuilder kunnen
+     navertellen; er staat daarom niets over aantallen klanten of
+     jaren ervaring buiten de 20+ die al overal staat. ═══════════ -->
+<section class="kentallen">
+  <div class="wrap">
+    <div class="row">
+      <div class="it"><b>Doesburg</b><span>Eigen productie, geen onderaanneming buiten de EU</span></div>
+      <div class="it"><b>48 uur</b><span>Offerte, ook op specificatie</span></div>
+      <div class="it"><b>Serie of stuk</b><span>Zelfde tolerantie, zelfde dossier</span></div>
+      <div class="it"><b>Per charge</b><span>Materiaal herleidbaar tot het certificaat</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WAT HIER ANDERS IS ══════════════════════════════════════ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ey ey-dark">// Waar het hier om draait</div>
+      <h2>Bij defensie begint het bij de eis, niet bij de maat</h2>
+      <p class="lead">In elk ander vak meten we het apparaat op en bouwen we eromheen. Hier ligt
+        eerst vast waaraan de kist moet voldoen, en daarna pas hoe groot hij wordt. Wat hieronder
+        staat bepaalt de bouw en staat in de offerte, zodat er bij oplevering niets te bespreken is.</p>
+    </div>
+    <div class="eisenrij">
+      <div class="eis"><div class="n">// 01</div><h3>Schokwaarden</h3>
+        <p>Val- en trilproeven volgens de opgegeven norm, met meetrapport bij oplevering.</p></div>
+      <div class="eis"><div class="n">// 02</div><h3>Materiaalherkomst</h3>
+        <p>Herleidbaar per charge. Plaatmateriaal, beslag en schuim, elk met certificaat.</p></div>
+      <div class="eis"><div class="n">// 03</div><h3>Klimaat en afdichting</h3>
+        <p>Stof- en waterdicht tot de gevraagde klasse, met drukventiel waar nodig.</p></div>
+      <div class="eis"><div class="n">// 04</div><h3>Merking</h3>
+        <p>Volgens je eigen codering, gefreesd of ge&euml;tst, niet als sticker.</p></div>
+      <div class="eis"><div class="n">// 05</div><h3>Levering</h3>
+        <p>Op afroep of in delen, met pakbon per serienummer en een vaste contactpersoon.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ UITGEVOERD WERK ═════════════════════════════════════════
+     De klantcase van dit segment. Geen naam, geen logo, wel de
+     opdracht: wat erin ging, hoeveel, welke eis, wat er gemeten is.
+
+     LET OP: de opdrachten hieronder zijn illustratief. Ze moeten één
+     voor één door CaseBuilder bevestigd worden voordat deze pagina
+     naar buiten gaat, inclusief de normaanduidingen. ═══════════ -->
+<section class="werk" id="werk">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ey ey-dark">// In plaats van klantverhalen</div>
+      <h2>Wat we bouwden, zonder te zeggen voor wie</h2>
+      <p class="lead">In dit segment noemen wij geen opdrachtgevers, en onze klanten geven geen
+        citaten. Wat we wél kunnen laten zien is de opdracht zelf: de eis die erin ging, de serie
+        die eruit kwam en wat daarvan is vastgelegd.</p>
+    </div>
+
+    <div class="lijst">
+      <details>
+        <summary>
+          <span class="nr">// 01</span>
+          <h3>Radarset, 180 kg, serie van 12</h3>
+          <span class="kort">Val- en trilproef &middot; drukventiel</span>
+          <span class="tk" aria-hidden="true"></span>
+        </summary>
+        <div class="uit">
+          <p>Een set die op een voertuig meerijdt en op locatie in twee delen wordt uitgeladen.
+            Het zwaartepunt lag hoog, dus de indeling volgt de tilpunten en niet de buitenmaat:
+            twee kisten van elk onder de honderd kilo in plaats van één die met vier man moet.
+            De elektronica staat op een schokgedempt frame, los van de buitenwand.</p>
+          <dl>
+            <dt>Aantal</dt><dd>12, in twee leveringen</dd>
+            <dt>Buitenmaat</dt><dd>1.240 &times; 780 &times; 620 mm</dd>
+            <dt>Getest op</dt><dd>Val- en trilproef volgens de opgegeven norm</dd>
+            <dt>Meegeleverd</dt><dd>Meetrapport, materiaalcertificaten, tekening rev. C</dd>
+          </dl>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span class="nr">// 02</span>
+          <h3>Optische richtmiddelen, uitgefreesd schuim</h3>
+          <span class="kort">Klimaatklasse &middot; merking gefreesd</span>
+          <span class="tk" aria-hidden="true"></span>
+        </summary>
+        <div class="uit">
+          <p>Zes instrumenten in één kist, elk in een eigen uitsparing zodat bij het inpakken
+            zichtbaar is wat er ontbreekt. Het schuim is uitgefreesd op de tekening van de klant,
+            niet op een afdruk van het instrument: dat laatste geeft speling zodra er een revisie
+            komt. De merking is in de wand gefreesd volgens hun eigen codering.</p>
+          <dl>
+            <dt>Aantal</dt><dd>40</dd>
+            <dt>Interieur</dt><dd>Uitgefreesd PE, 40 mm, per instrument een eigen vak</dd>
+            <dt>Afdichting</dt><dd>Stof- en waterdicht, drukventiel</dd>
+            <dt>Meegeleverd</dt><dd>Certificaat per charge, tekening, afwijkingenlijst</dd>
+          </dl>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span class="nr">// 03</span>
+          <h3>Verbindingsset met kabelvak en aarding</h3>
+          <span class="kort">In bedrijf te gebruiken &middot; deksel dicht</span>
+          <span class="tk" aria-hidden="true"></span>
+        </summary>
+        <div class="uit">
+          <p>Deze kist gaat op locatie niet open maar aan: de set draait in de kist, met doorvoeren
+            in de zijwand en een aardingsdoorvoer onderin. Het deksel blijft dicht, ook in de regen.
+            Het kabelvak zit achter een eigen klep zodat de kabels erin blijven bij transport.</p>
+          <dl>
+            <dt>Aantal</dt><dd>8</dd>
+            <dt>Bijzonder</dt><dd>Doorvoeren op werkhoogte, aarding onderin</dd>
+            <dt>Getest op</dt><dd>Regenproef met deksel dicht en kabels aangesloten</dd>
+            <dt>Meegeleverd</dt><dd>Meetrapport, tekening rev. B, onderhoudsinstructie</dd>
+          </dl>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HET DOSSIER ═════════════════════════════════════════════ -->
+<section class="dossier">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <div class="ey">// Wat je meekrijgt</div>
+        <h2>Het dossier is het bewijs</h2>
+        <p class="lead">Een kist die voldoet is één ding. Kunnen aantonen dát hij voldoet is wat
+          jouw auditor vraagt. Dat hoort bij de levering en kost niets extra.</p>
+        <ol>
+          <li><b>Testrapport</b><span>Val-, tril- en klimaattest op het eerste exemplaar, met meetwaarden en foto's</span></li>
+          <li><b>Materiaalcertificaten</b><span>Per charge, voor plaatmateriaal, beslag en schuim</span></li>
+          <li><b>Tekening met revisie</b><span>De versie waarop gebouwd is, niet de laatste die rondging</span></li>
+          <li><b>Afwijkingenlijst</b><span>Wat er is afgeweken van de specificatie, en wie dat heeft goedgekeurd</span></li>
+        </ol>
+      </div>
+      <div class="blad">
+        <div class="vel ruit"></div>
+        <div class="bij"><span>Tekening &middot; rev. C</span><span>Schaal 1:10</span><span>Doesburg</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROCES ══════════════════════════════════════════════════ -->
+<section class="proces">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ey ey-dark">// Van eis tot levering</div>
+      <h2>Vier stappen, en waar de tijd in zit</h2>
+    </div>
+    <div class="stappen">
+      <div class="st"><div class="n">// 01</div><h3>Specificatie</h3>
+        <p>Je stuurt de eis, een tekening of een datasheet. Ontbreekt er iets, dan bellen we.</p>
+        <div class="tijd">Offerte binnen 48 uur</div></div>
+      <div class="st"><div class="n">// 02</div><h3>Tekening</h3>
+        <p>Wij tekenen de kist en leggen de afwijkingen voor. Pas na jouw akkoord gaat er iets de zaag in.</p>
+        <div class="tijd">Akkoord op tekening</div></div>
+      <div class="st"><div class="n">// 03</div><h3>Eerste exemplaar</h3>
+        <p>We bouwen er één, testen die volgens de norm en leggen het rapport erbij.</p>
+        <div class="tijd">Vrijgave voor de serie</div></div>
+      <div class="st"><div class="n">// 04</div><h3>Serie en levering</h3>
+        <p>De rest volgt in dezelfde tolerantie, op afroep of in delen, met pakbon per serienummer.</p>
+        <div class="tijd">Zo snel als tien werkdagen</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TOEPASSINGEN ════════════════════════════════════════════
+     Ook een SEO-blok: dit zijn de interne links naar de categorieën,
+     met de woorden die iemand intikt. ═════════════════════════ -->
+<section class="toep ruit ruit-dark ruit-veld">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ey">// Toepassingen</div>
+      <h2>Wat er in het veld in gaat</h2>
+      <p class="lead">Elk item is een casetype dat we vaker hebben gebouwd. De maatvoering volgt
+        jouw apparatuur, niet andersom.</p>
+    </div>
+    <div class="toeprij">
+      <a class="tp" href='/mockups/case-voor-gitaar-v1'><h3>Veldapparatuur</h3>
+        <p>Meet- en verbindingsapparatuur die mee het terrein op gaat.</p><span class="go">Naar de case &rarr;</span></a>
+      <a class="tp" href='/mockups/case-voor-gitaar-v1'><h3>Optische systemen</h3>
+        <p>Kijkers, richtmiddelen en sensoren in uitgefreesd schuim.</p><span class="go">Naar de case &rarr;</span></a>
+      <a class="tp" href='/mockups/case-voor-gitaar-v1'><h3>Communicatie</h3>
+        <p>Radiosets en antennes, met kabelvak en aardingsdoorvoer.</p><span class="go">Naar de case &rarr;</span></a>
+      <a class="tp" href='/mockups/case-voor-gitaar-v1'><h3>Munitietransport</h3>
+        <p>Volgens voorschrift, met vergrendeling en verzegeling.</p><span class="go">Naar de case &rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ VRAGEN ══════════════════════════════════════════════════ -->
+<section class="vragen">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ey ey-dark">// Vragen die inkopers stellen</div>
+      <h2>Voordat je een specificatie deelt</h2>
+    </div>
+    <details>
+      <summary><h3>Kunnen we onder geheimhouding offreren?</h3><span class="tk" aria-hidden="true">+</span></summary>
+      <div class="antw">Ja. Stuur je NDA mee met de aanvraag, of vink het vakje aan in het formulier
+        hieronder, dan tekenen wij voordat je specificaties deelt. Tot die tijd is een globale
+        omschrijving genoeg om te bepalen of het bij ons past.</div>
+    </details>
+    <details>
+      <summary><h3>Bouwen jullie naar een opgegeven norm?</h3><span class="tk" aria-hidden="true">+</span></summary>
+      <div class="antw">Wij bouwen naar de norm die jij opgeeft en leggen de meting daarvan vast in
+        het testrapport. Geef je geen norm op, dan stellen wij er een voor op basis van het
+        transport, en die staat dan in de offerte.</div>
+    </details>
+    <details>
+      <summary><h3>Wat als er over twee jaar een serie bij moet?</h3><span class="tk" aria-hidden="true">+</span></summary>
+      <div class="antw">De tekening met revisie blijft bij ons bewaard, dus een naleverings-serie
+        krijgt dezelfde maatvoering en hetzelfde interieur. Is er een onderdeel uit productie, dan
+        melden we dat vóór de offerte in plaats van erna.</div>
+    </details>
+    <details>
+      <summary><h3>Waar wordt gebouwd?</h3><span class="tk" aria-hidden="true">+</span></summary>
+      <div class="antw">In Doesburg, in onze eigen werkplaats. Er is geen onderaanneming buiten de
+        EU. Een audit ter plaatse kan na afspraak.</div>
+    </details>
+  </div>
+</section>
+
+<!-- ══ AANVRAAG ════════════════════════════════════════════════ -->
+<section class="slot2" id="aanvraag">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <div class="ey ey-dark">// Verder</div>
+        <h2>Stuur je specificatie</h2>
+        <p class="lead">Een eis, een tekening of een datasheet is genoeg. Je krijgt binnen twee
+          werkdagen een prijs en een tekening, en pas daarna beslis je iets.</p>
+        <div class="nda">
+          <input type="checkbox" id="nda">
+          <label for="nda">Wij willen eerst een geheimhoudingsverklaring tekenen. Stuur die mee
+            voordat ik specificaties deel.</label>
+        </div>
+        <p style="margin-top:22px"><a class="btn btn-pri" href='/mockups/case-aanvragen-v1'>Case aanvragen</a></p>
+      </div>
+      <div class="kaart">
+        <div class="wie">
+          <div class="portret"></div>
+          <div class="naam"><b>Nog in te vullen</b><span>Contactpersoon defensie</span></div>
+        </div>
+        <div class="regel">Wie hier komt met een specificatie krijgt één vaste contactpersoon,
+          van offerte tot levering. Geen wisselende mailadressen.</div>
+        <div class="regel"><b>+31 (0)575 575734</b><br><span class="mono">Doesburg, werkdagen 8&ndash;17u</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="merk"><img src="assets/woordmerk-wit.svg" alt="Casebuilder.com"></div>
+        <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734">+31 (0)575 575734</a></p>
+      </div>
+      <div><h5>Offerte aanvragen</h5><a href='/mockups/case-aanvragen-v1'>Case aanvragen</a><a href='/mockups/laten-controleren-v1'>Maten laten controleren</a><a href="#" title="/grote-spelers/series — bestaat nog niet als pagina">Series en staffels</a><a href="#" title="/grote-spelers — hier nog zonder eigen instap">Zakelijk bestellen</a></div>
+      <div><h5>Kant en klaar</h5><a href='/mockups/shop-v1'>Alle vaste cases</a><a href='/mockups/case-voor-v3'>Wat ga je vervoeren?</a><a href='/mockups/flightcases-v1'>Flightcases per model</a><a href='/mockups/categorie-v1'>Onderdelen</a></div>
+      <div><h5>Zelf configureren</h5><a href='/mockups/configurator-v1'>Naar de configurator</a><a href='/mockups/zo-werkt-het-v1'>Zo werkt het</a><a href="#" title="/account/orders — achter inloggen">Herhaalorder</a><a href="#" title="/account/configuraties — achter inloggen">Mijn configuraties</a></div>
+      <div><h5>Branches</h5><a href='/mockups/branche-audio-visueel-v1'>Audio-visueel en podium</a><a href='/mockups/branche-broadcast-en-media-v1'>Broadcast en media</a><a href='/mockups/branche-industrie-en-machinebouw-v1'>Industrie en machinebouw</a><a href='/mockups/branche-meet-en-testapparatuur-v1'>Meet- en testapparatuur</a><a href='/mockups/branche-defensie-v1'>Defensie</a><a href='/mockups/branche-schaalmodellen-v1'>Schaalmodellen</a><a href='/mockups/branches'>Alle branches</a><a class='anders' href='/mockups/grote-spelers-v1'>Inkopen als grote partij &rarr;</a></div>
+      <div><h5>Service</h5><a href='/mockups/service-levertijden-v1'>Levertijden</a><a href="#" title="/service/verzending — bestaat nog niet als pagina">Verzending</a><a href="#" title="/service/zaagservice — bestaat nog niet als pagina">Zaagservice</a><a href='/mockups/over-ons-v1'>Over Proflite</a><a href='/mockups/contact-v1'>Contact</a></div>
+    </div>
+    <div class="bot"><span>KVK 09123456</span><span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span></div>
+  </div>
+</footer>
+
+<script src="assets/navzoek.js"></script>
+<script src="assets/versies.js"></script>
+<script src="assets/hoogtemelder.js"></script>
+<script src="assets/vervoeren.js"></script>
+
+
+
+<!-- ══ GESTRUCTUREERDE DATA ═════════════════════════════════════
+     De vragen hierboven nog een keer, in het formaat waarmee Google ze
+     als los resultaat kan tonen. Opgebouwd uit de pagina zelf en niet
+     met de hand bijgehouden: twee lijsten die hetzelfde moeten zeggen
+     gaan uit elkaar lopen, en dan staat er in de zoekresultaten iets
+     anders dan op de pagina. ══════════════════════════════════════ -->
+<script>
+(function () {
+  var vragen = Array.prototype.map.call(
+    document.querySelectorAll('.vragen details'),
+    function (d) {
+      return {
+        '@type': 'Question',
+        name: d.querySelector('h3').textContent.trim(),
+        acceptedAnswer: { '@type': 'Answer', text: d.querySelector('.antw').textContent.trim() }
+      };
+    }
+  );
+  if (!vragen.length) return;
+  var blok = document.createElement('script');
+  blok.type = 'application/ld+json';
+  blok.textContent = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: vragen
+  });
+  document.head.appendChild(blok);
+})();
+</script>
+<script src="assets/navzoek.js"></script>
+<script src="assets/versies.js"></script>
+<script src="assets/hoogtemelder.js"></script>
+<script src="assets/vervoeren.js"></script>
+</body>
+</html>
