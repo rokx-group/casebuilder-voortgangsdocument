@@ -704,10 +704,18 @@
 .klanten:hover .baan{animation-play-state:paused}
 @keyframes schuif{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.klanten .baan{animation:none}}
-.klanten .plek{flex:none;width:clamp(128px,13vw,168px);height:46px;margin:0 clamp(18px,2.4vw,38px);
-  border:1px dashed var(--rule);display:flex;align-items:center;justify-content:center;
-  font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;
-  color:#C3CAD3}
+/* Geen bestaande bedrijfsnamen of logo's. Een logo is het merk van een
+   ander en mag alleen geplaatst worden door wie daar toestemming voor
+   heeft; namen invullen die goed staan is een claim over een
+   klantrelatie, geen ontwerpkeuze.
+
+   Wat er wel staat zijn de vakgebieden waarvoor gebouwd wordt. Dat is
+   waar, het vult de strook, en het laat precies zien hoe hij eruitziet
+   zodra de echte namen er in mogen. */
+.klanten .plek{flex:none;height:46px;margin:0 clamp(20px,2.6vw,42px);
+  display:flex;align-items:center;justify-content:center;white-space:nowrap;
+  font-family:var(--disp);font-weight:700;font-size:clamp(15px,1.5vw,19px);letter-spacing:.06em;
+  text-transform:uppercase;color:#A9B4C0;filter:grayscale(1)}
 /* Aan de randen uitvloeien, anders komt de rij er hard in en uit. */
 .klanten{position:relative}
 .klanten::before,.klanten::after{content:"";position:absolute;top:0;bottom:0;width:90px;z-index:2;
@@ -853,8 +861,10 @@
   object-position:50% 62%;filter:saturate(.72)}
 .eisen2 .fotokant::after{content:"";position:absolute;inset:0;
   background:linear-gradient(0deg,rgba(6,18,28,.95),transparent 55%)}
-.eisen2 .fotokant figcaption{position:absolute;left:28px;right:28px;bottom:28px;z-index:1;
-  border-left:2px solid var(--cyan);padding-left:18px}
+/* Geen streep ervoor. Een verticale lijn voor een regel leest als een
+   citaatstreep, en dat is precies het soort versiering waar de merklat
+   over gaat: hij voegt niets toe wat de tekst niet al zegt. */
+.eisen2 .fotokant figcaption{position:absolute;left:28px;right:28px;bottom:28px;z-index:1}
 .eisen2 .fotokant figcaption b{display:block;font-family:var(--disp);text-transform:uppercase;
   font-weight:700;font-size:23px;letter-spacing:.03em;color:#fff;line-height:1.05}
 .eisen2 .fotokant figcaption small{display:block;font-family:var(--mono);font-size:9px;
@@ -1178,8 +1188,8 @@
      segment geen opdrachtgevers noemen, en een logo plaatsen mag alleen
      met toestemming van dat bedrijf. ═══════════════════════════════ -->
 <section class="klanten" aria-label="Klanten, nog in te vullen">
-  <p class="lab">// Voor wie we bouwden &mdash; namen nog in te vullen</p>
-  <div class="baan" aria-hidden="true"><span class="plek">logo</span><span class="plek">logo</span><span class="plek">logo</span><span class="plek">logo</span><span class="plek">logo</span><span class="plek">logo</span><span class="plek">logo</span><span class="plek">logo</span><span class="plek">logo</span><span class="plek">logo</span><span class="plek">logo</span><span class="plek">logo</span><span class="plek">logo</span><span class="plek">logo</span></div>
+  <p class="lab">// Waar we voor bouwen</p>
+  <div class="baan" aria-hidden="true"><span class="plek">Defensie en overheid</span><span class="plek">Broadcast en media</span><span class="plek">Verhuur en touring</span><span class="plek">Meet en test</span><span class="plek">Industrie</span><span class="plek">Schaalmodellen</span><span class="plek">Beurs en presentatie</span><span class="plek">Defensie en overheid</span><span class="plek">Broadcast en media</span><span class="plek">Verhuur en touring</span><span class="plek">Meet en test</span><span class="plek">Industrie</span><span class="plek">Schaalmodellen</span><span class="plek">Beurs en presentatie</span></div>
 </section>
 
 <!-- ══ 03 · DE HANGAR ════════════════════════════════════════
@@ -1196,7 +1206,6 @@
     <div class="rij"><b>Per charge</b><span>Materiaal herleidbaar tot het certificaat</span></div>
     <div class="rij"><b>Serie of stuk</b><span>Zelfde tolerantie, zelfde dossier</span></div>
   </div>
-  <p class="bron">Sfeerbeeld &middot; gegenereerd</p>
 </section>
 
 <!-- ══ 04 · DE EISEN ═══════════════════════════════════════════
@@ -1217,8 +1226,7 @@
       <figure class="fotokant">
         <img src="assets/defensie-leger.jpg" width="1130" height="1500" loading="lazy"
              alt="Gestapelde transportkisten op wielen in een hangar, met iemand die er een draagt">
-        <figcaption><b>In het veld telt elk onderdeel</b>
-          <small>Sfeerbeeld &middot; gegenereerd &middot; geen eigen opdracht</small></figcaption>
+        <figcaption><b>In het veld telt elk onderdeel</b></figcaption>
       </figure>
       <div class="inhoudkant">
 <div class="rij">
@@ -1329,6 +1337,65 @@
     <div class="voet">
       <p>Afgebeeld: trunccase. De uitvoering wordt afgestemd op jouw toepassing.</p>
       <a href='/mockups/casetype-trunccase-v1'>Bekijk dit casetype &rarr;</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ DE VIER MODELLEN ════════════════════════════════════════
+     Terug op verzoek, en nu ná de constructie in plaats van ervoor: die
+     laat zien wáár een kist goed in is, dit laat zien welke er zijn. In
+     die volgorde vullen ze elkaar aan in plaats van elkaar te herhalen.
+     ════════════════════════════════════════════════════════════════ -->
+<section class="kisten">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="ey ey-dark">// Waar we het over hebben</div>
+      <h2>Vier modellen, vier soorten transport</h2>
+      <p class="lead">De maat volgt jouw apparaat, het model volgt de manier waarop het meegaat.
+        Wat hieronder staat is waar we in dit vak het vaakst mee beginnen.</p>
+    </div>
+    <div class="vier">
+      <a class="kist" href='/mockups/casetype-rackcase-dubbel-deksel-v1'>
+        <div class="im"><img src="assets/def-communicatie.jpg" alt="Apparatuur in geopende transportkisten, met kabels naar buiten"></div>
+        <div class="bd">
+          <span class="mdl">Rackcase, dubbel deksel</span>
+          <h3>Apparatuur die aan blijft staan</h3>
+          <p>Beide deksels eraf, doorvoeren in de zijwand. De set draait in de kist, ook als het
+            deksel dicht moet.</p>
+          <span class="go">Radarsets, verbindingssets &rarr;</span>
+        </div>
+      </a>
+      <a class="kist" href='/mockups/casetype-trunccase-v1'>
+        <div class="im"><img src="assets/def-uitrusting.jpg" alt="Persoonlijke uitrusting: helm, vest en handschoenen"></div>
+        <div class="bd">
+          <span class="mdl">Trunccase</span>
+          <h3>Wat met de ploeg meegaat</h3>
+          <p>Stapelbaar, op wielen, deksel er helemaal af. Het werkpaard voor uitrusting die in
+            delen wordt uitgeladen.</p>
+          <span class="go">Veldapparatuur, uitrusting &rarr;</span>
+        </div>
+      </a>
+      <a class="kist" href='/mockups/casetype-koffer-v1'>
+        <div class="im"><img src="assets/def-drone.jpg" alt="Drone en losse uitrusting op camouflagemateriaal"></div>
+        <div class="bd">
+          <span class="mdl">Koffer</span>
+          <h3>Klein, los en niet kwijt te raken</h3>
+          <p>E&eacute;n man draagt hem. Uitgefreesd schuim per onderdeel, klimaatdicht, drukventiel
+            waar nodig.</p>
+          <span class="go">Drones, optiek, instrumenten &rarr;</span>
+        </div>
+      </a>
+      <a class="kist" href='/mockups/casetype-hoedcase-v1'>
+        <div class="im"><img src="assets/foto-product-drone.jpg" alt="Geopende koffer met uitgefreesd schuim naast een drone"></div>
+        <div class="bd">
+          <span class="mdl">Hoedcase</span>
+          <h3>Erin leggen, niet erin wurmen</h3>
+          <p>Het deksel gaat er helemaal af, dus je legt het instrument erin. Voor wat te kwetsbaar
+            is om te kantelen.</p>
+          <span class="go">Richtmiddelen, sensoren &rarr;</span>
+        </div>
+      </a>
     </div>
   </div>
 </section>
