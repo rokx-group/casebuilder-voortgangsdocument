@@ -1,0 +1,12 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch();
+const p = await b.newPage({ viewportSize: { width: 1440, height: 900 } });
+const fouten = []; p.on('pageerror', e => fouten.push(e.message));
+await p.goto('http://localhost:8899/mockups/branche-defensie-v3.html');
+await p.waitForTimeout(900);
+console.log('knop in hero:', await p.locator('.kop4 .doen .btn').count(), '| logoplekken:', await p.locator('.klanten .plek').count());
+await p.screenshot({ path: process.argv[2] + '/hero-knop.png' });
+await p.locator('.klanten').scrollIntoViewIfNeeded(); await p.waitForTimeout(600);
+await p.screenshot({ path: process.argv[2] + '/klanten.png' });
+console.log(fouten.length ? 'JS-FOUTEN: ' + fouten.join(' | ') : 'geen javascriptfouten');
+await b.close();

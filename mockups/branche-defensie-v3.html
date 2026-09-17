@@ -252,6 +252,13 @@
 .kop4 .wrap{position:relative;text-align:center}
 .kop4 .ey{color:var(--cyan)}
 .kop4 h1{font-size:clamp(36px,5.4vw,80px);color:#fff;line-height:.9;margin:18px auto 0;max-width:19ch}
+/* Eén knop onder de regel, geen twee. Twee knoppen naast elkaar dwingen
+   een keuze af voordat iemand iets gelezen heeft, en dan wordt de hero
+   een sjabloon in plaats van een openingsbeeld. Wie verder wil lezen
+   scrollt; wie meteen wil praten klikt. */
+.kop4 .doen{margin-top:30px}
+.kop4 .doen .btn{background:var(--cyan);color:var(--void);border-color:var(--cyan)}
+.kop4 .doen .btn:hover{background:#8AD3EF;border-color:#8AD3EF}
 .kop4 h1 .acc{color:var(--cyan)}
 
 /* Een aanwijzing dat er meer is, en niet meer dan dat. Het streepje zakt
@@ -665,6 +672,49 @@
 @media(max-width:900px){.kisten .vier{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.kisten .vier{grid-template-columns:1fr}}
 
+
+/* ══════════════════════════════════════════════════════════════
+   De klantenstrook.
+
+   De vorm staat er, de namen niet. Twee redenen, en ze wegen allebei.
+
+   Op déze pagina staat drie regels hoger dat wij in dit segment geen
+   opdrachtgevers noemen. Een logomuur eronder spreekt dat tegen, en de
+   inkoper die het leest weet meteen welke van de twee waar is.
+
+   En een logo van een bedrijf is zijn merk. Dat plaatsen mag alleen als
+   dat bedrijf klant is en toestemming heeft gegeven. Namen invullen die
+   goed staan is geen ontwerpkeuze maar een claim, en die valt niet meer
+   te repareren zodra een van die bedrijven hem ziet.
+
+   Wat hier dus staat is de beweging en de maat, met lege plekken. Zodra
+   CaseBuilder zegt welke klanten genoemd mogen worden, vervangen die de
+   vakken. Blijft dat leeg, dan kan de hele strook weg: dat is beter dan
+   vage vormen die nergens op slaan.
+
+   De rij schuift met een animatie en niet met javascript, en hij staat
+   stil bij prefers-reduced-motion. Twee dezelfde helften achter elkaar,
+   zodat de lus onzichtbaar is.
+   ══════════════════════════════════════════════════════════════ */
+.klanten{background:#fff;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  overflow:hidden;padding:26px 0}
+.klanten .lab{text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--mute);margin-bottom:20px}
+.klanten .baan{display:flex;width:max-content;animation:schuif 34s linear infinite}
+.klanten:hover .baan{animation-play-state:paused}
+@keyframes schuif{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.klanten .baan{animation:none}}
+.klanten .plek{flex:none;width:clamp(128px,13vw,168px);height:46px;margin:0 clamp(18px,2.4vw,38px);
+  border:1px dashed var(--rule);display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:#C3CAD3}
+/* Aan de randen uitvloeien, anders komt de rij er hard in en uit. */
+.klanten{position:relative}
+.klanten::before,.klanten::after{content:"";position:absolute;top:0;bottom:0;width:90px;z-index:2;
+  pointer-events:none}
+.klanten::before{left:0;background:linear-gradient(90deg,#fff,transparent)}
+.klanten::after{right:0;background:linear-gradient(270deg,#fff,transparent)}
+
 </style>
 </head>
 <body>
@@ -897,6 +947,7 @@
   <div class="wrap">
     <div class="ey">// Defensie, veiligheid en overheid</div>
     <h1>Flightcases voor <span class="acc">defensie</span>, gebouwd naar specificatie</h1>
+    <p class="doen"><a class="btn btn-pri" href="#aanvraag">Plan een gesprek</a></p>
   </div>
   <div class="verder"><i></i>Lees verder</div>
 </section>
@@ -918,6 +969,17 @@
       meekomt.</p>
     <p class="onder">Offerte binnen 48 uur &middot; ook op specificatie</p>
   </div>
+</section>
+
+
+<!-- ══ DE KLANTENSTROOK ════════════════════════════════════════
+     De vorm staat er, de namen niet. Zie de toelichting in de
+     stylesheet: op deze pagina staat drie regels hoger dat wij in dit
+     segment geen opdrachtgevers noemen, en een logo plaatsen mag alleen
+     met toestemming van dat bedrijf. ═══════════════════════════════ -->
+<section class="klanten" aria-label="Klanten, nog in te vullen">
+  <p class="lab">// Voor wie we bouwden &mdash; namen nog in te vullen</p>
+  <div class="baan" aria-hidden="true"><span class="plek">logo</span><span class="plek">logo</span><span class="plek">logo</span><span class="plek">logo</span><span class="plek">logo</span><span class="plek">logo</span><span class="plek">logo</span><span class="plek">logo</span><span class="plek">logo</span><span class="plek">logo</span><span class="plek">logo</span><span class="plek">logo</span><span class="plek">logo</span><span class="plek">logo</span></div>
 </section>
 
 <!-- ══ 03 · DE HANGAR ════════════════════════════════════════
