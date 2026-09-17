@@ -154,3 +154,40 @@
   .hero .specs div,
   .vraag .specs div { min-width: 50%; padding-left: 6px; padding-right: 6px }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   De ontvangst op de bestemming.
+
+   Staat bovenaan de pagina waar je landt en herhaalt wat je typte. Dat
+   is geen versiering: wie "f16 vleugel" intikt en op een algemene
+   defensiepagina komt, weet niet of zijn vraag is aangekomen. Deze
+   strook zegt dat hij is aangekomen, en waarom je hier staat.
+
+   Navy, niet lichtblauw: hij hoort bij de pagina te horen en niet als
+   melding te lezen die je kunt wegklikken. En hij loopt door tot de
+   rand, zodat de kop eronder gewoon de kop van de pagina blijft.
+   ══════════════════════════════════════════════════════════════ */
+/* section krijgt in brand.css 88 px boven en onder. Dat is de maat voor
+   een inhoudssectie; deze strook is een tussenkopje van vier regels en
+   zou daarmee een half scherm vullen. Vandaar de eigen maat. */
+.ontvangst { background: var(--dark); color: #fff; padding: 0 }
+/* Alleen boven en onder: .wrap heeft zijn eigen zijmarge van 32 px en
+   die hoort hier niet overschreven te worden, anders plakt de tekst
+   tegen de rand van het scherm. */
+.ontvangst .wrap { padding-top: 26px; padding-bottom: 30px }
+.ontvangst .lab {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--cyan);
+}
+.ontvangst .wat {
+  font-family: var(--disp); text-transform: uppercase; font-weight: 900;
+  font-size: clamp(26px, 3.2vw, 40px); line-height: 1; letter-spacing: .03em; margin-top: 10px;
+}
+.ontvangst .uitleg {
+  margin-top: 12px; max-width: 64ch; font-size: 15px; color: rgba(255,255,255,.76);
+}
+.ontvangst .btn-pri { margin-top: 20px }
+
+/* Op de aanvraagpagina staat de tekst al in het veld; daar markeert
+   dit dat hij is meegekomen en niet door de bezoeker is getypt. */
+.is-meegekomen { border-color: var(--cyan) }

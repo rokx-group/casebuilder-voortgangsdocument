@@ -158,7 +158,7 @@
       li.addEventListener('mousedown', function (e) {
         e.preventDefault();          // blur vóór de klik zou de lijst sluiten
         var label = e.target.closest('a.gr');
-        ga(label ? label.getAttribute('href') : t.pagina);
+        ga(label ? label.getAttribute('href') : metTekst(t.pagina, input.value.trim()));
       });
       lijst.appendChild(li);
     }
@@ -204,6 +204,23 @@
       input.setAttribute('aria-activedescendant', actief > -1 ? 'vervoer-optie-' + actief : '');
     }
 
+
+  /* ── de tekst reist mee ──────────────────────────────────────
+     Wat je typt gaat als ?vervoeren= mee naar elke bestemming, niet
+     alleen naar de aanvraag. Zonder die tekst begint de pagina waar je
+     landt met een algemeen verhaal, en dan voelt de sprong als
+     doorgestuurd worden. Mét die tekst kan hij beginnen met waar je op
+     zocht, en dat is het verschil tussen doorverwezen en opgevangen.
+
+     De drie deuren onderaan dragen hun tekst al in de URL; die worden
+     hier overgeslagen zodat er niet twee keer hetzelfde in komt. */
+  function metTekst(url, tekst) {
+    if (!tekst || url.indexOf('vervoeren=') > -1 || url.indexOf('zoek=') > -1) return url;
+    var hash = '', h = url.indexOf('#');
+    if (h > -1) { hash = url.slice(h); url = url.slice(0, h); }
+    return url + (url.indexOf('?') > -1 ? '&' : '?') + 'vervoeren=' + encodeURIComponent(tekst) + hash;
+  }
+
     function ga(url) {
       window.location.href = url;
     }
@@ -215,12 +232,12 @@
       var tekst = input.value.trim();
       if (!tekst) { input.focus(); return; }
 
-      if (actief > -1 && treffers[actief]) return ga(treffers[actief].pagina);
+      if (actief > -1 && treffers[actief]) return ga(metTekst(treffers[actief].pagina, tekst));
       // Zonder aanwijzing tellen de uitwegen niet mee: Enter hoort de beste
       // treffer te openen, niet het overzicht.
 
       var beste = window.TOEPASSINGEN_ZOEK(tekst, 1)[0];
-      if (beste) return ga(beste.pagina);
+      if (beste) return ga(metTekst(beste.pagina, tekst));
 
       ga(AANVRAAG + '?vervoeren=' + encodeURIComponent(tekst));
     }
@@ -292,6 +309,70 @@
     doel.classList.add('is-meegekomen');
   }
 
+
+  /* ── 3 · de ontvangst op de bestemming ──────────────────────
+     Wie hier komt heeft net iets ingetikt waarvan hij niet wist of wij
+     er iets mee kunnen. Begint de pagina dan met een algemeen verhaal,
+     dan is de vraag onbeantwoord gebleven. Deze strook beantwoordt hem
+     in één zin: dit typte je, daarom sta je hier, en hier ga je verder.
+
+     Met javascript en niet in de opmaak van elke pagina, om twee
+     redenen. Hij hoort er alleen te staan als er echt iets getypt is,
+     en zes branchepagina's plus de productpagina's zouden anders zeven
+     keer dezelfde blok krijgen die zeven keer uit de pas gaat lopen.
+
+     De tekst gaat er als textContent in, nooit als opmaak: wat een
+     bezoeker typt komt hier binnen en mag geen html worden. */
+
+  function toonOntvangst() {
+    // De aanvraagpagina vangt de tekst zelf op, in het veld. Daar zou
+    // deze strook hetzelfde twee keer zeggen.
+    if (document.querySelector('[data-vervoeren]')) return;
+
+    var tekst = new URLSearchParams(window.location.search).get('vervoeren');
+    if (!tekst) return;
+    tekst = tekst.trim();
+    if (!tekst) return;
+
+    var anker = document.querySelector('section.kop, .vraag, .hero, main > section, .crumbs');
+    if (!anker) return;
+
+    var strook = document.createElement('section');
+    strook.className = 'ontvangst';
+
+    var wrap = document.createElement('div');
+    wrap.className = 'wrap';
+
+    var lab = document.createElement('p');
+    lab.className = 'lab';
+    lab.textContent = '// Je zocht op';
+
+    var wat = document.createElement('p');
+    wat.className = 'wat';
+    wat.textContent = tekst;
+
+    var uitleg = document.createElement('p');
+    uitleg.className = 'uitleg';
+    uitleg.textContent = 'Hier hebben we geen kant-en-klare case voor liggen. Dit is wat we in dit vak doen, en hoe we hem voor je maken.';
+
+    var knop = document.createElement('a');
+    knop.className = 'btn btn-pri';
+    knop.href = AANVRAAG + '?vervoeren=' + encodeURIComponent(tekst);
+    knop.textContent = 'Vraag hem aan met deze tekst';
+
+    wrap.appendChild(lab);
+    wrap.appendChild(wat);
+    wrap.appendChild(uitleg);
+    wrap.appendChild(knop);
+    strook.appendChild(wrap);
+
+    // Onder het kruimelpad en boven de kop: je leest eerst waar je bent,
+    // dan waarom, dan de pagina zelf.
+    if (anker.classList.contains('crumbs')) anker.parentNode.insertBefore(strook, anker.nextSibling);
+    else anker.parentNode.insertBefore(strook, anker);
+  }
+
   document.querySelectorAll('[data-vervoer]').forEach(bouwBalk);
   vulAanvraagIn();
+  toonOntvangst();
 })();
