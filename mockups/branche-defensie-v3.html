@@ -736,8 +736,11 @@
    Vier eigenschappen op één regel, direct onder de kop. Geen kaartjes en
    geen iconen: het zijn vier woorden die je in één blik leest. */
 .pluspunten{border-bottom:1px solid var(--rule);background:#fff}
-.pluspunten .wrap{display:flex;justify-content:space-between;gap:20px;
-  padding-top:24px;padding-bottom:24px;flex-wrap:wrap}
+/* Krap gehouden. Dit is een balk en geen sectie: hij hoort tegen de kop
+   aan te liggen, niet als eigen blok te lezen. */
+.pluspunten{padding:0}
+.pluspunten .wrap{display:flex;justify-content:space-between;gap:16px;
+  padding-top:14px;padding-bottom:14px;flex-wrap:wrap}
 .pluspunten span{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
   color:var(--dark)}
 .pluspunten span::before{content:"+";color:var(--blue);margin-right:12px}
@@ -825,6 +828,77 @@
   .spec2 .kop2r{display:none}
   .spec2 .regel{grid-template-columns:1fr;gap:10px}
 }
+
+
+/* ══════════════════════════════════════════════════════════════
+   De eisen, in de opzet van het inzet-blok uit de aangeleverde variant:
+   een hoge foto links en de inhoud rechts.
+
+   Dat is een betere drager dan drie rijen onder elkaar. De foto geeft
+   het blok gewicht en laat zien waar die eisen vandaan komen, en de som
+   rechts blijft doen wat hij deed: in één oogopslag tonen wat er is
+   opgelost.
+
+   De foto loopt door tot de onderkant van het blok en krijgt zijn
+   bijschrift over het beeld heen. Wat daar staat is een oefening en geen
+   opdracht van ons; dat staat er ook.
+   ══════════════════════════════════════════════════════════════ */
+.eisen2 .indeling{display:grid;grid-template-columns:1.03fr 1.15fr;gap:clamp(30px,5vw,80px);
+  align-items:stretch;margin-top:clamp(26px,3vw,44px)}
+.eisen2 .fotokant{position:relative;align-self:stretch;min-height:clamp(420px,52vw,660px);
+  background:var(--dark);overflow:hidden}
+.eisen2 .fotokant img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:48% 50%;filter:saturate(.6)}
+.eisen2 .fotokant::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(6,18,28,.95),transparent 55%)}
+.eisen2 .fotokant figcaption{position:absolute;left:28px;right:28px;bottom:28px;z-index:1;
+  border-left:2px solid var(--cyan);padding-left:18px}
+.eisen2 .fotokant figcaption b{display:block;font-family:var(--disp);text-transform:uppercase;
+  font-weight:700;font-size:23px;letter-spacing:.03em;color:#fff;line-height:1.05}
+.eisen2 .fotokant figcaption small{display:block;font-family:var(--mono);font-size:9px;
+  letter-spacing:.1em;text-transform:uppercase;color:#BFCED8;margin-top:9px}
+.eisen2 .inhoudkant{display:flex;flex-direction:column;justify-content:center}
+.eisen2 .inhoudkant .rij{grid-template-columns:1fr;gap:16px;padding:clamp(18px,2.2vw,26px) 0}
+.eisen2 .inhoudkant .rij:first-child{border-top:0;padding-top:0}
+.eisen2 .inhoudkant .som{margin-top:4px}
+@media(max-width:1000px){
+  .eisen2 .indeling{grid-template-columns:1fr}
+  .eisen2 .fotokant{min-height:300px}
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   Het slot: wat moet er met jullie mee.
+
+   Vervangt het aanvraagblok. Het verschil is de vraagstelling: "stuur je
+   specificatie" vraagt om papier dat de bezoeker misschien niet heeft,
+   "wat moet er met jullie mee" vraagt om iets wat hij altijd kan
+   beantwoorden. Dat is op deze pagina de lagere drempel, en de rest
+   volgt in het gesprek.
+
+   Beeld over de volle breedte met een verloop dat van links dicht naar
+   rechts open gaat, zodat de tekst leesbaar blijft en de foto toch te
+   zien is.
+   ══════════════════════════════════════════════════════════════ */
+.slot4{position:relative;isolation:isolate;overflow:hidden;background:var(--dark);color:#fff;
+  padding:clamp(56px,8vw,96px) 0}
+.slot4 .achter{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:center 50%;z-index:-2}
+.slot4::after{content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(90deg,rgba(0,40,64,.96),rgba(0,40,64,.92) 35%,rgba(0,40,64,.38))}
+.slot4 h2{font-size:clamp(40px,5.2vw,72px);line-height:.95;color:#fff;margin:20px 0}
+.slot4 h2 span{color:var(--cyan)}
+.slot4 > .wrap > p{max-width:47ch;font-size:16px;line-height:1.75;color:#D0DEE7}
+.slot4 .doen2{display:flex;align-items:center;gap:clamp(20px,3vw,34px);margin-top:28px;flex-wrap:wrap}
+.slot4 .tel{font-size:11px;color:#CFDAE1}
+.slot4 .tel strong{display:block;font-size:16px;color:#fff;font-weight:500;margin-top:4px}
+.slot4 .nda2{display:flex;gap:10px;align-items:flex-start;margin-top:26px;padding:14px 16px;
+  max-width:52ch;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);
+  font-size:14px;color:#D0DEE7}
+.slot4 .nda2 input{margin-top:3px;flex:none}
+.slot4 .onder2{display:flex;gap:16px;align-items:center;margin-top:44px;
+  font-family:var(--mono);font-size:10px;line-height:1.7;letter-spacing:.06em;text-transform:uppercase;
+  color:#C2D3DE}
 
 </style>
 </head>
@@ -1072,7 +1146,7 @@
   <div class="wrap">
     <span>Op maat gemaakt</span>
     <span>Zelf samenstellen</span>
-    <span>Bouwpakket of kant-en-klaar</span>
+    <span>Dossier bij elke levering</span>
     <span>Eigen productie in Doesburg</span>
   </div>
 </section>
@@ -1137,7 +1211,15 @@
   </div>
 
   <div class="wrap">
-    <div class="rij">
+    <div class="indeling">
+      <figure class="fotokant">
+        <img src="assets/defensie-verbinding.jpg" width="1280" height="852" loading="lazy"
+             alt="Militairen werken met verbindingsapparatuur tijdens een oefening">
+        <figcaption><b>In het veld telt elk onderdeel</b>
+          <small>Oefening Allied Spirit &middot; Hohenfels &middot; sfeerbeeld, geen eigen opdracht</small></figcaption>
+      </figure>
+      <div class="inhoudkant">
+<div class="rij">
       <div class="vraag2">
         <div class="wat">// Radarset op een voertuig</div>
         <h3>Twee man moeten hem kunnen tillen, niet vier</h3>
@@ -1181,6 +1263,8 @@
         <div class="kant na"><div class="v">Deksel dicht</div><div class="l">draait in de kist</div></div>
       </div>
     </div>
+        </div>
+    </div>
   </div>
 </section>
 
@@ -1199,7 +1283,7 @@
   <div class="wrap">
     <div class="hfd">
       <div class="ey">// De constructie &middot; elk detail heeft een taak</div>
-      <h2 id="constructie-kop">Klaar voor transport.<br><span>Tot in de details.</span></h2>
+      <h2 id="constructie-kop">Klaar voor transport<br><span>tot in de details</span></h2>
       <p>Wat er onderweg gebeurt telt mee in het ontwerp. Van het eerste handvat tot het laatste
         sluitwerk.</p>
     </div>
@@ -1286,28 +1370,30 @@
   </div>
 </section>
 
-<!-- ══ 07 · DE AANVRAAG ════════════════════════════════════════ -->
-<section class="slot3" id="aanvraag">
+<!-- ══ HET SLOT ═══════════════════════════════════════════════
+     "Wat moet er met jullie mee" in plaats van "stuur je specificatie".
+     Het eerste kan iedereen beantwoorden, het tweede vraagt om papier
+     dat de bezoeker misschien niet heeft. Dat is hier de lagere drempel;
+     de rest volgt in het gesprek. ══════════════════════════════════ -->
+<section class="slot4" id="aanvraag" aria-labelledby="slot-kop">
+  <img class="achter" src="assets/defensie-oefening.jpg" alt="" loading="lazy">
   <div class="wrap">
-    <div class="grid">
-      <div>
-        <div class="ey ey-dark">// Verder</div>
-        <h2>Stuur je specificatie</h2>
-        <p class="lead">Een eis, een tekening of een datasheet is genoeg. Je krijgt binnen twee
-          werkdagen een prijs en een tekening, en pas daarna beslis je iets.</p>
-        <div class="nda">
-          <input type="checkbox" id="nda">
-          <label for="nda">Wij willen eerst een geheimhoudingsverklaring tekenen. Stuur die mee
-            voordat ik specificaties deel.</label>
-        </div>
-        <p style="margin-top:22px"><a class="btn btn-pri" href='/mockups/case-aanvragen-v1'>Case aanvragen</a></p>
-      </div>
-      <div class="kaart">
-        <div class="naam"><b>Nog in te vullen</b><span>Contactpersoon defensie</span></div>
-        <div class="regel">Wie hier komt met een specificatie krijgt &eacute;&eacute;n vaste
-          contactpersoon, van offerte tot levering.</div>
-        <div class="regel"><b>+31 (0)575 575734</b><br><span class="mono">Doesburg, werkdagen 8&ndash;17u</span></div>
-      </div>
+    <div class="ey">// Jouw apparatuur, ons vertrekpunt</div>
+    <h2 id="slot-kop">Wat moet er<br><span>met jullie mee</span></h2>
+    <p>Een eisenlijst, een tekening of gewoon een overzicht van de apparatuur. Vertel wat je wilt
+      vervoeren en onder welke omstandigheden, dan weten wij genoeg om te beginnen.</p>
+    <div class="nda2">
+      <input type="checkbox" id="nda">
+      <label for="nda">Wij willen eerst een geheimhoudingsverklaring tekenen. Stuur die mee voordat
+        ik specificaties deel.</label>
+    </div>
+    <div class="doen2">
+      <a class="btn btn-pri" href='/mockups/case-aanvragen-v1?vervoeren=Defensieapparatuur'>Bespreek je toepassing</a>
+      <a class="tel" href="tel:+31575575734">Liever direct contact?<strong>+31 (0)575 575734</strong></a>
+    </div>
+    <div class="onder2">
+      <img src="assets/beeldmerk-wit.svg" alt="" width="30" height="30">
+      <span>CaseBuilder &middot; Proflite BV<br>Doesburg, Nederland</span>
     </div>
   </div>
 </section>
