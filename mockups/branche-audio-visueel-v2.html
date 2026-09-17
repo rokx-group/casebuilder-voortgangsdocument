@@ -658,7 +658,11 @@
 .kisten .kist{background:#fff;display:flex;flex-direction:column;transition:.14s}
 .kisten .kist:hover{background:var(--lichtblauw,#E6EFF6)}
 .kisten .kist .im{aspect-ratio:4/3;overflow:hidden;background:var(--bg)}
-.kisten .kist .im img{width:100%;height:100%;object-fit:cover}
+.kisten .kist .im img{width:100%;height:100%;object-fit:cover;object-position:center 66%}
+/* De vier modelfotos zijn vierkant en gaan in een vlak van 4:3, dus er
+   valt boven en onder iets weg. Boven de kist staat lege studioruimte en
+   onder staan de wielen, dus de uitsnede schuift naar beneden: liever de
+   leegte kwijt dan het onderstel. */
 .kisten .kist .bd{padding:16px 18px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
 /* Het model als label boven de kop, want de kop gaat over wat je
    vervoert en niet over hoe de kist heet. Wie een naam zoekt vindt hem
@@ -1388,7 +1392,7 @@
     </div>
     <div class="vier">
       <a class="kist" href='/mockups/casetype-rackcase-dubbel-deksel-v1'>
-        <div class="im"><img src="assets/av-studiocamera.jpg" alt="Studiocamera in een televisiestudio"></div>
+        <div class="im"><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt="Rackcase met een deksel voor en achter"></div>
         <div class="bd">
           <span class="mdl">Rackcase, dubbel deksel</span>
           <h3>Een rack dat aangesloten blijft</h3>
@@ -1397,7 +1401,7 @@
         </div>
       </a>
       <a class="kist" href='/mockups/casetype-trunccase-v1'>
-        <div class="im"><img src="assets/av-tv-show.jpg" alt="Podium met licht tijdens een televisieproductie"></div>
+        <div class="im"><img src="assets/flightcase-trunccase.jpg" alt="Trunccase op zwenkwielen met afneembaar deksel"></div>
         <div class="bd">
           <span class="mdl">Trunccase</span>
           <h3>Wat met de crew meegaat</h3>
@@ -1407,7 +1411,7 @@
         </div>
       </a>
       <a class="kist" href='/mockups/casetype-koffer-v1'>
-        <div class="im"><img src="assets/def-drone.jpg" alt="Drone en losse uitrusting op camouflagemateriaal"></div>
+        <div class="im"><img src="assets/flightcase-koffer.jpg" alt="Draagbare koffer met beugelsloten"></div>
         <div class="bd">
           <span class="mdl">Koffer</span>
           <h3>Klein, duur en niet kwijt te raken</h3>
@@ -1416,7 +1420,7 @@
         </div>
       </a>
       <a class="kist" href='/mockups/casetype-hoedcase-v1'>
-        <div class="im"><img src="assets/foto-product-drone.jpg" alt="Geopende koffer met uitgefreesd schuim naast een drone"></div>
+        <div class="im"><img src="assets/flightcase-hoedcase.jpg" alt="Hoedcase waarvan het deksel er helemaal af gaat"></div>
         <div class="bd">
           <span class="mdl">Hoedcase</span>
           <h3>Erin leggen, niet erin wurmen</h3>
