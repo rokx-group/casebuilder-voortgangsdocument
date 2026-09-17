@@ -1,0 +1,154 @@
+/* ══════════════════════════════════════════════════════════════
+   De voet van casebuilder.com
+
+   Los onderdeel. Neem assets/footer.css op in de pagina en plak de
+   markup uit onderdelen/footer.html onderin de body. Verder is er niets
+   nodig: brand.css levert de fonts, de kleuren en .wrap, en het raster
+   in de onderhoeken komt uit css en niet uit een beeld.
+
+   Het idee: de voet is een technische tekening. Onderaan één maatlijn
+   met het visiestatement uit het boek erin, en in de twee onderhoeken
+   het ruitjesraster op zeven procent, het dichtst in de hoek en
+   uitvloeiend naar het midden.
+
+   Gebouwd in mockups/footer-maatvoering.html, waar ook de afwegingen
+   staan en de varianten die het niet geworden zijn.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ══════════════════════════════════════════════════════════════
+   DE OPBOUW
+
+   Een handvol variabelen stuurt alles: het vlak eronder, de inkt, de
+   lijn van de bemating en de randlijnen. Verder staat er nergens een
+   kleur hard in, dus een andere ondergrond is een kwestie van die
+   regels overschrijven.
+   ══════════════════════════════════════════════════════════════ */
+.voet{background:var(--vlak);color:var(--inkt);position:relative;
+  padding:clamp(38px,4.2vw,56px) 0 0}
+.voet .veld{position:relative}
+
+/* ── de maatlijn onder ──────────────────────────────────────
+   In de maat staat het visiestatement uit het boek, letterlijk: maatwerk
+   is de standaard. Dat is iets anders dan de oneliner "maatwerk is
+   standaard" uit hoofdstuk 08; die staat er zonder lidwoord en zegt iets
+   kleiners. Hier hoort de visie, want dit is de laatste regel van de
+   pagina. Eén zin, dus geen punt. */
+.voet .maat-h{position:relative;height:1px;background:var(--lijnzwak);
+  margin:clamp(30px,3.4vw,44px) 0 0}
+.voet .maat-h::before,.voet .maat-h::after{content:"";position:absolute;top:-5px;width:1px;height:11px;
+  background:var(--lijn)}
+.voet .maat-h::before{left:0}
+.voet .maat-h::after{right:0}
+.voet .maat-h span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--lijn);
+  background:var(--vlak);padding:0 14px;white-space:nowrap}
+
+/* ── de merkregel ───────────────────────────────────────────── */
+.voet .merkregel{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;
+  margin-bottom:clamp(28px,3.2vw,40px);flex-wrap:wrap}
+.voet .merkregel img{height:30px;display:block}
+.voet .merkregel .code{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gedempt);text-align:right;line-height:1.9}
+
+/* ── de kolommen ────────────────────────────────────────────── */
+.voet .cols{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.voet .cols>div{position:relative}
+/* Hier stonden hairlines tussen de kolommen, als de vakverdeling op een
+   tekening. Ze zijn eruit: zes verticale lijnen door een voet hakken hem
+   in stukken, en de kopjes met hun onderstreping scheiden de groepen al.
+   Een lijn die iets scheidt wat al gescheiden is, is er een te veel. */
+.voet h5{font-size:15px;letter-spacing:.06em;color:var(--kop);font-weight:700;
+  padding-bottom:10px;margin-bottom:6px;border-bottom:1px solid var(--randlijn)}
+.voet .cols a{display:block;padding:5px 0;font-size:14px;color:var(--inkt)}
+.voet .cols a:hover{color:var(--accent)}
+.voet .claim{font-size:14px;line-height:1.75;color:var(--inkt)}
+.voet .claim b{color:var(--kop);font-weight:700;display:block;font-family:var(--disp);
+  text-transform:uppercase;letter-spacing:.04em;font-size:17px;margin-bottom:8px;line-height:1.05}
+.voet a.anders{margin-top:10px;padding-top:10px;border-top:1px solid var(--randlijn);color:var(--accent)}
+
+/* ── de onderbalk ───────────────────────────────────────────── */
+.voet .bot{border-top:1px solid var(--randlijn);margin-top:20px;padding:18px 0 clamp(26px,3vw,38px);
+  display:flex;justify-content:space-between;gap:16px;font-family:var(--mono);font-size:10px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--gedempt)}
+.voet .bot a{display:inline;padding:0;font-size:inherit;letter-spacing:inherit;color:var(--gedempt)}
+.voet .bot a:hover{color:var(--accent)}
+
+/* ══ J — VOID ═════════════════════════════════════════════════
+   Het diepste donker uit het palet, met de bemating in signaalblauw.
+
+   In de twee onderhoeken staat het raster uit het boek, in de vorm die
+   daar hoeken heet: het is het dichtst in de hoek en vloeit uit naar het
+   midden. Dekking zeven procent, want dat schrijft het boek voor deze
+   vorm voor, en boven de tien wordt het behang.
+
+   De twee liggen diagonaal tegenover elkaar, dus de linker vloeit uit
+   naar rechtsboven en de rechter naar linksboven. Zo blijft het midden
+   leeg en komt het raster alleen op waar niets staat. */
+.voet{--vlak:var(--void);--inkt:rgba(255,255,255,.66);--kop:#fff;--accent:var(--cyan);
+  --lijn:var(--cyan);--lijnzwak:rgba(102,196,232,.5);
+  --randlijn:rgba(255,255,255,.2);--gedempt:rgba(255,255,255,.4);
+  isolation:isolate;overflow:hidden}
+.voet .ruithoek{position:absolute;bottom:0;z-index:-1;pointer-events:none;
+  width:clamp(240px,34vw,560px);height:clamp(190px,24vw,360px);
+  background-image:linear-gradient(#fff 1px,transparent 1px),
+                   linear-gradient(90deg,#fff 1px,transparent 1px);
+  background-size:28px 28px;opacity:.07}
+/* Het verloop begint in de hoek zelf: 45 graden loopt naar rechtsboven,
+   dus nul procent ligt linksonder. Rechts precies andersom. */
+.voet .ruithoek.l{left:0;
+  -webkit-mask-image:linear-gradient(45deg,#000 0%,transparent 64%);
+  mask-image:linear-gradient(45deg,#000 0%,transparent 64%)}
+.voet .ruithoek.r{right:0;
+  -webkit-mask-image:linear-gradient(315deg,#000 0%,transparent 64%);
+  mask-image:linear-gradient(315deg,#000 0%,transparent 64%)}
+
+/* ══════════════════════════════════════════════════════════════
+   OPRUIMEN
+
+   De voet was te druk. Niet door één ding maar door het aantal lagen:
+   merkregel, zes kolommen, maatlijn, scheidingslijn, onderbalk. Vijf
+   banden onder elkaar, en elke band had zijn eigen lijn.
+
+   Vier ingrepen.
+
+   Branches helemaal uit de voet. Ze stonden eerst als kolom en daarna
+   als regel; nu staan ze er niet meer. Let op wat dat kost: de
+   branchepagina's zijn vanuit de voet niet meer te bereiken, en de voet
+   is de enige plek waar élke link zichtbaar wordt. Ze moeten dus ergens
+   anders vandaan gevonden worden, uit het menu of vanuit de pagina's
+   zelf.
+
+   Inkopen als grote partij blijft, alleen, rechts op een eigen regel.
+   Het is geen branche maar een andere manier van kopen, en in zijn
+   eentje op die regel krijgt hij het gewicht dat daarbij past.
+
+   De claimkolom eruit en vier kolommen in plaats van zes. De maat langs
+   de zijkant weg, want één maat onderaan is genoeg om het te laten
+   lezen als een tekening.
+
+   Eén lijn minder onderaan. De maatlijn en de rand boven de juridische
+   regel zaten een paar tellen uit elkaar en deden hetzelfde werk. De
+   rand is eruit, de maatlijn blijft: die zegt tenminste iets.
+   ══════════════════════════════════════════════════════════════ */
+.voet .slotregel{display:flex;justify-content:flex-end;
+  margin:clamp(26px,3vw,38px) 0 0;padding-top:clamp(18px,2vw,26px);
+  border-top:1px solid var(--randlijn)}
+.voet .slotregel .groot{color:var(--accent);font-size:15px;white-space:nowrap}
+.voet .slotregel .groot:hover{color:#fff}
+/* Zonder eigen rand: de maatlijn erboven is al de scheiding. */
+.voet .bot{border-top:0;margin-top:0}
+
+/* De strakste stand gaat een stap verder: geen claimkolom en geen maat
+   langs de zijkant. Wat overblijft is vier kolommen, één regel branches
+   en één maat onderaan. */
+
+/* ── klein ─────────────────────────────────────────────────── */
+@media(max-width:1100px){
+  .voet .cols,.voet .cols{grid-template-columns:1fr 1fr}
+}
+@media(max-width:820px){
+  .voet .cols{grid-template-columns:1fr;gap:26px}
+  .voet .bot{flex-direction:column;gap:8px}
+  .voet .merkregel .code{text-align:left}
+  .voet .slotregel{justify-content:flex-start}
+}

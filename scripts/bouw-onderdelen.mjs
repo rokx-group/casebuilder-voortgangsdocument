@@ -29,10 +29,14 @@ const wortel = join(dirname(fileURLToPath(import.meta.url)), "..");
 const MAP = join(wortel, "mockups");
 const alleenMelden = process.argv.includes("--check");
 
+/* De footer matcht op <footer met of zonder attributen. Het patroon stond
+   op <footer> zonder meer, en toen de voet een klasse kreeg vond het
+   script hem niet meer: het draaide door zonder te vervangen en zonder
+   te klagen. */
 const ONDERDELEN = [
   { naam: "header", bestand: "onderdelen/header.html", patroon: /<header class="main">[\s\S]*?<\/header>/ },
   { naam: "nav",    bestand: "onderdelen/nav.html",    patroon: /<nav class="primary">[\s\S]*?<\/nav>/ },
-  { naam: "footer", bestand: "onderdelen/footer.html", patroon: /<footer>[\s\S]*?<\/footer>/ },
+  { naam: "footer", bestand: "onderdelen/footer.html", patroon: /<footer[^>]*>[\s\S]*?<\/footer>/ },
   /* Alles onder de hero van de homepage. Anders dan de drie hierboven zit
      dit niet in élke mockup maar alleen in de versies die er nog staan: de
      homepage is één ontwerp waarvan alleen de hero verschilt, en dat is

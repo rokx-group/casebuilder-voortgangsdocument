@@ -3,6 +3,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/brand.css">
+<link rel="stylesheet" href="assets/footer.css">
 <style>
 /* /grote-spelers/verhuur-en-touring */
 .kop{background:var(--void);color:#fff;position:relative;overflow:hidden}
@@ -36,7 +37,7 @@
 </style></head><body>
 <header class="main">
   <div class="wrap">
-    <a aria-label='Casebuilder.com &mdash; naar de homepage' class='merk' href='/mockups/homepage-v2'><img src="assets/woordmerk.svg" alt="Casebuilder.com"></a>
+    <div class="logo"><em>case</em>Builder.com</div>
     <form class="search" onsubmit="return false">
       <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
       <input placeholder="Zoek op case, onderdeel of artikelnummer…" aria-label="Zoeken">
@@ -49,184 +50,55 @@
 </header>
 <nav class="primary">
   <div class="wrap">
-    <a href='/mockups/case-aanvragen-v1'>Case aanvragen</a>
-    <a href='/mockups/case-voor-v1'>Wat ga je vervoeren?</a>
+    <a href="case-aanvragen-v1.html">Case aanvragen</a>
+    <a href="case-voor-v1.html">Wat ga je vervoeren?</a>
 
     <!-- Flightcases draagt nu drie ingangen tegelijk: waarvoor, welk
          model, en zelf bouwen. Zelf configureren stond hiervoor los in
          de balk; als top-level item concurreerde het met Flightcases
-         terwijl het er een onderdeel van is.
-
-         "Waarvoor" zijn de zes toepassingen (wat je vervoert), niet de
-         branches (wie je bent): die hebben hun eigen menu, en dezelfde zes
-         markten twee keer in de balk zei niets extra's. Backline heeft al
-         een eigen pagina; de rest wijst hun vak in de index aan. -->
+         terwijl het er een onderdeel van is. -->
     <span class="heeft-menu">
-      <a href='/mockups/flightcases-v1'>Flightcases</a>
+      <a href="flightcases-v1.html">Flightcases</a>
       <div class="megamenu">
         <div class="wrap">
           <div>
             <h4>// WAAR GEBRUIK JE HEM VOOR</h4>
             <ul>
-              <li><a href='/mockups/case-voor-v3#av-licht'>AV &amp; licht<span class="n">142</span></a></li>
-              <li><a href='/mockups/case-voor-backline-v1'>Backline &amp; muziek<span class="n">127</span></a></li>
-              <li><a href='/mockups/case-voor-v3#broadcast'>Broadcast &amp; camera<span class="n">86</span></a></li>
-              <li><a href='/mockups/case-voor-v3#medisch'>Medisch &amp; lab<span class="n">64</span></a></li>
-              <li><a href='/mockups/case-voor-v3#industrie'>Industrie &amp; meettechniek<span class="n">73</span></a></li>
-              <li><a href='/mockups/case-voor-v3#evenement'>Evenement &amp; beursbouw<span class="n">50</span></a></li>
-              <li><a href='/mockups/case-voor-v3#alle-categorieen'>Alle toepassingen &rarr;</a></li>
+              <li><a href="branche-audio-visueel-v1.html">Audio-visueel en podium<span class="n">22</span></a></li>
+              <li><a href="branche-broadcast-en-media-v1.html">Broadcast en media<span class="n">9</span></a></li>
+              <li><a href="branche-industrie-en-machinebouw-v1.html">Industrie en machinebouw<span class="n">14</span></a></li>
+              <li><a href="branche-meet-en-testapparatuur-v1.html">Meet- en testapparatuur<span class="n">11</span></a></li>
+              <li><a href="branche-defensie-v1.html">Defensie<span class="n">7</span></a></li>
+              <li><a href="branche-schaalmodellen-v1.html">Schaalmodellen<span class="n">5</span></a></li>
             </ul>
           </div>
           <div>
             <h4>// MODELLEN</h4>
-            <!-- Met beeld (besloten 12 september): een model herken je aan
-                 zijn vorm, niet aan zijn naam. Een stilstaande kist per
-                 model, in CSS — geen foto's, want die hebben vijf
-                 verschillende uitsnedes, en geen script, want dit menu
-                 staat op elke pagina. Zodra CaseBuilder renders uit de
-                 configurator levert, komen die hiervoor in de plaats. -->
-            <div class="modeltegels">
-              <a href='/mockups/casetype-koffer-v1'><span class="modelkist" style="--b:46.0px;--h:16.4px;--d:29.6px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Koffer<small>vanaf &euro; 149</small></span></a>
-              <a href='/mockups/casetype-hoedcase-v1'><span class="modelkist" style="--b:46.0px;--h:31.6px;--d:28.8px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Hoedcase<small>vanaf &euro; 179</small></span></a>
-              <a href='/mockups/casetype-trunccase-v1'><span class="modelkist" style="--b:46.0px;--h:34.5px;--d:34.5px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Trunccase<small>vanaf &euro; 199</small></span></a>
-              <a href='/mockups/casetype-rackcase-enkel-deksel-v1'><span class="modelkist" style="--b:46.0px;--h:30.7px;--d:38.3px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Rackcase enkel<small>vanaf &euro; 229</small></span></a>
-              <a href='/mockups/casetype-rackcase-dubbel-deksel-v1'><span class="modelkist" style="--b:44.5px;--h:46.0px;--d:40.8px" aria-hidden="true"><span class="kb"><i class="v"></i><i class="l"></i><i class="r"></i><i class="bo"></i></span></span><span>Rackcase dubbel<small>vanaf &euro; 259</small></span></a>
-            </div>
-            <a class='allemodellen' href='/mockups/flightcases-v1'>Alle modellen &rarr;</a>
+            <ul>
+              <li><a href="casetype-rackcase-enkel-deksel-v1.html">Rackcase enkel deksel</a></li>
+              <li><a href="casetype-rackcase-dubbel-deksel-v1.html">Rackcase dubbel deksel</a></li>
+              <li><a href="casetype-trunccase-v1.html">Trunccase</a></li>
+              <li><a href="casetype-hoedcase-v1.html">Hoedcase</a></li>
+              <li><a href="casetype-koffer-v1.html">Koffer</a></li>
+              <li><a href="flightcases-v1.html">Alle modellen &rarr;</a></li>
+            </ul>
           </div>
-          <div class="vlak">
+          <div class="zelf">
             <b>Zelf configureren</b>
             <p>Jouw maten invullen en de prijs zien terwijl je typt. Een casebouwer kijkt je opgave na voordat we zagen.</p>
-            <a class='btn btn-dark' href='/mockups/configurator-v1'>Start met configureren &rarr;</a>
+            <a class="btn btn-dark" href="configurator-v1.html">Start met configureren &rarr;</a>
           </div>
         </div>
-      </div><!-- /megamenu -->
+      </div>
     </span>
 
-    <!-- Branches: wie je bent. Links de zes markten met een eigen pagina,
-         in het midden de manieren van inkopen voor grote partijen — dat is
-         dezelfde koper in een andere rol (zie /grote-spelers), niet een
-         zevende markt. Rechts de opvang voor wie zichzelf er niet in ziet. -->
-    <span class="heeft-menu">
-      <a href='/mockups/branches'>Branches</a>
-      <div class="megamenu">
-        <div class="wrap">
-          <div>
-            <h4>// ZES MARKTEN</h4>
-            <ul>
-              <li><a href='/mockups/branche-audio-visueel-v1'>Audio-visueel en podium<span class="n">22</span></a></li>
-              <li><a href='/mockups/branche-broadcast-en-media-v1'>Broadcast en media<span class="n">9</span></a></li>
-              <li><a href='/mockups/branche-industrie-en-machinebouw-v1'>Industrie en machinebouw<span class="n">14</span></a></li>
-              <li><a href='/mockups/branche-meet-en-testapparatuur-v1'>Meet- en testapparatuur<span class="n">11</span></a></li>
-              <li><a href='/mockups/branche-defensie-v1'>Defensie<span class="n">7</span></a></li>
-              <li><a href='/mockups/branche-schaalmodellen-v1'>Schaalmodellen<span class="n">5</span></a></li>
-              <li><a href='/mockups/branches'>Alle branches &rarr;</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4>// INKOPEN ALS GROTE PARTIJ</h4>
-            <ul>
-              <li><a href='/mockups/speler-defensie-en-overheid-v1'>Defensie en overheid</a></li>
-              <li><a href='/mockups/speler-oem-en-series-v1'>OEM en series</a></li>
-              <li><a href='/mockups/speler-verhuur-en-touring-v1'>Verhuur en touring</a></li>
-              <li><a href='/mockups/speler-omroep-en-studio-v1'>Omroep en studio</a></li>
-              <li><a href='/mockups/speler-netbeheer-en-energie-v1'>Netbeheer en energie</a></li>
-              <li><a href='/mockups/grote-spelers-v1'>Hoe je bij ons inkoopt &rarr;</a></li>
-            </ul>
-          </div>
-          <div class="vlak">
-            <b>Staat je markt er niet bij?</b>
-            <p>We bouwen ook voor winkelinrichting, IT-racks en medisch en lab &mdash; alleen nog zonder eigen pagina. Vertel wat je vervoert, dan tekenen we het.</p>
-            <a class='btn btn-dark' href='/mockups/case-aanvragen-v1'>Case aanvragen &rarr;</a>
-          </div>
-        </div>
-      </div><!-- /megamenu -->
-    </span>
-
-    <!-- Service: alles rond bestellen en daarna. Het vlak is de telefoon,
-         want direct advies is wat een servicepagina het vaakst oplevert. -->
-    <span class="heeft-menu">
-      <a href='/mockups/service-hub-v1'>Service</a>
-      <div class="megamenu">
-        <div class="wrap">
-          <div>
-            <h4>// BESTELLEN EN LEVEREN</h4>
-            <ul>
-              <li><a href='/mockups/zo-werkt-het-v1'>Zo werkt het</a></li>
-              <li><a href='/mockups/service-levertijden-v1'>Levertijden</a></li>
-              <li><a href="#">Verzending</a></li>
-              <li><a href='/mockups/laten-controleren-v1'>Maten laten controleren</a></li>
-              <li><a href="#">Veelgestelde vragen</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4>// ZELF BOUWEN</h4>
-            <ul>
-              <li><a href='/mockups/categorie-v1'>Onderdelen</a></li>
-              <li><a href="#">Zaagservice</a></li>
-            </ul>
-            <h4>// OVER ONS</h4>
-            <ul>
-              <li><a href='/mockups/over-ons-v1'>Over Proflite</a></li>
-              <li><a href='/mockups/contact-v1'>Contact</a></li>
-            </ul>
-          </div>
-          <div class="vlak">
-            <b>Direct advies</b>
-            <p>+31 (0)575 575734 &mdash; je belt met iemand uit de werkplaats in Doesburg, niet met een callcenter.</p>
-            <a class='btn btn-dark' href='/mockups/contact-v1'>Stuur een bericht &rarr;</a>
-          </div>
-        </div>
-      </div><!-- /megamenu -->
-    </span>
-    <!-- Shop: links het overzicht — klik je op Shop zelf, dan kom je daar,
-         met alle vaste cases en filters. Onderaan die kolom de weg via je
-         apparaat: de 39 categorieën, waarvandaan je in vier klikken bij het
-         apparaat bent. In het midden een paar populaire producten en
-         daaronder de populairste onderdelen — kort, want het overzicht en
-         de onderdelenpagina zijn één klik verder. Rechts de uitweg voor wie
-         een andere maat nodig heeft.
-         Shop staat achteraan: wie het assortiment zoekt weet dat al. -->
-    <span class="heeft-menu">
-      <a href='/mockups/shop-v1'>Shop</a>
-      <div class="megamenu">
-        <div class="wrap">
-          <div>
-            <h4>// ALLE VASTE CASES, MET FILTERS</h4>
-            <ul>
-              <li><a href='/mockups/shop-v1#av-licht'>AV &amp; licht</a></li>
-              <li><a href='/mockups/shop-v1#backline'>Backline &amp; muziek</a></li>
-              <li><a href='/mockups/shop-v1#broadcast'>Broadcast &amp; camera</a></li>
-              <li><a href='/mockups/shop-v1#medisch'>Medisch &amp; lab</a></li>
-              <li><a href='/mockups/shop-v1#industrie'>Industrie &amp; meettechniek</a></li>
-              <li><a href='/mockups/shop-v1#evenement'>Evenement &amp; beursbouw</a></li>
-              <li><a href='/mockups/case-voor-v3'>Alle 39 categorie&euml;n &rarr;</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4>// POPULAIRE PRODUCTEN</h4>
-            <ul>
-              <li><a href='/mockups/case-voor-gibson-les-paul-v2'>Gibson Les Paul Standard</a></li>
-              <li><a href='/mockups/case-voor-gibson-les-paul-v2' title='/product — hier nog de Les Paul-pagina'>Pioneer DDJ-FLX10</a></li>
-              <li><a href='/mockups/case-voor-gibson-les-paul-v2' title='/product — hier nog de Les Paul-pagina'>Robe Robin 600 LEDWash, duo</a></li>
-              <li><a href='/mockups/case-voor-gibson-les-paul-v2' title='/product — hier nog de Les Paul-pagina'>Sony FX6</a></li>
-            </ul>
-            <h4>// POPULAIRE ONDERDELEN</h4>
-            <ul>
-              <li><a href='/mockups/categorie-v1'>Balhoeken</a></li>
-              <li><a href='/mockups/categorie-v1' title='/onderdelen/{categorie} — hier nog het balhoeken-sjabloon'>Vlindersluitingen</a></li>
-              <li><a href='/mockups/categorie-v1' title='/onderdelen/{categorie} — hier nog het balhoeken-sjabloon'>Handgrepen</a></li>
-              <li><a href='/mockups/categorie-v1'>Alle onderdelen &rarr;</a></li>
-            </ul>
-          </div>
-          <div class="vlak">
-            <b>Andere maat nodig?</b>
-            <p>Kies je eigen afmetingen, ronde of vierkante hoeken en een slot. Wil je meer, dan ga je vanuit daar door naar de volledige editor.</p>
-            <a class='btn btn-dark' href='/mockups/editor-v2#l2'>Op jouw maat &rarr;</a>
-          </div>
-        </div>
-      </div><!-- /megamenu -->
-    </span>
+    <a href="branches.html">Branches</a>
+    <a href="service-hub-v1.html">Service</a>
+    <!-- Shop staat achteraan: wie het assortiment zoekt weet dat al, en
+         de drie ingangen ervoor zijn voor wie dat niet weet. -->
+    <!-- Shop wijst voorlopig naar /case-voor: de webshop zelf bestaat nog
+         niet als eigen ingang, en een dode link is erger dan een omweg. -->
+    <a href="case-voor-v1.html">Shop</a>
     <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#">NL &#9662;</a></div>
   </div>
 </nav>
@@ -251,20 +123,40 @@
       <div class="cs"><div class="im"><img src="assets/placeholder-speler-verhuur-en-touring.svg" alt=""></div><div class="bd"><span class="n">// 03</span><b>Lichtverhuur</b><p>Moving-headcases in serie, met clampvak</p><span class="toestemming">naam onder voorbehoud van toestemming</span></div></div>
     </div></div></section>
 
-<footer>
+<!-- De voet van casebuilder.com, versie maatvoering.
+
+     Nodig: assets/brand.css en assets/footer.css in de head. Verder
+     niets, ook geen script en geen beeld: het raster in de onderhoeken
+     komt uit css.
+
+     De links hieronder wijzen naar de mockups. Bij inbouw gaan ze naar
+     de echte paden, en de vier links met href="#" bestaan nog niet als
+     pagina.
+
+     Gebouwd en afgewogen in mockups/footer-maatvoering.html. -->
+<footer class="voet">
+  <span class="ruithoek l"></span><span class="ruithoek r"></span>
   <div class="wrap">
-    <div class="cols">
-      <div>
-        <div class="merk"><img src="assets/woordmerk-wit.svg" alt="Casebuilder.com"></div>
-        <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734">+31 (0)575 575734</a></p>
+    <div class="veld">
+      <div class="merkregel">
+        <img src="assets/woordmerk-wit.svg" alt="casebuilder.com">
+        <div class="code">Proflite BV &middot; Doesburg, Nederland<br>+31 (0)575 575734 &middot; CB-2026-0148</div>
       </div>
-      <div><h5>Offerte aanvragen</h5><a href='/mockups/case-aanvragen-v1'>Case aanvragen</a><a href='/mockups/laten-controleren-v1'>Maten laten controleren</a><a href="#" title="/grote-spelers/series — bestaat nog niet als pagina">Series en staffels</a><a href="#" title="/grote-spelers — hier nog zonder eigen instap">Zakelijk bestellen</a></div>
-      <div><h5>Kant en klaar</h5><a href='/mockups/shop-v1'>Alle vaste cases</a><a href='/mockups/case-voor-v3'>Wat ga je vervoeren?</a><a href='/mockups/flightcases-v1'>Flightcases per model</a><a href='/mockups/categorie-v1'>Onderdelen</a></div>
-      <div><h5>Zelf configureren</h5><a href='/mockups/configurator-v1'>Naar de configurator</a><a href='/mockups/zo-werkt-het-v1'>Zo werkt het</a><a href="#" title="/account/orders — achter inloggen">Herhaalorder</a><a href="#" title="/account/configuraties — achter inloggen">Mijn configuraties</a></div>
-      <div><h5>Branches</h5><a href='/mockups/branche-audio-visueel-v1'>Audio-visueel en podium</a><a href='/mockups/branche-broadcast-en-media-v1'>Broadcast en media</a><a href='/mockups/branche-industrie-en-machinebouw-v1'>Industrie en machinebouw</a><a href='/mockups/branche-meet-en-testapparatuur-v1'>Meet- en testapparatuur</a><a href='/mockups/branche-defensie-v1'>Defensie</a><a href='/mockups/branche-schaalmodellen-v1'>Schaalmodellen</a><a href='/mockups/branches'>Alle branches</a><a class='anders' href='/mockups/grote-spelers-v1'>Inkopen als grote partij &rarr;</a></div>
-      <div><h5>Service</h5><a href='/mockups/service-levertijden-v1'>Levertijden</a><a href="#" title="/service/verzending — bestaat nog niet als pagina">Verzending</a><a href="#" title="/service/zaagservice — bestaat nog niet als pagina">Zaagservice</a><a href='/mockups/over-ons-v1'>Over Proflite</a><a href='/mockups/contact-v1'>Contact</a></div>
+      <div class="cols">
+        <div><h5>Offerte aanvragen</h5><a href="/mockups/case-aanvragen-v1">Case aanvragen</a><a href="/mockups/laten-controleren-v1">Maten laten controleren</a><a href="#">Series en staffels</a><a href="#">Zakelijk bestellen</a></div>
+        <div><h5>Kant en klaar</h5><a href="#">Alle vaste cases</a><a href="/mockups/case-voor-v3">Wat ga je vervoeren?</a><a href="/mockups/flightcases-v1">Flightcases per model</a><a href="/mockups/categorie-v1">Onderdelen</a></div>
+        <div><h5>Zelf configureren</h5><a href="/mockups/configurator-v1">Naar de configurator</a><a href="/mockups/zo-werkt-het-v1">Zo werkt het</a><a href="#">Herhaalorder</a><a href="#">Mijn configuraties</a></div>
+        <div><h5>Service</h5><a href="/mockups/service-levertijden-v1">Levertijden</a><a href="#">Verzending</a><a href="#">Zaagservice</a><a href="/mockups/over-ons-v1">Over Proflite</a><a href="/mockups/contact-v1">Contact</a></div>
+      </div>
+      <div class="slotregel">
+        <a class="groot" href="/mockups/grote-spelers-v1">Inkopen als grote partij &rarr;</a>
+      </div>
+      <div class="maat-h"><span>Maatwerk is de standaard</span></div>
+      <div class="bot">
+        <span>KVK 09123456</span>
+        <span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; &copy; 2026 Proflite BV</span>
+      </div>
     </div>
-    <div class="bot"><span>KVK 09123456</span><span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span></div>
   </div>
 </footer>
 <script src="assets/navzoek.js"></script>
