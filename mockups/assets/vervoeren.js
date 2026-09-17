@@ -352,13 +352,13 @@
     wat.textContent = tekst;
 
     var uitleg = document.createElement('p');
-    uitleg.className = 'uitleg';
-    uitleg.textContent = 'Hier hebben we geen kant-en-klare case voor liggen. Dit is wat we in dit vak doen, en hoe we hem voor je maken.';
+    uitleg.className = 'ontv-uitleg';
+    uitleg.textContent = 'Geen kant-en-klare case, wel dit vak.';
 
     var knop = document.createElement('a');
-    knop.className = 'btn btn-pri';
+    knop.className = 'ontv-link';
     knop.href = AANVRAAG + '?vervoeren=' + encodeURIComponent(tekst);
-    knop.textContent = 'Vraag hem aan met deze tekst';
+    knop.textContent = 'Vraag hem aan met deze tekst \u2192';
 
     wrap.appendChild(lab);
     wrap.appendChild(wat);
