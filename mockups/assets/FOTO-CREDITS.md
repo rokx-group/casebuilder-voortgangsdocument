@@ -20,3 +20,7 @@ Bij livegang vervangen door eigen fotografie.
 - **defensie-oefening** — "Combined Operations Dutch and German armies" · Floris Oosterveld · CC BY 2.0 · <https://commons.wikimedia.org/wiki/File:Combined_Operations_Dutch_and_German_armies.jpg>
 - **defensie-verbinding** — "Exercise Allied Spirit I" · Gertrud Zach / U.S. Army · publiek domein · <https://commons.wikimedia.org/wiki/File:Exercise_Allied_Spirit_I_150120-A-HE359-239.jpg>
 - **defensie-leger** — gegenereerd beeld, aangeleverd door Rokx. Sfeerbeeld bij de eisen op `/branches/defensie`; het bijschrift zegt erbij dat het geen eigen opdracht is.
+- **av-studiocamera** — "LRT TV studios" · Erwin Verbruggen · CC BY-SA 2.0 · <https://commons.wikimedia.org/wiki/File:LRT_TV_studios_cam.jpg>
+- **av-tv-show** — "The Voice of Azerbaijan, stage 3" · Emin Allahverdi · CC BY-SA 4.0 · <https://commons.wikimedia.org/wiki/File:The_Voice_of_Azerbaijan,_stage_3.jpg>
+
+Deze twee staan onder CC BY-SA. Naamsvermelding is daar een voorwaarde van de licentie en geen keuze, dus op `/branches/audio-visueel` staat een regel met bron en licentie vlak boven de voet. Die kan niet weg zolang die beelden er staan.

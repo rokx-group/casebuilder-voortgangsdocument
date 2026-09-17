@@ -43,10 +43,10 @@
 
      Gitaar en Gibson Les Paul houden hun eigen pagina; die bestaan. */
   var BRANCHEPAGINA = {
-    Licht:     'branche-audio-visueel-v1.html',
-    Audio:     'branche-audio-visueel-v1.html',
-    Backline:  'branche-audio-visueel-v1.html',
-    Beurs:     'branche-audio-visueel-v1.html',
+    Licht:     'branche-audio-visueel-v2.html',
+    Audio:     'branche-audio-visueel-v2.html',
+    Backline:  'branche-audio-visueel-v2.html',
+    Beurs:     'branche-audio-visueel-v2.html',
     Camera:    'branche-broadcast-en-media-v1.html',
     Medisch:   'branche-meet-en-testapparatuur-v1.html',
     Industrie: 'branche-industrie-en-machinebouw-v1.html'
@@ -108,7 +108,7 @@
     /* Branches. Ze staan bewust ná de toepassingen: typt iemand "camera",
        dan wil hij de cases voor camerabodies zien en niet eerst de hele
        broadcastbranche. Bij gelijke score wint de bovenste. */
-    { naam: 'Audio-visueel',             groep: 'Branche', soort: 'branche', pagina: 'branche-audio-visueel-v1.html',
+    { naam: 'Audio-visueel',             groep: 'Branche', soort: 'branche', pagina: 'branche-audio-visueel-v2.html',
       zoek: ['av', 'podium', 'theater', 'evenement', 'concert', 'tour', 'verhuur', 'rental', 'licht en geluid', 'festival', 'crew', 'truck', 'stage', 'band', 'club', 'zaal', 'line array', 'monitorwedge'] },
     { naam: 'Broadcast en media',        groep: 'Branche', soort: 'branche', pagina: 'branche-broadcast-en-media-v1.html',
       zoek: ['broadcast', 'tv', 'televisie', 'omroep', 'media', 'film', 'productiehuis', 'studio', 'ob-wagen', 'regiewagen', 'zender', 'satelliet', 'uplink', 'teleprompter', 'autocue', 'microfoonset', 'intercom'] },
