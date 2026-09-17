@@ -109,37 +109,57 @@
   var teller = document.querySelector('[data-zoekteller]');
   var wis    = document.querySelector('[data-zoekwis]');
 
+  /* ── één matcher voor de hele site ──────────────────────────
+     Deze pagina had zijn eigen vergelijking: de term moest in de naam of
+     in een synoniem voorkomen, als hele string. Daardoor vond "gitaarcase"
+     de categorie gitaar niet, en "f16 vleugel" helemaal niets, terwijl de
+     balk in de hero op dezelfde woorden wel antwoord gaf. Twee matchers
+     die uit elkaar lopen is erger dan een matcher die iets mist: dan is
+     niet te voorspellen wat de site doet.
+
+     Nu doet TOEPASSINGEN_ZOEK het werk, dezelfde functie als in de hero.
+     Wat hij teruggeeft wordt hier alleen nog gekoppeld aan de regel in de
+     index, zodat het springen naar een vak blijft werken. */
   function filter() {
-    var term = vergelijkvorm(veld.value.trim());
+    var ruw = veld.value.trim();
+    var term = vergelijkvorm(ruw);
     var treffers = [];
+    var raak = 0;
 
-    if (term) {
-      regels.forEach(function (regel) {
-        // In de naam, of anders in een synoniem: wie "m32" typt zoekt een
-        // mengtafel, ook al staat dat woord nergens in de regel.
-        var raakNaam = regel.zoek.indexOf(term) >= 0;
-        var raakSynoniem = (regel.extra || []).some(function (w) { return w.indexOf(term) === 0; });
-        if (raakNaam || raakSynoniem) treffers.push(regel);
-      });
-    }
+    if (ruw.length >= 2 && window.TOEPASSINGEN_ZOEK) {
+      var opNaam = {};
+      regels.forEach(function (r) { opNaam[r.tekst.toLowerCase()] = r; });
 
-    // Alleen wat een eigen plek in de index heeft telt mee in de teller;
-    // de regels hieronder bestaan alleen in het paneel.
-    var raak = treffers.length;
-
-    if (term) {
-      extraRegels.forEach(function (r) {
-        if (r.zoek.indexOf(term) >= 0 || r.extra.some(function (w) { return w.indexOf(term) === 0; })) {
-          treffers.push(r);
+      var uitIndex = [];
+      var erbuiten = [];
+      window.TOEPASSINGEN_ZOEK(ruw, 12).forEach(function (t) {
+        var regel = opNaam[t.naam.toLowerCase()];
+        if (regel) {
+          if (uitIndex.indexOf(regel) < 0) uitIndex.push(regel);
+        } else {
+          // Geen regel in de index: een branche, of een apparaat met een
+          // eigen pagina zoals de Les Paul. Die horen wel in het paneel.
+          erbuiten.push({ tekst: t.naam, groep: t.groep, pagina: t.pagina,
+                          buiten: true, soort: t.soort });
         }
       });
+
+      // Alleen wat een eigen plek in de index heeft telt mee in de teller.
+      raak = uitIndex.length;
+      treffers = uitIndex.concat(erbuiten);
     }
 
     if (wis) wis.hidden = !term;
     vulPaneel(term, treffers);
 
+    /* De teller telt categorieën, want dat is wat de index eronder toont.
+       Maar niets gevonden is niet hetzelfde als geen categorie gevonden:
+       wie "f16 vleugel" typt krijgt de defensiepagina te zien terwijl er
+       geen categorie bij zit. Stond er dan "niets gevonden", dan spreekt
+       de regel het paneel eronder tegen. */
     if (!teller) return;
     if (!term) teller.textContent = regels.length + ' categorieën in 6 toepassingen';
+    else if (raak === 0 && treffers.length) teller.textContent = 'geen categorie, wel een plek waar dit thuishoort';
     else if (raak === 0) teller.textContent = 'niets gevonden — stuur het gewoon op, dan meten we het in';
     else teller.textContent = raak === 1 ? '1 categorie gevonden' : raak + ' categorieën gevonden';
   }

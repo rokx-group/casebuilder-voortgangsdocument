@@ -87,17 +87,17 @@
        dan wil hij de cases voor camerabodies zien en niet eerst de hele
        broadcastbranche. Bij gelijke score wint de bovenste. */
     { naam: 'Audio-visueel',             groep: 'Branche', soort: 'branche', pagina: 'branche-audio-visueel-v1.html',
-      zoek: ['av', 'podium', 'theater', 'evenement', 'concert', 'tour', 'verhuur', 'rental', 'licht en geluid'] },
+      zoek: ['av', 'podium', 'theater', 'evenement', 'concert', 'tour', 'verhuur', 'rental', 'licht en geluid', 'festival', 'crew', 'truck', 'stage', 'band', 'club', 'zaal', 'line array', 'monitorwedge'] },
     { naam: 'Broadcast en media',        groep: 'Branche', soort: 'branche', pagina: 'branche-broadcast-en-media-v1.html',
-      zoek: ['broadcast', 'tv', 'televisie', 'omroep', 'media', 'film', 'productiehuis'] },
+      zoek: ['broadcast', 'tv', 'televisie', 'omroep', 'media', 'film', 'productiehuis', 'studio', 'ob-wagen', 'regiewagen', 'zender', 'satelliet', 'uplink', 'teleprompter', 'autocue', 'microfoonset', 'intercom'] },
     { naam: 'Industrie en machinebouw',  groep: 'Branche', soort: 'branche', pagina: 'branche-industrie-en-machinebouw-v1.html',
-      zoek: ['industrie', 'machinebouw', 'fabriek', 'productie', 'oem', 'technische dienst'] },
+      zoek: ['industrie', 'machinebouw', 'fabriek', 'productie', 'oem', 'technische dienst', 'monteur', 'buitendienst', 'servicetechnicus', 'onderhoud', 'robot', 'aandrijving', 'pomp', 'klep', 'lager', 'gereedschapskoffer'] },
     { naam: 'Meet- en testapparatuur',   groep: 'Branche', soort: 'branche', pagina: 'branche-meet-en-testapparatuur-v1.html',
-      zoek: ['meettechniek', 'testen', 'kalibratie', 'meetlab', 'inspectie'] },
+      zoek: ['meettechniek', 'testen', 'kalibratie', 'meetlab', 'inspectie', 'oscilloscoop', 'spectrumanalyzer', 'multimeter', 'meetbrug', 'netwerkanalyzer', 'thermokoppel', 'testset'] },
     { naam: 'Defensie',                  groep: 'Branche', soort: 'branche', pagina: 'branche-defensie-v1.html',
-      zoek: ['defensie', 'leger', 'militair', 'krijgsmacht', 'landmacht', 'marine', 'luchtmacht', 'navo', 'veiligheidsregio'] },
+      zoek: ['defensie', 'leger', 'militair', 'krijgsmacht', 'landmacht', 'marine', 'luchtmacht', 'navo', 'veiligheidsregio', 'f16', 'f35', 'straaljager', 'jachtvliegtuig', 'vleugel', 'romp', 'munitie', 'wapen', 'geweer', 'nachtkijker', 'warmtebeeld', 'thermisch', 'radar', 'antenne', 'verbindingsset', 'radioset', 'manpack', 'helm', 'vest', 'uitrusting', 'veldkeuken', 'genie', 'explosieven', 'eod', 'uav', 'sensorkop', 'richtmiddel', 'vizier'] },
     { naam: 'Schaalmodellen',            groep: 'Branche', soort: 'branche', pagina: 'branche-schaalmodellen-v1.html',
-      zoek: ['schaalmodel', 'maquette', 'prototype', 'modelbouw', 'architect'] }
+      zoek: ['schaalmodel', 'maquette', 'prototype', 'modelbouw', 'architect', 'presentatiemodel', 'designmodel', 'kunstwerk', 'sculptuur', 'vitrine', 'miniatuur'] }
   ];
 
   /* Zonder accenten en in kleine letters, zodat "réflex" en "Reflex"
@@ -122,14 +122,39 @@
      typt, en dat leest als een fout. Bij losse woorden telt een kort
      woord (av, tv) alleen als het precies klopt of vooraan staat: "av"
      zit ook midden in woorden die er niets mee te maken hebben. */
+  /* Meervoud terug naar de stam. Nederlands laat bij het meervoud een
+     dubbele klinker vallen: gitaar wordt gitaren, haak wordt haken. Wie
+     "gitaren" typt zou "Elektrische gitaar" anders niet vinden, en dan
+     lijkt de zoekfunctie stuk terwijl de categorie er gewoon staat. */
+  function stam(w) {
+    var uit = '';
+    for (var i = 0; i < w.length; i++) {
+      if (i > 0 && w[i] === w[i - 1] && 'aeou'.indexOf(w[i]) >= 0) continue;
+      uit += w[i];
+    }
+    return uit.replace(/(en|s)$/, '');
+  }
+
   function rangschik(woorden, perWoord) {
     var treffers = [];
     window.TOEPASSINGEN.forEach(function (t, plek) {
       var termen = [t.naam].concat(t.zoek || []).map(window.TOEPASSINGEN_NORM);
       var beste = 0;
       woorden.forEach(function (w) {
+        var ws = stam(w);
         termen.forEach(function (n) {
-          var score = n === w ? 3 : n.indexOf(w) === 0 ? 2 : n.indexOf(w) > -1 ? 1 : 0;
+          var ns = stam(n);
+          /* Vier treden. De derde is er later bij gekomen en is de
+             belangrijkste: hij kijkt ook of het ingetypte wóórd de term
+             bevat, niet alleen of de term het woord bevat. Zonder die
+             kant vindt "gitaarcase" de categorie "gitaar" niet, terwijl
+             dat precies is wat iemand intikt. */
+          var score = 0;
+          if (n === w || ns === ws) score = 3;
+          else if (n.indexOf(w) === 0 || ns.indexOf(ws) === 0) score = 2;
+          else if (ns.length >= 3 && ws.indexOf(ns) === 0) score = 2;
+          else if (n.indexOf(w) > -1) score = 1;
+          else if (ns.length >= 4 && ws.indexOf(ns) > -1) score = 1;
           if (perWoord && w.length < 4 && score < 2) score = 0;
           if (score > beste) beste = score;
         });
