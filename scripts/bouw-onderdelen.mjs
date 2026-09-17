@@ -2,6 +2,16 @@
 /**
  * Zet header, nav en footer in elke mockup gelijk aan het gedeelde onderdeel.
  *
+ * LET OP: dit script raakt drie onderdelen tegelijk. Draai je het om de
+ * footer uit te rollen, dan gaan header en nav mee. Staat een van die
+ * twee in onderdelen/ nog op een oudere versie, dan zet je die stilletjes
+ * over zesenzestig pagina's terug. Dat is precies wat er op 17 september
+ * gebeurde: het woordmerk werd weer platte tekst en het megamenu
+ * verdween, zonder foutmelding.
+ *
+ * Kijk dus eerst of alle drie de onderdelen actueel zijn, niet alleen
+ * degene waar je iets aan veranderd hebt.
+ *
  * Deze drie blokken stonden 48 keer in de repo. Dat liep uiteen: zeven
  * verschillende headers, waarvan sommige het zoekveld als <form> en andere
  * als <div>, met twee verschillende placeholders. Niemand had dat besloten
