@@ -29,59 +29,81 @@
  * zijn eigen gitaar, en moet toch ergens landen.
  */
 (function () {
+  /* Het gedeelde sjabloon was case-voor-gitaar-v1: één uitgewerkte
+     categoriepagina die de andere zevenendertig leenden. Dat werkt zolang
+     je erop bladert, maar niet in de zoekflow: wie "moving head" intikt
+     kwam uit op een pagina met de kop "Flightcases voor gitaren" en een
+     alinea over halzen en kopplaten. Dat is erger dan geen pagina, want
+     het zegt dat we niet luisteren.
+
+     Een categorie zonder eigen pagina gaat daarom naar de branche waar
+     hij onder valt. Dat is altijd waar: een moving head hoort in de
+     audio-visuele hoek, en die pagina gaat over wat daar telt. Zodra een
+     categorie echte inhoud krijgt, verandert hier één regel.
+
+     Gitaar en Gibson Les Paul houden hun eigen pagina; die bestaan. */
+  var BRANCHEPAGINA = {
+    Licht:     'branche-audio-visueel-v1.html',
+    Audio:     'branche-audio-visueel-v1.html',
+    Backline:  'branche-audio-visueel-v1.html',
+    Beurs:     'branche-audio-visueel-v1.html',
+    Camera:    'branche-broadcast-en-media-v1.html',
+    Medisch:   'branche-meet-en-testapparatuur-v1.html',
+    Industrie: 'branche-industrie-en-machinebouw-v1.html'
+  };
   var SJABLOON = 'case-voor-gitaar-v1.html';
 
   window.TOEPASSINGEN = [
     /* licht en podium */
-    { naam: 'Moving heads',              groep: 'Licht',      pagina: SJABLOON, zoek: ['movinghead', 'spot', 'beam', 'wash'] },
-    { naam: 'Wash- en spotarmaturen',    groep: 'Licht',      pagina: SJABLOON, zoek: ['armatuur', 'par', 'led par'] },
-    { naam: 'Dimmerpacks en racks',      groep: 'Licht',      pagina: SJABLOON, zoek: ['dimmer', 'rack', '19 inch'] },
-    { naam: 'Blinders en strobes',       groep: 'Licht',      pagina: SJABLOON, zoek: ['blinder', 'strobe'] },
-    { naam: 'Hazers en rookmachines',    groep: 'Licht',      pagina: SJABLOON, zoek: ['hazer', 'rookmachine', 'fazer'] },
-    { naam: 'Truss-hardware',            groep: 'Licht',      pagina: SJABLOON, zoek: ['truss', 'klem', 'coupler'] },
+    { naam: 'Moving heads',              groep: 'Licht',      pagina: BRANCHEPAGINA['Licht'], zoek: ['movinghead', 'spot', 'beam', 'wash'] },
+    { naam: 'Wash- en spotarmaturen',    groep: 'Licht',      pagina: BRANCHEPAGINA['Licht'], zoek: ['armatuur', 'par', 'led par'] },
+    { naam: 'Dimmerpacks en racks',      groep: 'Licht',      pagina: BRANCHEPAGINA['Licht'], zoek: ['dimmer', 'rack', '19 inch'] },
+    { naam: 'Blinders en strobes',       groep: 'Licht',      pagina: BRANCHEPAGINA['Licht'], zoek: ['blinder', 'strobe'] },
+    { naam: 'Hazers en rookmachines',    groep: 'Licht',      pagina: BRANCHEPAGINA['Licht'], zoek: ['hazer', 'rookmachine', 'fazer'] },
+    { naam: 'Truss-hardware',            groep: 'Licht',      pagina: BRANCHEPAGINA['Licht'], zoek: ['truss', 'klem', 'coupler'] },
 
     /* audio en backline */
-    { naam: 'Line-array en speakers',    groep: 'Audio',      pagina: SJABLOON, zoek: ['speaker', 'luidspreker', 'linearray', 'top', 'sub'] },
-    { naam: 'Mengtafels',                groep: 'Audio',      pagina: SJABLOON, zoek: ['mengtafel', 'mixer', 'midas', 'm32', 'x32', 'console', 'foh'] },
-    { naam: 'Kabelhaspels en multicore', groep: 'Audio',      pagina: SJABLOON, zoek: ['kabel', 'haspel', 'multicore', 'stagebox'] },
+    { naam: 'Line-array en speakers',    groep: 'Audio',      pagina: BRANCHEPAGINA['Audio'], zoek: ['speaker', 'luidspreker', 'linearray', 'top', 'sub'] },
+    { naam: 'Mengtafels',                groep: 'Audio',      pagina: BRANCHEPAGINA['Audio'], zoek: ['mengtafel', 'mixer', 'midas', 'm32', 'x32', 'console', 'foh'] },
+    { naam: 'Kabelhaspels en multicore', groep: 'Audio',      pagina: BRANCHEPAGINA['Audio'], zoek: ['kabel', 'haspel', 'multicore', 'stagebox'] },
     { naam: 'Elektrische gitaren',       groep: 'Backline',   pagina: 'case-voor-gitaar-v1.html', zoek: ['gitaar', 'guitar', 'stratocaster', 'telecaster'] },
     { naam: 'Gibson Les Paul',           groep: 'Backline',   pagina: 'case-voor-gibson-les-paul-v2.html', zoek: ['les paul', 'lespaul', 'gibson'],
       ouder: { naam: 'Alle gitaarcases bekijken', pagina: 'case-voor-gitaar-v2.html' } },
-    { naam: 'Basgitaren',                groep: 'Backline',   pagina: SJABLOON, zoek: ['bas', 'basgitaar', 'precision', 'jazz bass'] },
-    { naam: 'Akoestische gitaren',       groep: 'Backline',   pagina: SJABLOON, zoek: ['akoestisch', 'western', 'klassieke gitaar'] },
-    { naam: 'Versterkers en cabinets',   groep: 'Backline',   pagina: SJABLOON, zoek: ['versterker', 'amp', 'cabinet', 'combo', 'head'] },
-    { naam: 'Pedalboards',               groep: 'Backline',   pagina: SJABLOON, zoek: ['pedal', 'pedalboard', 'effecten'] },
-    { naam: 'Drumhardware',              groep: 'Backline',   pagina: SJABLOON, zoek: ['drum', 'snare', 'bekken', 'hardware'] },
-    { naam: 'Keyboards en synths',       groep: 'Backline',   pagina: SJABLOON, zoek: ['keyboard', 'synth', 'piano', 'nord'] },
-    { naam: 'Blaasinstrumenten',         groep: 'Backline',   pagina: SJABLOON, zoek: ['trompet', 'saxofoon', 'trombone', 'blaas'] },
-    { naam: 'DJ-apparatuur',            groep: 'Backline',   pagina: SJABLOON, zoek: ['dj', 'controller', 'cdj', 'djm', 'draaitafel', 'mengpaneel', 'pioneer'] },
+    { naam: 'Basgitaren',                groep: 'Backline',   pagina: BRANCHEPAGINA['Backline'], zoek: ['bas', 'basgitaar', 'precision', 'jazz bass'] },
+    { naam: 'Akoestische gitaren',       groep: 'Backline',   pagina: BRANCHEPAGINA['Backline'], zoek: ['akoestisch', 'western', 'klassieke gitaar'] },
+    { naam: 'Versterkers en cabinets',   groep: 'Backline',   pagina: BRANCHEPAGINA['Backline'], zoek: ['versterker', 'amp', 'cabinet', 'combo', 'head'] },
+    { naam: 'Pedalboards',               groep: 'Backline',   pagina: BRANCHEPAGINA['Backline'], zoek: ['pedal', 'pedalboard', 'effecten'] },
+    { naam: 'Drumhardware',              groep: 'Backline',   pagina: BRANCHEPAGINA['Backline'], zoek: ['drum', 'snare', 'bekken', 'hardware'] },
+    { naam: 'Keyboards en synths',       groep: 'Backline',   pagina: BRANCHEPAGINA['Backline'], zoek: ['keyboard', 'synth', 'piano', 'nord'] },
+    { naam: 'Blaasinstrumenten',         groep: 'Backline',   pagina: BRANCHEPAGINA['Backline'], zoek: ['trompet', 'saxofoon', 'trombone', 'blaas'] },
+    { naam: 'DJ-apparatuur',            groep: 'Backline',   pagina: BRANCHEPAGINA['Backline'], zoek: ['dj', 'controller', 'cdj', 'djm', 'draaitafel', 'mengpaneel', 'pioneer'] },
 
     /* camera en broadcast */
-    { naam: 'Camerabodies',              groep: 'Camera',     pagina: SJABLOON, zoek: ['camera', 'body', 'red', 'arri', 'sony fx'] },
-    { naam: 'Optiek en lenzensets',      groep: 'Camera',     pagina: SJABLOON, zoek: ['lens', 'lenzen', 'optiek', 'objectief'] },
-    { naam: 'Statieven en heads',        groep: 'Camera',     pagina: SJABLOON, zoek: ['statief', 'tripod', 'head'] },
-    { naam: 'Monitoren',                 groep: 'Camera',     pagina: SJABLOON, zoek: ['monitor', 'scherm', 'display'] },
-    { naam: 'Regie- en switchkoffers',   groep: 'Camera',     pagina: SJABLOON, zoek: ['regie', 'switcher', 'atem'] },
-    { naam: 'Drone en gimbal',           groep: 'Camera',     pagina: SJABLOON, zoek: ['drone', 'gimbal', 'ronin', 'dji'] },
+    { naam: 'Camerabodies',              groep: 'Camera',     pagina: BRANCHEPAGINA['Camera'], zoek: ['camera', 'body', 'red', 'arri', 'sony fx'] },
+    { naam: 'Optiek en lenzensets',      groep: 'Camera',     pagina: BRANCHEPAGINA['Camera'], zoek: ['lens', 'lenzen', 'optiek', 'objectief'] },
+    { naam: 'Statieven en heads',        groep: 'Camera',     pagina: BRANCHEPAGINA['Camera'], zoek: ['statief', 'tripod', 'head'] },
+    { naam: 'Monitoren',                 groep: 'Camera',     pagina: BRANCHEPAGINA['Camera'], zoek: ['monitor', 'scherm', 'display'] },
+    { naam: 'Regie- en switchkoffers',   groep: 'Camera',     pagina: BRANCHEPAGINA['Camera'], zoek: ['regie', 'switcher', 'atem'] },
+    { naam: 'Drone en gimbal',           groep: 'Camera',     pagina: BRANCHEPAGINA['Camera'], zoek: ['drone', 'gimbal', 'ronin', 'dji'] },
 
     /* medisch en labo */
-    { naam: 'Meetapparatuur',            groep: 'Medisch',    pagina: SJABLOON, zoek: ['meetapparaat', 'meten', 'instrument'] },
-    { naam: 'Demokoffers met inlay',     groep: 'Medisch',    pagina: SJABLOON, zoek: ['demokoffer', 'sample', 'verkoopkoffer'] },
-    { naam: 'Endoscopie',                groep: 'Medisch',    pagina: SJABLOON, zoek: ['endoscoop', 'scoop'] },
-    { naam: 'Laboratoriuminstrumenten',  groep: 'Medisch',    pagina: SJABLOON, zoek: ['lab', 'laboratorium', 'analyse'] },
-    { naam: 'Trolleycases',              groep: 'Medisch',    pagina: SJABLOON, zoek: ['trolley', 'wielen', 'rolkoffer'] },
+    { naam: 'Meetapparatuur',            groep: 'Medisch',    pagina: BRANCHEPAGINA['Medisch'], zoek: ['meetapparaat', 'meten', 'instrument'] },
+    { naam: 'Demokoffers met inlay',     groep: 'Medisch',    pagina: BRANCHEPAGINA['Medisch'], zoek: ['demokoffer', 'sample', 'verkoopkoffer'] },
+    { naam: 'Endoscopie',                groep: 'Medisch',    pagina: BRANCHEPAGINA['Medisch'], zoek: ['endoscoop', 'scoop'] },
+    { naam: 'Laboratoriuminstrumenten',  groep: 'Medisch',    pagina: BRANCHEPAGINA['Medisch'], zoek: ['lab', 'laboratorium', 'analyse'] },
+    { naam: 'Trolleycases',              groep: 'Medisch',    pagina: BRANCHEPAGINA['Medisch'], zoek: ['trolley', 'wielen', 'rolkoffer'] },
 
     /* industrie en service */
-    { naam: 'Servicekoffers',            groep: 'Industrie',  pagina: SJABLOON, zoek: ['service', 'monteur', 'buitendienst'] },
-    { naam: 'Kalibratieapparatuur',      groep: 'Industrie',  pagina: SJABLOON, zoek: ['kalibratie', 'ijken'] },
-    { naam: 'Handgereedschap',           groep: 'Industrie',  pagina: SJABLOON, zoek: ['gereedschap', 'tool', 'sleutel'] },
-    { naam: 'Sensoren en dataloggers',   groep: 'Industrie',  pagina: SJABLOON, zoek: ['sensor', 'datalogger', 'meetkast'] },
+    { naam: 'Servicekoffers',            groep: 'Industrie',  pagina: BRANCHEPAGINA['Industrie'], zoek: ['service', 'monteur', 'buitendienst'] },
+    { naam: 'Kalibratieapparatuur',      groep: 'Industrie',  pagina: BRANCHEPAGINA['Industrie'], zoek: ['kalibratie', 'ijken'] },
+    { naam: 'Handgereedschap',           groep: 'Industrie',  pagina: BRANCHEPAGINA['Industrie'], zoek: ['gereedschap', 'tool', 'sleutel'] },
+    { naam: 'Sensoren en dataloggers',   groep: 'Industrie',  pagina: BRANCHEPAGINA['Industrie'], zoek: ['sensor', 'datalogger', 'meetkast'] },
 
     /* beurs en presentatie */
-    { naam: 'Standmateriaal',            groep: 'Beurs',      pagina: SJABLOON, zoek: ['stand', 'beurs', 'expo'] },
-    { naam: 'Banners en kokers',         groep: 'Beurs',      pagina: SJABLOON, zoek: ['banner', 'koker', 'rollup'] },
-    { naam: 'Displays en schermen',      groep: 'Beurs',      pagina: SJABLOON, zoek: ['display', 'led scherm', 'videowall'] },
-    { naam: 'Catering en bar',           groep: 'Beurs',      pagina: SJABLOON, zoek: ['catering', 'bar', 'keuken'] },
+    { naam: 'Standmateriaal',            groep: 'Beurs',      pagina: BRANCHEPAGINA['Beurs'], zoek: ['stand', 'beurs', 'expo'] },
+    { naam: 'Banners en kokers',         groep: 'Beurs',      pagina: BRANCHEPAGINA['Beurs'], zoek: ['banner', 'koker', 'rollup'] },
+    { naam: 'Displays en schermen',      groep: 'Beurs',      pagina: BRANCHEPAGINA['Beurs'], zoek: ['display', 'led scherm', 'videowall'] },
+    { naam: 'Catering en bar',           groep: 'Beurs',      pagina: BRANCHEPAGINA['Beurs'], zoek: ['catering', 'bar', 'keuken'] },
 
     /* Branches. Ze staan bewust ná de toepassingen: typt iemand "camera",
        dan wil hij de cases voor camerabodies zien en niet eerst de hele
@@ -94,7 +116,7 @@
       zoek: ['industrie', 'machinebouw', 'fabriek', 'productie', 'oem', 'technische dienst', 'monteur', 'buitendienst', 'servicetechnicus', 'onderhoud', 'robot', 'aandrijving', 'pomp', 'klep', 'lager', 'gereedschapskoffer'] },
     { naam: 'Meet- en testapparatuur',   groep: 'Branche', soort: 'branche', pagina: 'branche-meet-en-testapparatuur-v1.html',
       zoek: ['meettechniek', 'testen', 'kalibratie', 'meetlab', 'inspectie', 'oscilloscoop', 'spectrumanalyzer', 'multimeter', 'meetbrug', 'netwerkanalyzer', 'thermokoppel', 'testset'] },
-    { naam: 'Defensie',                  groep: 'Branche', soort: 'branche', pagina: 'branche-defensie-v1.html',
+    { naam: 'Defensie',                  groep: 'Branche', soort: 'branche', pagina: 'branche-defensie-v3.html',
       zoek: ['defensie', 'leger', 'militair', 'krijgsmacht', 'landmacht', 'marine', 'luchtmacht', 'navo', 'veiligheidsregio', 'f16', 'f35', 'straaljager', 'jachtvliegtuig', 'vleugel', 'romp', 'munitie', 'wapen', 'geweer', 'nachtkijker', 'warmtebeeld', 'thermisch', 'radar', 'antenne', 'verbindingsset', 'radioset', 'manpack', 'helm', 'vest', 'uitrusting', 'veldkeuken', 'genie', 'explosieven', 'eod', 'uav', 'sensorkop', 'richtmiddel', 'vizier'] },
     { naam: 'Schaalmodellen',            groep: 'Branche', soort: 'branche', pagina: 'branche-schaalmodellen-v1.html',
       zoek: ['schaalmodel', 'maquette', 'prototype', 'modelbouw', 'architect', 'presentatiemodel', 'designmodel', 'kunstwerk', 'sculptuur', 'vitrine', 'miniatuur'] }
