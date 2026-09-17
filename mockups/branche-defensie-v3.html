@@ -653,6 +653,11 @@
 .kisten .kist .im{aspect-ratio:4/3;overflow:hidden;background:var(--bg)}
 .kisten .kist .im img{width:100%;height:100%;object-fit:cover}
 .kisten .kist .bd{padding:16px 18px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
+/* Het model als label boven de kop, want de kop gaat over wat je
+   vervoert en niet over hoe de kist heet. Wie een naam zoekt vindt hem
+   er nog steeds; wie zijn probleem zoekt leest eerst de kop. */
+.kisten .kist .mdl{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--blue)}
 .kisten .kist h3{font-size:17px;line-height:1.15}
 .kisten .kist p{font-size:13.5px;color:var(--mute);line-height:1.5}
 .kisten .kist .go{margin-top:auto;padding-top:10px;font-family:var(--mono);font-size:9.5px;
@@ -993,33 +998,6 @@
   </div>
 </section>
 
-<!-- ══ 05 · HET DOSSIER ════════════════════════════════════════
-     Het enige echte onderscheid in dit segment, dus dit blok mag wél
-     diep. Niet dat de kist voldoet, maar dat je het kunt aantonen. ═ -->
-<section class="dossier">
-  <div class="wrap">
-    <div class="grid">
-      <div>
-        <div class="ey">// Wat je meekrijgt</div>
-        <h2>Het dossier is het bewijs</h2>
-        <p class="lead">Een kist die voldoet is &eacute;&eacute;n ding. Kunnen aantonen dát hij
-          voldoet is wat jouw auditor vraagt. Dat hoort bij de levering en kost niets extra.</p>
-        <ol>
-          <li><b>Testrapport</b><span>Val-, tril- en klimaattest op het eerste exemplaar, met meetwaarden en foto's</span></li>
-          <li><b>Materiaalcertificaten</b><span>Per charge, voor plaatmateriaal, beslag en schuim</span></li>
-          <li><b>Tekening met revisie</b><span>De versie waarop gebouwd is, niet de laatste die rondging</span></li>
-          <li><b>Afwijkingenlijst</b><span>Wat er is afgeweken van de specificatie, en wie dat heeft goedgekeurd</span></li>
-        </ol>
-      </div>
-      <div class="blad">
-        <div class="vel ruit"></div>
-        <div class="bij"><span>Tekening &middot; rev. C</span><span>Schaal 1:10</span><span>Doesburg</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
 <!-- ══ DE VIER KISTEN ══════════════════════════════════════════
      Onder het dossier, omdat daar de vraag opkomt: waar hebben we het
      over. Vier modellen die in dit vak het meest gebouwd worden.
@@ -1036,38 +1014,45 @@
     </div>
     <div class="vier">
       <a class="kist" href='/mockups/casetype-rackcase-dubbel-deksel-v1'>
-        <div class="im"><img src="assets/flightcase-rackcase-dubbel-deksel.jpg" alt="Rackcase met dubbel deksel"></div>
+        <div class="im"><img src="assets/def-communicatie.jpg" alt="Apparatuur in geopende transportkisten, met kabels naar buiten"></div>
         <div class="bd">
-          <h3>Rackcase, dubbel deksel</h3>
-          <p>Apparatuur die in de kist blijft draaien. Beide deksels eraf, doorvoeren in de zijwand.</p>
+          <span class="mdl">Rackcase, dubbel deksel</span>
+          <h3>Apparatuur die aan blijft staan</h3>
+          <p>Beide deksels eraf, doorvoeren in de zijwand. De set draait in de kist, ook als het
+            deksel dicht moet.</p>
           <span class="go">Radarsets, verbindingssets &rarr;</span>
         </div>
       </a>
       <a class="kist" href='/mockups/casetype-trunccase-v1'>
-        <div class="im"><img src="assets/flightcase-trunccase.jpg" alt="Trunccase"></div>
+        <div class="im"><img src="assets/def-uitrusting.jpg" alt="Persoonlijke uitrusting: helm, vest en handschoenen"></div>
         <div class="bd">
-          <h3>Trunccase</h3>
-          <p>Stapelbaar, op wielen, met een deksel dat er helemaal af gaat. Het werkpaard.</p>
+          <span class="mdl">Trunccase</span>
+          <h3>Wat met de ploeg meegaat</h3>
+          <p>Stapelbaar, op wielen, deksel er helemaal af. Het werkpaard voor uitrusting die in
+            delen wordt uitgeladen.</p>
           <span class="go">Veldapparatuur, uitrusting &rarr;</span>
         </div>
       </a>
       <a class="kist" href='/mockups/casetype-koffer-v1'>
-        <div class="im"><img src="assets/flightcase-koffer.jpg" alt="Koffer"></div>
+        <div class="im"><img src="assets/def-drone.jpg" alt="Drone en losse uitrusting op camouflagemateriaal"></div>
         <div class="bd">
-          <h3>Koffer</h3>
-          <p>Eén man draagt hem. Uitgefreesd schuim, klimaatdicht, drukventiel waar nodig.</p>
-          <span class="go">Optiek, meetinstrumenten &rarr;</span>
+          <span class="mdl">Koffer</span>
+          <h3>Klein, los en niet kwijt te raken</h3>
+          <p>E&eacute;n man draagt hem. Uitgefreesd schuim per onderdeel, klimaatdicht, drukventiel
+            waar nodig.</p>
+          <span class="go">Drones, optiek, instrumenten &rarr;</span>
         </div>
       </a>
       <a class="kist" href='/mockups/casetype-hoedcase-v1'>
-        <div class="im"><img src="assets/flightcase-hoedcase.jpg" alt="Hoedcase"></div>
+        <div class="im"><img src="assets/foto-product-drone.jpg" alt="Geopende koffer met uitgefreesd schuim naast een drone"></div>
         <div class="bd">
-          <h3>Hoedcase</h3>
-          <p>Deksel er helemaal af, dus je legt erin in plaats van erin te wurmen. Voor wat kwetsbaar is.</p>
+          <span class="mdl">Hoedcase</span>
+          <h3>Erin leggen, niet erin wurmen</h3>
+          <p>Het deksel gaat er helemaal af, dus je legt het instrument erin. Voor wat te kwetsbaar
+            is om te kantelen.</p>
           <span class="go">Richtmiddelen, sensoren &rarr;</span>
         </div>
       </a>
-    </div>
   </div>
 </section>
 
