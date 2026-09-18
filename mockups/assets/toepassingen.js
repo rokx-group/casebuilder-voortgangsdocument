@@ -119,7 +119,44 @@
     { naam: 'Defensie',                  groep: 'Branche', soort: 'branche', pagina: 'branche-defensie-v3.html',
       zoek: ['defensie', 'leger', 'militair', 'krijgsmacht', 'landmacht', 'marine', 'luchtmacht', 'navo', 'veiligheidsregio', 'f16', 'f35', 'straaljager', 'jachtvliegtuig', 'vleugel', 'romp', 'munitie', 'wapen', 'geweer', 'nachtkijker', 'warmtebeeld', 'thermisch', 'radar', 'antenne', 'verbindingsset', 'radioset', 'manpack', 'helm', 'vest', 'uitrusting', 'veldkeuken', 'genie', 'explosieven', 'eod', 'uav', 'sensorkop', 'richtmiddel', 'vizier'] },
     { naam: 'Schaalmodellen',            groep: 'Branche', soort: 'branche', pagina: 'branche-schaalmodellen-v1.html',
-      zoek: ['schaalmodel', 'maquette', 'prototype', 'modelbouw', 'architect', 'presentatiemodel', 'designmodel', 'kunstwerk', 'sculptuur', 'vitrine', 'miniatuur'] }
+      zoek: ['schaalmodel', 'maquette', 'prototype', 'modelbouw', 'architect', 'presentatiemodel', 'designmodel', 'kunstwerk', 'sculptuur', 'vitrine', 'miniatuur'] },
+
+    /* Onderdelen. De echte winkel op casebuilder.com is voor het grootste
+       deel een onderdelencatalogus: 279 artikelen, twaalf hoofdgroepen,
+       ongeveer vijftig subgroepen. Die hele catalogus was hier onzichtbaar,
+       dus wie "balhoek" of "xlr" intikte kreeg te horen dat er geen
+       categorie bestaat, terwijl het artikel gewoon op voorraad ligt.
+
+       Ze staan onderaan met opzet. Bij gelijke score wint de bovenste, en
+       wie "gitaar" typt zoekt een gitaarcase en geen gitaarklem. Alleen wie
+       een onderdeelwoord intikt, en dat lijkt nergens anders op, komt hier
+       terecht.
+
+       De groepen komen uit de bestaande winkel en zijn niet verzonnen. */
+    { naam: 'Hoeken',            groep: 'Onderdeel', soort: 'onderdeel', pagina: 'shop-v1.html',
+      zoek: ['hoek', 'balhoek', 'overzethoek', 'platte hoek', 'hoekbeslag', 'kogelhoek'] },
+    { naam: 'Profielen',         groep: 'Onderdeel', soort: 'onderdeel', pagina: 'shop-v1.html',
+      zoek: ['profiel', 'hoekprofiel', 'sluitprofiel', 'rackprofiel', 'aluminium profiel', 'kantprofiel'] },
+    { naam: 'Handgrepen',        groep: 'Onderdeel', soort: 'onderdeel', pagina: 'shop-v1.html',
+      zoek: ['handgreep', 'greep', 'beugel', 'inbouwgreep', 'opbouwgreep', 'pull out'] },
+    { naam: 'Sluitingen',        groep: 'Onderdeel', soort: 'onderdeel', pagina: 'shop-v1.html',
+      zoek: ['sluiting', 'slot', 'vlindersluiting', 'vlinderslot', 'spansluiting', 'grendel'] },
+    { naam: 'Scharnieren',       groep: 'Onderdeel', soort: 'onderdeel', pagina: 'shop-v1.html',
+      zoek: ['scharnier', 'pianoscharnier', 'inbouwscharnier'] },
+    { naam: 'Wielen',            groep: 'Onderdeel', soort: 'onderdeel', pagina: 'shop-v1.html',
+      zoek: ['wiel', 'zwenkwiel', 'bokwiel', 'castor', 'rem', 'wielplaat'] },
+    { naam: 'Voetjes',           groep: 'Onderdeel', soort: 'onderdeel', pagina: 'shop-v1.html',
+      zoek: ['voetje', 'voet', 'rubber voet', 'stapelvoet', 'stapelnok'] },
+    { naam: 'Schuimplastic',     groep: 'Onderdeel', soort: 'onderdeel', pagina: 'shop-v1.html',
+      zoek: ['schuim', 'foam', 'noppenschuim', 'plukschuim', 'inlay', 'uitfrezen', 'polyether'] },
+    { naam: 'Negentien inch',    groep: 'Onderdeel', soort: 'onderdeel', pagina: 'shop-v1.html',
+      zoek: ['19 inch', '19inch', 'rackrail', 'rackstrip', 'rackdeur', 'he', 'blindplaat', 'r1272'] },
+    { naam: 'Connectoren',       groep: 'Onderdeel', soort: 'onderdeel', pagina: 'shop-v1.html',
+      zoek: ['connector', 'xlr', 'bnc', 'speakon', 'powercon', 'chassisdeel', 'doorvoer'] },
+    { naam: 'Bevestiging',       groep: 'Onderdeel', soort: 'onderdeel', pagina: 'shop-v1.html',
+      zoek: ['popnagel', 'blindklinknagel', 'bout', 'schroef', 'moer', 'ring', 'lijm'] },
+    { naam: 'Schotels en labels',groep: 'Onderdeel', soort: 'onderdeel', pagina: 'shop-v1.html',
+      zoek: ['schotel', 'label', 'kabelschotel', 'naamplaat', 'typeplaat'] }
   ];
 
   /* Zonder accenten en in kleine letters, zodat "réflex" en "Reflex"

@@ -1004,9 +1004,15 @@
       FACETTEN.forEach(function (f) { if (f.laag === 'lokaal') staat.f[f.id] = Object.assign({}, terug[f.id] || {}); });
       staat.groep = g.id;
     }
+    /* Binnenkomen via een link betekent: laat precies zien wat de link
+       belooft. De bewaarde categoriekeuze van een vorig bezoek wordt
+       daarom gewist, ook als de link alleen een groep noemt. Anders klik
+       je op "Alles in broadcast" en staat er nog een filter uit een
+       eerdere sessie aan, zonder dat je snapt waarom je drie cases ziet. */
+    staat.f.cat = {};
     if (d[1]) {
       var c = g.cats.filter(function (x) { return slug(x) === d[1]; })[0];
-      if (c) { staat.f.cat = {}; staat.f.cat[c] = c; }
+      if (c) staat.f.cat[c] = c;
     }
   }
   /* Binnenkomen met een zoekwoord: open het tabblad waar de meeste
@@ -1017,6 +1023,9 @@
     if (!q) return;
     staat.zoek = q.trim().slice(0, 60);
     if (!staat.zoek) return;
+    /* Om dezelfde reden als hierboven: een zoekwoord hoort niet stilletjes
+       versmald te worden door een filter van vorige week. */
+    staat.f.cat = {};
     var perGroep = GROEPEN.map(function (g) {
       return { id: g.id, naam: g.naam, n: PRODUCTEN.filter(function (p) { return p.groep === g.id && zoekPast(p); }).length };
     });
@@ -1032,9 +1041,20 @@
   }
 
   laad();
+  /* Zonder hash en zonder zoekwoord kom je binnen via de navigatie. Dan
+     mag de winkel onthouden welk tabblad je open had, maar niet welke
+     categorie je toen had aangevinkt: negentien cases die opeens één
+     case tonen leest als een kapotte pagina, niet als een geheugen. */
+  if (!location.hash && !new URLSearchParams(location.search).get('zoek')) staat.f.cat = {};
   uitHash();
   uitZoek();
   teken();
+
+  /* Een link naar #broadcast vanaf de winkel zelf verandert alleen de
+     hash; de browser laadt de pagina dan niet opnieuw en het script zou
+     nooit meer draaien. Dan klik je op een categorie en gebeurt er niets.
+     Vandaar deze regel. */
+  addEventListener('hashchange', function () { uitHash(); teken(); });
 })();
 </script>
 <script src="assets/laatst.js"></script>
