@@ -149,25 +149,64 @@
 .index{padding-top:34px}
 .index .sec-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:26px}
 .index .sec-head h2{margin:10px 0 0}
-.vakken{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
-  border:1px solid var(--rule)}
-.vak{background:#fff;padding:24px 26px 26px;display:flex;flex-direction:column}
-.vak .vkop{display:flex;align-items:baseline;gap:12px;padding-bottom:12px;
-  border-bottom:1px solid var(--rule);margin-bottom:14px}
-.vak h3{font-size:22px;letter-spacing:.03em;line-height:1.05}
-.vak .tel{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--mute);white-space:nowrap}
-.vak ul{list-style:none}
-.vak li{border-bottom:1px solid var(--bg)}
-.vak li:last-child{border-bottom:0}
-.vak a{display:flex;align-items:baseline;gap:10px;padding:7px 0;font-size:14.5px;color:var(--ink)}
-.vak a:hover{color:var(--blue)}
-.vak a .n{margin-left:auto;font-family:var(--mono);font-size:9.5px;color:var(--rule);letter-spacing:.1em}
-.vak a:hover .n{color:var(--mute)}
-.vak .alles{margin-top:14px;padding-top:12px;border-top:1px solid var(--rule);
-  font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:14px;
-  letter-spacing:.05em;color:var(--blue)}
-.vak .alles:hover{color:var(--dark)}
+/* Stond als zes gelijke vakken in een raster met haarlijnvoegen. Dat
+   leest als een spreadsheet: zes even zware vlakken naast elkaar. En
+   omdat de ene toepassing negen categorieen heeft en de andere vijf,
+   stond de bovenste rij half leeg.
+
+   Nu zes banen onder elkaar. Links draagt de naam het gewicht, met het
+   aantal erboven en een regel die zegt wat er in dit vak speelt; rechts
+   lopen de categorieen in kolommen, zodat een ongelijk aantal geen gat
+   meer slaat. Alleen horizontale lijnen en geen kaders: het is een
+   register, geen tabel. */
+.register{border-top:2px solid var(--dark)}
+.baan{display:grid;grid-template-columns:minmax(230px,290px) 1fr;gap:clamp(24px,4vw,56px);
+  padding:30px 0 32px;border-bottom:1px solid var(--rule);align-items:start}
+.baan:last-child{border-bottom:0}
+
+.baan-kop .tel{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--blue)}
+.baan-kop h3{font-size:clamp(22px,2.1vw,27px);letter-spacing:.02em;line-height:1.02;margin:8px 0 0}
+.baan-kop h3 a{color:var(--dark)}
+.baan-kop h3 a:hover{color:var(--blue)}
+.baan-kop .zin{font-size:14px;color:var(--mute);line-height:1.55;margin-top:10px;max-width:33ch}
+.baan-kop .alles{display:inline-block;margin-top:14px;font-family:var(--disp);text-transform:uppercase;
+  font-weight:700;font-size:13.5px;letter-spacing:.05em;color:var(--blue)}
+.baan-kop .alles:hover{color:var(--dark)}
+
+/* Kolommen en geen raster: bij vijf of negen categorieen vult de tekst
+   de ruimte vanzelf in plaats van er een gat in te laten. */
+.baan-lijst{list-style:none;columns:2;column-gap:44px}
+.baan-lijst li{break-inside:avoid;border-bottom:1px solid var(--bg)}
+.baan-lijst a{display:flex;align-items:baseline;gap:10px;padding:8px 0;font-size:14.5px;color:var(--ink)}
+.baan-lijst a:hover{color:var(--blue)}
+.baan-lijst a .n{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--mute);
+  letter-spacing:.08em}
+
+/* ── de branches ──────────────────────────────────────────
+   Een toepassing is wat je vervoert, een branche is wie je bent. Die
+   twee assen vallen niet samen: defensie hangt onder geen enkele
+   toepassing en stond daardoor helemaal niet op deze pagina, terwijl
+   het wel een van de vier bestemmingen is. Vandaar een eigen blok. */
+.vakgebied{background:var(--dark);color:#fff;border-top:1px solid var(--rule)}
+.vakgebied .ey{color:var(--cyan)}
+.vakgebied h2{color:#fff}
+/* Dezelfde tweedeling als bij de toepassingen: kop links, uitleg
+   rechts. Zonder deze regel liep de zin over de volle breedte en werd
+   hij honderd tekens lang, wat niemand leest. */
+.vakgebied .sec-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end}
+.vakgebied .sec-head h2{margin:10px 0 0}
+.vakgebied .sec-head p{color:rgba(255,255,255,.72);font-size:16px;line-height:1.6}
+.brs{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.16);margin-top:26px}
+.br{background:var(--dark);padding:22px 24px 24px;display:flex;flex-direction:column;transition:.14s}
+.br:hover{background:rgba(255,255,255,.07)}
+.br .nr{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--cyan)}
+.br h3{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:20px;
+  letter-spacing:.03em;color:#fff;margin:11px 0 9px;line-height:1.05}
+.br p{font-size:14px;color:rgba(255,255,255,.7);line-height:1.55;flex:1}
+.br .go{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--cyan);margin-top:16px}
 
 /* ── veelgevraagd ────────────────────────────────────────── */
 .vaak{background:var(--bg);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
@@ -241,13 +280,17 @@
 .index .inmeten a:hover{color:var(--dark);border-bottom-color:var(--dark)}
 
 @media(max-width:1080px){
-  .vakken{grid-template-columns:1fr 1fr}
+  .baan{grid-template-columns:1fr;gap:18px}
+  .baan-lijst{columns:2}
+  .brs{grid-template-columns:1fr 1fr}
   .dingen{grid-template-columns:1fr 1fr}
   .maatwerk .row{grid-template-columns:1fr}
-  .index .sec-head{grid-template-columns:1fr;gap:14px}
+  .index .sec-head,
+  .vakgebied .sec-head{grid-template-columns:1fr;gap:14px}
 }
 @media(max-width:760px){
-    .vakken{grid-template-columns:1fr}
+  .baan-lijst{columns:1}
+  .brs{grid-template-columns:1fr}
   .dingen{grid-template-columns:1fr}
   .nietbij .grid{grid-template-columns:1fr}
 }
@@ -615,10 +658,15 @@
       </div>
     </div>
 
-    <div class="vakken">
-      <div class="vak" id="av-licht">
-        <div class="vkop"><h3>AV &amp; licht</h3><span class="tel">142 cases</span></div>
-        <ul>
+    <div class="register">
+      <div class="baan" id="av-licht">
+        <div class="baan-kop">
+          <p class="tel">142 cases</p>
+          <h3><a href='/mockups/shop-v1#av-licht'>AV &amp; licht</a></h3>
+          <p class="zin">Armaturen, speakers en kabelwerk die elke week op- en afgebouwd worden. De kist gaat net zo vaak mee als de set.</p>
+          <a class="alles" href='/mockups/shop-v1#av-licht'>Alles in AV &amp; licht →</a>
+        </div>
+        <ul class="baan-lijst">
           <li><a href='/mockups/shop-v1#av-licht/moving-heads' title='Alle cases voor moving heads in de shop'>Moving heads<span class="n">31</span></a></li>
           <li><a href='/mockups/shop-v1#av-licht/wash-en-spotarmaturen' title='Alle cases voor wash- en spotarmaturen in de shop'>Wash- en spotarmaturen<span class="n">24</span></a></li>
           <li><a href='/mockups/shop-v1#av-licht/dimmerpacks-en-racks' title='Alle cases voor dimmerpacks en racks in de shop'>Dimmerpacks en racks<span class="n">18</span></a></li>
@@ -628,12 +676,15 @@
           <li><a href='/mockups/shop-v1#av-licht/truss-hardware' title='Alle cases voor truss-hardware in de shop'>Truss-hardware<span class="n">11</span></a></li>
           <li><a href='/mockups/shop-v1#av-licht/hazers-en-rookmachines' title='Alle cases voor hazers en rookmachines in de shop'>Hazers en rookmachines<span class="n">9</span></a></li>
         </ul>
-        <a class="alles" href='/mockups/shop-v1#av-licht'>Alles in AV &amp; licht →</a>
       </div>
-
-      <div class="vak" id="backline">
-        <div class="vkop"><h3>Backline &amp; muziek</h3><span class="tel">127 cases</span></div>
-        <ul>
+      <div class="baan" id="backline">
+        <div class="baan-kop">
+          <p class="tel">127 cases</p>
+          <h3><a href='/mockups/case-voor-backline-v1'>Backline &amp; muziek</a></h3>
+          <p class="zin">Instrumenten en versterking, waar de vorm van het apparaat de kist bepaalt en niet andersom.</p>
+          <a class="alles" href='/mockups/case-voor-backline-v1'>Alles in backline →</a>
+        </div>
+        <ul class="baan-lijst">
           <li><a href='/mockups/shop-v1#backline/elektrische-gitaren' title='Alle cases voor elektrische gitaren in de shop'>Elektrische gitaren<span class="n">26</span></a></li>
           <li><a href='/mockups/shop-v1#backline/basgitaren' title='Alle cases voor basgitaren in de shop'>Basgitaren<span class="n">14</span></a></li>
           <li><a href='/mockups/shop-v1#backline/akoestische-gitaren' title='Alle cases voor akoestische gitaren in de shop'>Akoestische gitaren<span class="n">12</span></a></li>
@@ -644,12 +695,15 @@
           <li><a href='/mockups/shop-v1#backline/blaasinstrumenten' title='Alle cases voor blaasinstrumenten in de shop'>Blaasinstrumenten<span class="n">8</span></a></li>
           <li><a href='/mockups/shop-v1#backline/dj-apparatuur' title='Alle cases voor dj-apparatuur in de shop'>DJ-apparatuur<span class="n">9</span></a></li>
         </ul>
-        <a class='alles' href='/mockups/case-voor-backline-v1'>Alles in backline →</a>
       </div>
-
-      <div class="vak" id="broadcast">
-        <div class="vkop"><h3>Broadcast &amp; camera</h3><span class="tel">86 cases</span></div>
-        <ul>
+      <div class="baan" id="broadcast">
+        <div class="baan-kop">
+          <p class="tel">86 cases</p>
+          <h3><a href='/mockups/shop-v1#broadcast'>Broadcast &amp; camera</a></h3>
+          <p class="zin">Optiek en bodies die schoon en schokvrij op locatie moeten aankomen, vaak in een set die compleet moet blijven.</p>
+          <a class="alles" href='/mockups/shop-v1#broadcast'>Alles in broadcast →</a>
+        </div>
+        <ul class="baan-lijst">
           <li><a href='/mockups/shop-v1#broadcast/camerabodies' title='Alle cases voor camerabodies in de shop'>Camerabodies<span class="n">18</span></a></li>
           <li><a href='/mockups/shop-v1#broadcast/optiek-en-lenzensets' title='Alle cases voor optiek en lenzensets in de shop'>Optiek en lenzensets<span class="n">17</span></a></li>
           <li><a href='/mockups/shop-v1#broadcast/statieven-en-heads' title='Alle cases voor statieven en heads in de shop'>Statieven en heads<span class="n">12</span></a></li>
@@ -658,44 +712,110 @@
           <li><a href='/mockups/shop-v1#broadcast/audio-en-microfoons' title='Alle cases voor audio en microfoons in de shop'>Audio en microfoons<span class="n">9</span></a></li>
           <li><a href='/mockups/shop-v1#broadcast/drone-en-gimbal' title='Alle cases voor drone en gimbal in de shop'>Drone en gimbal<span class="n">9</span></a></li>
         </ul>
-        <a class="alles" href='/mockups/shop-v1#broadcast'>Alles in broadcast →</a>
       </div>
-
-      <div class="vak" id="medisch">
-        <div class="vkop"><h3>Medisch &amp; lab</h3><span class="tel">64 cases</span></div>
-        <ul>
+      <div class="baan" id="medisch">
+        <div class="baan-kop">
+          <p class="tel">64 cases</p>
+          <h3><a href='/mockups/shop-v1#medisch'>Medisch &amp; lab</a></h3>
+          <p class="zin">Apparatuur die gekalibreerd aankomt, met een inlay die per onderdeel laat zien wat er ontbreekt.</p>
+          <a class="alles" href='/mockups/shop-v1#medisch'>Alles in medisch &amp; lab →</a>
+        </div>
+        <ul class="baan-lijst">
           <li><a href='/mockups/shop-v1#medisch/meetapparatuur' title='Alle cases voor meetapparatuur in de shop'>Meetapparatuur<span class="n">19</span></a></li>
           <li><a href='/mockups/shop-v1#medisch/demokoffers-met-inlay' title='Alle cases voor demokoffers met inlay in de shop'>Demokoffers met inlay<span class="n">16</span></a></li>
           <li><a href='/mockups/shop-v1#medisch/endoscopie' title='Alle cases voor endoscopie in de shop'>Endoscopie<span class="n">11</span></a></li>
           <li><a href='/mockups/shop-v1#medisch/laboratoriuminstrumenten' title='Alle cases voor laboratoriuminstrumenten in de shop'>Laboratoriuminstrumenten<span class="n">10</span></a></li>
           <li><a href='/mockups/shop-v1#medisch/trolleycases' title='Alle cases voor trolleycases in de shop'>Trolleycases<span class="n">8</span></a></li>
         </ul>
-        <a class="alles" href='/mockups/shop-v1#medisch'>Alles in medisch &amp; lab →</a>
       </div>
-
-      <div class="vak" id="industrie">
-        <div class="vkop"><h3>Industrie &amp; meettechniek</h3><span class="tel">73 cases</span></div>
-        <ul>
+      <div class="baan" id="industrie">
+        <div class="baan-kop">
+          <p class="tel">73 cases</p>
+          <h3><a href='/mockups/shop-v1#industrie'>Industrie &amp; meettechniek</a></h3>
+          <p class="zin">Gereedschap en meetsets die met een monteur de buitendienst in gaan, elke dag opnieuw.</p>
+          <a class="alles" href='/mockups/shop-v1#industrie'>Alles in industrie →</a>
+        </div>
+        <ul class="baan-lijst">
           <li><a href='/mockups/shop-v1#industrie/servicekoffers' title='Alle cases voor servicekoffers in de shop'>Servicekoffers<span class="n">22</span></a></li>
           <li><a href='/mockups/shop-v1#industrie/kalibratieapparatuur' title='Alle cases voor kalibratieapparatuur in de shop'>Kalibratieapparatuur<span class="n">17</span></a></li>
           <li><a href='/mockups/shop-v1#industrie/handgereedschap' title='Alle cases voor handgereedschap in de shop'>Handgereedschap<span class="n">14</span></a></li>
           <li><a href='/mockups/shop-v1#industrie/drones-en-inspectie' title='Alle cases voor drones en inspectie in de shop'>Drones en inspectie<span class="n">11</span></a></li>
           <li><a href='/mockups/shop-v1#industrie/sensoren-en-dataloggers' title='Alle cases voor sensoren en dataloggers in de shop'>Sensoren en dataloggers<span class="n">9</span></a></li>
         </ul>
-        <a class="alles" href='/mockups/shop-v1#industrie'>Alles in industrie →</a>
       </div>
-
-      <div class="vak" id="evenement">
-        <div class="vkop"><h3>Evenement &amp; beursbouw</h3><span class="tel">50 cases</span></div>
-        <ul>
+      <div class="baan" id="evenement">
+        <div class="baan-kop">
+          <p class="tel">50 cases</p>
+          <h3><a href='/mockups/shop-v1#evenement'>Evenement &amp; beursbouw</a></h3>
+          <p class="zin">Standmateriaal en displays die per beurs een keer heel moeten aankomen en daarna weer plat gaan.</p>
+          <a class="alles" href='/mockups/shop-v1#evenement'>Alles in evenement →</a>
+        </div>
+        <ul class="baan-lijst">
           <li><a href='/mockups/shop-v1#evenement/standmateriaal' title='Alle cases voor standmateriaal in de shop'>Standmateriaal<span class="n">15</span></a></li>
           <li><a href='/mockups/shop-v1#evenement/banners-en-kokers' title='Alle cases voor banners en kokers in de shop'>Banners en kokers<span class="n">11</span></a></li>
           <li><a href='/mockups/shop-v1#evenement/displays-en-schermen' title='Alle cases voor displays en schermen in de shop'>Displays en schermen<span class="n">10</span></a></li>
           <li><a href='/mockups/shop-v1#evenement/catering-en-bar' title='Alle cases voor catering en bar in de shop'>Catering en bar<span class="n">8</span></a></li>
           <li><a href='/mockups/shop-v1#evenement/documenten-en-samples' title='Alle cases voor documenten en samples in de shop'>Documenten en samples<span class="n">6</span></a></li>
         </ul>
-        <a class="alles" href='/mockups/shop-v1#evenement'>Alles in evenement →</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DE BRANCHES ────────────────────────────────────────────
+     Een toepassing is wat je vervoert, een branche is wie je bent. Die
+     twee assen vallen niet samen: defensie hangt onder geen enkele
+     toepassing en stond daardoor nergens op deze pagina, terwijl de
+     branchepagina wel een van de vier bestemmingen van de zoekbalk is.
+     Wie zijn apparaat niet weet maar zijn vak wel, begint hier. ───── -->
+<section class="vakgebied tight">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="ey">// OF BEGIN BIJ JE VAK</div>
+        <h2>Zes branches</h2>
+      </div>
+      <div class="uitleg">
+        <p>Een toepassing is w&aacute;t je vervoert, een branche is w&iacute;e je bent. Die twee vallen niet samen: AV en backline horen bij dezelfde branche, en defensie hoort bij geen enkele toepassing.</p>
+      </div>
+    </div>
+    <div class="brs">
+      <a class="br" href='/mockups/branche-defensie-v3'>
+        <span class="nr">// 01</span>
+        <h3>Defensie</h3>
+        <p>Transport naar een oefening of een missie, met eisen die vastliggen voordat de kist bestaat.</p>
+        <span class="go">Bekijk de branche &rarr;</span>
+      </a>
+      <a class="br" href='/mockups/branche-audio-visueel-v2'>
+        <span class="nr">// 02</span>
+        <h3>Audio-visueel en podium</h3>
+        <p>Elke week opbouwen en afbreken. Wat erin moet past, en wat erop moet kan erop blijven.</p>
+        <span class="go">Bekijk de branche &rarr;</span>
+      </a>
+      <a class="br" href='/mockups/branche-broadcast-en-media-v1'>
+        <span class="nr">// 03</span>
+        <h3>Broadcast en media</h3>
+        <p>Camera, optiek en regie die samen de deur uit gaan en samen terug moeten komen.</p>
+        <span class="go">Bekijk de branche &rarr;</span>
+      </a>
+      <a class="br" href='/mockups/branche-industrie-en-machinebouw-v1'>
+        <span class="nr">// 04</span>
+        <h3>Industrie en machinebouw</h3>
+        <p>Onderdelen en gereedschap onderweg tussen fabriek, monteur en klant.</p>
+        <span class="go">Bekijk de branche &rarr;</span>
+      </a>
+      <a class="br" href='/mockups/branche-meet-en-testapparatuur-v1'>
+        <span class="nr">// 05</span>
+        <h3>Meet- en testapparatuur</h3>
+        <p>Gekalibreerd erin, gekalibreerd eruit. De inlay houdt het instrument vast, niet het schuim eromheen.</p>
+        <span class="go">Bekijk de branche &rarr;</span>
+      </a>
+      <a class="br" href='/mockups/branche-schaalmodellen-v1'>
+        <span class="nr">// 06</span>
+        <h3>Schaalmodellen</h3>
+        <p>Eenmalig, onvervangbaar en zelden een rechthoek. Hier telt de binnenkant.</p>
+        <span class="go">Bekijk de branche &rarr;</span>
+      </a>
     </div>
   </div>
 </section>
