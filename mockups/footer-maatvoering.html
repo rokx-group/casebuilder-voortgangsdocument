@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — de maatvoering (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   De maatvoering
+
+   Maatlijnen langs de randen, de maat in mono erin, en het raster uit
+   het boek in de twee onderhoeken.
+
+   Er stonden er vier: void, wit papier met het raster, een navy
+   blauwdruk en een volledig bemate versie. Void is het geworden, met het
+   raster in de twee onderhoeken en zonder de hairlines tussen de
+   kolommen. Daarna is er nog een ronde opgeruimd, zie hieronder.
+
+   De kleuren staan als variabelen bovenaan het blok. Wil je een andere
+   ondergrond proberen, dan kopieer je die vier regels en hoef je aan de
+   opbouw niets te doen.
+   ══════════════════════════════════════════════════════════════ */
+
+body{background:#EDF0F4}
+.vgl{max-width:1440px;margin:0 auto;padding:0 24px 90px}
+.inleiding{max-width:82ch;margin:44px 0 6px}
+.inleiding h1{font-size:30px;margin-bottom:10px}
+.inleiding p{font-size:14.5px;color:var(--mute);line-height:1.68}
+.inleiding p b{color:var(--ink)}
+.kop{margin:46px 0 12px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.kop .nr{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--blue)}
+.kop h3{font-size:24px}
+.kop .wat{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);margin-left:auto}
+.demo{border:1px solid var(--rule);margin-bottom:10px}
+
+/* ══════════════════════════════════════════════════════════════
+   DE OPBOUW
+
+   Een handvol variabelen stuurt alles: het vlak eronder, de inkt, de
+   lijn van de bemating en de randlijnen. Verder staat er nergens een
+   kleur hard in, dus een andere ondergrond is een kwestie van die
+   regels overschrijven.
+   ══════════════════════════════════════════════════════════════ */
+.mv{background:var(--vlak);color:var(--inkt);position:relative;
+  padding:clamp(38px,4.2vw,56px) 0 0}
+.mv .veld{position:relative;padding-left:clamp(38px,3.4vw,52px)}
+
+/* ── de maatlijn links ──────────────────────────────────────
+   Een lijn met twee dwarsstreepjes aan de uiteinden en het woord in het
+   midden, gedraaid. Dat is hoe een maat op een tekening staat, en
+   daarom geen pijlpunten: die horen bij een pijl, niet bij een maat. */
+.mv .maat-v{position:absolute;left:clamp(12px,1.4vw,20px);top:2px;bottom:52px;width:1px;
+  background:var(--lijnzwak)}
+.mv .maat-v::before,.mv .maat-v::after{content:"";position:absolute;left:-5px;width:11px;height:1px;
+  background:var(--lijn)}
+.mv .maat-v::before{top:0}
+.mv .maat-v::after{bottom:0}
+.mv .maat-v span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-90deg);
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--lijn);white-space:nowrap;
+  background:var(--vlak);padding:6px 4px}
+
+/* ── de maatlijn onder ──────────────────────────────────────
+   In de maat staat het visiestatement uit het boek, letterlijk: maatwerk
+   is de standaard. Dat is iets anders dan de oneliner "maatwerk is
+   standaard" uit hoofdstuk 08; die staat er zonder lidwoord en zegt iets
+   kleiners. Hier hoort de visie, want dit is de laatste regel van de
+   pagina. Eén zin, dus geen punt. */
+.mv .maat-h{position:relative;height:1px;background:var(--lijnzwak);
+  margin:clamp(30px,3.4vw,44px) 0 0}
+.mv .maat-h::before,.mv .maat-h::after{content:"";position:absolute;top:-5px;width:1px;height:11px;
+  background:var(--lijn)}
+.mv .maat-h::before{left:0}
+.mv .maat-h::after{right:0}
+.mv .maat-h span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--lijn);
+  background:var(--vlak);padding:0 14px;white-space:nowrap}
+
+/* ── de merkregel ───────────────────────────────────────────── */
+.mv .merkregel{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;
+  margin-bottom:clamp(28px,3.2vw,40px);flex-wrap:wrap}
+.mv .merkregel img{height:30px;display:block}
+.mv .merkregel .code{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gedempt);text-align:right;line-height:1.9}
+
+/* ── de kolommen ────────────────────────────────────────────── */
+.mv .cols{display:grid;grid-template-columns:1.15fr repeat(4,1fr);gap:26px}
+.mv .cols>div{position:relative}
+/* Hier stonden hairlines tussen de kolommen, als de vakverdeling op een
+   tekening. Ze zijn eruit: zes verticale lijnen door een voet hakken hem
+   in stukken, en de kopjes met hun onderstreping scheiden de groepen al.
+   Een lijn die iets scheidt wat al gescheiden is, is er een te veel. */
+.mv h5{font-size:15px;letter-spacing:.06em;color:var(--kop);font-weight:700;
+  padding-bottom:10px;margin-bottom:6px;border-bottom:1px solid var(--randlijn)}
+.mv .cols a{display:block;padding:5px 0;font-size:14px;color:var(--inkt)}
+.mv .cols a:hover{color:var(--accent)}
+.mv .claim{font-size:14px;line-height:1.75;color:var(--inkt)}
+.mv .claim b{color:var(--kop);font-weight:700;display:block;font-family:var(--disp);
+  text-transform:uppercase;letter-spacing:.04em;font-size:17px;margin-bottom:8px;line-height:1.05}
+.mv a.anders{margin-top:10px;padding-top:10px;border-top:1px solid var(--randlijn);color:var(--accent)}
+
+/* ── de onderbalk ───────────────────────────────────────────── */
+.mv .bot{border-top:1px solid var(--randlijn);margin-top:20px;padding:18px 0 clamp(26px,3vw,38px);
+  display:flex;justify-content:space-between;gap:16px;font-family:var(--mono);font-size:10px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--gedempt)}
+.mv .bot a{display:inline;padding:0;font-size:inherit;letter-spacing:inherit;color:var(--gedempt)}
+.mv .bot a:hover{color:var(--accent)}
+
+/* ══ J — VOID ═════════════════════════════════════════════════
+   Het diepste donker uit het palet, met de bemating in signaalblauw.
+
+   In de twee onderhoeken staat het raster uit het boek, in de vorm die
+   daar hoeken heet: het is het dichtst in de hoek en vloeit uit naar het
+   midden. Dekking zeven procent, want dat schrijft het boek voor deze
+   vorm voor, en boven de tien wordt het behang.
+
+   De twee liggen diagonaal tegenover elkaar, dus de linker vloeit uit
+   naar rechtsboven en de rechter naar linksboven. Zo blijft het midden
+   leeg en komt het raster alleen op waar niets staat. */
+.mv.j{--vlak:var(--void);--inkt:rgba(255,255,255,.66);--kop:#fff;--accent:var(--cyan);
+  --lijn:var(--cyan);--lijnzwak:rgba(102,196,232,.5);
+  --randlijn:rgba(255,255,255,.2);--gedempt:rgba(255,255,255,.4);
+  isolation:isolate;overflow:hidden}
+.mv.j .ruithoek{position:absolute;bottom:0;z-index:-1;pointer-events:none;
+  width:clamp(240px,34vw,560px);height:clamp(190px,24vw,360px);
+  background-image:linear-gradient(#fff 1px,transparent 1px),
+                   linear-gradient(90deg,#fff 1px,transparent 1px);
+  background-size:28px 28px;opacity:.07}
+/* Het verloop begint in de hoek zelf: 45 graden loopt naar rechtsboven,
+   dus nul procent ligt linksonder. Rechts precies andersom. */
+.mv.j .ruithoek.l{left:0;
+  -webkit-mask-image:linear-gradient(45deg,#000 0%,transparent 64%);
+  mask-image:linear-gradient(45deg,#000 0%,transparent 64%)}
+.mv.j .ruithoek.r{right:0;
+  -webkit-mask-image:linear-gradient(315deg,#000 0%,transparent 64%);
+  mask-image:linear-gradient(315deg,#000 0%,transparent 64%)}
+
+/* ══════════════════════════════════════════════════════════════
+   OPRUIMEN
+
+   De voet was te druk. Niet door één ding maar door het aantal lagen:
+   merkregel, zes kolommen, maatlijn, scheidingslijn, onderbalk. Vijf
+   banden onder elkaar, en elke band had zijn eigen lijn.
+
+   Vier ingrepen.
+
+   Branches helemaal uit de voet. Ze stonden eerst als kolom en daarna
+   als regel; nu staan ze er niet meer. Let op wat dat kost: de
+   branchepagina's zijn vanuit de voet niet meer te bereiken, en de voet
+   is de enige plek waar élke link zichtbaar wordt. Ze moeten dus ergens
+   anders vandaan gevonden worden, uit het menu of vanuit de pagina's
+   zelf.
+
+   Inkopen als grote partij blijft, alleen, rechts op een eigen regel.
+   Het is geen branche maar een andere manier van kopen, en in zijn
+   eentje op die regel krijgt hij het gewicht dat daarbij past.
+
+   De claimkolom eruit en vier kolommen in plaats van zes. De maat langs
+   de zijkant weg, want één maat onderaan is genoeg om het te laten
+   lezen als een tekening.
+
+   Eén lijn minder onderaan. De maatlijn en de rand boven de juridische
+   regel zaten een paar tellen uit elkaar en deden hetzelfde werk. De
+   rand is eruit, de maatlijn blijft: die zegt tenminste iets.
+   ══════════════════════════════════════════════════════════════ */
+.mv .slotregel{display:flex;justify-content:flex-end;
+  margin:clamp(30px,3.4vw,44px) 0 0;padding-top:clamp(18px,2vw,26px);
+  border-top:1px solid var(--randlijn)}
+.mv .slotregel .groot{color:var(--accent);font-size:15px;white-space:nowrap}
+.mv .slotregel .groot:hover{color:#fff}
+/* Zonder eigen rand: de maatlijn erboven is al de scheiding. */
+.mv .bot{border-top:0;margin-top:0}
+
+/* De strakste stand gaat een stap verder: geen claimkolom en geen maat
+   langs de zijkant. Wat overblijft is vier kolommen, één regel branches
+   en één maat onderaan. */
+.mv.strak .cols{grid-template-columns:repeat(4,1fr)}
+.mv.strak .maat-v{display:none}
+.mv.strak .veld{padding-left:0}
+.mv.strak .merkregel{margin-bottom:clamp(30px,3.4vw,44px)}
+.mv.strak .slotregel{margin-top:clamp(26px,3vw,38px)}
+
+/* ── klein ─────────────────────────────────────────────────── */
+@media(max-width:1100px){
+  .mv .cols,.mv.strak .cols{grid-template-columns:1fr 1fr}
+}
+@media(max-width:820px){
+  .mv .cols{grid-template-columns:1fr;gap:26px}
+  .mv .bot{flex-direction:column;gap:8px}
+  .mv .veld{padding-left:30px}
+  .mv .merkregel .code{text-align:left}
+  .mv .slotregel{justify-content:flex-start}
+}
+</style>
+</head>
+<body>
+
+<div class="vgl">
+
+  <div class="inleiding">
+    <div class="ey ey-dark">// De maatvoering</div>
+    <h1>De footer als tekening</h1>
+    <p>Vier kolommen, het raster in de twee onderhoeken, en onderaan één maatlijn met de
+      oneliner erin. Branches zijn helemaal uit de voet: <b>inkopen als grote partij</b> staat
+      alleen, rechts op een eigen regel.</p>
+  </div>
+
+  <!-- ══ O ══════════════════════════════════════════════════════ -->
+  <div class="kop">
+    <div class="nr">// O</div>
+    <h3>Strak</h3>
+    <div class="wat">Vier kolommen &middot; één slotregel</div>
+  </div>
+  <div class="demo">
+    <footer class="mv j strak">
+      <span class="ruithoek l"></span><span class="ruithoek r"></span>
+      <div class="wrap">
+        <div class="veld">
+          <div class="merkregel">
+            <img src="assets/woordmerk-wit.svg" alt="casebuilder.com">
+            <div class="code">Proflite BV &middot; Doesburg, Nederland<br>+31 (0)575 575734 &middot; CB-2026-0148</div>
+          </div>
+          <div class="cols">
+            <div><h5>Offerte aanvragen</h5><a href="/mockups/case-aanvragen-v1">Case aanvragen</a><a href="/mockups/laten-controleren-v1">Maten laten controleren</a><a href="#">Series en staffels</a><a href="#">Zakelijk bestellen</a></div>
+            <div><h5>Kant en klaar</h5><a href="#">Alle vaste cases</a><a href="/mockups/case-voor-v3">Wat ga je vervoeren?</a><a href="/mockups/flightcases-v1">Flightcases per model</a><a href="/mockups/categorie-v1">Onderdelen</a></div>
+            <div><h5>Zelf configureren</h5><a href="/mockups/configurator-v1">Naar de configurator</a><a href="/mockups/zo-werkt-het-v1">Zo werkt het</a><a href="#">Herhaalorder</a><a href="#">Mijn configuraties</a></div>
+            <div><h5>Service</h5><a href="/mockups/service-levertijden-v1">Levertijden</a><a href="#">Verzending</a><a href="#">Zaagservice</a><a href="/mockups/over-ons-v1">Over Proflite</a><a href="/mockups/contact-v1">Contact</a></div>
+          </div>
+          <div class="slotregel">
+            <a class="groot" href="/mockups/grote-spelers-v1">Inkopen als grote partij &rarr;</a>
+          </div>
+          <div class="maat-h"><span>Maatwerk is de standaard</span></div>
+          <div class="bot">
+            <span>KVK 09123456</span>
+            <span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; &copy; 2026 Proflite BV</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+</div>
+</body>
+</html>

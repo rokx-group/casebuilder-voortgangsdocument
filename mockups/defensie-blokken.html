@@ -1,0 +1,796 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — defensie, vijf blokken (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   Defensie, vijf blokken die een verhaal vertellen
+
+   Wat er op /branches/defensie v2 staat klopt en is compleet. Wat het
+   niet doet is iets laten voelen. Elk blok beantwoordt een vraag van de
+   inkoper, netjes en op volgorde, en daarmee leest de pagina als een
+   goed ingevuld formulier. Je onthoudt er niets van.
+
+   Deze vijf blokken doen iets anders. Ze vertellen wat een kist
+   meemaakt en wat wij daarvoor doen, in plaats van op te sommen wat
+   wij leveren. Ze zijn bedoeld om tussen de bestaande secties te
+   staan, niet om ze te vervangen.
+
+   01  De val                 het gebaar: wat een kist te verduren krijgt
+   02  Wat er niet op staat   het lef: een kist die niets prijsgeeft
+   03  De reis                het verhaal: zeven belastingen op een rij
+   04  De doorsnede           het bewijs: de wand, laag voor laag
+   05  De specificatie        de conversie: wij lezen jouw eisenlijst
+
+   Drie regels die overal gelden.
+
+   Geen getal dat niet klopt. Elk cijfer hieronder is een voorbeeld en
+   staat gemarkeerd met een noot. Ze moeten stuk voor stuk bevestigd
+   worden voordat dit live gaat, want dit is het enige segment waar één
+   niet-natrekbaar cijfer de rest van de pagina meeneemt.
+
+   Tekening boven foto. Van bijna alles wat hier gemaakt wordt bestaat
+   geen bruikbaar beeld, en een stockfoto van een soldaat is precies de
+   marketing waar deze doelgroep op afhaakt. Een technische tekening
+   mag je wel laten zien, en die past bij het raster uit het boek.
+
+   Beweging doet mee of hij is er niet. Eén gebaar per blok, kort,
+   en het blok werkt ook zonder.
+   ══════════════════════════════════════════════════════════════ */
+
+body{background:#EDF0F4}
+.vgl{max-width:1440px;margin:0 auto;padding:0 24px 90px}
+.inleiding{max-width:82ch;margin:44px 0 10px}
+.inleiding h1{font-size:30px;margin-bottom:10px}
+.inleiding p{font-size:14.5px;color:var(--mute);line-height:1.68;margin-bottom:10px}
+.inleiding p b{color:var(--ink)}
+.kop{margin:52px 0 14px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.kop .nr{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--blue)}
+.kop h3{font-size:24px}
+.kop .wat{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);margin-left:auto}
+.toel{max-width:76ch;font-size:14px;color:var(--mute);line-height:1.68;margin:0 0 18px}
+.toel b{color:var(--ink)}
+.demo{border:1px solid var(--rule);margin-bottom:10px;overflow:hidden}
+/* Kop, titel en lead hebben in het gedeelde stylesheet geen onderlinge
+   ruimte: die zet elke pagina zelf, want hij verschilt per blok. Hier
+   één keer voor alle vijf, zodat de drie niet tegen elkaar aan komen te
+   staan. */
+.demo h2{margin-top:12px}
+.demo .lead{margin-top:14px}
+/* De noot hangt onder het blok en hoort niet bij het ontwerp: het is de
+   lijst met wat er nagevraagd moet worden voordat dit live kan. */
+.noot{font-family:var(--mono);font-size:10px;letter-spacing:.1em;line-height:1.9;
+  color:var(--mute);margin:0 0 34px;padding-left:14px;border-left:2px solid var(--cyan);
+  text-transform:uppercase}
+
+/* ══════════════════════════════════════════════════════════════
+   01 — DE VAL
+
+   Eén beeld, één getal, één uitkomst. Dit blok verkoopt niets: het
+   laat zien wat er met een kist gebeurt voordat hij goedgekeurd is.
+
+   De vorm is de proef zelf. Links een verticale baan met de hoogte
+   erlangs, en een kist die valt zodra het blok in beeld komt. Het
+   getal telt mee naar beneden. Daarna staat er wat er gemeten is.
+
+   De valcurve is geen sierlijke ease maar cubic-bezier(.55,.06,.9,.4):
+   traag beginnen, hard aankomen. Een val die uitdempt is een lift.
+
+   Waarom dit het openingsblok is en niet de afsluiting: het is het
+   enige moment op de pagina waar iets gebeurt. Dat hoort vooraan,
+   voordat de lezer besloten heeft dat dit weer een brochure is.
+   ══════════════════════════════════════════════════════════════ */
+.val{background:var(--void);color:#fff;position:relative;overflow:hidden}
+.val .grid{display:grid;grid-template-columns:auto 1fr;gap:clamp(40px,6vw,96px);
+  padding:clamp(48px,6vw,86px) 0 clamp(44px,5vw,72px);align-items:stretch}
+
+/* de baan */
+.val .baan{position:relative;width:clamp(150px,16vw,230px);min-height:clamp(330px,40vw,470px)}
+/* De maatlijn. Eén hairline met streepjes erlangs, zoals op een
+   meetlat: het is de hoogte waarover de kist valt en niet een
+   decoratieve rand. */
+.val .lat{position:absolute;left:0;top:0;bottom:0;width:1px;background:rgba(255,255,255,.22)}
+.val .lat span{position:absolute;left:0;top:var(--t);width:13px;height:1px;
+  background:rgba(255,255,255,.3)}
+.val .lat span::after{content:attr(data-mm);position:absolute;left:19px;top:-7px;
+  font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:rgba(255,255,255,.34)}
+/* De grond is dikker dan de lat: daar houdt het op. */
+.val .grond{position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--cyan)}
+/* Het spoor. Vier standen van de kist op de baan, aflopend in dekking,
+   zoals een stroboscoopopname van een vallend voorwerp.
+
+   Zonder dit is de baan na de val een lege kolom met onderin een
+   blokje, en wie de animatie mist ziet niets. Met het spoor staat de
+   val er ook stil op. Dat het bovendien een meetbeeld is en geen
+   animatie-effect maakt het hier passend: zo fotografeer je een val.
+
+   De standen staan niet gelijkmatig maar dichter naar beneden toe,
+   want dat doet een vallend voorwerp ook. */
+.val .spoor{position:absolute;left:52px;top:0;bottom:0;width:74px;pointer-events:none}
+.val .spoor b{position:absolute;left:0;width:74px;height:50px;border:1.5px solid #fff;
+  top:var(--t);opacity:var(--o);display:block}
+.val .spoor b::before{content:"";position:absolute;left:-1.5px;right:-1.5px;top:15px;height:1.5px;
+  background:rgba(255,255,255,.5)}
+/* De kist. Een blokje met de verhoudingen van een koffer, geen icoon. */
+.val .kist{position:absolute;left:52px;top:0;width:74px;height:50px;border:1.5px solid #fff;
+  background:var(--void);transform:translateY(0);z-index:2;
+  transition:transform .92s cubic-bezier(.55,.06,.9,.4)}
+/* De deksellijn en de twee sloten: op deze maat genoeg om het als kist
+   te lezen in plaats van als rechthoek. */
+.val .kist::before{content:"";position:absolute;left:-1.5px;right:-1.5px;top:15px;height:1.5px;
+  background:rgba(255,255,255,.55)}
+.val .kist i{position:absolute;top:9px;width:9px;height:13px;border:1.5px solid var(--cyan);
+  background:var(--void)}
+.val .kist i:first-child{left:14px}
+.val .kist i:last-child{right:14px}
+.val.aan .kist{transform:translateY(var(--valt))}
+/* De klap: de grond licht kort op als de kist aankomt. Vertraagd met
+   dezelfde duur als de val, zodat het samenvalt met de aankomst. */
+.val .grond{transition:box-shadow .2s .92s,height .2s .92s}
+.val.aan .grond{height:3px;box-shadow:0 0 22px 2px rgba(102,196,232,.5)}
+
+/* de tekst */
+.val .inhoud{display:flex;flex-direction:column;justify-content:center;padding-right:clamp(0px,4vw,60px)}
+.val h2{color:#fff;font-size:clamp(28px,3.4vw,46px);max-width:18ch;margin-top:14px}
+.val .cijfer{display:flex;align-items:baseline;gap:16px;margin-top:26px}
+.val .cijfer b{font-family:var(--disp);font-weight:900;font-size:clamp(64px,9vw,128px);
+  line-height:.8;letter-spacing:-.01em;color:var(--cyan);font-variant-numeric:tabular-nums}
+/* Het label staat naast het cijfer en niet eronder, maar het moet wel
+   breed genoeg zijn om in twee regels te passen. Op 16ch brak het in
+   vijf regels en werd het een kolom naast een kolom. */
+.val .cijfer span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);max-width:40ch;line-height:1.9}
+.val p{font-size:16px;color:rgba(255,255,255,.78);max-width:52ch;margin-top:24px}
+.val .uitkomst{margin-top:26px;border-top:1px solid rgba(255,255,255,.18);padding-top:18px;
+  display:grid;grid-template-columns:repeat(3,auto);gap:34px;justify-content:start}
+.val .uitkomst div b{display:block;font-family:var(--disp);text-transform:uppercase;font-weight:700;
+  font-size:19px;color:#fff;letter-spacing:.03em}
+.val .uitkomst div span{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:6px}
+
+/* ══════════════════════════════════════════════════════════════
+   02 — WAT ER NIET OP STAAT
+
+   Het blok dat durft leeg te zijn. In dit segment is onzichtbaarheid
+   een eigenschap van het product, en dat is precies wat een
+   marketingpagina nooit laat zien. Een kist die niets prijsgeeft, met
+   veel lucht eromheen, zegt meer over begrip van de sector dan drie
+   alinea's over discretie.
+
+   Het beeld is een tekening en geen foto. Een blanco kist fotograferen
+   levert een grijze doos op; getekend zie je juist dat er iets
+   ontbreekt, omdat de tekening wél alle constructiedelen laat zien.
+
+   De opsomming is hier geen stijlmiddel maar de inhoud: het is
+   letterlijk een lijst van weglatingen. Vier regels gedempt, dan één
+   regel in wit. Dat laatste is het hele punt van het blok.
+   ══════════════════════════════════════════════════════════════ */
+.stil{background:var(--dark);color:#fff}
+.stil .grid{display:grid;grid-template-columns:1fr .95fr;gap:clamp(40px,6vw,90px);
+  align-items:center;padding:clamp(56px,7vw,104px) 0}
+.stil h2{color:#fff;font-size:clamp(30px,3.8vw,52px);max-width:15ch;margin-top:14px}
+.stil p.lead{font-size:17px;color:rgba(255,255,255,.78);max-width:46ch;margin-top:18px}
+.stil ul{list-style:none;margin:32px 0 0;padding:0}
+.stil li{border-top:1px solid rgba(255,255,255,.16);padding:13px 0;font-size:15.5px;
+  color:rgba(255,255,255,.55)}
+/* De laatste regel is geen opsommingsitem meer maar de conclusie, dus
+   hij krijgt de kleur en het gewicht van een kop. */
+.stil li.wel{color:#fff;border-top:1.5px solid var(--cyan);font-family:var(--disp);
+  text-transform:uppercase;font-weight:700;font-size:20px;letter-spacing:.03em;padding-top:16px;
+  line-height:1.15}
+.stil .tekening{position:relative}
+.stil .tekening svg{width:100%;height:auto;display:block}
+/* Het raster hoort achter de tekening en niet achter de tekst: daar is
+   het een technisch vel waarop getekend is, hier zou het ruis zijn. */
+.stil .tekening::before{content:"";position:absolute;inset:-6% -4%;z-index:-1;
+  background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);
+  background-size:28px 28px;opacity:.07;
+  -webkit-mask-image:radial-gradient(ellipse 66% 70% at 50% 50%,#000 25%,transparent 76%);
+  mask-image:radial-gradient(ellipse 66% 70% at 50% 50%,#000 25%,transparent 76%)}
+.stil .tekening{isolation:isolate}
+.stil .bijschrift{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.4);margin-top:18px;text-align:right}
+
+/* ══════════════════════════════════════════════════════════════
+   03 — DE REIS
+
+   Zeven dingen die een kist overkomen tussen de werkplaats en het
+   veld. Niet als opsomming maar op een lijn, want het is een volgorde
+   en geen keuzemenu.
+
+   Dit blok doet het werk dat een klantverhaal zou doen in een segment
+   waar geen klantverhalen mogen. Je leest wat de kist doorstaat, en
+   daarmee vertelt het product zijn eigen reis.
+
+   De lijn loopt door het hele blok en stopt niet bij de laatste halte:
+   de kist gaat daarna weer terug. Dat is geen detail maar het verschil
+   tussen eenmalig transport en materieel dat jaren meegaat.
+   ══════════════════════════════════════════════════════════════ */
+.reis{background:var(--bg)}
+.reis .kopregel{padding:clamp(52px,6vw,88px) 0 clamp(30px,3vw,42px);max-width:62ch}
+.reis .spoor{position:relative;padding-bottom:clamp(56px,6vw,90px)}
+/* De lijn ligt op de hoogte van de nummers, niet bovenaan het blok:
+   dan hangen de haltes eraan in plaats van eronder. */
+.reis .lijn{position:absolute;left:0;right:0;top:19px;height:1px;background:var(--rule)}
+.reis .lijn::after{content:"";position:absolute;right:-1px;top:-4px;width:9px;height:9px;
+  border-top:1.5px solid var(--blue);border-right:1.5px solid var(--blue);
+  transform:rotate(45deg)}
+.reis .haltes{display:grid;grid-template-columns:repeat(7,1fr);gap:20px;position:relative}
+.reis .halte .punt{width:11px;height:11px;border:1.5px solid var(--blue);background:var(--bg);
+  margin:14px 0 0;position:relative;z-index:2}
+.reis .halte.zwaar .punt{background:var(--blue)}
+.reis .halte .nr{font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:var(--mute);
+  margin-top:16px;display:block}
+.reis .halte h4{font-size:19px;margin-top:8px;line-height:1.05}
+.reis .halte .waarde{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--blue);
+  margin-top:10px;text-transform:uppercase}
+.reis .halte p{font-size:13.5px;color:var(--mute);margin-top:8px;line-height:1.6}
+/* De slotregel staat op de lijn en niet eronder: hij hoort bij de reis
+   en is niet de samenvatting ervan. */
+.reis .terug{margin-top:clamp(34px,4vw,54px);border-top:1.5px solid var(--dark);padding-top:20px;
+  display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:baseline}
+.reis .terug b{font-family:var(--disp);text-transform:uppercase;font-weight:700;font-size:21px;
+  color:var(--dark);letter-spacing:.03em}
+.reis .terug span{font-size:14.5px;color:var(--mute);max-width:56ch}
+
+/* ══════════════════════════════════════════════════════════════
+   04 — DE DOORSNEDE
+
+   Het bewijs waar dit segment op koopt: niet dat de kist goed is maar
+   waaruit hij bestaat. Een doorsnede met maatlijnen doet dat in één
+   oogopslag, en het is het soort beeld dat een technische inkoper
+   doorstuurt naar zijn collega.
+
+   De toplaag en het plaatmateriaal staan op schaal ten opzichte van
+   elkaar: 0,8 mm is hier zeven pixels en 9 mm is er tachtig. Dat moet
+   ook, want een doorsnede waarin die twee even dik zijn is een plaatje
+   en geen tekening, en dat ziet de lezer die hier iets van weet meteen.
+   De schuimlaag is wél verkort, anders wordt het blok twee schermen
+   hoog, en dat staat er met zoveel woorden onder.
+
+   In de kop staat geen totaalmaat. Dat stond er eerst wel, negentien
+   millimeter, en dat klopte niet: 0,8 plus 9 plus 40 is geen negentien.
+   Een opgeteld getal dat niet opgaat is in dit segment erger dan geen
+   getal, dus de kop telt niets meer op.
+
+   Rechts de lijst met dezelfde nummering. Links kijk je, rechts lees
+   je, en de nummers verbinden de twee.
+   ══════════════════════════════════════════════════════════════ */
+.snede{background:var(--void);color:#fff;
+  padding:clamp(52px,6vw,92px) 0 clamp(48px,5.5vw,84px)}
+.snede .kopregel{max-width:58ch;margin-bottom:clamp(32px,4vw,52px)}
+.snede h2{color:#fff}
+.snede .lead{color:rgba(255,255,255,.76)}
+.snede .grid{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(40px,5vw,76px);align-items:center}
+.snede .plaat svg{width:100%;height:auto;display:block}
+.snede ol{list-style:none;margin:0;padding:0;counter-reset:l}
+.snede li{counter-increment:l;border-top:1px solid rgba(255,255,255,.16);padding:15px 0 15px 46px;
+  position:relative}
+.snede li::before{content:"0" counter(l);position:absolute;left:0;top:16px;font-family:var(--mono);
+  font-size:10px;letter-spacing:.14em;color:var(--cyan)}
+.snede li b{display:block;font-family:var(--disp);text-transform:uppercase;font-weight:700;
+  font-size:18px;letter-spacing:.03em;color:#fff}
+.snede li span{display:block;font-size:14px;color:rgba(255,255,255,.66);margin-top:5px}
+.snede li em{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--cyan);
+  float:right;margin-left:14px;padding-top:3px}
+
+/* ══════════════════════════════════════════════════════════════
+   05 — DE SPECIFICATIE
+
+   Het conversieblok. Een inkoper hier heeft geen behoefte aan een
+   configurator maar aan de zekerheid dat zijn eisenlijst gelezen
+   wordt zoals hij bedoeld is.
+
+   Links staat daarom een fragment van zo'n lijst, in de vorm waarin
+   hij binnenkomt: genummerd, droog, in mono. Rechts wat wij eruit
+   halen en wat dat betekent voor de bouw. Dat laat zien dat de taal
+   begrepen wordt, en dat is precies wat een offerteaanvraag
+   tegenhoudt of losmaakt.
+
+   De twee kolommen zijn even breed. Maak je de rechter groter, dan
+   wordt het onze uitleg bij hun vraag; even breed blijft het een
+   vertaling.
+   ══════════════════════════════════════════════════════════════ */
+.spec{background:#fff;padding:clamp(52px,6vw,92px) 0 clamp(52px,6vw,92px)}
+.spec .kopregel{max-width:60ch;margin-bottom:clamp(30px,3.6vw,46px)}
+/* Eén grid met acht cellen, en niet twee kolommen naast elkaar.
+
+   Als twee losse kolommen liepen de paren uit de pas: links is een
+   aanvraagregel twee regels en rechts de vertaling drie, en na vier
+   rijen staat een vertaling een halve cel lager dan de eis waar hij bij
+   hoort. In één grid deelt elke rij zijn hoogte. Dat is hier geen
+   opmaakdetail maar de werking van het blok: de vertaling moet naast
+   zijn eis blijven staan. */
+.spec .grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1.5px solid var(--dark)}
+.spec .kolomkop{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mute);padding:14px 34px 14px 0}
+.spec .regel{border-top:1px solid var(--rule);padding:20px 34px 20px 0}
+.spec .l{background:var(--bg)}
+.spec .r{border-left:1px solid var(--rule);padding-left:34px;padding-right:0}
+.spec .kolomkop.r{color:var(--blue)}
+.spec .regel.l{font-family:var(--mono);font-size:12.5px;line-height:1.75;color:var(--ink);
+  letter-spacing:.01em}
+/* De aangestreepte woorden zijn de plekken waar een eis een bouwkeuze
+   afdwingt. Een lijn in signaalblauw en geen onderstreping, want
+   onderstreepte tekst leest als een link die nergens heen gaat. */
+.spec .regel.l u{text-decoration:none;color:var(--blue);border-bottom:1.5px solid var(--cyan);
+  padding-bottom:1px}
+.spec .regel.r b{display:block;font-family:var(--disp);text-transform:uppercase;font-weight:700;
+  font-size:18px;letter-spacing:.03em;color:var(--dark)}
+.spec .regel.r span{display:block;font-size:14.5px;color:var(--mute);margin-top:6px;max-width:44ch}
+.spec .slot{margin-top:34px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.spec .slot p{font-size:14.5px;color:var(--mute);max-width:44ch}
+
+/* ── klein ─────────────────────────────────────────────────── */
+@media(max-width:1000px){
+  .val .grid,.stil .grid,.snede .grid{grid-template-columns:1fr}
+  .stil .tekening{order:-1}
+  .reis .haltes{grid-template-columns:repeat(2,1fr);gap:28px}
+  .reis .lijn{display:none}
+  /* Op één kolom verdwijnt het paar en wordt het een afwisseling:
+     eis, vertaling, eis, vertaling. De dom-volgorde klopt daar al voor,
+     dus er hoeft alleen ruimte en rand af. */
+  .spec .grid{grid-template-columns:1fr}
+  .spec .r{border-left:0;padding-left:0}
+  .spec .kolomkop.r{display:none}
+}
+@media(max-width:620px){
+  .val .uitkomst{grid-template-columns:1fr;gap:16px}
+  .reis .haltes{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  .val .kist{transition:none}
+  .val.aan .kist{transform:translateY(var(--valt))}
+}
+</style>
+</head>
+<body>
+
+<div class="vgl">
+
+  <div class="inleiding">
+    <div class="ey ey-dark">// Defensie, aanvullende blokken</div>
+    <h1>Vijf blokken die iets vertellen</h1>
+    <p>Wat er op <b>/branches/defensie v2</b> staat klopt en is compleet. Wat het niet doet is
+      iets laten voelen. Elk blok beantwoordt een vraag van de inkoper, netjes en op volgorde,
+      en daarmee leest de pagina als een goed ingevuld formulier. Je onthoudt er niets van.</p>
+    <p>Deze vijf doen iets anders. Ze vertellen <b>wat een kist meemaakt en wat wij daarvoor
+      doen</b>, in plaats van op te sommen wat wij leveren. Ze zijn bedoeld om tussen de
+      bestaande secties te staan, niet om ze te vervangen.</p>
+    <p>Elk cijfer hieronder is een voorbeeld en staat in de noot onder het blok. Ze moeten stuk
+      voor stuk bevestigd worden voordat dit live gaat: dit is het enige segment waar één
+      niet-natrekbaar cijfer de rest van de pagina meeneemt.</p>
+  </div>
+
+  <!-- ══ 01 ══════════════════════════════════════════════════════ -->
+  <div class="kop">
+    <div class="nr">// 01</div>
+    <h3>De val</h3>
+    <div class="wat">Na de kentallen &middot; volle breedte</div>
+  </div>
+  <p class="toel">Eén beeld, één getal, één uitkomst. Dit blok verkoopt niets: het laat zien wat
+    er met een kist gebeurt <b>voordat hij goedgekeurd is</b>. De kist valt zodra het blok in
+    beeld komt, de teller loopt mee naar beneden, en op de grond staat wat er gemeten is. De
+    curve is traag beginnen en hard aankomen, want een val die uitdempt is een lift.</p>
+
+  <div class="demo">
+    <section class="val" id="val">
+      <div class="wrap">
+        <div class="grid">
+          <div class="baan">
+            <div class="lat">
+              <span style="--t:0%" data-mm="1200"></span>
+              <span style="--t:25%" data-mm="900"></span>
+              <span style="--t:50%" data-mm="600"></span>
+              <span style="--t:75%" data-mm="300"></span>
+            </div>
+            <div class="spoor" aria-hidden="true">
+              <b style="--t:4%;--o:.1"></b>
+              <b style="--t:22%;--o:.15"></b>
+              <b style="--t:46%;--o:.22"></b>
+              <b style="--t:72%;--o:.34"></b>
+            </div>
+            <div class="kist"><i></i><i></i></div>
+            <div class="grond"></div>
+          </div>
+          <div class="inhoud">
+            <div class="ey">// Proef 01, vrije val</div>
+            <h2>Twaalf keer op beton, daarna pas akkoord</h2>
+            <div class="cijfer">
+              <b id="teller">0</b>
+              <span>Millimeter valhoogte<br>Zes vlakken, drie ribben, drie hoeken</span>
+            </div>
+            <p>De proef gaat volgens de norm die jij opgeeft. Wat erna gebeurt is belangrijker
+              dan de val zelf: de inhoud wordt gemeten en niet bekeken. Een kist die er heel
+              uitziet kan een apparaat hebben laten schuiven.</p>
+            <div class="uitkomst">
+              <div><b>Nog invullen</b><span>Meetwaarde inhoud</span></div>
+              <div><b>Per vlak</b><span>Vastgelegd in het rapport</span></div>
+              <div><b>Bij levering</b><span>Rapport gaat mee</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <p class="noot">Na te vragen: welke norm wordt in de praktijk aangehouden, en klopt 1200 mm
+    &middot; wordt er per vlak, ribbe en hoek getest of anders &middot; wordt de inhoud
+    daadwerkelijk gemeten, en waarmee &middot; gaat het meetrapport standaard mee of op verzoek</p>
+
+  <!-- ══ 02 ══════════════════════════════════════════════════════ -->
+  <div class="kop">
+    <div class="nr">// 02</div>
+    <h3>Wat er niet op staat</h3>
+    <div class="wat">Na de werkplaats &middot; halve pagina lucht</div>
+  </div>
+  <p class="toel">Het blok dat durft leeg te zijn. In dit segment is <b>onzichtbaarheid een
+    eigenschap van het product</b>, en dat is precies wat een marketingpagina nooit laat zien.
+    Een kist die niets prijsgeeft, met veel lucht eromheen, zegt meer over begrip van de sector
+    dan drie alinea's over discretie. Het beeld is een tekening: een blanco kist fotograferen
+    levert een grijze doos op, getekend zie je juist dat er iets ontbreekt.</p>
+
+  <div class="demo">
+    <section class="stil">
+      <div class="wrap">
+        <div class="grid">
+          <div>
+            <div class="ey">// Merking</div>
+            <h2>Wat er niet op staat</h2>
+            <p class="lead">Een kist die op transport gaat vertelt onderweg aan iedereen wat
+              erin zit, of hij vertelt niets. Dat tweede is hier het uitgangspunt.</p>
+            <ul>
+              <li>Geen merknaam, van ons niet en van jullie niet</li>
+              <li>Geen kleur die zich onderscheidt van de rest van de lading</li>
+              <li>Geen sticker die na één winter half loslaat</li>
+              <li>Geen typeaanduiding waaruit de inhoud te herleiden is</li>
+              <li class="wel">Wel jouw codering, gefreesd in het materiaal</li>
+            </ul>
+          </div>
+          <div class="tekening">
+            <!-- Vooraanzicht, in lijnen. Alles wat een kist heeft staat
+                 erop: hoekbeslag, dekselnaad, twee vlindersloten, twee
+                 grepen. Wat er niet op staat is een naam, en dat zie je
+                 pas doordat de rest er wél is. -->
+            <svg viewBox="20 24 380 252" role="img" aria-label="Vooraanzicht van een flightcase zonder opschrift">
+              <g fill="none" stroke="#fff" stroke-width="1.6" opacity=".9">
+                <rect x="30" y="34" width="360" height="232"/>
+                <!-- dekselnaad: het deksel is het bovenste derde -->
+                <path d="M30 110 H390"/>
+                <path d="M30 118 H390" opacity=".4"/>
+              </g>
+              <!-- Hoekstukken, vier stuks. Niet het merk-device uit het
+                   boek: dat zijn open haken op paginaniveau, en die hier
+                   gebruiken zou het merk laten poseren als beslag. Dit is
+                   het echte onderdeel, met de schuine afsnijding die een
+                   flightcasehoek heeft. -->
+              <g fill="none" stroke="#fff" stroke-width="1.6" opacity=".75">
+                <path d="M30 72 H72 V34"/><path d="M30 52 L48 34"/>
+                <path d="M390 72 H348 V34"/><path d="M390 52 L372 34"/>
+                <path d="M30 228 H72 V266"/><path d="M30 248 L48 266"/>
+                <path d="M390 228 H348 V266"/><path d="M390 248 L372 266"/>
+              </g>
+              <!-- de sloten, in signaalblauw: dit is de vorm waar het
+                   beeldmerk vandaan komt, dus die mag de kleur hebben -->
+              <g fill="none" stroke="#66C4E8" stroke-width="1.6">
+                <rect x="116" y="98" width="36" height="32"/>
+                <path d="M124 114 H144"/>
+                <rect x="268" y="98" width="36" height="32"/>
+                <path d="M276 114 H296"/>
+              </g>
+              <!-- grepen -->
+              <g fill="none" stroke="#fff" stroke-width="1.6" opacity=".9">
+                <path d="M78 186 H126 V210 H78 Z"/>
+                <path d="M294 186 H342 V210 H294 Z"/>
+              </g>
+              <!-- het vlak waar normaal het opschrift staat: leeg, met
+                   alleen een maatlijn eromheen, zodat de leegte
+                   opzettelijk leest en niet als vergeten -->
+              <g stroke="#fff" stroke-width="1" opacity=".26" stroke-dasharray="4 4">
+                <rect x="150" y="150" width="120" height="58" fill="none"/>
+              </g>
+            </svg>
+            <div class="bijschrift">Vooraanzicht &middot; zonder opschrift &middot; CB-2026-0212</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <p class="noot">Na te vragen: wordt merking gefreesd, gegraveerd of geëtst, en waarin
+    &middot; is een neutrale kleurstelling standaard of een optie &middot; mag de eigen codering
+    van de klant in het bestand mee de productie in</p>
+
+  <!-- ══ 03 ══════════════════════════════════════════════════════ -->
+  <div class="kop">
+    <div class="nr">// 03</div>
+    <h3>De reis</h3>
+    <div class="wat">Voor het dossier &middot; licht blok</div>
+  </div>
+  <p class="toel">Zeven dingen die een kist overkomen tussen de werkplaats en het veld, op een
+    lijn en niet als opsomming: het is een volgorde. <b>Dit blok doet het werk dat een
+    klantverhaal zou doen</b> in een segment waar geen klantverhalen mogen. De lijn stopt niet
+    bij de laatste halte, want de kist gaat daarna weer terug. Dat is het verschil tussen
+    eenmalig transport en materieel dat jaren meegaat.</p>
+
+  <div class="demo">
+    <section class="reis">
+      <div class="wrap">
+        <div class="kopregel">
+          <div class="ey ey-dark">// Van werkplaats tot veld</div>
+          <h2>Wat de kist meemaakt voordat hij aankomt</h2>
+          <p class="lead">Geen van deze zeven is bijzonder. Samen bepalen ze wat een kist moet
+            kunnen, en dus wat er in de offerte hoort te staan.</p>
+        </div>
+        <div class="spoor">
+          <div class="lijn"></div>
+          <div class="haltes">
+            <div class="halte">
+              <div class="punt"></div><span class="nr">// 01</span>
+              <h4>Laden</h4>
+              <div class="waarde">Heftruck</div>
+              <p>Vorkopeningen op maat, of een bodem die het zonder doet.</p>
+            </div>
+            <div class="halte zwaar">
+              <div class="punt"></div><span class="nr">// 02</span>
+              <h4>Stapelen</h4>
+              <div class="waarde">Nog invullen kg</div>
+              <p>Drie hoog in de container betekent drie kisten op de onderste.</p>
+            </div>
+            <div class="halte zwaar">
+              <div class="punt"></div><span class="nr">// 03</span>
+              <h4>Vallen</h4>
+              <div class="waarde">1200 mm</div>
+              <p>Niet als ongeluk maar als eis: dit is de proef uit blok 01.</p>
+            </div>
+            <div class="halte">
+              <div class="punt"></div><span class="nr">// 04</span>
+              <h4>Trillen</h4>
+              <div class="waarde">Weg en lucht</div>
+              <p>Uren achtereen, op de frequentie die het voertuig maakt.</p>
+            </div>
+            <div class="halte zwaar">
+              <div class="punt"></div><span class="nr">// 05</span>
+              <h4>Koelen</h4>
+              <div class="waarde">Nog invullen &deg;C</div>
+              <p>In het ruim vriest het. Materiaal krimpt, afdichting moet mee.</p>
+            </div>
+            <div class="halte">
+              <div class="punt"></div><span class="nr">// 06</span>
+              <h4>Stof en water</h4>
+              <div class="waarde">Klasse op aanvraag</div>
+              <p>Tot de klasse die je opgeeft, met drukventiel waar nodig.</p>
+            </div>
+            <div class="halte">
+              <div class="punt"></div><span class="nr">// 07</span>
+              <h4>Openen</h4>
+              <div class="waarde">Met handschoenen</div>
+              <p>In het donker, in de kou, door iemand die haast heeft.</p>
+            </div>
+          </div>
+          <div class="terug">
+            <b>En dan weer terug</b>
+            <span>De weg naar huis is dezelfde weg, met een kist die al een keer geladen,
+              gestapeld en geopend is. Daar wordt op gebouwd, niet op de heenreis.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <p class="noot">Na te vragen: welke stapelbelasting wordt gehanteerd &middot; tot welke
+    temperatuur is getest &middot; welke IP-klasse is haalbaar met en zonder drukventiel
+    &middot; wordt trilproef zelf gedaan of uitbesteed</p>
+
+  <!-- ══ 04 ══════════════════════════════════════════════════════ -->
+  <div class="kop">
+    <div class="nr">// 04</div>
+    <h3>De doorsnede</h3>
+    <div class="wat">Bij het dossier &middot; donker blok</div>
+  </div>
+  <p class="toel">Het bewijs waar dit segment op koopt: niet dat de kist goed is maar
+    <b>waaruit hij bestaat</b>. De lagen staan op schaal ten opzichte van elkaar, en dat moet
+    ook: een doorsnede waarin 0,8 mm even dik getekend is als 9 mm is een plaatje en geen
+    tekening, en dat ziet de lezer die hier iets van weet meteen. Links kijk je, rechts lees je,
+    de nummers verbinden de twee.</p>
+
+  <div class="demo">
+    <section class="snede">
+      <div class="wrap">
+        <div class="kopregel">
+          <div class="ey">// Wandopbouw</div>
+          <h2>Vier lagen tussen de weg en je apparaat</h2>
+          <p class="lead">Wat een wand kan hangt niet aan het materiaal maar aan de opbouw. Dit
+            is de standaard; zwaarder kan, en dan verandert het gewicht mee.</p>
+        </div>
+        <div class="grid">
+          <div class="plaat">
+            <!-- Doorsnede, op schaal. 1 mm is 9 px, dus 0,8 mm is
+                 zeven pixels en 9 mm is éénentachtig. Precies daarom
+                 staat de dunne toplaag er als een streep op: zo dun is
+                 hij ook. -->
+            <svg viewBox="0 46 520 220" role="img" aria-label="Doorsnede van de wandopbouw, vier lagen">
+              <!-- Maatlijn links. Hij loopt van buiten naar binnen en
+                   noemt geen totaal, want de schuimlaag staat verkort en
+                   dan is elk totaal een verzinsel. -->
+              <g stroke="#66C4E8" stroke-width="1" fill="none">
+                <path d="M34 60 V240"/>
+                <path d="M28 60 H40"/>
+                <path d="M28 240 H40"/>
+              </g>
+              <text x="16" y="150" fill="#66C4E8" font-family="IBM Plex Mono, monospace"
+                font-size="9" letter-spacing="1.4" transform="rotate(-90 16 150)"
+                text-anchor="middle">BUITEN NAAR BINNEN</text>
+
+              <!-- 01 toplaag hpl 0,8 mm -->
+              <rect x="60" y="60" width="330" height="7" fill="#66C4E8"/>
+              <!-- 02 multiplex 9 mm -->
+              <rect x="60" y="67" width="330" height="81" fill="#fff" opacity=".9"/>
+              <!-- houtnerf, alleen als teken dat dit hout is -->
+              <g stroke="#06121C" stroke-width="1" opacity=".25">
+                <path d="M60 86 H390"/><path d="M60 106 H390"/><path d="M60 128 H390"/>
+              </g>
+              <!-- 03 schuim 40 mm, hier ingekort weergegeven -->
+              <rect x="60" y="148" width="330" height="72" fill="#fff" opacity=".18"/>
+              <g stroke="#fff" stroke-width="1" opacity=".3">
+                <path d="M60 148 L390 220" stroke-dasharray="3 5"/>
+                <path d="M60 220 L390 148" stroke-dasharray="3 5"/>
+              </g>
+              <!-- 04 binnenlaag -->
+              <rect x="60" y="220" width="330" height="20" fill="#fff" opacity=".55"/>
+
+              <!-- verwijslijnen naar rechts -->
+              <g stroke="#66C4E8" stroke-width="1" fill="none" opacity=".85">
+                <path d="M390 63 H452"/><path d="M390 108 H452"/>
+                <path d="M390 184 H452"/><path d="M390 230 H452"/>
+              </g>
+              <g fill="#66C4E8" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1.4">
+                <text x="460" y="67">01</text><text x="460" y="112">02</text>
+                <text x="460" y="188">03</text><text x="460" y="234">04</text>
+              </g>
+              <!-- onderschrift: dit is een uitsnede en geen volledige wand -->
+              <text x="60" y="258" fill="#fff" opacity=".4" font-family="IBM Plex Mono, monospace"
+                font-size="9" letter-spacing="1.4">UITSNEDE &#183; SCHUIMLAAG VERKORT WEERGEGEVEN</text>
+            </svg>
+          </div>
+          <ol>
+            <li><em>0,8 mm</em><b>Toplaag</b><span>Gelamineerd, bestand tegen schuren en
+              schoonmaakmiddel. Dit is de laag die je ziet en die het eerst te lijden heeft.</span></li>
+            <li><em>9 mm</em><b>Berkenmultiplex</b><span>De draagconstructie. Meerdere lagen
+              kruislings verlijmd, want de sterkte zit in de richting.</span></li>
+            <li><em>40 mm</em><b>Schuiminleg</b><span>Op maat gefreesd naar het apparaat, niet
+              gesneden. Dat is het verschil tussen passen en klemmen.</span></li>
+            <li><em>Per eis</em><b>Binnenafwerking</b><span>Vilt, folie of onbehandeld,
+              afhankelijk van wat erin gaat en of het eruit moet kunnen glijden.</span></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </div>
+  <p class="noot">Na te vragen: welke plaatdikte
+    en welk laminaat worden er echt gebruikt &middot; is 40 mm de gangbare schuimdikte &middot;
+    welke binnenafwerkingen zijn er in de praktijk</p>
+
+  <!-- ══ 05 ══════════════════════════════════════════════════════ -->
+  <div class="kop">
+    <div class="nr">// 05</div>
+    <h3>De specificatie</h3>
+    <div class="wat">Voor de aanvraag &middot; wit blok</div>
+  </div>
+  <p class="toel">Het conversieblok. Een inkoper hier heeft geen behoefte aan een configurator
+    maar aan <b>de zekerheid dat zijn eisenlijst gelezen wordt zoals hij bedoeld is</b>. Links
+    een fragment zoals het binnenkomt, rechts wat wij eruit halen en wat dat betekent voor de
+    bouw. De kolommen zijn even breed: maak je de rechter groter, dan wordt het onze uitleg bij
+    hun vraag, en even breed blijft het een vertaling.</p>
+
+  <div class="demo">
+    <section class="spec">
+      <div class="wrap">
+        <div class="kopregel">
+          <div class="ey ey-dark">// Voordat je iets deelt</div>
+          <h2>Stuur de eisenlijst, niet de maten</h2>
+          <p class="lead">Dit is een fragment uit een aanvraag zoals hij hier binnenkomt, en
+            wat wij eruit lezen. Je hoeft niets te vertalen: dat is ons werk.</p>
+        </div>
+        <div class="grid">
+          <div class="kolomkop l">Zoals het binnenkomt</div>
+          <div class="kolomkop r">Wat wij eruit halen</div>
+
+          <div class="regel l">3.2 &nbsp;Transportmiddel dient bestand te zijn tegen
+            <u>herhaald hijsen</u> met vier aanslagpunten bij een totaalgewicht van
+            <u>180 kg</u>.</div>
+          <div class="regel r"><b>Vier hijsogen, doorgezet naar het frame</b>
+            <span>Niet in de plaat maar door de constructie, met een berekening van de belasting
+              per oog bij 180 kg.</span></div>
+
+          <div class="regel l">3.5 &nbsp;Interne fixatie zodanig dat verplaatsing van de
+            apparatuur <u>&lt; 1 mm</u> bedraagt na de in bijlage B genoemde proeven.</div>
+          <div class="regel r"><b>Schuim gefreesd, niet gesneden</b>
+            <span>Onder een millimeter haal je niet met snijschuim. De inleg gaat uit de
+              freesbank, naar de maat van het apparaat.</span></div>
+
+          <div class="regel l">4.1 &nbsp;Merking conform <u>bijlage C</u>, aan te brengen op
+            twee zijden, niet zijnde een zelfklevend medium.</div>
+          <div class="regel r"><b>Gefreesde merking, twee zijden</b>
+            <span>Bijlage C is de codering; die gaat als bestand mee de productie in en komt in
+              het materiaal, niet erop.</span></div>
+
+          <div class="regel l">6.0 &nbsp;Levering in <u>deelzendingen</u>, af te roepen binnen
+            twaalf maanden na opdracht.</div>
+          <div class="regel r"><b>Serie vastgelegd, afroep per pakbon</b>
+            <span>Maatvoering en prijs liggen vast bij opdracht. Wat je later afroept is dezelfde
+              kist, met een oplopend serienummer.</span></div>
+        </div>
+        <div class="slot">
+          <a class="btn btn-dark" href="#aanvraag">Specificatie sturen</a>
+          <p>Eén vaste contactpersoon, van offerte tot levering. Een geheimhoudingsverklaring
+            regelen we vooraf als dat nodig is.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <p class="noot">Na te vragen: mag dit fragment zo gebruikt worden of moet het verder
+    geanonimiseerd &middot; klopt de vertaling per regel technisch &middot; wordt een
+    geheimhoudingsverklaring standaard aangeboden</p>
+
+</div>
+
+<script>
+/* De val. Eén gebaar: de kist zakt en de teller loopt mee.
+
+   De teller telt op naar 1200 en niet af naar nul. Aftellen leest als
+   een lanceerklok en laat bovendien "0 mm valhoogte" achter, wat niets
+   betekent. Optellend is het de afgelegde hoogte, en blijft het getal
+   staan dat er ook hoort te staan.
+
+   De valafstand staat als css-variabele op de sectie en wordt gemeten
+   in plaats van vastgezet, omdat de baan met de tekstkolom meegroeit.
+   Meten moet ná document.fonts.ready: met het vervangende lettertype
+   is de kop hoger, dus de kolom ook, en dan valt de kist door de
+   grondlijn heen zodra Barlow Condensed binnen is. */
+(function(){
+  var sec = document.getElementById('val');
+  if(!sec) return;
+  var baan = sec.querySelector('.baan'), kist = sec.querySelector('.kist'),
+      teller = document.getElementById('teller');
+  var eind = 1200, duur = 920, gemeten = false;
+
+  function zet(){
+    sec.style.setProperty('--valt', (baan.clientHeight - kist.offsetHeight - 3) + 'px');
+    gemeten = true;
+  }
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(zet); else zet();
+  zet();
+  addEventListener('resize', zet);
+
+  function tel(){
+    var t0 = performance.now();
+    (function stap(nu){
+      var d = Math.min(1, (nu - t0) / duur);
+      /* Dezelfde curve als de css-transitie, zodat het getal en de kist
+         op hetzelfde moment aankomen in plaats van vlak na elkaar. */
+      var v = d < 1 ? 1 - Math.pow(1 - d, 2.4) : 1;
+      teller.textContent = Math.round(eind * v);
+      if(d < 1) requestAnimationFrame(stap); else teller.textContent = eind;
+    })(t0);
+  }
+
+  function los(){
+    if(!gemeten) zet();
+    sec.classList.add('aan');
+    tel();
+  }
+
+  if(!('IntersectionObserver' in window)){ los(); return; }
+  var io = new IntersectionObserver(function(rijen){
+    rijen.forEach(function(r){ if(r.isIntersecting){ los(); io.disconnect(); } });
+  },{threshold:.45});
+  io.observe(sec);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Flightcases voor audio-visueel, tv en live | CaseBuilder — v2</title>
+<meta name="description" content="Flightcases voor beeld, licht en geluid. Van studio tot liveproductie: bespreek jouw apparatuur en stel je case op maat samen met CaseBuilder.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css"><style>.kop4{position:relative;background:var(--void);color:#fff;overflow:hidden;
+  height:clamp(520px,92vh,900px);display:flex;align-items:center;justify-content:center}
+
+/* De film vult het vlak. Een ingesloten speler ligt vast op 16:9 en is
+   niet bij te snijden zoals een eigen bestand, dus rekken we hem op tot
+   de kortste zijde past en loopt de rest buiten beeld. Vandaar twee
+   maten: breed genoeg voor een breed scherm, hoog genoeg voor een hoog. */
+.kop4 .film{position:absolute;inset:0;overflow:hidden}
+.kop4 .film iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:100vw;height:56.25vw;min-height:100%;min-width:177.78vh;border:0;pointer-events:none}
+
+/* Zwaar genoeg om witte tekst op elk frame leesbaar te houden. Een film
+   wisselt van helderheid, dus deze laag moet werken op het lichtste
+   beeld en niet op het gemiddelde. In het midden iets dichter, want daar
+   staat de zin. */
+.kop4 .scrim{position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 50%,rgba(6,18,28,.74) 0%,rgba(6,18,28,.6) 55%,rgba(6,18,28,.8) 100%)}
+
+.kop4 .wrap{position:relative;text-align:center}
+.kop4 .ey{color:var(--cyan)}
+.kop4 h1{font-size:clamp(36px,5.4vw,80px);color:#fff;line-height:.9;margin:18px auto 0;max-width:19ch}
+.kop4 h1 .acc{color:var(--cyan)}
+
+/* Een aanwijzing dat er meer is, en niet meer dan dat. Het streepje zakt
+   en komt terug: genoeg om op te vallen, te weinig om af te leiden. */
+.kop4 .verder{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.5)}
+.kop4 .verder i{display:block;width:1px;height:34px;background:rgba(255,255,255,.45);
+  animation:zak 2.4s ease-in-out infinite}
+@keyframes zak{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1)}}
+.kop4 .verder i{transform-origin:top}
+@media(prefers-reduced-motion:reduce){.kop4 .verder i{animation:none}}
+
+@media(max-width:760px){
+  .kop4{height:clamp(440px,78vh,640px)}
+  .kop4 h1{font-size:clamp(30px,8vw,44px)}
+}
+
+
+
+/* A single editorial sequence, using the shared CaseBuilder brand tokens. */
+:root{--av-line:rgba(102,196,232,.24)}
+html{scroll-padding-top:72px}
+a:focus-visible,summary:focus-visible{outline:3px solid var(--cyan);outline-offset:6px}
+.kop4 .hero-poster{width:100%;height:100%;object-fit:cover;object-position:50% 50%}
+.kop4 .film iframe{z-index:1}
+.kop4 .scrim{z-index:2}
+.kop4 .wrap,.kop4 .verder{z-index:3}
+.crumbs.donker .wrap>span:last-child{color:#fff}
+.av-facts{border-bottom:1px solid var(--rule);background:#fff}
+.av-facts .wrap{display:flex;justify-content:space-between;gap:20px;padding-top:25px;padding-bottom:25px;font:500 10px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dark)}
+.av-facts span::before{content:'+';color:var(--blue);margin-right:12px}
+.av-intro{padding:90px 0 100px}
+.intro-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:100px;align-items:center}
+.av-intro h2{font-size:clamp(34px,3.4vw,48px);line-height:1.02;max-width:23ch;margin-top:20px}
+.intro-copy p{font-size:16px;line-height:1.8;color:#525e68}
+.text-link{display:inline-flex;gap:32px;align-items:center;padding:10px 0 8px;margin-top:24px;border-bottom:1px solid var(--cyan);font:700 16px var(--disp);letter-spacing:.04em;text-transform:uppercase}
+.text-link span{color:var(--blue);font:22px var(--body);transition:transform .2s}
+.text-link:hover span{transform:translateY(3px)}
+.chapter{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--av-line);padding-top:20px;font:500 10px var(--mono);text-transform:uppercase;letter-spacing:.16em;color:var(--cyan)}
+.av-case{background:var(--void);color:#fff;position:relative;isolation:isolate;padding:48px 0 0;overflow:hidden}
+.field-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-3;filter:saturate(.5)}
+.field-shade{position:absolute;inset:0;z-index:-2;background:linear-gradient(180deg,rgba(6,18,28,.86),rgba(0,38,61,.65) 48%,rgba(6,18,28,.97))}
+.case-content{position:relative}
+.case-heading{text-align:center;margin:56px auto 0}
+.case-heading h2{font-size:clamp(42px,5vw,70px);color:#fff;line-height:.95}
+.case-heading h2 span{color:var(--cyan)}
+.case-heading>p{max-width:47ch;color:#c9d7df;font-size:15px;margin:22px auto 0}
+.case-stage{position:relative;height:620px;max-width:1200px;margin:0 auto}
+.case-orbit{position:absolute;left:50%;top:50%;width:510px;height:510px;transform:translate(-50%,-50%);border:1px solid var(--av-line);border-radius:50%}
+.case-orbit::before{content:'';position:absolute;inset:35px;border:1px dashed rgba(102,196,232,.18);border-radius:50%}
+.case-orbit::after{content:'';position:absolute;left:50%;top:-35px;bottom:-35px;border-left:1px solid rgba(102,196,232,.13)}
+.case-orbit i{position:absolute;top:50%;left:-50px;right:-50px;border-top:1px solid rgba(102,196,232,.13)}
+.case-orbit>span{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);white-space:nowrap;font:9px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#9db7c6}
+.case-product{position:absolute;width:540px;left:50%;top:43px;transform:translateX(-50%);filter:drop-shadow(0 28px 25px rgba(0,0,0,.6))}
+/* Crop the existing product photograph in CSS; retain its actual hardware. */
+.case-product img{width:100%;height:auto;clip-path:polygon(6% 22%,60% 13%,94% 24%,92% 69%,84% 73%,86% 75%,85% 79%,83% 82%,80% 84%,77% 83%,77% 80%,78% 76%,48% 83%,46% 86%,47% 90%,43% 95%,39% 95%,36% 92%,35% 89%,34% 84%,21% 76%,20% 79%,17% 80%,15% 78%,15% 73%,10% 68%);filter:brightness(1.12)}
+.callout-lines{position:absolute;inset:0;width:100%;height:100%;color:rgba(102,196,232,.75);pointer-events:none}
+.case-note{position:absolute;width:205px}
+.case-note h3{font-size:22px;color:#fff;margin:10px 0}
+.case-note p{font-size:13px;color:#c7d3dc;line-height:1.7}
+.detail-number{font:11px var(--mono);letter-spacing:.12em;color:var(--cyan);display:inline-block;padding-bottom:9px;border-bottom:1px solid var(--cyan)}
+.note-one{left:0;top:112px}.note-two{left:0;top:375px}.note-three{right:0;top:112px}.note-four{right:0;top:375px}
+.case-bottom{display:flex;justify-content:space-between;align-items:center;gap:25px;border-top:1px solid var(--av-line);padding:23px 0 27px}
+.case-bottom p{font-size:11px;color:#b1c2ce}
+.case-bottom a{font:600 13px var(--disp);letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;color:var(--cyan)}
+.case-bottom a span{margin-left:18px}
+.av-field{background:var(--void);color:#fff;padding:70px 0 104px}
+.field-layout{display:grid;grid-template-columns:1.03fr 1fr;gap:90px;margin-top:54px;align-items:center}
+.field-photo{position:relative;align-self:stretch;min-height:640px;background:var(--dark);overflow:hidden}
+.field-photo>img{height:100%;width:100%;position:absolute;object-fit:cover;object-position:48% 50%;filter:saturate(.6)}
+.field-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(6,18,28,.95),transparent 55%)}
+.field-photo figcaption{position:absolute;bottom:32px;left:30px;right:30px;z-index:1;border-left:2px solid var(--cyan);padding-left:20px}
+.field-photo figcaption span{font:700 25px var(--disp);text-transform:uppercase;display:block}
+.field-photo figcaption small{display:block;font:9px var(--mono);letter-spacing:.1em;color:#bfced8;margin-top:10px;text-transform:uppercase}
+.field-copy h2{font-size:clamp(44px,4.9vw,68px);line-height:.95;color:#fff;margin:20px 0 25px}
+.field-copy h2 span{color:var(--cyan)}
+.field-copy>p{color:#b7c8d3;font-size:15px;line-height:1.8;max-width:45ch}
+.use-list{margin-top:30px;border-top:1px solid var(--av-line)}
+.use-list details{border-bottom:1px solid var(--av-line)}
+.use-list summary{display:flex;align-items:center;gap:17px;cursor:pointer;list-style:none;padding:22px 0}
+.use-list summary::-webkit-details-marker{display:none}
+.use-list summary>span{font:10px var(--mono);color:var(--cyan)}
+.use-list h3{font-size:21px;font-weight:600;color:#fff;flex:1}
+.use-list summary i{width:12px;height:12px;position:relative;color:var(--cyan);flex:none}
+.use-list summary i::before,.use-list summary i::after{content:'';position:absolute;background:currentColor}
+.use-list summary i::before{top:5px;left:0;width:12px;height:1px}
+.use-list summary i::after{top:0;left:5px;height:12px;width:1px}
+.use-list details[open] summary i::after{display:none}
+.use-answer{padding:0 24px 23px 32px;font-size:13px;line-height:1.8;color:#b7c8d3}
+.field-copy .text-link{color:#fff}.field-copy .text-link span{color:var(--cyan)}
+.av-brief{padding:48px 0 100px;background:var(--bg)}
+.av-brief .chapter{border-color:#c4d4df;color:var(--blue)}
+.brief-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:100px;margin-top:70px}
+.brief-intro h2{font-size:clamp(42px,4.5vw,62px);line-height:.98;margin:20px 0 24px}
+.brief-intro h2 span{color:var(--blue)}
+.brief-intro p{max-width:36ch;color:#53626d;font-size:15px;line-height:1.8}
+.brief-labels{display:grid;grid-template-columns:.9fr 1.1fr;gap:22px;color:var(--blue);font:10px var(--mono);text-transform:uppercase;letter-spacing:.12em;padding:0 0 15px;border-bottom:2px solid var(--dark)}
+.brief-row{display:grid;grid-template-columns:.9fr 1.1fr;gap:22px;padding:26px 0;border-bottom:1px solid #ccd9e2}
+.brief-row>div{display:flex;gap:17px;align-items:baseline}
+.brief-row span{font:10px var(--mono);color:var(--blue)}
+.brief-row h3{font-size:21px;font-weight:700}
+.brief-row p{font-size:13px;line-height:1.75;color:#53626d}
+.brief-footnote{font-size:12px;line-height:1.75;color:#53626d;padding-top:22px}
+.av-contact{position:relative;isolation:isolate;overflow:hidden;padding:96px 0;background:var(--dark);color:#fff}
+.contact-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 50%;z-index:-2}
+.av-contact::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(0,40,64,.96),rgba(0,40,64,.92) 35%,rgba(0,40,64,.35))}
+.contact-content h2{font-size:clamp(48px,5.5vw,78px);line-height:.95;color:#fff;margin:24px 0}
+.contact-content h2 span{color:var(--cyan)}
+.contact-content>p{max-width:47ch;font-size:16px;line-height:1.8;color:#d0dee7}
+.contact-actions{display:flex;align-items:center;gap:32px;margin-top:32px;flex-wrap:wrap}
+.contact-actions .btn{gap:32px}
+.contact-phone{font-size:11px;color:#cfdae1}.contact-phone strong{font-size:16px;display:block;color:#fff;font-weight:500;margin-top:4px}
+.contact-signoff{display:flex;gap:16px;align-items:center;margin-top:48px;font:10px/1.8 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:#c2d3de}
+.av-credits{background:var(--void);color:#90a5b5;font-size:10px;line-height:1.8;padding:16px 0;border-bottom:1px solid var(--av-line)}
+.av-credits a{text-decoration:underline;text-underline-offset:3px}
+@media(min-width:761px) and (max-width:1100px){.intro-grid,.field-layout,.brief-grid{gap:45px}.case-note{width:180px}.case-product{width:460px;top:85px}.case-orbit{width:430px;height:430px}.case-stage{height:620px}.field-photo{min-height:680px}}
+@media(min-width:761px) and (max-width:1000px){
+ .case-stage{height:auto;display:grid;grid-template-columns:1fr 1fr;gap:30px 60px;padding:480px 30px 44px}
+ .case-product{top:0}.case-orbit{top:240px}.callout-lines{display:none}
+ .case-note{position:static;width:auto;border-top:1px solid var(--av-line);padding-top:16px}
+}
+@media(max-width:760px){
+ .av-facts .wrap{display:grid;grid-template-columns:1fr 1fr;font-size:9px;gap:18px 12px}
+ .av-intro{padding:55px 0}.intro-grid{grid-template-columns:1fr;gap:24px}.intro-copy p{font-size:15px}
+ .chapter{font-size:9px;letter-spacing:.08em}.chapter>span:last-child{max-width:17ch;text-align:right;line-height:1.6}
+ .av-case{padding-top:30px}.case-heading{margin-top:42px}.case-heading>p{font-size:14px;max-width:34ch}
+ .case-stage{height:auto;display:grid;grid-template-columns:1fr 1fr;gap:28px 22px;padding:370px 0 34px}
+ .case-product{width:370px;max-width:110%;top:0}.case-orbit{width:310px;height:310px;top:183px}.case-orbit>span{bottom:-10px;font-size:8px}
+ .callout-lines{display:none}.case-note{position:static;width:auto;border-top:1px solid var(--av-line);padding-top:16px}.case-note h3{font-size:20px}.case-note p{font-size:12px}.note-three{grid-row:3;grid-column:1}.note-four{grid-row:3;grid-column:2}
+ .case-bottom{align-items:flex-start;flex-direction:column;gap:12px}.case-bottom p{max-width:43ch}
+ .av-field{padding:40px 0 60px}.field-layout{grid-template-columns:1fr;gap:36px;margin-top:35px}.field-photo{min-height:420px}.field-photo>img{object-position:center 40%}.field-copy h2{font-size:52px}.field-copy>p{max-width:none}
+ .av-brief{padding:30px 0 60px}.brief-grid{grid-template-columns:1fr;gap:42px;margin-top:40px}.brief-intro h2{font-size:48px}.brief-intro h2 br:nth-child(2){display:initial}.brief-intro p{max-width:none}.brief-row,.brief-labels{grid-template-columns:.9fr 1.1fr;gap:18px}.brief-row>div{gap:10px}.brief-row h3{font-size:19px}
+ .av-contact{padding:64px 0}.av-contact::after{background:linear-gradient(90deg,rgba(0,40,64,.95),rgba(0,40,64,.72))}.contact-photo{object-position:60% 50%}.contact-content h2{font-size:54px}.contact-actions{gap:24px}.contact-signoff{margin-top:35px}
+}
+@media(max-width:380px){.brief-intro h2{font-size:42px}.case-stage{padding-top:330px}.case-product{width:330px}.case-orbit{width:270px;height:270px;top:165px}.av-facts .wrap{font-size:8px}.brief-row{grid-template-columns:1fr;gap:12px}.brief-labels{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.text-link span{transition:none}.kop4 .film iframe{display:none}}
+
+/* Show lighting stays visible; brand colours remain navy and cyan. */
+.kop4 .scrim{background:linear-gradient(180deg,rgba(6,18,28,.3),rgba(6,18,28,.45) 45%,rgba(6,18,28,.82))}
+.kop4 h1{max-width:17ch;text-shadow:0 3px 35px rgba(0,0,0,.35)}
+.kop4 .hero-poster{object-position:50% 62%}
+.field-bg{filter:saturate(.85);object-position:center 60%}
+.field-shade{background:linear-gradient(180deg,rgba(6,18,28,.92),rgba(0,32,52,.64) 48%,rgba(6,18,28,.97))}
+.field-photo>img{object-position:65% 50%;filter:saturate(.65)}
+.case-note h3{max-width:17ch}
+.contact-content h2{max-width:20ch}
+.contact-actions{max-width:720px;gap:24px}
+.contact-actions .btn{gap:20px}
+@media(max-width:760px){.kop4 h1{font-size:clamp(38px,10vw,62px)}.field-copy h2{font-size:48px}.contact-content h2{font-size:48px}.field-photo>img{object-position:70% 50%}}
+</style></head><body><header class="main">
+  <div class="wrap">
+    <a class="merk" href="homepage-v2.html" aria-label="CaseBuilder — homepage"><img src="assets/woordmerk.svg" alt="CaseBuilder.com"></a>
+    <form class="search" action="zoeken-v1.html">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg>
+      <input name="q" placeholder="Zoek op case, onderdeel of artikelnummer…" aria-label="Zoeken">
+    </form>
+    <div class="hdr-r">
+      <a href="account.html" class="stil">Inloggen</a>
+      <a href="checkout.html">Winkelwagen</a>
+    </div>
+  </div>
+</header>
+
+<nav class="primary">
+  <div class="wrap">
+    <a href="case-aanvragen-v1.html">Case aanvragen</a>
+    <a href="case-voor-v1.html">Wat ga je vervoeren?</a>
+
+    <!-- Flightcases draagt nu drie ingangen tegelijk: waarvoor, welk
+         model, en zelf bouwen. Zelf configureren stond hiervoor los in
+         de balk; als top-level item concurreerde het met Flightcases
+         terwijl het er een onderdeel van is. -->
+    <span class="heeft-menu">
+      <a href="flightcases-v1.html">Flightcases</a>
+      <div class="megamenu">
+        <div class="wrap">
+          <div>
+            <h4>// WAAR GEBRUIK JE HEM VOOR</h4>
+            <ul>
+              <li><a href="branche-audio-visueel-v2.html">Audio-visueel en podium</a></li>
+              <li><a href="branche-broadcast-en-media-v1.html">Broadcast en media</a></li>
+              <li><a href="branche-industrie-en-machinebouw-v1.html">Industrie en machinebouw</a></li>
+              <li><a href="branche-meet-en-testapparatuur-v1.html">Meet- en testapparatuur</a></li>
+              <li><a href="branche-defensie-v2.html">Defensie</a></li>
+              <li><a href="branche-schaalmodellen-v1.html">Schaalmodellen</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>// MODELLEN</h4>
+            <ul>
+              <li><a href="casetype-rackcase-enkel-deksel-v1.html">Rackcase enkel deksel</a></li>
+              <li><a href="casetype-rackcase-dubbel-deksel-v1.html">Rackcase dubbel deksel</a></li>
+              <li><a href="casetype-trunccase-v1.html">Trunccase</a></li>
+              <li><a href="casetype-hoedcase-v1.html">Hoedcase</a></li>
+              <li><a href="casetype-koffer-v1.html">Koffer</a></li>
+              <li><a href="flightcases-v1.html">Alle modellen &rarr;</a></li>
+            </ul>
+          </div>
+          <div class="zelf">
+            <b>Zelf configureren</b>
+            <p>Jouw maten invullen en de prijs zien terwijl je typt. Een casebouwer kijkt je opgave na voordat we zagen.</p>
+            <a class="btn btn-dark" href="configurator-v1.html">Start met configureren &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </span>
+
+    <a href="branches.html" class="on">Branches</a>
+    <a href="service-hub-v1.html">Service</a>
+    <!-- Shop staat achteraan: wie het assortiment zoekt weet dat al, en
+         de drie ingangen ervoor zijn voor wie dat niet weet. -->
+    <!-- Shop wijst voorlopig naar /case-voor: de webshop zelf bestaat nog
+         niet als eigen ingang, en een dode link is erger dan een omweg. -->
+    <a href="case-voor-v1.html">Shop</a>
+    <div class="rechts"><span>Direct advies <b>+31 (0)575 575734</b></span><a href="#">NL &#9662;</a></div>
+  </div>
+</nav>
+
+<div class="crumbs donker">
+  <div class="wrap">
+    <a href="homepage-v2.html">Home</a><span class="sep">/</span>
+    <a href="branches.html">Branches</a><span class="sep">/</span>
+    <span>Audio-visueel</span>
+  </div>
+</div>
+
+<main><section class="kop4">
+  <div class="film"><img class="hero-poster" src="assets/av-tv-show.jpg" alt="" fetchpriority="high">
+    
+  </div>
+  <div class="scrim"></div>
+  <div class="wrap">
+    <div class="ey">// Audio-visueel · televisie · liveproducties</div>
+    <h1>Flightcases voor <span class="acc">alles achter</span> de show.</h1>
+  </div>
+  <a class="verder" href="#intro"><i></i>Lees verder</a>
+</section>
+<div class="av-facts"><div class="wrap"><span>Op maat gemaakt</span><span>Zelf samenstellen</span><span>Bouwpakket of kant-en-klaar</span><span>CaseBuilder · Doesburg</span></div></div>
+<section class="av-intro" id="intro">
+  <div class="wrap intro-grid">
+    <div><span class="ey ey-dark">// Voordat de camera draait</span><h2>De show begint al bij het inladen.</h2></div>
+    <div class="intro-copy"><p>Een studioshow, een live-uitzending of de volgende zaal. Je apparatuur moet mee, heel aankomen en klaarstaan voor gebruik. Daarom begint een goede flightcase bij jouw werk: laden, opbouwen, draaien en weer door.</p><a class="text-link" href="#de-case">Van bus naar backstage <span aria-hidden="true">↓</span></a></div>
+  </div>
+</section>
+
+<section class="av-case" id="de-case" aria-labelledby="case-title">
+  <img class="field-bg" src="assets/av-tv-show.jpg" alt="" loading="lazy">
+  <div class="field-shade"></div>
+  <div class="wrap case-content">
+    <div class="chapter"><span>01 / Onderweg naar de show</span><span>Laden. Lossen. Nog een keer.</span></div>
+    <div class="case-heading"><h2 id="case-title">Gebouwd voor de show.<br><span>En de rit erna.</span></h2><p>Van laadklep tot studiovloer: een case gaat door veel handen. Dan moeten juist de details kloppen.</p></div>
+    <div class="case-stage">
+      <div class="case-orbit" aria-hidden="true"><i></i><span>CB / Transportcase</span></div>
+      <figure class="case-product"><img src="assets/flightcase-trunccase.jpg" width="1020" height="1020" loading="lazy" alt="Trunccase met aluminium profielen, metalen balhoeken, verzonken handgrepen, vlindersloten en zwenkwielen"></figure>
+      <svg class="callout-lines" viewBox="0 0 1200 620" fill="none" aria-hidden="true"><g stroke="currentColor"><path d="M230 153 H305 L515 225"/><path d="M230 416 H300 L405 275"/><path d="M970 153 H890 L780 225"/><path d="M970 416 H905 L560 515"/></g><g fill="currentColor"><circle cx="515" cy="225" r="4"/><circle cx="405" cy="275" r="4"/><circle cx="780" cy="225" r="4"/><circle cx="560" cy="515" r="4"/></g></svg>
+      <div class="case-note note-one"><span class="detail-number">01</span><h3>Bescherming langs de randen</h3><p>Metalen hoeken en aluminium profielen beschermen de randen bij het laden en lossen.</p></div>
+      <div class="case-note note-two"><span class="detail-number">02</span><h3>Handgrepen die terugklappen</h3><p>Geveerde handgrepen vallen terug in hun uitsparing. Handig als cases dicht naast elkaar staan.</p></div>
+      <div class="case-note note-three"><span class="detail-number">03</span><h3>Dicht. En weer open.</h3><p>Met vlindersloten sluit je het deksel. Het beslag ligt verzonken in de case.</p></div>
+      <div class="case-note note-four"><span class="detail-number">04</span><h3>Door naar de volgende vloer</h3><p>Zwenkwielen zijn een optie voor het verplaatsen van je set. Stem de uitvoering af op gewicht en gebruik.</p></div>
+    </div>
+    <div class="case-bottom"><p>Afgebeeld: trunccase. De uitvoering wordt afgestemd op jouw toepassing.</p><a href="casetype-trunccase-v1.html">Bekijk dit casetype <span aria-hidden="true">↗</span></a></div>
+  </div>
+</section>
+
+<section class="av-field" id="inzet" aria-labelledby="field-title">
+  <div class="wrap">
+    <div class="chapter"><span>02 / Achter de schermen</span><span>Beeld · Licht · Geluid</span></div>
+    <div class="field-layout">
+      <figure class="field-photo"><img src="assets/av-studiocamera.jpg" width="1280" height="853" loading="lazy" alt="Studiocamera tussen de lichtarmaturen in een televisiestudio van LRT"><figcaption><span>Buiten beeld. Onmisbaar voor de show.</span><small>Camera &amp; licht · LRT televisiestudio</small></figcaption></figure>
+      <div class="field-copy"><span class="ey">Elk onderdeel van de productie</span><h2 id="field-title">In beeld.<br>Uit de speakers.<br><span>Op zijn plek.</span></h2><p>Een camera met accessoires. Een lichtset met clamps. Een rack dat op locatie direct aangesloten wordt. Wat je vervoert én hoe je ermee werkt, bepaalt de case.</p>
+        <div class="use-list">
+          <details open><summary><span>01</span><h3>Camera, regie &amp; beeld</h3><i aria-hidden="true"></i></summary><div class="use-answer">Neem de complete set mee in het ontwerp: camera, lenzen, monitor, accu’s en bekabeling. Bespreek wat bij elkaar hoort en welke onderdelen apart beschermd moeten worden.</div></details>
+          <details><summary><span>02</span><h3>Licht &amp; podium</h3><i aria-hidden="true"></i></summary><div class="use-answer">Bij een armatuur tellen ook de beugel, clamp en kabels mee. Geef model, afmetingen en gewicht door, plus het aantal dat je samen wilt vervoeren. Dan begint de indeling bij de volledige set.</div></details>
+          <details><summary><span>03</span><h3>Audio &amp; 19-inch racks</h3><i aria-hidden="true"></i></summary><div class="use-answer">Voor rackapparatuur zijn hoogte, inbouwdiepte en bereikbaarheid van de aansluitingen van belang. Kies een enkel of dubbel deksel passend bij de toegang die je nodig hebt.</div></details>
+        </div>
+        <a class="text-link" href="case-aanvragen-v1.html?vervoeren=AV-apparatuur">Bespreek jouw productie <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="av-brief" id="specificatie" aria-labelledby="brief-title">
+  <div class="wrap">
+    <div class="chapter"><span>03 / Jouw setup</span><span>Van apparatuur naar indeling</span></div>
+    <div class="brief-grid">
+      <div class="brief-intro"><span class="ey ey-dark">Elke productie begint met een plan</span><h2 id="brief-title">Jouw set.<br>Jouw werkwijze.<br><span>Jouw case.</span></h2><p>Wat moet er mee, hoe vaak en hoe gebruik je het op locatie? Met die informatie wordt een verzameling apparatuur een logische transportset.</p><a class="text-link" href="#aanvraag">Laat je set bekijken <span aria-hidden="true">↓</span></a></div>
+      <div class="brief-table">
+        <div class="brief-labels"><span>Jouw gebruik</span><span>Wat we bespreken</span></div>
+        <div class="brief-row"><div><span>01</span><h3>Welke apparatuur?</h3></div><p>Merk, model, afmetingen en gewicht. Tel uitstekende delen en accessoires mee.</p></div>
+        <div class="brief-row"><div><span>02</span><h3>Hoe gebruik je het?</h3></div><p>Uitpakken voor gebruik of aansluiten in de case? Denk aan kabelruimte en bereikbare aansluitingen.</p></div>
+        <div class="brief-row"><div><span>03</span><h3>Hoe gaat het mee?</h3></div><p>In de bus, op een laadklep of door smalle deuren. Bespreek handgrepen, wielen en beschikbare laadruimte.</p></div>
+        <div class="brief-row"><div><span>04</span><h3>Wat is de planning?</h3></div><p>Eén case of meerdere sets. Vermeld de aantallen en wanneer je productie begint.</p></div>
+        <p class="brief-footnote">Al precies duidelijk wat je nodig hebt? Kies een casetype en stel je eigen afmetingen en beslag samen in de configurator.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="av-contact" id="aanvraag" aria-labelledby="contact-title">
+  <img class="contact-photo" src="assets/av-tv-show.jpg" loading="lazy" alt="">
+  <div class="wrap contact-content"><span class="ey">// Volgende productie op de planning?</span><h2 id="contact-title">Jouw volgende show.<br><span>Goed ingepakt.</span></h2><p>Stuur je apparatuur of paklijst door. Of begin direct met configureren als je de maten en uitvoering al weet.</p><div class="contact-actions"><a class="btn btn-pri" href="case-aanvragen-v1.html?vervoeren=AV-apparatuur">Bespreek je case <span aria-hidden="true">↗</span></a><a class="btn btn-ghost" href="configurator-v1.html">Zelf configureren ↗</a><a class="contact-phone" href="tel:+31575575734">Liever direct contact?<strong>+31 (0)575 575734</strong></a></div><div class="contact-signoff"><img src="assets/beeldmerk-wit.svg" alt="" width="32" height="32"><span>CaseBuilder · Proflite BV<br>Doesburg, Nederland</span></div></div>
+</section>
+<div class="av-credits"><div class="wrap">Sfeerfotografie: <a href="https://commons.wikimedia.org/wiki/File:The_Voice_of_Azerbaijan,_stage_3.jpg">The Voice of Azerbaijan · Emin Allahverdi</a> / <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> · <a href="https://commons.wikimedia.org/wiki/File:LRT_TV_studios_cam.jpg">LRT-studio · Erwin Verbruggen</a> / <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>. Beelden bijgesneden en voorzien van een kleuroverlay; bewerkingen onder dezelfde licenties.</div></div>
+</main><footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="merk" href="homepage-v2.html"><img src="assets/woordmerk-wit.svg" alt="CaseBuilder.com"></a>
+        <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734">+31 (0)575 575734</a></p>
+      </div>
+      <div><h5>Offerte aanvragen</h5><a href="case-aanvragen-v1.html">Case aanvragen</a><a href="laten-controleren-v1.html">Maten laten controleren</a><a href="#">Series en staffels</a><a href="#">Zakelijk bestellen</a></div>
+      <div><h5>Zelf configureren</h5><a href="configurator-v1.html">Naar de configurator</a><a href="zo-werkt-het-v1.html">Zo werkt het</a><a href="#">Herhaalorder</a><a href="#">Mijn configuraties</a></div>
+      <div><h5>Flightcases</h5><a href="flightcases-v1.html">Alle flightcases</a><a href="casetype-koffer-v1.html">Koffer</a><a href="casetype-hoedcase-v1.html">Hoedcase</a><a href="casetype-trunccase-v1.html">Trunccase</a><a href="casetype-rackcase-enkel-deksel-v1.html">Rackcase enkel</a><a href="casetype-rackcase-dubbel-deksel-v1.html">Rackcase dubbel</a></div>
+      <div><h5>Service</h5><a href="service-levertijden-v1.html">Levertijden</a><a href="#">Verzending</a><a href="categorie-v1.html">Onderdelen</a><a href="#">Zaagservice</a><a href="#">Over Proflite</a><a href="contact-v1.html">Contact</a></div>
+    </div>
+    <div class="bot"><span>CaseBuilder · Proflite BV · Doesburg</span><span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span></div>
+  </div>
+</footer>
+
+
+<script src="assets/navzoek.js"></script><script src="assets/versies.js"></script><script src="assets/hoogtemelder.js"></script>
+</body></html>

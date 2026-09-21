@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder — de voet die sluit (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   De voet die sluit, drie richtingen
+
+   De voet die er nu ligt is een sitemap in zes kolommen. Correct, maar
+   inwisselbaar: dezelfde voet past onder elke webshop van Nederland.
+   Er is niets aan te zien dat dit bedrijf kisten maakt die dichtklikken.
+
+   Het merk heeft daar wél een vorm voor, en die wordt nergens gebruikt.
+   Het beeldmerk is geen letterspel: het cB komt van het vlinderslot, de
+   sluiting op een flightcase. De blauwe c is de beugel, de dwarsstaaf
+   van de B grijpt erdoorheen. Twee delen die elkaar vasthouden.
+
+   In de vector ligt die dwarsstaaf op exact de helft van de hoogte.
+   Dat is het scharnier van alles wat hieronder staat: als je het merk
+   op de grens tussen twee kleurvlakken legt, valt de naad precies door
+   de staaf. Het merk wordt dan de sluiting van de pagina, en dat is
+   geen versiering maar het merk dat doet waar het voor gemaakt is.
+
+   Drie uitwerkingen, oplopend in gebaar.
+
+   C  De vingerlas    rustig, werkt onder elke pagina
+   D  Het slot        het merk op de kleurgrens, het grote gebaar, in vier
+                      kleurstellingen waarvan de hap de scherpste is
+   E  De paklijst     de voet als dossier, uit de defensie-taal
+
+   De inhoud is in alle drie identiek en gelijk aan wat er nu live
+   staat. Wat verschilt is de vorm, niet de sitemap.
+   ══════════════════════════════════════════════════════════════ */
+
+body{background:#EDF0F4}
+.vgl{max-width:1440px;margin:0 auto;padding:0 24px 90px}
+.inleiding{max-width:82ch;margin:44px 0 10px}
+.inleiding h1{font-size:30px;margin-bottom:10px}
+.inleiding p{font-size:14.5px;color:var(--mute);line-height:1.68;margin-bottom:10px}
+.inleiding p b{color:var(--ink)}
+
+.kop{margin:52px 0 14px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.kop .nr{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--blue)}
+.kop h3{font-size:24px}
+.kop .wat{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mute);margin-left:auto}
+.toel{max-width:76ch;font-size:14px;color:var(--mute);line-height:1.68;margin:0 0 18px}
+.toel b{color:var(--ink)}
+
+/* De demo staat in een eigen vlak zonder marge: je beoordeelt de
+   verhoudingen van de voet, niet de plek op deze pagina. Boven elke
+   voet een strook van de pagina erboven, want een voet die sluit heeft
+   iets nodig om op te sluiten. */
+.demo{border:1px solid var(--rule);margin-bottom:10px}
+.boven{background:#fff;padding:46px 32px 40px;border-bottom:0}
+.boven p{font-size:15px;color:var(--mute);max-width:60ch}
+.boven .ey{margin-bottom:8px}
+
+/* ══════════════════════════════════════════════════════════════
+   C — DE VINGERLAS
+
+   Twee donkere vlakken die niet dezelfde donker zijn: navy boven,
+   void onder. Op de grens grijpen ze in elkaar.
+
+   Waarom navy boven en niet licht: de voet blijft dan één donker blok
+   en valt niet uit elkaar in twee blokken. Het verschil is klein
+   genoeg om als één kist te lezen en groot genoeg om te zien dat er
+   twee delen zijn. Dit is de variant die onder elke pagina kan, ook
+   onder een pagina die zelf al druk is.
+
+   Het bovenste deel is niet zomaar donkerder: het krijgt de taak die
+   een voet nu mist. Eén regel merk en de twee handelingen. De links
+   staan eronder, in het diepste vlak, waar ze horen.
+   ══════════════════════════════════════════════════════════════ */
+.voetC{background:var(--void);color:rgba(255,255,255,.66)}
+.voetC .akkoord{background:var(--dark);padding:clamp(40px,4.4vw,58px) 0 clamp(38px,4.2vw,54px)}
+.voetC .akkoord .rij{display:grid;grid-template-columns:1.3fr auto;gap:40px;align-items:center}
+/* De zin is een oneliner uit het boek, letterlijk overgenomen, met de
+   punten die het boek voorschrijft. Twee losse zinnen, dus twee punten. */
+.voetC .zin{font-family:var(--disp);text-transform:uppercase;font-weight:900;
+  font-size:clamp(34px,4.6vw,64px);line-height:.92;letter-spacing:.02em;color:#fff}
+.voetC .zin span{color:var(--cyan)}
+.voetC .onderzin{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(255,255,255,.45);margin-top:16px}
+.voetC .acties{display:flex;flex-direction:column;gap:10px;min-width:232px}
+.voetC .acties .btn{justify-content:center}
+.voetC .acties .btn-ghost{border-color:rgba(255,255,255,.55)}
+
+/* De naad zelf. Geen lijn maar een verbinding.
+
+   Eerst stonden hier drie sluitplaatjes op een hairline. Dat werkte
+   niet: drie kadertjes op een rij lezen als icoontjes die "sluiting"
+   betekenen, en een teken dat iets betekent is decoratie. De naad moet
+   zelf sluiten.
+
+   Dus een vingerlas. Om de beurt steekt het bovenste vlak in het
+   onderste en het onderste in het bovenste, zoals de rand van een
+   deksel in de bak valt en zoals twee planken in elkaar grijpen. Eén
+   regel css, geen beeld, en over de volle breedte te zien.
+
+   De maat: 68 px breed en 22 px diep, dus ruim drie keer zo breed als
+   diep. Halveer de breedte en het wordt een zaagtandrandje dat als
+   versiering leest; maak hem ondieper en het worden kantelen. Deze
+   verhouding leest als een verbinding die iets vasthoudt. */
+.tandnaad{height:22px;
+  background:repeating-linear-gradient(90deg,var(--dark) 0 68px,var(--void) 68px 136px)}
+
+.voetC .linkvoet{padding:clamp(40px,4.4vw,56px) 0 0}
+.voetC .cols{display:grid;grid-template-columns:1.15fr repeat(5,1fr);gap:26px}
+.voetC h5{font-size:15px;letter-spacing:.06em;color:#fff;font-weight:700;
+  padding-bottom:10px;margin-bottom:6px;border-bottom:1px solid rgba(255,255,255,.22)}
+.voetC .cols a{display:block;padding:5px 0;font-size:14px}
+.voetC .cols a:hover{color:var(--cyan)}
+.voetC .adr{font-size:14px;line-height:1.8}
+.voetC .adr a{display:inline;padding:0}
+.voetC .merk img{height:26px}
+.voetC a.anders{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.18);color:var(--cyan)}
+.voetC .bot{border-top:1px solid rgba(255,255,255,.15);margin-top:44px;padding:20px 0 30px;
+  display:flex;justify-content:space-between;gap:16px;font-family:var(--mono);font-size:10px;
+  letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.voetC .bot a{display:inline;padding:0;font-size:inherit;letter-spacing:inherit}
+.voetC .bot a:hover{color:var(--cyan)}
+
+/* ══════════════════════════════════════════════════════════════
+   D — HET SLOT
+
+   Hier is de kleurgrens niet subtiel maar hard: licht boven, donker
+   onder, en het beeldmerk ligt er middenop. Doordat de dwarsstaaf van
+   de B op de helft van de vector ligt, valt de naad er precies
+   doorheen. Boven de lijn staat de B in navy op licht, eronder in wit
+   op donker. De c blijft in beide helften hetzelfde blauw.
+
+   Dat is geen trucje maar de logo-regel uit het boek, letterlijk: op
+   donkere ondergrond keert het zwart uit naar wit en blijft het
+   signaalblauw ongewijzigd. Hier gebeurt dat in één merk tegelijk,
+   omdat het merk op twee ondergronden tegelijk ligt.
+
+   Twee gevolgen voor de opbouw. Het lichte deel moet iets te doen
+   hebben, anders is het een lege strook boven een voet: het krijgt de
+   claim en de twee handelingen. En het merk mag nergens anders in de
+   voet nog een keer staan, dus het woordmerk gaat uit de linkerkolom
+   en wordt vervangen door het adres. Eén merk per voet.
+
+   De beweging: bij binnenkomst trekt de hairline vanuit het slot naar
+   links en naar rechts open. De naad sluit dus vanaf de sluiting, niet
+   andersom. Het merk zelf beweegt niet, want een half logo in beweging
+   is een half logo. Duurt 700 ms, gebeurt één keer.
+   ══════════════════════════════════════════════════════════════ */
+.voetD{background:var(--void);color:rgba(255,255,255,.66)}
+.voetD .licht{background:var(--lightblue);padding:clamp(44px,5vw,70px) 0 clamp(52px,5.6vw,76px);
+  position:relative}
+.voetD .licht .rij{display:grid;grid-template-columns:1.3fr auto;gap:40px;align-items:end}
+.voetD .zin{font-family:var(--disp);text-transform:uppercase;font-weight:900;
+  font-size:clamp(34px,4.8vw,66px);line-height:.92;letter-spacing:.02em;color:var(--dark)}
+.voetD .onderzin{font-size:15px;color:var(--mute);margin-top:14px;max-width:46ch}
+.voetD .acties{display:flex;flex-direction:column;gap:10px;min-width:232px}
+.voetD .acties .btn{justify-content:center}
+
+/* De naad met het slot. De laag is 0 px hoog zodat hij niets van de
+   opbouw verschuift; alles erin hangt eromheen. */
+.slotnaad{position:relative;height:0;z-index:3}
+/* De twee lijnstukken groeien vanuit het midden naar buiten. Ze zijn
+   apart zodat ze allebei vanaf het slot kunnen vertrekken. */
+.slotnaad .lijn{position:absolute;top:0;height:2px;background:var(--cyan);opacity:.6;
+  transform:scaleX(0);transition:transform .7s cubic-bezier(.16,.84,.44,1)}
+.slotnaad .lijn.l{left:0;right:50%;transform-origin:right center}
+.slotnaad .lijn.r{left:50%;right:0;transform-origin:left center}
+.slotnaad.aan .lijn{transform:scaleX(1)}
+/* De lijn ligt op het lichte vlak en op het donkere vlak tegelijk, dus
+   één kleur werkt niet. Boven de naad is er geen lijn nodig: de
+   kleurgrens is de lijn. Eronder trekt de hairline door. */
+/* De maat: 124 px breed geeft met de verhouding van de vector 87 px
+   hoog, dus ruim 40 px boven en onder de naad. Bij 92 px las het als een
+   klein merkje dat toevallig op de rand stond; op deze maat is het de
+   sluiting van de pagina. Groter kan niet: dan wordt het een badge en
+   gaat het concurreren met de claim ernaast. */
+.slot{position:absolute;left:50%;top:0;transform:translate(-50%,-50%);width:124px;height:87px}
+.slot .helft{position:absolute;inset:0}
+.slot .helft svg{width:100%;height:100%;display:block}
+/* De sluiting is altijd dezelfde vector, twee keer gestapeld en halfom
+   afgesneden. Wat verschilt is alleen welke kleur welke helft krijgt.
+   Drie manieren, en ze zeggen alle drie iets anders.
+
+   Silhouet    één vorm, donker boven en licht onder, de c doet mee. Het
+               merk leest hier niet als logo maar als schaduw die op de
+               lijn omslaat. Het boek staat dit toe: er is een variant in
+               één inkt waarin ook het blauw meegaat.
+   Merk        de gewone tweekleur, met de c in signaalblauw en alleen de
+               B die omslaat. Dichtst bij het logo zoals het overal staat.
+   Uitsparing  elke helft krijgt de kleur van het vlak aan de andere kant,
+               dus het bovenste deel is gestanst uit de voet en het
+               onderste uit de pagina erboven.
+
+   Het afsnijden gebeurt met clip-path en niet met twee losse tekeningen:
+   zo staat er maar één vector in het bestand en kan het merk nooit uit
+   het lood raken tussen de helften. */
+.slot .helft.b{clip-path:inset(0 0 50% 0)}
+.slot .helft.o{clip-path:inset(50% 0 0 0)}
+
+.slot.silhouet .helft.b .beugel,.slot.silhouet .helft.b .letter{fill:var(--dark)}
+.slot.silhouet .helft.o .beugel,.slot.silhouet .helft.o .letter{fill:#fff}
+
+.slot.merk .beugel{fill:var(--logo)}
+.slot.merk .helft.b .letter{fill:var(--dark)}
+.slot.merk .helft.o .letter{fill:#fff}
+
+.slot.uitsparing .beugel{fill:var(--logo)}
+.slot.uitsparing .helft.b .letter{fill:var(--void)}
+.slot.uitsparing .helft.o .letter{fill:var(--lightblue)}
+
+/* ── de hap ────────────────────────────────────────────────
+   Niet het merk óp de rand maar het merk úit de rand.
+
+   De andere drie leggen de sluiting bovenop de kleurgrens. Dat leest als
+   een logo dat toevallig op een lijn staat. Hier is de vorm een gat: de
+   voet is weggesneden en je kijkt door het merk heen naar de pagina
+   erboven. Dat is wat een vlinderslot met een kist doet, en het is ook
+   wat de freesbank met schuim doet.
+
+   Het is dezelfde opbouw als de andere drie, met twee verschillen. De
+   bovenste helft wordt niet getekend, want boven de naad is het vlak al
+   licht en een lichte vorm op een licht vlak is niets. En de onderste
+   helft krijgt in zijn geheel de kleur van de pagina erboven, de c dus
+   ook: een gat heeft geen twee kleuren.
+
+   Ik heb dit eerst met een echt masker gebouwd, een donker vlak met het
+   merk eruit geknipt. Dat gaf een haarlijn rond de tekening doordat de
+   geschaalde rand niet op de pixel viel, en een masker uit een apart
+   bestand laadt bovendien niet als de pagina van schijf geopend wordt.
+   Dit levert hetzelfde beeld zonder die twee problemen. */
+.slot.hap .helft.b{display:none}
+.slot.hap .helft.o .beugel,.slot.hap .helft.o .letter{fill:var(--lightblue)}
+/* De naadlijn stopt aan weerszijden van de hap in plaats van er dwars
+   doorheen te lopen. Hij tekent nu een rand die onderbroken is, en dat
+   is precies wat er te zien moet zijn. */
+.slotnaad.met-hap .lijn.l{right:calc(50% + 58px)}
+.slotnaad.met-hap .lijn.r{left:calc(50% + 58px)}
+
+/* ── de drie naast elkaar ───────────────────────────────────
+   Op ware grootte en op een echte naad, want een sluiting beoordeel je
+   niet los op een vel maar op de overgang waar hij zijn werk doet. */
+.keuze{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:10px}
+.keuze figure{margin:0;border:1px solid var(--rule);background:var(--void)}
+.keuze .vlak{position:relative;background:var(--lightblue);height:110px}
+.keuze .onder{background:var(--void);height:96px}
+.keuze .naadje{position:relative;height:0}
+.keuze .naadje .lijn{position:absolute;top:0;left:0;right:0;height:2px;background:var(--cyan);opacity:.6}
+.keuze .slot{width:104px;height:73px}
+.keuze figcaption{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.55);padding:14px 16px 16px;border-top:1px solid rgba(255,255,255,.12)}
+.keuze figcaption b{display:block;color:#fff;font-weight:500;margin-bottom:5px}
+
+.voetD .linkvoet{padding:clamp(56px,5.6vw,76px) 0 0}
+.voetD .cols{display:grid;grid-template-columns:1.15fr repeat(5,1fr);gap:26px}
+.voetD h5{font-size:15px;letter-spacing:.06em;color:#fff;font-weight:700;
+  padding-bottom:10px;margin-bottom:6px;border-bottom:1px solid rgba(255,255,255,.22)}
+.voetD .cols a{display:block;padding:5px 0;font-size:14px}
+.voetD .cols a:hover{color:var(--cyan)}
+.voetD .adr{font-size:14px;line-height:1.8}
+.voetD .adr a{display:inline;padding:0}
+.voetD .adr b{color:#fff;font-weight:700;display:block;font-family:var(--disp);
+  text-transform:uppercase;letter-spacing:.04em;font-size:17px;margin-bottom:6px}
+.voetD a.anders{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.18);color:var(--cyan)}
+.voetD .bot{border-top:1px solid rgba(255,255,255,.15);margin-top:44px;padding:20px 0 30px;
+  display:flex;justify-content:space-between;gap:16px;font-family:var(--mono);font-size:10px;
+  letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.voetD .bot a{display:inline;padding:0;font-size:inherit;letter-spacing:inherit}
+.voetD .bot a:hover{color:var(--cyan)}
+
+/* ══════════════════════════════════════════════════════════════
+   E — DE PAKLIJST
+
+   Een andere gedachte dan C en D. Hier is de voet geen sluiting maar
+   het papier dat met de kist meegaat: de paklijst. Dat is de taal die
+   op de defensiepagina al werkt, en die nergens anders op de site
+   terugkomt.
+
+   Elke kolom is een positie met een nummer, elke groep een blok in de
+   lijst, en onderin staat het serienummer. Dat serienummer is geen
+   sier: het staat in het boek als merk-device, formaat CB-2026-NNNN,
+   oplopend per pagina. Op het web is het nooit gebruikt. Hier kan het,
+   want een voet is op elke pagina hetzelfde blok met een ander nummer.
+
+   Het risico is dat dit te technisch wordt voor de fotograaf die een
+   koffer zoekt. Daarom blijven de labels gewoon Nederlands en zit het
+   dossiergevoel alleen in de vorm: nummers, hairlines, mono.
+   ══════════════════════════════════════════════════════════════ */
+.voetE{background:var(--void);color:rgba(255,255,255,.66);
+  padding:0 0 0}
+/* De kop van de lijst. Dit is de regel die van de voet een document
+   maakt in plaats van een restvlak. */
+.voetE .lijstkop{border-bottom:1px solid rgba(255,255,255,.2);padding:16px 0;
+  display:flex;justify-content:space-between;gap:20px;font-family:var(--mono);font-size:10px;
+  letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.42)}
+.voetE .lijstkop b{color:var(--cyan);font-weight:500}
+.voetE .linkvoet{padding:clamp(34px,3.6vw,48px) 0 0}
+/* De verticale hairlines zijn de vakverdeling van de inleg. Ze staan
+   tussen de kolommen en niet eromheen, dus de buitenste twee vallen
+   weg. */
+.voetE .cols{display:grid;grid-template-columns:1.25fr repeat(5,1fr);gap:0}
+/* Alleen links inspringen en niet aan beide kanten: met 22 px links én
+   rechts bleef er per kolom te weinig over en brak "Audio-visueel en
+   podium" over twee regels. Een vakverdeling mag je zien, hij mag de
+   inhoud niet indrukken. */
+.voetE .cols>div{padding-left:24px;border-left:1px solid rgba(255,255,255,.12)}
+.voetE .cols>div:first-child{border-left:0;padding-left:0;padding-right:28px}
+.voetE .pos{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--cyan);
+  display:block;margin-bottom:6px}
+.voetE h5{font-size:15px;letter-spacing:.06em;color:#fff;font-weight:700;
+  padding-bottom:10px;margin-bottom:6px;border-bottom:1px solid rgba(255,255,255,.22)}
+.voetE .cols a{display:block;padding:5px 0;font-size:14px}
+.voetE .cols a:hover{color:var(--cyan)}
+.voetE .adr{font-size:14px;line-height:1.8}
+.voetE .adr a{display:inline;padding:0}
+.voetE .merk img{height:26px;margin-bottom:14px}
+/* Zonder actie is dit een naslagwerk en geen voet. C en D hebben de
+   twee handelingen in hun bovenste vlak; hier is dat vlak er niet, dus
+   ze staan onder het adres. Klein formaat, want ze mogen de lijst niet
+   overstemmen. */
+.voetE .acties{display:flex;flex-direction:column;gap:8px;margin-top:22px;max-width:210px}
+/* Padding en tekengrootte staan er expliciet bij: de knoppen staan in
+   .cols en zouden anders de maat van een kolomlink krijgen. */
+.voetE .acties .btn{justify-content:center;display:flex;padding:11px 18px;font-size:14px}
+.voetE .acties .btn-ghost{border-color:rgba(255,255,255,.5)}
+.voetE a.anders{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.18);color:var(--cyan)}
+/* De afsluitregel van een paklijst: de handtekening. Hier het
+   serienummer links en het juridische rechts, met een dikkere lijn
+   erboven omdat dit het einde van het document is en niet zomaar een
+   scheiding. */
+.voetE .bot{border-top:1.5px solid rgba(255,255,255,.3);margin-top:48px;padding:18px 0 30px;
+  display:flex;justify-content:space-between;gap:16px;font-family:var(--mono);font-size:10px;
+  letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.voetE .bot .serie{color:var(--cyan);position:static}
+.voetE .bot a{display:inline;padding:0;font-size:inherit;letter-spacing:inherit}
+.voetE .bot a:hover{color:var(--cyan)}
+
+/* ── klein ─────────────────────────────────────────────────── */
+@media(max-width:1100px){
+  .voetC .cols,.voetD .cols,.voetE .cols{grid-template-columns:1fr 1fr;gap:26px}
+  .voetE .cols>div{border-left:0;padding:0}
+}
+@media(max-width:820px){
+  .voetC .akkoord .rij,.voetD .licht .rij{grid-template-columns:1fr;align-items:start;gap:28px}
+  .voetC .acties,.voetD .acties{min-width:0}
+  .voetC .cols,.voetD .cols,.voetE .cols{grid-template-columns:1fr;gap:26px}
+  .voetC .bot,.voetD .bot,.voetE .bot,.voetE .lijstkop{flex-direction:column;gap:8px}
+  .slot{width:70px;height:49px}
+}
+/* Wie beweging heeft uitgezet krijgt de naad gewoon dicht te zien. */
+@media(prefers-reduced-motion:reduce){
+  .slotnaad .lijn{transition:none;transform:scaleX(1)}
+}
+</style>
+</head>
+<body>
+
+<!-- De sluiting staat hier één keer als vector en wordt overal met
+     <use> aangeroepen. Zo is er maar één waarheid: raakt er iets aan het
+     merk, dan verandert het op elke plek tegelijk. De paden hebben geen
+     eigen fill, want die wordt per gebruik gezet. -->
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+    <path id="cb-c" fill-rule="nonzero" d="M48.5610,73.0985 C45.5320,75.2505 41.8410,76.5295 37.8520,76.5295 C27.6230,76.5295 20.4310,68.2025 20.4310,57.9735 C20.4310,47.7455 27.6230,39.4185 37.8520,39.4185 C41.8420,39.4185 45.5320,40.6975 48.5620,42.8495 L65.3940,30.4095 C58.3350,23.3565 48.5940,18.9875 37.8520,18.9875 C16.3570,18.9875 0.0000,36.4785 0.0000,57.9735 C0.0000,79.4685 16.3570,96.9605 37.8520,96.9605 C48.5930,96.9605 58.3340,92.5915 65.3929,85.5395 L48.5610,73.0985 Z"/>
+    <path id="cb-b" fill-rule="nonzero" d="M150.4028,55.9720 C156.2248,51.2300 160.3638,42.4180 160.3638,34.0980 C160.3638,15.2960 145.0668,0.0000 126.2728,0.0000 L81.1537,0.0000 L81.1537,47.7580 L38.9598,47.7580 C33.3198,47.7580 29.3628,52.3340 29.3628,57.9740 C29.3628,63.6140 33.3198,68.1890 38.9598,68.1890 L81.1537,68.1890 L81.1537,115.9480 L130.1428,115.9480 C148.9448,115.9480 164.2408,100.6510 164.2408,81.8560 C164.2408,72.2260 158.4628,62.5490 150.4028,55.9720 Z M139.9328,34.0980 C139.9328,41.6330 133.8078,47.7580 126.2728,47.7580 L104.3647,47.7580 L104.3647,20.4310 L126.2728,20.4310 C133.8078,20.4310 139.9328,26.5630 139.9328,34.0980 Z M130.1428,95.5170 L104.3647,95.5170 L104.3647,68.1890 L126.2728,68.1890 C134.2728,68.1890 143.8098,70.5640 143.8098,81.8560 C143.8098,89.3920 137.6778,95.5170 130.1428,95.5170 Z"/>
+  </defs>
+</svg>
+
+<div class="vgl">
+
+  <div class="inleiding">
+    <div class="ey ey-dark">// Voetvarianten, tweede ronde</div>
+    <h1>De voet die sluit</h1>
+    <p>De voet die er nu ligt klopt en is inwisselbaar. Zes kolommen links, een balk met
+      voorwaarden eronder: die voet past onder elke webshop van Nederland. Er is niets aan te
+      zien dat dit bedrijf kisten maakt die dichtklikken.</p>
+    <p><b>Het merk heeft daar wel een vorm voor, en die wordt nergens gebruikt.</b> Het cB is
+      geen letterspel maar het vlinderslot: de blauwe c is de beugel, de dwarsstaaf van de B
+      grijpt erdoorheen. In de vector ligt die staaf op exact de helft van de hoogte. Leg het
+      merk op de grens tussen twee kleurvlakken en de naad valt er precies doorheen.</p>
+    <p>Drie uitwerkingen, oplopend in gebaar. De inhoud is in alle drie gelijk aan wat er nu
+      live staat: wat verschilt is de vorm, niet de sitemap.</p>
+  </div>
+
+  <!-- ══ C ═══════════════════════════════════════════════════════ -->
+  <div class="kop">
+    <div class="nr">// C</div>
+    <h3>De vingerlas</h3>
+    <div class="wat">Navy op void &middot; de naad grijpt</div>
+  </div>
+  <p class="toel">Twee donkere vlakken die niet dezelfde donker zijn, en op de grens grijpen ze
+    in elkaar. Om de beurt steekt het bovenste vlak in het onderste en het onderste in het
+    bovenste, <b>zoals de rand van een deksel in de bak valt</b>. Hier begon een eerdere versie
+    met drie sluitplaatjes op een hairline: dat lezen als icoontjes die sluiting betekenen, en
+    een teken dat iets betekent is decoratie. Zo sluit de naad zelf. Het bovenste deel krijgt
+    de taak die een voet nu mist: een regel merk en de twee handelingen.</p>
+
+  <div class="demo">
+    <div class="boven">
+      <div class="ey ey-dark">// Einde van de pagina</div>
+      <p>Een strook van de pagina erboven, zodat je ziet waarop de voet sluit.</p>
+    </div>
+
+    <footer class="voetC">
+      <div class="akkoord">
+        <div class="wrap">
+          <div class="rij">
+            <div>
+              <div class="zin">Maat in. <span>Case uit.</span></div>
+              <div class="onderzin">Tien werkdagen van scherm naar showroom</div>
+            </div>
+            <div class="acties">
+              <a class="btn btn-pri" href="/mockups/case-aanvragen-v1">Case aanvragen</a>
+              <a class="btn btn-ghost" href="/mockups/configurator-v1">Zelf configureren</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tandnaad"></div>
+
+      <div class="linkvoet">
+        <div class="wrap">
+          <div class="cols">
+            <div>
+              <div class="merk"><img src="assets/woordmerk-wit.svg" alt="Casebuilder.com"></div>
+              <p class="adr" style="margin-top:14px">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734">+31 (0)575 575734</a></p>
+            </div>
+            <div><h5>Offerte aanvragen</h5><a href="/mockups/case-aanvragen-v1">Case aanvragen</a><a href="/mockups/laten-controleren-v1">Maten laten controleren</a><a href="#">Series en staffels</a><a href="#">Zakelijk bestellen</a></div>
+            <div><h5>Kant en klaar</h5><a href="#">Alle vaste cases</a><a href="/mockups/case-voor-v3">Wat ga je vervoeren?</a><a href="/mockups/flightcases-v1">Flightcases per model</a><a href="/mockups/categorie-v1">Onderdelen</a></div>
+            <div><h5>Zelf configureren</h5><a href="/mockups/configurator-v1">Naar de configurator</a><a href="/mockups/zo-werkt-het-v1">Zo werkt het</a><a href="#">Herhaalorder</a><a href="#">Mijn configuraties</a></div>
+            <div><h5>Branches</h5><a href="/mockups/branche-audio-visueel-v1">Audio-visueel en podium</a><a href="/mockups/branche-broadcast-en-media-v1">Broadcast en media</a><a href="/mockups/branche-industrie-en-machinebouw-v1">Industrie en machinebouw</a><a href="/mockups/branche-meet-en-testapparatuur-v1">Meet- en testapparatuur</a><a href="/mockups/branche-defensie-v2">Defensie</a><a href="/mockups/branche-schaalmodellen-v1">Schaalmodellen</a><a href="/mockups/branches">Alle branches</a><a class="anders" href="/mockups/grote-spelers-v1">Inkopen als grote partij &rarr;</a></div>
+            <div><h5>Service</h5><a href="/mockups/service-levertijden-v1">Levertijden</a><a href="#">Verzending</a><a href="#">Zaagservice</a><a href="/mockups/over-ons-v1">Over Proflite</a><a href="/mockups/contact-v1">Contact</a></div>
+          </div>
+          <div class="bot">
+            <span>KVK 09123456</span>
+            <span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ══ D ═══════════════════════════════════════════════════════ -->
+  <div class="kop">
+    <div class="nr">// D</div>
+    <h3>Het slot</h3>
+    <div class="wat">Licht op void &middot; het merk op de kleurgrens</div>
+  </div>
+  <p class="toel">De kleurgrens is hier hard, en het beeldmerk ligt er middenop. Doordat de
+    dwarsbalk van de B in de vector op exact de helft van de hoogte ligt, valt de naad er
+    precies doorheen. <b>Welke kleur welke helft krijgt bepaalt wat je ziet</b>, en dat verschil
+    is groter dan het lijkt. Hieronder staan de vier manieren op ware grootte naast elkaar; de
+    grote voet eronder staat op de hap, waarbij het merk geen vorm op de rand is maar een gat
+    erin. Het woordmerk in de linkerkolom vervalt: één merk per voet.</p>
+
+  <div class="keuze">
+    <figure>
+      <div class="vlak"></div>
+      <div class="naadje"><span class="lijn"></span>
+        <div class="slot hap">
+          <div class="helft b"><svg viewBox="0 0 164.2408 115.9480" aria-hidden="true"><use href="#cb-c" class="beugel"/><use href="#cb-b" class="letter"/></svg></div>
+          <div class="helft o"><svg viewBox="0 0 164.2408 115.9480" aria-hidden="true"><use href="#cb-c" class="beugel"/><use href="#cb-b" class="letter"/></svg></div>
+        </div>
+      </div>
+      <div class="onder"></div>
+      <figcaption><b>Silhouet</b>Eén vorm, de c doet mee. Slaat om op de lijn.</figcaption>
+    </figure>
+    <figure>
+      <div class="vlak"></div>
+      <div class="naadje"><span class="lijn"></span>
+        <div class="slot merk">
+          <div class="helft b"><svg viewBox="0 0 164.2408 115.9480" aria-hidden="true"><use href="#cb-c" class="beugel"/><use href="#cb-b" class="letter"/></svg></div>
+          <div class="helft o"><svg viewBox="0 0 164.2408 115.9480" aria-hidden="true"><use href="#cb-c" class="beugel"/><use href="#cb-b" class="letter"/></svg></div>
+        </div>
+      </div>
+      <div class="onder"></div>
+      <figcaption><b>Merk</b>De c blijft signaalblauw, alleen de B slaat om.</figcaption>
+    </figure>
+    <figure>
+      <div class="vlak"></div>
+      <div class="naadje"><span class="lijn"></span>
+        <div class="slot uitsparing">
+          <div class="helft b"><svg viewBox="0 0 164.2408 115.9480" aria-hidden="true"><use href="#cb-c" class="beugel"/><use href="#cb-b" class="letter"/></svg></div>
+          <div class="helft o"><svg viewBox="0 0 164.2408 115.9480" aria-hidden="true"><use href="#cb-c" class="beugel"/><use href="#cb-b" class="letter"/></svg></div>
+        </div>
+      </div>
+      <div class="onder"></div>
+      <figcaption><b>Uitsparing</b>Elke helft krijgt de kleur van het vlak aan de overkant.</figcaption>
+    </figure>
+    <figure>
+      <div class="vlak"></div>
+      <div class="naadje"><span class="lijn"></span>
+        <div class="slot hap">
+          <div class="helft o"><svg viewBox="0 0 164.2408 115.9480" aria-hidden="true"><use href="#cb-c" class="beugel"/><use href="#cb-b" class="letter"/></svg></div>
+        </div>
+      </div>
+      <div class="onder"></div>
+      <figcaption><b>Hap</b>Geen vorm op de rand maar een gat erin.</figcaption>
+    </figure>
+  </div>
+
+  <div class="demo">
+    <div class="boven">
+      <div class="ey ey-dark">// Einde van de pagina</div>
+      <p>Scroll de voet in beeld: de naad trekt vanuit het slot naar links en rechts open.</p>
+    </div>
+
+    <footer class="voetD">
+      <div class="licht">
+        <div class="wrap">
+          <div class="rij">
+            <div>
+              <div class="zin">Sneller vooruit</div>
+              <div class="onderzin">Je tekent, de software rekent, de machine freest. Tien
+                werkdagen later staat hij er.</div>
+            </div>
+            <div class="acties">
+              <a class="btn btn-dark" href="/mockups/case-aanvragen-v1">Case aanvragen</a>
+              <a class="btn btn-out" href="/mockups/configurator-v1">Zelf configureren</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- De sluiting. Twee keer dezelfde vector, halfom afgesneden, met
+           alleen de B die van kleur wisselt. De svg is inline en niet als
+           <img>, omdat de fill anders niet per helft te zetten is. -->
+      <div class="slotnaad met-hap" id="slotnaad">
+        <span class="lijn l"></span><span class="lijn r"></span>
+        <div class="slot hap">
+          <div class="helft b">
+            <svg viewBox="0 0 164.2408 115.9480" role="img" aria-label="Casebuilder">
+              <use href="#cb-c" class="beugel"/><use href="#cb-b" class="letter"/>
+            </svg>
+          </div>
+          <div class="helft o" aria-hidden="true">
+            <svg viewBox="0 0 164.2408 115.9480">
+              <use href="#cb-c" class="beugel"/><use href="#cb-b" class="letter"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="linkvoet">
+        <div class="wrap">
+          <div class="cols">
+            <div>
+              <p class="adr"><b>Proflite BV</b>Doesburg, Nederland<br><a href="tel:+31575575734">+31 (0)575 575734</a><br><a href="mailto:info@casebuilder.com">info@casebuilder.com</a></p>
+            </div>
+            <div><h5>Offerte aanvragen</h5><a href="/mockups/case-aanvragen-v1">Case aanvragen</a><a href="/mockups/laten-controleren-v1">Maten laten controleren</a><a href="#">Series en staffels</a><a href="#">Zakelijk bestellen</a></div>
+            <div><h5>Kant en klaar</h5><a href="#">Alle vaste cases</a><a href="/mockups/case-voor-v3">Wat ga je vervoeren?</a><a href="/mockups/flightcases-v1">Flightcases per model</a><a href="/mockups/categorie-v1">Onderdelen</a></div>
+            <div><h5>Zelf configureren</h5><a href="/mockups/configurator-v1">Naar de configurator</a><a href="/mockups/zo-werkt-het-v1">Zo werkt het</a><a href="#">Herhaalorder</a><a href="#">Mijn configuraties</a></div>
+            <div><h5>Branches</h5><a href="/mockups/branche-audio-visueel-v1">Audio-visueel en podium</a><a href="/mockups/branche-broadcast-en-media-v1">Broadcast en media</a><a href="/mockups/branche-industrie-en-machinebouw-v1">Industrie en machinebouw</a><a href="/mockups/branche-meet-en-testapparatuur-v1">Meet- en testapparatuur</a><a href="/mockups/branche-defensie-v2">Defensie</a><a href="/mockups/branche-schaalmodellen-v1">Schaalmodellen</a><a href="/mockups/branches">Alle branches</a><a class="anders" href="/mockups/grote-spelers-v1">Inkopen als grote partij &rarr;</a></div>
+            <div><h5>Service</h5><a href="/mockups/service-levertijden-v1">Levertijden</a><a href="#">Verzending</a><a href="#">Zaagservice</a><a href="/mockups/over-ons-v1">Over Proflite</a><a href="/mockups/contact-v1">Contact</a></div>
+          </div>
+          <div class="bot">
+            <span>KVK 09123456</span>
+            <span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ══ E ═══════════════════════════════════════════════════════ -->
+  <div class="kop">
+    <div class="nr">// E</div>
+    <h3>De paklijst</h3>
+    <div class="wat">Void &middot; posnummers en serienummer</div>
+  </div>
+  <p class="toel">Een andere gedachte dan C en D: de voet is hier geen sluiting maar het papier
+    dat met de kist meegaat. Elke kolom is een positie met een nummer, de hairlines ertussen zijn
+    de vakverdeling van de inleg, en onderin staat het serienummer uit het boek, formaat
+    CB-2026-NNNN, oplopend per pagina. <b>Dat device staat in het brandbook en is op het web nog
+    nooit gebruikt.</b> Het risico is dat het te technisch wordt voor een fotograaf die een
+    koffer zoekt, dus de labels blijven gewoon Nederlands: het dossiergevoel zit alleen in de
+    vorm.</p>
+
+  <div class="demo">
+    <div class="boven">
+      <div class="ey ey-dark">// Einde van de pagina</div>
+      <p>Geen tweede kleurvlak: hier doet de typografie het werk.</p>
+    </div>
+
+    <footer class="voetE">
+      <div class="wrap">
+        <div class="lijstkop">
+          <span>Paklijst &middot; casebuilder.com</span>
+          <span>26 posities &middot; <b>Doesburg, NL</b></span>
+        </div>
+        <div class="linkvoet">
+          <div class="cols">
+            <div>
+              <div class="merk"><img src="assets/woordmerk-wit.svg" alt="Casebuilder.com"></div>
+              <p class="adr">Proflite BV<br>Doesburg, Nederland<br><a href="tel:+31575575734">+31 (0)575 575734</a></p>
+              <div class="acties">
+                <a class="btn btn-pri btn-sm" href="/mockups/case-aanvragen-v1">Case aanvragen</a>
+                <a class="btn btn-ghost btn-sm" href="/mockups/configurator-v1">Zelf configureren</a>
+              </div>
+            </div>
+            <div><span class="pos">// 01</span><h5>Offerte aanvragen</h5><a href="/mockups/case-aanvragen-v1">Case aanvragen</a><a href="/mockups/laten-controleren-v1">Maten laten controleren</a><a href="#">Series en staffels</a><a href="#">Zakelijk bestellen</a></div>
+            <div><span class="pos">// 02</span><h5>Kant en klaar</h5><a href="#">Alle vaste cases</a><a href="/mockups/case-voor-v3">Wat ga je vervoeren?</a><a href="/mockups/flightcases-v1">Flightcases per model</a><a href="/mockups/categorie-v1">Onderdelen</a></div>
+            <div><span class="pos">// 03</span><h5>Zelf configureren</h5><a href="/mockups/configurator-v1">Naar de configurator</a><a href="/mockups/zo-werkt-het-v1">Zo werkt het</a><a href="#">Herhaalorder</a><a href="#">Mijn configuraties</a></div>
+            <div><span class="pos">// 04</span><h5>Branches</h5><a href="/mockups/branche-audio-visueel-v1">Audio-visueel en podium</a><a href="/mockups/branche-broadcast-en-media-v1">Broadcast en media</a><a href="/mockups/branche-industrie-en-machinebouw-v1">Industrie en machinebouw</a><a href="/mockups/branche-meet-en-testapparatuur-v1">Meet- en testapparatuur</a><a href="/mockups/branche-defensie-v2">Defensie</a><a href="/mockups/branche-schaalmodellen-v1">Schaalmodellen</a><a href="/mockups/branches">Alle branches</a><a class="anders" href="/mockups/grote-spelers-v1">Inkopen als grote partij &rarr;</a></div>
+            <div><span class="pos">// 05</span><h5>Service</h5><a href="/mockups/service-levertijden-v1">Levertijden</a><a href="#">Verzending</a><a href="#">Zaagservice</a><a href="/mockups/over-ons-v1">Over Proflite</a><a href="/mockups/contact-v1">Contact</a></div>
+          </div>
+          <div class="bot">
+            <span class="serie">CB-2026-0148 &middot; KVK 09123456</span>
+            <span><a href="#">Algemene voorwaarden</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="#">Copyright</a> &middot; &copy; 2026 Proflite BV</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+</div>
+
+<script>
+/* De naad van variant D trekt open zodra de sluiting in beeld komt.
+   Met een observer en niet met een scrollhandler: dat is één callback in
+   plaats van een berekening bij elke pixel, en hij hoeft maar één keer
+   te vuren. */
+(function(){
+  var n = document.getElementById('slotnaad');
+  if(!n) return;
+  if(!('IntersectionObserver' in window)){ n.classList.add('aan'); return; }
+  /* De laag zelf is 0 px hoog en komt dus nooit voor 60 procent in
+     beeld. Kijken naar de sluiting erin, die heeft wel hoogte. */
+  var doel = n.querySelector('.slot');
+  var io = new IntersectionObserver(function(rijen){
+    rijen.forEach(function(r){
+      if(r.isIntersecting){ n.classList.add('aan'); io.disconnect(); }
+    });
+  },{threshold:.6});
+  io.observe(doel);
+})();
+</script>
+</body>
+</html>

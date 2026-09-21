@@ -42,7 +42,7 @@ const GROEPEN = [
   { id: "bestellen",  titel: "Bestellen",       uitleg: "Winkelwagen, afrekenen, bevestiging en account.", test: (n) => /^(checkout|bedankt|account|winkelwagen)/.test(n) },
   { id: "catalogus",  titel: "Catalogus",       uitleg: "Overzicht, categorie, onderdeel, zoeken.", test: (n) => /^(flightcases|categorie|onderdeel|zoeken|overzicht-)/.test(n) },
   { id: "service",    titel: "Service en aanvraag", uitleg: "Alles rond bestellen, vragen en contact.", test: (n) => /^(service|contact|case-aanvragen|laten-controleren|zo-werkt-het|faq)/.test(n) },
-  { id: "varianten",  titel: "Vergelijkpagina's", uitleg: "Varianten naast elkaar, met de afweging erbij.", test: (n) => /varianten|^concepten|^hero-voorstellen/.test(n) },
+  { id: "varianten",  titel: "Vergelijkpagina's", uitleg: "Varianten naast elkaar, met de afweging erbij.", test: (n) => /varianten|blokken|^concepten|^hero-voorstellen|^footer-/.test(n) },
   { id: "overig",     titel: "Overig",          uitleg: "Wat in geen groep past.", test: () => true },
 ];
 

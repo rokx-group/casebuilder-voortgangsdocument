@@ -1,0 +1,15 @@
+/* Photo-led branch selector. Navigation remains a separate, explicit action. */
+(() => {
+ const worlds = {"show": {"title": "Van backstage tot studiovloer.", "description": "Licht, geluid en backline. Ontdek wat de opbouw, de show en het transport vragen van je case.", "image": "assets/av-tv-show.jpg", "alt": "Verlicht podium van een talentenshow", "url": "branche-audio-visueel-v2.html", "tags": "Licht · Geluid · Backline", "name": "Audio-visueel"}, "camera": {"title": "Alles voor de volgende take.", "description": "Camera, optiek en regie. Een werkveld waarin je complete set mee moet naar de volgende opname.", "image": "assets/av-studiocamera.jpg", "alt": "Camera en licht in een televisiestudio", "url": "branche-broadcast-en-media-v1.html", "tags": "Camera · Optiek · Regie", "name": "Broadcast & media"}, "tech": {"title": "Je werk reist met je mee.", "description": "Technische apparatuur en gereedschap. Voor de werkplaats, de buitendienst en het werk op locatie.", "image": "assets/foto-industrie-en-machinebouw.jpg", "alt": "Apparatuur en bekabeling in transportbare racks", "url": "branche-industrie-en-machinebouw-v1.html", "tags": "Service · Gereedschap · Machines", "name": "Industrie & techniek"}, "field": {"title": "Waar de inzet de eisen bepaalt.", "description": "Een case begint bij wat je vervoert en onder welke omstandigheden. De specificatie is het vertrekpunt.", "image": "assets/defensie-oefening.jpg", "alt": "Militairen, een voertuig en een helikopter tijdens een oefening", "url": "branche-defensie-v2.html", "tags": "Veldapparatuur · Verbinding · Transport", "name": "Defensie & veiligheid"}, "measure": {"title": "Precies werk. Ook onderweg.", "description": "Van meetinstrument tot complete testopstelling. Bespreek de apparatuur, kwetsbare delen en het gebruik.", "image": "assets/foto-meet-en-testapparatuur.jpg", "alt": "Technische opstelling in een geopende transportcase", "url": "branche-meet-en-testapparatuur-v1.html", "tags": "Meten · Testen · Kalibratie", "name": "Meet- & testapparatuur"}, "model": {"title": "Groot werk. Op kleine schaal.", "description": "Een model, maquette of presentatie. De vorm en de manier van in- en uitpakken bepalen de bescherming.", "image": "assets/foto-schaalmodellen.jpg", "alt": "Transportcases in een opslagruimte", "url": "branche-schaalmodellen-v1.html", "tags": "Maquettes · Modellen · Presentatie", "name": "Schaalmodellen"}};
+ const buttons = [...document.querySelectorAll('[data-world]')];
+ buttons.forEach(button => button.addEventListener('click', () => {
+  const item=worlds[button.dataset.world];
+  buttons.forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+  const img=document.querySelector('#preview-image'); img.src=item.image; img.alt=item.alt;
+  document.querySelector('#preview-title').textContent=item.title;
+  document.querySelector('#preview-tags').textContent=item.tags;
+  document.querySelector('#preview-description').textContent=item.description;
+  document.querySelector('#preview-link').href=item.url;
+  document.querySelector('#world-status').textContent=item.name+' geselecteerd. '+item.description;
+ }));
+})();

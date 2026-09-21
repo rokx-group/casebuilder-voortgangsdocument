@@ -50,7 +50,9 @@
     'case-voor': [
       { id: 'v1', bestand: 'case-voor-v1.html', label: 'v1' },
       { id: 'v2', bestand: 'case-voor-v2.html', label: 'v2 · index' },
-      { id: 'v3', bestand: 'case-voor-v3.html', label: 'v3 · meelopend zoeken' }
+      { id: 'v3', bestand: 'case-voor-v3.html', label: 'v3 · meelopend zoeken' },
+      { id: 'v4', bestand: 'case-voor-v4.html', label: 'v4 · jouw volgende stop' },
+      { id: 'v5', bestand: 'case-voor-v5.html', label: 'v5 · vertrekpunt' }
     ],
     'case-voor-gitaar': [
       { id: 'wireframe', bestand: 'case-voor-gitaar.html', label: 'wireframe' },
@@ -107,10 +109,12 @@
       { id: 'v2', bestand: 'grote-spelers-v2.html', label: 'v2 · drie stappen' }
     ],
     'branche-audio-visueel': [
-      { id: 'v1', bestand: 'branche-audio-visueel-v1.html', label: 'v1' }
+      { id: 'v1', bestand: 'branche-audio-visueel-v1.html', label: 'v1' },
+      { id: 'v2', bestand: 'branche-audio-visueel-v2.html', label: 'v2 · achter de show' }
     ],
     'branche-defensie': [
-      { id: 'v1', bestand: 'branche-defensie-v1.html', label: 'v1' }
+      { id: 'v1', bestand: 'branche-defensie-v1.html', label: 'v1' },
+      { id: 'v2', bestand: 'branche-defensie-v2.html', label: 'v2 · defensie in beeld' }
     ],
     'branche-industrie-en-machinebouw': [
       { id: 'v1', bestand: 'branche-industrie-en-machinebouw-v1.html', label: 'v1' }
