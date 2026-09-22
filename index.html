@@ -1364,6 +1364,8 @@
   .kotoggle[aria-expanded="false"]::after { transform:rotate(-90deg); }
   .kotoggle:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
   .kobody { display:flex; flex-direction:column; gap:18px; }
+  /* display:flex hierboven wint anders van het hidden-attribuut: dan klapt er niets dicht. */
+  .kobody[hidden] { display:none; }
   .koalles { font-size:13.5px; color:var(--faint); }
   .koalles button { all:unset; cursor:pointer; color:var(--accent); border-bottom:1px solid currentColor; }
   .kostijg { color:var(--keep); font-weight:600; }
