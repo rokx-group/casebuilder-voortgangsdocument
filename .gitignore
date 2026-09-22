@@ -4,3 +4,6 @@ node_modules/
 
 # Tijdelijke kopieën van een extern hulpmiddel; ruimen zichzelf op.
 .probe2-*
+
+# Python-cache van de scripts in scripts/.
+__pycache__/

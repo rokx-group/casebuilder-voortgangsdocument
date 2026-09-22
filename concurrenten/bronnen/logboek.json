@@ -1,0 +1,581 @@
+{
+ "opgehaald": "2026-09-22T13:09Z",
+ "concurrenten": {
+  "vdwerf": [
+   {
+    "url": "https://www.vdwerf-flightcases.nl/sitemap.xml",
+    "eind": "https://www.vdwerf-flightcases.nl/sitemap.xml",
+    "status": 200,
+    "bestand": "vdwerf/sitemap.xml",
+    "soort": "index",
+    "urls": 0
+   },
+   {
+    "url": "https://www.vdwerf-flightcases.nl/post-sitemap.xml",
+    "eind": "https://www.vdwerf-flightcases.nl/post-sitemap.xml",
+    "status": 200,
+    "bestand": "vdwerf/post-sitemap.xml",
+    "soort": "urlset",
+    "urls": 3
+   },
+   {
+    "url": "https://www.vdwerf-flightcases.nl/page-sitemap.xml",
+    "eind": "https://www.vdwerf-flightcases.nl/page-sitemap.xml",
+    "status": 200,
+    "bestand": "vdwerf/page-sitemap.xml",
+    "soort": "urlset",
+    "urls": 10
+   },
+   {
+    "url": "https://www.vdwerf-flightcases.nl/elementskit_template-sitemap.xml",
+    "status": "overgeslagen",
+    "bestand": null,
+    "urls": 0
+   },
+   {
+    "url": "https://www.vdwerf-flightcases.nl/category-sitemap.xml",
+    "eind": "https://www.vdwerf-flightcases.nl/category-sitemap.xml",
+    "status": 200,
+    "bestand": "vdwerf/category-sitemap.xml",
+    "soort": "urlset",
+    "urls": 1
+   }
+  ],
+  "awcases": [
+   {
+    "url": "https://www.awcases.nl/sitemap_index.xml",
+    "eind": "https://www.awcases.nl/sitemap_index.xml",
+    "status": 200,
+    "bestand": "awcases/sitemap_index.xml",
+    "soort": "index",
+    "urls": 0
+   },
+   {
+    "url": "https://www.awcases.nl/post-sitemap.xml",
+    "eind": "https://www.awcases.nl/post-sitemap.xml",
+    "status": 200,
+    "bestand": "awcases/post-sitemap.xml",
+    "soort": "urlset",
+    "urls": 7
+   },
+   {
+    "url": "https://www.awcases.nl/page-sitemap.xml",
+    "eind": "https://www.awcases.nl/page-sitemap.xml",
+    "status": 200,
+    "bestand": "awcases/page-sitemap.xml",
+    "soort": "urlset",
+    "urls": 39
+   },
+   {
+    "url": "https://www.awcases.nl/product-sitemap.xml",
+    "eind": "https://www.awcases.nl/product-sitemap.xml",
+    "status": 200,
+    "bestand": "awcases/product-sitemap.xml",
+    "soort": "urlset",
+    "urls": 195
+   },
+   {
+    "url": "https://www.awcases.nl/project-sitemap.xml",
+    "eind": "https://www.awcases.nl/project-sitemap.xml",
+    "status": 200,
+    "bestand": "awcases/project-sitemap.xml",
+    "soort": "urlset",
+    "urls": 10
+   },
+   {
+    "url": "https://www.awcases.nl/vacancy-sitemap.xml",
+    "eind": "https://www.awcases.nl/vacancy-sitemap.xml",
+    "status": 200,
+    "bestand": "awcases/vacancy-sitemap.xml",
+    "soort": "urlset",
+    "urls": 2
+   },
+   {
+    "url": "https://www.awcases.nl/category-sitemap.xml",
+    "eind": "https://www.awcases.nl/category-sitemap.xml",
+    "status": 200,
+    "bestand": "awcases/category-sitemap.xml",
+    "soort": "urlset",
+    "urls": 2
+   },
+   {
+    "url": "https://www.awcases.nl/project_category-sitemap.xml",
+    "eind": "https://www.awcases.nl/project_category-sitemap.xml",
+    "status": 200,
+    "bestand": "awcases/project_category-sitemap.xml",
+    "soort": "urlset",
+    "urls": 3
+   },
+   {
+    "url": "https://www.awcases.nl/product_cat-sitemap.xml",
+    "eind": "https://www.awcases.nl/product_cat-sitemap.xml",
+    "status": 200,
+    "bestand": "awcases/product_cat-sitemap.xml",
+    "soort": "urlset",
+    "urls": 20
+   },
+   {
+    "url": "https://www.awcases.nl/pa_binnenbak-sitemap.xml",
+    "eind": "https://www.awcases.nl/pa_binnenbak-sitemap.xml",
+    "status": 200,
+    "bestand": "awcases/pa_binnenbak-sitemap.xml",
+    "soort": "urlset",
+    "urls": 3
+   },
+   {
+    "url": "https://www.awcases.nl/pa_extra-hoog-tussenschot-sitemap.xml",
+    "eind": "https://www.awcases.nl/pa_extra-hoog-tussenschot-sitemap.xml",
+    "status": 200,
+    "bestand": "awcases/pa_extra-hoog-tussenschot-sitemap.xml",
+    "soort": "urlset",
+    "urls": 4
+   },
+   {
+    "url": "https://www.awcases.nl/pa_extra-laag-tussenschot-sitemap.xml",
+    "eind": "https://www.awcases.nl/pa_extra-laag-tussenschot-sitemap.xml",
+    "status": 200,
+    "bestand": "awcases/pa_extra-laag-tussenschot-sitemap.xml",
+    "soort": "urlset",
+    "urls": 4
+   },
+   {
+    "url": "https://www.awcases.nl/pa_extra-lade-sitemap.xml",
+    "eind": "https://www.awcases.nl/pa_extra-lade-sitemap.xml",
+    "status": 200,
+    "bestand": "awcases/pa_extra-lade-sitemap.xml",
+    "soort": "urlset",
+    "urls": 4
+   },
+   {
+    "url": "https://www.awcases.nl/pa_extra-tussenschot-sitemap.xml",
+    "eind": "https://www.awcases.nl/pa_extra-tussenschot-sitemap.xml",
+    "status": 200,
+    "bestand": "awcases/pa_extra-tussenschot-sitemap.xml",
+    "soort": "urlset",
+    "urls": 4
+   },
+   {
+    "url": "https://www.awcases.nl/pa_grotere-maat-sitemap.xml",
+    "eind": "https://www.awcases.nl/pa_grotere-maat-sitemap.xml",
+    "status": 200,
+    "bestand": "awcases/pa_grotere-maat-sitemap.xml",
+    "soort": "urlset",
+    "urls": 4
+   },
+   {
+    "url": "https://www.awcases.nl/pa_hoogte-sitemap.xml",
+    "eind": "https://www.awcases.nl/pa_hoogte-sitemap.xml",
+    "status": 200,
+    "bestand": "awcases/pa_hoogte-sitemap.xml",
+    "soort": "urlset",
+    "urls": 3
+   },
+   {
+    "url": "https://www.awcases.nl/pa_hoogte-in-he-sitemap.xml",
+    "eind": "https://www.awcases.nl/pa_hoogte-in-he-sitemap.xml",
+    "status": 200,
+    "bestand": "awcases/pa_hoogte-in-he-sitemap.xml",
+    "soort": "urlset",
+    "urls": 25
+   },
+   {
+    "url": "https://www.awcases.nl/pa_meer-of-minder-vakken-sitemap.xml",
+    "eind": "https://www.awcases.nl/pa_meer-of-minder-vakken-sitemap.xml",
+    "status": 200,
+    "bestand": "awcases/pa_meer-of-minder-vakken-sitemap.xml",
+    "soort": "urlset",
+    "urls": 5
+   },
+   {
+    "url": "https://www.awcases.nl/pa_tafelpoten-in-voordeksel-sitemap.xml",
+    "eind": "https://www.awcases.nl/pa_tafelpoten-in-voordeksel-sitemap.xml",
+    "status": 200,
+    "bestand": "awcases/pa_tafelpoten-in-voordeksel-sitemap.xml",
+    "soort": "urlset",
+    "urls": 2
+   },
+   {
+    "url": "https://www.awcases.nl/pa_topmount-sitemap.xml",
+    "eind": "https://www.awcases.nl/pa_topmount-sitemap.xml",
+    "status": 200,
+    "bestand": "awcases/pa_topmount-sitemap.xml",
+    "soort": "urlset",
+    "urls": 2
+   },
+   {
+    "url": "https://www.awcases.nl/pa_wielen-sitemap.xml",
+    "eind": "https://www.awcases.nl/pa_wielen-sitemap.xml",
+    "status": 200,
+    "bestand": "awcases/pa_wielen-sitemap.xml",
+    "soort": "urlset",
+    "urls": 2
+   },
+   {
+    "url": "https://www.awcases.nl/author-sitemap.xml",
+    "status": "overgeslagen",
+    "bestand": null,
+    "urls": 0
+   }
+  ],
+  "123flightcase": [
+   {
+    "url": "https://www.123flightcase.nl/sitemap_index.xml",
+    "eind": "https://www.123flightcase.nl/sitemap_index.xml",
+    "status": 200,
+    "bestand": "123flightcase/sitemap_index.xml",
+    "soort": "index",
+    "urls": 0
+   },
+   {
+    "url": "http://www.123flightcase.nl/page-sitemap.xml",
+    "eind": "https://www.123flightcase.nl/page-sitemap.xml",
+    "status": 200,
+    "bestand": "123flightcase/page-sitemap.xml",
+    "soort": "urlset",
+    "urls": 19
+   },
+   {
+    "url": "http://www.123flightcase.nl/product-sitemap.xml",
+    "eind": "https://www.123flightcase.nl/product-sitemap.xml",
+    "status": 200,
+    "bestand": "123flightcase/product-sitemap.xml",
+    "soort": "urlset",
+    "urls": 176
+   },
+   {
+    "url": "http://www.123flightcase.nl/product_cat-sitemap.xml",
+    "eind": "https://www.123flightcase.nl/product_cat-sitemap.xml",
+    "status": 200,
+    "bestand": "123flightcase/product_cat-sitemap.xml",
+    "soort": "urlset",
+    "urls": 29
+   },
+   {
+    "url": "http://www.123flightcase.nl/product_shipping_class-sitemap.xml",
+    "eind": "https://www.123flightcase.nl/product_shipping_class-sitemap.xml",
+    "status": 200,
+    "bestand": "123flightcase/product_shipping_class-sitemap.xml",
+    "soort": "urlset",
+    "urls": 6
+   }
+  ],
+  "megacase": [
+   {
+    "url": "https://megacase.com/nl/sitemap_index.xml",
+    "eind": "https://megacase.com/nl/sitemap_index.xml",
+    "status": 200,
+    "bestand": "megacase/nl__sitemap_index.xml",
+    "soort": "urlset",
+    "urls": 1815
+   },
+   {
+    "url": "https://megacase.com/nl/",
+    "eind": "https://megacase.com/nl/",
+    "status": 200,
+    "bestand": "megacase/nl.homepage.html",
+    "soort": "homepage",
+    "urls": 0
+   }
+  ],
+  "faes": [
+   {
+    "url": "https://faes.nl/sitemap_index.xml",
+    "eind": "https://faes.nl/sitemap_index.xml",
+    "status": 200,
+    "bestand": "faes/sitemap_index.xml",
+    "soort": "index",
+    "urls": 0
+   },
+   {
+    "url": "https://faes.nl/post-sitemap.xml",
+    "eind": "https://faes.nl/post-sitemap.xml",
+    "status": 200,
+    "bestand": "faes/post-sitemap.xml",
+    "soort": "urlset",
+    "urls": 598
+   },
+   {
+    "url": "https://faes.nl/page-sitemap.xml",
+    "eind": "https://faes.nl/page-sitemap.xml",
+    "status": 200,
+    "bestand": "faes/page-sitemap.xml",
+    "soort": "urlset",
+    "urls": 187
+   },
+   {
+    "url": "https://faes.nl/cp_casestudy-sitemap.xml",
+    "eind": "https://faes.nl/cp_casestudy-sitemap.xml",
+    "status": 200,
+    "bestand": "faes/cp_casestudy-sitemap.xml",
+    "soort": "urlset",
+    "urls": 54
+   },
+   {
+    "url": "https://faes.nl/cp_vacatures-sitemap.xml",
+    "eind": "https://faes.nl/cp_vacatures-sitemap.xml",
+    "status": 200,
+    "bestand": "faes/cp_vacatures-sitemap.xml",
+    "soort": "urlset",
+    "urls": 22
+   },
+   {
+    "url": "https://faes.nl/category-sitemap.xml",
+    "eind": "https://faes.nl/category-sitemap.xml",
+    "status": 200,
+    "bestand": "faes/category-sitemap.xml",
+    "soort": "urlset",
+    "urls": 20
+   },
+   {
+    "url": "https://faes.nl/casestudy-category-sitemap.xml",
+    "eind": "https://faes.nl/casestudy-category-sitemap.xml",
+    "status": 200,
+    "bestand": "faes/casestudy-category-sitemap.xml",
+    "soort": "urlset",
+    "urls": 10
+   },
+   {
+    "url": "https://faes.nl/content-type-sitemap.xml",
+    "eind": "https://faes.nl/content-type-sitemap.xml",
+    "status": 200,
+    "bestand": "faes/content-type-sitemap.xml",
+    "soort": "urlset",
+    "urls": 2
+   },
+   {
+    "url": "https://faes.nl/author-sitemap.xml",
+    "status": "overgeslagen",
+    "bestand": null,
+    "urls": 0
+   }
+  ],
+  "amptown": [
+   {
+    "url": "https://www.amptown-cases.de/wp-sitemap.xml",
+    "eind": "https://www.amptown-cases.de/wp-sitemap.xml",
+    "status": 200,
+    "bestand": "amptown/wp-sitemap.xml",
+    "soort": "index",
+    "urls": 0
+   },
+   {
+    "url": "https://www.amptown-cases.de/wp-sitemap-posts-post-1.xml",
+    "eind": "https://www.amptown-cases.de/wp-sitemap-posts-post-1.xml",
+    "status": 200,
+    "bestand": "amptown/wp-sitemap-posts-post-1.xml",
+    "soort": "urlset",
+    "urls": 110
+   },
+   {
+    "url": "https://www.amptown-cases.de/wp-sitemap-posts-page-1.xml",
+    "eind": "https://www.amptown-cases.de/wp-sitemap-posts-page-1.xml",
+    "status": 200,
+    "bestand": "amptown/wp-sitemap-posts-page-1.xml",
+    "soort": "urlset",
+    "urls": 36
+   },
+   {
+    "url": "https://www.amptown-cases.de/wp-sitemap-posts-product-1.xml",
+    "eind": "https://www.amptown-cases.de/wp-sitemap-posts-product-1.xml",
+    "status": 200,
+    "bestand": "amptown/wp-sitemap-posts-product-1.xml",
+    "soort": "urlset",
+    "urls": 351
+   },
+   {
+    "url": "https://www.amptown-cases.de/wp-sitemap-posts-dt_portfolio-1.xml",
+    "eind": "https://www.amptown-cases.de/wp-sitemap-posts-dt_portfolio-1.xml",
+    "status": 200,
+    "bestand": "amptown/wp-sitemap-posts-dt_portfolio-1.xml",
+    "soort": "urlset",
+    "urls": 7
+   },
+   {
+    "url": "https://www.amptown-cases.de/wp-sitemap-taxonomies-category-1.xml",
+    "eind": "https://www.amptown-cases.de/wp-sitemap-taxonomies-category-1.xml",
+    "status": 200,
+    "bestand": "amptown/wp-sitemap-taxonomies-category-1.xml",
+    "soort": "urlset",
+    "urls": 2
+   },
+   {
+    "url": "https://www.amptown-cases.de/wp-sitemap-taxonomies-post_tag-1.xml",
+    "eind": "https://www.amptown-cases.de/wp-sitemap-taxonomies-post_tag-1.xml",
+    "status": 200,
+    "bestand": "amptown/wp-sitemap-taxonomies-post_tag-1.xml",
+    "soort": "urlset",
+    "urls": 106
+   },
+   {
+    "url": "https://www.amptown-cases.de/wp-sitemap-taxonomies-product_cat-1.xml",
+    "eind": "https://www.amptown-cases.de/wp-sitemap-taxonomies-product_cat-1.xml",
+    "status": 200,
+    "bestand": "amptown/wp-sitemap-taxonomies-product_cat-1.xml",
+    "soort": "urlset",
+    "urls": 100
+   },
+   {
+    "url": "https://www.amptown-cases.de/wp-sitemap-taxonomies-product_tag-1.xml",
+    "eind": "https://www.amptown-cases.de/wp-sitemap-taxonomies-product_tag-1.xml",
+    "status": 200,
+    "bestand": "amptown/wp-sitemap-taxonomies-product_tag-1.xml",
+    "soort": "urlset",
+    "urls": 79
+   },
+   {
+    "url": "https://www.amptown-cases.de/wp-sitemap-users-1.xml",
+    "status": "overgeslagen",
+    "bestand": null,
+    "urls": 0
+   }
+  ],
+  "denting": [
+   {
+    "url": "https://www.denting.nl/sitemap_index.xml",
+    "eind": "https://www.denting.nl/sitemap_index.xml",
+    "status": 200,
+    "bestand": "denting/sitemap_index.xml",
+    "soort": "index",
+    "urls": 0
+   },
+   {
+    "url": "https://www.denting.nl/page-sitemap.xml",
+    "eind": "https://www.denting.nl/page-sitemap.xml",
+    "status": 200,
+    "bestand": "denting/page-sitemap.xml",
+    "soort": "urlset",
+    "urls": 19
+   },
+   {
+    "url": "https://www.denting.nl/product-sitemap1.xml",
+    "eind": "https://www.denting.nl/product-sitemap1.xml",
+    "status": 200,
+    "bestand": "denting/product-sitemap1.xml",
+    "soort": "urlset",
+    "urls": 201
+   },
+   {
+    "url": "https://www.denting.nl/product-sitemap2.xml",
+    "eind": "https://www.denting.nl/product-sitemap2.xml",
+    "status": 200,
+    "bestand": "denting/product-sitemap2.xml",
+    "soort": "urlset",
+    "urls": 30
+   }
+  ],
+  "dfb": [
+   {
+    "url": "https://dfb-cases.nl/sitemap.xml",
+    "eind": "https://dfb-cases.nl/sitemap.xml",
+    "status": 200,
+    "bestand": "dfb/sitemap.xml",
+    "soort": "urlset",
+    "urls": 427
+   }
+  ],
+  "reco": [
+   {
+    "url": "https://recocasesholland.nl/sitemap_index.xml",
+    "eind": "https://recocasesholland.nl/sitemap_index.xml",
+    "status": 200,
+    "bestand": "reco/sitemap_index.xml",
+    "soort": "index",
+    "urls": 0
+   },
+   {
+    "url": "https://recocasesholland.nl/page-sitemap.xml",
+    "eind": "https://recocasesholland.nl/page-sitemap.xml",
+    "status": 200,
+    "bestand": "reco/page-sitemap.xml",
+    "soort": "urlset",
+    "urls": 7
+   }
+  ],
+  "slf": [
+   {
+    "url": "https://www.slfgroup.pro/sitemap.xml",
+    "eind": "https://www.slfgroup.pro/sitemap.xml",
+    "status": 200,
+    "bestand": "slf/sitemap.xml",
+    "soort": "urlset",
+    "urls": 8
+   }
+  ],
+  "jdb": [
+   {
+    "url": "https://www.jdblichtengeluid.nl/sitemap.xml",
+    "eind": "https://www.jdblichtengeluid.nl/sitemap_index.xml",
+    "status": 200,
+    "bestand": "jdb/sitemap.xml",
+    "soort": "index",
+    "urls": 0
+   },
+   {
+    "url": "https://www.jdblichtengeluid.nl/page-sitemap.xml",
+    "eind": "https://www.jdblichtengeluid.nl/page-sitemap.xml",
+    "status": 200,
+    "bestand": "jdb/page-sitemap.xml",
+    "soort": "urlset",
+    "urls": 12
+   },
+   {
+    "url": "https://www.jdblichtengeluid.nl/attachment-sitemap.xml",
+    "status": "overgeslagen",
+    "bestand": null,
+    "urls": 0
+   }
+  ],
+  "kiro": [
+   {
+    "url": "https://www.kiroflightcases.nl/sitemap_index.xml",
+    "eind": "https://www.kiroflightcases.nl/sitemap_index.xml",
+    "status": 200,
+    "bestand": "kiro/sitemap_index.xml",
+    "soort": "index",
+    "urls": 0
+   },
+   {
+    "url": "https://www.kiroflightcases.nl/page-sitemap.xml",
+    "eind": "https://www.kiroflightcases.nl/page-sitemap.xml",
+    "status": 200,
+    "bestand": "kiro/page-sitemap.xml",
+    "soort": "urlset",
+    "urls": 10
+   },
+   {
+    "url": "https://www.kiroflightcases.nl/product-sitemap.xml",
+    "eind": "https://www.kiroflightcases.nl/product-sitemap.xml",
+    "status": 200,
+    "bestand": "kiro/product-sitemap.xml",
+    "soort": "urlset",
+    "urls": 27
+   },
+   {
+    "url": "https://www.kiroflightcases.nl/product_cat-sitemap.xml",
+    "eind": "https://www.kiroflightcases.nl/product_cat-sitemap.xml",
+    "status": 200,
+    "bestand": "kiro/product_cat-sitemap.xml",
+    "soort": "urlset",
+    "urls": 9
+   },
+   {
+    "url": "https://www.kiroflightcases.nl/product_tag-sitemap.xml",
+    "eind": "https://www.kiroflightcases.nl/product_tag-sitemap.xml",
+    "status": 200,
+    "bestand": "kiro/product_tag-sitemap.xml",
+    "soort": "urlset",
+    "urls": 8
+   }
+  ],
+  "rhinocase": [
+   {
+    "url": "https://rhinocase.nl/",
+    "eind": "https://rhinocase.nl/",
+    "status": 200,
+    "bestand": "rhinocase/index.homepage.html",
+    "soort": "homepage",
+    "urls": 0
+   }
+  ]
+ }
+}
