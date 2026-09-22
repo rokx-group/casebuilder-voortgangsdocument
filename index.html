@@ -12362,10 +12362,21 @@
       <div class="sec-head">
         <span class="eyebrow">Stap 5</span>
         <h2 data-rail="Top 100">Top 100</h2>
-        <p>De zoekwoorden die CaseBuilder als eerste moet laten zien. Alleen case-specifiek en met gemeten volume. Het volume is een bereik per maand; het bod is wat adverteerders boven aan de pagina betalen per klik, een maat voor commerci&euml;le waarde. &ldquo;3 maanden&rdquo; en &ldquo;jaar&rdquo; zijn de wijziging in zoekvolume volgens Keyword Planner; bij bereiken staat daar meestal 0%, een uitschieter (+900%, &minus;90%) betekent dat het woord van bereik wisselde.</p>
+        <p>De zoekwoorden die CaseBuilder als eerste moet laten zien &mdash; pagina-niveau; voor apparaten staat er een <a href="#ko-topprod">tweede lijst</a> onder. Alleen case-specifiek en met gemeten volume. Het volume is een bereik per maand; het bod is wat adverteerders boven aan de pagina betalen per klik, een maat voor commerci&euml;le waarde. &ldquo;3 maanden&rdquo; en &ldquo;jaar&rdquo; zijn de wijziging in zoekvolume volgens Keyword Planner; bij bereiken staat daar meestal 0%, een uitschieter (+900%, &minus;90%) betekent dat het woord van bereik wisselde.</p>
       </div>
       <div class="scroller"><table class="tpl" id="ko-top-tabel"></table></div>
       <button type="button" class="kometer" id="ko-top-meer">Toon alle 100</button>
+    </section>
+
+    <section id="ko-topprod">
+      <div class="sec-head">
+        <span class="eyebrow">Stap 5 &middot; producten</span>
+        <h2 data-rail="Top 100 producten">Top 100 producten</h2>
+        <p>Niet de zoekwoorden maar de <strong>apparaten</strong>: waar maken de concurrenten cases voor? Elke concurrent schrijft zijn producten anders op &mdash; &ldquo;taperack yamaha dm7 compact doghouse&rdquo; en &ldquo;flightcase yamaha dm7&rdquo; zijn hetzelfde apparaat. Daarom is uit elke productnaam het merk en het model gehaald en geteld hoeveel bedrijven er een case voor voeren. Faes en zijn webshop tellen als &eacute;&eacute;n bedrijf.</p>
+        <p>Zoekvolume ontbreekt meestal: op apparaatniveau is nog niets opgevraagd. De kolom &ldquo;zoekwoord&rdquo; is de lijst voor de volgende ronde in Keyword Planner &mdash; die staat klaar als <a class="kolink" href="concurrenten/keywords-apparaten.csv" download>keywords-apparaten.csv</a>.</p>
+      </div>
+      <div class="scroller"><table class="tpl" id="ko-topprod-tabel"></table></div>
+      <button type="button" class="kometer" id="ko-topprod-meer">Toon alle 100</button>
     </section>
 
     <section>
@@ -12700,6 +12711,22 @@
       };
       document.getElementById('ko-top-meer').addEventListener('click', function () { alleTop = !alleTop; tekenTop(); });
       tekenTop();
+    }
+
+    if (D.topprod) {
+      var alleProd = false;
+      var tekenProd = function () {
+        document.getElementById('ko-topprod-tabel').innerHTML =
+          '<thead><tr><th class="r">#</th><th>Apparaat</th><th class="r">Bedrijven</th><th>Welke</th><th class="r">Productpagina&rsquo;s</th><th>Zoekwoord volgende ronde</th><th>Zoekvolume</th></tr></thead><tbody>' +
+          (alleProd ? D.topprod : D.topprod.slice(0, 25)).map(function (t, i) {
+            return '<tr><td class="num">' + (i + 1) + '</td><td><strong>' + e(t[0]) + '</strong></td><td class="num">' + t[2] +
+              '</td><td class="kozacht">' + e(t[3].map(function (x) { return NAAM[x]; }).join(', ')) + '</td><td class="num">' + t[4] +
+              '</td><td class="mono">' + e(t[5]) + '</td><td class="mono">' + (t[1] ? bereik(t[1]) : '<span class="kozacht">nog niet gemeten</span>') + '</td></tr>';
+          }).join('') + '</tbody>';
+        document.getElementById('ko-topprod-meer').textContent = alleProd ? 'Toon alleen de eerste 25' : 'Toon alle ' + D.topprod.length;
+      };
+      document.getElementById('ko-topprod-meer').addEventListener('click', function () { alleProd = !alleProd; tekenProd(); });
+      tekenProd();
     }
 
     if (D.clusters && D.clusterlijst) {

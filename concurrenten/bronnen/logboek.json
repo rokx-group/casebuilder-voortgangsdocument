@@ -1,5 +1,5 @@
 {
- "opgehaald": "2026-09-22T13:09Z",
+ "opgehaald": "2026-09-22T20:17Z",
  "concurrenten": {
   "vdwerf": [
    {
@@ -277,6 +277,24 @@
     "urls": 0
    }
   ],
+  "koffersenkisten": [
+   {
+    "url": "https://www.koffersenkisten.nl/sitemap.xml",
+    "eind": "https://www.koffersenkisten.nl/sitemap.xml",
+    "status": 200,
+    "bestand": "koffersenkisten/sitemap.xml",
+    "soort": "index",
+    "urls": 0
+   },
+   {
+    "url": "https://koffersenkisten.nl/sitemap1.xml",
+    "eind": "https://www.koffersenkisten.nl/sitemap1.xml",
+    "status": 200,
+    "bestand": "koffersenkisten/sitemap1.xml",
+    "soort": "urlset",
+    "urls": 1135
+   }
+  ],
   "faes": [
    {
     "url": "https://faes.nl/sitemap_index.xml",
@@ -498,7 +516,7 @@
     "status": 200,
     "bestand": "slf/sitemap.xml",
     "soort": "urlset",
-    "urls": 8
+    "urls": 7
    }
   ],
   "jdb": [

@@ -1,5 +1,9 @@
 """De concurrenten, en waar ze genoemd worden.
 
+'groep' hoort bij concurrenten van hetzelfde bedrijf (Faes en zijn webshop
+Koffers en Kisten). Waar geteld wordt hoeveel concurrenten iets voeren,
+tellen die samen als één.
+
 Eén plek. Haal- en bouwscript lezen allebei deze lijst. Een concurrent
 toevoegen = hier een regel erbij, daarna beide scripts draaien.
 
@@ -38,6 +42,12 @@ PADEN = {
     'slf': [(r'/nl/flightcases$', 'categorie')],
     'jdb': [(r'/flightcase-maatwerk/$', 'categorie')],
     'awcases': [(r'/winkel/$', 'pagina')],
+    # Eigen opzet: producten onder /nl_NL/p/, en vijf ingangen die samen de
+    # categorie-indeling vormen (toepassing, merk, interieur, materiaal,
+    # eigenschap).
+    'koffersenkisten': [(r'/nl_NL/p/', 'product'),
+                        (r'/nl_NL/(toepassingen|merken|interieur|materiaal|eigenschappen)(/|$)', 'categorie'),
+                        (r'/nl_NL/blog', 'blog')],
 }
 OVERSLAAN_URL = {
     'faes': r'faes\.nl/en/',
@@ -62,9 +72,17 @@ CONCURRENTEN = [
      'genoemd': [BRANCHE, OVERZICHT], 'taal': 'de',
      'vondst': 'productadressen in het Duits, ook op /nl/. Sitemap niet in robots.txt; gevonden op /nl/sitemap_index.xml. Categorieën uit het menu op de homepage',
      'rol': 'Structurele tweeling: configurator, shop, aanvraag.'},
-    {'slug': 'faes', 'naam': 'Faes', 'site': 'https://faes.nl',
+    # De webshop van Faes staat op een eigen domein; faes.nl zelf verkoopt niet
+    # (productpagina's hebben geen prijs of winkelwagen, alleen een formulier).
+    {'slug': 'koffersenkisten', 'naam': 'Koffers en Kisten (Faes)', 'site': 'https://www.koffersenkisten.nl',
+     'sitemaps': ['https://www.koffersenkisten.nl/sitemap.xml'],
+     'genoemd': [('Faes, pagina E-commerce', 'https://faes.nl/e-commerce/')],
+     'vondst': 'gevonden via faes.nl/e-commerce: "Dé webshop voor koffers en kisten"',
+     'groep': 'faes',
+     'rol': 'De webshop van Faes: SKB, Defender, Viking. faes.nl zelf is een catalogus zonder prijzen.'},
+    {'slug': 'faes', 'naam': 'Faes', 'site': 'https://faes.nl', 'groep': 'faes',
      'sitemaps': ['https://faes.nl/sitemap_index.xml'], 'genoemd': [BRANCHE, STRATEGIE, OVERZICHT],
-     'rol': 'Deelt in op branche; beweegt vanuit high-tech richting AV.'},
+     'rol': 'Deelt in op branche; beweegt vanuit high-tech richting AV. Geen webshop — verkoopt via koffersenkisten.nl.'},
     {'slug': 'amptown', 'naam': 'Amptown Cases', 'site': 'https://www.amptown-cases.de',
      'sitemaps': ['https://www.amptown-cases.de/wp-sitemap.xml'], 'genoemd': [STRATEGIE], 'taal': 'de',
      'rol': '"Wellicht de grootste concurrent in Europa" (Marketingstrategie).'},
