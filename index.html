@@ -1334,6 +1334,52 @@
   table.tpl tr:last-child td { border-bottom:none; }
   .scroller { overflow-x:auto; }
 
+  /* Tab Concurrenten. Leunt op table.tpl, .card en .chip; hier alleen wat die
+     niet hebben: de filterbalk boven de lijst en de balkjes in de telling. */
+  .kolink { color:var(--accent); text-decoration:none; border-bottom:1px solid currentColor; }
+  .kolink:hover { color:var(--primary); }
+  table.kostap td:first-child { width:48px; }
+  table.kostap td:nth-child(2) { width:22%; }
+  table.tpl th.r { text-align:right; }
+  .kozacht { color:var(--muted); font-size:13px; }
+  #ko-overlap-tabel td:nth-child(2) { white-space:nowrap; }
+  .kobar { display:inline-block; width:80px; height:6px; background:var(--line-soft); border-radius:3px; vertical-align:middle; overflow:hidden; }
+  .kobar i { display:block; height:100%; background:var(--accent); }
+  .kobalk { display:flex; flex-wrap:wrap; gap:12px 18px; align-items:flex-end; }
+  .kosoort { display:flex; border:1px solid var(--line); border-radius:3px; overflow:hidden; }
+  .kosoort button { background:var(--surface); border:0; padding:9px 14px; cursor:pointer; font-size:13.5px; color:var(--muted); }
+  .kosoort button + button { border-left:1px solid var(--line); }
+  .kosoort button[aria-pressed="true"] { background:var(--accent-bg); color:var(--ink); font-weight:600; }
+  .koveld { display:flex; flex-direction:column; gap:4px; font-size:12px; color:var(--faint); }
+  .koveld select, .koveld input { font:inherit; font-size:14px; color:var(--ink); background:var(--surface);
+    border:1px solid var(--line); border-radius:3px; padding:8px 10px; }
+  .kozoek { flex:1; min-width:220px; }
+  .kotel { font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.08em; color:var(--faint); padding-bottom:10px; }
+  .kometer { align-self:flex-start; background:var(--surface); border:1px solid var(--line); border-radius:3px;
+    padding:8px 14px; cursor:pointer; font-size:13.5px; color:var(--accent); }
+  .kometer:hover { border-color:var(--accent); }
+  .kobron { margin:0; padding-left:18px; display:flex; flex-direction:column; gap:8px; font-size:14.5px; color:var(--muted); }
+  .kotoggle { all:unset; cursor:pointer; display:inline-flex; align-items:baseline; gap:10px; }
+  .kotoggle::after { content:"\25BE"; font-size:.55em; color:var(--faint); transition:transform .15s; }
+  .kotoggle[aria-expanded="false"]::after { transform:rotate(-90deg); }
+  .kotoggle:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+  .kobody { display:flex; flex-direction:column; gap:18px; }
+  .koalles { font-size:13.5px; color:var(--faint); }
+  .koalles button { all:unset; cursor:pointer; color:var(--accent); border-bottom:1px solid currentColor; }
+  .kostijg { color:var(--keep); font-weight:600; }
+  .kodaal { color:var(--open); font-weight:600; }
+  .kocl summary { cursor:pointer; }
+  .kocl p { margin:8px 0 0; max-width:80ch; }
+  .kocltab { margin-top:10px; font-size:13px; }
+  .kocltab th, .kocltab td { padding:6px 10px; }
+  .kocltab tr.koalg td:first-child { color:var(--muted); text-decoration:line-through; text-decoration-color:var(--line); }
+  /* Eén regel per rij: naam van de concurrent en de link breken niet af. */
+  #ko-lijst td:first-child, #ko-lijst td:last-child, #ko-top-tabel td, .kocltab td.mono { white-space:nowrap; }
+  #ko-top-tabel td:nth-child(2) { white-space:normal; }
+  .kobronnen { border-top:1px solid var(--line-soft); padding:10px 0; }
+  .kobronnen summary { cursor:pointer; }
+  .kobronnen ul { margin:8px 0 0; padding-left:18px; display:flex; flex-direction:column; gap:4px; font-size:13.5px; word-break:break-all; }
+
   .taskgroups { display:flex; flex-direction:column; gap:26px; }
   .taskgroup { display:flex; flex-direction:column; gap:10px; }
   .taskgroup > h3 { font-size:20px; color:var(--primary); }
@@ -1566,6 +1612,7 @@
       <li><button class="tab" role="tab" id="t9" data-hash="intro" aria-controls="p9" aria-selected="false">Intro</button></li>
       <li><button class="tab" role="tab" id="t4" data-hash="wireframes" aria-controls="p4" aria-selected="false">Wireframes</button></li>
       <li><button class="tab" role="tab" id="t7" data-hash="meetings" aria-controls="p7" aria-selected="false">Meetings</button></li>
+      <li><button class="tab" role="tab" id="t10" data-hash="productlijst" aria-controls="p10" aria-selected="false">Productlijst</button></li>
       <li><a class="uit" href="mockups/header-varianten.html" target="_blank" rel="noopener">Prototypes<span class="pijl">&#8599;</span></a></li>
     </ul>
   </div>
@@ -12268,6 +12315,149 @@
 
   </div>
 
+  <!-- Productlijst: wat de concurrenten aan categorieën en producten online
+       hebben, als basis voor de zoekwoorden van CaseBuilder. De lijsten komen
+       uit concurrenten/data.js (scripts/bouw-concurrenten.py); alleen het
+       stappenplan en de toelichting staan hier met de hand. -->
+  <div class="tabpanel" id="p10" role="tabpanel" aria-labelledby="t10" hidden>
+
+    <header class="masthead">
+      <span class="eyebrow">SEO-onderzoek &middot; claude pre-onderzoek</span>
+      <h1>Productlijst</h1>
+      <p class="lede">Welke categorie&euml;n en producten de concurrenten online hebben, uit hun eigen sitemaps. Daaruit komt een top 100 van zoekwoorden die CaseBuilder moet laten zien, en per cluster de stof voor &eacute;&eacute;n pagina.</p>
+      <p class="lede">Opgehaald op <strong data-ko="datum">&hellip;</strong>. Het werkexemplaar staat in Drive: <a class="kolink" href="https://docs.google.com/spreadsheets/d/1C9k9fvFqYCdq2Y3oXwG3jKn3WL4IlfolIIvsVrsZC5o/edit" target="_blank" rel="noopener">Google Sheet &ldquo;SEO onderzoek productenlijst&rdquo;</a>, met een tabblad per cluster; daar vullen we stap 3b tot 5 aan. Voor Keyword Planner: <a class="kolink" href="concurrenten/keywords-keyword-planner.csv" download>keywords-keyword-planner.csv</a> (<span data-ko="n-csv">&hellip;</span> zoekwoorden, &eacute;&eacute;n per regel). De momentopname: <a class="kolink" href="concurrenten/concurrenten.xlsx" download>concurrenten.xlsx</a>.</p>
+      <p class="koalles"><button type="button" data-ko-alles="open">Alles openklappen</button> &middot; <button type="button" data-ko-alles="dicht">Alles dichtklappen</button></p>
+    </header>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Werkwijze</span>
+        <h2 data-rail="Stappenplan">Stappenplan</h2>
+        <p>Van de lijst van de concurrent naar de lijst van CaseBuilder. Stap 1, 2 en 4 zijn gedaan, de top 100 staat. Open: de sleutelzinnen nalopen (3) en de alternatieven (3b).</p>
+      </div>
+      <div class="scroller">
+      <table class="tpl kostap">
+        <thead><tr><th>Stap</th><th>Wat</th><th>Hoe</th><th>Stand</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">1</td><td><strong>Productcategorie&euml;n</strong></td><td>De categorie-indeling van elke concurrent, uit de sitemap. <span data-ko="n-categorie">&hellip;</span> categorie&euml;n.</td><td><span class="chip chip-keep">klaar</span></td></tr>
+          <tr><td class="mono">2</td><td><strong>Producten</strong></td><td>Elke productpagina, uit dezelfde sitemaps. <span data-ko="n-product">&hellip;</span> producten, plus <span data-ko="n-landingspagina">&hellip;</span> losse trefwoordpagina&rsquo;s.</td><td><span class="chip chip-keep">klaar</span></td></tr>
+          <tr><td class="mono">3</td><td><strong>Sleutelzin per pagina</strong></td><td>Het zoekwoord dat in het adres zit: <code>/flightcase-op-wielen</code> wordt &ldquo;flightcase op wielen&rdquo;. Maten en de eigen merknaam van de concurrent gaan eraf, modelnummers blijven staan. Eerste versie, nog met de hand na te lopen.</td><td><span class="chip chip-move">eerste versie</span></td></tr>
+          <tr><td class="mono">3b</td><td><strong>Alternatieve zoekwoorden</strong></td><td>Per sleutelzin de varianten waar ook op gezocht wordt: &ldquo;kabelkist&rdquo; naast &ldquo;kabelkoffer&rdquo; en &ldquo;cable trunk&rdquo;. Komt uit de zoekwoordtool van stap 4.</td><td><span class="chip chip-open">open</span></td></tr>
+          <tr><td class="mono">4</td><td><strong>Zoekvolume uit Keyword Planner</strong></td><td>De CSV hierboven als plan ge&uuml;pload in Keyword Planner, de export (&ldquo;Historische statistieken van plan&rdquo;) teruggezet in de clustertabs: zoekvolume, concurrentie, bod laag en hoog, wijziging over 3 maanden en over een jaar. De volumes zijn <strong>bereiken</strong> (10&ndash;100, 100&ndash;1K, 1K&ndash;10K): het advertentieaccount heeft niets lopen, en dan geeft Google geen exacte getallen. Later eventueel via de API van Google Ads of Ahrefs.</td><td><span class="chip chip-keep">klaar</span></td></tr>
+          <tr><td class="mono">5</td><td><strong>Top 100 voor CaseBuilder</strong></td><td>De case-specifieke zoekwoorden op volume; bij gelijk bereik eerst wat meer concurrenten voeren, dan het hoogste bod. Losse algemene woorden (&ldquo;interieur&rdquo;, &ldquo;koffers&rdquo;) halen veel volume op van mensen die iets anders zoeken en tellen niet mee. Zie <a href="#ko-top">Top 100</a>.</td><td><span class="chip chip-move">eerste versie</span></td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <div class="thesis">
+      <span class="eyebrow">Vraag aan Clement</span>
+      <p>Klopt deze logica: van de sitemaps van de concurrenten naar categorie&euml;n en producten, naar zoekwoorden, naar clusters, naar zoekvolume, naar een top 100? En kun je hiermee de productcategorie&euml;n en subcategorie&euml;n voor de nieuwe CaseBuilder-webshop vastleggen?</p>
+    </div>
+
+    <section id="ko-top">
+      <div class="sec-head">
+        <span class="eyebrow">Stap 5</span>
+        <h2 data-rail="Top 100">Top 100</h2>
+        <p>De zoekwoorden die CaseBuilder als eerste moet laten zien. Alleen case-specifiek en met gemeten volume. Het volume is een bereik per maand; het bod is wat adverteerders boven aan de pagina betalen per klik, een maat voor commerci&euml;le waarde. &ldquo;3 maanden&rdquo; en &ldquo;jaar&rdquo; zijn de wijziging in zoekvolume volgens Keyword Planner; bij bereiken staat daar meestal 0%, een uitschieter (+900%, &minus;90%) betekent dat het woord van bereik wisselde.</p>
+      </div>
+      <div class="scroller"><table class="tpl" id="ko-top-tabel"></table></div>
+      <button type="button" class="kometer" id="ko-top-meer">Toon alle 100</button>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Van lijst naar pagina</span>
+        <h2 data-rail="Clusters">Clusters</h2>
+        <p>Een cluster is een verzameling zoekwoorden waar &eacute;&eacute;n pagina van te maken is. Elk zoekwoord zit in precies &eacute;&eacute;n cluster. Gesorteerd op zoekvolume; klap een cluster open voor de zoekwoorden, ook op volume, met concurrentie en bod. Subclusters: waar een deel van een cluster zelf genoeg volume heeft voor een eigen pagina. De indeling staat in <code>scripts/clusters.py</code>.</p>
+        <p>Een apparaatnaam zonder casewoord krijgt &ldquo;flightcase&rdquo; ervoor (&ldquo;flightcase genz benz 410t&rdquo;), anders meet je het volume van de speaker in plaats van de case. Duitse zinnen van Megacase en Amptown zijn weggelaten.</p>
+      </div>
+      <div class="scroller"><table class="tpl" id="ko-clusters"></table></div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Wie</span>
+        <h2 data-rail="Per concurrent" data-ko-dicht>Per concurrent</h2>
+        <p>Dertien bedrijven, allemaal uit onze eigen stukken: de Branche selectie, de Marketingstrategie en het concurrentenoverzicht. Wie geen productsitemap heeft, verkoopt niet online: Van der Werf, Reco, SLF, JDB en Rhinocase werken op aanvraag.</p>
+      </div>
+      <div class="scroller"><table class="tpl" id="ko-wie"></table></div>
+      <article class="card">
+        <h3>Waar Megacase de maten van 1.800 apparaten vandaan haalt</h3>
+        <p>Niet uit GS1: op hun productpagina&rsquo;s staat geen GTIN-, EAN- of Icecat-koppeling. Hun configurator is die van de <strong>Thomann Case Factory</strong>: dezelfde software, met in de teksten &ldquo;Thomann Casefactory&rdquo; en een thomann.de-adres voor vragen. De lijst met fabrikanten en modellen laadt uit hun eigen systeem, niet uit een openbare bron. Zelf noemen ze het een &ldquo;grote modellendatabase&rdquo; uit decennia bouwen. Die komt dus uit wat ze gebouwd en gemeten hebben, met Thomann erachter, dat vrijwel elk keyboard verkoopt.</p>
+        <p><strong>Voor CaseBuilder:</strong> hetzelfde bezit ligt in de eigen orderhistorie: elke gebouwde case is een apparaat met maten. GS1 geeft een productnummer, en maten meestal alleen van de verpakking. Handleidingen van fabrikanten en Open Icecat vullen aan.</p>
+      </article>
+    </section>
+
+
+    <section id="ko-overlap">
+      <div class="sec-head">
+        <span class="eyebrow">Voorloper van stap 5</span>
+        <h2 data-rail="Overlap" data-ko-dicht>Wat bij de meeste concurrenten terugkomt</h2>
+        <p>Woorden en woordparen uit de sleutelzinnen, geteld per concurrent. Hoe meer concurrenten iets voeren, hoe zekerder er vraag naar is. Nog zonder zoekvolume: dat komt in stap 4. Megacase en Amptown gebruiken Duitse adressen, dus hun producten tellen hier minder mee dan ze zouden moeten.</p>
+      </div>
+      <div class="scroller"><table class="tpl" id="ko-overlap-tabel"></table></div>
+      <button type="button" class="kometer" id="ko-overlap-meer">Toon alle termen</button>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Stap 1, 2 en 3</span>
+        <h2 data-rail="De lijsten" data-ko-dicht>Categorie&euml;n en producten</h2>
+        <p>De volledige lijsten, met per regel de sleutelzin, het cluster waar hij in valt, en een link naar de pagina bij de concurrent. Dezelfde rijen staan in de Sheet. &ldquo;Weggelaten&rdquo; = niet naar Keyword Planner gegaan: Duits, te lang, of geen bruikbaar zoekwoord.</p>
+      </div>
+      <div class="kobalk">
+        <div class="kosoort" role="group" aria-label="Soort">
+          <button type="button" data-soort="categorie" aria-pressed="true">Categorie&euml;n</button>
+          <button type="button" data-soort="product" aria-pressed="false">Producten</button>
+          <button type="button" data-soort="landingspagina" aria-pressed="false">Trefwoordpagina&rsquo;s (DFB)</button>
+        </div>
+        <label class="koveld"><span>Concurrent</span><select id="ko-wie-kies"><option value="">Alle</option></select></label>
+        <label class="koveld"><span>Cluster</span><select id="ko-cl-kies"><option value="">Alle</option></select></label>
+        <label class="koveld kozoek"><span>Zoek</span><input type="search" id="ko-zoek" placeholder="bijvoorbeeld: kabelkist, 19 inch, allen heath"></label>
+        <span class="kotel" id="ko-tel"></span>
+      </div>
+      <div class="scroller"><table class="tpl" id="ko-lijst"></table></div>
+      <button type="button" class="kometer" id="ko-lijst-meer" hidden>Toon meer</button>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Herkomst</span>
+        <h2 data-rail="Bronnen" data-ko-dicht>Bronnen</h2>
+        <p>Elke regel hierboven is terug te voeren op een van deze bestanden. Van elke sitemap staat een ongewijzigde kopie in <code>concurrenten/bronnen/</code>, zodat de telling klopt, ook als de concurrent zijn site verandert.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <h3>Werkwijze en opdracht</h3>
+          <ul class="kobron">
+            <li><a class="kolink" href="https://docs.google.com/document/d/1B9D65QFHAtyKt-Cbtvv-6edQbtavuXU-0K60dLUOpac/edit" target="_blank" rel="noopener">Rokx SOP &mdash; SEO heist stappenplan</a>: sitemap van de concurrent exporteren, van URL naar titel, dan naar content. Uit de Drive-map <a class="kolink" href="https://drive.google.com/drive/folders/1nS1mqI5VPvCNH8oxRgVGL3dmgHvvgwwx" target="_blank" rel="noopener">SEO heist</a>.</li>
+            <li>Het stappenplan 1&ndash;5 hierboven: afgesproken op 22 september 2026.</li>
+            <li><a class="kolink" href="https://drive.google.com/drive/folders/1roYbWv0fLy2fF_wbTu-fyG7V4TuGbMlN" target="_blank" rel="noopener">Drive-map SEO onderzoek productenlijst</a> (Opdracht 1602).</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Waar de concurrenten vandaan komen</h3>
+          <ul class="kobron">
+            <li><a class="kolink" href="https://docs.google.com/document/d/1gbJetGe2UNJ-pJAvvHWU7I6YYdyl8SXEMBtUHX7OMwE/edit" target="_blank" rel="noopener">Branche selectie sep 2026</a>: Faes, Van der Werf Flightcases, AW Cases, Megacase, 123Flightcase.</li>
+            <li><a class="kolink" href="https://docs.google.com/document/d/1md4Rh843wOlmaJUxxDEKFiFMY7cxRakjEpIJcHQNDxY/edit" target="_blank" rel="noopener">Casebuilder Marketingstrategie</a>, hoofdstuk Concurrentie-analyse: Amptown, Denting, DFB Cases, Reco Cases, SLF, JDB.</li>
+            <li>Concurrentenoverzicht in de Rokx-tool (22 september 2026): voegt KIRO Flightcases en Rhinocase toe.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Hoe het gemaakt is</h3>
+          <ul class="kobron">
+            <li><code>scripts/haal-concurrenten.py</code> haalt de sitemaps op die robots.txt aanwijst, en bewaart ze.</li>
+            <li><code>scripts/bouw-concurrenten.py</code> maakt er de Excel en deze tab van, zonder internet.</li>
+            <li><code>scripts/concurrenten_lijst.py</code>: de lijst concurrenten, en per site welke adressen wat zijn.</li>
+          </ul>
+        </article>
+      </div>
+      <div id="ko-bronnen"></div>
+    </section>
+
+  </div>
+
 
 </div>
 
@@ -12400,6 +12590,208 @@
 
     window.addEventListener('popstate', function () { go(location.hash.slice(1), false); });
     go(location.hash.slice(1), false);
+  })();
+</script>
+
+<script src="concurrenten/data.js"></script>
+<script>
+  // Tab Productlijst. Alles hieronder komt uit concurrenten/data.js; ontbreekt
+  // dat bestand, dan blijft de tab staan met alleen het stappenplan.
+  (function () {
+    var D = window.CONCURRENTEN;
+    if (!D || !document.getElementById('p10')) return;
+    var K = {}; D.kolommen.forEach(function (k, i) { K[k] = i; });
+    var NAAM = {}; D.concurrenten.forEach(function (c) { NAAM[c.slug] = c.naam; });
+    var e = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
+    var nl = function (n) { return Number(n || 0).toLocaleString('nl-NL'); };
+    var link = function (u, t) { return '<a class="kolink" href="' + e(u) + '" target="_blank" rel="noopener">' + e(t) + '</a>'; };
+
+    // Kop en stappenplan: tellingen invullen.
+    var tot = {};
+    D.rijen.forEach(function (r) { tot[r[K.soort]] = (tot[r[K.soort]] || 0) + 1; });
+    var d = new Date(D.opgehaald.replace('Z', ':00Z'));
+    document.querySelectorAll('[data-ko]').forEach(function (el) {
+      var k = el.getAttribute('data-ko');
+      if (k === 'datum') el.textContent = isNaN(d) ? D.opgehaald : d.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+      else if (k === 'n-csv') el.textContent = nl(D.csv);
+      else if (k.indexOf('n-') === 0) el.textContent = nl(tot[k.slice(2)]);
+    });
+
+    // Per concurrent.
+    var wie = '<thead><tr><th>Concurrent</th><th>Genoemd in</th><th class="r">Categorie&euml;n</th><th class="r">Producten</th><th class="r">Trefwoord&shy;pagina&rsquo;s</th><th>Taal</th><th>Opmerking</th></tr></thead><tbody>';
+    D.concurrenten.forEach(function (c) {
+      var t = c.tel || {};
+      wie += '<tr><td>' + link(c.site, c.naam) + '</td><td>' +
+        c.genoemd.map(function (g) { return g.url ? link(g.url, g.titel) : e(g.titel); }).join('<br>') + '</td>' +
+        '<td class="num">' + (t.categorie || '&ndash;') + '</td><td class="num">' + (t.product ? nl(t.product) : '&ndash;') + '</td>' +
+        '<td class="num">' + (t.landingspagina || '&ndash;') + '</td><td class="mono">' + e(c.taal) + '</td>' +
+        '<td class="kozacht">' + e([c.rol, c.vondst].filter(Boolean).join(' ')) + '</td></tr>';
+    });
+    document.getElementById('ko-wie').innerHTML = wie + '</tbody>';
+
+    // Secties in- en uitklappen. De kop wordt een knop; alles na de kop gaat
+    // in een blok dat verborgen kan worden. Zonder script blijft alles open.
+    // Stappenplan, top 100 en clusters beginnen open (de uitkomst), de
+    // onderbouwing dicht.
+    var secties = [];
+    Array.prototype.forEach.call(document.querySelectorAll('#p10 > section'), function (sec, i) {
+      var kop = sec.querySelector('.sec-head h2');
+      if (!kop) return;
+      var blok = document.createElement('div');
+      blok.className = 'kobody';
+      blok.id = 'ko-blok-' + i;
+      while (sec.querySelector('.sec-head').nextSibling) blok.appendChild(sec.querySelector('.sec-head').nextSibling);
+      sec.appendChild(blok);
+      var knop = document.createElement('button');
+      knop.type = 'button';
+      knop.className = 'kotoggle';
+      knop.setAttribute('aria-controls', blok.id);
+      while (kop.firstChild) knop.appendChild(kop.firstChild);
+      kop.appendChild(knop);
+      var zet = function (open) { knop.setAttribute('aria-expanded', open ? 'true' : 'false'); blok.hidden = !open; };
+      knop.addEventListener('click', function () { zet(knop.getAttribute('aria-expanded') !== 'true'); });
+      zet(!kop.hasAttribute('data-ko-dicht'));
+      secties.push({ sec: sec, zet: zet });
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-ko-alles]'), function (b) {
+      b.addEventListener('click', function () {
+        var open = b.getAttribute('data-ko-alles') === 'open';
+        secties.forEach(function (x) { x.zet(open); });
+      });
+    });
+    // Een link naar een dichte sectie (#ko-top, #ko-overlap) klapt hem eerst open.
+    document.addEventListener('click', function (ev) {
+      var a = ev.target.closest && ev.target.closest('a[href^="#ko-"]');
+      if (!a) return;
+      var doel = document.getElementById(a.getAttribute('href').slice(1));
+      secties.forEach(function (x) { if (x.sec === doel || x.sec.contains(doel)) x.zet(true); });
+    }, true);
+
+    // Top 100 en clusters. Volumes zijn het midden van een bereik (het
+    // advertentieaccount loopt niet); toon daarom altijd het bereik.
+    var BEREIK = { 0: '0', 50: '10–100', 500: '100–1K', 5000: '1K–10K', 50000: '10K–100K', 500000: '100K–1M' };
+    var bereik = function (n) { return n == null ? '–' : (BEREIK[n] || nl(n)); };
+    var euro = function (x) { return x == null ? '' : '€' + x.toFixed(2).replace('.', ','); };
+    var bod = function (lo, hi) { return lo == null && hi == null ? '–' : euro(lo) + ' – ' + euro(hi); };
+    // Wijziging uit Keyword Planner ('0%', '-90%', '900%'): kleur alleen als het
+    // echt iets zegt. Bij bereiken is 0% de gewone uitkomst.
+    var trend = function (x) {
+      if (!x) return '–';
+      var n = parseFloat(String(x).replace(',', '.'));
+      var kl = n > 0 ? 'kostijg' : n < 0 ? 'kodaal' : '';
+      return kl ? '<span class="' + kl + '">' + e(x) + '</span>' : e(x);
+    };
+    var CLNAAM = {}; (D.clusters || []).forEach(function (c) { CLNAAM[c.slug] = c.naam; });
+
+    if (D.top) {
+      var alleTop = false;
+      var tekenTop = function () {
+        document.getElementById('ko-top-tabel').innerHTML =
+          '<thead><tr><th class="r">#</th><th>Zoekwoord</th><th>Zoekvolume</th><th>Cluster</th><th>Concurrentie</th><th>Bod (laag – hoog)</th><th class="r">3 maanden</th><th class="r">Jaar</th><th class="r">Concurrenten</th></tr></thead><tbody>' +
+          (alleTop ? D.top : D.top.slice(0, 25)).map(function (t, i) {
+            return '<tr><td class="num">' + (i + 1) + '</td><td><strong>' + e(t[0]) + '</strong></td><td class="mono">' + bereik(t[1]) +
+              '</td><td>' + e(t[2]) + '</td><td>' + e(t[3]) + '</td><td class="mono">' + bod(t[4], t[5]) +
+              '</td><td class="num">' + trend(t[7]) + '</td><td class="num">' + trend(t[8]) + '</td><td class="num">' + (t[6] || '–') + '</td></tr>';
+          }).join('') + '</tbody>';
+        document.getElementById('ko-top-meer').textContent = alleTop ? 'Toon alleen de eerste 25' : 'Toon alle ' + D.top.length;
+      };
+      document.getElementById('ko-top-meer').addEventListener('click', function () { alleTop = !alleTop; tekenTop(); });
+      tekenTop();
+    }
+
+    if (D.clusters && D.clusterlijst) {
+      var cls = D.clusters.concat([{ slug: 'zonder', naam: 'zonder cluster', zaad: [] }]).map(function (c) {
+        var l = D.clusterlijst[c.slug] || [];
+        var spec = l.filter(function (k) { return k[1] && k[5] === 'case-specifiek'; });
+        return { c: c, l: l, met: l.filter(function (k) { return k[1]; }).length,
+                 som: spec.reduce(function (a, k) { return a + k[1]; }, 0), beste: spec[0] };
+      });
+      // Hoogste case-specifieke volume eerst; 'zonder cluster' altijd onderaan.
+      cls.sort(function (a, b) { return (a.c.slug === 'zonder') - (b.c.slug === 'zonder') || b.som - a.som || b.l.length - a.l.length; });
+      document.getElementById('ko-clusters').innerHTML =
+        '<thead><tr><th>Cluster</th><th class="r">Zoekwoorden</th><th class="r">Met volume</th><th>Sterkste zoekwoord</th><th class="r">Concurrenten</th></tr></thead><tbody>' +
+        cls.map(function (x) {
+          var c = x.c, metVol = x.l.filter(function (k) { return k[1]; }), rest = x.l.length - metVol.length;
+          var lijst = '<table class="tpl kocltab"><thead><tr><th>Zoekwoord</th><th>Volume</th><th>Concurrentie</th><th>Bod (laag – hoog)</th><th>Intentie</th></tr></thead><tbody>' +
+            metVol.map(function (k) {
+              return '<tr' + (k[5] === 'algemeen' ? ' class="koalg"' : '') + '><td>' + e(k[0]) + '</td><td class="mono">' + bereik(k[1]) + '</td><td>' + e(k[2]) +
+                '</td><td class="mono">' + bod(k[3], k[4]) + '</td><td class="kozacht">' + e(k[5]) + '</td></tr>';
+            }).join('') + '</tbody></table>' +
+            (rest ? '<p class="kozacht">+ ' + nl(rest) + ' zoekwoorden zonder gemeten volume: ' + e(x.l.filter(function (k) { return !k[1]; }).slice(0, 40).map(function (k) { return k[0]; }).join(' · ')) + (rest > 40 ? ' · …' : '') + '</p>' : '');
+          return '<tr><td><details class="kocl"><summary><strong>' + e(c.slug === 'zonder' ? 'zonder cluster (nakijken)' : 'cluster ' + c.naam) + '</strong></summary>' + lijst + '</details></td>' +
+            '<td class="num">' + nl(x.l.length) + '</td><td class="num">' + x.met + '</td><td>' +
+            (x.beste ? e(x.beste[0]) + ' <span class="kozacht">' + bereik(x.beste[1]) + '</span>' : '<span class="kozacht">–</span>') +
+            '</td><td class="num">' + (D.clusterwie[c.slug] || []).length + '</td></tr>';
+        }).join('') + '</tbody>';
+    }
+
+    // Overlap.
+    var alleOverlap = false;
+    function tekenOverlap() {
+      var rijen = alleOverlap ? D.overlap : D.overlap.slice(0, 40);
+      var max = D.overlap.length ? D.overlap[0][1] : 1;
+      document.getElementById('ko-overlap-tabel').innerHTML =
+        '<thead><tr><th>Term</th><th>Concurrenten</th><th class="r">Pagina&rsquo;s</th><th>Welke</th></tr></thead><tbody>' +
+        rijen.map(function (o) {
+          return '<tr><td><strong>' + e(o[0]) + '</strong></td><td><span class="kobar"><i style="width:' + Math.round(o[1] / max * 100) + '%"></i></span> ' + o[1] +
+            '</td><td class="num">' + nl(o[2]) + '</td><td class="kozacht">' + e(o[3].join(', ')) + '</td></tr>';
+        }).join('') + '</tbody>';
+      var knop = document.getElementById('ko-overlap-meer');
+      knop.textContent = alleOverlap ? 'Toon alleen de top 40' : 'Toon alle ' + D.overlap.length + ' termen';
+    }
+    document.getElementById('ko-overlap-meer').addEventListener('click', function () { alleOverlap = !alleOverlap; tekenOverlap(); });
+    tekenOverlap();
+
+    // De lijsten: filter op soort, concurrent en zoekterm.
+    var staat = { soort: 'categorie', c: '', cl: '', q: '', n: 150 };
+    var WEG = { 'weg:duits': 'weggelaten: Duits', 'weg:te lang': 'weggelaten: te lang', 'weg:onbruikbaar': 'weggelaten' };
+    var clNaam = function (x) { return x === 'zonder' ? 'zonder cluster' : (CLNAAM[x] ? CLNAAM[x] : (WEG[x] || '')); };
+    var clKies = document.getElementById('ko-cl-kies');
+    (D.clusters || []).concat([{ slug: 'zonder', naam: 'zonder cluster' }]).forEach(function (c) {
+      var o = document.createElement('option'); o.value = c.slug; o.textContent = c.naam; clKies.appendChild(o);
+    });
+    clKies.addEventListener('change', function () { staat.cl = clKies.value; staat.n = 150; tekenLijst(); });
+    var kies = document.getElementById('ko-wie-kies');
+    D.concurrenten.forEach(function (c) { var o = document.createElement('option'); o.value = c.slug; o.textContent = c.naam; kies.appendChild(o); });
+    function tekenLijst() {
+      var q = staat.q.toLowerCase();
+      var rijen = D.rijen.filter(function (r) {
+        return r[K.soort] === staat.soort && (!staat.c || r[K.c] === staat.c) && (!staat.cl || r[K.cluster] === staat.cl) &&
+          (!q || (r[K.naam] + ' ' + r[K.zin] + ' ' + r[K.pad]).toLowerCase().indexOf(q) !== -1);
+      });
+      document.getElementById('ko-tel').textContent = nl(rijen.length) + ' regels';
+      document.getElementById('ko-lijst').innerHTML =
+        '<thead><tr><th>Concurrent</th><th>Naam</th><th>Categorie</th><th>Sleutelzin</th><th>Cluster</th><th>Pagina</th></tr></thead><tbody>' +
+        rijen.slice(0, staat.n).map(function (r) {
+          return '<tr><td>' + e(NAAM[r[K.c]]) + '</td><td>' + e(r[K.naam]) + '</td><td class="kozacht">' + e(r[K.pad]) +
+            '</td><td><strong>' + e(r[K.zin]) + '</strong></td><td class="kozacht">' + e(clNaam(r[K.cluster])) + '</td><td>' + link(r[K.url], 'bekijk ↗') + '</td></tr>';
+        }).join('') + '</tbody>';
+      var meer = document.getElementById('ko-lijst-meer');
+      meer.hidden = rijen.length <= staat.n;
+      meer.textContent = 'Toon ' + nl(Math.min(500, rijen.length - staat.n)) + ' meer';
+    }
+    document.querySelectorAll('.kosoort button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        staat.soort = b.getAttribute('data-soort'); staat.n = 150;
+        document.querySelectorAll('.kosoort button').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        tekenLijst();
+      });
+    });
+    kies.addEventListener('change', function () { staat.c = kies.value; staat.n = 150; tekenLijst(); });
+    document.getElementById('ko-zoek').addEventListener('input', function (ev) { staat.q = ev.target.value.trim(); staat.n = 150; tekenLijst(); });
+    document.getElementById('ko-lijst-meer').addEventListener('click', function () { staat.n += 500; tekenLijst(); });
+    tekenLijst();
+
+    // Bronnen per concurrent: elke opgehaalde sitemap, met de bewaarde kopie.
+    document.getElementById('ko-bronnen').innerHTML = D.concurrenten.map(function (c) {
+      return '<details class="kobronnen"><summary><strong>' + e(c.naam) + '</strong> <span class="kozacht">' + c.bronnen.length + ' bestanden</span></summary><ul>' +
+        c.bronnen.map(function (b) {
+          var wat = b.status === 'overgeslagen' ? 'overgeslagen (geen aanbod)' :
+            b.soort === 'index' ? 'index' : b.soort === 'homepage' ? 'homepage' : nl(b.urls) + ' adressen';
+          return '<li>' + link(b.url, b.url.replace(/^https?:\/\//, '')) + ' <span class="kozacht">&middot; ' + e(b.status) + ' &middot; ' + wat +
+            (b.bestand ? ' &middot; <a class="kolink" href="concurrenten/bronnen/' + e(b.bestand) + '" target="_blank" rel="noopener">kopie</a>' : '') + '</span></li>';
+        }).join('') + '</ul></details>';
+    }).join('');
   })();
 </script>
 
