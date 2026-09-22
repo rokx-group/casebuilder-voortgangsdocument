@@ -1372,6 +1372,7 @@
   .kocl p { margin:8px 0 0; max-width:80ch; }
   .kocltab { margin-top:10px; font-size:13px; }
   .kocltab th, .kocltab td { padding:6px 10px; }
+  #ko-lijst tr.koalg td:nth-child(4) strong { color:var(--muted); text-decoration:line-through; text-decoration-color:var(--line); }
   .kocltab tr.koalg td:first-child { color:var(--muted); text-decoration:line-through; text-decoration-color:var(--line); }
   /* Eén regel per rij: naam van de concurrent en de link breken niet af. */
   #ko-lijst td:first-child, #ko-lijst td:last-child, #ko-top-tabel td, .kocltab td.mono { white-space:nowrap; }
@@ -12404,7 +12405,7 @@
       <div class="sec-head">
         <span class="eyebrow">Stap 1, 2 en 3</span>
         <h2 data-rail="De lijsten" data-ko-dicht>Categorie&euml;n en producten</h2>
-        <p>De volledige lijsten, met per regel de sleutelzin, het cluster waar hij in valt, en een link naar de pagina bij de concurrent. Dezelfde rijen staan in de Sheet. &ldquo;Weggelaten&rdquo; = niet naar Keyword Planner gegaan: Duits, te lang, of geen bruikbaar zoekwoord.</p>
+        <p>De volledige lijsten, gesorteerd op zoekvolume (hoogste eerst), dan op hoeveel concurrenten het voeren. Per regel de sleutelzin, het volume, het cluster waar hij in valt, en een link naar de pagina bij de concurrent. Dezelfde rijen staan in de Sheet. &ldquo;Weggelaten&rdquo; = niet naar Keyword Planner gegaan: Duits, te lang, of geen bruikbaar zoekwoord.</p>
       </div>
       <div class="kobalk">
         <div class="kosoort" role="group" aria-label="Soort">
@@ -12761,10 +12762,10 @@
       });
       document.getElementById('ko-tel').textContent = nl(rijen.length) + ' regels';
       document.getElementById('ko-lijst').innerHTML =
-        '<thead><tr><th>Concurrent</th><th>Naam</th><th>Categorie</th><th>Sleutelzin</th><th>Cluster</th><th>Pagina</th></tr></thead><tbody>' +
+        '<thead><tr><th>Concurrent</th><th>Naam</th><th>Categorie</th><th>Sleutelzin</th><th>Zoekvolume</th><th>Cluster</th><th>Pagina</th></tr></thead><tbody>' +
         rijen.slice(0, staat.n).map(function (r) {
-          return '<tr><td>' + e(NAAM[r[K.c]]) + '</td><td>' + e(r[K.naam]) + '</td><td class="kozacht">' + e(r[K.pad]) +
-            '</td><td><strong>' + e(r[K.zin]) + '</strong></td><td class="kozacht">' + e(clNaam(r[K.cluster])) + '</td><td>' + link(r[K.url], 'bekijk ↗') + '</td></tr>';
+          return '<tr' + (r[K.intentie] === 'algemeen' ? ' class="koalg" title="Algemeen woord: telt niet mee in de top 100"' : '') + '><td>' + e(NAAM[r[K.c]]) + '</td><td>' + e(r[K.naam]) + '</td><td class="kozacht">' + e(r[K.pad]) +
+            '</td><td><strong>' + e(r[K.zin]) + '</strong></td><td class="mono">' + (r[K.vol] != null ? bereik(r[K.vol]) : '–') + '</td><td class="kozacht">' + e(clNaam(r[K.cluster])) + '</td><td>' + link(r[K.url], 'bekijk ↗') + '</td></tr>';
         }).join('') + '</tbody>';
       var meer = document.getElementById('ko-lijst-meer');
       meer.hidden = rijen.length <= staat.n;
