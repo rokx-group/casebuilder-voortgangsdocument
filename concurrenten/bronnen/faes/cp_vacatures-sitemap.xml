@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="//faes.nl/wp-content/plugins/wordpress-seo/css/main-sitemap.xsl"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+	<url>
+		<loc>https://faes.nl/vacature/</loc>
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/vacature/" />
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/vacature/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/vacature/" />
+		<lastmod>2026-09-01T06:01:31+00:00</lastmod>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/vacancy/</loc>
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/vacancy/" />
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/vacancy/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/vacancy/" />
+		<lastmod>2026-09-01T06:01:31+00:00</lastmod>
+	</url>
+	<url>
+		<loc>https://faes.nl/vacature/productiemedewerkster/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/vacancy/production-employee/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/vacature/productiemedewerkster/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/vacature/productiemedewerkster/" />
+		<lastmod>2025-12-02T15:07:41+00:00</lastmod>
+	</url>
+	<url>
+		<loc>https://faes.nl/vacature/cleanroommedewerker/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/vacancy/cleanroom-employee/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/vacature/cleanroommedewerker/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/vacature/cleanroommedewerker/" />
+		<lastmod>2025-12-09T14:44:40+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/KF_7277_def.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/vacancy/cleanroom-employee/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/vacancy/cleanroom-employee/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/vacature/cleanroommedewerker/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/vacature/cleanroommedewerker/" />
+		<lastmod>2026-04-16T10:39:52+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/KF_7277_def.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/vacancy/production-employee/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/vacancy/production-employee/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/vacature/productiemedewerkster/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/vacature/productiemedewerkster/" />
+		<lastmod>2026-04-16T10:41:47+00:00</lastmod>
+	</url>
+	<url>
+		<loc>https://faes.nl/vacature/mechanical-engineer/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/vacancy/mechanical-engineer/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/vacature/mechanical-engineer/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/vacature/mechanical-engineer/" />
+		<lastmod>2026-04-16T10:42:39+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/KF_7277_def.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/vacancy/mechanical-engineer/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/vacancy/mechanical-engineer/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/vacature/mechanical-engineer/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/vacature/mechanical-engineer/" />
+		<lastmod>2026-04-16T10:44:51+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/KF_7277_def.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/vacature/bbl-assemblagemedewerker-in-de-kempen-werken-leren-tegelijk/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/vacancy/bbl-assembly-worker-in-the-kempen-work-learn-at-the-same-time/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/vacature/bbl-assemblagemedewerker-in-de-kempen-werken-leren-tegelijk/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/vacature/bbl-assemblagemedewerker-in-de-kempen-werken-leren-tegelijk/" />
+		<lastmod>2026-06-09T13:37:54+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/KF_7277_def.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/vacature/bbl-logistiek-medewerker-in-de-kempen-werken-leren-tegelijk/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/vacancy/bbl-logistics-employee-in-the-kempen-work-learn-at-the-same-time/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/vacature/bbl-logistiek-medewerker-in-de-kempen-werken-leren-tegelijk/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/vacature/bbl-logistiek-medewerker-in-de-kempen-werken-leren-tegelijk/" />
+		<lastmod>2026-06-09T13:41:34+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/KF_7277_def.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/vacancy/bbl-logistics-employee-in-the-kempen-work-learn-at-the-same-time/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/vacancy/bbl-logistics-employee-in-the-kempen-work-learn-at-the-same-time/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/vacature/bbl-logistiek-medewerker-in-de-kempen-werken-leren-tegelijk/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/vacature/bbl-logistiek-medewerker-in-de-kempen-werken-leren-tegelijk/" />
+		<lastmod>2026-06-10T06:16:10+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/KF_7277_def.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/vacancy/bbl-assembly-worker-in-the-kempen-work-learn-at-the-same-time/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/vacancy/bbl-assembly-worker-in-the-kempen-work-learn-at-the-same-time/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/vacature/bbl-assemblagemedewerker-in-de-kempen-werken-leren-tegelijk/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/vacature/bbl-assemblagemedewerker-in-de-kempen-werken-leren-tegelijk/" />
+		<lastmod>2026-06-10T06:20:06+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/KF_7277_def.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/vacature/accountmanager-defensie-safety-security/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/vacancy/defence-account-manager-safety-security/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/vacature/accountmanager-defensie-safety-security/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/vacature/accountmanager-defensie-safety-security/" />
+		<lastmod>2026-07-13T07:48:03+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/KF_7277_def.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/vacancy/defence-account-manager-safety-security/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/vacancy/defence-account-manager-safety-security/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/vacature/accountmanager-defensie-safety-security/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/vacature/accountmanager-defensie-safety-security/" />
+		<lastmod>2026-07-13T07:56:54+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/KF_7277_def.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/vacature/teamlead-logistiek-dienstverlening/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/vacancy/team-lead-logistics-services/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/vacature/teamlead-logistiek-dienstverlening/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/vacature/teamlead-logistiek-dienstverlening/" />
+		<lastmod>2026-07-24T06:49:55+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/KF_7277_def.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/vacancy/team-lead-logistics-services/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/vacancy/team-lead-logistics-services/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/vacature/teamlead-logistiek-dienstverlening/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/vacature/teamlead-logistiek-dienstverlening/" />
+		<lastmod>2026-07-24T06:55:42+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/KF_7277_def.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/vacature/team-lead-engineering/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/vacancy/team-lead-engineering/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/vacature/team-lead-engineering/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/vacature/team-lead-engineering/" />
+		<lastmod>2026-07-24T11:07:51+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/KF_7277_def.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/vacancy/team-lead-engineering/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/vacancy/team-lead-engineering/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/vacature/team-lead-engineering/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/vacature/team-lead-engineering/" />
+		<lastmod>2026-07-24T11:13:48+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/KF_7277_def.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/vacature/qhse-proces-specialist/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/vacancy/qhse-proces-specialist/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/vacature/qhse-proces-specialist/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/vacature/qhse-proces-specialist/" />
+		<lastmod>2026-08-11T09:54:06+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/KF_7277_def.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/vacancy/qhse-proces-specialist/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/vacancy/qhse-proces-specialist/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/vacature/qhse-proces-specialist/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/vacature/qhse-proces-specialist/" />
+		<lastmod>2026-08-11T10:46:52+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/KF_7277_def.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/vacature/logistiek-medewerker/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/vacancy/logistics-employee/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/vacature/logistiek-medewerker/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/vacature/logistiek-medewerker/" />
+		<lastmod>2026-09-01T06:01:31+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/KF_7277_def.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/vacancy/logistics-employee/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/vacancy/logistics-employee/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/vacature/logistiek-medewerker/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/vacature/logistiek-medewerker/" />
+		<lastmod>2026-09-01T06:01:31+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/KF_7277_def.jpg</image:loc>
+		</image:image>
+	</url>
+</urlset>
+<!-- XML Sitemap generated by Yoast SEO -->

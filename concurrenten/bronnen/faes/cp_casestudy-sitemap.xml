@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="//faes.nl/wp-content/plugins/wordpress-seo/css/main-sitemap.xsl"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+	<url>
+		<loc>https://faes.nl/klantcases/remade-in-holland/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/remade-in-holland/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/remade-in-holland/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/remade-in-holland/" />
+		<lastmod>2025-11-25T08:06:23+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/pexels-cottonbro-7565159-scaled.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/miljoenenbesparing-op-transport-door-volumereductie-bij-philips-healthcare/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/millions-saved-on-transportation-through-volume-reduction-at-philips-healthcare/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/miljoenenbesparing-op-transport-door-volumereductie-bij-philips-healthcare/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/miljoenenbesparing-op-transport-door-volumereductie-bij-philips-healthcare/" />
+		<lastmod>2025-11-25T08:10:35+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Philips-PackAssist.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/klant-van-faes-kmwe/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/customer-of-faes-kmwe/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/klant-van-faes-kmwe/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/klant-van-faes-kmwe/" />
+		<lastmod>2025-11-25T08:14:16+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Faes-Group-en-KMWE-bevestigen-langdurige-samenwerking-met-10-jarig-contract.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/boels-gerenommeerd-verhuurbedrijf/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/boels-reputable-rental-company/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/boels-gerenommeerd-verhuurbedrijf/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/boels-gerenommeerd-verhuurbedrijf/" />
+		<lastmod>2025-11-25T08:15:36+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Marketing_sales_huur_Boels.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/brabant-water/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/brabant-water/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/brabant-water/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/brabant-water/" />
+		<lastmod>2025-11-25T08:18:33+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/BrabantWater5-scaled-1.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/st-elisabeth-ziekenhuis-tilburg/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/st-elisabeth-hospital-tilburg/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/st-elisabeth-ziekenhuis-tilburg/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/st-elisabeth-ziekenhuis-tilburg/" />
+		<lastmod>2025-11-25T08:20:49+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/DSC_3910-scaled-1.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/sanoco-gevelsystemen/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/sanoco-facade-systems/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/sanoco-gevelsystemen/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/sanoco-gevelsystemen/" />
+		<lastmod>2025-11-25T08:22:02+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Img026779-scaled-1.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/half-19-inch-behuizingen-voor-titaan-project-van-defensie/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/half-19-inch-enclosures-for-defense-departments-titaan-project/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/half-19-inch-behuizingen-voor-titaan-project-van-defensie/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/half-19-inch-behuizingen-voor-titaan-project-van-defensie/" />
+		<lastmod>2025-11-25T08:26:50+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/titaan-project-defensie-faes-case-henk-hardeman-1024x576-1.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/businesscase-packassist-implementatie-bij-philips-healthcare/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/faes-optimizes-philips-healthcares-supply-chain/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/businesscase-packassist-implementatie-bij-philips-healthcare/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/businesscase-packassist-implementatie-bij-philips-healthcare/" />
+		<lastmod>2025-11-25T08:28:32+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Philips-PackAssist.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/klant-van-faes-philips-healthcare/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/faes-customer-philips-healthcare/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/klant-van-faes-philips-healthcare/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/klant-van-faes-philips-healthcare/" />
+		<lastmod>2025-11-25T08:34:07+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/flightcase_training_philips-300x245-2.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/sapa-artline-shaping-the-future/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/sapa-artline-shaping-the-future/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/sapa-artline-shaping-the-future/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/sapa-artline-shaping-the-future/" />
+		<lastmod>2025-11-25T08:41:10+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/aluclass1-1.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/het-verhaal-achter-de-koffer-met-jeroen-verspaandonk-van-louwershanique/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/the-story-behind-the-case-of-louwershanique/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/het-verhaal-achter-de-koffer-met-jeroen-verspaandonk-van-louwershanique/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/het-verhaal-achter-de-koffer-met-jeroen-verspaandonk-van-louwershanique/" />
+		<lastmod>2025-11-25T08:42:24+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/LouwersHanique-7-1024x683-1.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/gea-engineering-for-a-better-world/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/gea-engineering-for-a-better-world/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/gea-engineering-for-a-better-world/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/gea-engineering-for-a-better-world/" />
+		<lastmod>2025-11-25T08:43:48+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/GEA-klantcase-koffers-Faes-Cases2-740x671-kopie.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/lion-ready-for-action/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/lion-ready-for-action/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/lion-ready-for-action/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/lion-ready-for-action/" />
+		<lastmod>2025-11-25T08:45:06+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Het_verhaal_achter_de_koffer_-_LION_thumbnail-740x416-1.png</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/maatwerkverpakking-voor-twee-grote-halfgeleider-componenten/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/custom-packaging-for-two-large-semiconductor-components/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/maatwerkverpakking-voor-twee-grote-halfgeleider-componenten/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/maatwerkverpakking-voor-twee-grote-halfgeleider-componenten/" />
+		<lastmod>2025-11-25T08:47:58+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Tailor-made-Clean-and-Send-Assies-for-two-large-semiconductor-components_Faes.png</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/stikstof-gevulde-rvs-dome-voor-een-hightech-klant/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/nitrogen-filled-stainless-steel-dome-for-a-high-tech-customer/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/stikstof-gevulde-rvs-dome-voor-een-hightech-klant/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/stikstof-gevulde-rvs-dome-voor-een-hightech-klant/" />
+		<lastmod>2025-11-25T08:51:14+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/RVS-dome-Hightech-klant-2.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/een-toolkit-voor-de-medische-sector/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/a-toolkit-for-the-medical-sector/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/een-toolkit-voor-de-medische-sector/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/een-toolkit-voor-de-medische-sector/" />
+		<lastmod>2025-11-25T08:52:58+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Medische-Flightcase.png</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/studenten-werken-met-project-march-vii-aan-het-exoskelet/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/students-work-on-exoskeleton-with-project-march-vii/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/studenten-werken-met-project-march-vii-aan-het-exoskelet/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/studenten-werken-met-project-march-vii-aan-het-exoskelet/" />
+		<lastmod>2025-11-25T08:55:28+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Walkingpattern.png</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/assembleon/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/assembleon/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/assembleon/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/assembleon/" />
+		<lastmod>2025-11-25T08:57:38+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Kist-Assembleon-samen.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/maatwerk-verpakkingsoplossingen-voor-halfgeleiderbedrijf/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/custom-packaging-solutions-for-semiconductor-company/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/maatwerk-verpakkingsoplossingen-voor-halfgeleiderbedrijf/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/maatwerk-verpakkingsoplossingen-voor-halfgeleiderbedrijf/" />
+		<lastmod>2025-11-25T08:59:34+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Tailor-made-Clean-Transport-and-Send-Assies-for-a-semiconductor-company-4-scaled-1.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/itho-daalderop-climate-for-life/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/itho-daalderop-climate-for-life/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/itho-daalderop-climate-for-life/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/itho-daalderop-climate-for-life/" />
+		<lastmod>2025-11-25T09:38:37+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/121104745_2846582195442008_1907861230062134038_n.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/het-verhaal-achter-de-koffer-van-chess/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/the-story-behind-the-case-of-chess/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/het-verhaal-achter-de-koffer-van-chess/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/het-verhaal-achter-de-koffer-van-chess/" />
+		<lastmod>2025-11-25T09:40:20+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Chess-Wise-1040x545-1.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/een-uitdagende-case-f16-onderhoudsset-voor-defensie/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/a-challenging-case-f16-maintenance-kit-for-defense/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/een-uitdagende-case-f16-onderhoudsset-voor-defensie/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/een-uitdagende-case-f16-onderhoudsset-voor-defensie/" />
+		<lastmod>2025-11-25T09:43:28+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/SKB-3i-3.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/team-rembrandts/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/team-rembrandts/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/team-rembrandts/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/team-rembrandts/" />
+		<lastmod>2025-11-25T09:46:04+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Rembrandts3-480x320-1.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/medtronic/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/medtronic/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/medtronic/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/medtronic/" />
+		<lastmod>2025-11-25T09:49:17+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Logo-Medtronic-1.png</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/remade-in-holland/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/remade-in-holland/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/remade-in-holland/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/remade-in-holland/" />
+		<lastmod>2025-11-25T10:00:20+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/pexels-cottonbro-7565159-scaled.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/millions-saved-on-transportation-through-volume-reduction-at-philips-healthcare/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/millions-saved-on-transportation-through-volume-reduction-at-philips-healthcare/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/miljoenenbesparing-op-transport-door-volumereductie-bij-philips-healthcare/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/miljoenenbesparing-op-transport-door-volumereductie-bij-philips-healthcare/" />
+		<lastmod>2025-11-25T10:01:38+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Philips-PackAssist.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/customer-of-faes-kmwe/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/customer-of-faes-kmwe/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/klant-van-faes-kmwe/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/klant-van-faes-kmwe/" />
+		<lastmod>2025-11-25T10:02:16+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Faes-Group-en-KMWE-bevestigen-langdurige-samenwerking-met-10-jarig-contract.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/boels-reputable-rental-company/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/boels-reputable-rental-company/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/boels-gerenommeerd-verhuurbedrijf/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/boels-gerenommeerd-verhuurbedrijf/" />
+		<lastmod>2025-11-25T10:02:46+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Marketing_sales_huur_Boels.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/brabant-water/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/brabant-water/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/brabant-water/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/brabant-water/" />
+		<lastmod>2025-11-25T10:03:42+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/BrabantWater5-scaled-1.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/st-elisabeth-hospital-tilburg/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/st-elisabeth-hospital-tilburg/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/st-elisabeth-ziekenhuis-tilburg/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/st-elisabeth-ziekenhuis-tilburg/" />
+		<lastmod>2025-11-25T10:04:45+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/DSC_3910-scaled-1.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/sanoco-facade-systems/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/sanoco-facade-systems/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/sanoco-gevelsystemen/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/sanoco-gevelsystemen/" />
+		<lastmod>2025-11-25T10:05:12+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Img026779-scaled-1.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/half-19-inch-enclosures-for-defense-departments-titaan-project/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/half-19-inch-enclosures-for-defense-departments-titaan-project/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/half-19-inch-behuizingen-voor-titaan-project-van-defensie/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/half-19-inch-behuizingen-voor-titaan-project-van-defensie/" />
+		<lastmod>2025-11-25T10:05:40+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/titaan-project-defensie-faes-case-henk-hardeman-1024x576-1.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/faes-optimizes-philips-healthcares-supply-chain/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/faes-optimizes-philips-healthcares-supply-chain/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/businesscase-packassist-implementatie-bij-philips-healthcare/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/businesscase-packassist-implementatie-bij-philips-healthcare/" />
+		<lastmod>2025-11-25T10:06:11+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Philips-PackAssist.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/faes-customer-philips-healthcare/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/faes-customer-philips-healthcare/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/klant-van-faes-philips-healthcare/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/klant-van-faes-philips-healthcare/" />
+		<lastmod>2025-11-25T10:08:26+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/flightcase_training_philips-300x245-2.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/sapa-artline-shaping-the-future/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/sapa-artline-shaping-the-future/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/sapa-artline-shaping-the-future/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/sapa-artline-shaping-the-future/" />
+		<lastmod>2025-11-25T10:10:32+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/aluclass1-1.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/the-story-behind-the-case-of-louwershanique/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/the-story-behind-the-case-of-louwershanique/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/het-verhaal-achter-de-koffer-met-jeroen-verspaandonk-van-louwershanique/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/het-verhaal-achter-de-koffer-met-jeroen-verspaandonk-van-louwershanique/" />
+		<lastmod>2025-11-25T10:11:01+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/LouwersHanique-7-1024x683-1.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/gea-engineering-for-a-better-world/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/gea-engineering-for-a-better-world/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/gea-engineering-for-a-better-world/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/gea-engineering-for-a-better-world/" />
+		<lastmod>2025-11-25T10:11:32+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/GEA-klantcase-koffers-Faes-Cases2-740x671-kopie.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/lion-ready-for-action/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/lion-ready-for-action/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/lion-ready-for-action/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/lion-ready-for-action/" />
+		<lastmod>2025-11-25T10:11:58+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Het_verhaal_achter_de_koffer_-_LION_thumbnail-740x416-1.png</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/custom-packaging-for-two-large-semiconductor-components/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/custom-packaging-for-two-large-semiconductor-components/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/maatwerkverpakking-voor-twee-grote-halfgeleider-componenten/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/maatwerkverpakking-voor-twee-grote-halfgeleider-componenten/" />
+		<lastmod>2025-11-25T10:12:19+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Tailor-made-Clean-and-Send-Assies-for-two-large-semiconductor-components_Faes.png</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/nitrogen-filled-stainless-steel-dome-for-a-high-tech-customer/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/nitrogen-filled-stainless-steel-dome-for-a-high-tech-customer/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/stikstof-gevulde-rvs-dome-voor-een-hightech-klant/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/stikstof-gevulde-rvs-dome-voor-een-hightech-klant/" />
+		<lastmod>2025-11-25T10:13:18+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/RVS-dome-Hightech-klant-2.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/a-toolkit-for-the-medical-sector/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/a-toolkit-for-the-medical-sector/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/een-toolkit-voor-de-medische-sector/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/een-toolkit-voor-de-medische-sector/" />
+		<lastmod>2025-11-25T10:15:46+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Medische-Flightcase.png</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/students-work-on-exoskeleton-with-project-march-vii/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/students-work-on-exoskeleton-with-project-march-vii/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/studenten-werken-met-project-march-vii-aan-het-exoskelet/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/studenten-werken-met-project-march-vii-aan-het-exoskelet/" />
+		<lastmod>2025-11-25T10:16:07+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Walkingpattern.png</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/assembleon/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/assembleon/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/assembleon/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/assembleon/" />
+		<lastmod>2025-11-25T10:16:34+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Kist-Assembleon-samen.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/custom-packaging-solutions-for-semiconductor-company/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/custom-packaging-solutions-for-semiconductor-company/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/maatwerk-verpakkingsoplossingen-voor-halfgeleiderbedrijf/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/maatwerk-verpakkingsoplossingen-voor-halfgeleiderbedrijf/" />
+		<lastmod>2025-11-25T10:17:09+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Tailor-made-Clean-Transport-and-Send-Assies-for-a-semiconductor-company-4-scaled-1.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/itho-daalderop-climate-for-life/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/itho-daalderop-climate-for-life/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/itho-daalderop-climate-for-life/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/itho-daalderop-climate-for-life/" />
+		<lastmod>2025-11-25T10:17:39+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/121104745_2846582195442008_1907861230062134038_n.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/the-story-behind-the-case-of-chess/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/the-story-behind-the-case-of-chess/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/het-verhaal-achter-de-koffer-van-chess/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/het-verhaal-achter-de-koffer-van-chess/" />
+		<lastmod>2025-11-25T10:18:07+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Chess-Wise-1040x545-1.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/a-challenging-case-f16-maintenance-kit-for-defense/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/a-challenging-case-f16-maintenance-kit-for-defense/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/een-uitdagende-case-f16-onderhoudsset-voor-defensie/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/een-uitdagende-case-f16-onderhoudsset-voor-defensie/" />
+		<lastmod>2025-11-25T10:18:30+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/SKB-3i-3.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/team-rembrandts/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/team-rembrandts/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/team-rembrandts/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/team-rembrandts/" />
+		<lastmod>2025-11-25T10:19:00+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Rembrandts3-480x320-1.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/medtronic/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/medtronic/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/medtronic/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/medtronic/" />
+		<lastmod>2025-11-25T10:25:45+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Logo-Medtronic-1.png</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/the-story-behind-signifys-case/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/the-story-behind-signifys-case/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/het-verhaal-achter-de-koffer-van-signify/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/het-verhaal-achter-de-koffer-van-signify/" />
+		<lastmod>2025-11-25T10:26:01+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Signify-Interact-Pro-2-website-1.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/en/customer-case-studies/custom-flight-case-for-vdls-elt-project/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/custom-flight-case-for-vdls-elt-project/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/maatwerk-flightcase-voor-vdl-elt-project/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/maatwerk-flightcase-voor-vdl-elt-project/" />
+		<lastmod>2025-11-25T10:26:23+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/VDL-ETG-case-for-ELT-project-header2-scaled-1.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/maatwerk-flightcase-voor-vdl-elt-project/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/custom-flight-case-for-vdls-elt-project/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/maatwerk-flightcase-voor-vdl-elt-project/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/maatwerk-flightcase-voor-vdl-elt-project/" />
+		<lastmod>2025-11-26T14:59:46+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/VDL-ETG-case-for-ELT-project-header2-scaled-1.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>https://faes.nl/klantcases/het-verhaal-achter-de-koffer-van-signify/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://faes.nl/en/customer-case-studies/the-story-behind-signifys-case/" />
+		<xhtml:link rel="alternate" hreflang="nl" href="https://faes.nl/klantcases/het-verhaal-achter-de-koffer-van-signify/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://faes.nl/klantcases/het-verhaal-achter-de-koffer-van-signify/" />
+		<lastmod>2025-11-26T15:16:10+00:00</lastmod>
+		<image:image>
+			<image:loc>https://faes.nl/wp-content/uploads/Signify-Interact-Pro-2-website-1.jpg</image:loc>
+		</image:image>
+	</url>
+</urlset>
+<!-- XML Sitemap generated by Yoast SEO -->
