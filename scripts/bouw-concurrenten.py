@@ -333,6 +333,10 @@ def top100(clusters):
     return [(e, naam[slug]) for e, slug in kand[:100]]
 
 
+def naam_van_c(slug):
+    return next(c['naam'] for c in CONCURRENTEN if c['slug'] == slug)
+
+
 def main():
     logboek = json.loads((BRONNEN / 'logboek.json').read_text())
     rijen, tellingen = [], {}
@@ -398,12 +402,18 @@ def main():
     clusters, weg = cluster_lijsten(rijen)
     # Terug naar de rijen: het cluster van hun zoekwoord, of waarom ze er niet
     # in zitten. Eén bron van waarheid voor de lijst, de Sheet en de clustertabs.
-    cl_van = {e['kw']: e['cl'] for l in clusters.values() for e in l}
+    per_kw = {e['kw']: e for l in clusters.values() for e in l}
     for r in rijen:
-        r['cluster'] = ''
+        r['cluster'], r['vol'], r['nwie'], r['intentie'] = '', None, 0, ''
         if r['soort'] in ZOEKBAAR and r['zin']:
             kw, reden = zoekwoord(r['zin'], r['cl'])
-            r['cluster'] = cl_van.get(kw, '') if kw else 'weg:' + reden
+            e = per_kw.get(kw) if kw else None
+            r['cluster'] = e['cl'] if e else ('weg:' + reden if reden else '')
+            if e:
+                r['vol'], r['nwie'], r['intentie'] = e['n'], len(e['wie']), e['intentie']
+    # De lijsten op zoekvolume van hun zoekwoord, dan hoeveel concurrenten het
+    # voeren, dan op naam. Zo staat bovenaan wat ertoe doet, in tab en Sheet.
+    rijen.sort(key=lambda r: (-(r['vol'] or -1), -r['nwie'], naam_van_c(r['c']), r['naam']))
     top = top100(clusters)
     gevonden = sum(1 for l in clusters.values() for e in l if e['vol'])
     print(f'volumes: {len(VOL)} in export, {gevonden} gekoppeld, {sum(1 for l in clusters.values() for e in l if e["n"])} met volume, top100: {len(top)}')
@@ -452,7 +462,7 @@ def schrijf_data(rijen, tellingen, overlap, logboek, n_csv, clusters, top):
                          'bestand': l.get('bestand')} for l in logboek['concurrenten'].get(c['slug'], [])],
         })
     # Compacte rijen: kolomnamen één keer, dan arrays. Scheelt de helft.
-    kol = ['c', 'soort', 'naam', 'pad', 'zin', 'url', 'mod', 'cluster']
+    kol = ['c', 'soort', 'naam', 'pad', 'zin', 'url', 'mod', 'cluster', 'vol', 'intentie']
     data = {
         'opgehaald': logboek['opgehaald'], 'stappen': STAPPEN, 'concurrenten': concurrenten,
         'clusters': [{'slug': s, 'naam': n, 'zaad': z} for s, n, _, z in CLUSTERS], 'csv': n_csv,
@@ -560,10 +570,11 @@ def schrijf_excel(rijen, tellingen, overlap, logboek, clusters, top):
     kort = lambda u: urlparse(u).path.strip('/').split('/')[-1] or urlparse(u).netloc
     clusternaam = {s: n for s, n, _, _ in CLUSTERS}
     clusternaam['zonder'] = 'zonder cluster'
-    kol = lambda r: [naam_van[r['c']], r['naam'], r['pad'], r['zin'], clusternaam.get(r['cluster'], r['cluster'].replace('weg:', 'weggelaten: ')), '', '',
+    kol = lambda r: [naam_van[r['c']], r['naam'], r['pad'], r['zin'], clusternaam.get(r['cluster'], r['cluster'].replace('weg:', 'weggelaten: ')), '',
+                     BEREIK.get(int(r['vol']), '') if r['vol'] is not None else '',
                      r['url'], r['mod'], kort(r['bron'])]
     koppen = ['Concurrent', 'Naam', 'Categorie', 'Sleutelzin (stap 3)', 'Cluster', 'Alternatieven (3b)',
-              'Zoekvolume (4)', 'URL', 'Laatst gewijzigd', 'Uit sitemap']
+              'Zoekvolume (bereik)', 'URL', 'Laatst gewijzigd', 'Uit sitemap']
     breed = [22, 44, 30, 40, 22, 30, 14, 60, 14, 28]
     blad('Categorieën', koppen, [kol(r) for r in rijen if r['soort'] == 'categorie'], breed)
 
