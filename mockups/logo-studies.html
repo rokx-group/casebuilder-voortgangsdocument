@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder &mdash; studies met de c en de B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700;900&family=DM+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   Studies met de c en de B.
+
+   Geen pagina, een werkbank. Elke studie is één idee, groot, met de
+   naam erbij en in één regel wat het met het merk te maken heeft. Wat
+   hier blijft hangen gaat straks naar de homepage; de rest gaat weg.
+
+   De twee vormen staan één keer in een defs-blok en worden overal met
+   use aangeroepen. Dat moet: de brandbook verbiedt het logo na te
+   bouwen uit losse onderdelen, dus er mag nergens een tweede versie van
+   die paden rondslingeren die later uit de pas gaat lopen.
+
+   Het palet is dat van na de herziening van 23 juli 2026. De drie
+   vervallen kleuren komen hier niet voor.
+   ══════════════════════════════════════════════════════════════ */
+
+:root{
+  --navy:#003352;
+  --signaal:#0393D1;
+  --helder:#2BA9DD;
+  --diep:#0276A8;
+  --inkt:#1A1A1A;
+  --bg:#F2F5F9;
+  --lichtblauw:#E6EFF6;
+  --lijn:#D9DEE5;
+  --gedempt:#5F6873;
+  --disp:'Barlow Condensed',sans-serif;
+  --body:'DM Sans',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--navy);color:#fff;font-family:var(--body);line-height:1.55;
+  -webkit-font-smoothing:antialiased}
+a{color:inherit}
+
+.blad{max-width:1320px;margin:0 auto;padding:0 28px 120px}
+
+/* ── de kop van de werkbank ───────────────────────────────── */
+.intro{padding:72px 0 44px;border-bottom:1px solid rgba(255,255,255,.16)}
+.intro .lab{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--helder)}
+.intro h1{font-family:var(--disp);text-transform:uppercase;font-weight:900;letter-spacing:.02em;
+  font-size:clamp(40px,5.4vw,72px);line-height:.94;margin:16px 0 0}
+.intro p{margin-top:16px;max-width:60ch;color:rgba(255,255,255,.72);font-size:16px}
+
+/* ── een studie ───────────────────────────────────────────── */
+.studie{border-bottom:1px solid rgba(255,255,255,.16);padding:44px 0}
+.studie .hoofd{display:flex;align-items:baseline;gap:20px;flex-wrap:wrap;margin-bottom:26px}
+.studie .nr{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--helder);flex:none}
+.studie h2{font-family:var(--disp);text-transform:uppercase;font-weight:700;letter-spacing:.03em;
+  font-size:clamp(22px,2.4vw,30px);line-height:1}
+.studie .waarom{font-size:14.5px;color:rgba(255,255,255,.62);max-width:52ch;margin-left:auto}
+.speel{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  background:transparent;border:1px solid rgba(255,255,255,.34);color:#fff;padding:8px 14px;
+  cursor:pointer;transition:.14s;flex:none}
+.speel:hover{border-color:var(--helder);color:var(--helder)}
+
+/* Het vlak waarin een studie speelt. Donkerder dan de pagina zodat de
+   vormen los komen van de achtergrond. */
+.vlak{position:relative;overflow:hidden;background:#00263d;border:1px solid rgba(255,255,255,.14);
+  min-height:340px;display:flex;align-items:center;justify-content:center}
+.vlak.licht{background:var(--bg)}
+.vlak.hoog{min-height:460px}
+
+/* Het ruitjespapier eronder, op de sterkte die de brandbook noemt. */
+.ruit::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);
+  background-size:28px 28px;opacity:.07}
+.ruit.licht::before{background-image:linear-gradient(var(--navy) 1px,transparent 1px),linear-gradient(90deg,var(--navy) 1px,transparent 1px);opacity:.05}
+
+.merk{width:clamp(180px,26vw,320px);height:auto;overflow:visible}
+.merk .c{fill:var(--signaal)}
+.merk .b{fill:#fff}
+.vlak.licht .merk .b{fill:var(--inkt)}
+
+/* ══ 01 · HET SLOT ════════════════════════════════════════════
+   De c is een open haak, de balk van de B loopt die bek in. Voorbij
+   het punt en dan terugzakken: dat is hoe een vlinderslot sluit. */
+.s-slot .c{animation:slot-haak .34s cubic-bezier(.2,.7,.3,1) both}
+.s-slot .b{animation:slot-grendel .72s cubic-bezier(.33,1.28,.42,1) .24s both}
+@keyframes slot-haak{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:none}}
+@keyframes slot-grendel{
+  0%{opacity:0;transform:translateX(52px)}
+  55%{opacity:1}
+  78%{transform:translateX(-4px)}
+  100%{opacity:1;transform:none}
+}
+
+/* ══ 02 · DE FREESBAAN ════════════════════════════════════════
+   De omtrek wordt getrokken alsof een frees de baan afrijdt. Daarna
+   loopt de vulling erin. Dit is letterlijk wat er in Doesburg gebeurt:
+   een tekening wordt een gereedschapsbaan. */
+.s-baan .c,.s-baan .b{
+  fill:transparent;stroke:var(--helder);stroke-width:2.2;
+  stroke-dasharray:var(--lengte);stroke-dashoffset:var(--lengte);
+  animation:baan-rijd 2.4s cubic-bezier(.5,0,.2,1) both, baan-vul .8s ease 2.1s both;
+}
+.s-baan .b{animation-delay:.5s,2.6s}
+@keyframes baan-rijd{to{stroke-dashoffset:0}}
+/* De lijn verdwijnt terwijl de vulling erin loopt. Bleef hij staan, dan
+   kreeg het logo een rand die het niet heeft, en dat is precies het
+   soort wijziging aan de vorm die de brandbook verbiedt. */
+@keyframes baan-vul{to{fill:var(--vul);stroke-opacity:0}}
+.s-baan .c{--vul:var(--signaal)}
+.s-baan .b{--vul:#fff}
+
+/* ══ 03 · DE FREES ════════════════════════════════════════════
+   Een snijlijn gaat over het vlak en laat achter zich de vorm staan.
+   Het masker beweegt, niet de vorm, dus het leest als materiaal dat
+   wordt weggehaald in plaats van als een plaatje dat infadet. */
+/* De groep is even breed als het vlak, zodat de knip en de beitel allebei
+   in procenten van dezelfde breedte rekenen en precies samenvallen. */
+.s-frees .groep{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  animation:frees-snij 1.9s cubic-bezier(.45,0,.2,1) both}
+@keyframes frees-snij{from{clip-path:inset(0 0 0 96%)}to{clip-path:inset(0 0 0 0)}}
+/* De beitel zelf: een dunne lijn die meeloopt en aan het eind wegvalt. */
+.s-frees .beitel{position:absolute;top:0;bottom:0;width:2px;background:var(--helder);z-index:2;
+  box-shadow:0 0 26px 3px rgba(43,169,221,.7);animation:beitel-loop 1.9s cubic-bezier(.45,0,.2,1) both}
+@keyframes beitel-loop{0%{left:96%;opacity:0}8%{opacity:1}90%{opacity:1}100%{left:0%;opacity:0}}
+
+/* ══ 04 · UIT ELKAAR ══════════════════════════════════════════
+   De exploded view uit een technische tekening: de twee delen schuiven
+   uit elkaar en de maat ertussen wordt zichtbaar. Zo teken je een
+   samenstelling, en zo verkoopt dit bedrijf zijn werk. */
+.s-uit .c{animation:uit-c 2.6s cubic-bezier(.4,0,.2,1) infinite alternate both}
+.s-uit .b{animation:uit-b 2.6s cubic-bezier(.4,0,.2,1) infinite alternate both}
+@keyframes uit-c{from{transform:none}to{transform:translateX(-34px)}}
+@keyframes uit-b{from{transform:none}to{transform:translateX(34px)}}
+.s-uit .maatlijn{stroke:var(--helder);stroke-width:1.2;opacity:0;
+  animation:maat-aan 2.6s ease infinite alternate both}
+@keyframes maat-aan{0%{opacity:0}45%{opacity:0}100%{opacity:.85}}
+.s-uit .maattekst{fill:var(--helder);font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  opacity:0;animation:maat-aan 2.6s ease infinite alternate both}
+
+/* ══ 05 · DE B ALS VENSTER ════════════════════════════════════
+   De letter is geen vorm op het beeld maar een gat erin. Het navy
+   vlak ligt over de film en de B is eruit gesneden, dus je kijkt er
+   doorheen. Dit is het idee met de meeste zeggingskracht: een case is
+   een omhulsel, en hier is het merk het omhulsel. */
+.s-venster{padding:0}
+.s-venster .vlak{min-height:470px;background:#000}
+.s-venster video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.s-venster .plaat{position:absolute;inset:0;width:100%;height:100%}
+/* Alleen het dekvlak is navy. Stond er rect, dan werd ook de witte
+   rechthoek in het masker navy, want css wint van het fill-attribuut. Een
+   donker masker laat bijna alles door, en dan zag je de film overal in
+   plaats van alleen door de letter. */
+.s-venster .plaat .dek{fill:var(--navy)}
+/* De B ademt langzaam, zodat je merkt dat het beeld erachter beweegt. */
+.s-venster .gat{animation:venster-adem 9s ease-in-out infinite alternate both;
+  transform-box:fill-box;transform-origin:center}
+@keyframes venster-adem{from{transform:scale(1)}to{transform:scale(1.08)}}
+
+/* ══ 06 · DE HAAK ═════════════════════════════════════════════
+   De c alleen, groot en half buiten beeld, met inhoud in zijn bek.
+   Hij is geen decoratie maar een beugel: hij houdt iets vast, en dat
+   is precies wat een vlinderslot doet. */
+.s-haak .vlak{justify-content:flex-start;padding:52px 52px 52px 0}
+.s-haak .grote-c{position:absolute;left:-13%;top:50%;translate:0 -50%;
+  width:clamp(300px,42vw,560px);height:auto;opacity:.92}
+.s-haak .grote-c .c{fill:var(--signaal)}
+.s-haak .inhoud{position:relative;margin-left:clamp(190px,27vw,360px);max-width:46ch}
+.s-haak .inhoud .lab{font-family:var(--mono);font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--helder)}
+.s-haak .inhoud h3{font-family:var(--disp);text-transform:uppercase;font-weight:900;
+  font-size:clamp(28px,3.6vw,50px);line-height:.95;margin:14px 0 12px}
+.s-haak .inhoud p{color:rgba(255,255,255,.74);font-size:15.5px}
+
+/* ══ 07 · DE B ALS WATERMERK ══════════════════════════════════
+   Wat je vroeg: een blok met rechts een grote B, doorzichtig. Hij zit
+   deels buiten het vlak, want een merkteken dat helemaal past leest
+   als een plaatje en een merkteken dat eruit loopt als een stempel. */
+.s-water .vlak{justify-content:flex-start;padding:56px}
+.s-water .grote-b{position:absolute;right:-3%;top:50%;translate:0 -50%;
+  width:clamp(280px,40vw,520px);height:auto;opacity:.11}
+.s-water .grote-b .b{fill:#fff}
+.s-water.omgekeerd .vlak{background:var(--bg);color:var(--inkt)}
+.s-water.omgekeerd .grote-b{opacity:.07}
+.s-water.omgekeerd .grote-b .b{fill:var(--navy)}
+.s-water .inhoud{position:relative;max-width:44ch}
+.s-water .inhoud .lab{font-family:var(--mono);font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--helder)}
+.s-water.omgekeerd .inhoud .lab{color:var(--diep)}
+.s-water .inhoud h3{font-family:var(--disp);text-transform:uppercase;font-weight:900;
+  font-size:clamp(26px,3.2vw,44px);line-height:.96;margin:14px 0 12px}
+.s-water.omgekeerd .inhoud h3{color:var(--navy)}
+.s-water .inhoud p{color:rgba(255,255,255,.74);font-size:15.5px}
+.s-water.omgekeerd .inhoud p{color:var(--gedempt)}
+
+/* ══ 08 · HET RASTER ══════════════════════════════════════════
+   De vorm komt uit het ruitjespapier zelf tevoorschijn: het raster
+   licht op binnen de letter en dooft erbuiten. Het merk-device tekent
+   het merk. */
+.s-raster .vlak{background:#00263d}
+/* Beide lagen in één kader. Het masker paste zich eerst aan het hele vlak
+   aan en de omtrek aan zijn eigen breedte, dus ze vielen niet samen. */
+.s-raster .kader{position:relative;width:clamp(220px,32vw,400px);aspect-ratio:164.2408/115.948}
+.s-raster .rastervlak{position:absolute;inset:0;
+  background-image:linear-gradient(var(--helder) 1px,transparent 1px),linear-gradient(90deg,var(--helder) 1px,transparent 1px);
+  background-size:28px 28px;opacity:.9;
+  -webkit-mask-image:var(--vorm);mask-image:var(--vorm);
+  -webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-position:center;mask-position:center;
+  animation:raster-pols 3.4s ease-in-out infinite alternate both}
+@keyframes raster-pols{from{opacity:.35;background-size:28px 28px}to{opacity:1;background-size:28px 28px}}
+.s-raster .omtrek{position:absolute;inset:0;width:100%;height:100%;opacity:.28}
+.s-raster .omtrek .c,.s-raster .omtrek .b{fill:none;stroke:#fff;stroke-width:1.4}
+
+/* ══ 09 · SCROLLGESTUURD ══════════════════════════════════════
+   Het slot sluit terwijl je scrolt, met animation-timeline en zonder
+   javascript. De browser koppelt de tijdlijn aan de positie van het
+   blok in beeld, dus de beweging staat stil als jij stilstaat. */
+.s-scroll .vlak{min-height:300px}
+@supports (animation-timeline: view()){
+  .s-scroll .c{animation:slot-haak linear both;animation-timeline:view();animation-range:entry 10% cover 40%}
+  .s-scroll .b{animation:scroll-grendel linear both;animation-timeline:view();animation-range:entry 10% cover 50%}
+  .s-scroll .melding{display:none}
+}
+@keyframes scroll-grendel{from{transform:translateX(64px);opacity:.25}to{transform:none;opacity:1}}
+.s-scroll .melding{position:absolute;left:20px;bottom:16px;font-family:var(--mono);font-size:10px;
+  letter-spacing:.14em;color:rgba(255,255,255,.45)}
+
+/* ── afspeelknop: de animatie opnieuw starten ──────────────── */
+.herstart{animation:none!important}
+
+@media(prefers-reduced-motion:reduce){
+  .studie *{animation-duration:.001s!important;animation-iteration-count:1!important}
+}
+@media(max-width:820px){
+  .studie .waarom{margin-left:0}
+  .s-haak .inhoud{margin-left:0;margin-top:190px}
+  .s-water .grote-b{right:-24%;opacity:.09}
+  .merk{width:min(74vw,300px)}
+}
+</style>
+</head>
+<body>
+
+<!-- De twee vormen, één keer. Ongewijzigd uit assets/beeldmerk.svg.
+     Overal elders op deze pagina staat een use die hiernaar wijst. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <path id="cb-c" fill-rule="nonzero" d="M48.5610,73.0985 C45.5320,75.2505 41.8410,76.5295 37.8520,76.5295 C27.6230,76.5295 20.4310,68.2025 20.4310,57.9735 C20.4310,47.7455 27.6230,39.4185 37.8520,39.4185 C41.8420,39.4185 45.5320,40.6975 48.5620,42.8495 L65.3940,30.4095 C58.3350,23.3565 48.5940,18.9875 37.8520,18.9875 C16.3570,18.9875 0.0000,36.4785 0.0000,57.9735 C0.0000,79.4685 16.3570,96.9605 37.8520,96.9605 C48.5930,96.9605 58.3340,92.5915 65.3929,85.5395 L48.5610,73.0985 Z"/>
+    <path id="cb-b" fill-rule="nonzero" d="M150.4028,55.9720 C156.2248,51.2300 160.3638,42.4180 160.3638,34.0980 C160.3638,15.2960 145.0668,0.0000 126.2728,0.0000 L81.1537,0.0000 L81.1537,47.7580 L38.9598,47.7580 C33.3198,47.7580 29.3628,52.3340 29.3628,57.9740 C29.3628,63.6140 33.3198,68.1890 38.9598,68.1890 L81.1537,68.1890 L81.1537,115.9480 L130.1428,115.9480 C148.9448,115.9480 164.2408,100.6510 164.2408,81.8560 C164.2408,72.2260 158.4628,62.5490 150.4028,55.9720 Z M139.9328,34.0980 C139.9328,41.6330 133.8078,47.7580 126.2728,47.7580 L104.3647,47.7580 L104.3647,20.4310 L126.2728,20.4310 C133.8078,20.4310 139.9328,26.5630 139.9328,34.0980 Z M130.1428,95.5170 L104.3647,95.5170 L104.3647,68.1890 L126.2728,68.1890 C134.2728,68.1890 143.8098,70.5640 143.8098,81.8560 C143.8098,89.3920 137.6778,95.5170 130.1428,95.5170 Z"/>
+  </defs>
+</svg>
+
+<div class="blad">
+
+  <div class="intro">
+    <p class="lab">// Werkbank, geen pagina</p>
+    <h1>Wat je met een c<br>en een B kunt doen</h1>
+    <p>Negen studies met de twee vormen uit het beeldmerk, los en samen. Het uitgangspunt is
+      steeds hetzelfde: de c is een open haak, de B heeft een balk die er precies in past, en
+      samen zijn ze een vlinderslot. Wat hiervan blijft hangen gaat naar de homepage.</p>
+  </div>
+
+  <!-- ══ 01 ══════════════════════════════════════════════════ -->
+  <section class="studie s-slot" data-studie>
+    <div class="hoofd">
+      <span class="nr">// 01</span>
+      <h2>Het slot</h2>
+      <p class="waarom">De balk schuift de bek in, gaat er vier eenheden voorbij en zakt terug.
+        Dat laatste stukje is de klik.</p>
+      <button class="speel" type="button" data-speel>Opnieuw</button>
+    </div>
+    <div class="vlak ruit">
+      <svg class="merk" viewBox="0 0 164.2408 115.9480" aria-label="Casebuilder"><title>Het slot sluit</title>
+        <use class="c" href="#cb-c"/><use class="b" href="#cb-b"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ══ 02 ══════════════════════════════════════════════════ -->
+  <section class="studie s-baan" data-studie>
+    <div class="hoofd">
+      <span class="nr">// 02</span>
+      <h2>De freesbaan</h2>
+      <p class="waarom">De omtrek wordt getrokken alsof een frees de baan afrijdt, daarna loopt
+        de vulling erin. Precies wat er in Doesburg gebeurt.</p>
+      <button class="speel" type="button" data-speel>Opnieuw</button>
+    </div>
+    <div class="vlak ruit">
+      <svg class="merk" viewBox="0 0 164.2408 115.9480" aria-label="Casebuilder"><title>De omtrek wordt gefreesd</title>
+        <use class="c" href="#cb-c" style="--lengte:304"/><use class="b" href="#cb-b" style="--lengte:704"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ══ 03 ══════════════════════════════════════════════════ -->
+  <section class="studie s-frees" data-studie>
+    <div class="hoofd">
+      <span class="nr">// 03</span>
+      <h2>De frees</h2>
+      <p class="waarom">Een snijlijn gaat over het vlak en laat de vorm achter zich staan. Het
+        masker beweegt, niet de letter, dus het leest als materiaal dat weggaat.</p>
+      <button class="speel" type="button" data-speel>Opnieuw</button>
+    </div>
+    <div class="vlak ruit">
+      <span class="beitel"></span>
+      <div class="groep">
+        <svg class="merk" viewBox="0 0 164.2408 115.9480" aria-label="Casebuilder"><title>De vorm wordt vrijgefreesd</title>
+          <use class="c" href="#cb-c"/><use class="b" href="#cb-b"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 04 ══════════════════════════════════════════════════ -->
+  <section class="studie s-uit" data-studie>
+    <div class="hoofd">
+      <span class="nr">// 04</span>
+      <h2>Uit elkaar</h2>
+      <p class="waarom">De exploded view uit een technische tekening. De delen schuiven uit
+        elkaar en de maat ertussen wordt zichtbaar.</p>
+    </div>
+    <div class="vlak ruit">
+      <svg class="merk" viewBox="-40 -14 244 144" aria-label="Casebuilder"><title>De twee delen uit elkaar</title>
+        <use class="c" href="#cb-c"/><use class="b" href="#cb-b"/>
+        <g>
+          <line class="maatlijn" x1="18" y1="126" x2="146" y2="126"/>
+          <line class="maatlijn" x1="18" y1="120" x2="18" y2="132"/>
+          <line class="maatlijn" x1="146" y1="120" x2="146" y2="132"/>
+          <text class="maattekst" x="82" y="122" text-anchor="middle">SPELING</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ══ 05 ══════════════════════════════════════════════════ -->
+  <section class="studie s-venster">
+    <div class="hoofd">
+      <span class="nr">// 05</span>
+      <h2>De B als venster</h2>
+      <p class="waarom">De letter is geen vorm op het beeld maar een gat erin. Een case is een
+        omhulsel; hier is het merk het omhulsel.</p>
+    </div>
+    <div class="vlak">
+      <video autoplay muted loop playsinline preload="metadata" poster="assets/hero-v3-poster.jpg" aria-hidden="true" tabindex="-1">
+        <source src="assets/hero-v3.webm" type="video/webm">
+        <source src="assets/hero-v3.mp4" type="video/mp4">
+      </video>
+      <svg class="plaat" viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <mask id="venster">
+            <rect x="0" y="0" width="400" height="240" fill="#fff"/>
+            <g transform="translate(118 62)">
+              <g class="gat"><use href="#cb-b" fill="#000"/></g>
+            </g>
+          </mask>
+        </defs>
+        <rect class="dek" x="0" y="0" width="400" height="240" mask="url(#venster)"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ══ 06 ══════════════════════════════════════════════════ -->
+  <section class="studie s-haak">
+    <div class="hoofd">
+      <span class="nr">// 06</span>
+      <h2>De haak</h2>
+      <p class="waarom">De c alleen, groot en half buiten beeld, met de inhoud in zijn bek. Geen
+        decoratie maar een beugel die iets vasthoudt.</p>
+    </div>
+    <div class="vlak ruit hoog">
+      <svg class="grote-c" viewBox="0 0 66 116" aria-hidden="true"><use class="c" href="#cb-c"/></svg>
+      <div class="inhoud">
+        <p class="lab">// Doesburg</p>
+        <h3>Wat erin moet,<br>houden we vast</h3>
+        <p>Het beeldmerk komt van het vlinderslot: een klein onderdeel met een grote functie,
+          herkenbaar voor iedereen die met flightcases werkt.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 07 ══════════════════════════════════════════════════ -->
+  <section class="studie s-water">
+    <div class="hoofd">
+      <span class="nr">// 07</span>
+      <h2>De B als watermerk</h2>
+      <p class="waarom">Een inhoudsblok met rechts een grote doorzichtige B, deels buiten het
+        vlak. Wat helemaal past leest als een plaatje, wat eruit loopt als een stempel.</p>
+    </div>
+    <div class="vlak ruit">
+      <svg class="grote-b" viewBox="0 0 165 116" aria-hidden="true"><use class="b" href="#cb-b"/></svg>
+      <div class="inhoud">
+        <p class="lab">// Van scherm naar showroom</p>
+        <h3>Maat in.<br>Case uit.</h3>
+        <p>Je maten gaan het systeem in, je tekening gaat naar de machine, en wat eruit komt is
+          de case die je hebt getekend.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 07b, dezelfde op licht ═══════════════════════════════ -->
+  <section class="studie s-water omgekeerd">
+    <div class="hoofd">
+      <span class="nr">// 07 &middot; b</span>
+      <h2>Hetzelfde, op licht</h2>
+      <p class="waarom">Op wit moet hij zwakker, zeven procent in plaats van elf. Anders wordt
+        het watermerk een vlek in plaats van een ondergrond.</p>
+    </div>
+    <div class="vlak ruit licht">
+      <svg class="grote-b" viewBox="0 0 165 116" aria-hidden="true"><use class="b" href="#cb-b"/></svg>
+      <div class="inhoud">
+        <p class="lab">// Van scherm naar showroom</p>
+        <h3>Maat in.<br>Case uit.</h3>
+        <p>Je maten gaan het systeem in, je tekening gaat naar de machine, en wat eruit komt is
+          de case die je hebt getekend.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 08 ══════════════════════════════════════════════════ -->
+  <section class="studie s-raster">
+    <div class="hoofd">
+      <span class="nr">// 08</span>
+      <h2>Het raster</h2>
+      <p class="waarom">De vorm komt uit het ruitjespapier zelf tevoorschijn. Het merk-device
+        tekent het merk.</p>
+    </div>
+    <div class="vlak hoog">
+      <div class="kader">
+        <div class="rastervlak" style="--vorm:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 164.24 115.95'%3E%3Cpath d='M48.561,73.0985 C45.532,75.2505 41.841,76.5295 37.852,76.5295 C27.623,76.5295 20.431,68.2025 20.431,57.9735 C20.431,47.7455 27.623,39.4185 37.852,39.4185 C41.842,39.4185 45.532,40.6975 48.562,42.8495 L65.394,30.4095 C58.335,23.3565 48.594,18.9875 37.852,18.9875 C16.357,18.9875 0,36.4785 0,57.9735 C0,79.4685 16.357,96.9605 37.852,96.9605 C48.593,96.9605 58.334,92.5915 65.3929,85.5395 L48.561,73.0985 Z M150.4028,55.972 C156.2248,51.23 160.3638,42.418 160.3638,34.098 C160.3638,15.296 145.0668,0 126.2728,0 L81.1537,0 L81.1537,47.758 L38.9598,47.758 C33.3198,47.758 29.3628,52.334 29.3628,57.974 C29.3628,63.614 33.3198,68.189 38.9598,68.189 L81.1537,68.189 L81.1537,115.948 L130.1428,115.948 C148.9448,115.948 164.2408,100.651 164.2408,81.856 C164.2408,72.226 158.4628,62.549 150.4028,55.972 Z M139.9328,34.098 C139.9328,41.633 133.8078,47.758 126.2728,47.758 L104.3647,47.758 L104.3647,20.431 L126.2728,20.431 C133.8078,20.431 139.9328,26.563 139.9328,34.098 Z M130.1428,95.517 L104.3647,95.517 L104.3647,68.189 L126.2728,68.189 C134.2728,68.189 143.8098,70.564 143.8098,81.856 C143.8098,89.392 137.6778,95.517 130.1428,95.517 Z' fill='%23000'/%3E%3C/svg%3E&quot;)"></div>
+      <svg class="omtrek" viewBox="0 0 164.2408 115.9480" aria-hidden="true">
+        <use class="c" href="#cb-c"/><use class="b" href="#cb-b"/>
+      </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 09 ══════════════════════════════════════════════════ -->
+  <section class="studie s-scroll">
+    <div class="hoofd">
+      <span class="nr">// 09</span>
+      <h2>Scrollgestuurd</h2>
+      <p class="waarom">Het slot sluit terwijl je scrolt, zonder javascript. De browser koppelt
+        de tijdlijn aan de positie in beeld, dus de beweging staat stil als jij stilstaat.</p>
+    </div>
+    <div class="vlak ruit">
+      <svg class="merk" viewBox="0 0 164.2408 115.9480" aria-label="Casebuilder"><title>Sluit mee met het scrollen</title>
+        <use class="c" href="#cb-c"/><use class="b" href="#cb-b"/>
+      </svg>
+      <span class="melding">Deze browser ondersteunt animation-timeline niet, het slot staat stil</span>
+    </div>
+  </section>
+
+</div>
+
+<script>
+/* De knop start de animatie opnieuw. Klasse eraf, één frame wachten
+   zodat de browser de stijl opnieuw berekent, en er weer op. Zonder dat
+   tussenstapje ziet hij geen verandering en gebeurt er niets. */
+document.querySelectorAll('[data-speel]').forEach(function (knop) {
+  knop.addEventListener('click', function () {
+    var vlak = knop.closest('[data-studie]').querySelector('.vlak');
+    var delen = vlak.querySelectorAll('use, .beitel, .groep');
+    delen.forEach(function (d) { d.classList.add('herstart'); });
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        delen.forEach(function (d) { d.classList.remove('herstart'); });
+      });
+    });
+  });
+});
+</script>
+</body>
+</html>
