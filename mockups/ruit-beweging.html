@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casebuilder, de ruit in beweging (lab)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   De ruit in beweging
+
+   Zes manieren om het raster te laten bewegen, elk op het soort vlak
+   waar die vorm nu al staat. Het raster is ruitjespapier, de technische
+   tekening onder alles. Beweging moet dat verhaal vertellen: de tekening
+   wordt opgezet, het veld wordt onthuld, de maat wordt genomen. Geen
+   eindeloze lus, want dan wordt het behang.
+
+   De dekking is die uit het boek: vol 5, veld 6, hoeken 7 procent.
+   De schakelaar bovenin vermenigvuldigt dat alleen om te kunnen
+   beoordelen, nooit om zo op te leveren.
+
+   Op donker staat het raster hier in wit, zoals nu in brand.css. Welke
+   kleur op donker geldt (wit, signaalblauw of cyan) is nog open.
+   ══════════════════════════════════════════════════════════════ */
+
+:root{--zicht:1}
+body.zichtbaar{--zicht:6}
+
+/* bediening */
+.bediening{position:sticky;top:0;z-index:20;background:var(--white);border-bottom:1px solid var(--rule)}
+.bediening .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:64px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px}
+.bediening h1{font-size:28px}
+.schakel{display:inline-flex;align-items:center;gap:12px;cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dark)}
+.schakel input{appearance:none;width:34px;height:18px;border:1.5px solid var(--dark);position:relative;cursor:pointer}
+.schakel input::after{content:"";position:absolute;top:2px;left:2px;width:11px;height:11px;background:var(--dark);transition:transform .2s}
+.schakel input:checked{background:var(--dark)}
+.schakel input:checked::after{background:var(--cyan);transform:translateX(16px)}
+
+.intro{padding:72px 0 56px}
+.intro p{max-width:64ch;color:var(--mute);font-size:17px}
+.intro p+p{margin-top:14px}
+
+/* banden */
+.band{position:relative;isolation:isolate;overflow:hidden;min-height:76vh;display:grid;align-items:end;padding:120px 0 72px}
+.band.licht{background:var(--white);border-top:1px solid var(--rule)}
+.band.papier{background:var(--bg)}
+.band.navy{background:var(--dark);color:#fff}
+.band.void{background:var(--void);color:#fff}
+.band.hoog{min-height:120vh}
+
+.band .wrap{width:100%;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:48px;align-items:end}
+.band .nr{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue)}
+.navy .nr,.void .nr{color:var(--cyan)}
+.band h2{font-size:clamp(48px,7.4vw,112px);line-height:.88;margin-top:18px}
+.navy h2,.void h2{color:#fff}
+.band .uitleg{font-size:15px;line-height:1.6;color:var(--mute);max-width:44ch}
+.navy .uitleg,.void .uitleg{color:rgba(255,255,255,.66)}
+.band .uitleg b{font-weight:500;color:var(--ink)}
+.navy .uitleg b,.void .uitleg b{color:#fff}
+.band .waar{margin-top:14px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.navy .waar,.void .waar{color:rgba(255,255,255,.4)}
+
+.start{margin-top:22px;background:none;border:0;border-bottom:1.5px solid currentColor;padding:0 0 4px;cursor:pointer;
+  font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dark)}
+.navy .start,.void .start{color:var(--cyan)}
+
+/* ── de laag ─────────────────────────────────────────────────
+   Hetzelfde raster als .ruit in brand.css, maar als los element, zodat
+   masker en dekking per optie te sturen zijn. */
+.laag{position:absolute;inset:0;z-index:-1;pointer-events:none;--lijn:var(--dark);
+  background-image:linear-gradient(var(--lijn) 1px,transparent 1px),linear-gradient(90deg,var(--lijn) 1px,transparent 1px);
+  background-size:28px 28px;opacity:min(1,calc(var(--dekking) * var(--zicht)))}
+.navy .laag,.void .laag{--lijn:#fff}
+
+/* 01 tekenen. Het raster als echte lijnen, zodat ze getekend kunnen
+   worden. De lijnen krijgen hun vertraging uit het script. */
+svg.laag{background:none;color:var(--dark)}
+svg.laag line{stroke:currentColor;stroke-width:1;shape-rendering:crispEdges;stroke-dasharray:1;stroke-dashoffset:1}
+.speel svg.laag line{animation:trek .8s cubic-bezier(.45,0,.2,1) var(--d) forwards}
+@keyframes trek{to{stroke-dashoffset:0}}
+
+/* 02 openbloeien. Het veld groeit vanuit het midden open. Het masker
+   zelf is dat van ruit-veld-a4.svg: vol tot 40, weg op 92 procent. */
+@property --straal{syntax:'<percentage>';inherits:false;initial-value:60%}
+.veld{--dekking:.06;--straal:.1%;
+  -webkit-mask-image:radial-gradient(ellipse var(--straal) var(--straal) at 50% 50%,#000 40%,transparent 92%);
+  mask-image:radial-gradient(ellipse var(--straal) var(--straal) at 50% 50%,#000 40%,transparent 92%)}
+.speel .veld{--straal:60%;animation:bloei 2s cubic-bezier(.2,.7,.2,1) both}
+@keyframes bloei{from{--straal:.1%}to{--straal:60%}}
+
+/* 03 inlopen. De hoeken lopen vanuit de rand naar binnen, eerst de
+   diagonaal linksboven en rechtsonder, dan de andere twee. Zoals je een
+   vel vastlegt voordat je gaat tekenen. Straal 42 procent, als in
+   ruit-hoeken-a4.svg. */
+@property --paar1{syntax:'<percentage>';inherits:false;initial-value:42%}
+@property --paar2{syntax:'<percentage>';inherits:false;initial-value:42%}
+.hoeken{--dekking:.07;--paar1:.1%;--paar2:.1%;
+  --m:radial-gradient(ellipse var(--paar1) var(--paar1) at 0% 0%,#000,transparent),
+      radial-gradient(ellipse var(--paar1) var(--paar1) at 100% 100%,#000,transparent),
+      radial-gradient(ellipse var(--paar2) var(--paar2) at 100% 0%,#000,transparent),
+      radial-gradient(ellipse var(--paar2) var(--paar2) at 0% 100%,#000,transparent);
+  -webkit-mask-image:var(--m);mask-image:var(--m)}
+.speel .hoeken{--paar1:42%;--paar2:42%;animation:paar1 1.4s cubic-bezier(.2,.7,.2,1) both,paar2 1.4s cubic-bezier(.2,.7,.2,1) .35s both}
+@keyframes paar1{from{--paar1:.1%}to{--paar1:42%}}
+@keyframes paar2{from{--paar2:.1%}to{--paar2:42%}}
+
+/* 04 meelezen. Het veld volgt de cursor, traag, met een nalooptijd.
+   Zonder cursor ligt het in het midden, gewoon als veld. */
+.volg{--dekking:.07;
+  -webkit-mask-image:radial-gradient(circle 340px at var(--x,50%) var(--y,50%),#000 0%,transparent 100%);
+  mask-image:radial-gradient(circle 340px at var(--x,50%) var(--y,50%),#000 0%,transparent 100%)}
+
+/* 05 aanzetten op scroll. De aanzet uit de paginakop groeit mee met
+   hoe ver je de band in scrolt, en staat stil als je stilstaat. */
+.aanzet{--dekking:.07;
+  -webkit-mask-image:linear-gradient(135deg,#000 0%,transparent var(--a,55%));
+  mask-image:linear-gradient(135deg,#000 0%,transparent var(--a,55%))}
+
+/* 06 onderlaag. Het raster schuift trager dan de inhoud, zodat je ziet
+   dat het een laag onder de pagina is en geen print op de band. */
+.onder{--dekking:.05;background-position:0 calc(var(--schuif,0) * 1px)}
+
+@media (max-width:860px){
+  .band .wrap{grid-template-columns:1fr;gap:24px}
+}
+
+/* Minder beweging: alles staat meteen in de eindstand. */
+@media (prefers-reduced-motion:reduce){
+  .speel svg.laag line,svg.laag line{animation:none;stroke-dashoffset:0}
+  .veld,.speel .veld{animation:none;--straal:60%}
+  .hoeken,.speel .hoeken{animation:none;--paar1:42%;--paar2:42%}
+}
+</style>
+</head>
+<body class="zichtbaar">
+
+<div class="bediening">
+  <div class="wrap">
+    <h1>Ruit in beweging</h1>
+    <label class="schakel"><input type="checkbox" id="zicht" checked> Raster zesvoudig zichtbaar</label>
+  </div>
+</div>
+
+<section class="wrap intro">
+  <p class="mono ey-dark" style="color:var(--blue)">Lab · niet voor oplevering</p>
+  <p style="margin-top:18px">Zes manieren om de ruit te laten bewegen, elk op het soort vlak waar die vorm nu al staat. Elk blok heeft een eigen startknop. Bij de blokken die aan de muis of het scrollen hangen, doet de knop die beweging voor je, maar je kunt ook zelf bewegen of scrollen.</p>
+  <p>Op de echte dekking van 5 tot 7 procent is de beweging bewust bijna onzichtbaar. Daarom staat de schakelaar bovenin aan, zodat je de vorm kunt beoordelen. Zet hem uit om te zien wat de bezoeker werkelijk ziet.</p>
+</section>
+
+<!-- 01 -->
+<section class="band licht" data-speel>
+  <svg class="laag" id="teken" aria-hidden="true"></svg>
+  <div class="wrap">
+    <div>
+      <p class="nr">01 · Vol · Tekenen</p>
+      <h2>Maat in. Case uit.</h2>
+    </div>
+    <div>
+      <p class="uitleg"><b>De tekening wordt opgezet.</b> Elke lijn trekt zich van rand tot rand, verticaal van links naar rechts en horizontaal van boven naar onder, zoals een plotter een vel opbouwt. Na ruim een seconde staat het raster er en beweegt niets meer.</p>
+      <p class="waar">Contactblok, kop van producten</p>
+      <button class="start" type="button">Start</button>
+    </div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section class="band navy" data-speel>
+  <div class="laag veld" aria-hidden="true"></div>
+  <div class="wrap">
+    <div>
+      <p class="nr">02 · Veld · Openbloeien</p>
+      <h2>Sneller vooruit</h2>
+    </div>
+    <div>
+      <p class="uitleg"><b>Het veld wordt onthuld.</b> De radiale onthulling uit het boek, maar dan in de tijd: vanuit het midden groeit het raster open tot de vorm die het boek voorschrijft. Rustig, twee seconden, en daarna ligt het stil onder de kop.</p>
+      <p class="waar">Hero, closer, donkere banden</p>
+      <button class="start" type="button">Start</button>
+    </div>
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="band papier" data-speel>
+  <div class="laag hoeken" aria-hidden="true"></div>
+  <div class="wrap">
+    <div>
+      <p class="nr">03 · Hoeken · Inlopen</p>
+      <h2>Past precies. Punt.</h2>
+    </div>
+    <div>
+      <p class="uitleg"><b>Het vel wordt vastgelegd.</b> De vier hoeken lopen vanuit de rand naar binnen, eerst de diagonaal linksboven en rechtsonder, dan de andere twee. Het midden blijft leeg, zodat de payoff vrij staat.</p>
+      <p class="waar">Payoff, vlinderslot</p>
+      <button class="start" type="button">Start</button>
+    </div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section class="band void" id="volg">
+  <div class="laag volg" aria-hidden="true"></div>
+  <div class="wrap">
+    <div>
+      <p class="nr">04 · Veld · Meelezen</p>
+      <h2>De configurator is nooit dicht</h2>
+    </div>
+    <div>
+      <p class="uitleg"><b>Het veld volgt de hand.</b> Beweeg de muis over deze band. Het veld schuift traag mee, met wat naloop, alsof je met een loep over de tekening gaat. Op een telefoon en zonder muis blijft het een gewoon veld in het midden.</p>
+      <p class="waar">Hero van de configurator, eventueel de homepage</p>
+      <button class="start" type="button" data-demo="volg">Start</button>
+    </div>
+  </div>
+</section>
+
+<!-- 05 -->
+<section class="band navy hoog" id="aanzet">
+  <div class="laag aanzet" aria-hidden="true"></div>
+  <div class="wrap">
+    <div>
+      <p class="nr">05 · Aanzet · Op scroll</p>
+      <h2>Tien werkdagen van scherm naar showroom</h2>
+    </div>
+    <div>
+      <p class="uitleg"><b>De aanzet groeit met je mee.</b> Hoe verder je deze band in scrolt, hoe verder het raster vanuit linksboven de band in loopt. Scrol je terug, dan trekt het terug. Sta je stil, dan staat het stil.</p>
+      <p class="waar">Paginakoppen, aanvraagbanden</p>
+      <button class="start" type="button" data-demo="scrol">Start</button>
+    </div>
+  </div>
+</section>
+
+<!-- 06 -->
+<section class="band licht hoog" id="onder">
+  <div class="laag onder" aria-hidden="true"></div>
+  <div class="wrap">
+    <div>
+      <p class="nr">06 · Vol · Onderlaag</p>
+      <h2>Details kloppen tot op de millimeter</h2>
+    </div>
+    <div>
+      <p class="uitleg"><b>Het raster ligt onder de pagina.</b> Het schuift langzamer dan de tekst, dus bij het scrollen zie je dat de inhoud op de tekening ligt en er niet in gedrukt staat. Een verschil van een derde, niet meer.</p>
+      <p class="waar">Lange contentpagina's</p>
+      <button class="start" type="button" data-demo="scrol">Start</button>
+    </div>
+  </div>
+</section>
+
+<script>
+const rustig = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// schakelaar voor de dekking
+document.getElementById('zicht').addEventListener('change', e => {
+  document.body.classList.toggle('zichtbaar', e.target.checked);
+});
+
+// 01: het raster als losse lijnen, opnieuw opgebouwd bij een andere maat
+const svg = document.getElementById('teken');
+function tekenRaster(){
+  const band = svg.parentElement;
+  const w = band.clientWidth, h = band.clientHeight, cel = 28, stap = 16;
+  svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+  let lijnen = '';
+  for (let i = 0, x = 0.5; x <= w; i++, x += cel)
+    lijnen += `<line x1="${x}" y1="0" x2="${x}" y2="${h}" pathLength="1" style="--d:${i * stap}ms"/>`;
+  for (let i = 0, y = 0.5; y <= h; i++, y += cel)
+    lijnen += `<line x1="0" y1="${y}" x2="${w}" y2="${y}" pathLength="1" style="--d:${i * stap}ms"/>`;
+  svg.innerHTML = lijnen;
+}
+tekenRaster();
+let maatTimer;
+addEventListener('resize', () => { clearTimeout(maatTimer); maatTimer = setTimeout(tekenRaster, 150); });
+svg.style.opacity = 'min(1, calc(.05 * var(--zicht)))';
+
+// 01 tot 03: afspelen op de startknop
+document.querySelectorAll('[data-speel] .start').forEach(knop => knop.addEventListener('click', () => {
+  const band = knop.closest('.band');
+  band.classList.remove('speel');
+  void band.offsetWidth; // forceer een nieuwe start van de animatie
+  band.classList.add('speel');
+}));
+
+// 04: het veld volgt de cursor met naloop
+const volgBand = document.getElementById('volg');
+const volgLaag = volgBand.querySelector('.volg');
+let doel = null, nu = null, loopt = false;
+function stap(){
+  nu.x += (doel.x - nu.x) * .08;
+  nu.y += (doel.y - nu.y) * .08;
+  volgLaag.style.setProperty('--x', nu.x + 'px');
+  volgLaag.style.setProperty('--y', nu.y + 'px');
+  if (Math.abs(doel.x - nu.x) + Math.abs(doel.y - nu.y) > .5) requestAnimationFrame(stap);
+  else loopt = false;
+}
+function midden(){
+  return { x: volgBand.clientWidth / 2, y: volgBand.clientHeight / 2 };
+}
+volgBand.addEventListener('pointermove', e => {
+  if (e.pointerType !== 'mouse') return;
+  const r = volgBand.getBoundingClientRect();
+  doel = { x: e.clientX - r.left, y: e.clientY - r.top };
+  if (!nu) nu = midden();
+  if (rustig) { nu = { ...doel }; }
+  if (!loopt) { loopt = true; requestAnimationFrame(stap); }
+});
+volgBand.addEventListener('pointerleave', () => {
+  if (!nu) return;
+  doel = midden();
+  if (!loopt) { loopt = true; requestAnimationFrame(stap); }
+});
+
+// 05 en 06: gekoppeld aan de scrollpositie
+const aanzetBand = document.getElementById('aanzet');
+const aanzetLaag = aanzetBand.querySelector('.aanzet');
+const onderBand = document.getElementById('onder');
+const onderLaag = onderBand.querySelector('.onder');
+function scrol(){
+  const vh = innerHeight;
+  const a = aanzetBand.getBoundingClientRect();
+  // nul als de band onderin binnenkomt, een als hij halverwege het scherm staat
+  const p = Math.min(1, Math.max(0, (vh - a.top) / (vh * .9)));
+  aanzetLaag.style.setProperty('--a', (4 + p * 51).toFixed(2) + '%');
+  const o = onderBand.getBoundingClientRect();
+  onderLaag.style.setProperty('--schuif', (-o.top * .33).toFixed(1));
+}
+if (!rustig) {
+  addEventListener('scroll', () => requestAnimationFrame(scrol), { passive: true });
+  scrol();
+}
+
+// Startknop 04: het veld beschrijft een lus over de band en komt tot
+// rust in het midden, zoals een hand die over de tekening gaat.
+const zacht = t => t < .5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
+function speelVolg(){
+  const w = volgBand.clientWidth, h = volgBand.clientHeight, duur = 4200, t0 = performance.now();
+  nu = nu || midden();
+  function frame(t){
+    const p = Math.min(1, (t - t0) / duur), hoek = zacht(p) * Math.PI * 2;
+    doel = { x: w / 2 + Math.sin(hoek) * w * .36, y: h / 2 - Math.sin(hoek * 2) * h * .28 };
+    if (!loopt) { loopt = true; requestAnimationFrame(stap); }
+    if (p < 1) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+
+// Startknop 05 en 06: de pagina scrolt zelf rustig door de band heen,
+// zodat je de koppeling met het scrollen ziet zonder zelf te scrollen.
+function speelScrol(band){
+  const r = band.getBoundingClientRect(), y = scrollY + r.top;
+  const van = y - innerHeight * .95, naar = y + Math.min(r.height - innerHeight, innerHeight * .5);
+  const duur = 3200;
+  document.documentElement.style.scrollBehavior = 'auto';
+  scrollTo(0, van);
+  const t0 = performance.now();
+  function frame(t){
+    const p = Math.min(1, (t - t0) / duur);
+    scrollTo(0, van + (naar - van) * zacht(p));
+    if (p < 1) requestAnimationFrame(frame);
+    else document.documentElement.style.scrollBehavior = '';
+  }
+  requestAnimationFrame(frame);
+}
+
+document.querySelectorAll('[data-demo]').forEach(knop => knop.addEventListener('click', () => {
+  if (knop.dataset.demo === 'volg') speelVolg();
+  else speelScrol(knop.closest('.band'));
+}));
+</script>
+</body>
+</html>

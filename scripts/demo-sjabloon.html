@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Gegenereerd door scripts/bouw-demo-animaties.mjs uit scripts/demo-sjabloon.html.
+     Niet hier aanpassen, maar in het sjabloon, en dan opnieuw bouwen. -->
+<title>Casebuilder, demo {{titel}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/demo.css">
+</head>
+<body data-animatie="{{slug}}">
+
+<nav class="nav" aria-label="Hoofdmenu">
+  <div class="wrap">
+    <a class="merk" href="#top"><img src="assets/woordmerk.svg" alt="caseBuilder.com" width="200" height="21"></a>
+    <ul>
+      <li><a href="#ingangen">Flightcases</a></li>
+      <li><a href="#branches">Branches</a></li>
+      <li><a href="#werkwijze">Zo werkt het</a></li>
+      <li><a href="#enkel">Shop</a></li>
+    </ul>
+    <div class="rechts">
+      <span class="tel">+31 (0)575 575734</span>
+      <a class="knop" href="#offerte">Case aanvragen</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero donker" id="top" data-ruit="veld" data-blad="Hero" data-beslag>
+  <div class="wrap">
+    <div>
+      <p class="label">// Prijs direct zichtbaar · geen wachttijd</p>
+      <h1>Millimeterwerk, de snelste van Nederland</h1>
+      <p class="lead">Online configureren, gecontroleerd door een casebouwer, op maat gebouwd. Wat je in de configurator ziet, is de prijs.</p>
+      <div class="acties">
+        <a class="knop" href="#werkwijze">Start met configureren</a>
+        <a class="link" href="#offerte">Liever een offerte</a>
+      </div>
+      <form class="zoek" onsubmit="return false">
+        <label class="label" for="vervoer">Wat ga je vervoeren?</label>
+        <div class="veld">
+          <input id="vervoer" type="text" autocomplete="off" placeholder="Bijvoorbeeld: mengtafel Midas M32">
+          <button type="submit">Zoek</button>
+        </div>
+      </form>
+    </div>
+    <!-- hero-beeld -->
+    <figure class="hero-beeld" data-plek="hero">
+      <img src="assets/foto-crew.jpg" alt="Drie casebouwers in gesprek op de werkvloer in Doesburg" width="1600" height="1066">
+      <figcaption>Werkvloer · Doesburg</figcaption>
+    </figure>
+    <!-- /hero-beeld -->
+  </div>
+</header>
+
+<section class="specs" aria-label="In het kort">
+  <div class="wrap">
+    <div><span class="label">// Levertijd</span><b>Tien werkdagen</b></div>
+    <div><span class="label">// Prijs</span><b>Direct zichtbaar</b></div>
+    <div><span class="label">// Uitvoering</span><b>Bouwpakket of kant-en-klaar</b></div>
+    <div><span class="label">// Controle</span><b>Casebouwer kijkt mee</b></div>
+    <div><span class="label">// Ervaring</span><b>20+ jaar</b></div>
+  </div>
+</section>
+
+<!-- alleen:serienummer -->
+<section class="sectie productie donker" id="productie" data-ruit="veld" data-blad="Van de werkvloer">
+  <div class="wrap">
+    <div>
+      <p class="label">// Vandaag van de werkvloer</p>
+      <div class="teller" aria-live="polite"><span class="vast">CB‑2026‑</span><span class="rollen" data-teller></span></div>
+      <p class="lead" data-laatste>ging vandaag om 14:32 de deur uit. Rackcase 24 HE, audio-visueel.</p>
+    </div>
+    <div>
+      <p class="label">Eerder vandaag</p>
+      <ol class="vertrek" data-vertrek></ol>
+      <p class="noot">Voorbeelddata. De koppeling met de productie is een vraag aan Gert.</p>
+    </div>
+  </div>
+</section>
+<!-- /alleen -->
+
+<section class="sectie" id="ingangen" data-blad="Waar begin je">
+  <div class="wrap">
+    <div class="kop">
+      <div>
+        <p class="label">// 01 · Waar begin je</p>
+        <h2>Drie manieren om bij de juiste case te komen</h2>
+      </div>
+      <p class="lead">Je hoeft niet te weten hoe een flightcase heet om er een te bestellen.</p>
+    </div>
+    <div class="ingangen">
+      <article class="ingang">
+        <span class="letter">A</span>
+        <h3>Ik weet wat ik nodig heb</h3>
+        <p>Model en maten zijn bekend. Direct de configurator in, prijs meteen in beeld, klaar in vijf stappen.</p>
+        <a class="link" href="#werkwijze">Naar de configurator</a>
+      </article>
+      <article class="ingang">
+        <span class="letter">B</span>
+        <h3>Ik weet wat ik moet beschermen</h3>
+        <p>Een Les Paul, een 19-inch rack van 6 HE, een moving head. Zeg wat erin gaat, wij bepalen de maten.</p>
+        <a class="link" href="#enkel">Wat ga je vervoeren</a>
+      </article>
+      <article class="ingang">
+        <span class="letter">C</span>
+        <h3>Ik weet het nog niet</h3>
+        <p>Koffer, hoedcase, trunccase of rackcase. Wat is het verschil, en wat past bij jouw transport?</p>
+        <a class="link" href="#branches">Vergelijk de vijf modellen</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sectie voordelen" id="voordelen" data-ruit="vol" data-blad="Waarom caseBuilder">
+  <div class="wrap">
+    <div class="kop">
+      <div>
+        <p class="label">// 02 · Waarom caseBuilder</p>
+        <h2>Geen wachtmuziek. Geen verrassingen.</h2>
+      </div>
+      <p class="lead">De configurator rekent, een casebouwer kijkt mee, de CNC freest. Dit zijn de cijfers die daaruit komen.</p>
+    </div>
+    <div class="cijfers">
+      <div class="cijfer"><div class="getal">10</div><div class="eenheid">Werkdagen</div><p>Van scherm naar showroom. Kant-en-klaar of als bouwpakket met alle onderdelen op maat.</p></div>
+      <div class="cijfer"><div class="getal">1</div><div class="eenheid">Werkdag</div><p>Om je configuratie na te laten kijken door een casebouwer. Gratis.</p></div>
+      <div class="cijfer"><div class="getal">0</div><div class="eenheid">Terugbelverzoeken</div><p>De prijs verandert live mee terwijl je maten invult.</p></div>
+      <div class="cijfer"><div class="getal">20+</div><div class="eenheid">Jaar</div><p>Cases bouwen in Doesburg, eerst voor de podiumwereld, nu voor zes markten.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sectie werkwijze donker" id="werkwijze" data-ruit="aanzet" data-blad="Hoe het werkt">
+  <div class="wrap">
+    <div class="kop">
+      <div>
+        <p class="label">// 03 · Hoe het werkt</p>
+        <h2>Van maat naar kade in vier stappen</h2>
+      </div>
+      <p class="lead">Je wacht niet op een prijs en niet op een terugbelverzoek.</p>
+    </div>
+    <ol class="stappen">
+      <li class="stap"><span class="nr">01</span><h3>Kies of laat kiezen</h3><p>Model zelf kiezen, of zeg wat je vervoert en wij bepalen de maten.</p></li>
+      <li class="stap"><span class="nr">02</span><h3>Configureer online</h3><p>Maten, kleur, beslag, wielen. De prijs verandert live mee.</p></li>
+      <li class="stap"><span class="nr">03</span><h3>Laat het controleren</h3><p>Een casebouwer kijkt je configuratie na. Binnen één werkdag.</p></li>
+      <li class="stap"><span class="nr">04</span><h3>Tien werkdagen later</h3><p>Kant-en-klaar of als bouwpakket, met alle onderdelen op maat.</p></li>
+    </ol>
+    <div class="onder">
+      <p>Vóór je bestelt kijkt er altijd een casebouwer mee. Gratis, want een case die niet past kost ons allebei tijd.</p>
+      <a class="link" href="#offerte">Laat je maten controleren</a>
+    </div>
+  </div>
+</section>
+
+<!-- alleen:levertijd -->
+<section class="levertijd" id="levertijd" data-ruit="vol" data-blad="Levertijd">
+  <div class="plakker">
+    <div class="wrap">
+      <div class="kop">
+        <div>
+          <p class="label">// Levertijd · tien werkdagen</p>
+          <h2>Tien werkdagen, dag voor dag</h2>
+        </div>
+        <p class="lead">Scroll door de week. Elke dag schuift de meetlat een streep op, tot de dag dat je case er staat.</p>
+      </div>
+      <div class="nu-dag" aria-live="polite"><span class="dagnr" data-dagnr>Dag 00</span><div><b data-fase>Bestel je vandaag</b><p data-uitleg>Je configuratie komt binnen bij een casebouwer.</p></div></div>
+      <ol class="meetlat" data-meetlat></ol>
+      <p class="eind" data-eind>Bestel je vandaag, dan staat hij er op <b data-einddatum></b>.</p>
+      <p class="noot">Dagindeling indicatief.</p>
+    </div>
+  </div>
+</section>
+<!-- /alleen -->
+
+<section class="sectie prijs" id="prijs" data-blad="De prijs">
+  <div class="wrap">
+    <div>
+      <p class="label">// 04 · En de prijs dan</p>
+      <h2>Geen offerte, geen wachttijd</h2>
+      <p class="lead">Wat je in de configurator ziet, is de prijs. Geen aanvraagformulier, geen terugbelverzoek, geen drie werkdagen stilte.</p>
+      <a class="knop" href="#werkwijze">Start met configureren</a>
+    </div>
+    <div class="bon" data-bon>
+      <header><span class="label">// Voorbeeld</span><span class="label">Rackcase enkel, 19" 24 HE</span></header>
+      <ol>
+        <li><span>Basis rackcase enkel deksel</span><span>€ 229,00</span></li>
+        <li><span>Maatwerk 483 × 600 × 1.334 mm</span><span>€ 118,00</span></li>
+        <li><span>Zwart paneel, logo op deksel</span><span>€ 45,00</span></li>
+        <li><span>Wielenset 100 mm met rem</span><span>€ 20,50</span></li>
+      </ol>
+      <footer><span class="label">// Als bouwpakket</span><b>€ 412,50</b></footer>
+    </div>
+  </div>
+</section>
+
+<!-- alleen:bemating -->
+<section class="sectie modellen donker" id="modellen" data-ruit="aanzet" data-blad="Modellen">
+  <div class="wrap">
+    <div class="kop">
+      <div>
+        <p class="label">// Modellen</p>
+        <h2>Elk model in elke maat</h2>
+      </div>
+      <p class="lead">Drie van de vijf basismodellen, met een voorbeeldmaat. Op de productpagina komt de maat uit de catalogus, in de configurator vul je je eigen maat in.</p>
+    </div>
+    <div class="maatfotos">
+      <figure class="maatfoto" data-maat="600,680,640"><div class="foto"><img src="assets/flightcase-rackcase-enkel-deksel.jpg" alt="Rackcase met enkel deksel op wielen" loading="lazy"></div>
+        <figcaption><b>Rackcase enkel deksel</b><span>vanaf € 229</span></figcaption></figure>
+      <figure class="maatfoto" data-maat="800,600,600"><div class="foto"><img src="assets/flightcase-trunccase.jpg" alt="Trunccase op wielen" loading="lazy"></div>
+        <figcaption><b>Trunccase</b><span>Maat naar keuze</span></figcaption></figure>
+      <figure class="maatfoto" data-maat="620,180,460"><div class="foto"><img src="assets/flightcase-koffer.jpg" alt="Flightcase-koffer met handgreep" loading="lazy"></div>
+        <figcaption><b>Koffer</b><span>Maat naar keuze</span></figcaption></figure>
+    </div>
+    <p class="noot">Voorbeeldmaten, breedte × hoogte × diepte.</p>
+  </div>
+</section>
+<!-- /alleen -->
+
+<section class="sectie branches" id="branches" data-blad="Branches">
+  <div class="wrap">
+    <div class="kop">
+      <div>
+        <p class="label">// 05 · Zes markten</p>
+        <h2>Waar onze cases terechtkomen</h2>
+      </div>
+      <p class="lead">Dezelfde fabriek, dezelfde tolerantie. Wat verschilt is wat erin gaat en wat het onderweg meemaakt.</p>
+    </div>
+    <div class="markten">
+      <a class="markt" href="#branches"><figure><img src="assets/foto-audio-visueel.jpg" alt="Flightcases achter een podium" loading="lazy"></figure>
+        <div class="tekst"><span class="aantal">22 toepassingen</span><h3>Audio-visueel</h3><p>De markt waar we mee begonnen zijn. Cases die tien keer per jaar de vrachtwagen in en uit gaan, vijf jaar lang.</p></div></a>
+      <a class="markt" href="#branches"><figure><img src="assets/foto-broadcast-en-media.jpg" alt="Camera's en regieapparatuur op locatie" loading="lazy"></figure>
+        <div class="tekst"><span class="aantal">9 toepassingen</span><h3>Broadcast en media</h3><p>Camera's, optiek en regieapparatuur die dagelijks op locatie staan. Snel open, snel dicht, en altijd compleet.</p></div></a>
+      <a class="markt" href="#branches"><figure><img src="assets/foto-industrie-en-machinebouw.jpg" alt="Transportbare racks met technische apparatuur" loading="lazy"></figure>
+        <div class="tekst"><span class="aantal">14 toepassingen</span><h3>Industrie en machinebouw</h3><p>Machineonderdelen, prototypes en behuizing voor mobiele opstellingen. Seriematig, met een tekening vooraf.</p></div></a>
+      <a class="markt" href="#branches"><figure><img src="assets/foto-meet-en-testapparatuur.jpg" alt="Meetinstrument in een gefreesd schuiminterieur" loading="lazy"></figure>
+        <div class="tekst"><span class="aantal">11 toepassingen</span><h3>Meet- en testapparatuur</h3><p>Meetinstrumenten die het veld in gaan. Het schuiminterieur is hier het product, gefreesd op het instrument zelf.</p></div></a>
+      <a class="markt" href="#branches"><figure><img src="assets/foto-defensie.jpg" alt="Militair transport met cases" loading="lazy"></figure>
+        <div class="tekst"><span class="aantal">7 toepassingen</span><h3>Defensie</h3><p>Transport dat aan specificatie moet voldoen en dat aantoonbaar moet zijn. Materiaal, documentatie en keuring liggen vooraf vast.</p></div></a>
+      <a class="markt" href="#branches"><figure><img src="assets/foto-schaalmodellen.jpg" alt="Schaalmodel klaar voor transport" loading="lazy"></figure>
+        <div class="tekst"><span class="aantal">5 toepassingen</span><h3>Schaalmodellen en maquettes</h3><p>Eenmalig, onvervangbaar en zelden rechthoekig. Altijd volledig maatwerk.</p></div></a>
+    </div>
+  </div>
+</section>
+
+<section class="sectie enkel" id="enkel" data-ruit="hoeken" data-blad="Eén instrument">
+  <div class="wrap">
+    <div class="kop">
+      <div>
+        <p class="label">// 06 · Ook voor één instrument</p>
+        <h2>Eén case? Ook goed.</h2>
+      </div>
+      <p class="lead">Wij bouwen voor verhuurbedrijven met zeventig kisten per seizoen, en voor de gitarist met één Les Paul. Het schuim freest de CNC op het instrument zelf.</p>
+    </div>
+    <div class="objecten">
+      <article class="object"><div class="vak"><svg class="silhouet" data-vorm="lespaul" aria-hidden="true"></svg></div><h3>Gibson Les Paul</h3><span class="prijsje">vanaf € 189</span></article>
+      <article class="object"><div class="vak"><svg class="silhouet" data-vorm="viool" aria-hidden="true"></svg></div><h3>Viool of altviool</h3><span class="prijsje">vanaf € 175</span></article>
+      <article class="object"><div class="vak"><svg class="silhouet" data-vorm="dj" aria-hidden="true"></svg></div><h3>DJ-controller</h3><span class="prijsje">vanaf € 219</span></article>
+      <article class="object"><div class="vak"><svg class="silhouet" data-vorm="drone" aria-hidden="true"></svg></div><h3>Draagbare drone</h3><span class="prijsje">vanaf € 165</span></article>
+    </div>
+    <p class="onder"><a class="link" href="#enkel">Alle 38 objecten, zoek op wat je vervoert</a></p>
+  </div>
+</section>
+
+<section class="sectie citaat" id="citaat" data-blad="Wie er mee op tour is">
+  <div class="wrap">
+    <p class="label">// 07 · Wie er mee op tour is</p>
+    <div>
+      <blockquote>“Wij bestellen per seizoen zeventig kisten. Dat het bedrag er meteen staat, scheelt ons een week heen-en-weer per bestelling.”</blockquote>
+      <p class="bron">Verhuurbedrijf, podiumtechniek · citaat nog op te halen</p>
+    </div>
+  </div>
+</section>
+
+<section class="sectie offerte" id="offerte" data-ruit="aanzet" data-blad="Liever een offerte">
+  <div class="wrap">
+    <div>
+      <p class="label">// 08 · Liever een offerte</p>
+      <h2>Of stuur gewoon wat je hebt</h2>
+      <p class="lead">Geen maten bij de hand? Een schets, een datasheet of een foto van je apparatuur is genoeg. Je krijgt dezelfde werkdag een tekening met prijs terug.</p>
+      <ul class="soorten">
+        <li><span>01</span>Schets op papier</li>
+        <li><span>02</span>Datasheet of pdf</li>
+        <li><span>03</span>Foto van je apparatuur</li>
+        <li><span>04</span>Alleen de afmetingen</li>
+        <li><span>05</span>Een oude case</li>
+      </ul>
+    </div>
+    <div class="sleep">
+      <span class="label">// Joran tekent het uit</span>
+      <div class="vlak"><div><b>Sleep je bestand hierheen</b>of kies een bestand van je computer</div></div>
+      <a class="knop" href="#offerte">Verstuur naar Joran</a>
+    </div>
+  </div>
+</section>
+
+<section class="slot donker" id="slot" data-ruit="hoeken" data-blad="Sneller vooruit" data-beslag>
+  <div class="wrap">
+    <div>
+      <p class="label">// Klaar om te bouwen</p>
+      <h2>Sneller vooruit</h2>
+    </div>
+    <div>
+      <p class="lead">Maten invullen, prijs zien, bestellen. Tien werkdagen later staat je case er.</p>
+      <a class="knop" href="#werkwijze">Start met configureren</a>
+    </div>
+  </div>
+</section>
+
+<footer class="voet" data-blad="Voet">
+  <div class="wrap">
+    <div>
+      <img src="assets/woordmerk-wit.svg" alt="caseBuilder.com" width="200" height="21">
+      <p style="margin-top:18px;max-width:36ch">Custom flightcases uit Doesburg. Een merk van Proflite.</p>
+    </div>
+    <div><h4>Flightcases</h4><ul><li><a href="#">Rackcases</a></li><li><a href="#">Trunccases</a></li><li><a href="#">Hoedcases</a></li><li><a href="#">Koffers</a></li></ul></div>
+    <div><h4>Service</h4><ul><li><a href="#">Levertijden</a></li><li><a href="#">Laten controleren</a></li><li><a href="#">Onderdelen</a></li><li><a href="#">Contact</a></li></ul></div>
+    <div><h4>Contact</h4><ul><li>+31 (0)575 575734</li><li>Doesburg</li></ul></div>
+    <div class="onderrand"><span data-serie>CB-2026-0412</span><span>Sneller vooruit</span></div>
+  </div>
+</footer>
+
+<script src="assets/demos.js"></script>
+<script src="assets/demo.js"></script>
+</body>
+</html>
