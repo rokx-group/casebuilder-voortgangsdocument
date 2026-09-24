@@ -7,3 +7,6 @@ node_modules/
 
 # Python-cache van de scripts in scripts/.
 __pycache__/
+
+# Eigen Python-omgeving voor de scripts (zie scripts/requirements.txt).
+.venv/

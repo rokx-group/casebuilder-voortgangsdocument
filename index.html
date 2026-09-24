@@ -1409,10 +1409,10 @@
   .urgent p { font-size:14.5px; color:var(--muted); max-width:78ch; }
   .urgent p strong { color:var(--ink); font-weight:600; }
   h3.tablabel { padding-top:14px; }
-  /* De kop: de fasebalk met rechts Features en Componenten, en direct onder
+  /* De kop: de fasebalk met rechts Features en Prototypes, en direct onder
      de lijn de doorsneden. Eén element, zodat de gap van .wrap tussen de kop
      en de inhoud valt en niet tussen de balk en de lijst eronder. De lijn
-     hoort bij .kop-rij, zodat de link naar Componenten erop staat zonder
+     hoort bij .kop-rij, zodat de link naar Prototypes erop staat zonder
      dat hij in de tablist hoeft. */
   .kop { display:flex; flex-direction:column; gap:6px; }
   .kop-rij { display:flex; align-items:flex-end; flex-wrap:wrap; border-bottom:1px solid var(--line); }
@@ -1423,17 +1423,35 @@
   .tablink:hover { color:var(--muted); }
   .tablink .pijl { font-size:12px; color:var(--accent); }
   .tablink:focus-visible { outline:2px solid var(--accent); outline-offset:2px; border-radius:2px; }
+  /* Het doorsnedemenu: rechts onder de lijn, opent bij hover en bij focus
+     (toetsenbord), en op touch met een tik op de knop (.open). De padding-top
+     van het menu overbrugt het gat met de knop, anders sluit hij onderweg. */
+  .doorsnee { position:relative; align-self:flex-end; }
+  .doorsnee-knop { font-family:"Barlow Condensed","Inter",sans-serif; font-weight:600; font-size:17px;
+    color:var(--faint); background:none; border:0; padding:2px 0; cursor:pointer;
+    display:flex; align-items:baseline; gap:7px; }
+  .doorsnee-knop .huidig { color:var(--primary); }
+  .doorsnee-knop .huidig::before { content:"\00B7"; color:var(--accent); margin-right:7px; }
+  .doorsnee-knop .pijl-dicht { font-size:11px; color:var(--accent); transition:transform .15s; }
+  .doorsnee:hover .doorsnee-knop, .doorsnee:focus-within .doorsnee-knop { color:var(--muted); }
+  .doorsnee:hover .pijl-dicht, .doorsnee:focus-within .pijl-dicht, .doorsnee.open .pijl-dicht { transform:rotate(180deg); }
+  .doorsnee-knop:focus-visible { outline:2px solid var(--accent); outline-offset:2px; border-radius:2px; }
+  .doorsnee-menu { list-style:none; margin:0; padding:10px 0 0; position:absolute; right:0; top:100%;
+    z-index:40; min-width:190px; display:none; }
+  .doorsnee:hover .doorsnee-menu, .doorsnee:focus-within .doorsnee-menu, .doorsnee.open .doorsnee-menu { display:block; }
+  .doorsnee-menu::before { content:""; position:absolute; inset:10px 0 0; background:var(--surface);
+    border:1px solid var(--line); border-radius:3px; box-shadow:0 8px 24px rgba(0,40,70,.10); z-index:-1; }
+  .doorsnee-menu li { display:flex; align-items:baseline; gap:9px; padding:0 16px; }
+  .doorsnee-menu li:first-child { padding-top:8px; }
+  .doorsnee-menu li:last-child { padding-bottom:8px; border-top:1px solid var(--line-soft); margin-top:4px; padding-top:4px; }
+  .doorsnee-menu li::before { content:"\2022"; color:var(--line); font-size:15px; }
   /* De .tab-opmaak is voor een balk gemaakt — onderstreping plus negatieve
-     marge — dus die zetten we in de doorsnedelijst terug naar iets dat in een
-     lijst thuishoort. */
-  .doorsnee { list-style:none; margin:0; padding:0;
-    display:flex; flex-wrap:wrap; justify-content:flex-end; gap:0 20px; }
-  .doorsnee li { display:flex; align-items:baseline; gap:9px; }
-  .doorsnee li::before { content:"\2022"; color:var(--line); font-size:15px; }
-  .doorsnee .tab, .doorsnee .uit { padding:2px 0; border-bottom:0; margin-bottom:0;
-    font-size:17px; text-decoration:none; }
+     marge — dus die zetten we in het menu terug naar iets dat in een lijst
+     thuishoort. */
+  .doorsnee .tab, .doorsnee .uit { padding:6px 0; border-bottom:0; margin-bottom:0;
+    font-size:17px; text-decoration:none; width:100%; text-align:left; }
   .doorsnee .tab[aria-selected="true"] { color:var(--primary); }
-  .doorsnee li:has(.tab[aria-selected="true"])::before { color:var(--accent); }
+  .doorsnee-menu li:has(.tab[aria-selected="true"])::before { color:var(--accent); }
   .doorsnee .uit { font-family:"Barlow Condensed","Inter",sans-serif; font-weight:600;
     color:var(--faint); display:flex; align-items:baseline; gap:7px; }
   .doorsnee .uit:hover, .doorsnee .tab:hover { color:var(--muted); }
@@ -1592,9 +1610,9 @@
 
   <div class="kop">
     <!-- De balk: de vijf fasen, en rechts de twee dingen die je in elke fase
-         nodig hebt — de features en de componenten. Componenten is een link
-         naar het mockup-overzicht, geen tab, en staat daarom naast de
-         tablist in plaats van erin. -->
+         nodig hebt — de features en de prototypes. Prototypes is een link
+         naar de mockups, geen tab, en staat daarom naast de tablist in
+         plaats van erin. -->
     <div class="kop-rij">
       <div class="tabs" role="tablist" aria-label="Projectfase">
         <button class="tab" role="tab" id="t1" data-hash="definitie" aria-controls="p1" aria-selected="false"><span class="tnum">01</span>Definitiefase</button>
@@ -1604,20 +1622,25 @@
         <button class="tab" role="tab" id="t6" data-hash="livegang" aria-controls="p6" aria-selected="false"><span class="tnum">05</span>Live-gang</button>
         <button class="tab tab-right" role="tab" id="t8" data-hash="features" aria-controls="p8" aria-selected="false">Features</button>
       </div>
-      <a class='tablink' href='/mockups/overzicht#componenten' rel='noopener' target='_blank'>Componenten<span class="pijl">&#8599;</span></a>
+      <a class='tablink' href='/mockups/header-varianten' rel='noopener' target='_blank'>Prototypes<span class="pijl">&#8599;</span></a>
     </div>
 
     <!-- Deze horen niet bij de fasereeks: het zijn doorsneden door het
-         project, geen stappen erin. Direct onder de lijn als lijst. Ze houden
-         class="tab" en data-hash, dus het schakelscript pakt ze ongewijzigd
-         op. -->
-    <ul class="doorsnee">
+         project, geen stappen erin. Onder de lijn, rechts, in een menu dat
+         opent bij hover — zo groeit de kop niet mee met elke nieuwe tab. Ze
+         houden class="tab" en data-hash, dus het schakelscript pakt ze
+         ongewijzigd op. De knop toont welke doorsnede open staat. -->
+    <div class="doorsnee">
+    <button type="button" class="doorsnee-knop" aria-haspopup="true" aria-expanded="false">Meer<span class="huidig" hidden></span><span class="pijl-dicht" aria-hidden="true">&#9662;</span></button>
+    <ul class="doorsnee-menu">
       <li><button class="tab" role="tab" id="t9" data-hash="intro" aria-controls="p9" aria-selected="false">Intro</button></li>
       <li><button class="tab" role="tab" id="t4" data-hash="wireframes" aria-controls="p4" aria-selected="false">Wireframes</button></li>
       <li><button class="tab" role="tab" id="t7" data-hash="meetings" aria-controls="p7" aria-selected="false">Meetings</button></li>
       <li><button class="tab" role="tab" id="t10" data-hash="productlijst" aria-controls="p10" aria-selected="false">Productlijst</button></li>
-      <li><a class='uit' href='/mockups/header-varianten' rel='noopener' target='_blank'>Prototypes<span class="pijl">&#8599;</span></a></li>
+      <li><button class="tab" role="tab" id="t11" data-hash="rici" aria-controls="p11" aria-selected="false">Rici</button></li>
+      <li><a class='uit' href='/mockups/overzicht#componenten' rel='noopener' target='_blank'>Componenten<span class="pijl">&#8599;</span></a></li>
     </ul>
+    </div>
   </div>
 
   <div class="tabpanel" id="p9" role="tabpanel" aria-labelledby="t9" hidden>
@@ -12329,6 +12352,7 @@
       <h1>Productlijst</h1>
       <p class="lede">Welke categorie&euml;n en producten de concurrenten online hebben, uit hun eigen sitemaps. Daaruit komt een top 100 van zoekwoorden die CaseBuilder moet laten zien, en per cluster de stof voor &eacute;&eacute;n pagina.</p>
       <p class="lede">Opgehaald op <strong data-ko="datum">&hellip;</strong>. Het werkexemplaar staat in Drive: <a class="kolink" href="https://docs.google.com/spreadsheets/d/1C9k9fvFqYCdq2Y3oXwG3jKn3WL4IlfolIIvsVrsZC5o/edit" target="_blank" rel="noopener">Google Sheet &ldquo;SEO onderzoek productenlijst&rdquo;</a>, met een tabblad per cluster; daar vullen we stap 3b tot 5 aan. Voor Keyword Planner: <a class="kolink" href="concurrenten/keywords-keyword-planner.csv" download>keywords-keyword-planner.csv</a> (<span data-ko="n-csv">&hellip;</span> zoekwoorden, &eacute;&eacute;n per regel). De momentopname: <a class="kolink" href="concurrenten/concurrenten.xlsx" download>concurrenten.xlsx</a>.</p>
+      <div class="thesis" id="ko-conclusie"></div>
       <p class="koalles"><button type="button" data-ko-alles="open">Alles openklappen</button> &middot; <button type="button" data-ko-alles="dicht">Alles dichtklappen</button></p>
     </header>
 
@@ -12362,7 +12386,7 @@
       <div class="sec-head">
         <span class="eyebrow">Stap 5</span>
         <h2 data-rail="Top 100">Top 100</h2>
-        <p>De zoekwoorden die CaseBuilder als eerste moet laten zien &mdash; pagina-niveau; voor apparaten staat er een <a href="#ko-topprod">tweede lijst</a> onder. Alleen case-specifiek en met gemeten volume. Het volume is een bereik per maand; het bod is wat adverteerders boven aan de pagina betalen per klik, een maat voor commerci&euml;le waarde. &ldquo;3 maanden&rdquo; en &ldquo;jaar&rdquo; zijn de wijziging in zoekvolume volgens Keyword Planner; bij bereiken staat daar meestal 0%, een uitschieter (+900%, &minus;90%) betekent dat het woord van bereik wisselde.</p>
+        <p>De zoekwoorden die CaseBuilder als eerste moet laten zien &mdash; pagina-niveau; voor apparaten staat er een <a href="#ko-topprod">tweede lijst</a> onder. Alleen case-specifiek en met gemeten volume. <strong>Het zijn lagen, geen rangorde van 1 tot 100:</strong> 74 van de honderd delen hetzelfde bereik 10&ndash;100, dus binnen een laag zegt de plek weinig. Een handvol zoekwoorden is van ons (zaadtermen, 0 concurrenten), de rest komt van een concurrent. Het volume is een bereik per maand; het bod is wat adverteerders boven aan de pagina betalen per klik, een maat voor commerci&euml;le waarde. &ldquo;3 maanden&rdquo; en &ldquo;jaar&rdquo; zijn de wijziging in zoekvolume volgens Keyword Planner; bij bereiken staat daar meestal 0%, een uitschieter (+900%, &minus;90%) betekent dat het woord van bereik wisselde.</p>
       </div>
       <div class="scroller"><table class="tpl" id="ko-top-tabel"></table></div>
       <button type="button" class="kometer" id="ko-top-meer">Toon alle 100</button>
@@ -12384,7 +12408,7 @@
         <span class="eyebrow">Van lijst naar pagina</span>
         <h2 data-rail="Clusters">Clusters</h2>
         <p>Een cluster is een verzameling zoekwoorden waar &eacute;&eacute;n pagina van te maken is. Elk zoekwoord zit in precies &eacute;&eacute;n cluster. Gesorteerd op zoekvolume; klap een cluster open voor de zoekwoorden, ook op volume, met concurrentie en bod. Subclusters: waar een deel van een cluster zelf genoeg volume heeft voor een eigen pagina. De indeling staat in <code>scripts/clusters.py</code>.</p>
-        <p>Een apparaatnaam zonder casewoord krijgt &ldquo;flightcase&rdquo; ervoor (&ldquo;flightcase genz benz 410t&rdquo;), anders meet je het volume van de speaker in plaats van de case. Duitse zinnen van Megacase en Amptown zijn weggelaten.</p>
+        <p>Een apparaatnaam zonder casewoord krijgt &ldquo;flightcase&rdquo; ervoor (&ldquo;flightcase behringer x32&rdquo;), anders meet je het volume van de mengtafel in plaats van de case. <strong>Megacase en Amptown zijn Duitstalig en samen ruim de helft van alle rijen</strong>; van die twee gebruiken we alleen het apparaat (merk en model), niet hun zinnen &mdash; die horen in een Duitse zoekwoordronde.</p>
       </div>
       <div class="scroller"><table class="tpl" id="ko-clusters"></table></div>
     </section>
@@ -12393,14 +12417,9 @@
       <div class="sec-head">
         <span class="eyebrow">Wie</span>
         <h2 data-rail="Per concurrent" data-ko-dicht>Per concurrent</h2>
-        <p>Dertien bedrijven, allemaal uit onze eigen stukken: de Branche selectie, de Marketingstrategie en het concurrentenoverzicht. Wie geen productsitemap heeft, verkoopt niet online: Van der Werf, Reco, SLF, JDB en Rhinocase werken op aanvraag.</p>
+        <p>Dertien bedrijven, allemaal uit onze eigen stukken: de Branche selectie, de Marketingstrategie en het concurrentenoverzicht. Bij Van der Werf, Reco, SLF, JDB en Rhinocase vonden we geen webshop: geen productsitemap, en op de site geen prijzen of winkelwagen. Faes verkoopt wél online, maar op een eigen domein (koffersenkisten.nl), dat hier apart staat.</p>
       </div>
       <div class="scroller"><table class="tpl" id="ko-wie"></table></div>
-      <article class="card">
-        <h3>Waar Megacase de maten van 1.800 apparaten vandaan haalt</h3>
-        <p>Niet uit GS1: op hun productpagina&rsquo;s staat geen GTIN-, EAN- of Icecat-koppeling. Hun configurator is die van de <strong>Thomann Case Factory</strong>: dezelfde software, met in de teksten &ldquo;Thomann Casefactory&rdquo; en een thomann.de-adres voor vragen. De lijst met fabrikanten en modellen laadt uit hun eigen systeem, niet uit een openbare bron. Zelf noemen ze het een &ldquo;grote modellendatabase&rdquo; uit decennia bouwen. Die komt dus uit wat ze gebouwd en gemeten hebben, met Thomann erachter, dat vrijwel elk keyboard verkoopt.</p>
-        <p><strong>Voor CaseBuilder:</strong> hetzelfde bezit ligt in de eigen orderhistorie: elke gebouwde case is een apparaat met maten. GS1 geeft een productnummer, en maten meestal alleen van de verpakking. Handleidingen van fabrikanten en Open Icecat vullen aan.</p>
-      </article>
     </section>
 
 
@@ -12437,6 +12456,17 @@
 
     <section>
       <div class="sec-head">
+        <span class="eyebrow">Losse bevinding</span>
+        <h2 data-rail="Megacase" data-ko-dicht>Waar Megacase zijn maten vandaan haalt</h2>
+      </div>
+      <article class="card">
+        <p>Niet uit GS1: op hun productpagina&rsquo;s staat geen GTIN-, EAN- of Icecat-koppeling. Hun configurator is die van de <strong>Thomann Case Factory</strong>: dezelfde software, met in de teksten &ldquo;Thomann Casefactory&rdquo; en een thomann.de-adres voor vragen. De lijst met fabrikanten en modellen laadt uit hun eigen systeem, niet uit een openbare bron. Zelf noemen ze het een &ldquo;grote modellendatabase&rdquo; uit decennia bouwen. Die komt dus uit wat ze gebouwd en gemeten hebben, met Thomann erachter, dat vrijwel elk keyboard verkoopt.</p>
+        <p><strong>Voor CaseBuilder:</strong> hetzelfde bezit ligt in de eigen orderhistorie: elke gebouwde case is een apparaat met maten. GS1 geeft een productnummer, en maten meestal alleen van de verpakking. Handleidingen van fabrikanten en Open Icecat vullen aan.</p>
+      </article>
+    </section>
+
+    <section>
+      <div class="sec-head">
         <span class="eyebrow">Herkomst</span>
         <h2 data-rail="Bronnen" data-ko-dicht>Bronnen</h2>
         <p>Elke regel hierboven is terug te voeren op een van deze bestanden. Van elke sitemap staat een ongewijzigde kopie in <code>concurrenten/bronnen/</code>, zodat de telling klopt, ook als de concurrent zijn site verandert.</p>
@@ -12464,10 +12494,139 @@
             <li><code>scripts/haal-concurrenten.py</code> haalt de sitemaps op die robots.txt aanwijst, en bewaart ze.</li>
             <li><code>scripts/bouw-concurrenten.py</code> maakt er de Excel en deze tab van, zonder internet.</li>
             <li><code>scripts/concurrenten_lijst.py</code>: de lijst concurrenten, en per site welke adressen wat zijn.</li>
+            <li><code>scripts/clusters.py</code>: de clusterindeling &mdash; welke woorden bij welke pagina horen.</li>
+            <li><code>concurrenten/relevantie.csv</code>: met de hand nagekeken zoekwoorden. Een regel kan niet zien dat &ldquo;server rack&rdquo; over serverkasten gaat; wie daar j of n invult, wint van het script.</li>
           </ul>
         </article>
       </div>
       <div id="ko-bronnen"></div>
+    </section>
+
+  </div>
+
+  <div class="tabpanel" id="p11" role="tabpanel" aria-labelledby="t11" hidden>
+
+    <header class="masthead">
+      <span class="eyebrow">Wireframe in tekst &middot; opzet voor Rici</span>
+      <h1>Opzet van vier pagina&rsquo;s</h1>
+      <p class="lede">Homepage, Wat ga je vervoeren?, een branchepagina en de shop. Per pagina het doel en daaronder de secties van boven naar onder: wat erin staat en wat het moet doen. Alleen tekst, gelezen uit de mockups die nu gekozen zijn.</p>
+      <p class="lede">Bronnen: homepage-v1 met de gedeelde onderkant (homepage-onder), met de afwijkingen van homepage-huismerk erbij &middot; case-voor-v3 &middot; branche-defensie-v3 (AV volgt dezelfde opzet) &middot; shop-v1.</p>
+    </header>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Op elke pagina</span>
+        <h2 data-rail="Kop en voet">Kop en voet</h2>
+      </div>
+      <div class="scroller">
+      <table class="tpl">
+        <thead><tr><th>Onderdeel</th><th>Elementen</th><th>Wat het doet</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Header</strong></td><td>Woordmerk, megamenu (Shop &middot; Flightcases &middot; Wat ga je vervoeren? &middot; Branches &middot; Service), zoekveld, Inloggen, Winkelwagen</td><td>Shop hoort in de navigatie. Het Flightcases-menu toont de zes toepassingen, niet de branches</td></tr>
+          <tr><td><strong>Footer</strong></td><td>Vier kolommen: Offerte &middot; Kant en klaar &middot; Zelf configureren &middot; Service. Link &ldquo;Inkopen als grote partij&rdquo;. Bedrijfsgegevens, KVK, voorwaarden, privacy</td><td>Tweede navigatie per route. Ingang voor de grote koper zonder eigen tak in het hoofdmenu</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">01 &middot; /</span>
+        <h2 data-rail="Homepage">Homepage</h2>
+        <p><strong>Doel:</strong> professionaliteit uitstralen en de grote klant aanspreken, zonder de koper van &eacute;&eacute;n case af te schrikken. Elke bezoeker vindt binnen &eacute;&eacute;n scherm zijn route: aanvraag, configurator of shop. Toets: kan iemand die het woord &ldquo;hoedcase&rdquo; niet kent hier verder?</p>
+      </div>
+      <div class="scroller">
+      <table class="tpl">
+        <thead><tr><th>#</th><th>Sectie</th><th>Elementen</th><th>Wat het moet doen</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">0</td><td><strong>Hero</strong><br>donker, foto of film</td><td>Eyebrow, H1, &eacute;&eacute;n zin uitleg, hoofdknop &ldquo;Wat ga je vervoeren?&rdquo; die openklapt tot zoekveld, tweede knop &ldquo;Stuur je schets of maten&rdquo;</td><td>E&eacute;n belofte, geen drie. Vraagt naar het apparaat, niet naar maten. <em>Huismerk:</em> H1 &ldquo;Sneller vooruit&rdquo;, zoekveld met &ldquo;Of teken hem zelf&rdquo;</td></tr>
+          <tr><td class="mono">1</td><td><strong>Belofteband</strong><br>licht, direct onder de hero</td><td>Vier feiten: levertijd &middot; specialist kijkt mee &middot; 20+ jaar &middot; prijs direct zichtbaar. Waarde groot, nuancering klein eronder</td><td>Maakt &ldquo;snel&rdquo; controleerbaar: tien werkdagen, tekening dezelfde dag, offerte binnen 48 uur</td></tr>
+          <tr><td class="mono">2</td><td><strong>Waar begin je?</strong></td><td>Drie kaarten met label, H3, uitleg en link. v1: configurator / wat ga je vervoeren / vergelijk modellen. Huismerk: configurator / wat ga je vervoeren / naar de shop</td><td>De drie routes, niet even zwaar: de aanvraag (zeventig procent van de orders) krijgt het dichte cyaan vlak, de andere twee een rand</td></tr>
+          <tr><td class="mono">3</td><td><strong>Wie er mee op tour is</strong></td><td>Logostrook (zes), &eacute;&eacute;n klantcitaat</td><td>Bewijs. &ldquo;Marktleider&rdquo; werkt alleen met namen en aantallen ernaast</td></tr>
+          <tr><td class="mono">4</td><td><strong>Zes markten</strong></td><td>Zes branchetegels: aantal toepassingen, H3, &eacute;&eacute;n zin, &ldquo;Bekijk branche&rdquo;. Knop &ldquo;Alle branches&rdquo;</td><td>Ingang voor de zakelijke koper die denkt vanuit wie hij is</td></tr>
+          <tr><td class="mono">5</td><td><strong>Hoe het werkt</strong></td><td>Vier stappen: kiezen &rarr; configureren &rarr; laten controleren &rarr; geleverd. Knop &ldquo;Laat je maten controleren&rdquo;</td><td>Neemt de angst voor een verkeerde bestelling weg: er kijkt gratis een casebouwer mee</td></tr>
+          <tr><td class="mono">6</td><td><strong>En de prijs dan</strong></td><td>Voorbeeldprijsregel van een rackcase (basis, maatwerk, paneel en logo, wielen, totaal). Knop &ldquo;Start met configureren&rdquo;</td><td>Laat zien dat de prijs er meteen staat, zonder offerte</td></tr>
+          <tr><td class="mono">7</td><td><strong>Ook voor &eacute;&eacute;n instrument</strong></td><td>Vijf productregels met &ldquo;vanaf &euro;&rdquo;, link &ldquo;Alle 38 objecten&rdquo;</td><td>Vangt de kleine koper op. Leidt naar de shop en naar /case-voor</td></tr>
+          <tr><td class="mono">8</td><td><strong>Of stuur gewoon wat je hebt</strong></td><td>Vijf soorten input (schets, datasheet, foto, maten, oude case). Blok &ldquo;Joran tekent het uit&rdquo; met portret. Aanvraagformulier op de pagina: wat, bestanden, aantal, wanneer, waarheen</td><td>Aanvraag zonder account. Eindigt bij een mens, niet bij een formulier</td></tr>
+          <tr><td class="mono">9</td><td><strong>Zelf bouwen</strong></td><td>Acht onderdeelcategorie&euml;n, bouwpakket, zaagservice, zoeken op artikelnummer</td><td>Voor de koper die zijn artikelnummer al kent</td></tr>
+          <tr><td class="mono">10</td><td><strong>Afsluiter</strong></td><td>H2 &ldquo;Jouw maten. Jouw kist.&rdquo;, knop &ldquo;Open de configurator&rdquo;</td><td>Laatste duw</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p><em>Huismerk is korter:</em> hero &rarr; &ldquo;Maat in. Case uit.&rdquo; (tekenen &rarr; rekenen &rarr; CNC) &rarr; bewijsblok Dakar Rally (47 cases, 4.500 km, 0 schade) &rarr; drie startroutes &rarr; footer. Welke homepage het wordt, is nog niet besloten.</p>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">02 &middot; /case-voor</span>
+        <h2 data-rail="Wat ga je vervoeren?">Wat ga je vervoeren?</h2>
+        <p><strong>Doel:</strong> een index, geen etalage. Wie hier komt wil zo snel mogelijk naar zijn apparaat. Alle categorie&euml;n staan uitgeschreven, geordend op <strong>toepassing</strong> (w&aacute;t je vervoert). Elke categorielink gaat naar de gefilterde shop (<code>/shop#av-licht/moving-heads</code>), dus er is geen eigen sjabloon per categorie.</p>
+      </div>
+      <div class="scroller">
+      <table class="tpl">
+        <thead><tr><th>#</th><th>Sectie</th><th>Elementen</th><th>Wat het moet doen</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">0</td><td><strong>Kop</strong></td><td>Broodkruimel, eyebrow met tellingen, H1 &ldquo;Wat ga je vervoeren?&rdquo;, uitleg, meelopend zoekveld met snelkeuzes (moving head, gitaar, camera, drone, rack) en &ldquo;Wissen&rdquo;, tweede knop &ldquo;Stuur je schets of maten&rdquo;</td><td>Meteen zoeken, zonder jargon</td></tr>
+          <tr><td class="mono">1</td><td><strong>Belofteband</strong></td><td>Vier feiten: categorie&euml;n in zes toepassingen &middot; ook op maat &middot; zo begint zeventig procent &middot; tien werkdagen</td><td>Zelfde patroon als op de homepage</td></tr>
+          <tr><td class="mono">2</td><td><strong>Zes toepassingen</strong><br>register</td><td>Zes banen onder elkaar. Links: aantal cases, naam en &eacute;&eacute;n zin over het vak. Rechts: de categorie&euml;n in twee kolommen met aantal, plus &ldquo;Alles in &hellip;&rdquo;</td><td>Het hart van de pagina. Alleen horizontale lijnen, geen kaders. De zin per toepassing bevat de woorden die mensen intikken</td></tr>
+          <tr><td class="mono">3</td><td><strong>Of begin bij je vak</strong></td><td>Zes genummerde branchekaarten (H3, zin, &ldquo;Bekijk de branche&rdquo;), met de uitleg toepassing &ne; branche</td><td>Tweede ingang voor wie vanuit zijn sector denkt</td></tr>
+          <tr><td class="mono">4</td><td><strong>Het vaakst gevraagd</strong></td><td>Acht productregels (naam, model, maten, vanaf &euro;). Knop &ldquo;Alle apparaten A&ndash;Z&rdquo;</td><td>Directe sprong naar een product</td></tr>
+          <tr><td class="mono">5</td><td><strong>Geen match gevonden?</strong></td><td>Twee kaarten: &ldquo;Stuur op wat je hebt&rdquo; in cyaan als hoofdingang, &ldquo;Configureer het zelf&rdquo; ernaast</td><td>Vangnet, en tegelijk de belangrijkste route</td></tr>
+          <tr><td class="mono">6</td><td><strong>Een categorie is meer dan een maat</strong></td><td>Drie blokken met foto: binnenmaat &middot; schuim op gewicht &middot; beslag op gebruik</td><td>Laat vakkennis zien en verklaart waarom er categorie&euml;n zijn</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p><em>Open:</em> &ldquo;Alle apparaten A&ndash;Z&rdquo; linkt nog nergens heen (voorstel: anker naar een A&ndash;Z-blok onderaan deze pagina). Medisch en Evenement hebben geen branchepagina. 38 en 39 categorie&euml;n staan nog door elkaar.</p>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">03 &middot; /branches/{branche}</span>
+        <h2 data-rail="Branchepagina">Branchepagina (voorbeeld: defensie)</h2>
+        <p><strong>Doel:</strong> informatief: wie zijn wij, en wat maken we voor jou. Niet inkoopgericht, daarvoor is /grote-spelers. De bezoeker herkent zijn eigen probleem en plant een gesprek. Geen prijs en geen winkelwagen.</p>
+      </div>
+      <div class="scroller">
+      <table class="tpl">
+        <thead><tr><th>#</th><th>Sectie</th><th>Elementen</th><th>Wat het moet doen</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">0</td><td><strong>Kop</strong><br>donker, grote foto</td><td>Broodkruimel, eyebrow, H1 &ldquo;Flightcases voor {branche}, &hellip;&rdquo;, knop &ldquo;Plan een gesprek&rdquo;, link &ldquo;Lees verder&rdquo;</td><td>Meteen duidelijk: dit gaat over jouw vak</td></tr>
+          <tr><td class="mono">1</td><td><strong>USP-strook</strong></td><td>Vier korte feiten: op maat &middot; zelf samenstellen &middot; dossier bij elke levering &middot; eigen productie</td><td>Vertrouwen boven de vouw</td></tr>
+          <tr><td class="mono">2</td><td><strong>Waar het hier om draait</strong></td><td>H2 en twee alinea&rsquo;s over wat dit vak anders maakt, plus &ldquo;offerte binnen 48 uur&rdquo;</td><td>Laat zien dat we het vak begrijpen</td></tr>
+          <tr><td class="mono">3</td><td><strong>Waar we voor bouwen</strong></td><td>Doorlopende strook met alle markten</td><td>Laat zien hoe breed CaseBuilder werkt</td></tr>
+          <tr><td class="mono">4</td><td><strong>Van Doesburg naar het veld</strong></td><td>Vier feiten met een groot getal: Doesburg &middot; 48 uur &middot; per charge &middot; serie of stuk</td><td>Bewijs in feiten</td></tr>
+          <tr><td class="mono">5</td><td><strong>Drie eisen, drie oplossingen</strong></td><td>Drie cases: context, H3 met de eis, uitleg, en een voor&rarr;na-getal (bijv. 180 kg &rarr; 2 &times; 95)</td><td>Referenties zonder klantnamen: herken je jouw probleem</td></tr>
+          <tr><td class="mono">6</td><td><strong>De constructie</strong></td><td>Beeld van de case met vier genummerde details (hoeken, grepen, sluitwerk, wielen), link &ldquo;Bekijk dit casetype&rdquo;</td><td>Laat de bouwkwaliteit zien</td></tr>
+          <tr><td class="mono">7</td><td><strong>Vier modellen</strong></td><td>Vier modelkaarten: foto, H3 over het gebruik, typische apparatuur als link</td><td>Koppelt het model aan de manier van transport</td></tr>
+          <tr><td class="mono">8</td><td><strong>De specificatie</strong></td><td>Vier vragen (wat erin &middot; hoe het reist &middot; omgeving &middot; wat vast moet liggen), met een kanttekening over normen</td><td>Bereidt het gesprek voor en kwalificeert de lead</td></tr>
+          <tr><td class="mono">9</td><td><strong>Afsluiter met contact</strong></td><td>H2, uitleg, opmerking over een geheimhoudingsverklaring, knop &ldquo;Bespreek je toepassing&rdquo;, telefoonnummer</td><td>Eindigt bij een mens</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>De opzet is per branche gelijk. De inhoud van secties 2, 5 en 7 verschilt; bij AV bijvoorbeeld een podiumfoto en vier modellen op hun eigen productfoto.</p>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">04 &middot; /shop</span>
+        <h2 data-rail="Shop">Shop</h2>
+        <p><strong>Doel:</strong> alle vaste cases per toepassing. Een vaste case is gemaakt voor &eacute;&eacute;n apparaat en heeft vaste maten: je kiest alleen kleur en logo en rekent direct af. Onderdelen horen er ook bij. Wie een andere maat nodig heeft, gaat door naar de configurator of de aanvraag.</p>
+      </div>
+      <div class="scroller">
+      <table class="tpl">
+        <thead><tr><th>#</th><th>Sectie</th><th>Elementen</th><th>Wat het moet doen</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">0</td><td><strong>Kop</strong></td><td>Broodkruimel (Home / Shop / {toepassing}), eyebrow &ldquo;Vaste cases voor &eacute;&eacute;n apparaat&rdquo;, H1 = de toepassing, uitleg</td><td>Legt uit wat de shop wel en niet is</td></tr>
+          <tr><td class="mono">1</td><td><strong>Verder waar je was</strong><br>lichte balk</td><td>Laatst bekeken product en categorie, &ldquo;Vergeet dit&rdquo;</td><td>Terug naar waar je was. Staat sinds 12 september hier in plaats van op de homepage</td></tr>
+          <tr><td class="mono">2</td><td><strong>Toepassingstabs</strong></td><td>Zes tabs (AV &amp; licht, Backline &amp; muziek, &hellip;)</td><td>Wisselen van toepassing. Het adres <code>#toepassing/categorie</code> zet tab en filter goed</td></tr>
+          <tr><td class="mono">3</td><td><strong>Zoeken</strong></td><td>&ldquo;Zoek op case, onderdeel of artikelnummer&hellip;&rdquo;</td><td>Een zoekterm hoort bij dit bezoek en wordt niet bewaard</td></tr>
+          <tr><td class="mono">4</td><td><strong>Filters</strong><br>zijbalk</td><td><em>Per tab:</em> Categorie, Merk. <em>Blijven staan bij wisselen:</em> Model, Prijs (drie banden), Levertijd (op voorraad), Aan te passen (ook op jouw maat / vaste vorm), Gebruikt in (branche)</td><td>Branche is een filter, geen schakelaar bovenaan</td></tr>
+          <tr><td class="mono">5</td><td><strong>Resultaatbalk</strong></td><td>Aantal cases, &ldquo;Prijzen excl. btw&rdquo;, sorteren (meest verkocht, prijs laag&ndash;hoog, prijs hoog&ndash;laag)</td><td></td></tr>
+          <tr><td class="mono">6</td><td><strong>Productgrid</strong></td><td>Kaart: beeld, meta (categorie &middot; model), naam, regel &ldquo;Gebruikt in &hellip;&rdquo; (of &ldquo;Vaste maten, kleur en logo naar keuze&rdquo;), prijs</td><td>Kaart gaat naar de productpagina <code>/case-voor/{apparaat}</code></td></tr>
+          <tr><td class="mono">7</td><td><strong>Staat jouw apparaat er niet bij?</strong></td><td>Uitleg, &ldquo;Op jouw maat&rdquo; (configurator, met de maten van deze kist als begin), &ldquo;Case aanvragen&rdquo;</td><td>Uitgang naar de configurator of de aanvraag</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p><strong>Shop-megamenu:</strong> links de toepassingen, met onderaan &ldquo;Alle 38 categorie&euml;n&rdquo;. In het midden populaire producten, met daaronder populaire onderdelen.</p>
     </section>
 
   </div>
@@ -12685,6 +12844,9 @@
     // advertentieaccount loopt niet); toon daarom altijd het bereik.
     var BEREIK = { 0: '0', 50: '10–100', 500: '100–1K', 5000: '1K–10K', 50000: '10K–100K', 500000: '100K–1M' };
     var bereik = function (n) { return n == null ? '–' : (BEREIK[n] || nl(n)); };
+    // Lagen in plaats van rangnummers: binnen hetzelfde bereik is de volgorde
+    // niet gemeten, alleen het aantal concurrenten zegt dan nog iets.
+    var laag = function (n, wie) { return bereik(n) + (n <= 50 && wie >= 2 ? ' · bij 2+ concurrenten' : ''); };
     var euro = function (x) { return x == null ? '' : '€' + x.toFixed(2).replace('.', ','); };
     var bod = function (lo, hi) { return lo == null && hi == null ? '–' : euro(lo) + ' – ' + euro(hi); };
     // Wijziging uit Keyword Planner ('0%', '-90%', '900%'): kleur alleen als het
@@ -12697,14 +12859,33 @@
     };
     var CLNAAM = {}; (D.clusters || []).forEach(function (c) { CLNAAM[c.slug] = c.naam; });
 
+    // Conclusie: met welke clusters je begint. Puur uit de cijfers — het
+    // zwaarste case-specifieke volume per cluster — zodat de aanbeveling
+    // meebeweegt als de volumes veranderen.
+    if (D.clusters && D.clusterlijst) {
+      var zwaarte = D.clusters.map(function (c) {
+        var l = D.clusterlijst[c.slug] || [];
+        var spec = l.filter(function (k) { return k[1] && k[5] === 'case-specifiek'; });
+        return { naam: c.naam, som: spec.reduce(function (a, k) { return a + k[1]; }, 0), beste: spec[0], n: l.length };
+      }).filter(function (x) { return x.som > 0; }).sort(function (a, b) { return b.som - a.som; });
+      var eerste = zwaarte.slice(0, 6);
+      document.getElementById('ko-conclusie').innerHTML =
+        '<span class="eyebrow">Wat dit betekent</span>' +
+        '<p><strong>Begin met deze ' + eerste.length + ' pagina\'s.</strong> ' +
+        eerste.map(function (x) { return e(x.naam) + ' <span class="kozacht">(' + e(x.beste[0]) + ', ' + bereik(x.beste[1]) + ')</span>'; }).join(' &middot; ') +
+        '. Dat is de volgorde op gemeten zoekvolume; de overige ' + (zwaarte.length - eerste.length) + ' clusters met volume staan eronder.</p>' +
+        '<p>Twee dingen bepalen of deze volgorde standhoudt: de volumes zijn <strong>bereiken</strong> (het advertentieaccount ligt stil), en het is nog niet besloten of CaseBuilder <strong>onderdelen en koffers van andere merken</strong> verkoopt. Zegt de klant daar nee op, dan vallen de clusters onderdelen en kunststof koffers weg en schuift de rest op.</p>';
+    }
+
+
     if (D.top) {
       var alleTop = false;
       var tekenTop = function () {
         document.getElementById('ko-top-tabel').innerHTML =
-          '<thead><tr><th class="r">#</th><th>Zoekwoord</th><th>Zoekvolume</th><th>Cluster</th><th>Concurrentie</th><th>Bod (laag – hoog)</th><th class="r">3 maanden</th><th class="r">Jaar</th><th class="r">Concurrenten</th></tr></thead><tbody>' +
+          '<thead><tr><th>Laag</th><th>Zoekwoord</th><th>Cluster</th><th>Concurrentie</th><th>Bod (laag – hoog)</th><th class="r">3 maanden</th><th class="r">Jaar</th><th class="r">Concurrenten</th></tr></thead><tbody>' +
           (alleTop ? D.top : D.top.slice(0, 25)).map(function (t, i) {
-            return '<tr><td class="num">' + (i + 1) + '</td><td><strong>' + e(t[0]) + '</strong></td><td class="mono">' + bereik(t[1]) +
-              '</td><td>' + e(t[2]) + '</td><td>' + e(t[3]) + '</td><td class="mono">' + bod(t[4], t[5]) +
+            return '<tr><td class="kozacht">' + e(laag(t[1], t[6])) + '</td><td><strong>' + e(t[0]) + '</strong></td>' +
+              '<td>' + e(t[2]) + '</td><td>' + e(t[3]) + '</td><td class="mono">' + bod(t[4], t[5]) +
               '</td><td class="num">' + trend(t[7]) + '</td><td class="num">' + trend(t[8]) + '</td><td class="num">' + (t[6] || '–') + '</td></tr>';
           }).join('') + '</tbody>';
         document.getElementById('ko-top-meer').textContent = alleTop ? 'Toon alleen de eerste 25' : 'Toon alle ' + D.top.length;
@@ -12717,9 +12898,9 @@
       var alleProd = false;
       var tekenProd = function () {
         document.getElementById('ko-topprod-tabel').innerHTML =
-          '<thead><tr><th class="r">#</th><th>Apparaat</th><th class="r">Bedrijven</th><th>Welke</th><th class="r">Productpagina&rsquo;s</th><th>Zoekwoord volgende ronde</th><th>Zoekvolume</th></tr></thead><tbody>' +
+          '<thead><tr><th>Laag</th><th>Apparaat</th><th class="r">Bedrijven</th><th>Welke</th><th class="r">Productpagina&rsquo;s</th><th>Zoekwoord volgende ronde</th><th>Zoekvolume</th></tr></thead><tbody>' +
           (alleProd ? D.topprod : D.topprod.slice(0, 25)).map(function (t, i) {
-            return '<tr><td class="num">' + (i + 1) + '</td><td><strong>' + e(t[0]) + '</strong></td><td class="num">' + t[2] +
+            return '<tr><td class="kozacht">' + (t[2] > 1 ? 'bij 2+ bedrijven' : 'bij 1 bedrijf') + '</td><td><strong>' + e(t[0]) + '</strong></td><td class="num">' + t[2] +
               '</td><td class="kozacht">' + e(t[3].map(function (x) { return NAAM[x]; }).join(', ')) + '</td><td class="num">' + t[4] +
               '</td><td class="mono">' + e(t[5]) + '</td><td class="mono">' + (t[1] ? bereik(t[1]) : '<span class="kozacht">nog niet gemeten</span>') + '</td></tr>';
           }).join('') + '</tbody>';
@@ -13278,5 +13459,34 @@
   })();
 </script>
 
+
+<script>
+  /* Doorsnedemenu: de knop toont welke doorsnede open staat, en een tik
+     opent en sluit het menu op touch, waar hover niet bestaat. */
+  (function () {
+    var wrap = document.querySelector('.doorsnee');
+    if (!wrap) return;
+    var knop = wrap.querySelector('.doorsnee-knop');
+    var huidig = knop.querySelector('.huidig');
+    function label() {
+      var t = wrap.querySelector('.tab[aria-selected="true"]');
+      huidig.hidden = !t;
+      huidig.textContent = t ? t.textContent : '';
+    }
+    function zet(open) {
+      wrap.classList.toggle('open', open);
+      knop.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    knop.addEventListener('click', function () {
+      var open = !wrap.classList.contains('open');
+      zet(open);
+      if (!open) knop.blur();
+    });
+    wrap.addEventListener('click', function (e) { if (e.target.closest('.tab, .uit')) { zet(false); knop.blur(); } });
+    document.addEventListener('click', function (e) { if (!wrap.contains(e.target)) zet(false); });
+    new MutationObserver(label).observe(wrap, { subtree:true, attributes:true, attributeFilter:['aria-selected'] });
+    label();
+  })();
+</script>
 </body>
 </html>

@@ -179,32 +179,65 @@ ZOEKBAAR = ('categorie', 'landingspagina', 'product')
 BRONVOLGORDE = {'zaadterm': 0, 'categorie': 1, 'landingspagina': 2, 'product': 3}
 
 
-# Woorden die alleen Duits zijn. Megacase zet op /nl/ Nederlandse én Duitse
-# adressen door elkaar; een zin met een van deze woorden gaat niet naar een
-# Nederlandse zoekwoordtool.
-DUITS = set('fuer für mit und oder schwarz weiss truhe truhen truhencase kabeltruhe zubehoer zubehor zubehör '
-            'zubehoercase haubencase schublade rackschublade tief stahl tuer tür deckel innenmassen bildschirme '
-            'lautsprecher mischpult mischpulte trennwand trennwandset gross groß stueck stück abdeckung koffer­set '
-            'rollbrett griff griffe ecke ecken fach zubehoerfach kiste kisten unbekannt'.split())
-# Wat een zin tot een case-zoekwoord maakt. Ontbreekt dat, dan zoek je op het
-# apparaat en krijg je het volume van de speaker, niet van de case.
-CASEWOORD = re.compile(r'case|koffer|kist|rack|trunk|trolley|\bbak|box|verpakking|container|behuizing|\btas\b|hoes|'
-                       r'schuim|foam|inlay|interieur')
-ZONDER_CASEWOORD_OK = {'onderdelen', 'schuim', 'industrie', 'meubels'}
-ONZIN = re.compile(r'kopie|testbericht|\btest\b|geen categorie|uncategorized|^adding$|3d product|^overig|^aanbod$|^branches')
+# Wat een zoekwoord over een case laat gaan. Staat een van deze woorden erin —
+# ook middenin, zoals in 'kabelkist' of 'mixercase' — dan zoekt iemand een
+# case. 'bak', 'box' en 'container' stonden hier ook, maar die haalden het
+# volume op van opbergbakken en verhuisdozen.
+CASEWOORD = re.compile(r'case|koffer|kist|rack|trunk|trolley|verpakking|behuizing|hoes')
+ONZIN = re.compile(r'kopie|testbericht|\btest\b|geen categorie|uncategorized|^adding$|3d product|^overig|'
+                   r'^aanbod$|^branches|product category')
+# Tikfouten van de concurrenten; anders wordt elke verschrijving een eigen
+# zoekwoord.
+TIKFOUT = {'flichtcase': 'flightcase', 'fightcase': 'flightcase', 'flighcase': 'flightcase',
+           'filghtcase': 'flightcase', 'trolly': 'trolley', 'stduio': 'studio', 'kunstof': 'kunststof',
+           'allenheat': 'allen heath', 'sindle': 'single', 'profilier': 'profiler',
+           'tecnologies': 'technologies'}
+# Codes uit de productnamen van Amptown en Megacase: uitvoeringsletters en
+# aantallen. Een klant zoekt niet op 'case 4x cameo matrix panel 3 ww wheel'.
+CODE = re.compile(r'^(rg|kk|pb|fa|eer|eeb|bk|rsh|col|\d+in1|\d+tlg|\d+x)$')
+MAAT = re.compile(r'^\d+(mm|cm|kg|kw|w|l)$')
+DUITSE_MAAT = {'breite', 'hoehe', 'höhe', 'tiefe', 'innenmassen'}
 
 
-def zoekwoord(zin, cluster):
-    """Van sleutelzin naar een zoekwoord dat Keyword Planner accepteert en
-    dat over een case gaat. None = hoort niet in de lijst (en de reden staat
-    in de telling)."""
+def schoon(zin):
+    """Van sleutelzin naar kale woorden: tikfouten hersteld, maten en
+    uitvoeringscodes eruit."""
     z = re.sub(r"[^a-z0-9àáäâèéëêïíîöóôüúûç&+ -]", ' ', zin.lower())
-    z = re.sub(r'\s+', ' ', z).strip(' -')
+    z = re.sub(r'\b\d+(?:[.,]\d+)?\s*x\s*\d+.*$', '', z)        # 1100 x 480 x 760 en alles erna
+    z = re.sub(r'\b(b|d|h|t)\s*x\s*(b|d|h|t).*$', '', z)
+    woorden = []
+    for w in re.split(r'\s+', z):
+        w = TIKFOUT.get(w, w)
+        if not w or CODE.match(w) or MAAT.match(w) or w in DUITSE_MAAT:
+            continue
+        woorden.extend(w.split())
+    return re.sub(r'\s+', ' ', ' '.join(woorden)).strip(' -')
+
+
+def zoekwoord(zin, taal, merken):
+    """Van sleutelzin naar een zoekwoord dat Keyword Planner accepteert en dat
+    over een case gaat. None = hoort niet in de lijst, met de reden erbij.
+
+    Twee regels die eerder misgingen:
+    - Een Duitstalige bron levert geen Nederlands zoekwoord. Megacase en
+      Amptown zijn samen meer dan de helft van alle rijen; daar houden we
+      alleen het apparaat uit over (merk + model), niet de zin.
+    - 'flightcase' ervoor plakken mag alleen als er een apparaat genoemd wordt.
+      Anders krijg je onzin als 'flightcase gasveer 50n'.
+    """
+    z = schoon(zin)
     if len(z) < 3 or z.replace(' ', '').isdigit() or ONZIN.search(z):
         return None, 'onbruikbaar'
-    if set(z.split()) & DUITS:
-        return None, 'duits'
-    if cluster not in ZONDER_CASEWOORD_OK and not CASEWOORD.search(z):
+    app, _, _ = apparaat_uit(z, merken)
+    if taal != 'nl':
+        if not app:
+            return None, 'duitse bron'
+        z = app                      # 'truhencase fuer medion p18077' → 'medion p18077'
+    if not CASEWOORD.search(z) and app:
+        # Een apparaat zonder casewoord: 'genz benz 410t' wordt 'flightcase
+        # genz benz 410t', anders meet je het volume van de speaker. Zonder
+        # apparaat blijft de zin staan zoals hij is ('popnagel' is een echt
+        # zoekwoord); zoekintentie() markeert hem dan als algemeen.
         z = 'flightcase ' + z
     if len(z) > 80 or len(z.split()) > 10:   # grenzen van Google Ads
         return None, 'te lang'
@@ -262,37 +295,39 @@ def getal(x):
         return None
 
 
+def lees_relevantie():
+    """concurrenten/relevantie.csv: met de hand nagelopen zoekwoorden. Een
+    regel is 'zoekwoord,j/n,notitie'. Een regel kan niet zien dat 'server rack'
+    over serverkasten gaat en 'aluminium koffer' vaak over reiskoffers; een
+    mens wel. Wat hierin staat wint van de regel hieronder."""
+    f = MAP / 'relevantie.csv'
+    uit = {}
+    if not f.exists():
+        return uit
+    for regel in csv.reader(io.StringIO(f.read_text(encoding='utf-8'))):
+        # Alleen ingevulde regels tellen: leeg = nog niet nagekeken, dan
+        # beslist de regel hieronder.
+        if len(regel) >= 2 and regel[0] and regel[0] != 'zoekwoord' and regel[1].strip():
+            uit[regel[0].strip().lower()] = regel[1].strip().lower().startswith('j')
+    return uit
+
+
 def zoekintentie(kw):
-    """'algemeen' = zegt niets over een case. Een los woord ('interieur',
-    'koffers') of een zin zonder casewoord ('popnagel') haalt volume op van
-    mensen die iets anders zoeken. Blijft zichtbaar, telt niet mee in de top 100."""
-    if len(kw.split()) == 1 and 'flightcase' not in kw:
-        return 'algemeen'
-    if not CASEWOORD.search(kw) and 'flightcase' not in kw:
-        return 'algemeen'
-    return 'case-specifiek'
+    """'algemeen' = zegt niets over een case, en haalt dus volume op van mensen
+    die iets anders zoeken ('interieur', 'gereedschap', 'pallets'). Gekeken
+    wordt of er een casewoord in een van de woorden zit: 'kabelkist' en
+    'mixercase' tellen dus wel mee, 'plastic bakken' niet."""
+    if kw in RELEVANTIE:
+        return 'case-specifiek' if RELEVANTIE[kw] else 'algemeen'
+    return 'case-specifiek' if CASEWOORD.search(kw) else 'algemeen'
 
 
-def ken_clusters_toe(rijen):
-    """Elke zoekbare rij krijgt het eerste cluster dat past (zie clusters.py)."""
-    regels = [(slug, re.compile(rx)) for slug, _, rx, _ in CLUSTERS]
-    for r in rijen:
-        r['cl'] = ''
-        if r['soort'] not in ZOEKBAAR or not r['zin']:
-            continue
-        tekst = (r['zin'] + ' ' + r['pad']).lower()
-        for slug, rx in regels:
-            if rx.search(tekst):
-                r['cl'] = slug
-                break
-
-
-def cluster_lijsten(rijen):
+def cluster_lijsten(rijen, merken):
     """Per cluster de sleutelzinnen, elk één keer: zaadtermen, dan wat de
     concurrenten als categorie of trefwoordpagina hebben, dan producten. Binnen
     die groepen: bij meer concurrenten eerst. Nederlands vóór Duits."""
-    # Eerst alle zoekwoorden, elk één keer. De spelling komt uit zoekwoord()
-    # met het cluster van de rij, precies zoals ze naar Keyword Planner gingen.
+    # Eerst alle zoekwoorden, elk één keer, in de spelling waarin ze naar
+    # Keyword Planner gaan.
     alle, weg = {}, Counter()
     for slug, naam, _, zaad in CLUSTERS:
         for z in zaad:
@@ -300,7 +335,7 @@ def cluster_lijsten(rijen):
     for r in rijen:
         if r['soort'] not in ZOEKBAAR or not r['zin']:
             continue
-        kw, reden = zoekwoord(r['zin'], r['cl'])
+        kw, reden = zoekwoord(r['zin'], r['taal'], merken)
         if not kw:
             weg[reden] += 1
             continue
@@ -318,15 +353,27 @@ def cluster_lijsten(rijen):
     specifiek = [x for x in regels if x[0] != 'algemeen']
     algemeen = dict(regels)['algemeen']
     def kies(e):
+        # Eerst de woorden van het zoekwoord zelf, dan pas het categoriepad bij
+        # de concurrent. Andersom belandde 'koffer' in 'flightcase op maat',
+        # omdat het bij een concurrent onder 'maatwerk verpakkingen' hing.
         if 'cl' in e:
             return e['cl']
         for slug, rx in specifiek:
             if rx.search(e['kw']):
                 return slug
+        if algemeen.search(e['kw']):
+            return 'algemeen'
         for slug, rx in specifiek:
             if any(rx.search(p) for p in e['paden']):
                 return slug
-        return 'algemeen' if algemeen.search(e['kw']) else 'zonder'
+        return 'zonder'
+
+    for kw in [k for k in alle if re.search(r' \d$', k)]:
+        basis = kw.rsplit(' ', 1)[0]
+        if basis in alle:
+            alle[basis]['wie'] |= alle[kw]['wie']
+            alle[basis]['zinnen'] |= alle[kw]['zinnen']
+            del alle[kw]
 
     uit = {slug: [] for slug, _, _, _ in CLUSTERS}
     uit['zonder'] = []
@@ -362,9 +409,23 @@ def merken_uit_data(rijen):
         naam = pad.split('›')[-1].strip()
         if naam and not naam.isdigit() and len(naam) > 2:
             uit.add(naam)
-    return uit
+    return uit | MERKEN_EXTRA
 
 
+# Merken die geen van de concurrenten als categorie voert, maar die wel in
+# productnamen staan. Zonder deze lijst missen de klassiekers: de X32, de
+# CDJ-3000, de DJM-900.
+MERKEN_EXTRA = set(
+    'behringer mackie studiomaster tascam avolites obsidian xone midas digico avid soundcraft yamaha waves '
+    'pioneer alphatheta denon rane traktor reloop numark eurolite stairville adj briteq ignition futurelight '
+    'litecraft antari sgm selecon martin chauvet cameo showtec glp elation robe ayrton arri astera varytec '
+    'ampeg orange blackstar peavey markbass hartke engl boss moog sequential prophet arturia novation kawai '
+    'ketron viscount leslie gretsch paiste nord korg roland fender marshall gibson takamine steinway '
+    'blackmagic atem tricaster manfrotto cartoni epson optoma sony samsung philips lg bose sennheiser shure '
+    'rcf jbl nexo meyer eaw fohhn turbosound alcons fbt qsc lodestar chainmaster movecat liftket motorola '
+    'medion apple ipad macbook dell hp lenovo'.split()
+) | {'allen heath', 'l acoustics', 'db technologies', 'clay paky', 'vari lite', 'ld systems', 'the box',
+     'marshall electronics'}
 MODEL = re.compile(r'[a-z]*\d[a-z0-9-]*')
 # Merken die zelf koffers en cases maken. Een 'skb 3i' is geen apparaat waar
 # een case omheen moet, maar een case die een concurrent doorverkoopt.
@@ -372,20 +433,40 @@ CASEMERKEN = {'skb', 'defender', 'viking', 'peli', 'pelican', 'nanuk', 'explorer
               'husk', 'maxado', 'shell', 'shell case', 'mio', 'zarges', 'amptown', 'megacase', 'gator', 'thon'}
 
 
+# Woorden die na het merk het model afsluiten: daarna volgt de uitvoering,
+# niet het apparaat.
+MODEL_STOP = re.compile(r'case|koffer|kist|rack|trunk|trolley|flight|wheel|wielen|met|voor|zwart|black|'
+                        r'\d+in1|\d+x|\d+(kg|kw|w|mm|cm|l)$')
+
+
 def apparaat_uit(zin, merken):
     """Welk apparaat noemt deze productnaam? Een merk uit de lijst, gevolgd
-    door een modelaanduiding. 'taperack yamaha dm7 compact doghouse' en
-    'flightcase yamaha dm7' worden zo allebei 'yamaha dm7', zodat je kunt
-    tellen hoeveel concurrenten er een case voor maken."""
+    door de modelaanduiding: de woorden erna tot aan een uitvoeringswoord, aan
+    elkaar geschreven. 'allen heath qu 16' wordt 'allen heath qu16' en niet
+    'allen heath 16'; 'taperack yamaha dm7 compact doghouse' wordt
+    'yamaha dm7'. Zo tellen dezelfde apparaten ook echt samen."""
     w = zin.lower().split()
     for i, woord in enumerate(w):
         for merk in (' '.join(w[i:i + 2]), woord):
-            if merk in merken:
-                for t in w[i + (2 if ' ' in merk else 1):][:2]:
-                    # Een model heeft een cijfer en meer dan één teken: 'dm7',
-                    # 'ka74', '3i'. Een losse '1' zegt niets.
-                    if MODEL.fullmatch(t) and len(t) > 1:
-                        return merk + ' ' + t, merk, t
+            if merk not in merken:
+                continue
+            rest = w[i + (2 if ' ' in merk else 1):]
+            # Hooguit twee woorden: het model zelf ('dm7'), of een letterdeel
+            # met het nummer erachter ('qu 16', 'quantum 112'). Stopt bij het
+            # eerste woord mét cijfer, anders plakt de uitvoering eraan vast
+            # ('dm7 compact' werd 'dm7compact').
+            model = []
+            for t in rest[:2]:
+                if MODEL_STOP.search(t) or not re.fullmatch(r'[a-z0-9-]+', t):
+                    break
+                model.append(t)
+                if any(c.isdigit() for c in t):
+                    break
+            if model and not any(c.isdigit() for c in model[-1]):
+                model = []
+            code = ''.join(model).strip('-')
+            if code and any(c.isdigit() for c in code) and len(code) > 1:
+                return merk + ' ' + code, merk, code
     return None, None, None
 
 
@@ -425,6 +506,15 @@ def top100_producten(rijen, merken):
         e['n'] = getal(e['vol']['Avg. monthly searches']) if e['vol'] else None
     return sorted(per.values(), key=lambda e: (e['soort'] != 'apparaat', -len(e['bedrijven']), -(e['n'] or 0),
                                                -e['paginas'], e['app']))[:100]
+
+
+def laag(e):
+    """De lijst is geen rangorde van 1 tot 100: 74 zoekwoorden delen hetzelfde
+    bereik. Een laag zegt wat er wel te zeggen valt."""
+    bereik = BEREIK.get(int(e['n']), str(int(e['n'])))
+    if e['n'] and e['n'] <= 50 and len(e['wie']) >= 2:
+        return bereik + ' · bij 2+ concurrenten'
+    return bereik
 
 
 def top100(clusters):
@@ -477,7 +567,7 @@ def main():
                 gezien.add(url)
                 naam = linktekst or naam_uit_url(url)
                 rijen.append({
-                    'c': slug, 'soort': soort, 'naam': naam,
+                    'c': slug, 'soort': soort, 'naam': naam, 'taal': c.get('taal', 'nl'),
                     'pad': categorie_pad(url) if soort == 'categorie' else categorie_van_product(url) if soort == 'product' else '',
                     'zin': sleutelzin(naam, slug) if soort in ('categorie', 'product', 'landingspagina') else '',
                     'url': url, 'mod': mod, 'bron': bron,
@@ -501,18 +591,21 @@ def main():
     overlap = sorted(((t, len(s), hoeveel[t], sorted(naam_van[x] for x in s)) for t, s in wie.items() if len(s) >= 2),
                      key=lambda x: (-x[1], -x[2], x[0]))[:300]
 
-    global VOL, VERZONDEN
+    global VOL, VERZONDEN, RELEVANTIE
     VOL = lees_volumes()
     VERZONDEN = lees_verzonden()
-    ken_clusters_toe(rijen)
-    clusters, weg = cluster_lijsten(rijen)
+    RELEVANTIE = lees_relevantie()
+    # De merkenlijst eerst: zoekwoord() heeft hem nodig om te zien of een
+    # Duitstalige of casewoordloze zin toch een apparaat noemt.
+    merken = merken_uit_data(rijen)
+    clusters, weg = cluster_lijsten(rijen, merken)
     # Terug naar de rijen: het cluster van hun zoekwoord, of waarom ze er niet
     # in zitten. Eén bron van waarheid voor de lijst, de Sheet en de clustertabs.
     per_kw = {e['kw']: e for l in clusters.values() for e in l}
     for r in rijen:
         r['cluster'], r['vol'], r['nwie'], r['intentie'] = '', None, 0, ''
         if r['soort'] in ZOEKBAAR and r['zin']:
-            kw, reden = zoekwoord(r['zin'], r['cl'])
+            kw, reden = zoekwoord(r['zin'], r['taal'], merken)
             e = per_kw.get(kw) if kw else None
             r['cluster'] = e['cl'] if e else ('weg:' + reden if reden else '')
             if e:
@@ -521,14 +614,13 @@ def main():
     # voeren, dan op naam. Zo staat bovenaan wat ertoe doet, in tab en Sheet.
     rijen.sort(key=lambda r: (-(r['vol'] or -1), -r['nwie'], naam_van_c(r['c']), r['naam']))
     top = top100(clusters)
-    top_prod = top100_producten(rijen, merken_uit_data(rijen))
+    top_prod = top100_producten(rijen, merken)
     gevonden = sum(1 for l in clusters.values() for e in l if e['vol'])
     print(f'volumes: {len(VOL)} in export, {gevonden} gekoppeld, {sum(1 for l in clusters.values() for e in l if e["n"])} met volume, top100: {len(top)}')
     n_csv = schrijf_csv(clusters)
     schrijf_csv_apparaten(top_prod)
     schrijf_data(rijen, tellingen, overlap, logboek, n_csv, clusters, top, top_prod)
     schrijf_excel(rijen, tellingen, overlap, logboek, clusters, top, top_prod)
-    zonder = sum(1 for r in rijen if r['soort'] in ZOEKBAAR and r['zin'] and not r['cl'])
     for slug, naam, _, _ in CLUSTERS:
         wie = set().union(*(e['wie'] for e in clusters[slug]))
         print(f'  cluster {naam:<22} {len(clusters[slug]):>5} zinnen · {len(wie):>2} concurrenten')
@@ -700,22 +792,23 @@ def schrijf_excel(rijen, tellingen, overlap, logboek, clusters, top, top_prod):
     breed = [22, 44, 30, 40, 22, 30, 14, 60, 14, 28]
     blad('Categorieën', koppen, [kol(r) for r in rijen if r['soort'] == 'categorie'], breed)
 
-    blad('top 100', ['#', 'Keyword', 'Zoekvolume (bereik)', 'Cluster', 'Aantal concurrenten', 'Welke', 'Competition',
+    blad('top 100', ['Laag', 'Keyword', 'Cluster', 'Aantal concurrenten', 'Welke', 'Competition',
                      'Top of page bid (low range)', 'Top of page bid (high range)', 'Three month change', 'YoY change',
                      'Voorbeeld bij concurrent'],
-         [[i + 1, e['kw'], BEREIK.get(int(e['n']), int(e['n'])), cl, len(e['wie']) or '',
+         [[laag(e), e['kw'], cl, len(e['wie']) or '',
            ', '.join(sorted(naam_van[x] for x in e['wie'])), e['vol']['Competition'],
            getal(e['vol']['Top of page bid (low range)']), getal(e['vol']['Top of page bid (high range)']),
            e['vol']['Three month change'], e['vol']['YoY change'], e['url']]
-          for i, (e, cl) in enumerate(top)],
-         [5, 40, 16, 24, 12, 50, 12, 12, 12, 12, 12, 60])
-    blad('top 100 producten', ['#', 'Apparaat', 'Merk', 'Model', 'Soort', 'Aantal bedrijven', 'Welke', 'Productpagina’s',
+          for e, cl in top],
+         [26, 40, 24, 12, 50, 12, 12, 12, 12, 12, 60])
+    blad('top 100 producten', ['Laag', 'Apparaat', 'Merk', 'Model', 'Soort', 'Aantal bedrijven', 'Welke', 'Productpagina’s',
                                'Zoekwoord voor de volgende ronde', 'Zoekvolume (bereik)', 'Voorbeeld bij concurrent',
                                'Zoals de concurrent het noemt'],
-         [[i + 1, e['app'], e['merk'], e['model'], e['soort'], len(e['bedrijven']),
+         [['bij 2+ bedrijven' if len(e['bedrijven']) > 1 else 'bij 1 bedrijf',
+           e['app'], e['merk'], e['model'], e['soort'], len(e['bedrijven']),
            ', '.join(sorted(naam_van[x] for x in e['wie'])), e['paginas'], e['zoekwoord'],
            BEREIK.get(int(e['n']), int(e['n'])) if e['n'] else '(nog niet gemeten)', e['url'], e['voorbeeld']]
-          for i, e in enumerate(top_prod)],
+          for e in top_prod],
          [5, 26, 18, 12, 14, 14, 40, 14, 34, 20, 56, 44])
     wb.move_sheet('top 100 producten', offset=-(len(wb.sheetnames) - 3))
     wb.move_sheet('top 100', offset=-(len(wb.sheetnames) - 2))
@@ -758,7 +851,7 @@ def schrijf_excel(rijen, tellingen, overlap, logboek, clusters, top, top_prod):
     wb.save(MAP / 'concurrenten.xlsx')
 
 
-VOL, VERZONDEN = {}, set()
+VOL, VERZONDEN, RELEVANTIE = {}, set(), {}
 
 if __name__ == '__main__':
     main()
