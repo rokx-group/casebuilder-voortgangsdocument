@@ -1659,7 +1659,7 @@
       <li><button class="tab" role="tab" id="t4" data-hash="wireframes" aria-controls="p4" aria-selected="false">Wireframes</button></li>
       <li><button class="tab" role="tab" id="t7" data-hash="meetings" aria-controls="p7" aria-selected="false">Meetings</button></li>
       <li><button class="tab" role="tab" id="t10" data-hash="productlijst" aria-controls="p10" aria-selected="false">Productlijst</button></li>
-      <li><button class="tab" role="tab" id="t11" data-hash="rici" aria-controls="p11" aria-selected="false">Rici</button></li>
+      <li><button class="tab" role="tab" id="t11" data-hash="opzet-pages" aria-controls="p11" aria-selected="false">Opzet pages</button></li>
       <li><a class='uit' href='/mockups/header-varianten' rel='noopener' target='_blank'>Prototypes<span class="pijl">&#8599;</span></a></li>
       <li><a class='uit' href='/mockups/overzicht#componenten' rel='noopener' target='_blank'>Componenten<span class="pijl">&#8599;</span></a></li>
     </ul>
@@ -12735,7 +12735,10 @@
       });
       if (!found && wfBtns.length) selectWf(wfBtns[0].getAttribute('data-wf'));
     }
+    // Oude adressen van hernoemde tabs blijven werken.
+    var OUDE_HASH = { rici: 'opzet-pages' };
     function tabByHash(slug) {
+      slug = OUDE_HASH[slug] || slug;
       for (var i = 0; i < tabs.length; i++) {
         if (tabs[i].getAttribute('data-hash') === slug) return tabs[i];
       }
