@@ -21,7 +21,9 @@ from urllib.parse import unquote, urlparse
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from concurrenten_lijst import CONCURRENTEN, PADEN, OVERSLAAN_URL  # noqa: E402
-from clusters import CLUSTERS  # noqa: E402
+from clusters import CLUSTERS, BUITEN_AANBOD, INDELING, INDELING_BRON, ONDERDEEL_SUB  # noqa: E402
+
+assert set(INDELING) == {s for s, _, _, _ in CLUSTERS}, 'elk cluster hoort in INDELING (clusters.py)'
 
 ROOT = Path(__file__).resolve().parent.parent
 MAP = ROOT / 'concurrenten'
@@ -37,8 +39,10 @@ STAPPEN = [
     ('2', 'Producten', 'Per concurrent elke productpagina uit de sitemap.', 'klaar'),
     ('3', 'Sleutelzin per pagina', 'Eerste versie, afgeleid uit de URL: het slot van het adres is meestal het zoekwoord. Nog met de hand te controleren.', 'eerste versie'),
     ('3b', 'Alternatieve zoekwoorden', 'Varianten en synoniemen per sleutelzin. Komt uit de zoekwoordtool van stap 4.', 'open'),
-    ('4', 'Zoekvolume uit Keyword Planner', 'De CSV als plan geüpload, "Historische statistieken van plan" teruggezet in de clustertabs. Volumes zijn bereiken (10–100, 100–1K, 1K–10K, 10K–100K): het account heeft geen lopende advertenties. Later eventueel via de API.', 'klaar (bereiken)'),
-    ('5', 'Top 100 voor CaseBuilder', 'Case-specifieke zoekwoorden op volume, bij gelijk volume: meer concurrenten eerst, dan het hoogste bod. Losse algemene woorden (interieur, koffers) tellen niet mee.', 'eerste versie'),
+    ('4', 'Zoekvolume uit Keyword Planner', 'De CSV als plan geüpload, "Historische statistieken van plan" teruggezet in de clustertabs. Alleen bereiken (10–100, 100–1K, …): exacte getallen geeft Google alleen als er advertenties lopen.', 'klaar (bereiken)'),
+    ('5', 'Top 100 zoekwoorden en apparaten', 'Zoekwoorden die over een case gaan, op volume. Apart: de apparaten waarvoor concurrenten cases maken.', 'eerste versie'),
+    ('6', 'Indeling shop en SEO-pagina’s', 'Elk cluster wordt een shopcategorie, filter, optie of route (clusters.py, INDELING).', 'eerste versie'),
+    ('7', 'Voorbeeld SEO-pagina', 'Eén categorie uitgewerkt: zoekwoorden, tussenkoppen, subpagina’s.', 'eerste versie'),
 ]
 
 # Waar de uitkomst te zien is, en wat we aan Clement vragen. Staan bovenaan
@@ -172,9 +176,11 @@ def categorie_pad(url):
 
 
 # De kolommen van een export uit Google Ads Keyword Planner, in dezelfde
-# volgorde. Dan plak je in stap 4 de export er zo overheen.
-PLANNER = ['Keyword', 'Avg. monthly searches', 'Top of page bid (low range)', 'Top of page bid (high range)',
-           'Competition', 'Three month change', 'YoY change', 'Competition (indexed value)']
+# volgorde, zodat je in stap 4 de export er zo overheen plakt. De koppen zijn
+# vertaald: de Sheet gaat naar de klant. De export zelf heeft Engelse koppen
+# ('Avg. monthly searches'); lees_volumes() leest die.
+PLANNER = ['Zoekwoord', 'Gem. zoekopdrachten per maand', 'Bod bovenaan pagina (laag)', 'Bod bovenaan pagina (hoog)',
+           'Concurrentie', 'Wijziging 3 maanden', 'Wijziging jaar', 'Concurrentie (index)']
 ZOEKBAAR = ('categorie', 'landingspagina', 'product')
 BRONVOLGORDE = {'zaadterm': 0, 'categorie': 1, 'landingspagina': 2, 'product': 3}
 
@@ -185,7 +191,9 @@ BRONVOLGORDE = {'zaadterm': 0, 'categorie': 1, 'landingspagina': 2, 'product': 3
 # volume op van opbergbakken en verhuisdozen.
 CASEWOORD = re.compile(r'case|koffer|kist|rack|trunk|trolley|verpakking|behuizing|hoes')
 ONZIN = re.compile(r'kopie|testbericht|\btest\b|geen categorie|uncategorized|^adding$|3d product|^overig|'
-                   r'^aanbod$|^branches|product category')
+                   r'^aanbod$|^branches|product category|'
+                   # Menukoppen van Koffers en Kisten, geen categorie.
+                   r'^(eigenschappen|materiaal|merken|toepassingen)$')
 # Tikfouten van de concurrenten; anders wordt elke verschrijving een eigen
 # zoekwoord.
 TIKFOUT = {'flichtcase': 'flightcase', 'fightcase': 'flightcase', 'flighcase': 'flightcase',
@@ -214,7 +222,7 @@ def schoon(zin):
     return re.sub(r'\s+', ' ', ' '.join(woorden)).strip(' -')
 
 
-def zoekwoord(zin, taal, merken):
+def zoekwoord(zin, taal, merken, soort='product'):
     """Van sleutelzin naar een zoekwoord dat Keyword Planner accepteert en dat
     over een case gaat. None = hoort niet in de lijst, met de reden erbij.
 
@@ -228,6 +236,10 @@ def zoekwoord(zin, taal, merken):
     z = schoon(zin)
     if len(z) < 3 or z.replace(' ', '').isdigit() or ONZIN.search(z):
         return None, 'onbruikbaar'
+    # Behalve als Keyword Planner er zelf volume voor meet ('skb roto rack'):
+    # gemeten vraag wint van de regel.
+    if is_casemerk_artikel(z, soort) and planner_sleutel(z) not in VOL:
+        return None, 'casemerk-artikel'
     app, _, _ = apparaat_uit(z, merken)
     if taal != 'nl':
         if not app:
@@ -335,7 +347,7 @@ def cluster_lijsten(rijen, merken):
     for r in rijen:
         if r['soort'] not in ZOEKBAAR or not r['zin']:
             continue
-        kw, reden = zoekwoord(r['zin'], r['taal'], merken)
+        kw, reden = zoekwoord(r['zin'], r['taal'], merken, r['soort'])
         if not kw:
             weg[reden] += 1
             continue
@@ -431,6 +443,21 @@ MODEL = re.compile(r'[a-z]*\d[a-z0-9-]*')
 # een case omheen moet, maar een case die een concurrent doorverkoopt.
 CASEMERKEN = {'skb', 'defender', 'viking', 'peli', 'pelican', 'nanuk', 'explorer', 'hprc', 'max', 'rako',
               'husk', 'maxado', 'shell', 'shell case', 'mio', 'zarges', 'amptown', 'megacase', 'gator', 'thon'}
+# Een artikel van zo'n merk: het merk vooraan en een typenummer erin ('skb
+# iseries 3i 1309 6 vervangend plukschuim', 'hprc2500', 'shell case model 311
+# leeg', 'skb gevormde tenor saxofoon koffer'). Dat is een koffer die een concurrent doorverkoopt, geen zoekwoord
+# waarop CaseBuilder gevonden wil worden; alleen Koffers en Kisten levert er
+# al honderden. Het merk zelf ('skb', 'peli case', 'nanuk kunststof koffers')
+# staat als categorie bij de concurrent en blijft staan.
+CASEMERK_VOORAAN = re.compile(r'^(?:flightcase |case |koffer )?(?:'
+                              + '|'.join(sorted((re.escape(m) for m in CASEMERKEN), key=len, reverse=True))
+                              + r')(?:\b|(?=\d))')
+
+
+def is_casemerk_artikel(z, soort):
+    """Een productpagina met het merk vooraan is altijd een artikel; een
+    categorie alleen als er een typenummer in staat."""
+    return bool(CASEMERK_VOORAAN.match(z)) and (soort == 'product' or any(c.isdigit() for c in z))
 
 
 # Woorden die na het merk het model afsluiten: daarna volgt de uitvoering,
@@ -499,7 +526,11 @@ def top100_producten(rijen, merken):
         e['wie'].add(r['c'])
         e['bedrijven'].add(groep[r['c']])
         e['paginas'] += 1
+    # Onder welke categorie hoort het apparaat? Dezelfde regels als de
+    # clusters, op merk en model: 'midas m32' valt onder mixercases.
+    regels = [(slug, re.compile(rx)) for slug, _, rx, _ in CLUSTERS if INDELING[slug]['rol'] == 'categorie']
     for e in per.values():
+        e['cl'] = next((slug for slug, rx in regels if rx.search(e['app'])), '')
         e['soort'] = 'casemodel' if e['merk'].split()[0] in CASEMERKEN else 'apparaat'
         e['zoekwoord'] = ('koffer ' if e['soort'] == 'casemodel' else 'flightcase ') + e['app']
         e['vol'] = VOL.get(planner_sleutel(e['zoekwoord'])) or VOL.get(planner_sleutel(e['app']))
@@ -517,13 +548,31 @@ def laag(e):
     return bereik
 
 
+def onderdeel_sub(lijst):
+    """De zoekwoorden van het cluster onderdelen, verdeeld over de
+    subcategorieën van de shopafdeling (ONDERDEEL_SUB in clusters.py). Per
+    subcategorie: naam, aantal zoekwoorden, en de sterkste vijf."""
+    regels = [(naam, re.compile(rx)) for naam, rx in ONDERDEEL_SUB]
+    per = defaultdict(list)
+    for e in lijst:
+        naam = next((n for n, rx in regels if rx.search(e['kw'])), 'Overig')
+        per[naam].append(e)
+    uit = []
+    for naam, _ in ONDERDEEL_SUB + [('Overig', '')]:
+        l = sorted(per.get(naam, []), key=lambda e: (-(e['n'] or 0), -len(e['wie']), e['kw']))
+        if l:
+            uit.append([naam, len(l), [[e['kw'], e['n']] for e in l[:5]]])
+    return uit
+
+
 def top100(clusters):
     """Stap 5: case-specifiek, met volume. Bij gelijk bereik: meer
     concurrenten eerst (bewezen aanbod), dan het hoogste bod (commerciële
     waarde)."""
     naam = {s: n for s, n, _, _ in CLUSTERS}
     naam['zonder'] = 'zonder cluster'
-    kand = [(e, slug) for slug, l in clusters.items() for e in l if e['n'] and e['intentie'] == 'case-specifiek']
+    kand = [(e, slug) for slug, l in clusters.items() for e in l
+            if e['n'] and e['intentie'] == 'case-specifiek' and slug not in BUITEN_AANBOD]
     kand.sort(key=lambda x: (-x[0]['n'], -len(x[0]['wie']), -(getal(x[0]['vol']['Top of page bid (high range)']) or 0), x[0]['kw']))
     return [(e, naam[slug]) for e, slug in kand[:100]]
 
@@ -605,7 +654,7 @@ def main():
     for r in rijen:
         r['cluster'], r['vol'], r['nwie'], r['intentie'] = '', None, 0, ''
         if r['soort'] in ZOEKBAAR and r['zin']:
-            kw, reden = zoekwoord(r['zin'], r['taal'], merken)
+            kw, reden = zoekwoord(r['zin'], r['taal'], merken, r['soort'])
             e = per_kw.get(kw) if kw else None
             r['cluster'] = e['cl'] if e else ('weg:' + reden if reden else '')
             if e:
@@ -676,7 +725,8 @@ def schrijf_data(rijen, tellingen, overlap, logboek, n_csv, clusters, top, top_p
     kol = ['c', 'soort', 'naam', 'pad', 'zin', 'url', 'mod', 'cluster', 'vol', 'intentie']
     data = {
         'opgehaald': logboek['opgehaald'], 'stappen': STAPPEN, 'concurrenten': concurrenten,
-        'clusters': [{'slug': s, 'naam': n, 'zaad': z} for s, n, _, z in CLUSTERS], 'csv': n_csv,
+        'clusters': [{'slug': s, 'naam': n, 'zaad': z, 'buiten': BUITEN_AANBOD.get(s, '')}
+                     for s, n, _, z in CLUSTERS], 'csv': n_csv,
         # Dezelfde opgeschoonde zoekwoorden als in de CSV en de clustertabs,
         # zodat de tab dezelfde aantallen toont als de Sheet.
         # Per zoekwoord: [zoekwoord, volume (midden bereik), concurrentie, bod laag,
@@ -686,8 +736,10 @@ def schrijf_data(rijen, tellingen, overlap, logboek, n_csv, clusters, top, top_p
                               getal(e['vol']['Top of page bid (high range)']) if e['vol'] else None,
                               e['intentie'], len(e['wie'])] for e in l] for k, l in clusters.items()},
         'topprod': [[e['app'], e['n'], len(e['bedrijven']), sorted(e['wie']), e['paginas'], e['zoekwoord'], e['url'],
-                     e['soort'], e['merk']]
+                     e['soort'], e['merk'], e['cl']]
                     for e in top_prod],
+        'indeling': INDELING, 'indelingbron': {'titel': INDELING_BRON[0], 'url': INDELING_BRON[1]},
+        'onderdeelsub': onderdeel_sub(clusters['onderdelen']),
         'top': [[e['kw'], e['n'], cl, e['vol']['Competition'], getal(e['vol']['Top of page bid (low range)']),
                  getal(e['vol']['Top of page bid (high range)']), len(e['wie']),
                  e['vol']['Three month change'], e['vol']['YoY change']] for e, cl in top],
@@ -792,8 +844,8 @@ def schrijf_excel(rijen, tellingen, overlap, logboek, clusters, top, top_prod):
     breed = [22, 44, 30, 40, 22, 30, 14, 60, 14, 28]
     blad('Categorieën', koppen, [kol(r) for r in rijen if r['soort'] == 'categorie'], breed)
 
-    blad('top 100', ['Laag', 'Keyword', 'Cluster', 'Aantal concurrenten', 'Welke', 'Competition',
-                     'Top of page bid (low range)', 'Top of page bid (high range)', 'Three month change', 'YoY change',
+    blad('top 100 zoekwoorden', ['Laag', 'Zoekwoord', 'Cluster', 'Aantal concurrenten', 'Welke', 'Concurrentie',
+                     'Bod bovenaan pagina (laag)', 'Bod bovenaan pagina (hoog)', 'Wijziging 3 maanden', 'Wijziging jaar',
                      'Voorbeeld bij concurrent'],
          [[laag(e), e['kw'], cl, len(e['wie']) or '',
            ', '.join(sorted(naam_van[x] for x in e['wie'])), e['vol']['Competition'],
@@ -801,7 +853,7 @@ def schrijf_excel(rijen, tellingen, overlap, logboek, clusters, top, top_prod):
            e['vol']['Three month change'], e['vol']['YoY change'], e['url']]
           for e, cl in top],
          [26, 40, 24, 12, 50, 12, 12, 12, 12, 12, 60])
-    blad('top 100 producten', ['Laag', 'Apparaat', 'Merk', 'Model', 'Soort', 'Aantal bedrijven', 'Welke', 'Productpagina’s',
+    blad('top 100 apparaten', ['Laag', 'Apparaat', 'Merk', 'Model', 'Soort', 'Aantal bedrijven', 'Welke', 'Productpagina’s',
                                'Zoekwoord voor de volgende ronde', 'Zoekvolume (bereik)', 'Voorbeeld bij concurrent',
                                'Zoals de concurrent het noemt'],
          [['bij 2+ bedrijven' if len(e['bedrijven']) > 1 else 'bij 1 bedrijf',
@@ -810,8 +862,8 @@ def schrijf_excel(rijen, tellingen, overlap, logboek, clusters, top, top_prod):
            BEREIK.get(int(e['n']), int(e['n'])) if e['n'] else '(nog niet gemeten)', e['url'], e['voorbeeld']]
           for e in top_prod],
          [5, 26, 18, 12, 14, 14, 40, 14, 34, 20, 56, 44])
-    wb.move_sheet('top 100 producten', offset=-(len(wb.sheetnames) - 3))
-    wb.move_sheet('top 100', offset=-(len(wb.sheetnames) - 2))
+    wb.move_sheet('top 100 apparaten', offset=-(len(wb.sheetnames) - 3))
+    wb.move_sheet('top 100 zoekwoorden', offset=-(len(wb.sheetnames) - 2))
 
     # Eén tabblad per cluster, direct na Categorieën: één sleutelzin per rij,
     # met vooraan de kolommen van Keyword Planner (nog leeg, stap 4).

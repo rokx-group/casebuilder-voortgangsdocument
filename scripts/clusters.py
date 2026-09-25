@@ -36,14 +36,18 @@ CLUSTERS = [
      r'bevestiging|bouwpakket|carrosserie|insteek|zwenkwiel|bokwiel|opbouwwiel|steekwiel|inbouwwiel|\bwiel\b|'
      r'rackstrip|rack ?rail|rackschienen|rackprofiel|hoekprofiel|plaatmateriaal|kitplaat|beslag|\bklink|\bveer\b|'
      r'gasveer|kraagbout|\bbout\b|glijlat|klepschaar|afdekplaat|frontplaat|blindplaat|contactdoos|\bschroef|'
-     r'\bmoer\b|accessoires|\bgaffertape|\btape\b|\bboor\b|rubberdop|klittenband|velcro',
+     r'\bmoer\b|kooimoer|inslagmoer|onderlegring|accessoires|\bgaffertape|\btape\b|\bboor\b|spiraalboor|rubberdop|'
+     r'rubber voet|\bvoet\b|glijvoet|stapelvoet|stapelplaat|stapelsysteem|dekselstop|haakplaat|wielplaat|beugel|'
+     r'schouderband|straphandle|sluitprofiel|\b[fhu] profiel|ventilatie|tussenschot|\bverf\b|structuurlak|lakspray|'
+     # Plaatmateriaal alleen vooraan: 'kabelkoffer zwart multiplex' is een kabelkist.
+     r'^multiplex|betonplex|klittenband|velcro',
      ['flightcase onderdelen', 'flightcase hoeken', 'flightcase sluitingen', 'flightcase handgrepen', 'flightcase wielen']),
     ('industrie', 'industriële verpakking',
      r'cleanroom|cleamroom|karton|houten kist|pallet|verpakking|\besd\b|stofarm|returnable|herbruikbare',
      ['industriële verpakking', 'transportverpakking op maat', 'cleanroom verpakking', 'houten transportkist']),
     ('mixercases', 'mixercases',
      r'mixer|mengpaneel|mengtafel|\btilt|mischpult|\bregie\b|regiecase|midas|allen ?heath|allenheat|\bah\b|soundcraft|'
-     r'digico|avid|behringer|mackie|studiomaster|tascam|\bvenue\b|waves lv1|road hog|avolites|obsidian|zero 88|'
+     r'digico|avid|behringer|mackie|studiomaster|tascam|\bvenue\b|waves (emotion ?)?lv1|touchmix|road hog|avolites|obsidian|zero 88|'
      r'grand ?ma|\bxone\b|yamaha (dm|cl|ql|tf|ls|pm|m7cl|01v|mg|rivage)|\bx32\b|\bm32\b|\bsq ?\d|dlive|ma lighting|'
      r'chamsys|lichtmischpult|lichttafel',
      ['mixercase', 'flightcase mengpaneel', 'tiltcase', 'mixer flightcase']),
@@ -56,31 +60,34 @@ CLUSTERS = [
      r'instrument|\bharp\b|harfe|cello|contrabas|pedal|\beffect|kemper|fractal|helix|line ?6|neural|quad cortex|'
      r'\bfender\b|marshall(?! electronics)|ampeg|orange|blackstar|peavey|markbass|hartke|\bengl\b|\bboss\b|\bmoog\b|'
      r'sequential|prophet|arturia|novation|kawai|ketron|viscount|leslie|gretsch|\bnord\b|korg|roland(?! (v-?\d|\d+hd))|'
-     r'steinway|boesendorfer|gibson|takamine|musikinstrument|\bamp(lifier)?\b|versterker',
+     r'steinway|boesendorfer|gibson|takamine|musikinstrument|\bamp(lifier)?\b|versterker|genz benz|clavia|'
+     # Yamaha maakt ook mengtafels; die staan al bij mixercases.
+     r'yamaha (genos|modx|mox|yc|cp|psr|motif|montage|reface)',
      ['keyboard flightcase', 'keyboard case', 'gitaar flightcase', 'instrumentcase', 'piano flightcase']),
     ('licht', 'lichtcases',
      r'\blicht(?!gewicht)|lichtcase|\blights?\b|lighting|moving|\bspot\b|spotlight|\bbeam\b|\bwash\b|\bpar\b|led ?bar|'
-     r'\blaser|rookmachine|hazer|\bfog|followspot|scheinwerfer|dimmer|\blamp|strobe|fresnel|flood|bodeneffekt|'
+     r'\blasers?\b|rookmachine|hazer|\bfog|followspot|scheinwerfer|dimmer|\blamp|strobe|fresnel|flood|bodeneffekt|'
      r'\brobe\b|clay paky|martin(?! audio)|chauvet|cameo|showtec|\bglp\b|elation|prolights|ayrton|\barri|astera|'
      r'varytec|eurolite|stairville|\badj\b|ignition|briteq|vari ?lite|\bsgm\b|selecon|futurelight|litecraft|antari|'
-     r'studio due|\betc\b',
+     r'studio due|\betc\b|\bdts\b|expolite|portman|\bclf\b|ldde|spiegelbol',
      ['lichtcase', 'moving head flightcase', 'flightcase moving heads', 'led par flightcase']),
     ('audio', 'speaker- en audiocases',
      r'speaker|luidspreker|lautsprecher|subwoofer|\bsub\b|line ?array|endstufe|microfoon|mikrofon|statief|stativ|'
      r'\bin ?ear|draadloos|funk|audio|\bton\b|monitoren|podiummonitor|l ?acoustics|d ?& ?b|\bdb\b|db technologies|'
      r'\brcf\b|\bjbl\b|nexo|meyer|shure|sennheiser|\beaw\b|fohhn|kling|turbosound|alcons|\bfbt\b|tw audio|ld systems|'
-     r'\bbose\b|martin audio|motorola|walkie',
+     r'\bbose\b|martin audio|motorola|walkie|\bqsc\b|the box|adamson|seeburg|infinity|dynacord|electro ?voice',
      ['speaker flightcase', 'luidspreker flightcase', 'microfoon flightcase', 'audio flightcase']),
     ('camera', 'camera- en videocases',
-     r'camera|kamera|\bvideo|broadcast|regie und produktion|produktion|\bstudio\b|\blens\b|objectief|drone|gimbal|'
-     r'blackmagic|\batem\b|tricaster|teleprompter|autocue|manfrotto|cartoni|marshall electronics|roland (v-?\d|\d+hd)',
+     r'camera|kamera|\bvideo|broadcast|regie und produktion|produktion|\bstudio\b|(?<!projector )\blens\b|objectief|drone|gimbal|'
+     r'blackmagic|\batem\b|tricaster|teleprompter|autocue|manfrotto|cartoni|marshall electronics|roland (v-?\d|\d+hd)|sony pxw',
      ['camera flightcase', 'camerakoffer', 'broadcast flightcase', 'drone koffer']),
     ('motoren', 'motorcases',
      r'\bmotor|takel|chainmaster|kettingtakel|liftket|lodestar|movecat|\basm\b|\bgis\b|columbus|kinetic|next stage lift',
      ['kettingtakel flightcase', 'motorcase', 'takel flightcase']),
     ('schermkisten', 'schermkisten',
      r'\bscherm(?!kap)|beeldscherm|display|\bmonitor\b|\btv\b|televisie|beamer|projector|led ?wall|videowall|'
-     r'touchscreen|bildschirm|\blcd\b|plasma|samsung|\blg\b|\bnec\b|philips|sony bravia',
+     r'touchscreen|bildschirm|\blcd\b|plasma|samsung|\blg\b|\bnec\b|philips|sony bravia|epson|optoma|barco|'
+     r'vivitek|panasonic pt|iiyama|\baoc\b|dell (u\d|ultrasharp)',
      ['schermkist', 'tv flightcase', 'flightcase televisie', 'monitor flightcase', 'beamer flightcase']),
     # Een rack telt in HE of U, en die lopen van 1 tot ongeveer 48. Zonder die
     # grens matcht '\d+u' ook 'epson eb l1495u'.
@@ -94,7 +101,7 @@ CLUSTERS = [
      r'\btool|gereedschapskist|gereedschapskoffer|\blade|drawer|schublade|werkplaats|werkbank|werkstation',
      ['toolcase', 'flightcase met lades', 'ladecase', 'gereedschapskist flightcase']),
     ('schuim', 'schuiminterieur',
-     r'schuim|foam|inlay|inlage|\binterieur|vakverdeling|vacuumvorm',
+     r'schuim|foam|inlay|inlage|\binterieur|vakverdeling|vacuumvorm|polybloc|padded dividers|binnenwerk|inzetbak',
      ['schuiminterieur op maat', 'plukschuim', 'koffer met schuim', 'foam inlay']),
     ('meubels', 'flightcase meubels',
      r'dressoir|meubel|möbel|moebel|sideboard|\bbar\b|salontafel|bureau|\bkast\b|tafel|\bbank\b|nachtkast|'
@@ -104,11 +111,11 @@ CLUSTERS = [
      r'presentatie|beurs|balie|\bdemo\b|showcase|\bmesse\b|beursstand|standbouw|promotie',
      ['presentatiekoffer', 'beurscase', 'beursbalie flightcase', 'demokoffer']),
     ('aluminium', 'aluminium koffers',
-     r'aluminium|\balu\b|alukoffer|alukist|profielkoffer|zarges',
+     r'aluminium|\balu\b|alukoffer|alukist|profielkoffer|zarges|\bviking\b|\bmio\b',
      ['aluminium koffer', 'aluminium kist', 'aluminium transportkist', 'aluminium koffer met schuim']),
     ('kunststof', 'kunststof koffers',
      r'kunststof|plastic|waterdicht|\bpeli|nanuk|\bskb|explorer|\bmax ?\d|hprc|protective|beschermkoffer|rugged|'
-     r'stofdicht|hardcase|lichtgewicht',
+     r'stofdicht|hardcase|lichtgewicht|\bhusk\b|maxado',
      ['kunststof koffer', 'waterdichte koffer', 'peli case', 'beschermkoffer']),
     ('transportkisten', 'transportkisten',
      r'\bkist|trunk|truhe|transport|standaardkist|universeel|universal|stolpcase|productkist|opbergkist|container',
@@ -128,4 +135,82 @@ CLUSTERS = [
     ('algemeen', 'flightcases algemeen',
      r'flight ?case|\bcase|koffer|suitcase',
      ['flightcase', 'flightcase kopen', 'flightcase koffer', 'flightcases']),
+]
+
+# Clusters die buiten het aanbod van CaseBuilder vallen. Ze blijven zichtbaar,
+# maar tellen niet mee in de top 100 en de aanbeveling. Per cluster de reden.
+# Besloten 25-09-2026: onderdelen hoort wél bij het aanbod (CaseBuilder verkoopt
+# losse onderdelen), kunststof koffers niet.
+BUITEN_AANBOD = {
+    'kunststof': 'CaseBuilder verkoopt geen koffers van andere merken (25-09-2026).',
+}
+
+# Van cluster naar site: wordt het een shopcategorie (onder welke toepassing),
+# of een filter, optie of route? Overgenomen uit "Clusters naar toepassingen en
+# branches" (25-09-2026), zie INDELING_BRON. Pas hier aan, niet op twee plekken.
+#   rol     categorie = shopcategorie · casetype/filter/optie = geen categorie ·
+#           onderdelen = eigen shopafdeling · route = maatwerk · product =
+#           productpagina's onder de categorie · shopstart = startpagina shop
+#   seo     de SEO-pagina voor dit cluster (voorstel, volgt de sitemap)
+INDELING_BRON = ('Clusters naar toepassingen en branches',
+                 'https://docs.google.com/spreadsheets/d/19M6PPP7xpI58xcG883EaYcJxCGHMfes8/edit')
+INDELING = {
+    'licht': dict(rol='categorie', toepassing='AV & licht', seo='/case-voor/licht',
+                  demo='Moving heads · Wash- en spotarmaturen · Blinders en strobes',
+                  branches='Audio-visueel en podium, Standbouw en events'),
+    'audio': dict(rol='categorie', toepassing='AV & licht', seo='/case-voor/speakers',
+                  demo='Line-array en speakers', branches='Audio-visueel en podium, Broadcast en media, Standbouw en events'),
+    'mixercases': dict(rol='categorie', toepassing='AV & licht', seo='/case-voor/mengtafel',
+                       demo='Mengtafels', branches='Audio-visueel en podium, Broadcast en media'),
+    'kabelkisten': dict(rol='categorie', toepassing='AV & licht', seo='/case-voor/kabels',
+                        demo='Kabelhaspels en multicore',
+                        branches='Audio-visueel en podium, Broadcast en media, Standbouw en events, Industrie en machinebouw, Motorsport'),
+    'motoren': dict(rol='categorie', toepassing='AV & licht', seo='/case-voor/kettingtakel',
+                    demo='Truss-hardware', branches='Audio-visueel en podium, Standbouw en events'),
+    'dj': dict(rol='categorie', toepassing='Backline & muziek', seo='/case-voor/dj',
+               demo='DJ-apparatuur', branches='Audio-visueel en podium'),
+    'instrumenten': dict(rol='categorie', toepassing='Backline & muziek', seo='/case-voor/instrumenten',
+                         demo='Gitaren · Keyboards · Drums · … (9 soorten)', branches='Audio-visueel en podium'),
+    'camera': dict(rol='categorie', toepassing='Broadcast & camera', seo='/case-voor/camera',
+                   demo='Camerabodies · Optiek · Drone en gimbal',
+                   branches='Broadcast en media, Defensie, Industrie en machinebouw, Motorsport'),
+    'schermkisten': dict(rol='categorie', toepassing='Evenement & beursbouw', seo='/case-voor/scherm',
+                         demo='Displays en schermen · Monitoren',
+                         branches='Standbouw en events, Broadcast en media, Audio-visueel en podium'),
+    'presentatie': dict(rol='categorie', toepassing='Evenement & beursbouw', seo='/case-voor/beurs-en-presentatie',
+                        demo='Standmateriaal', branches='Standbouw en events, Meet- en testapparatuur, Industrie en machinebouw'),
+    'meubels': dict(rol='categorie', toepassing='Evenement & beursbouw', seo='/case-voor/meubels',
+                    demo='Catering en bar', branches='Standbouw en events, Audio-visueel en podium'),
+    'toolcases': dict(rol='categorie', toepassing='Industrie & meettechniek', seo='/case-voor/gereedschap',
+                      demo='Handgereedschap · Servicekoffers',
+                      branches='Industrie en machinebouw, Motorsport, Defensie, Meet- en testapparatuur'),
+    'industrie': dict(rol='categorie', toepassing='Industrie & meettechniek', seo='/case-voor/industriele-verpakking',
+                      demo='Machineonderdelen', branches='Industrie en machinebouw, Meet- en testapparatuur, Defensie'),
+    'racks': dict(rol='casetype', seo='/flightcases/rackcase-enkel', demo='filter Casetype: Rackcase'),
+    'transportkisten': dict(rol='casetype', seo='/flightcases/trunccase', demo='filter Casetype: Trunccase'),
+    'wielen': dict(rol='filter', seo='', demo='filter: wielen ja of nee'),
+    'aluminium': dict(rol='filter', seo='', demo='materiaalfilter, of buiten scope als CaseBuilder ze niet maakt'),
+    'kunststof': dict(rol='buiten', seo='', demo='buiten scope: geen koffers van andere merken'),
+    'schuim': dict(rol='optie', seo='', demo='optie in de configurator, plus onderdelen'),
+    'onderdelen': dict(rol='onderdelen', seo='/onderdelen', demo='eigen shopafdeling Onderdelen'),
+    'opmaat': dict(rol='route', seo='/case-aanvragen', demo='route Maatwerk aanvragen'),
+    'apparaat': dict(rol='product', seo='/case-voor/{merk-model}', demo='productpagina onder de categorie'),
+    'algemeen': dict(rol='shopstart', seo='/shop', demo='startpagina van de shop'),
+}
+
+# Subcategorieën van de shopafdeling Onderdelen, afgeleid uit de zoekwoorden
+# van het cluster onderdelen. Eerste treffer wint.
+ONDERDEEL_SUB = [
+    ('Hoeken', r'hoek(?!lijn)'),
+    ('Sluitingen en sloten', r'sluiting|\bslot|vlinder'),
+    ('Handgrepen', r'handgre|handvat|straphandle|hengsel'),
+    ('Scharnieren en dekselstoppers', r'scharnier|dekselstop|gasveer|klepschaar'),
+    ('Wielen', r'wiel|dolly'),
+    ('Rackrails en frontplaten', r'rack ?rail|rackprofiel|rackstrip|rackschienen|frontplaat|blindplaat|contactdoos'),
+    ('Profielen', r'profiel|hoeklijn|insteek|glijlat'),
+    ('Schotels en inbouwdelen', r'schotel|inbouw|ventilatie'),
+    ('Bevestiging', r'nagel|moer|bout|schroef|ring\b|bevestiging|klink|carrosserie'),
+    ('Voeten en stapelen', r'voet|stapel|rubber'),
+    ('Plaat en afwerking', r'multiplex|plex|plaat|verf|lak|lijm|tape'),
+    ('Gereedschap', r'gereedschap|tang|boor'),
 ]
