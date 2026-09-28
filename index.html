@@ -1205,6 +1205,58 @@
     .tl .tlrow { grid-template-columns:64px 18px minmax(0,1fr); gap:0 10px; }
     .tl .tlwhen { font-size:10px; }
   }
+
+  /* Merch-tab: galerij, drukkers en printbestanden van merch-concept 1. */
+  .mx-links { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+  .mx-links a { font-size:13px; color:var(--accent); background:var(--surface); border:1px solid var(--line); border-radius:var(--r-sm);
+    padding:6px 11px; text-decoration:none; }
+  .mx-links a:hover { border-color:var(--accent); }
+  .mx-links .pijl { margin-left:4px; font-size:11px; }
+  .mx-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
+  .mx-klein { grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); }
+  .mx-kaart { display:block; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-sm); overflow:hidden;
+    text-decoration:none; color:var(--ink); }
+  .mx-kaart:hover { border-color:var(--accent); }
+  .mx-kaart img { display:block; width:100%; aspect-ratio:4/5; object-fit:cover; background:var(--surface-2); }
+  .mx-klein .mx-kaart img { aspect-ratio:1/1; object-fit:contain; }
+  .mx-breed { max-width:900px; margin-top:6px; }
+  .mx-breed img { aspect-ratio:auto; object-fit:contain; }
+  .mx-bij { display:block; padding:9px 11px; font-size:13px; line-height:1.4; color:var(--muted); }
+  .mx-bij b { font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--ink); margin-right:4px; }
+  .mx-bij em { font-style:normal; font-size:11px; margin-left:6px; padding:1px 6px; border-radius:3px; background:var(--accent-bg); color:var(--accent); }
+  .mx-st { font-size:12px; font-weight:600; padding:3px 8px; border-radius:3px; white-space:nowrap; }
+  .mx-ja { background:#E3F4E6; color:#1F6B30; }
+  .mx-aan { background:#FCEFD9; color:#8A5200; }
+  .mx-nee { background:#FBE3E3; color:#A12626; }
+  :root[data-theme="dark"] .mx-ja { background:#12351C; color:#8FD6A0; }
+  :root[data-theme="dark"] .mx-aan { background:#3A2A0E; color:#F0C07A; }
+  :root[data-theme="dark"] .mx-nee { background:#3D1616; color:#F2A0A0; }
+  .mx-druk { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; }
+  .mx-drukkol { background:var(--surface); border:1px solid var(--line); border-radius:var(--r-sm); padding:16px 18px; }
+  .mx-drukkol h3 { margin:0 0 10px; font-size:15px; }
+  .mx-drukkol ul { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px; font-size:14px; line-height:1.5; color:var(--muted); }
+  .mx-drukkol a { color:var(--accent); }
+  .mx-stad { font-size:12px; color:var(--faint); margin-left:4px; }
+  .mx-art { grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); }
+  .mx-artkaart { background:var(--surface); border:1px solid var(--line); border-radius:var(--r-sm); overflow:hidden; display:flex; flex-direction:column; }
+  .mx-artbeeld { background:#111; height:170px; padding:18px; display:flex; align-items:center; justify-content:center; }
+  .mx-artbeeld.mx-licht { background:#F4F4F4; }
+  .mx-artbeeld img { max-width:100%; max-height:100%; }
+  .mx-artbij { padding:11px 13px 13px; font-size:12.5px; line-height:1.45; color:var(--muted); display:flex; flex-direction:column; gap:3px; }
+  .mx-artbij b { color:var(--ink); font-size:13px; word-break:break-word; }
+  .mx-groep { font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); }
+  .mx-maat { font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--accent); }
+  .mx-artbij p { margin:3px 0 6px; }
+  .mx-artbij a { display:inline-block; margin-right:8px; font-size:12px; color:var(--accent); }
+  .mx-open { margin:0; padding-left:20px; display:flex; flex-direction:column; gap:10px; font-size:15px; line-height:1.55; max-width:80ch; }
+  .mx-lb { border:0; padding:0; background:transparent; max-width:96vw; max-height:96vh; overflow:visible; }
+  .mx-lb::backdrop { background:rgba(6,18,28,.9); }
+  .mx-lb img { display:block; max-width:92vw; max-height:84vh; object-fit:contain; margin:0 auto; }
+  .mx-lb p { color:#fff; text-align:center; font-size:14px; margin:12px 0 0; }
+  .mx-lb button { position:fixed; background:none; border:0; color:#fff; font-size:34px; cursor:pointer; padding:10px 16px; line-height:1; }
+  .mx-lb .mx-x { top:10px; right:12px; }
+  .mx-lb .mx-vorige { left:8px; top:50%; transform:translateY(-50%); }
+  .mx-lb .mx-volgende { right:8px; top:50%; transform:translateY(-50%); }
 </style>
 <style>
   :root {
@@ -1660,6 +1712,7 @@
       <li><button class="tab" role="tab" id="t7" data-hash="meetings" aria-controls="p7" aria-selected="false">Meetings</button></li>
       <li><button class="tab" role="tab" id="t10" data-hash="productlijst" aria-controls="p10" aria-selected="false">Productlijst</button></li>
       <li><button class="tab" role="tab" id="t11" data-hash="opzet-pages" aria-controls="p11" aria-selected="false">Opzet pages</button></li>
+      <li><button class="tab" role="tab" id="t12" data-hash="merch" aria-controls="p12" aria-selected="false">Merch</button></li>
       <li><a class='uit' href='/mockups/header-varianten' rel='noopener' target='_blank'>Prototypes<span class="pijl">&#8599;</span></a></li>
       <li><a class='uit' href='/mockups/overzicht#componenten' rel='noopener' target='_blank'>Componenten<span class="pijl">&#8599;</span></a></li>
     </ul>
@@ -12704,6 +12757,82 @@
 
   </div>
 
+  <div class="tabpanel" id="p12" role="tabpanel" aria-labelledby="t12" hidden>
+
+    <header class="masthead">
+      <span class="eyebrow">Merch &middot; concept 1</span>
+      <h1>Werkkleding en merch voor de crew</h1>
+      <p class="lede">Eerste conceptronde: een donkere kernserie en een witte variant, met per item of het te maken is, welke drukkers het kunnen en de printbestanden die klaarstaan. Klik op een beeld om het groot te bekijken.</p>
+      <nav class="mx-links"><a href="https://drive.google.com/drive/folders/1WOk2DcRjDntMKm73XqZnwSSXpEs2nL9H" target="_blank" rel="noopener">Drive-map merch<span class="pijl">&#8599;</span></a><a href="https://drive.google.com/drive/folders/1RTetLy7CYrDFfv9Ah2zx1Xg6Uxkl4ifn" target="_blank" rel="noopener">HQ-beelden (PNG)<span class="pijl">&#8599;</span></a><a href="https://drive.google.com/drive/folders/1UAVJoRuNlrY5hM0-0awpxODM_sg8joIa" target="_blank" rel="noopener">Printbestanden (SVG + PDF)<span class="pijl">&#8599;</span></a><a href="https://drive.google.com/file/d/1CuL--klbUPjACr5uReVppLeaVauPycsi/view" target="_blank" rel="noopener">Printadvies (Word)<span class="pijl">&#8599;</span></a><a href="https://drive.google.com/drive/folders/12Vc4qVJ5_OOeBa8_9XF_tVmcmhL1GLTy" target="_blank" rel="noopener">Merkbestanden<span class="pijl">&#8599;</span></a><a href="https://chatgpt.com/c/6aba2bd4-5650-83ed-928c-6231fbb6c1f2" target="_blank" rel="noopener">Conceptgesprek (ChatGPT)<span class="pijl">&#8599;</span></a></nav>
+    </header>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">01 &middot; Beelden</span>
+        <h2 data-rail="Donkere serie">Donkere serie</h2>
+        <p>De kernlijn in zwart. De aangepaste beelden hebben de correcties uit de eerste feedback: overall zonder slot en naamplaat op de rug, fleece met MILLIMETERWERK OP SNELHEID, werkschoen helemaal zwart en een nieuwe teamfoto.</p>
+      </div>
+      <div class="mx-grid"><a class="mx-kaart" href="merch/beeld/00_establishing_workshop_16x9.jpg" data-mx-titel="00 &middot; Werkplaats, sfeerbeeld"><img src="merch/beeld/00_establishing_workshop_16x9.jpg" alt="Werkplaats, sfeerbeeld" loading="lazy"><span class="mx-bij"><b>00</b> Werkplaats, sfeerbeeld</span></a><a class="mx-kaart" href="merch/beeld/01_tshirt_back_kees_4x5.jpg" data-mx-titel="01 &middot; T-shirt zwart, rug met naam"><img src="merch/beeld/01_tshirt_back_kees_4x5.jpg" alt="T-shirt zwart, rug met naam" loading="lazy"><span class="mx-bij"><b>01</b> T-shirt zwart, rug met naam</span></a><a class="mx-kaart" href="merch/beeld/02_white_tshirt_latch_closeup_4x5.jpg" data-mx-titel="02 &middot; T-shirt wit, borstlogo"><img src="merch/beeld/02_white_tshirt_latch_closeup_4x5.jpg" alt="T-shirt wit, borstlogo" loading="lazy"><span class="mx-bij"><b>02</b> T-shirt wit, borstlogo</span></a><a class="mx-kaart" href="merch/beeld/03_coverall_front_4x5.jpg" data-mx-titel="03 &middot; Overall, voorkant"><img src="merch/beeld/03_coverall_front_4x5.jpg" alt="Overall, voorkant" loading="lazy"><span class="mx-bij"><b>03</b> Overall, voorkant</span></a><a class="mx-kaart" href="merch/beeld/04_coverall_back_no_metal_plate_4x5.jpg" data-mx-titel="04 &middot; Overall, rug"><img src="merch/beeld/04_coverall_back_no_metal_plate_4x5.jpg" alt="Overall, rug" loading="lazy"><span class="mx-bij"><b>04</b> Overall, rug<em>Aangepast</em></span></a><a class="mx-kaart" href="merch/beeld/05_work_trousers_cnc_4x5.jpg" data-mx-titel="05 &middot; Werkbroek CNC"><img src="merch/beeld/05_work_trousers_cnc_4x5.jpg" alt="Werkbroek CNC" loading="lazy"><span class="mx-bij"><b>05</b> Werkbroek CNC</span></a><a class="mx-kaart" href="merch/beeld/06_fleece_millimeterwerk_op_snelheid_4x5.jpg" data-mx-titel="06 &middot; Fleece, mouwtekst"><img src="merch/beeld/06_fleece_millimeterwerk_op_snelheid_4x5.jpg" alt="Fleece, mouwtekst" loading="lazy"><span class="mx-bij"><b>06</b> Fleece, mouwtekst<em>Aangepast</em></span></a><a class="mx-kaart" href="merch/beeld/07_safety_boot_all_black_3x2.jpg" data-mx-titel="07 &middot; Werkschoen, helemaal zwart"><img src="merch/beeld/07_safety_boot_all_black_3x2.jpg" alt="Werkschoen, helemaal zwart" loading="lazy"><span class="mx-bij"><b>07</b> Werkschoen, helemaal zwart<em>Aangepast</em></span></a><a class="mx-kaart" href="merch/beeld/08_cap_back_4x5.jpg" data-mx-titel="08 &middot; Pet en hoodie, rug"><img src="merch/beeld/08_cap_back_4x5.jpg" alt="Pet en hoodie, rug" loading="lazy"><span class="mx-bij"><b>08</b> Pet en hoodie, rug</span></a><a class="mx-kaart" href="merch/beeld/09_team_scene_hq_16x9.jpg" data-mx-titel="09 &middot; Team"><img src="merch/beeld/09_team_scene_hq_16x9.jpg" alt="Team" loading="lazy"><span class="mx-bij"><b>09</b> Team<em>Aangepast</em></span></a><a class="mx-kaart" href="merch/beeld/10_full_kit_flatlay_4x5.jpg" data-mx-titel="10 &middot; Complete set in de koffer"><img src="merch/beeld/10_full_kit_flatlay_4x5.jpg" alt="Complete set in de koffer" loading="lazy"><span class="mx-bij"><b>10</b> Complete set in de koffer</span></a></div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">02 &middot; Beelden</span>
+        <h2 data-rail="Witte variant">Witte variant</h2>
+        <p>Dezelfde set in wit. Op het borstlogo na zijn dit uitsneden uit het overzichtsbord, dus klein. Na akkoord worden ze los op volle grootte gemaakt.</p>
+      </div>
+      <div class="mx-grid mx-klein"><a class="mx-kaart" href="merch/wit/01_tshirt_back_white_theme.jpg" data-mx-titel="01W &middot; T-shirt"><img src="merch/wit/01_tshirt_back_white_theme.jpg" alt="T-shirt" loading="lazy"><span class="mx-bij"><b>01W</b> T-shirt</span></a><a class="mx-kaart" href="merch/wit/02_tshirt_latch_closeup_white_theme.jpg" data-mx-titel="02W &middot; Borstlogo, close-up"><img src="merch/wit/02_tshirt_latch_closeup_white_theme.jpg" alt="Borstlogo, close-up" loading="lazy"><span class="mx-bij"><b>02W</b> Borstlogo, close-up</span></a><a class="mx-kaart" href="merch/wit/03_coverall_front_white_theme.jpg" data-mx-titel="03W &middot; Overall, voorkant"><img src="merch/wit/03_coverall_front_white_theme.jpg" alt="Overall, voorkant" loading="lazy"><span class="mx-bij"><b>03W</b> Overall, voorkant</span></a><a class="mx-kaart" href="merch/wit/04_coverall_back_white_theme.jpg" data-mx-titel="04W &middot; Overall, rug"><img src="merch/wit/04_coverall_back_white_theme.jpg" alt="Overall, rug" loading="lazy"><span class="mx-bij"><b>04W</b> Overall, rug</span></a><a class="mx-kaart" href="merch/wit/05_work_trousers_white_theme.jpg" data-mx-titel="05W &middot; Werkbroek"><img src="merch/wit/05_work_trousers_white_theme.jpg" alt="Werkbroek" loading="lazy"><span class="mx-bij"><b>05W</b> Werkbroek</span></a><a class="mx-kaart" href="merch/wit/06_fleece_white_theme.jpg" data-mx-titel="06W &middot; Fleece"><img src="merch/wit/06_fleece_white_theme.jpg" alt="Fleece" loading="lazy"><span class="mx-bij"><b>06W</b> Fleece</span></a><a class="mx-kaart" href="merch/wit/07_safety_boots_white_theme.jpg" data-mx-titel="07W &middot; Werkschoenen"><img src="merch/wit/07_safety_boots_white_theme.jpg" alt="Werkschoenen" loading="lazy"><span class="mx-bij"><b>07W</b> Werkschoenen</span></a><a class="mx-kaart" href="merch/wit/08_cap_white_theme.jpg" data-mx-titel="08W &middot; Pet"><img src="merch/wit/08_cap_white_theme.jpg" alt="Pet" loading="lazy"><span class="mx-bij"><b>08W</b> Pet</span></a><a class="mx-kaart" href="merch/wit/09_team_white_theme.jpg" data-mx-titel="09W &middot; Team"><img src="merch/wit/09_team_white_theme.jpg" alt="Team" loading="lazy"><span class="mx-bij"><b>09W</b> Team</span></a><a class="mx-kaart" href="merch/wit/10_full_kit_flatlay_white_theme.jpg" data-mx-titel="10W &middot; Complete set"><img src="merch/wit/10_full_kit_flatlay_white_theme.jpg" alt="Complete set" loading="lazy"><span class="mx-bij"><b>10W</b> Complete set</span></a></div>
+      <p><a class="mx-kaart mx-breed" href="merch/beeld/overview.jpg" data-mx-titel="Overzichtsbord, donker en wit"><img src="merch/beeld/overview.jpg" alt="Overzichtsbord donker en wit" loading="lazy"><span class="mx-bij"><b>Overzicht</b> donker en wit naast elkaar</span></a></p>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">03 &middot; Productie</span>
+        <h2 data-rail="Te printen?">Is het te maken?</h2>
+        <p>Ongeveer 80% kan zoals op de beelden. Drie details moeten anders: het raster op de broek, de metalen naamplaat en alles aan de werkschoen.</p>
+      </div>
+      <div class="scroller">
+      <table class="tpl">
+        <thead><tr><th>Item</th><th>In het ontwerp</th><th>Techniek</th><th>Haalbaar</th><th>Opmerking</th></tr></thead>
+        <tbody><tr><td><strong>T-shirt zwart, rug</strong></td><td>KEES groot, blauwe hoekmarkering, crewregel en CB-nummer</td><td>Zeefdruk 2 kleuren, naam per persoon via DTF of flex</td><td><span class="mx-st mx-ja">Ja</span></td><td>Basis in zeefdruk, naam en nummer per persoon erbij.</td></tr><tr><td><strong>T-shirts, voorkant</strong></td><td>Borstlogo, woordmerk met BUILD / DEPLOY / SUPPORT / REPEAT</td><td>Zeefdruk of DTG</td><td><span class="mx-st mx-ja">Ja</span></td><td>Het slot in beeld 02 is het echte koffer-beslag, geen print.</td></tr><tr><td><strong>Hoodie, rug</strong></td><td>Groot CB-beeldmerk</td><td>Zeefdruk 2 kleuren</td><td><span class="mx-st mx-ja">Ja</span></td><td>Blauw vraagt een Pantone-match.</td></tr><tr><td><strong>Overall, voorkant</strong></td><td>Geborduurd logo, metalen naamplaat, reflectieband</td><td>Borduren + patch</td><td><span class="mx-st mx-aan">Met aanpassing</span></td><td>Metalen plaat wordt een geweven of rubber patch. Kies een overall met reflectieband.</td></tr><tr><td><strong>Overall, rug</strong></td><td>Logo, CASEBUILDER.COM, pijlen DEZE KANT BOVEN</td><td>DTF / stretch-transfer</td><td><span class="mx-st mx-ja">Ja</span></td><td>Transfer is de norm op werkkledingstof.</td></tr><tr><td><strong>Werkbroek CNC</strong></td><td>Raster over de dijen, liniaal 0 tot 400 mm, kniemarkering, logo</td><td>Stretch-transfer</td><td><span class="mx-st mx-aan">Met aanpassing</span></td><td>Liniaal en logo kunnen. Het volle raster breekt op de knie: alleen met eigen stof (cut &amp; sew). Advies: raster weglaten.</td></tr><tr><td><strong>Fleece</strong></td><td>Borstlogo, verticale mouwtekst</td><td>Borduren</td><td><span class="mx-st mx-ja">Ja</span></td><td>Mouwtekst minstens 6 tot 8 mm hoog.</td></tr><tr><td><strong>Pet en muts</strong></td><td>Logo voor, tekst achter, liniaal op de klep, geweven label</td><td>Borduren + print</td><td><span class="mx-st mx-ja">Ja</span></td><td>Klepliniaal eerst als proef.</td></tr><tr><td><strong>Werkschoenen</strong></td><td>Logo op de zijkant, liniaal in de zool</td><td>Geen van de drukkers</td><td><span class="mx-st mx-nee">Niet realistisch</span></td><td>Zool vraagt een eigen mal (duizenden paren). Standaard zwarte schoen met blauwe veters.</td></tr></tbody>
+      </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">04 &middot; Productie</span>
+        <h2 data-rail="Drukkers">Drukkers in Nederland</h2>
+        <p>Geen enkele partij doet premium textieldruk &eacute;n werkkleding op topniveau. Advies: splitsen over twee leveranciers. Alle productlinks, prijzen en levertijden staan in het printadvies op Drive.</p>
+      </div>
+      <div class="mx-druk"><div class="mx-drukkol"><h3>Textiel: shirts, hoodie, pet, muts</h3><ul><li><a href="https://www.morecolor.nl/en" target="_blank" rel="noopener"><b>More Color</b></a> <span class="mx-stad">Amsterdam</span><br>Premium zeefdruk en borduren, Stanley/Stella en Build Your Brand. Vanaf 15 stuks, 2 tot 3 weken. Eerste keus.</li><li><a href="https://www.katoenfabriek.nl/kleding-bedrukken" target="_blank" rel="noopener"><b>Katoenfabriek</b></a> <span class="mx-stad">Utrecht</span><br>Pantone met de hand gemengd, DTG vanaf 5, zeefdruk vanaf 25. 10 tot 14 werkdagen.</li><li><a href="https://www.groenewas.nl/" target="_blank" rel="noopener"><b>Groenewas</b></a> <span class="mx-stad">Nijmegen</span><br>Discharge-inkt voor zachte ton-sur-ton, ook Carhartt werkkleding. Vanaf 10, ongeveer 1 week.</li></ul></div><div class="mx-drukkol"><h3>Werkkleding: overall, broek, fleece, schoenen</h3><ul><li><a href="https://proforto.nl/werkkleding-borduren" target="_blank" rel="noopener"><b>Proforto</b></a> <span class="mx-stad">Nijmegen</span><br>Tricorp, Mascot, Blaklader, Snickers, eigen borduurstudio. Vanaf 1 stuk, 5 tot 7 werkdagen. Eerste keus.</li><li><a href="https://www.e-snickers.nl/productinformatie/laat-je-logo-zien/" target="_blank" rel="noopener"><b>e-Snickers</b></a> <span class="mx-stad">Groningen</span><br>Alles Snickers, altijd eerst een proefborduursel. Borduurbestand EUR 50, extra logo EUR 30.</li><li><a href="https://www.opdruq.nl/collections/bedrukte-bedrijfskleding" target="_blank" rel="noopener"><b>Opdruq</b></a> <span class="mx-stad">Utrecht</span><br>Als het één leverancier moet zijn: streetwear en werkkleding inclusief werkschoenen.</li></ul></div></div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">05 &middot; Bestanden</span>
+        <h2 data-rail="Printbestanden">Printbestanden</h2>
+        <p>Vector, op ware grootte in millimeters, alle tekst omgezet naar contouren. Gebouwd uit de offici&euml;le logobestanden en de merkletters Barlow Condensed en IBM Plex Mono. Mappen heten product_drukker.</p>
+      </div>
+      <div class="mx-grid mx-art"><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/tees_more-color/tee-black_back_crew-KEES.svg" alt="tee-black_back_crew-KEES" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">T-shirts &middot; more-color</span><b>tee-black_back_crew-KEES</b><span class="mx-maat">280 &times; 175 mm</span><p>Back, centred ~8 cm below collar. Screen print 2 colours (white + blue) or DTF. Name and CB number change per person.</p><a href="merch/artwork/tees_more-color/tee-black_back_crew-KEES.pdf" download>PDF</a> <a href="merch/artwork/tees_more-color/tee-black_back_crew-KEES.svg" download>SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/tees_more-color/tee-black_back_crew-TEMPLATE.svg" alt="tee-black_back_crew-TEMPLATE" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">T-shirts &middot; more-color</span><b>tee-black_back_crew-TEMPLATE</b><span class="mx-maat">280 &times; 175 mm</span><p>Template: replace NAAM and the CB number per crew member (Barlow Condensed Bold / IBM Plex Mono Medium). Print name via DTF or flex if runs are small.</p><a href="merch/artwork/tees_more-color/tee-black_back_crew-TEMPLATE.pdf" download>PDF</a> <a href="merch/artwork/tees_more-color/tee-black_back_crew-TEMPLATE.svg" download>SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/tees_more-color/tee-black_front_chest-logo.svg" alt="tee-black_front_chest-logo" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">T-shirts &middot; more-color</span><b>tee-black_front_chest-logo</b><span class="mx-maat">80 &times; 56 mm</span><p>Left chest, 80 mm wide. Screen print or embroidery. Colours: blue + white.</p><a href="merch/artwork/tees_more-color/tee-black_front_chest-logo.pdf" download>PDF</a> <a href="merch/artwork/tees_more-color/tee-black_front_chest-logo.svg" download>SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/tees_more-color/tee-black_front_crew.svg" alt="tee-black_front_crew" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">T-shirts &middot; more-color</span><b>tee-black_front_crew</b><span class="mx-maat">240 &times; 108 mm</span><p>Front, centred, 24 cm wide. Screen print 2 colours. Wordmark is the official caseBuilder.com logo (the renders showed an invented &quot;CaseBuilder Crew&quot; lettering).</p><a href="merch/artwork/tees_more-color/tee-black_front_crew.pdf" download>PDF</a> <a href="merch/artwork/tees_more-color/tee-black_front_crew.svg" download>SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld mx-licht"><img src="merch/artwork/tees_more-color/tee-white_front_chest-logo.svg" alt="tee-white_front_chest-logo" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">T-shirts &middot; more-color</span><b>tee-white_front_chest-logo</b><span class="mx-maat">80 &times; 56 mm</span><p>Left chest, 80 mm wide. Screen print or embroidery. Colours: blue + ink #1A1A1A.</p><a href="merch/artwork/tees_more-color/tee-white_front_chest-logo.pdf" download>PDF</a> <a href="merch/artwork/tees_more-color/tee-white_front_chest-logo.svg" download>SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld mx-licht"><img src="merch/artwork/tees_more-color/tee-white_front_crew.svg" alt="tee-white_front_crew" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">T-shirts &middot; more-color</span><b>tee-white_front_crew</b><span class="mx-maat">240 &times; 108 mm</span><p>Front, centred, 24 cm wide. Screen print 2 colours. Wordmark is the official caseBuilder.com logo (the renders showed an invented &quot;CaseBuilder Crew&quot; lettering).</p><a href="merch/artwork/tees_more-color/tee-white_front_crew.pdf" download>PDF</a> <a href="merch/artwork/tees_more-color/tee-white_front_crew.svg" download>SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/hoodie_more-color/hoodie-black_back_logo.svg" alt="hoodie-black_back_logo" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Hoodie &middot; more-color</span><b>hoodie-black_back_logo</b><span class="mx-maat">300 &times; 212 mm</span><p>Back, centred ~12 cm below hood seam, 30 cm wide. Screen print 2 colours (blue + white).</p><a href="merch/artwork/hoodie_more-color/hoodie-black_back_logo.pdf" download>PDF</a> <a href="merch/artwork/hoodie_more-color/hoodie-black_back_logo.svg" download>SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/hoodie_more-color/hoodie-black_front_chest-logo.svg" alt="hoodie-black_front_chest-logo" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Hoodie &middot; more-color</span><b>hoodie-black_front_chest-logo</b><span class="mx-maat">80 &times; 56 mm</span><p>Left chest, 80 mm. Embroidery or screen print.</p><a href="merch/artwork/hoodie_more-color/hoodie-black_front_chest-logo.pdf" download>PDF</a> <a href="merch/artwork/hoodie_more-color/hoodie-black_front_chest-logo.svg" download>SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/cap_more-color/cap-black_front_logo.svg" alt="cap-black_front_logo" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Pet &middot; more-color</span><b>cap-black_front_logo</b><span class="mx-maat">60 &times; 42 mm</span><p>Front panel, 60 mm wide. Embroidery (blue + white thread).</p><a href="merch/artwork/cap_more-color/cap-black_front_logo.pdf" download>PDF</a> <a href="merch/artwork/cap_more-color/cap-black_front_logo.svg" download>SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/cap_more-color/cap-black_back_text.svg" alt="cap-black_back_text" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Pet &middot; more-color</span><b>cap-black_back_text</b><span class="mx-maat">72 &times; 18 mm</span><p>Back, above strap opening. Embroidery, white thread, cap height 6 mm (minimum for clean lettering).</p><a href="merch/artwork/cap_more-color/cap-black_back_text.pdf" download>PDF</a> <a href="merch/artwork/cap_more-color/cap-black_back_text.svg" download>SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/cap_more-color/cap-black_brim-ruler.svg" alt="cap-black_brim-ruler" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Pet &middot; more-color</span><b>cap-black_brim-ruler</b><span class="mx-maat">164 &times; 15 mm</span><p>Along the front edge of the brim, 1:1 scale (real millimetres). DTF or pad print, ask for a sample: the brim is curved.</p><a href="merch/artwork/cap_more-color/cap-black_brim-ruler.pdf" download>PDF</a> <a href="merch/artwork/cap_more-color/cap-black_brim-ruler.svg" download>SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/beanie_more-color/beanie-black_woven-label.svg" alt="beanie-black_woven-label" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Muts &middot; more-color</span><b>beanie-black_woven-label</b><span class="mx-maat">50 &times; 30 mm</span><p>Woven label 50 x 30 mm, black base, logo blue + white. Sewn on the cuff. Woven labels usually from ~100 pcs; embroidery is the alternative.</p><a href="merch/artwork/beanie_more-color/beanie-black_woven-label.pdf" download>PDF</a> <a href="merch/artwork/beanie_more-color/beanie-black_woven-label.svg" download>SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/coverall_proforto/coverall-black_front_chest-logo.svg" alt="coverall-black_front_chest-logo" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Overall &middot; proforto</span><b>coverall-black_front_chest-logo</b><span class="mx-maat">90 &times; 64 mm</span><p>Right chest, 90 mm wide. Embroidery (blue + white).</p><a href="merch/artwork/coverall_proforto/coverall-black_front_chest-logo.pdf" download>PDF</a> <a href="merch/artwork/coverall_proforto/coverall-black_front_chest-logo.svg" download>SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/coverall_proforto/coverall-black_back_upper.svg" alt="coverall-black_back_upper" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Overall &middot; proforto</span><b>coverall-black_back_upper</b><span class="mx-maat">260 &times; 168 mm</span><p>Back, between shoulder blades, 26 cm wide. DTF or stretch transfer (not rigid screen print on workwear fabric).</p><a href="merch/artwork/coverall_proforto/coverall-black_back_upper.pdf" download>PDF</a> <a href="merch/artwork/coverall_proforto/coverall-black_back_upper.svg" download>SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/coverall_proforto/coverall-black_back_lower-arrows.svg" alt="coverall-black_back_lower-arrows" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Overall &middot; proforto</span><b>coverall-black_back_lower-arrows</b><span class="mx-maat">124 &times; 46 mm</span><p>Back, just below the waist seam, 12 cm wide. DTF or stretch transfer, white.</p><a href="merch/artwork/coverall_proforto/coverall-black_back_lower-arrows.pdf" download>PDF</a> <a href="merch/artwork/coverall_proforto/coverall-black_back_lower-arrows.svg" download>SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/coverall_proforto/coverall-black_front_name-patch.svg" alt="coverall-black_front_name-patch" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Overall &middot; proforto</span><b>coverall-black_front_name-patch</b><span class="mx-maat">90 &times; 32 mm</span><p>Name patch 90 x 32 mm replacing the metal plate from the render. Woven or rubber (PVC) patch with velcro, or have it engraved on aluminium. CREW number per person.</p><a href="merch/artwork/coverall_proforto/coverall-black_front_name-patch.pdf" download>PDF</a> <a href="merch/artwork/coverall_proforto/coverall-black_front_name-patch.svg" download>SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/trousers_proforto/trousers-black_side-ruler-0-400mm.svg" alt="trousers-black_side-ruler-0-400mm" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Werkbroek &middot; proforto</span><b>trousers-black_side-ruler-0-400mm</b><span class="mx-maat">418 &times; 21 mm</span><p>Outer leg, from pocket downwards, true 1:1 scale (0 to 400 mm). Stretch transfer. 1 mm ticks left out on purpose (too fine for transfer).</p><a href="merch/artwork/trousers_proforto/trousers-black_side-ruler-0-400mm.pdf" download>PDF</a> <a href="merch/artwork/trousers_proforto/trousers-black_side-ruler-0-400mm.svg" download>SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/trousers_proforto/trousers-black_thigh-pocket-logo.svg" alt="trousers-black_thigh-pocket-logo" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Werkbroek &middot; proforto</span><b>trousers-black_thigh-pocket-logo</b><span class="mx-maat">60 &times; 42 mm</span><p>Thigh pocket flap, 60 mm. Embroidery or transfer.</p><a href="merch/artwork/trousers_proforto/trousers-black_thigh-pocket-logo.pdf" download>PDF</a> <a href="merch/artwork/trousers_proforto/trousers-black_thigh-pocket-logo.svg" download>SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/trousers_proforto/trousers-black_knee-corner-marks.svg" alt="trousers-black_knee-corner-marks" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Werkbroek &middot; proforto</span><b>trousers-black_knee-corner-marks</b><span class="mx-maat">110 &times; 90 mm</span><p>Optional, on the knee-pad pocket. Stretch transfer, white. The full thigh grid from the render is left out: not durable on stock trousers.</p><a href="merch/artwork/trousers_proforto/trousers-black_knee-corner-marks.pdf" download>PDF</a> <a href="merch/artwork/trousers_proforto/trousers-black_knee-corner-marks.svg" download>SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/fleece_proforto/fleece-black_front_chest-logo.svg" alt="fleece-black_front_chest-logo" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Fleece &middot; proforto</span><b>fleece-black_front_chest-logo</b><span class="mx-maat">80 &times; 56 mm</span><p>Left chest, 80 mm. Embroidery only on fleece (blue + white thread), with water-soluble topping.</p><a href="merch/artwork/fleece_proforto/fleece-black_front_chest-logo.pdf" download>PDF</a> <a href="merch/artwork/fleece_proforto/fleece-black_front_chest-logo.svg" download>SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/fleece_proforto/fleece-black_sleeve-text_horizontal.svg" alt="fleece-black_sleeve-text_horizontal" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Fleece &middot; proforto</span><b>fleece-black_sleeve-text_horizontal</b><span class="mx-maat">131 &times; 7 mm</span><p>Sleeve text, embroidery, cap height 7 mm (6 mm is the minimum on fleece). Placed vertically on the left upper arm, reading bottom to top: see _vertical file.</p><a href="merch/artwork/fleece_proforto/fleece-black_sleeve-text_horizontal.pdf" download>PDF</a> <a href="merch/artwork/fleece_proforto/fleece-black_sleeve-text_horizontal.svg" download>SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/fleece_proforto/fleece-black_sleeve-text_vertical.svg" alt="fleece-black_sleeve-text_vertical" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Fleece &middot; proforto</span><b>fleece-black_sleeve-text_vertical</b><span class="mx-maat">7 &times; 131 mm</span><p>Same text rotated for placement, reading bottom to top.</p><a href="merch/artwork/fleece_proforto/fleece-black_sleeve-text_vertical.pdf" download>PDF</a> <a href="merch/artwork/fleece_proforto/fleece-black_sleeve-text_vertical.svg" download>SVG</a></div></div></div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">06 &middot; Open</span>
+        <h2 data-rail="Open punten">Open punten</h2>
+      </div>
+      <ul class="mx-open">
+        <li><strong>Pantone voor CB-blauw.</strong> Het brandbook geeft alleen #0393D1. Dichtstbij liggen PMS 2925 C en PMS 2192 C; kiezen met een fysieke Pantone-waaier en een proefdruk vragen.</li>
+        <li><strong>Welk blauw is leidend?</strong> Het vector-logo gebruikt #0094D1, het brandbook #0393D1. De printbestanden volgen het brandbook.</li>
+        <li><strong>Namen en nummers van de crew.</strong> Nodig voor de rug van de shirts en de CREW-nummers op de naampatch.</li>
+        <li><strong>Laatste controle door een ontwerper</strong> voor de bestanden naar de drukker gaan.</li>
+        <li><strong>Offertes</strong> bij More Color (of Katoenfabriek) en Proforto, elk met een proefdruk of proefborduursel op het echte kledingstuk.</li>
+      </ul>
+    </section>
+
+  </div>
+
 
 </div>
 
@@ -13690,6 +13819,40 @@
     document.addEventListener('click', function (e) { if (!wrap.contains(e.target)) zet(false); });
     new MutationObserver(label).observe(wrap, { subtree:true, attributes:true, attributeFilter:['aria-selected'] });
     label();
+  })();
+</script>
+
+<script>
+  // Merch-galerij: klik op een beeld opent het groot in hetzelfde scherm.
+  // Pijltjestoetsen bladeren door alle beelden van de tab, Esc sluit.
+  (function () {
+    var kaarten = Array.prototype.slice.call(document.querySelectorAll('#p12 .mx-kaart'));
+    if (!kaarten.length) return;
+    var lb = document.createElement('dialog');
+    lb.className = 'mx-lb';
+    lb.innerHTML = '<button type="button" class="mx-x" aria-label="Sluiten">&times;</button>' +
+      '<button type="button" class="mx-vorige" aria-label="Vorige">&#8249;</button>' +
+      '<img alt=""><p></p>' +
+      '<button type="button" class="mx-volgende" aria-label="Volgende">&#8250;</button>';
+    document.body.appendChild(lb);
+    var im = lb.querySelector('img'), bij = lb.querySelector('p'), i = 0;
+    function toon(n) {
+      i = (n + kaarten.length) % kaarten.length;
+      im.src = kaarten[i].getAttribute('href');
+      bij.innerHTML = kaarten[i].getAttribute('data-mx-titel');
+      if (!lb.open) lb.showModal();
+    }
+    kaarten.forEach(function (k, n) {
+      k.addEventListener('click', function (ev) { ev.preventDefault(); toon(n); });
+    });
+    lb.querySelector('.mx-x').addEventListener('click', function () { lb.close(); });
+    lb.querySelector('.mx-vorige').addEventListener('click', function () { toon(i - 1); });
+    lb.querySelector('.mx-volgende').addEventListener('click', function () { toon(i + 1); });
+    lb.addEventListener('click', function (ev) { if (ev.target === lb) lb.close(); });
+    lb.addEventListener('keydown', function (ev) {
+      if (ev.key === 'ArrowLeft') toon(i - 1);
+      if (ev.key === 'ArrowRight') toon(i + 1);
+    });
   })();
 </script>
 </body>
