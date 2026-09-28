@@ -1502,7 +1502,11 @@
     border:1px solid var(--line); border-radius:3px; box-shadow:0 8px 24px rgba(0,40,70,.10); z-index:-1; }
   .doorsnee-menu li { display:flex; align-items:baseline; gap:9px; padding:0 16px; }
   .doorsnee-menu li:first-child { padding-top:8px; }
-  .doorsnee-menu li:last-child { padding-bottom:8px; border-top:1px solid var(--line-soft); margin-top:4px; padding-top:4px; }
+  .doorsnee-menu li:last-child { padding-bottom:8px; }
+  /* De lijn scheidt de tabs op deze pagina van de links naar buiten: de
+     ontwerpen en de componenten. Een klasse in plaats van :last-child,
+     omdat onder de lijn meer dan één link staat. */
+  .doorsnee-menu li.lijn { border-top:1px solid var(--line-soft); margin-top:4px; padding-top:4px; }
   .doorsnee-menu li::before { content:"\2022"; color:var(--line); font-size:15px; }
   /* De .tab-opmaak is voor een balk gemaakt — onderstreping plus negatieve
      marge — dus die zetten we in het menu terug naar iets dat in een lijst
@@ -1681,7 +1685,6 @@
         <button class="tab" role="tab" id="t6" data-hash="livegang" aria-controls="p6" aria-selected="false"><span class="tnum">05</span>Live-gang</button>
         <button class="tab tab-right" role="tab" id="t8" data-hash="features" aria-controls="p8" aria-selected="false">Features</button>
       </div>
-      <a class='tablink' href='https://casebuilder.demo.rokxgroup.com/home-schoon.html' rel='noopener' target='_blank'>Nieuw design<span class="pijl">&#8599;</span></a>
     </div>
 
     <!-- Deze horen niet bij de fasereeks: het zijn doorsneden door het
@@ -1698,7 +1701,8 @@
       <li><button class="tab" role="tab" id="t10" data-hash="productlijst" aria-controls="p10" aria-selected="false">Productlijst</button></li>
       <li><button class="tab" role="tab" id="t11" data-hash="opzet-pages" aria-controls="p11" aria-selected="false">Opzet pages</button></li>
       <li><button class="tab" role="tab" id="t12" data-hash="koppelingen" aria-controls="p12" aria-selected="false">Koppelingen</button></li>
-      <li><a class='uit' href='/mockups/header-varianten' rel='noopener' target='_blank'>Prototypes<span class="pijl">&#8599;</span></a></li>
+      <li class="lijn"><a class='uit' href='https://casebuilder.demo.rokxgroup.com/home-schoon.html' rel='noopener' target='_blank'>Final design<span class="pijl">&#8599;</span></a></li>
+      <li><a class='uit' href='/mockups/header-varianten' rel='noopener' target='_blank'>1st draft design<span class="pijl">&#8599;</span></a></li>
       <li><a class='uit' href='/mockups/overzicht#componenten' rel='noopener' target='_blank'>Componenten<span class="pijl">&#8599;</span></a></li>
     </ul>
     </div>
@@ -13036,14 +13040,19 @@
       <div class="sec-head">
         <span class="eyebrow">Beveiliging</span>
         <h2 data-rail="Beveiliging">Wie erbij kan</h2>
-        <p>De feed bevat namen, adressen en telefoonnummers van alle klanten. Daarom een paar lagen over elkaar heen, zodat &eacute;&eacute;n fout nog geen lek is.</p>
+        <p>Via deze route haalt het ERP van CaseBuilder de gegevens van alle klanten op: namen, adressen, telefoonnummers, bestellingen. Die route moet dus dicht zitten voor iedereen behalve dat ene systeem. Daarom vijf maatregelen. Elk vangt iets op als een andere faalt.</p>
       </div>
-      <div class="layers">
-        <div class="layer"><span class="tool">sleutel</span><h4>Een sleutel voor alleen deze route</h4><p>Geen beheerderssleutel van Medusa, want die opent de hele admin. Deze sleutel opent de orders-feed en verder niets. Hij is in te trekken en te vervangen zonder dat er iets stilvalt.</p></div>
-        <div class="layer"><span class="tool">afzender</span><h4>Alleen vanaf CaseBuilder</h4><p>De feed antwoordt alleen op de vaste adressen van CaseBuilder. Een gestolen sleutel is dan nog niet genoeg.</p></div>
-        <div class="layer"><span class="tool">verbinding</span><h4>Alleen versleuteld</h4><p>Uitsluitend https. Er wordt niets tussentijds bewaard, ook niet in een cache.</p></div>
-        <div class="layer"><span class="tool">tempo</span><h4>Een beperkt aantal verzoeken</h4><p>Wie te vaak vraagt of blijft raden, wordt tijdelijk geweigerd.</p></div>
-        <div class="layer"><span class="tool">logboek</span><h4>Wel wie, niet wat</h4><p>Elk verzoek wordt gelogd: wanneer, vanaf waar en hoeveel orders. De orders zelf en de sleutel komen nooit in een logboek.</p></div>
+      <div class="scroller">
+      <table class="tpl">
+        <thead><tr><th>Maatregel</th><th>Wat het is</th><th>Wat het tegenhoudt</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Een eigen sleutel</strong></td><td>Het ERP stuurt bij elk verzoek een geheime sleutel mee, zoals een wachtwoord. Die sleutel werkt alleen voor het ophalen van orders, niet voor de rest van de webshop.</td><td>Lekt de sleutel uit, dan kan niemand er producten mee wijzigen of geld terugboeken. We vervangen hem dan meteen door een nieuwe.</td></tr>
+          <tr><td><strong>Alleen vanaf CaseBuilder</strong></td><td>De server antwoordt alleen op verzoeken die van de vaste internetadressen van CaseBuilder komen.</td><td>Wie de sleutel heeft maar niet bij CaseBuilder zit, krijgt niets.</td></tr>
+          <tr><td><strong>Versleutelde verbinding</strong></td><td>Alles gaat via https en wordt onderweg nergens bewaard.</td><td>Niemand kan onderweg meelezen.</td></tr>
+          <tr><td><strong>Een maximum aantal verzoeken</strong></td><td>Het ERP mag een beperkt aantal keer per minuut vragen. Wie vaker vraagt of een verkeerde sleutel blijft proberen, wordt even geblokkeerd.</td><td>Sleutels raden, en de webshop platleggen met een stroom verzoeken.</td></tr>
+          <tr><td><strong>Een logboek zonder klantgegevens</strong></td><td>Van elk verzoek noteren we wanneer het kwam, vanaf welk adres, en hoeveel orders het opleverde. Niet de orders zelf en niet de sleutel.</td><td>Misbruik blijft achteraf zichtbaar, zonder dat het logboek zelf een lek wordt.</td></tr>
+        </tbody>
+      </table>
       </div>
     </section>
 
