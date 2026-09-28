@@ -71,10 +71,12 @@
   .sch .bx.nieuw { fill:var(--keep-bg); stroke:var(--keep); stroke-dasharray:5 4; }
   .sch .bx.later { stroke-dasharray:3 4; }
   .sch .grp { fill:var(--accent-bg); stroke:var(--accent); stroke-width:1; }
-  .sch .notitie { fill:var(--surface-2); stroke:var(--line-soft); }
-  .sch .lus { fill:none; stroke:var(--line); stroke-dasharray:4 4; }
-  .sch .lus-tab { fill:var(--surface-2); stroke:var(--line); }
-  .sch .leven { stroke:var(--line); stroke-dasharray:3 5; }
+  .sch .notitie { fill:var(--surface-2); stroke:var(--line); }
+  /* Kader en levenslijnen in --faint, niet --line: op het lichte thema
+     vielen ze anders weg tegen de achtergrond. */
+  .sch .lus { fill:none; stroke:var(--faint); stroke-width:1.1; stroke-dasharray:5 4; }
+  .sch .lus-tab { fill:var(--surface-2); stroke:var(--faint); stroke-width:1.1; }
+  .sch .leven { stroke:var(--faint); stroke-width:1.3; stroke-dasharray:4 4; }
   .sch text { fill:var(--ink); font-family:"DM Sans",sans-serif; font-size:13px; }
   .sch .t-kop { font-family:"Barlow Condensed",sans-serif; font-size:17px; font-weight:600; }
   .sch .t-klein { font-size:11.5px; fill:var(--muted); }
