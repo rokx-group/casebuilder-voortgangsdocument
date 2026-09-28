@@ -663,6 +663,64 @@
   .koshop { list-style:none; margin:10px 0 0; padding:0; display:flex; flex-direction:column; gap:10px; font-size:14px; }
   .koprod { display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
   .koprod span { font-size:12px; border:1px solid var(--line); border-radius:3px; padding:2px 7px; color:var(--muted); background:var(--surface-2); }
+  /* Voorbeeld L1-product uit de offerte van Joran. Twee nagebouwde stukken
+     site naast elkaar: de kaart in de shop (mockups/shop-v1, klasse .mod) en
+     de productpagina (mockups/product-v1, stand L1). Kleiner, maar met
+     dezelfde onderdelen in dezelfde volgorde, zodat je ziet welk veld waar
+     landt. */
+  .kol1 { display:grid; grid-template-columns:260px minmax(0,1fr); gap:18px; align-items:start; }
+  @media (max-width:760px) { .kol1 { grid-template-columns:1fr; } }
+  .kol1 figure { margin:0; }
+  .kol1 figcaption { font-size:12px; color:var(--faint); margin-top:7px; }
+  .kodemo { background:var(--surface); border:1px solid var(--line); border-radius:var(--r-sm); overflow:hidden; }
+  .kodemo-im { background:var(--surface-2); border-bottom:1px solid var(--line-soft); aspect-ratio:4/3;
+    display:flex; align-items:center; justify-content:center; padding:10px; }
+  .kodemo-im img { max-width:100%; max-height:100%; mix-blend-mode:multiply; }
+  :root[data-theme="dark"] .kodemo-im img { mix-blend-mode:normal; }
+  .kodemo-bd { padding:13px 15px 15px; display:flex; flex-direction:column; gap:5px; }
+  .kodemo-bd .meta { font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--faint); }
+  .kodemo-bd h4 { margin:0; font-size:17px; line-height:1.25; }
+  .kodemo-bd .waar { margin:0; font-size:13px; color:var(--muted); }
+  .kodemo-bd .pr { font-size:13px; color:var(--muted); margin-top:3px; }
+  .kodemo-bd .pr b { font-size:21px; color:var(--ink); margin-right:7px; }
+  .kodemo-bd .lvl, .kodemo-bd .stk { font-size:12px; padding:4px 8px; border-radius:3px; align-self:flex-start; }
+  .kodemo-bd .lvl { background:var(--accent-bg); color:var(--accent); }
+  .kodemo-bd .stk { background:var(--move-bg); color:var(--move); }
+  /* De productpagina: kruimels, kop, prijs, keuzes, en de blokken waarom. */
+  .kopdp { background:var(--surface); border:1px solid var(--line); border-radius:var(--r-sm); padding:18px 20px 20px; }
+  .kopdp .kruim { font-size:12px; color:var(--faint); margin:0 0 12px; }
+  .kopdp h4 { margin:0 0 6px; font-size:22px; line-height:1.2; }
+  .kopdp .lead { margin:0 0 14px; font-size:14.5px; color:var(--muted); max-width:62ch; }
+  .kopdp .prijsbalk { display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 12px; border-top:1px solid var(--line-soft);
+    border-bottom:1px solid var(--line-soft); padding:11px 0; margin-bottom:14px; }
+  .kopdp .prijsbalk b { font-size:26px; }
+  .kopdp .prijsbalk span { font-size:13px; color:var(--muted); }
+  .kopdp h5 { margin:0 0 7px; font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--faint); font-weight:500; }
+  .kowaarom { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; background:var(--line);
+    border:1px solid var(--line); border-radius:3px; overflow:hidden; margin:0 0 16px; }
+  @media (max-width:620px) { .kowaarom { grid-template-columns:1fr; } }
+  .kowaarom div { background:var(--surface-2); padding:11px 13px; }
+  .kowaarom b { display:block; font-size:15px; }
+  .kowaarom small { display:block; font-size:12.5px; color:var(--muted); margin-top:3px; }
+  .kokeuze { display:flex; flex-direction:column; gap:10px; margin-bottom:16px; }
+  .kokeuze > div { display:grid; grid-template-columns:78px minmax(0,1fr); gap:10px; align-items:center; font-size:13.5px; }
+  @media (max-width:520px) { .kokeuze > div { grid-template-columns:1fr; gap:3px; } }
+  .kokeuze .lb { font-size:12px; color:var(--faint); }
+  .kostaal { display:flex; gap:6px; }
+  .kostaal i { width:22px; height:22px; border-radius:3px; border:1px solid var(--line); }
+  .kovak { border:1px dashed var(--line); border-radius:3px; padding:7px 10px; color:var(--muted); font-size:13px; }
+  .komaten { display:flex; flex-wrap:wrap; gap:6px; }
+  .komaten a, .komaten span { font-size:12.5px; border:1px solid var(--line); border-radius:3px; padding:5px 9px;
+    background:var(--surface); color:var(--muted); text-decoration:none; white-space:nowrap; }
+  .komaten span.nu { border-color:var(--accent); background:var(--accent-bg); color:var(--accent); font-weight:600; }
+  .kodeur { display:block; border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:3px;
+    padding:11px 14px; font-size:13.5px; color:var(--muted); background:var(--surface-2); }
+  .kodeur b { display:block; color:var(--ink); font-size:14.5px; margin-bottom:2px; }
+  table.kogat td:first-child { white-space:nowrap; }
+  table.kogat .ja { color:var(--keep); font-weight:600; }
+  table.kogat .nee { color:var(--drop); font-weight:600; }
   /* Eén regel per rij: naam van de concurrent en de link breken niet af. */
   #ko-lijst td:first-child, #ko-lijst td:last-child, #ko-top-tabel td, .kocltab td.mono { white-space:nowrap; }
   #ko-top-tabel td:nth-child(2) { white-space:normal; }
@@ -723,6 +781,13 @@
   .doorsnee:hover .doorsnee-knop, .doorsnee:focus-within .doorsnee-knop { color:var(--muted); }
   .doorsnee:hover .pijl-dicht, .doorsnee:focus-within .pijl-dicht, .doorsnee.open .pijl-dicht { transform:rotate(180deg); }
   .doorsnee-knop:focus-visible { outline:2px solid var(--accent); outline-offset:2px; border-radius:2px; }
+  /* De themaknop rechtsboven, in de letter van Meer. */
+  .thema-knop { align-self:center; display:inline-flex; align-items:center; gap:7px; margin-left:12px;
+    padding:6px 10px; background:none; border:1px solid var(--line); border-radius:2px; cursor:pointer;
+    font-family:"Barlow Condensed","Inter",sans-serif; font-weight:600; font-size:15px; color:var(--muted); }
+  .thema-knop:hover { color:var(--ink); border-color:var(--muted); }
+  .thema-knop:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .thema-teken { font-size:14px; color:var(--accent); }
   .doorsnee-menu { list-style:none; margin:0; padding:10px 0 0; position:absolute; right:0; top:100%;
     z-index:40; min-width:190px; display:none; }
   .doorsnee:hover .doorsnee-menu, .doorsnee:focus-within .doorsnee-menu, .doorsnee.open .doorsnee-menu { display:block; }
@@ -781,13 +846,6 @@
   table.tpl.fixed2 th:nth-child(3), table.tpl.fixed2 td:nth-child(3) { width:50%; }
 
   table.tpl.fixed3 { table-layout:fixed; min-width:720px; }
-  /* De themaknop rechtsboven, in de letter van Meer. */
-  .thema-knop { align-self:center; display:inline-flex; align-items:center; gap:7px; margin-left:12px;
-    padding:6px 10px; background:none; border:1px solid var(--line); border-radius:2px; cursor:pointer;
-    font-family:"Barlow Condensed","Inter",sans-serif; font-weight:600; font-size:15px; color:var(--muted); }
-  .thema-knop:hover { color:var(--ink); border-color:var(--muted); }
-  .thema-knop:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
-  .thema-teken { font-size:14px; color:var(--accent); }
   table.tpl.fixed3 th:nth-child(1), table.tpl.fixed3 td:nth-child(1) { width:24%; }
   table.tpl.fixed3 th:nth-child(2), table.tpl.fixed3 td:nth-child(2) { width:54%; }
   table.tpl.fixed3 th:nth-child(3), table.tpl.fixed3 td:nth-child(3) { width:22%; }
@@ -915,6 +973,9 @@
         <button class="tab" role="tab" id="t5" data-hash="content" aria-controls="p5" aria-selected="false"><span class="tnum">04</span>Contentfase</button>
         <button class="tab" role="tab" id="t6" data-hash="livegang" aria-controls="p6" aria-selected="false"><span class="tnum">05</span>Live-gang</button>
       </div>
+      <!-- Licht of donker. Zonder keuze volgt de pagina het systeem; een
+           keuze blijft in deze browser bewaard (localStorage). -->
+      <button type="button" class="thema-knop" aria-pressed="false" aria-label="Donker thema"><span class="thema-teken" aria-hidden="true">&#9680;</span><span class="thema-tekst">Donker</span></button>
     </div>
 
     <!-- Deze horen niet bij de fasereeks: het zijn doorsneden door het
@@ -931,6 +992,7 @@
       <li><button class="tab" role="tab" id="t11" data-hash="opzet-pages" aria-controls="p11" aria-selected="false">Opzet pages</button></li>
       <li><button class="tab" role="tab" id="t12" data-hash="merch" aria-controls="p12" aria-selected="false">Merch</button></li>
       <li><button class="tab" role="tab" id="t13" data-hash="koppelingen" aria-controls="p13" aria-selected="false">Koppelingen</button></li>
+      <li><button class="tab" role="tab" id="t8" data-hash="features" aria-controls="p8" aria-selected="false">Features</button></li>
       <li class="lijn"><a class='uit' href='https://casebuilder.demo.rokxgroup.com/home-schoon.html' rel='noopener' target='_blank'>Final design<span class="pijl">&#8599;</span></a></li>
       <li><a class='uit' href='/mockups/header-varianten' rel='noopener' target='_blank'>1st draft design<span class="pijl">&#8599;</span></a></li>
       <li><a class='uit' href='/mockups/overzicht#componenten' rel='noopener' target='_blank'>Componenten<span class="pijl">&#8599;</span></a></li>
@@ -973,9 +1035,6 @@
           <dt>Doel</dt><dd>de drie routes zichtbaar maken.</dd>
           <dt>Waarom</dt><dd>de professional draagt de pagina, de consument vindt hier zijn deur.</dd>
           <dt>Bevat</dt><dd>ik weet wat ik vervoer → wij kiezen de route · ik weet mijn maten → configurator · ik heb een tekening of een serie → aanvraag.</dd>
-      <!-- Licht of donker. Zonder keuze volgt de pagina het systeem; een
-           keuze blijft in deze browser bewaard (localStorage). -->
-      <button type="button" class="thema-knop" aria-pressed="false" aria-label="Donker thema"><span class="thema-teken" aria-hidden="true">&#9680;</span><span class="thema-tekst">Donker</span></button>
         </dl></article>
         <article class="keuze"><span class="num">04</span><h3>Flightcases</h3><dl>
           <dt>Doel</dt><dd>van &quot;welk model?&quot; naar een modelpagina.</dd>
@@ -992,7 +1051,6 @@
         </dl></article>
         <article class="keuze"><span class="num">07</span><h3>Shop (niveau 1)</h3><dl>
           <dt>Doel</dt><dd>kant-en-klare cases en onderdelen direct verkopen.</dd>
-      <li><button class="tab" role="tab" id="t8" data-hash="features" aria-controls="p8" aria-selected="false">Features</button></li>
           <dt>Waarom</dt><dd>een vaste case voor één apparaat — kleur en logo kiezen, verder niets. Een Medusa-product, geen configurator, en niet op te schalen naar andere maten. Er zijn er nu bijna nul; dit assortiment moet nog worden opgebouwd. Shop wijst voorlopig naar Wat ga je vervoeren.</dd>
           <dt>Bevat</dt><dd>beeld links, koopblok rechts (prijs, kleur, logo, aantal, winkelwagen) · specificaties · alternatieven pas onderaan.</dd>
         </dl></article>
@@ -3341,6 +3399,152 @@
       <div class="cards" id="ko-shop"></div>
     </section>
 
+    <!-- ══ Stap 8 · het eerste echte L1-product ══════════════════════════
+         De zeven cases uit de offerte die Joran op 11 september 2026 mailde
+         (opgesteld 21 oktober 2024) zijn de eerste producten waarvan we alle gegevens
+         echt hebben: vaste maat, vaste prijs, volledige specificatie. Eén
+         is helemaal uitgewerkt, zodat te zien is welk veld van de offerte
+         waar op de site landt — en welke velden de offerte niet geeft.
+         De productgegevens staan hier vast: de offerte is een bevroren
+         document. De PDF blijft bewust buiten deze repo: die is publiek. De zoekwoorden komen uit de data, want die bewegen mee.
+         Volledige lijst met alle zeven: producten-joran/index.html.
+         ══════════════════════════════════════════════════════════════ -->
+    <section id="ko-l1">
+      <div class="sec-head">
+        <span class="eyebrow">Stap 8 &middot; van cluster naar product</span>
+        <h2 data-rail="Voorbeeld L1">Voorbeeld: een L1-product uit de offerte</h2>
+        <p>Joran stuurde een offerte met <strong>zeven kant-en-klare flightcases</strong>: vaste maten, vaste prijzen en een volledige specificatie. Dat is precies een <strong>L1-product</strong> &mdash; de klant kiest niets meer dan kleur en logo. Hieronder &eacute;&eacute;n case helemaal uitgewerkt: hoe hij in de shop staat, hoe zijn productpagina eruitziet, en welke velden de offerte nog niet geeft.</p>
+        <p class="kozacht">Alle zeven met foto en specificatie: <a class="kolink" href="producten-joran/index.html">Producten van Joran</a>. De offerte-PDF zelf staat niet in deze repo maar in Drive, onder Opdracht 1602.</p>
+      </div>
+
+      <h3>Waar de zeven landen</h3>
+      <p>Twee clusters uit het onderzoek, beide een <strong>casetype</strong>: geen eigen categoriepagina, maar een filter op de modelpagina. De zes trunccases vormen samen een maatladder; de rackcase staat er alleen voor.</p>
+      <div class="scroller">
+      <table class="tpl">
+        <thead><tr><th>Cluster</th><th class="r">Cases</th><th>Op de site</th><th>Zwaarste zoekwoord</th><th class="r">Prijs</th></tr></thead>
+        <tbody>
+          <tr><td><strong>transportkisten</strong></td><td class="num">6</td><td><code>/flightcases/trunccase</code> &middot; filter Casetype: Trunccase</td><td data-kol1-kw="transportkisten">&hellip;</td><td class="num">&euro; 279 &ndash; 579</td></tr>
+          <tr><td><strong>19 inch racks</strong></td><td class="num">1</td><td><code>/flightcases/rackcase-dubbel-deksel</code> &middot; filter Casetype: Rackcase</td><td data-kol1-kw="racks">&hellip;</td><td class="num">&euro; 489</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <p class="kozacht">De indeling wijst cluster &ldquo;19 inch racks&rdquo; naar <code>/flightcases/rackcase-enkel</code>; die van Joran heeft een dubbel deksel en hoort dus op de modelpagina ernaast (<a class="kolink" href="mockups/casetype-rackcase-dubbel-deksel-v1.html">mockup</a>). Het cluster levert de zoekwoorden voor beide.</p>
+
+      <h3>De maatladder van de trunccase</h3>
+      <p>Elke maat is een eigen product met een eigen pagina, zoals afgesproken op 11 september. De knoppen &ldquo;ook in deze maten&rdquo; wisselen tussen die pagina&rsquo;s; een maat ertussen is geen product maar een aanvraag. Het gewicht staat erbij omdat de verzendkosten erop rekenen.</p>
+      <div class="scroller">
+      <table class="tpl">
+        <thead><tr><th>Maat (buitenmaat)</th><th>Binnenmaat</th><th class="r">Gewicht</th><th>Wielen</th><th>Stapelbaar</th><th class="r">Prijs</th><th>Builder-ID</th></tr></thead>
+        <tbody>
+          <tr><td>600 &times; 400 &times; 400 mm</td><td class="mono">556 &times; 362 &times; 354</td><td class="num">12,38 kg</td><td>nee</td><td>ja, op balhoeken</td><td class="num">&euro; 279</td><td class="mono">129463</td></tr>
+          <tr><td>800 &times; 400 &times; 400 mm</td><td class="mono">756 &times; 362 &times; 354</td><td class="num">14,78 kg</td><td>nee</td><td>ja, op balhoeken</td><td class="num">&euro; 319</td><td class="mono">129464</td></tr>
+          <tr style="background:var(--accent-bg)"><td><strong>600 &times; 600 &times; 600 mm</strong></td><td class="mono">556 &times; 562 &times; 554</td><td class="num">25,71 kg</td><td>4&times; 100 mm zwenk</td><td>nee</td><td class="num"><strong>&euro; 399</strong></td><td class="mono">129460</td></tr>
+          <tr><td>800 &times; 600 &times; 600 mm</td><td class="mono">756 &times; 562 &times; 554</td><td class="num">29,22 kg</td><td>4&times; 100 mm zwenk</td><td>nee</td><td class="num">&euro; 479</td><td class="mono">129461</td></tr>
+          <tr><td>1200 &times; 600 &times; 600 mm</td><td class="mono">1156 &times; 562 &times; 554</td><td class="num">36,20 kg</td><td>4&times; 100 mm zwenk</td><td>nee</td><td class="num">&euro; 539</td><td class="mono">129462</td></tr>
+          <tr><td>1200 &times; 600 &times; 600 mm, met vakken</td><td class="mono">1156 &times; 562 &times; 554</td><td class="num">42,20 kg</td><td>4&times; 100 mm zwenk</td><td>nee</td><td class="num">&euro; 579</td><td class="mono">129465</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="kozacht">De blauwe rij is de case die hieronder is uitgewerkt. Prijzen zijn de offerteprijzen van oktober 2024, exclusief btw; voor de shop moeten ze herijkt worden.</p>
+
+      <h3>In de shop</h3>
+      <p>De kaart heeft acht velden. Vijf komen rechtstreeks uit de offerte, drie moeten we nog bepalen &mdash; die staan eronder.</p>
+      <div class="kol1">
+        <figure>
+          <div class="kodemo">
+            <div class="kodemo-im"><img src="producten-joran/beeld/129460.png" alt="Trunccase 600 bij 600 bij 600 mm, zwart, op wielen" loading="lazy"></div>
+            <div class="kodemo-bd">
+              <div class="meta">Trunccase &middot; 60 &times; 60 &times; 60</div>
+              <h4>Trunccase 600 &times; 600 &times; 600 mm</h4>
+              <p class="waar">Vaste maat met scharnierend deksel en vier wielen. Kleur en logo naar keuze.</p>
+              <div class="pr"><b>&euro; 399</b>excl. btw</div>
+              <div class="lvl">Vaste vorm &middot; alleen kleur en logo</div>
+              <div class="stk">Op bestelling &middot; gebouwd op order</div>
+            </div>
+          </div>
+          <figcaption>Nagebouwd uit <code>mockups/shop-v1</code>, klasse <code>.mod</code>. De foto komt uit de offerte-PDF.</figcaption>
+        </figure>
+        <div class="scroller">
+        <table class="tpl">
+          <thead><tr><th>Veld op de kaart</th><th>Waarde</th><th>Waar komt het vandaan</th></tr></thead>
+          <tbody>
+            <tr><td>Naam</td><td>Trunccase 600 &times; 600 &times; 600 mm</td><td>offerte: model + buitenmaat</td></tr>
+            <tr><td>Model</td><td>Trunccase</td><td>offerte, veld Model</td></tr>
+            <tr><td>Prijs</td><td>&euro; 399 excl. btw</td><td>offerte, okt 2024 &mdash; <span class="chip chip-open">herijken</span></td></tr>
+            <tr><td>Regel in klanttaal</td><td>&ldquo;Vaste maat met scharnierend deksel &hellip;&rdquo;</td><td>offerte: deksel + wielen, in klanttaal geschreven</td></tr>
+            <tr><td>Niveau</td><td>Vaste vorm &middot; alleen kleur en logo</td><td>L1, want de offerte geeft &eacute;&eacute;n vaste maat</td></tr>
+            <tr><td>Foto</td><td>uit de PDF gehaald</td><td><span class="chip chip-move">studiofoto nodig</span> &mdash; raster, geen witte achtergrond</td></tr>
+            <tr><td>Categorie en shoptab</td><td>nog kiezen</td><td><span class="chip chip-open">open</span> &mdash; een trunccase past onder AV &amp; licht, industrie en evenement</td></tr>
+            <tr><td>Voorraad of levertijd</td><td>nog onbekend</td><td><span class="chip chip-open">open</span> &mdash; staat niet in een offerte</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+
+      <h3>Op de productpagina</h3>
+      <p>De pagina in de stand L1: de kist, de prijs, drie blokken met de maat die telt, en twee keuzes. Verder niets &mdash; wie een andere maat wil, gaat naar de maatladder of naar een aanvraag.</p>
+      <div class="kopdp">
+        <p class="kruim">Shop &rsaquo; AV &amp; licht &rsaquo; Trunccase &rsaquo; 600 &times; 600 &times; 600 mm</p>
+        <span class="eyebrow">// VASTE CASE &middot; VASTE MAAT</span>
+        <h4>Trunccase 600 &times; 600 &times; 600 mm</h4>
+        <p class="lead">Een kubus van 60 bij 60 met een scharnierend deksel, waarvan de bovenste 75 mm meedraait. Onder vier zwenkwielen van 100 mm, twee met rem. 9 mm berken multiplex met zwart PVC, acht grote balhoeken en twee vlindersloten met verzet.</p>
+        <div class="prijsbalk"><b>&euro; 399</b><span>excl. btw</span><span>Builder-ID 129460</span><span>leeg 25,71 kg</span></div>
+        <div class="kowaarom">
+          <div><h5>// Binnenmaat</h5><b>556 &times; 562 &times; 554 mm</b><small>Waarvan 75 mm in het deksel. Meet je apparaat plus het schuim dat eromheen moet.</small></div>
+          <div><h5>// Wielen</h5><b>4&times; 100 mm zwenk</b><small>Twee met rem. Met wielen wordt hij 732 mm hoog &mdash; dat is de maat die door een deur moet.</small></div>
+          <div><h5>// Gewicht</h5><b>25,71 kg leeg</b><small>Boven de 23 kg van pakketvervoer: deze gaat als pallet of met een koerier.</small></div>
+        </div>
+        <div class="kokeuze">
+          <div><span class="lb">Kleur</span><div class="kostaal"><i style="background:#1A1A1A"></i><i style="background:#8C1C1C"></i><i style="background:#1C3A6B"></i><i style="background:#F2F2F2"></i></div></div>
+          <div><span class="lb">Logo</span><div class="kovak">Upload je logo &middot; SVG, PNG of JPG &mdash; wij zetten hem op het deksel</div></div>
+          <div><span class="lb">Aantal</span><div class="kovak" style="max-width:70px">1</div></div>
+          <div><span class="lb">&nbsp;</span><div><span class="chip chip-keep">In winkelwagen &rarr;</span></div></div>
+        </div>
+        <h5>// Ook in deze maten</h5>
+        <div class="komaten" style="margin-bottom:16px">
+          <a href="#ko-l1">60 &times; 40 &times; 40<br>&euro; 279</a>
+          <a href="#ko-l1">80 &times; 40 &times; 40<br>&euro; 319</a>
+          <span class="nu">60 &times; 60 &times; 60<br>&euro; 399</span>
+          <a href="#ko-l1">80 &times; 60 &times; 60<br>&euro; 479</a>
+          <a href="#ko-l1">120 &times; 60 &times; 60<br>&euro; 539</a>
+          <a href="#ko-l1">120 &times; 60 &times; 60 met vakken<br>&euro; 579</a>
+        </div>
+        <span class="kodeur"><b>Niet precies wat je zoekt?</b>Wij bouwen hem op maat. Stuur een schets, een foto of je maten &mdash; een casebouwer tekent hem uit.</span>
+      </div>
+      <p class="kozacht">Nagebouwd uit <code>mockups/product-v1</code>, stand L1 (daar zit de kist die je kunt draaien). Kleurstalen zijn een voorbeeld; welke kleuren CaseBuilder standaard levert, weten we nog niet.</p>
+
+      <h3>Wat de pagina van het onderzoek krijgt</h3>
+      <p>De tekst en de titels komen niet uit de offerte maar uit het cluster: de zoekwoorden van <strong>transportkisten</strong> bepalen waarop deze pagina gevonden moet worden.</p>
+      <div class="kosite">
+        <article class="card">
+          <p class="koseo-url">casebuilder.nl/flightcases/trunccase/600x600x600</p>
+          <dl class="koseo" id="ko-l1-seo"></dl>
+        </article>
+      </div>
+
+      <h3>Wat de offerte niet geeft</h3>
+      <p>Een offerte is geen productpagina. Dit staat er niet in en moet ergens anders vandaan komen &mdash; bij zeven cases met de hand, bij honderden uit een PIM.</p>
+      <div class="scroller">
+      <table class="tpl kogat">
+        <thead><tr><th>Wat de shop nodig heeft</th><th>In de offerte</th><th>Waar het vandaan moet komen</th></tr></thead>
+        <tbody>
+          <tr><td>Naam, model, maten, prijs</td><td class="ja">ja</td><td>Direct over te nemen; prijzen wel herijken (okt 2024).</td></tr>
+          <tr><td>Materiaal, beslag, wielen, sloten</td><td class="ja">ja</td><td>Volledig, tot op het aantal balhoeken. Dit is de specificatietabel op de pagina.</td></tr>
+          <tr><td>Gewicht</td><td class="ja">ja</td><td>Nodig voor verzendkosten. 25,71 kg leeg valt buiten pakketvervoer.</td></tr>
+          <tr><td>Foto</td><td>deels</td><td>Uit de PDF gehaald: bruikbaar om te kijken, te klein en te grijs voor de shop. Studiofoto&rsquo;s nodig, met een witte achtergrond en vier standen.</td></tr>
+          <tr><td>Categorie, shoptab, branche</td><td class="nee">nee</td><td>Wij kiezen, uit het onderzoek. Een trunccase raakt drie shoptabs; dat wordt een keuze.</td></tr>
+          <tr><td>Voorraad of levertijd</td><td class="nee">nee</td><td>CaseBuilder: zijn deze maten voorradig of worden ze per order gebouwd?</td></tr>
+          <tr><td>Kleuren en logo-opties</td><td class="nee">nee</td><td>CaseBuilder: welke paneelkleuren standaard, en wat kost een logo.</td></tr>
+          <tr><td>Titel, meta, alt-tekst, URL</td><td class="nee">nee</td><td>Uit het cluster, zie hierboven.</td></tr>
+          <tr><td>Verkooptekst</td><td class="nee">nee</td><td>Te schrijven uit de specificatie. De lead hierboven is een voorbeeld.</td></tr>
+          <tr><td>EAN of artikelnummer</td><td>deels</td><td>De Builder-ID (129460) is een intern nummer uit de configurator, geen EAN. Voor Amazon of Google Shopping is een EAN nodig.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="kozacht">Conclusie: van de tien regels hierboven vult de offerte er drie volledig, twee half en vijf helemaal niet. Die vijf zijn een vraag aan CaseBuilder of komen uit dit onderzoek. Voor zeven cases is dat handwerk van een middag; voor de hele catalogus is het de reden dat er een PIM moet komen.</p>
+    </section>
+
     <section id="ko-top">
       <div class="sec-head">
         <span class="eyebrow">Stap 5 &middot; zoekwoorden</span>
@@ -4039,6 +4243,27 @@
       </div>
     </section>
 
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Planning</span>
+        <h2 data-rail="Wat nu al kan">Wat we al bouwen, en wat op antwoord wacht</h2>
+        <p>De antwoorden van CaseBuilder veranderen de vertaling naar hun formaat, niet de opbouw. Daarom beginnen we nu al met stap 1 en 2.</p>
+      </div>
+      <div class="scroller">
+      <table class="tpl">
+        <thead><tr><th>Onderdeel</th><th>Wacht op antwoord?</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Feed-tabel, bijhouden van wijzigingen en het vangnet</strong> (stap 1)</td><td>Nee.</td></tr>
+          <tr><td><strong>De route zelf, met sleutel en vertaling</strong> (stap 2)</td><td>Nee. Alleen hoe het ERP de sleutel meestuurt hangt af van vraag 1, en dat is een kleine aanpassing.</td></tr>
+          <tr><td><strong>De nummers voor status, betaalmethode en webshop</strong></td><td>Ja, vraag 2. Tot dan werken we lokaal met tijdelijke nummers.</td></tr>
+          <tr><td><strong>Kortingen en terugbetalingen in de bedragen</strong></td><td>Deels, vraag 3. We bouwen ons voorstel en leggen het vast in een test. Een ander antwoord is dan een kleine aanpassing.</td></tr>
+          <tr><td><strong>Handmatige betaalmethoden</strong> (stap 4)</td><td>Vraag 6. Om te testen zetten we een order met de hand op betaald in de admin.</td></tr>
+          <tr><td><strong>Live zetten</strong></td><td>Ja. Eerst stap 0, en de vaste adressen van CaseBuilder uit vraag 7.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
   </div>
 
 
@@ -4428,6 +4653,33 @@
             (IND[c.slug].seo ? ' <code>' + e(IND[c.slug].seo) + '</code>' : '') + '</li>';
         }).join('') + '</ul></article>';
       document.getElementById('ko-shop').innerHTML = html;
+
+      // Voorbeeld L1-product (stap 8). De productgegevens staan vast in de
+      // HTML — de offerte is een bevroren document — maar de zoekwoorden
+      // komen hier uit de data, zodat ze meebewegen met een nieuwe export.
+      var spec = function (slug) {
+        return (D.clusterlijst[slug] || []).filter(function (k) { return k[1] && k[5] === 'case-specifiek'; });
+      };
+      Array.prototype.forEach.call(document.querySelectorAll('[data-kol1-kw]'), function (el) {
+        var k = spec(el.getAttribute('data-kol1-kw'))[0];
+        el.innerHTML = k ? '<strong>' + e(k[0]) + '</strong> <span class="kozacht">' + bereik(k[1]) + '</span>'
+                        : '<span class="kozacht">geen gemeten zoekwoord</span>';
+      });
+      var seo = document.getElementById('ko-l1-seo');
+      if (seo) {
+        var tk = spec('transportkisten'), hoofd = tk[0], rest = tk.slice(1, 5), it = IND.transportkisten || {};
+        var r = function (dt, dd) { return '<dt>' + dt + '</dt><dd>' + dd + '</dd>'; };
+        seo.innerHTML =
+          r('Titel', 'Trunccase 60 &times; 60 &times; 60 cm | CaseBuilder') +
+          r('H1', 'Trunccase 600 &times; 600 &times; 600 mm') +
+          r('Hoofdzoekwoord', hoofd ? '<strong>' + e(hoofd[0]) + '</strong> <span class="kozacht">' + bereik(hoofd[1]) + '</span>'
+                                    : '<span class="kozacht">geen gemeten zoekwoord</span>') +
+          r('Meeliften op', rest.length ? rest.map(function (k) { return e(k[0]) + ' <span class="kozacht">' + bereik(k[1]) + '</span>'; }).join('<br>')
+                                        : '<span class="kozacht">nog geen</span>') +
+          r('Cluster', 'transportkisten <span class="kozacht">' + e(it.demo) + '</span>') +
+          r('Modelpagina', '<code>' + e(it.seo) + '</code> <span class="kozacht">de categoriepagina erboven; deze case is er een product in</span>') +
+          r('Gevonden bij', '<span class="kozacht">' + e((D.clusterwie.transportkisten || []).map(function (x) { return NAAM[x]; }).join(', ')) + '</span>');
+      }
     })();
 
     // Overlap.
@@ -5018,8 +5270,6 @@
     });
   })();
 </script>
-</body>
-</html>
 
 <script>
   // Licht of donker: de knop draait de huidige stand om en onthoudt hem.
@@ -5045,3 +5295,5 @@
     toon();
   })();
 </script>
+</body>
+</html>

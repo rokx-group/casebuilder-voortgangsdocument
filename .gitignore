@@ -10,3 +10,6 @@ __pycache__/
 
 # Eigen Python-omgeving voor de scripts (zie scripts/requirements.txt).
 .venv/
+
+# Offertes en andere klantdocumenten horen niet in deze publieke repo.
+producten-joran/*.pdf
