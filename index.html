@@ -95,6 +95,10 @@
   .kp-staal.theirs { background:var(--surface-2); }
   .kp-staal.nieuw { background:var(--keep-bg); border:1.5px dashed var(--keep); }
   .kp-staal.later { border-style:dashed; }
+  /* Leeswijzer bij het ophaalschema: dezelfde tekens als in het schema. */
+  .kp-staal.notitie { background:var(--surface-2); border-color:var(--line-soft); }
+  .kp-leven { display:inline-block; width:0; height:14px; border-left:1.5px dashed var(--muted); margin:0 7px; }
+  .kp-pijl { font-size:15px; line-height:1; color:var(--muted); }
 
   .miles { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:12px; }
   .mile { background:var(--surface); border:1px solid var(--line); border-radius:3px;
@@ -12892,52 +12896,61 @@
           <marker id="kp2-pijl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="kop" d="M0 0 L10 5 L0 10 z"/></marker>
         </defs>
 
-        <rect class="lus" x="16" y="84" width="868" height="372" rx="4"/>
+        <!-- Drie kolommen, gelijk aan het raster van de afspraken eronder:
+             elk een derde, met dezelfde tussenruimte. Het kader loopt van
+             rand tot rand, net als die kaarten. -->
+        <rect class="lus" x="0.75" y="84" width="898.5" height="372" rx="4"/>
 
-        <rect class="bx theirs" x="20" y="16" width="220" height="52" rx="3"/>
-        <text class="t-kop" x="130" y="40" text-anchor="middle">ERP CaseBuilder</text>
-        <text class="t-klein" x="130" y="58" text-anchor="middle">de afnemer</text>
+        <rect class="bx theirs" x="0.8" y="16" width="292.6" height="52" rx="3"/>
+        <text class="t-kop" x="146.7" y="40" text-anchor="middle">ERP CaseBuilder</text>
+        <text class="t-klein" x="146.7" y="58" text-anchor="middle">de afnemer</text>
 
-        <rect class="bx nieuw" x="340" y="16" width="220" height="52" rx="3"/>
+        <rect class="bx nieuw" x="303.3" y="16" width="292.6" height="52" rx="3"/>
         <text class="t-kop" x="450" y="40" text-anchor="middle">Medusa</text>
         <text class="t-mono" x="450" y="58" text-anchor="middle">/api/onlineorders</text>
 
-        <rect class="bx" x="660" y="16" width="220" height="52" rx="3"/>
-        <text class="t-kop" x="770" y="40" text-anchor="middle">Feed-tabel</text>
-        <text class="t-klein" x="770" y="58" text-anchor="middle">per order: lastModified</text>
+        <rect class="bx" x="606.7" y="16" width="292.6" height="52" rx="3"/>
+        <text class="t-kop" x="753.3" y="40" text-anchor="middle">Feed-tabel</text>
+        <text class="t-klein" x="753.3" y="58" text-anchor="middle">per order: lastModified</text>
 
-        <line class="leven" x1="130" y1="68" x2="130" y2="450"/>
+        <line class="leven" x1="146.7" y1="68" x2="146.7" y2="450"/>
         <line class="leven" x1="450" y1="68" x2="450" y2="450"/>
-        <line class="leven" x1="770" y1="68" x2="770" y2="450"/>
+        <line class="leven" x1="753.3" y1="68" x2="753.3" y2="450"/>
 
         <!-- Na de levenslijnen, zodat het label de lijn afdekt -->
-        <rect class="lus-tab" x="16" y="84" width="150" height="22" rx="2"/>
-        <text class="t-mono" x="26" y="99">ELKE PAAR MINUTEN</text>
+        <rect class="lus-tab" x="0.75" y="84" width="150" height="22" rx="2"/>
+        <text class="t-mono" x="12" y="99">ELKE PAAR MINUTEN</text>
 
-        <path class="pijl" d="M130 132 H450" marker-end="url(#kp2-pijl)"/>
-        <text class="t-mono" x="290" y="124" text-anchor="middle">GET ?LastModified=T &middot; met sleutel</text>
+        <path class="pijl" d="M146.7 132 H450" marker-end="url(#kp2-pijl)"/>
+        <text class="t-mono" x="298.3" y="124" text-anchor="middle">GET ?LastModified=T &middot; met sleutel</text>
 
-        <rect class="notitie" x="340" y="150" width="220" height="40" rx="3"/>
+        <rect class="notitie" x="315.3" y="150" width="269.3" height="40" rx="3"/>
         <text class="t-klein" x="450" y="167" text-anchor="middle">Controleert sleutel, afzender-IP</text>
         <text class="t-klein" x="450" y="182" text-anchor="middle">en het aantal verzoeken</text>
 
-        <path class="pijl" d="M450 222 H770" marker-end="url(#kp2-pijl)"/>
-        <text class="t-klein" x="610" y="214" text-anchor="middle">orders met lastModified &ge; T</text>
+        <path class="pijl" d="M450 222 H753.3" marker-end="url(#kp2-pijl)"/>
+        <text class="t-klein" x="601.7" y="214" text-anchor="middle">orders met lastModified &ge; T</text>
 
-        <path class="pijl terug" d="M770 262 H450" marker-end="url(#kp2-pijl)"/>
-        <text class="t-klein" x="610" y="254" text-anchor="middle">de orders, oudste eerst</text>
+        <path class="pijl terug" d="M753.3 262 H450" marker-end="url(#kp2-pijl)"/>
+        <text class="t-klein" x="601.7" y="254" text-anchor="middle">de orders, oudste eerst</text>
 
-        <rect class="notitie" x="340" y="282" width="220" height="40" rx="3"/>
+        <rect class="notitie" x="315.3" y="282" width="269.3" height="40" rx="3"/>
         <text class="t-klein" x="450" y="299" text-anchor="middle">Zet elke order om naar het</text>
         <text class="t-klein" x="450" y="314" text-anchor="middle">formaat van CaseBuilder</text>
 
-        <path class="pijl terug" d="M450 356 H130" marker-end="url(#kp2-pijl)"/>
-        <text class="t-klein" x="290" y="348" text-anchor="middle">lijst met orders (JSON)</text>
+        <path class="pijl terug" d="M450 356 H146.7" marker-end="url(#kp2-pijl)"/>
+        <text class="t-klein" x="298.3" y="348" text-anchor="middle">lijst met orders (JSON)</text>
 
-        <rect class="notitie" x="20" y="384" width="220" height="40" rx="3"/>
-        <text class="t-klein" x="130" y="401" text-anchor="middle">Onthoudt de hoogste lastModified</text>
-        <text class="t-klein" x="130" y="416" text-anchor="middle">als volgende T</text>
+        <rect class="notitie" x="12" y="384" width="269.3" height="40" rx="3"/>
+        <text class="t-klein" x="146.7" y="401" text-anchor="middle">Onthoudt de hoogste lastModified</text>
+        <text class="t-klein" x="146.7" y="416" text-anchor="middle">als volgende T</text>
       </svg>
+      </div>
+      <div class="legend">
+        <span class="item"><span class="kp-leven"></span> de partij, van boven naar beneden in de tijd</span>
+        <span class="item"><span class="kp-pijl">&rarr;</span> verzoek</span>
+        <span class="item"><span class="kp-pijl terug">&#8674;</span> antwoord</span>
+        <span class="item"><span class="kp-staal notitie"></span> wat die partij zelf doet</span>
       </div>
 
       <div class="flow">
