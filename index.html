@@ -417,6 +417,47 @@
     .tl .tlwhen { font-size:10px; }
   }
 
+  /* Horizontale tijdlijn (tab Video). Twaalf maanden naast elkaar, met
+     productie boven de as en distributie eronder: zo is het ritme van het
+     plan (filmen, verspreiden, filmen) in één blik te zien. Wat voor de
+     nieuwe website telt, staat in accentkleur onder een eigen band. Hij krijgt
+     een minimumbreedte in een .scroller, net als de schema's op
+     Koppelingen: op een telefoon scrol je opzij in plaats van kolommen
+     van veertig pixels te lezen. */
+  .htl { display:grid; grid-template-columns:78px repeat(12,minmax(0,1fr)); gap:0 6px;
+    min-width:1060px; padding-bottom:4px; }
+  .htl .rl { font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--faint); align-self:center; }
+  .htl .band { grid-row:1; font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--accent); border-bottom:2px solid var(--accent);
+    padding-bottom:5px; margin-bottom:10px; }
+  .htl .hi { position:relative; background:var(--surface); border:1px solid var(--line);
+    border-radius:3px; padding:8px 8px; display:flex; flex-direction:column; gap:3px;
+    hyphens:auto; overflow-wrap:break-word; }
+  .htl .hi b { font-family:"Barlow Condensed",sans-serif; font-size:15px; font-weight:600;
+    line-height:1.12; color:var(--ink); }
+  .htl .hi span { font-size:11.5px; line-height:1.4; color:var(--muted); }
+  /* Productie hangt boven de as, distributie eronder; een steeltje wijst
+     naar de maand. */
+  .htl .hi.pr { grid-row:2; align-self:end; margin-bottom:14px; }
+  .htl .hi.di { grid-row:4; align-self:start; margin-top:14px; }
+  .htl .hi.pr::after, .htl .hi.di::after { content:""; position:absolute; left:50%;
+    width:1px; height:14px; background:var(--line); }
+  .htl .hi.pr::after { top:100%; }
+  .htl .hi.di::after { bottom:100%; }
+  .htl .hi.site { border-color:var(--accent); background:var(--accent-bg); }
+  .htl .hi.site b { color:var(--accent); }
+  .htl .hi.site::after { background:var(--accent); }
+  /* De as: één doorlopende lijn door de maandcellen, met een stip per maand. */
+  .htl .m { grid-row:3; position:relative; text-align:center; padding-top:16px;
+    font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--muted); }
+  .htl .m::before { content:""; position:absolute; left:-4px; right:-4px; top:5px; height:1px;
+    background:var(--line); }
+  .htl .m::after { content:""; position:absolute; left:50%; top:1px; width:9px; height:9px;
+    border-radius:50%; background:var(--surface); border:2px solid var(--line); transform:translateX(-50%); }
+  .htl .m.site::after { border-color:var(--accent); }
+  .htl .m small { display:block; font-size:9.5px; color:var(--faint); letter-spacing:.06em; }
+
   /* Merch-tab: galerij, drukkers en printbestanden van merch-concept 1. */
   .mx-links { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
   .mx-links a { font-size:13px; color:var(--accent); background:var(--surface); border:1px solid var(--line); border-radius:var(--r-sm);
@@ -4357,57 +4398,39 @@
         <h2 data-rail="Jaarplanning">Het jaar in twaalf maanden</h2>
         <p>Productie en distributie wisselen elkaar af. De ene maand wordt er gefilmd, de volgende wordt dat materiaal verspreid. Zo draaien we niet twaalf maanden lang dure nieuwe opnames. De vier klantcases liggen vast in de planning, maar welke klanten het worden kiezen we onderweg.</p>
       </div>
-      <div class="tl">
+      <div class="scroller">
+      <div class="htl" role="list" aria-label="Videojaarplan per maand">
+        <span class="band" style="grid-column:2 / 5">Voor de nieuwe website</span>
 
-        <div class="tlrow gepland">
-          <div class="tlwhen">okt 2026</div><div class="tlaxis"></div>
-          <div class="tlbody"><h4>Dronevlucht<span class="tlfase">productie &middot; site</span></h4><p>Hero-beeld voor de nieuwe website.</p></div>
-        </div>
-        <div class="tlrow gepland">
-          <div class="tlwhen">okt/nov</div><div class="tlaxis"></div>
-          <div class="tlbody"><h4>Grote fabriekshoot<span class="tlfase">productie &middot; site</span></h4><p>Hero-film, de basis van de beeldbank en fotografie. In dezelfde periode liggen het script en het storyboard voor de jaarfilm klaar.</p></div>
-        </div>
-        <div class="tlrow gepland">
-          <div class="tlwhen">dec</div><div class="tlaxis"></div>
-          <div class="tlbody"><h4>Montage en contentproductie<span class="tlfase">distributie &middot; site</span></h4><p>Het fabrieksmateriaal wordt websitebeeld en de eerste socialposts.</p></div>
-        </div>
-        <div class="tlrow gepland">
-          <div class="tlwhen">jan 2027</div><div class="tlaxis"></div>
-          <div class="tlbody"><h4>Klantcase 1<span class="tlfase">productie</span></h4><p>Casefilm, shorts en foto&rsquo;s.</p></div>
-        </div>
-        <div class="tlrow gepland">
-          <div class="tlwhen">feb</div><div class="tlaxis"></div>
-          <div class="tlbody"><h4>Content uit bestaand materiaal<span class="tlfase">distributie</span></h4><p>LinkedIn en campagnes.</p></div>
-        </div>
-        <div class="tlrow gepland">
-          <div class="tlwhen">mrt</div><div class="tlaxis"></div>
-          <div class="tlbody"><h4>Klantcase 2<span class="tlfase">productie</span></h4><p>Casefilm, shorts en foto&rsquo;s.</p></div>
-        </div>
-        <div class="tlrow gepland">
-          <div class="tlwhen">apr</div><div class="tlaxis"></div>
-          <div class="tlbody"><h4>Product- en kenniscontent<span class="tlfase">distributie</span></h4><p>Korte inhoudelijke video&rsquo;s: hoe een hoek wordt geklonken, welk schuim waarvoor.</p></div>
-        </div>
-        <div class="tlrow gepland">
-          <div class="tlwhen">mei</div><div class="tlaxis"></div>
-          <div class="tlbody"><h4>Klantcase 3<span class="tlfase">productie</span></h4><p>Casefilm, shorts en foto&rsquo;s.</p></div>
-        </div>
-        <div class="tlrow gepland">
-          <div class="tlwhen">jun</div><div class="tlaxis"></div>
-          <div class="tlbody"><h4>De mensen achter CaseBuilder<span class="tlfase">productie</span></h4><p>Voor werving en employer branding.</p></div>
-        </div>
-        <div class="tlrow gepland">
-          <div class="tlwhen">jul</div><div class="tlaxis"></div>
-          <div class="tlbody"><h4>Contentproductie<span class="tlfase">distributie</span></h4><p>Social en advertenties.</p></div>
-        </div>
-        <div class="tlrow gepland">
-          <div class="tlwhen">aug</div><div class="tlaxis"></div>
-          <div class="tlbody"><h4>Klantcase 4<span class="tlfase">productie</span></h4><p>Casefilm, shorts en foto&rsquo;s.</p></div>
-        </div>
-        <div class="tlrow gepland">
-          <div class="tlwhen">sep 2027</div><div class="tlaxis"></div>
-          <div class="tlbody"><h4>Jaarfilm en nieuwe hero<span class="tlfase">productie</span></h4><p>Het beste materiaal van het jaar samengebracht in één film. Het denkwerk daarvoor is al in oktober/november gedaan.</p></div>
-        </div>
+        <span class="rl" style="grid-row:2">Productie</span>
+        <div class="hi pr site" role="listitem" style="grid-column:2"><b>Drone&shy;vlucht</b><span>Hero-beeld voor de site</span></div>
+        <div class="hi pr site" role="listitem" style="grid-column:3"><b>Fabrieks&shy;shoot</b><span>Hero-film, beeldbank en foto&rsquo;s</span></div>
+        <div class="hi pr" role="listitem" style="grid-column:5"><b>Klantcase&nbsp;1</b><span>Casefilm, shorts, foto&rsquo;s</span></div>
+        <div class="hi pr" role="listitem" style="grid-column:7"><b>Klantcase&nbsp;2</b><span>Casefilm, shorts, foto&rsquo;s</span></div>
+        <div class="hi pr" role="listitem" style="grid-column:9"><b>Klantcase&nbsp;3</b><span>Casefilm, shorts, foto&rsquo;s</span></div>
+        <div class="hi pr" role="listitem" style="grid-column:10"><b>De mensen</b><span>Voor werving</span></div>
+        <div class="hi pr" role="listitem" style="grid-column:12"><b>Klantcase&nbsp;4</b><span>Casefilm, shorts, foto&rsquo;s</span></div>
+        <div class="hi pr" role="listitem" style="grid-column:13"><b>Jaarfilm en nieuwe hero</b><span>Het beste van het jaar</span></div>
 
+        <span class="m site" style="grid-column:2">okt<small>2026</small></span>
+        <span class="m site" style="grid-column:3">nov</span>
+        <span class="m site" style="grid-column:4">dec</span>
+        <span class="m" style="grid-column:5">jan<small>2027</small></span>
+        <span class="m" style="grid-column:6">feb</span>
+        <span class="m" style="grid-column:7">mrt</span>
+        <span class="m" style="grid-column:8">apr</span>
+        <span class="m" style="grid-column:9">mei</span>
+        <span class="m" style="grid-column:10">jun</span>
+        <span class="m" style="grid-column:11">jul</span>
+        <span class="m" style="grid-column:12">aug</span>
+        <span class="m" style="grid-column:13">sep</span>
+
+        <span class="rl" style="grid-row:4">Distributie</span>
+        <div class="hi di site" role="listitem" style="grid-column:4"><b>Montage</b><span>Websitebeeld en eerste posts</span></div>
+        <div class="hi di" role="listitem" style="grid-column:6"><b>Bestaand materiaal</b><span>LinkedIn en campagnes</span></div>
+        <div class="hi di" role="listitem" style="grid-column:8"><b>Kennis&shy;content</b><span>Korte inhoudelijke video&rsquo;s</span></div>
+        <div class="hi di" role="listitem" style="grid-column:11"><b>Content&shy;productie</b><span>Social en advertenties</span></div>
+      </div>
       </div>
     </section>
 
