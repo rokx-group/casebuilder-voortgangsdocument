@@ -6,7 +6,7 @@
  * het ontwerp komen en niet uit een schatting: hoogtes hangen af van clamp(),
  * regelafbreking en lettermetriek, en dat kun je niet uit de HTML aflezen.
  *
- * Gebruik:  node scripts/meet-hoogtes.mjs mockups/homepage.html
+ * Gebruik:  node scripts/meet-hoogtes.mjs mockups/homepage-v1.html
  *           node scripts/meet-hoogtes.mjs            (alle mockups)
  *
  * Stuurt Chrome headless aan via het DevTools-protocol. Geen dependencies.
