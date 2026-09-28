@@ -59,6 +59,43 @@
   .item .st { padding:13px 16px; }
   @media (max-width:700px){ .item .when, .item .what, .item .st { padding:2px 16px; } .item .when { padding-top:12px; } }
 
+  /* Schema's op de tab Koppelingen. Getekend als inline SVG met de
+     kleuren van de pagina zelf (var(--…)), zodat ze in het donkere thema
+     meekleuren zonder tweede set. Ze krijgen een minimumbreedte en staan
+     in een .scroller: op een telefoon scrol je het schema opzij in plaats
+     van tekst van vier pixels te lezen. */
+  .sch { min-width:760px; width:100%; margin:4px 0 14px; }
+  .sch .bx { fill:var(--surface); stroke:var(--line); stroke-width:1.2; }
+  .sch .bx.ours { stroke:var(--accent); }
+  .sch .bx.theirs { fill:var(--surface-2); }
+  .sch .bx.nieuw { fill:var(--keep-bg); stroke:var(--keep); stroke-dasharray:5 4; }
+  .sch .bx.later { stroke-dasharray:3 4; }
+  .sch .grp { fill:var(--accent-bg); stroke:var(--accent); stroke-width:1; }
+  .sch .notitie { fill:var(--surface-2); stroke:var(--line-soft); }
+  .sch .lus { fill:none; stroke:var(--line); stroke-dasharray:4 4; }
+  .sch .lus-tab { fill:var(--surface-2); stroke:var(--line); }
+  .sch .leven { stroke:var(--line); stroke-dasharray:3 5; }
+  .sch text { fill:var(--ink); font-family:"DM Sans",sans-serif; font-size:13px; }
+  .sch .t-kop { font-family:"Barlow Condensed",sans-serif; font-size:17px; font-weight:600; }
+  .sch .t-klein { font-size:11.5px; fill:var(--muted); }
+  .sch .t-klein.t-ink { font-size:13px; fill:var(--ink); }
+  .sch .t-mono { font-family:"IBM Plex Mono",monospace; font-size:10.5px; fill:var(--muted); }
+  .sch .t-acc { fill:var(--accent); letter-spacing:.08em; }
+  .sch .t-nieuw { fill:var(--keep); }
+  .sch .pijl { stroke:var(--muted); stroke-width:1.4; fill:none; }
+  .sch .pijl.terug { stroke-dasharray:6 4; }
+  .sch .pijl.nieuw { stroke:var(--keep); stroke-dasharray:6 4; }
+  .sch .pijl.later { stroke-dasharray:3 4; }
+  .sch .kop { fill:var(--muted); }
+  .sch .kop-n { fill:var(--keep); }
+  /* Staaltjes in de legenda: dezelfde rand als de vakken in het schema. */
+  .kp-staal { display:inline-block; width:18px; height:12px; border-radius:2px;
+    background:var(--surface); border:1.5px solid var(--line); }
+  .kp-staal.ours { border-color:var(--accent); }
+  .kp-staal.theirs { background:var(--surface-2); }
+  .kp-staal.nieuw { background:var(--keep-bg); border:1.5px dashed var(--keep); }
+  .kp-staal.later { border-style:dashed; }
+
   .miles { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:12px; }
   .mile { background:var(--surface); border:1px solid var(--line); border-radius:3px;
     padding:15px 18px; display:flex; gap:12px; align-items:baseline; }
@@ -1660,6 +1697,7 @@
       <li><button class="tab" role="tab" id="t7" data-hash="meetings" aria-controls="p7" aria-selected="false">Meetings</button></li>
       <li><button class="tab" role="tab" id="t10" data-hash="productlijst" aria-controls="p10" aria-selected="false">Productlijst</button></li>
       <li><button class="tab" role="tab" id="t11" data-hash="opzet-pages" aria-controls="p11" aria-selected="false">Opzet pages</button></li>
+      <li><button class="tab" role="tab" id="t12" data-hash="koppelingen" aria-controls="p12" aria-selected="false">Koppelingen</button></li>
       <li><a class='uit' href='/mockups/header-varianten' rel='noopener' target='_blank'>Prototypes<span class="pijl">&#8599;</span></a></li>
       <li><a class='uit' href='/mockups/overzicht#componenten' rel='noopener' target='_blank'>Componenten<span class="pijl">&#8599;</span></a></li>
     </ul>
@@ -1754,7 +1792,7 @@
         <h3>Lees dit als het plan van juli, niet als de stand van nu</h3>
         <p><strong>Plan en werkelijkheid lopen uiteen.</strong> Deze fase beschrijft het advies uit het architectuurvoorstel. Wat er sinds augustus daadwerkelijk staat, wijkt daarvan af &mdash; en dat is bewust:</p>
         <p><strong>Medusa draait self-hosted</strong> in Docker op een VPS in Neurenberg, niet in Medusa Cloud. Managed hosting is nog een open keuze. <strong>Er is geen eigen middleware</strong>: de site praat rechtstreeks met Medusa, en de prijs van een configuratie halen we server-side op bij de read-API van CaseBuilder. <strong>Er zijn geen koppelingen</strong> met Ridder of cb_core_v2.</p>
-        <p><strong>De betaalprovider is niet gekozen</strong> &mdash; Adyen of Stripe. Tot die keuze valt, loopt afrekenen op de handmatige provider van Medusa en wordt er dus niets afgeschreven. <strong>Een PIM is niet gekozen</strong>; dat hangt aan de vraag of Bol, Amazon en eBay een echt doel zijn. <strong>Een order gaat met de hand naar productie</strong>: een medewerker van CaseBuilder neemt het configuratie-id over uit onze Medusa-admin. Dat is de afspraak, geen gebrek.</p>
+        <p><strong>De betaalprovider is Stripe</strong> (besloten op 28 september). Tot de koppeling er is, loopt afrekenen op de handmatige provider van Medusa en wordt er dus niets afgeschreven. <strong>Een PIM is niet gekozen</strong>; dat hangt aan de vraag of Bol, Amazon en eBay een echt doel zijn. <strong>Orders gaan nu nog met de hand naar productie</strong>: een medewerker van CaseBuilder neemt het configuratie-id over uit onze Medusa-admin. Straks haalt het ERP van CaseBuilder de orders zelf op, zoals nu bij Magento. Zie <a href="#koppelingen">Koppelingen</a>.</p>
       </div>
       <div class="srcrow">
         <a class="srclink" href="https://docs.google.com/document/d/1i-uPzuidKTSGHmeWRdUQ6MksPGPez4vU/edit" target="_blank" rel="noopener noreferrer"><span class="tag">bron</span> Architectuurvoorstel &rarr;</a>
@@ -1901,7 +1939,7 @@
         </table>
       </div>
       <div class="cards">
-        <div class="card"><h3>Betaling staat los</h3><p>iDEAL is verplicht voor NL — ruim 60% van de klanten. De provider plugt in de commerce-backend en is dus verwisselbaar. <strong>Mollie</strong> voor lokaal en eenvoud (geen maandkosten, ~€0,30 per iDEAL-transactie), <strong>Stripe</strong> voor de sterkste API en Stripe Tax, dat de EU-btw uit handen neemt. Deze keuze kan tot het laatst wachten.</p></div>
+        <div class="card"><h3>Betaling staat los</h3><p>iDEAL is verplicht voor NL — ruim 60% van de klanten. De provider plugt in de commerce-backend en is dus verwisselbaar. <strong>Mollie</strong> voor lokaal en eenvoud (geen maandkosten, ~€0,30 per iDEAL-transactie), <strong>Stripe</strong> voor de sterkste API en Stripe Tax, dat de EU-btw uit handen neemt. <strong>Gekozen op 28 september: Stripe.</strong></p></div>
         <div class="card"><h3>EU-btw is een aandachtspunt bij Medusa</h3><p>NL plus DE, OSS, B2B reverse-charge en VIES draag je op Medusa meer zelf dan op Shopify. Mitigeren met Stripe Tax of een aparte tax-service — maar het moet wel belegd worden.</p></div>
       </div>
     </section>
@@ -1951,8 +1989,8 @@
           <tbody>
             <tr><td>Frontend</td><td class="mono">Next.js + Tailwind</td><td>Deploy op Vercel, met CI/CD en previews</td></tr>
             <tr><td>Content</td><td class="mono">Sanity</td><td>Headless CMS, EU-dataregio, blokkenbibliotheek</td></tr>
-            <tr><td>Webshop</td><td class="mono">Medusa Cloud</td><td>Managed. Magento vervallen; Shopify alleen terug bij multi-channel</td></tr>
-            <tr><td>Betalen</td><td class="mono">Mollie of Stripe</td><td>iDEAL verplicht; keuze kan tot het laatst wachten</td></tr>
+            <tr><td>Webshop</td><td class="mono">Medusa</td><td>Zelf gehost op een eigen server, niet in Medusa Cloud. Magento vervallen; Shopify alleen terug bij multi-channel</td></tr>
+            <tr><td>Betalen</td><td class="mono">Stripe</td><td>Besloten op 28 september. iDEAL verplicht</td></tr>
             <tr><td>Tracking</td><td class="mono">Google Tag Manager</td><td>Niet in code, niet in het CMS</td></tr>
             <tr><td>Configurator</td><td class="mono">extern, embedded</td><td>iframe met postMessage; voedt de winkelwagen</td></tr>
             <tr><td>PIM</td><td class="mono">alleen scenario 2</td><td>Nog te beslissen — hangt op knop 4</td></tr>
@@ -2014,7 +2052,7 @@
         <p>Gelezen van het infrastructuurbord, naast de twee documenten. Deze staan nergens genoteerd.</p>
       </div>
       <div class="qlist">
-        <div class="q"><span class="n">06</span><span class="body"><span class="qq">Adyen of Stripe — of allebei?</span><span class="why">Het bord noemt <code>adyen — magento success order status</code> én <code>stripe — custom db webhook maken voor successful payment</code>. De architectuurdocumenten adviseren Mollie of Stripe. Wat draait er vandaag echt?</span><span class="src">bepaalt of de betaalkoppeling migratie of nieuwbouw is</span></span></div>
+        <div class="q"><span class="n">06</span><span class="body"><span class="qq">Adyen of Stripe — of allebei?</span><span class="why">Het bord noemt <code>adyen — magento success order status</code> én <code>stripe — custom db webhook maken voor successful payment</code>. De architectuurdocumenten adviseren Mollie of Stripe. Wat draait er vandaag echt?</span><span class="src">beantwoord 28 sep: de nieuwe webshop krijgt Stripe; Adyen hoort bij de huidige Magento-shop</span></span></div>
         <div class="q"><span class="n">07</span><span class="body"><span class="qq">Is de casebuilder api hetzelfde als de REST API van cb_core_v2?</span><span class="why">Het bord tekent ze als twee blokken: een groene casebuilder api naast cb_core_v2, dat volgens de notitie een eigen schema en REST API heeft. Eén ding met twee namen, of twee lagen?</span><span class="src">bepaalt waar precies het luik zit</span></span></div>
         <div class="q"><span class="n">08</span><span class="body"><span class="qq">Het klantportaal pollt nu.</span><span class="why">Het bord toont een watchdog die klantorders uit de database pollt en offline orders terugduwt. Het architectuurvoorstel gaat uit van een directe read op de casebuilder api. Blijft die watchdog bestaan, of vervalt hij?</span><span class="src">verschil tussen verhuizen en herbouwen</span></span></div>
         <div class="q"><span class="n">09</span><span class="body"><span class="qq">Wanneer wordt de flash ID bijgewerkt?</span><span class="why">Bij het openen van de configurator ontstaat een flash ID in cb_core_v2. Gebeurt de update bij elke ontwerpwijziging, of alleen bij toevoegen aan de winkelwagen?</span><span class="src">bepaalt of een gedeelde configuratie-URL zonder login kan bestaan</span></span></div>
@@ -2190,7 +2228,7 @@
         <div class="item"><span class="when">nov mid</span><span class="what">Werkend prototype op staging</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
         <div class="item"><span class="when">dec</span><span class="what">Klantportaal custom frontend full build</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
         <div class="item"><span class="when">dec / jan</span><span class="what">Orderproductie-statusupdates van cb_core naar klantportaal<small>E-mail en status — de terugstroom uit het luik</small></span><span class="st"><span class="chip chip-open">gepland</span></span></div>
-        <div class="item"><span class="when">jan</span><span class="what">Betaalprovider integreren<small>Adyen of Stripe — nog niet gekozen. Tot dan loopt afrekenen op de handmatige provider van Medusa</small></span><span class="st"><span class="chip chip-open">gepland</span></span></div>
+        <div class="item"><span class="when">jan</span><span class="what">Stripe integreren<small>Stripe voor iDEAL, creditcard en PayPal, besloten op 28 september. Tot dan loopt afrekenen op de handmatige provider van Medusa</small></span><span class="st"><span class="chip chip-open">gepland</span></span></div>
         <div class="item"><span class="when">feb</span><span class="what">Volledige end-to-end test</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
         <div class="item"><span class="when">mrt 8–20</span><span class="what">User acceptance</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
         <div class="item"><span class="when">mrt 20–31</span><span class="what">Performance- en securityreview</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
@@ -11637,7 +11675,7 @@
         <div class="fhead">
           <span class="fn">05 &middot; Stripe <span class="fprog" data-f="prog"></span></span>
           <h3><button class="ftopen" type="button">Betalen</button></h3>
-          <p>iDEAL is verplicht: ruim 60% van de klanten rekent zo af. De betaalprovider klikt achter de webshop en is verwisselbaar, dus deze keuze kan tot het laatst wachten. Planning: januari.</p>
+          <p>iDEAL is verplicht: ruim 60% van de klanten rekent zo af. De betaalprovider klikt achter de webshop en is verwisselbaar. Gekozen op 28 september: Stripe. Planning: januari.</p>
           <div class="fstat"><span class="chip chip-open">gepland jan</span><span class="chip chip-open">keuze open</span></div>
           <span class="fmeer">Openen &rarr;</span>
         </div>
@@ -11651,7 +11689,7 @@
             <li><label><input type="checkbox" data-id="pay-tax"><span>EU-btw uit handen geven aan Stripe&nbsp;Tax, of een aparte btw-dienst</span></label></li>
             <li><label><input type="checkbox" data-id="pay-refund"><span>Terugbetalingen en deelbetalingen vanuit het orderscherm</span></label></li>
             <li><label><input type="checkbox" data-id="pay-huidig"><span>Uitzoeken wat er v&aacute;ndaag draait: het bord noemt Adyen &eacute;n Stripe</span></label></li>
-            <li><label><input type="checkbox" data-id="pay-webhook"><span>Bericht naar de casebuilder api zodra een betaling slaagt &mdash; pas dan gaat een order de productie in</span></label></li>
+            <li><label><input type="checkbox" data-id="pay-webhook"><span>CaseBuilder ziet betaalde orders: hun ERP haalt ze zelf op via de orders-feed (zie <a href="#koppelingen">Koppelingen</a>)</span></label></li>
           </ul>
           <label class="flab" for="nt-betalen">Wat mist hier, of moet anders? <span class="saved" data-f="saved">bewaard</span></label>
           <textarea id="nt-betalen" data-note="betalen" placeholder="Bijvoorbeeld: welk contract loopt er nu bij welke provider?"></textarea>
@@ -12700,6 +12738,348 @@
       </table>
       </div>
       <p><strong>Shop-megamenu:</strong> links de toepassingen, met onderaan &ldquo;Alle 38 categorie&euml;n&rdquo;. In het midden populaire producten, met daaronder populaire onderdelen.</p>
+    </section>
+
+  </div>
+
+  <div class="tabpanel" id="p12" role="tabpanel" aria-labelledby="t12" hidden>
+
+    <header class="masthead">
+      <span class="eyebrow">Techniek &middot; webshop-backend</span>
+      <h1>De koppelingen van de webshop</h1>
+      <p class="lede">Hoe de nieuwe webshop met de buitenwereld praat: wat er al draait, en het nieuwe endpoint waarmee CaseBuilder de orders ophaalt, net zoals nu bij Magento. Voor wie wil weten wat waar zit en waarom.</p>
+      <p class="lede">Stand van 28 september 2026. De volledige technische specificatie staat in de Medusa-repo: <code>docs/onlineorders-medusa-endpoint.md</code>.</p>
+    </header>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Het geheel</span>
+        <h2 data-rail="Het geheel">Wie met wie praat</h2>
+        <p>De website toont en verkoopt. Medusa is de webshop-backend: daar leven de producten, de winkelwagens en de orders. CaseBuilder zit op drie plekken aan. De configurator levert de prijs van een case op maat. Medewerkers werken in Medusa Admin, het beheerscherm van de webshop. En het ERP haalt straks de orders op.</p>
+      </div>
+      <div class="scroller">
+      <svg class="sch" viewBox="0 0 980 440" role="img" aria-labelledby="sch1-t sch1-d">
+        <title id="sch1-t">Overzicht van de koppelingen</title>
+        <desc id="sch1-d">De klant gebruikt de website. De website haalt tekst uit Sanity, krijgt configuraties uit de configurator van CaseBuilder en praat met Medusa via de Store API en eigen routes. Medusa haalt prijzen op bij de configurator-API van CaseBuilder. Medewerkers van CaseBuilder loggen in op Medusa Admin, het beheerscherm op /app. Nieuw: het ERP van CaseBuilder haalt de orders op via de orders-feed. Stripe volgt voor online betalen.</desc>
+        <defs>
+          <marker id="kp-pijl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="kop" d="M0 0 L10 5 L0 10 z"/></marker>
+          <marker id="kp-pijl-n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="kop-n" d="M0 0 L10 5 L0 10 z"/></marker>
+        </defs>
+
+        <!-- Kolom 1: de klant -->
+        <rect class="bx" x="16" y="186" width="150" height="56" rx="3"/>
+        <text class="t-kop" x="30" y="210">Klant</text>
+        <text class="t-klein" x="30" y="228">in de browser</text>
+
+        <!-- Kolom 2: website en wat erop inhaakt -->
+        <rect class="bx ours" x="206" y="40" width="190" height="56" rx="3"/>
+        <text class="t-kop" x="220" y="64">Sanity</text>
+        <text class="t-klein" x="220" y="82">teksten en pagina&rsquo;s</text>
+
+        <rect class="bx ours" x="206" y="176" width="190" height="76" rx="3"/>
+        <text class="t-kop" x="220" y="202">Website</text>
+        <text class="t-mono" x="220" y="222">Next.js &middot; Vercel</text>
+        <text class="t-klein" x="220" y="240">winkel, wagen, afrekenen</text>
+
+        <rect class="bx theirs" x="206" y="290" width="190" height="56" rx="3"/>
+        <text class="t-kop" x="220" y="314">Configurator</text>
+        <text class="t-klein" x="220" y="332">iframe van CaseBuilder</text>
+
+        <rect class="bx later" x="206" y="372" width="190" height="56" rx="3"/>
+        <text class="t-kop" x="220" y="396">Stripe (volgt)</text>
+        <text class="t-klein" x="220" y="414">iDEAL, creditcard, PayPal</text>
+
+        <!-- Kolom 3: Medusa -->
+        <rect class="grp" x="440" y="16" width="250" height="412" rx="4"/>
+        <text class="t-mono t-acc" x="454" y="38">MEDUSA &middot; WEBSHOP-BACKEND</text>
+
+        <rect class="bx" x="454" y="56" width="222" height="50" rx="3"/>
+        <text class="t-kop" x="468" y="78">Store API</text>
+        <text class="t-mono" x="468" y="96">/store/&hellip;</text>
+
+        <rect class="bx" x="454" y="118" width="222" height="50" rx="3"/>
+        <text class="t-kop" x="468" y="140">Medusa Admin</text>
+        <text class="t-klein" x="468" y="158">beheerscherm op /app, met login</text>
+
+        <rect class="bx" x="454" y="180" width="222" height="50" rx="3"/>
+        <text class="t-kop" x="468" y="202">Eigen routes</text>
+        <text class="t-klein" x="468" y="220">btw, case in wagen, prijscontrole</text>
+
+        <rect class="bx nieuw" x="454" y="242" width="222" height="50" rx="3"/>
+        <text class="t-kop" x="468" y="264">Orders-feed (nieuw)</text>
+        <text class="t-mono" x="468" y="282">/api/onlineorders</text>
+
+        <rect class="bx" x="454" y="330" width="222" height="80" rx="3"/>
+        <text class="t-kop" x="468" y="354">Database en wachtrij</text>
+        <text class="t-mono" x="468" y="374">Postgres &middot; Redis</text>
+        <text class="t-klein" x="468" y="396">plus een tabel voor de feed (nieuw)</text>
+
+        <!-- Kolom 4: CaseBuilder -->
+        <rect class="bx theirs" x="790" y="118" width="174" height="50" rx="3"/>
+        <text class="t-kop" x="804" y="140">Medewerker CB</text>
+        <text class="t-klein" x="804" y="158">eigen account</text>
+
+        <rect class="bx theirs" x="790" y="180" width="174" height="50" rx="3"/>
+        <text class="t-kop" x="804" y="202">Configurator-API</text>
+        <text class="t-mono" x="804" y="220">api.casebuilder.com</text>
+
+        <rect class="bx theirs" x="790" y="242" width="174" height="50" rx="3"/>
+        <text class="t-kop" x="804" y="264">ERP CaseBuilder</text>
+        <text class="t-klein" x="804" y="282">verwerkt de orders</text>
+
+        <!-- Pijlen -->
+        <path class="pijl" d="M166 214 H206" marker-start="url(#kp-pijl)" marker-end="url(#kp-pijl)"/>
+        <path class="pijl" d="M301 96 V176" marker-end="url(#kp-pijl)"/>
+        <path class="pijl" d="M301 290 V252" marker-end="url(#kp-pijl)"/>
+        <text class="t-klein" x="308" y="276">case naar de wagen</text>
+        <path class="pijl" d="M396 196 H420 V81 H454" marker-end="url(#kp-pijl)"/>
+        <path class="pijl" d="M396 230 H420 V205 H454" marker-end="url(#kp-pijl)"/>
+        <path class="pijl later" d="M396 400 H440" marker-end="url(#kp-pijl)"/>
+
+        <path class="pijl" d="M790 143 H676" marker-end="url(#kp-pijl)"/>
+        <text class="t-klein" x="733" y="136" text-anchor="middle">orders bekijken</text>
+        <path class="pijl" d="M676 205 H790" marker-end="url(#kp-pijl)"/>
+        <text class="t-klein" x="733" y="198" text-anchor="middle">prijs ophalen</text>
+        <path class="pijl nieuw" d="M790 267 H676" marker-end="url(#kp-pijl-n)"/>
+        <text class="t-klein t-nieuw" x="733" y="260" text-anchor="middle">haalt orders op</text>
+      </svg>
+      </div>
+      <div class="legend">
+        <span class="item"><span class="kp-staal ours"></span> van ons</span>
+        <span class="item"><span class="kp-staal theirs"></span> van CaseBuilder</span>
+        <span class="item"><span class="kp-staal nieuw"></span> nieuw, in de specificatie</span>
+        <span class="item"><span class="kp-staal later"></span> volgt later</span>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Bestaat al</span>
+        <h2 data-rail="Wat er al draait">Wat er al draait</h2>
+        <p>Medusa levert twee API&rsquo;s standaard mee: de Store API voor de winkel en de Admin API voor het beheer. Daarbovenop zijn in juli een paar eigen routes gebouwd, steeds omdat de standaard iets niet kon of niet mocht.</p>
+      </div>
+      <div class="scroller">
+      <table class="tpl">
+        <thead><tr><th>Route</th><th>Wie roept hem aan</th><th>Wat hij doet</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">/store/&hellip;</td><td>Website</td><td>Producten, winkelwagen, afrekenen. Standaard van Medusa</td><td><span class="chip chip-keep">draait</span></td></tr>
+          <tr><td class="mono">/app</td><td>Medewerkers, in de browser</td><td><strong>Medusa Admin</strong>, het beheerscherm dat standaard bij Medusa hoort. Inloggen met e-mail en wachtwoord, iedereen met een eigen account (toegevoegd via een uitnodiging). Hier staan producten, orders, klanten en betalingen. Op de orderpagina staan twee eigen panelen: het configuratie-id van de case en de ERP-overname</td><td><span class="chip chip-keep">draait</span></td></tr>
+          <tr><td class="mono">/admin/&hellip;</td><td>Medusa Admin</td><td>De Admin API: de achterkant van dat beheerscherm. Wie ingelogd is, praat hier via het scherm mee. Standaard van Medusa</td><td><span class="chip chip-keep">draait</span></td></tr>
+          <tr><td class="mono">/store/btw</td><td>Website</td><td>Het btw-tarief per land, uit dezelfde bron als de winkelwagen. Zo rekenen productpagina en wagen nooit verschillend</td><td><span class="chip chip-keep">draait</span></td></tr>
+          <tr><td class="mono">/store/carts/:id/geconfigureerde-case</td><td>Website, na de configurator</td><td>Legt een case op maat in de wagen. De browser stuurt alleen het configuratie-id, de prijs haalt Medusa zelf op bij CaseBuilder. Zo bepaalt nooit de browser wat de klant betaalt</td><td><span class="chip chip-keep">draait</span></td></tr>
+          <tr><td class="mono">/store/carts/:id/prijscontrole</td><td>Website, bij afrekenen</td><td>Controleert of de prijs van elke case nog klopt. Een wagen leeft dertig dagen, tarieven kunnen intussen veranderen</td><td><span class="chip chip-keep">draait</span></td></tr>
+          <tr><td class="mono">/admin/kenmerken/tag</td><td>Admin</td><td>Materiaal- en kleurwaarden aanmaken, altijd met groep en zonder dubbelen</td><td><span class="chip chip-keep">draait</span></td></tr>
+          <tr><td class="mono">/admin/orders/:id/erp-overname</td><td>Medewerker CaseBuilder</td><td>Markeert dat een order is overgenomen in het ERP, met wie en wanneer</td><td><span class="chip chip-keep">draait</span></td></tr>
+          <tr><td class="mono">/api/onlineorders</td><td>ERP CaseBuilder</td><td>Geeft de orders die sinds een tijdstip zijn veranderd. Hieronder uitgelegd</td><td><span class="chip chip-new">nieuw</span></td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Nieuw &middot; /api/onlineorders</span>
+        <h2 data-rail="Orders ophalen">Hoe CaseBuilder de orders ophaalt</h2>
+        <p>Nu haalt het ERP van CaseBuilder de orders bij Magento op met <code>GET /api/onlineorders?LastModified=&hellip;</code>. De nieuwe webshop biedt precies hetzelfde adres met hetzelfde antwoord. Aan de kant van CaseBuilder verandert dan alleen de host, plus een nieuwe sleutel.</p>
+      </div>
+      <div class="scroller">
+      <svg class="sch" viewBox="0 0 900 470" role="img" aria-labelledby="sch2-t sch2-d">
+        <title id="sch2-t">Het ophalen van orders, stap voor stap</title>
+        <desc id="sch2-d">Elke paar minuten vraagt het ERP van CaseBuilder aan Medusa de orders die sinds tijdstip T zijn veranderd. Medusa controleert sleutel, afzender en limiet, zoekt de orders op in de feed-tabel, zet ze om naar het formaat van CaseBuilder en stuurt een lijst terug. Het ERP onthoudt de hoogste lastModified als nieuw tijdstip.</desc>
+        <defs>
+          <marker id="kp2-pijl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="kop" d="M0 0 L10 5 L0 10 z"/></marker>
+        </defs>
+
+        <rect class="lus" x="16" y="84" width="868" height="372" rx="4"/>
+        <rect class="lus-tab" x="16" y="84" width="150" height="22" rx="2"/>
+        <text class="t-mono" x="26" y="99">ELKE PAAR MINUTEN</text>
+
+        <rect class="bx theirs" x="20" y="16" width="220" height="52" rx="3"/>
+        <text class="t-kop" x="130" y="40" text-anchor="middle">ERP CaseBuilder</text>
+        <text class="t-klein" x="130" y="58" text-anchor="middle">de afnemer</text>
+
+        <rect class="bx nieuw" x="340" y="16" width="220" height="52" rx="3"/>
+        <text class="t-kop" x="450" y="40" text-anchor="middle">Medusa</text>
+        <text class="t-mono" x="450" y="58" text-anchor="middle">/api/onlineorders</text>
+
+        <rect class="bx" x="660" y="16" width="220" height="52" rx="3"/>
+        <text class="t-kop" x="770" y="40" text-anchor="middle">Feed-tabel</text>
+        <text class="t-klein" x="770" y="58" text-anchor="middle">per order: lastModified</text>
+
+        <line class="leven" x1="130" y1="68" x2="130" y2="450"/>
+        <line class="leven" x1="450" y1="68" x2="450" y2="450"/>
+        <line class="leven" x1="770" y1="68" x2="770" y2="450"/>
+
+        <path class="pijl" d="M130 132 H450" marker-end="url(#kp2-pijl)"/>
+        <text class="t-mono" x="290" y="124" text-anchor="middle">GET ?LastModified=T &middot; met sleutel</text>
+
+        <rect class="notitie" x="462" y="150" width="236" height="40" rx="3"/>
+        <text class="t-klein" x="474" y="167">Controleert sleutel, afzender-IP</text>
+        <text class="t-klein" x="474" y="182">en het aantal verzoeken</text>
+
+        <path class="pijl" d="M450 222 H770" marker-end="url(#kp2-pijl)"/>
+        <text class="t-klein" x="610" y="214" text-anchor="middle">orders met lastModified &ge; T</text>
+
+        <path class="pijl terug" d="M770 262 H450" marker-end="url(#kp2-pijl)"/>
+        <text class="t-klein" x="610" y="254" text-anchor="middle">de orders, oudste eerst</text>
+
+        <rect class="notitie" x="462" y="282" width="236" height="40" rx="3"/>
+        <text class="t-klein" x="474" y="299">Zet elke order om naar het</text>
+        <text class="t-klein" x="474" y="314">formaat van CaseBuilder</text>
+
+        <path class="pijl terug" d="M450 356 H130" marker-end="url(#kp2-pijl)"/>
+        <text class="t-klein" x="290" y="348" text-anchor="middle">lijst met orders (JSON)</text>
+
+        <rect class="notitie" x="142" y="384" width="250" height="40" rx="3"/>
+        <text class="t-klein" x="154" y="401">Onthoudt de hoogste lastModified</text>
+        <text class="t-klein" x="154" y="416">als nieuwe T voor de volgende keer</text>
+      </svg>
+      </div>
+
+      <div class="flow">
+        <div class="stage ours">
+          <span class="who">Afspraak 1</span>
+          <h4>Alle orders, niet alleen betaalde</h4>
+          <ul><li>Elke order die sinds T veranderde komt mee: open, betaald of geannuleerd</li><li>De status staat erbij, in <code>stateId</code></li></ul>
+        </div>
+        <div class="stage ours">
+          <span class="who">Afspraak 2</span>
+          <h4>De laatste stand, geen geschiedenis</h4>
+          <ul><li>Verandert een order twee keer tussen twee keer ophalen, dan komt alleen de laatste stand mee</li><li>Dubbel binnenkomen kan; CaseBuilder verwerkt op ordernummer</li></ul>
+        </div>
+        <div class="stage ours">
+          <span class="who">Afspraak 3</span>
+          <h4>Zelfde velden als nu</h4>
+          <ul><li>Adressen, bedragen exclusief btw, orderregels</li><li>Bij een case op maat het configuratie-id, waarmee de tekening al klaarstaat</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Onder de motorkap</span>
+        <h2 data-rail="Wanneer een order meekomt">Wanneer een order opnieuw meekomt</h2>
+        <p>Medusa&rsquo;s eigen &ldquo;laatst gewijzigd&rdquo; is hier onbruikbaar. Een betaling verandert dat veld niet, een interne notitie juist wel. Daarom houden we zelf bij wanneer een order voor CaseBuilder echt veranderd is. Bij elke aanleiding rekenen we uit wat CaseBuilder zou krijgen, en alleen als dat anders is dan de vorige keer, schuift de tijd op.</p>
+      </div>
+      <div class="scroller">
+      <svg class="sch" viewBox="0 0 940 330" role="img" aria-labelledby="sch3-t sch3-d">
+        <title id="sch3-t">Wanneer lastModified opschuift</title>
+        <desc id="sch3-d">Vijf aanleidingen: order geplaatst, betaling binnen of teruggeboekt, geannuleerd of afgerond, order of adres gewijzigd, en een vangnet elke vijftien minuten. Ze lopen allemaal door dezelfde stap die de export opnieuw uitrekent. Is de export anders dan de vorige keer, dan wordt lastModified nu en krijgt CaseBuilder de order opnieuw. Zo niet, dan verandert er niets, bijvoorbeeld bij het markeren van de ERP-overname.</desc>
+        <defs>
+          <marker id="kp3-pijl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="kop" d="M0 0 L10 5 L0 10 z"/></marker>
+          <marker id="kp3-pijl-n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="kop-n" d="M0 0 L10 5 L0 10 z"/></marker>
+        </defs>
+
+        <rect class="bx" x="16" y="20" width="210" height="40" rx="3"/>
+        <text class="t-klein t-ink" x="30" y="45">Order geplaatst</text>
+        <rect class="bx" x="16" y="72" width="210" height="40" rx="3"/>
+        <text class="t-klein t-ink" x="30" y="97">Betaling binnen of teruggeboekt</text>
+        <rect class="bx" x="16" y="124" width="210" height="40" rx="3"/>
+        <text class="t-klein t-ink" x="30" y="149">Geannuleerd of afgerond</text>
+        <rect class="bx" x="16" y="176" width="210" height="40" rx="3"/>
+        <text class="t-klein t-ink" x="30" y="201">Order of adres gewijzigd</text>
+        <rect class="bx later" x="16" y="228" width="210" height="40" rx="3"/>
+        <text class="t-klein t-ink" x="30" y="253">Vangnet: elke 15 minuten</text>
+
+        <path class="pijl" d="M226 40 C258 40 258 150 290 150" marker-end="url(#kp3-pijl)"/>
+        <path class="pijl" d="M226 92 C258 92 258 150 290 150"/>
+        <path class="pijl" d="M226 144 C258 144 258 150 290 150"/>
+        <path class="pijl" d="M226 196 C258 196 258 150 290 150"/>
+        <path class="pijl" d="M226 248 C258 248 258 150 290 150"/>
+
+        <rect class="bx ours" x="290" y="118" width="196" height="64" rx="3"/>
+        <text class="t-kop" x="304" y="144">Export opnieuw uitrekenen</text>
+        <text class="t-klein" x="304" y="166">dezelfde stap voor alles</text>
+
+        <path class="pijl" d="M486 150 H512" marker-end="url(#kp3-pijl)"/>
+        <polygon class="bx" points="602,98 692,150 602,202 512,150"/>
+        <text class="t-klein t-ink" x="602" y="146" text-anchor="middle">Anders dan</text>
+        <text class="t-klein t-ink" x="602" y="162" text-anchor="middle">vorige keer?</text>
+
+        <path class="pijl nieuw" d="M692 150 H740" marker-end="url(#kp3-pijl-n)"/>
+        <text class="t-klein t-nieuw" x="716" y="142" text-anchor="middle">ja</text>
+        <rect class="bx nieuw" x="740" y="108" width="184" height="84" rx="3"/>
+        <text class="t-kop" x="754" y="134">lastModified = nu</text>
+        <text class="t-klein" x="754" y="156">CaseBuilder krijgt de order</text>
+        <text class="t-klein" x="754" y="172">bij de volgende keer ophalen</text>
+
+        <path class="pijl" d="M602 202 V246" marker-end="url(#kp3-pijl)"/>
+        <text class="t-klein" x="612" y="228">nee</text>
+        <rect class="bx" x="512" y="246" width="200" height="66" rx="3"/>
+        <text class="t-kop" x="526" y="272">Niets verandert</text>
+        <text class="t-klein" x="526" y="294">bijv. ERP-overname markeren</text>
+      </svg>
+      </div>
+      <p>Het vangnet bestaat omdat Medusa zulke meldingen op de achtergrond afhandelt. Mislukt er een, dan valt dat niet op. Elke vijftien minuten loopt er daarom een controle die ontbrekende of gemiste orders alsnog bijwerkt. Dat kan geen kwaad: een order die niet veranderd is, schuift niet op.</p>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Betalen</span>
+        <h2 data-rail="Betaalmethoden">Niet elke order is meteen betaald</h2>
+        <p>De huidige webshop kent zes manieren van betalen. Bij drie ervan bestaat de order al voordat het geld binnen is. Daarom geeft de feed ook onbetaalde orders mee, met hun status erbij.</p>
+      </div>
+      <div class="scroller">
+      <table class="tpl">
+        <thead><tr><th>Methode</th><th>Betaald wanneer</th><th>In de nieuwe webshop</th></tr></thead>
+        <tbody>
+          <tr><td><strong>iDEAL, creditcard, PayPal</strong></td><td>Direct bij bestellen</td><td>Via Stripe <span class="chip chip-open">volgt</span></td></tr>
+          <tr><td><strong>Overschrijving vooraf</strong></td><td>Als het geld binnen is</td><td>Eigen handmatige betaalmethode</td></tr>
+          <tr><td><strong>Op rekening</strong></td><td>Na levering, alleen voor vaste klanten</td><td>Eigen handmatige betaalmethode</td></tr>
+          <tr><td><strong>Pin of contant</strong></td><td>Bij afhalen in Doesburg</td><td>Eigen handmatige betaalmethode</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p><strong>Nog te beslissen:</strong> wie zet een overschrijving op &ldquo;betaald&rdquo;? Ons voorstel: een medewerker in de admin van de webshop. Dan komt de order vanzelf opnieuw in de feed, met de nieuwe status. Moet het vanuit het ERP gebeuren, dan is er een aparte koppeling de andere kant op nodig.</p>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Beveiliging</span>
+        <h2 data-rail="Beveiliging">Wie erbij kan</h2>
+        <p>De feed bevat namen, adressen en telefoonnummers van alle klanten. Daarom een paar lagen over elkaar heen, zodat &eacute;&eacute;n fout nog geen lek is.</p>
+      </div>
+      <div class="layers">
+        <div class="layer"><span class="tool">sleutel</span><h4>Een sleutel voor alleen deze route</h4><p>Geen beheerderssleutel van Medusa, want die opent de hele admin. Deze sleutel opent de orders-feed en verder niets. Hij is in te trekken en te vervangen zonder dat er iets stilvalt.</p></div>
+        <div class="layer"><span class="tool">afzender</span><h4>Alleen vanaf CaseBuilder</h4><p>De feed antwoordt alleen op de vaste adressen van CaseBuilder. Een gestolen sleutel is dan nog niet genoeg.</p></div>
+        <div class="layer"><span class="tool">verbinding</span><h4>Alleen versleuteld</h4><p>Uitsluitend https. Er wordt niets tussentijds bewaard, ook niet in een cache.</p></div>
+        <div class="layer"><span class="tool">tempo</span><h4>Een beperkt aantal verzoeken</h4><p>Wie te vaak vraagt of blijft raden, wordt tijdelijk geweigerd.</p></div>
+        <div class="layer"><span class="tool">logboek</span><h4>Wel wie, niet wat</h4><p>Elk verzoek wordt gelogd: wanneer, vanaf waar en hoeveel orders. De orders zelf en de sleutel komen nooit in een logboek.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Open vragen</span>
+        <h2 data-rail="Open vragen">Wat we nog van CaseBuilder nodig hebben</h2>
+        <p>Vraag 1 tot en met 6 zijn op 28 september naar Martijn gestuurd. Waar we zelf een verstandige keuze kunnen maken, staat ons voorstel erbij.</p>
+      </div>
+      <div class="qlist">
+        <div class="q"><span class="n">01</span><div class="body"><span class="qq">Hoe logt het ERP nu in bij het Magento-endpoint?</span><span class="why">Dan accepteert de nieuwe feed dezelfde vorm, en hoeft er aan jullie kant zo min mogelijk te veranderen.</span><span class="src">uitgezet 28 sep</span></div></div>
+        <div class="q"><span class="n">02</span><div class="body"><span class="qq">Wat betekenen de nummers van stateId, paymentMethodId en webshopId?</span><span class="why">Die nummers komen uit jullie systeem. De vertaling bouwen wij, de betekenis moet van jullie komen.</span><span class="src">uitgezet 28 sep</span></div></div>
+        <div class="q"><span class="n">03</span><div class="body"><span class="qq">Een echt voorbeeld van een antwoord, met korting en met een gedeeltelijke terugbetaling</span><span class="why">Voorstel: bedragen blijven de oorspronkelijke orderbedragen, een terugbetaling verandert alleen de status.</span><span class="src">uitgezet 28 sep</span></div></div>
+        <div class="q"><span class="n">04</span><div class="body"><span class="qq">Is de laatste stand van een order genoeg?</span><span class="why">Voorstel: ja. Zo werkt het huidige endpoint ook.</span><span class="src">uitgezet 28 sep</span></div></div>
+        <div class="q"><span class="n">05</span><div class="body"><span class="qq">Welke velden zijn verplicht?</span><span class="why">Voorstel: verplicht is wat nodig is om te leveren, met het huisnummer als apart veld. KvK, btw-nummer en referentie zijn optioneel, anders kan een particulier niet bestellen.</span><span class="src">uitgezet 28 sep</span></div></div>
+        <div class="q"><span class="n">06</span><div class="body"><span class="qq">Wie zet een overschrijving op betaald?</span><span class="why">Voorstel: een medewerker in de admin van de webshop. Nog te bevestigen.</span><span class="src">uitgezet 28 sep</span></div></div>
+        <div class="q"><span class="n">07</span><div class="body"><span class="qq">Vanaf welke adressen haalt het ERP op, en hoe kiest het de volgende starttijd?</span><span class="why">Voor de afzendercontrole, en om later veilig een maximum per antwoord in te stellen.</span><span class="src">nog uit te zetten</span></div></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Planning</span>
+        <h2 data-rail="Bouwvolgorde">In welke volgorde we het bouwen</h2>
+        <p>Elke stap is een eigen, losse wijziging. Lokaal bouwen en testen kan meteen. Live zetten wacht op stap 0.</p>
+      </div>
+      <div class="track">
+        <div class="item"><span class="when">Stap 0</span><span class="what">Database-updates op de server weer werkend maken<small>Zonder dit kan de nieuwe tabel niet veilig live</small></span><span class="st"><span class="chip chip-drop">blokkeert live</span></span></div>
+        <div class="item"><span class="when">Stap 1</span><span class="what">Feed-tabel, bijhouden van wijzigingen en het vangnet</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
+        <div class="item"><span class="when">Stap 2</span><span class="what">De route zelf, met sleutel en vertaling naar het formaat van CaseBuilder<small>De vertaling van de nummers wacht op vraag 2</small></span><span class="st"><span class="chip chip-drop">cb</span></span></div>
+        <div class="item"><span class="when">Stap 3</span><span class="what">Tests: het formaat, de beveiliging, en dat niets onnodig opnieuw meekomt</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
+        <div class="item"><span class="when">Stap 4</span><span class="what">Handmatige betaalmethoden: overschrijving, op rekening, afhalen</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
+        <div class="item"><span class="when">Stap 5</span><span class="what">Extra velden in het afrekenen: KvK, btw-nummer, referentie, huisnummer apart<small>Hangt af van vraag 5</small></span><span class="st"><span class="chip chip-drop">cb</span></span></div>
+        <div class="item"><span class="when">Stap 6</span><span class="what">Stripe voor iDEAL, creditcard en PayPal</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
+      </div>
     </section>
 
   </div>
