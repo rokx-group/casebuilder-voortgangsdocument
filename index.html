@@ -337,6 +337,7 @@
   .mt h4 { font-family:"Barlow Condensed",sans-serif; font-size:19px; font-weight:600;
     line-height:1.1; margin:0; color:var(--ink); text-wrap:balance; }
   .mt p { font-size:13px; color:var(--muted); line-height:1.5; }
+  .mt p a { color:var(--accent); text-decoration:none; border-bottom:1px solid currentColor; }
   .mt .tag { border-top:1.5px solid var(--line); padding:8px 16px;
     font-family:"Inter",sans-serif; font-size:10px; font-weight:600; letter-spacing:.09em;
     text-transform:uppercase; }
@@ -1385,18 +1386,21 @@
       <div class="sec-head">
         <span class="eyebrow">Toetsmomenten</span>
         <h2>Milestones</h2>
-        <p>Chronologisch, met de stand per 12 september. Vier zijn afgerond, één loopt, één wacht op CaseBuilder, één vervalt voor de MVP en de rest staat gepland.</p>
+        <p>Chronologisch, met de stand per 28 september. Vier zijn afgerond, vijf lopen, &eacute;&eacute;n is deels gedaan &mdash; de rest wacht op CaseBuilder &mdash; en drie staan gepland.</p>
       </div>
       <div class="mtiles">
         <div class="mt af"><div class="mtop"><span class="mn">1</span><h4>Tool set-up klaar</h4><p>Vercel-project, Sanity-basisinrichting en de bevestigde stack: Medusa, Sanity, Next.js.</p></div><span class="tag">afgerond</span></div>
         <div class="mt af"><div class="mtop"><span class="mn">2a</span><h4>Minimale frontend om een geconfigureerd product te bestellen</h4><p>Gebouwd: productpagina, winkelwagen, afrekenen en de orderpagina staan in de klantrepo (PR #12 en #16). De configurator-embed loopt via <strong>postMessage</strong> &mdash; hij stuurt een configuratie-id, wij halen de prijs server-side op bij de read-API van CaseBuilder. Geen POST-integratie dus.</p></div><span class="tag">afgerond</span></div>
-        <div class="mt cb"><div class="mtop"><span class="mn">2b</span><h4>We zien de order terug in het webshopportaal</h4><p>Hangt op het Magento-orderendpoint en de watchdog-koppeling met cb_core_v2 — beide van CaseBuilder.</p></div><span class="tag">wacht op cb</span></div>
+        <div class="mt deels"><div class="mtop"><span class="mn">2b</span><h4>We zien de order terug in het webshopportaal</h4><p>De order komt binnen in <strong>Medusa</strong> en is daar zichtbaar in de admin, voorlopig als onbetaald. Wat nog ontbreekt is de doorgifte naar het portaal van CaseBuilder: het Magento-orderendpoint en de watchdog-koppeling met cb_core_v2 &mdash; beide van CaseBuilder.</p></div><span class="tag">deels &middot; rest wacht op cb</span></div>
         <div class="mt af"><div class="mtop"><span class="mn">3</span><h4>Stresstest — afgerond</h4><p>Medusa blijft binnen alle grenzen; het knelpunt zit in de frontend, die álle producten ophaalt en in het geheugen filtert. De oorzaak is bekend en de drie ingrepen staan vast — dat is <strong>bouwwerk, geen onderzoek meer</strong>.</p></div><span class="tag">afgerond</span></div>
         <div class="mt af"><div class="mtop"><span class="mn">4</span><h4>Sitemap, wireframes en user flows uitgestippeld</h4><p>Negentien sjablonen, twintig besteltaken en de volledige nieuwe boom liggen er; alle sjablonen zijn getekend.</p></div><span class="tag">afgerond</span></div>
-        <div class="mt gepland"><div class="mtop"><span class="mn">4</span><h4>API en endpoint klaar</h4><p>De eigen Casebuilder API-middleware uit opdracht 1595 zit <strong>niet</strong> in de MVP: de site praat rechtstreeks met Medusa, en de prijs van een configuratie halen we server-side op bij de read-API van CaseBuilder. Blijft staan als plan voor later.</p></div><span class="tag">vervalt voor mvp</span></div>
-        <div class="mt gepland"><div class="mtop"><span class="mn">4</span><h4>Hoofdtemplates staan in de CMS</h4><p>Sanity-templates en de blokkenbibliotheek — oktober.</p></div><span class="tag">gepland</span></div>
+        <div class="mt loopt"><div class="mtop"><span class="mn">4</span><h4>Productcategorie&euml;n webshop bepaald</h4><p>Uit het concurrentenonderzoek ligt er een eerste indeling: welk cluster een shopcategorie wordt, welk een filter en welk een optie. Nog vast te leggen met CaseBuilder. Zie <a href="#ko-site">Van onderzoek naar site</a>.</p></div><span class="tag">loopt</span></div>
+        <div class="mt loopt"><div class="mtop"><span class="mn">4</span><h4>L1-producten geselecteerd</h4><p>Welke cases als kant-en-klaar product in de shop komen: vaste maat, alleen kleur en logo. De zeven uit de offerte van Joran zijn de eerste kandidaten. Zie <a href="#ko-l1">het uitgewerkte voorbeeld</a>.</p></div><span class="tag">loopt</span></div>
+        <div class="mt loopt"><div class="mtop"><span class="mn">4</span><h4>API en endpoint klaar</h4><p>De eigen Casebuilder API-middleware uit opdracht 1595 zit <strong>niet</strong> in de MVP: de site praat rechtstreeks met Medusa, en de prijs van een configuratie halen we server-side op bij de read-API van CaseBuilder. Loopt als eigen spoor naast de MVP.</p></div><span class="tag">loopt</span></div>
+        <div class="mt loopt"><div class="mtop"><span class="mn">4</span><h4>Hoofdtemplates staan in de CMS</h4><p>Sanity-templates en de blokkenbibliotheek &mdash; oktober.</p></div><span class="tag">loopt</span></div>
         <div class="mt loopt"><div class="mtop"><span class="mn">5a</span><h4>Designprototype klaar</h4><p>Alle negentien sjablonen hebben een ontwerp. De laatste vier &mdash; account, afrekenen, bevestiging en de foutpagina &mdash; zijn op 15 september getekend.</p></div><span class="tag">loopt</span></div>
         <div class="mt gepland"><div class="mtop"><span class="mn">5b</span><h4>Website usability-test</h4><p>Nog niet belegd. Vraagt een werkend prototype en deelnemers uit de doelgroep.</p></div><span class="tag">te plannen</span></div>
+        <div class="mt gepland"><div class="mtop"><span class="mn">6</span><h4>Videocontent-project</h4><p>Eigen videomateriaal voor de site. Omvang, planning en wie het maakt zijn nog te bepalen.</p></div><span class="tag">te plannen</span></div>
         <div class="mt gepland"><div class="mtop"><span class="mn">6</span><h4>Eerste contentpagina&#39;s live</h4><p>Vraagt de blokkenbibliotheek én de vertaalbeslissing — beide staan nog open.</p></div><span class="tag">gepland</span></div>
       </div>
     </section>
