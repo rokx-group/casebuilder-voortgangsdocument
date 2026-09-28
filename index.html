@@ -1,6 +1,10 @@
 <!doctype html>
 <html lang="nl">
 <head>
+<script>
+  // Het gekozen thema voor de eerste weergave, zonder flits.
+  try { var t = localStorage.getItem('vgd-thema'); if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
@@ -116,7 +120,6 @@
   table.tpl a:hover { color:var(--primary); }
   table.tpl a:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
 
-  .tab.tab-right { margin-left:auto; }
 
   /* Verwijzingen zijn geen acties: geen kader, geen vlak. Een tekstlink
      met een klein bronlabel ervoor. */
@@ -778,6 +781,13 @@
   table.tpl.fixed2 th:nth-child(3), table.tpl.fixed2 td:nth-child(3) { width:50%; }
 
   table.tpl.fixed3 { table-layout:fixed; min-width:720px; }
+  /* De themaknop rechtsboven, in de letter van Meer. */
+  .thema-knop { align-self:center; display:inline-flex; align-items:center; gap:7px; margin-left:12px;
+    padding:6px 10px; background:none; border:1px solid var(--line); border-radius:2px; cursor:pointer;
+    font-family:"Barlow Condensed","Inter",sans-serif; font-weight:600; font-size:15px; color:var(--muted); }
+  .thema-knop:hover { color:var(--ink); border-color:var(--muted); }
+  .thema-knop:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .thema-teken { font-size:14px; color:var(--accent); }
   table.tpl.fixed3 th:nth-child(1), table.tpl.fixed3 td:nth-child(1) { width:24%; }
   table.tpl.fixed3 th:nth-child(2), table.tpl.fixed3 td:nth-child(2) { width:54%; }
   table.tpl.fixed3 th:nth-child(3), table.tpl.fixed3 td:nth-child(3) { width:22%; }
@@ -904,7 +914,6 @@
         <button class="tab" role="tab" id="t3" data-hash="bouw" aria-controls="p3" aria-selected="false"><span class="tnum">03</span>Bouwfase</button>
         <button class="tab" role="tab" id="t5" data-hash="content" aria-controls="p5" aria-selected="false"><span class="tnum">04</span>Contentfase</button>
         <button class="tab" role="tab" id="t6" data-hash="livegang" aria-controls="p6" aria-selected="false"><span class="tnum">05</span>Live-gang</button>
-        <button class="tab tab-right" role="tab" id="t8" data-hash="features" aria-controls="p8" aria-selected="false">Features</button>
       </div>
     </div>
 
@@ -964,6 +973,9 @@
           <dt>Doel</dt><dd>de drie routes zichtbaar maken.</dd>
           <dt>Waarom</dt><dd>de professional draagt de pagina, de consument vindt hier zijn deur.</dd>
           <dt>Bevat</dt><dd>ik weet wat ik vervoer → wij kiezen de route · ik weet mijn maten → configurator · ik heb een tekening of een serie → aanvraag.</dd>
+      <!-- Licht of donker. Zonder keuze volgt de pagina het systeem; een
+           keuze blijft in deze browser bewaard (localStorage). -->
+      <button type="button" class="thema-knop" aria-pressed="false" aria-label="Donker thema"><span class="thema-teken" aria-hidden="true">&#9680;</span><span class="thema-tekst">Donker</span></button>
         </dl></article>
         <article class="keuze"><span class="num">04</span><h3>Flightcases</h3><dl>
           <dt>Doel</dt><dd>van &quot;welk model?&quot; naar een modelpagina.</dd>
@@ -980,6 +992,7 @@
         </dl></article>
         <article class="keuze"><span class="num">07</span><h3>Shop (niveau 1)</h3><dl>
           <dt>Doel</dt><dd>kant-en-klare cases en onderdelen direct verkopen.</dd>
+      <li><button class="tab" role="tab" id="t8" data-hash="features" aria-controls="p8" aria-selected="false">Features</button></li>
           <dt>Waarom</dt><dd>een vaste case voor één apparaat — kleur en logo kiezen, verder niets. Een Medusa-product, geen configurator, en niet op te schalen naar andere maten. Er zijn er nu bijna nul; dit assortiment moet nog worden opgebouwd. Shop wijst voorlopig naar Wat ga je vervoeren.</dd>
           <dt>Bevat</dt><dd>beeld links, koopblok rechts (prijs, kleur, logo, aantal, winkelwagen) · specificaties · alternatieven pas onderaan.</dd>
         </dl></article>
@@ -4998,3 +5011,28 @@
 </script>
 </body>
 </html>
+
+<script>
+  // Licht of donker: de knop draait de huidige stand om en onthoudt hem.
+  (function () {
+    var knop = document.querySelector('.thema-knop');
+    if (!knop) return;
+    var root = document.documentElement;
+    var systeemDonker = window.matchMedia('(prefers-color-scheme: dark)');
+    function stand() { return root.dataset.theme || (systeemDonker.matches ? 'dark' : 'light'); }
+    function toon() {
+      var donker = stand() === 'dark';
+      knop.setAttribute('aria-pressed', String(donker));
+      knop.setAttribute('aria-label', donker ? 'Licht thema' : 'Donker thema');
+      knop.querySelector('.thema-tekst').textContent = donker ? 'Licht' : 'Donker';
+    }
+    knop.addEventListener('click', function () {
+      var nieuw = stand() === 'dark' ? 'light' : 'dark';
+      root.dataset.theme = nieuw;
+      try { localStorage.setItem('vgd-thema', nieuw); } catch (e) {}
+      toon();
+    });
+    systeemDonker.addEventListener('change', toon);
+    toon();
+  })();
+</script>
