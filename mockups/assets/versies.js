@@ -30,19 +30,15 @@
       { id: 'v2', bestand: 'homepage-v2.html', label: 'v2 · film' }
     ],
     'categorie': [
-      { id: 'wireframe', bestand: 'categorie.html', label: 'wireframe' },
       { id: 'v1', bestand: 'categorie-v1.html', label: 'v1 · beeld' }
     ],
     'onderdeel': [
-      { id: 'wireframe', bestand: 'onderdeel.html', label: 'wireframe' },
       { id: 'v1', bestand: 'onderdeel-v1.html', label: 'v1 · beeld' }
     ],
     'casetype': [
-      { id: 'wireframe', bestand: 'casetype.html', label: 'wireframe' },
       { id: 'v1', bestand: 'casetype-v1.html', label: 'v1 · beeld' }
     ],
     'flightcases': [
-      { id: 'wireframe', bestand: 'flightcases.html', label: 'wireframe' },
       { id: 'v1', bestand: 'flightcases-v1.html', label: 'v1 · beeld' }
     ],
     'over-ons': [
@@ -56,12 +52,10 @@
       { id: 'v5', bestand: 'case-voor-v5.html', label: 'v5 · vertrekpunt' }
     ],
     'case-voor-gitaar': [
-      { id: 'wireframe', bestand: 'case-voor-gitaar.html', label: 'wireframe' },
       { id: 'v1', bestand: 'case-voor-gitaar-v1.html', label: 'v1 · kiezen' },
       { id: 'v2', bestand: 'case-voor-gitaar-v2.html', label: 'v2 · productenlijst' }
     ],
     'case-voor-gibson-les-paul': [
-      { id: 'wireframe', bestand: 'case-voor-gibson-les-paul.html', label: 'wireframe' },
       { id: 'v1', bestand: 'case-voor-gibson-les-paul-v1.html', label: 'v1 · advies' },
       { id: 'v2', bestand: 'case-voor-gibson-les-paul-v2.html', label: 'v2 · vaste case' }
     ],
@@ -69,20 +63,16 @@
     // knoppen voor twee verschillende pagina's, waarvan levertijden ook nog
     // eens zijn eigen reeks had. Een reeks is één pagina, in versies.
     'service': [
-      { id: 'wireframe', bestand: 'service.html', label: 'wireframe' },
       { id: 'v1', bestand: 'service-v1.html', label: 'v1 · beeld' },
       { id: 'v2', bestand: 'service-hub-v1.html', label: 'v2 · servicehub' }
     ],
     'service-levertijden': [
-      { id: 'wireframe', bestand: 'service-levertijden.html', label: 'wireframe' },
       { id: 'v1', bestand: 'service-levertijden-v1.html', label: 'v1 · beeld' }
     ],
     'zoeken': [
-      { id: 'wireframe', bestand: 'zoeken.html', label: 'wireframe' },
       { id: 'v1', bestand: 'zoeken-v1.html', label: 'v1 · beeld' }
     ],
     'laten-controleren': [
-      { id: 'wireframe', bestand: 'laten-controleren.html', label: 'wireframe' },
       { id: 'v1', bestand: 'laten-controleren-v1.html', label: 'v1 · de controle' }
     ],
     'bedankt': [
@@ -95,7 +85,6 @@
       { id: 'wireframe', bestand: 'checkout.html', label: 'wireframe' }
     ],
     'configurator': [
-      { id: 'wireframe', bestand: 'configurator.html', label: 'wireframe' },
       { id: 'v1', bestand: 'configurator-v1.html', label: 'v1 · eigen pagina' }
     ],
     // L1-L3. v1 had een eigen L2-editor; op 11 september besloten dat L2
@@ -172,7 +161,7 @@
   // is er één te veel.
   if (new URLSearchParams(location.search).has('kaal')) return;
 
-  var hier = location.pathname.split('/').pop() || 'homepage.html';
+  var hier = location.pathname.split('/').pop() || 'homepage-v1.html';
   var reeks = null;
   for (var sleutel in REEKSEN) {
     if (REEKSEN[sleutel].some(function (v) { return v.bestand === hier; })) reeks = REEKSEN[sleutel];

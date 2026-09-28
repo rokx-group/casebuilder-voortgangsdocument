@@ -1,6 +1,6 @@
 # CaseBuilder — voortgangsdocument
 
-Statische pagina met de stand van het CaseBuilder-project, verdeeld over vijf fases plus wireframes en de meetingagenda.
+Statische pagina met de stand van het CaseBuilder-project, verdeeld over vijf fases, met daarnaast tabs als Meetings, Productlijst, Opzet pages en Koppelingen. De ontwerpen staan in `mockups/`; de losse wireframes zijn op 28 september vervallen.
 
 ## Structuur
 
@@ -8,8 +8,8 @@ Statische pagina met de stand van het CaseBuilder-project, verdeeld over vijf fa
 index.html          het document zelf — één bestand, geen build
 mockups/            paginaontwerpen op het merksysteem
   assets/brand.css  CB-Brandrichtlijnen v1
-  homepage.html
-  categorie.html
+  homepage-v1.html
+  categorie-v1.html
 netlify.toml        publish = root, geen buildstap
 ```
 
@@ -19,7 +19,7 @@ Netlify is aan deze repo gekoppeld: elke push naar `main` deployt automatisch, e
 
 ## Werkwijze
 
-`index.html` is de bron. De ontwerpweergave in het document wordt gegenereerd uit `mockups/assets/brand.css` en `mockups/categorie.html`, zodat merk en document niet uit elkaar lopen.
+`index.html` is de bron. De ontwerpen staan los in `mockups/` en laden `mockups/assets/brand.css`; het document linkt ernaar in plaats van er een kopie van in te sluiten.
 
 De pagina staat op `noindex` en is niet afgeschermd — hij is niet bedoeld om gevonden te worden, wel om gedeeld te worden.
 
@@ -45,15 +45,13 @@ deploy. Zet in het dashboard geen branch deploys aan, anders vervalt dat.
 
 | | |
 |---|---|
-| `node scripts/bouw-ontwerpweergave.mjs` | bouwt de ingesloten ontwerpweergave in `index.html` uit `mockups/`. Draaien na elke mockupwijziging. |
-| `node scripts/bouw-wireframes.mjs` | schrijft per sjabloon een losse wireframepagina op ware grootte, uit `index.html`. |
 | `node scripts/meet-hoogtes.mjs [bestand]` | meet sectiehoogtes in Chrome op 1440 × 900. Niet schatten, meten. |
 
 ## Bestandsnamen in `mockups/`
 
 | | |
 |---|---|
-| `X.html` | de wireframe |
+| `X.html` | een wireframe; alleen `account`, `bedankt` en `checkout` bestaan nog, tot hun ontwerp op `werk` staat |
 | `X-v1.html` | het ontwerp |
 | `X-v1-video.html` | een variant daarvan |
 | `X-v2.html` | een volgende ontwerpronde |
