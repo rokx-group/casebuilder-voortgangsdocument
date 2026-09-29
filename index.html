@@ -417,46 +417,38 @@
     .tl .tlwhen { font-size:10px; }
   }
 
-  /* Horizontale tijdlijn (tab Video). Twaalf maanden naast elkaar, met
-     productie boven de as en distributie eronder: zo is het ritme van het
-     plan (filmen, verspreiden, filmen) in één blik te zien. Wat voor de
-     nieuwe website telt, staat in accentkleur onder een eigen band. Hij krijgt
-     een minimumbreedte in een .scroller, net als de schema's op
-     Koppelingen: op een telefoon scrol je opzij in plaats van kolommen
-     van veertig pixels te lezen. */
-  .htl { display:grid; grid-template-columns:78px repeat(12,minmax(0,1fr)); gap:0 6px;
+  /* Horizontale tijdlijn (tab Video). Twaalf maanden naast elkaar op één
+     as, met per maand één kaart eronder. Wat voor de nieuwe website telt,
+     staat in accentkleur onder een eigen band. Hij krijgt een
+     minimumbreedte in een .scroller, net als de schema's op Koppelingen:
+     op een telefoon scrol je opzij in plaats van kolommen van veertig
+     pixels te lezen. */
+  .htl { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:0 6px;
     min-width:1060px; padding-bottom:4px; }
-  .htl .rl { font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.1em;
-    text-transform:uppercase; color:var(--faint); align-self:center; }
   .htl .band { grid-row:1; font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.1em;
     text-transform:uppercase; color:var(--accent); border-bottom:2px solid var(--accent);
     padding-bottom:5px; margin-bottom:10px; }
-  .htl .hi { position:relative; background:var(--surface); border:1px solid var(--line);
-    border-radius:3px; padding:8px 8px; display:flex; flex-direction:column; gap:3px;
-    hyphens:auto; overflow-wrap:break-word; }
-  .htl .hi b { font-family:"Barlow Condensed",sans-serif; font-size:15px; font-weight:600;
-    line-height:1.12; color:var(--ink); }
-  .htl .hi span { font-size:11.5px; line-height:1.4; color:var(--muted); }
-  /* Productie hangt boven de as, distributie eronder; een steeltje wijst
-     naar de maand. */
-  .htl .hi.pr { grid-row:2; align-self:end; margin-bottom:14px; }
-  .htl .hi.di { grid-row:4; align-self:start; margin-top:14px; }
-  .htl .hi.pr::after, .htl .hi.di::after { content:""; position:absolute; left:50%;
-    width:1px; height:14px; background:var(--line); }
-  .htl .hi.pr::after { top:100%; }
-  .htl .hi.di::after { bottom:100%; }
-  .htl .hi.site { border-color:var(--accent); background:var(--accent-bg); }
-  .htl .hi.site b { color:var(--accent); }
-  .htl .hi.site::after { background:var(--accent); }
   /* De as: één doorlopende lijn door de maandcellen, met een stip per maand. */
-  .htl .m { grid-row:3; position:relative; text-align:center; padding-top:16px;
+  .htl .m { grid-row:2; position:relative; text-align:center; padding-top:16px;
     font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--muted); }
-  .htl .m::before { content:""; position:absolute; left:-4px; right:-4px; top:5px; height:1px;
+  .htl .m::before { content:""; position:absolute; left:-3px; right:-3px; top:5px; height:1px;
     background:var(--line); }
   .htl .m::after { content:""; position:absolute; left:50%; top:1px; width:9px; height:9px;
     border-radius:50%; background:var(--surface); border:2px solid var(--line); transform:translateX(-50%); }
   .htl .m.site::after { border-color:var(--accent); }
   .htl .m small { display:block; font-size:9.5px; color:var(--faint); letter-spacing:.06em; }
+  /* Kaart per maand, met een steeltje omhoog naar de as. */
+  .htl .hi { grid-row:3; position:relative; margin-top:14px; background:var(--surface);
+    border:1px solid var(--line); border-radius:3px; padding:8px 8px;
+    display:flex; flex-direction:column; gap:3px; hyphens:auto; overflow-wrap:break-word; }
+  .htl .hi::after { content:""; position:absolute; left:50%; bottom:100%; width:1px; height:14px;
+    background:var(--line); }
+  .htl .hi b { font-family:"Barlow Condensed",sans-serif; font-size:15px; font-weight:600;
+    line-height:1.12; color:var(--ink); }
+  .htl .hi span { font-size:11.5px; line-height:1.4; color:var(--muted); }
+  .htl .hi.site { border-color:var(--accent); background:var(--accent-bg); }
+  .htl .hi.site b { color:var(--accent); }
+  .htl .hi.site::after { background:var(--accent); }
 
   /* Merch-tab: galerij, drukkers en printbestanden van merch-concept 1. */
   .mx-links { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
@@ -1442,7 +1434,7 @@
         <div class="mt loopt"><div class="mtop"><span class="mn">4</span><h4>Hoofdtemplates staan in de CMS</h4><p>Sanity-templates en de blokkenbibliotheek &mdash; oktober.</p></div><span class="tag">loopt</span></div>
         <div class="mt loopt"><div class="mtop"><span class="mn">5a</span><h4>Designprototype klaar</h4><p>Alle negentien sjablonen hebben een ontwerp. De laatste vier &mdash; account, afrekenen, bevestiging en de foutpagina &mdash; zijn op 15 september getekend.</p></div><span class="tag">loopt</span></div>
         <div class="mt gepland"><div class="mtop"><span class="mn">5b</span><h4>Website usability-test</h4><p>Nog niet belegd. Vraagt een werkend prototype en deelnemers uit de doelgroep.</p></div><span class="tag">te plannen</span></div>
-        <div class="mt gepland"><div class="mtop"><span class="mn">6</span><h4>Eigen beeldmateriaal: drone en fabriekshoot</h4><p>Uit het videojaarplan (oktober 2026 &ndash; september 2027). Voor de site tellen de eerste twee: een <strong>dronevlucht</strong> rond pand en logistiek voor snel bewegend beeld in de hero, en daarna &eacute;&eacute;n <strong>draaidag in de fabriek</strong> &mdash; CNC, assemblage, materialen, mensen &mdash; met fotografie op dezelfde dag. Dat levert in november de basisset beeld voor de hele site. Daarna volgen vier klantcases, verspreid over het jaar. Zie <a href="#video">de uitwerking</a>.</p></div><span class="tag">gepland &middot; okt/nov</span></div>
+        <div class="mt gepland"><div class="mtop"><span class="mn">6</span><h4>Eigen beeldmateriaal: drone en fabriekshoot</h4><p>Uit het videojaarplan (oktober 2026 &ndash; september 2027). Voor de nieuwe website beginnen we met twee stappen: in oktober een <strong>dronevlucht</strong> over het pand, de omgeving, de fabriek en de logistiek, voor snel bewegend materiaal; daarna, in oktober/november, &eacute;&eacute;n <strong>volledige draaidag in de fabriek</strong> met tegelijk fotografie. Samen vormen ze de basisset beeldmateriaal van CaseBuilder. Zie <a href="#video">de uitwerking</a>.</p></div><span class="tag">gepland &middot; okt/nov</span></div>
         <div class="mt gepland"><div class="mtop"><span class="mn">6</span><h4>Eerste contentpagina&#39;s live</h4><p>Vraagt de blokkenbibliotheek én de vertaalbeslissing — beide staan nog open.</p></div><span class="tag">gepland</span></div>
       </div>
     </section>
@@ -4315,13 +4307,15 @@
   <!-- Video: de externe uitwerking van het videojaarplan van George
        (23-09-2026). Het origineel is intern; budget, productiepartners en
        wie wat uitvoert staan er bewust niet in, want deze pagina is
-       openbaar. De externe tekst staat ook als los document in de Drive. -->
+       openbaar. Alleen weglaten en herformuleren, niets toevoegen: wat hier
+       staat moet terug te vinden zijn in het jaarplan. De externe tekst
+       staat ook als los document in de Drive. -->
   <div class="tabpanel" id="p14" role="tabpanel" aria-labelledby="t14" hidden>
 
     <header class="masthead">
       <span class="eyebrow">Content &middot; videojaarplan</span>
       <h1>Een jaar video voor CaseBuilder</h1>
-      <p class="lede">Van oktober 2026 tot en met september 2027 bouwen we een eigen beeldbank op: geen losse bedrijfsfilm die jaren bovenaan de homepage blijft staan, maar materiaal waar CaseBuilder jaren mee kan communiceren. Eerst voor de nieuwe website, daarna voor LinkedIn, sales, advertenties en beurzen.</p>
+      <p class="lede">Van oktober 2026 tot en met september 2027 bouwen we een eigen beeldbank en videobibliotheek, waarmee CaseBuilder structureel content kan produceren. Niet &eacute;&eacute;n losse bedrijfsfilm die jarenlang bovenaan de homepage blijft staan, maar videocontent waar CaseBuilder jaren mee kan communiceren.</p>
       <p class="lede">Stand van 28 september 2026. De eerste twee stappen staan ook als milestone in de <a href="#bouw">bouwfase</a>.</p>
     </header>
 
@@ -4329,32 +4323,32 @@
       <div class="sec-head">
         <span class="eyebrow">01 &middot; Waarom</span>
         <h2 data-rail="Waarom">Het product is simpel, de wereld eromheen niet</h2>
-        <p>Een flightcase kan overal terechtkomen: backstage bij een concert, in een fabriek, op de Dakar-rally, aan boord van een schip, bij defensie of rond kostbare hightechapparatuur. Daar ligt het verhaal. We laten niet alleen zien wat CaseBuilder maakt, maar ook waarvoor het gemaakt wordt.</p>
+        <p>Een flightcase kan overal terechtkomen: backstage bij een concert, in een fabriek, op een Dakar-rally, aan boord van een schip, bij defensie of rondom kostbare hightechapparatuur. Daar ligt het verhaal. Niet alleen laten zien wat CaseBuilder maakt, maar waarvoor het gemaakt wordt.</p>
       </div>
       <div class="cards">
-        <div class="card"><h3>Maken</h3><p>De fabriek laat zien <strong>hoe</strong> CaseBuilder werkt: CNC, zagen, klinken, schuim snijden.</p></div>
-        <div class="card"><h3>Beschermen</h3><p>De flightcase laat zien <strong>wat</strong> er gemaakt wordt: aluminium, hoeken, sloten, het schuim op maat.</p></div>
-        <div class="card"><h3>Gebruiken</h3><p>De toepassing laat zien <strong>waarom</strong> het ertoe doet: de case op het podium, in de pit, in het ruim.</p></div>
+        <div class="card"><h3>Maken</h3><p>De fabriek laat zien <strong>hoe</strong> CaseBuilder werkt.</p></div>
+        <div class="card"><h3>Beschermen</h3><p>De flightcase laat zien <strong>wat</strong> er wordt gemaakt.</p></div>
+        <div class="card"><h3>Gebruiken</h3><p>De toepassing laat zien <strong>waarom</strong> dat ertoe doet.</p></div>
       </div>
-      <p class="note">Dat past bij de merkwaarden: <em>Klik klaar</em>, <em>Maken boven praten</em>, <em>Maatwerk versneld</em>. De stijl blijft daarom ruw: echte machines, mensen, aluminium, houtstof, transport en beweging. Niet gepolijst of corporate.</p>
+      <p class="note">Dat sluit aan bij het merk: <em>Klik Klaar</em>, <em>Maken boven praten</em>, <em>Maatwerk versneld</em>. De stijl wordt daarom niet te gepolijst of corporate. Liever echte machines, mensen, aluminium, houtstof, transport, beweging, techniek en actie.</p>
     </section>
 
     <section>
       <div class="sec-head">
         <span class="eyebrow">02 &middot; Waar het terechtkomt</span>
         <h2 data-rail="Kanalen">Eén beeldbank, zeven kanalen</h2>
-        <p>Elke opname is voor meer dan één plek bedoeld. Het doel is geen video, maar een voorraad.</p>
+        <p>Het doel is dus niet &eacute;&eacute;n video maken, maar videocontent waar CaseBuilder jaren mee kan communiceren.</p>
       </div>
       <div class="scroller">
       <table class="tpl">
         <thead><tr><th>Kanaal</th><th>Toepassing</th></tr></thead>
         <tbody>
           <tr><td><strong>Website</strong></td><td>Hero-video&rsquo;s, productpagina&rsquo;s, cases</td></tr>
-          <tr><td><strong>LinkedIn</strong></td><td>Korte video&rsquo;s, cases, achter de schermen</td></tr>
+          <tr><td><strong>LinkedIn</strong></td><td>Korte video&rsquo;s, cases, behind the scenes</td></tr>
           <tr><td><strong>Sales</strong></td><td>Cases en video&rsquo;s tijdens commerci&euml;le trajecten</td></tr>
-          <tr><td><strong>Advertenties</strong> (SEA en social)</td><td>Korte advertenties en fragmenten</td></tr>
+          <tr><td><strong>SEA en social advertising</strong></td><td>Korte advertenties en snippets</td></tr>
           <tr><td><strong>E-mail</strong></td><td>Cases, innovaties en productcontent</td></tr>
-          <tr><td><strong>Werving</strong></td><td>Mensen, fabriek en cultuur</td></tr>
+          <tr><td><strong>Recruitment</strong></td><td>Mensen, fabriek en cultuur</td></tr>
           <tr><td><strong>Presentaties en beurzen</strong></td><td>Sfeer-, product- en toepassingsvideo</td></tr>
         </tbody>
       </table>
@@ -4364,31 +4358,31 @@
     <section>
       <div class="sec-head">
         <span class="eyebrow">03 &middot; Formats</span>
-        <h2 data-rail="Vier formats">Vier vaste formats</h2>
-        <p>Elk stuk materiaal valt in een van vier series. <strong>CaseBuilder at Work</strong> krijgt het meeste gewicht.</p>
+        <h2 data-rail="Vier formats">Vier contentformats</h2>
+        <p>Vooral <strong>CaseBuilder at Work</strong> wordt groot.</p>
       </div>
       <div class="cards">
-        <div class="card"><h3>Inside CaseBuilder</h3><p><strong>Zo maken we het.</strong> CNC, assemblage, engineering, de mensen, dronebeeld van het pand.</p></div>
-        <div class="card"><h3>CaseBuilder at Work</h3><p><strong>Hier doen we het voor.</strong> Dakar, festivals, defensie, hightech, machinebouw.</p></div>
-        <div class="card"><h3>Customer Stories</h3><p><strong>Klanten vertellen waarom.</strong> Een interview, de toepassing en het product: een hightechbedrijf, een maquettebouwer, een band.</p></div>
-        <div class="card"><h3>Shorts</h3><p><strong>Kleine verhalen uit grote producties.</strong> Reels, LinkedIn-posts, advertenties en fragmenten.</p></div>
+        <div class="card"><h3>Inside CaseBuilder</h3><p><strong>Zo maken we het.</strong> CNC, assemblage, engineering, mensen, drone.</p></div>
+        <div class="card"><h3>CaseBuilder at Work</h3><p><strong>Hier doen we het voor.</strong> Dakar, festival, defensie, hightech, machinebouw.</p></div>
+        <div class="card"><h3>Customer Stories</h3><p><strong>Klanten vertellen waarom.</strong> Interview, toepassing en product. Bijzondere verhalen, bijvoorbeeld van een hoogwaardig technisch product, een maquettebouwer of een band.</p></div>
+        <div class="card"><h3>Shorts</h3><p><strong>Kleine verhalen uit grote producties.</strong> Reels, LinkedIn, advertenties, snippets.</p></div>
       </div>
       <div class="card">
         <h3>Zo werkt At Work</h3>
-        <p>Niet &ldquo;dit is een flightcase&rdquo;, maar: een vrachtwagen komt backstage aan. De cases rollen naar binnen. Het licht gaat omhoog, technici werken, het publiek stroomt binnen, de show begint. En ergens in dat verhaal staat <strong>CaseBuilder.com</strong> op de kist. Zo wordt een kist onderdeel van een veel groter verhaal.</p>
-        <p>Referenties: <a href="https://youtu.be/al7dIo7QXRE" target="_blank" rel="noopener">voorbeeld 1&nbsp;&#8599;</a> &middot; <a href="https://youtu.be/22lWXbOhKhM" target="_blank" rel="noopener">voorbeeld 2&nbsp;&#8599;</a></p>
+        <p>Niet &ldquo;dit is een flightcase&rdquo;, maar bijvoorbeeld: een vrachtwagen arriveert backstage. Flightcases rollen naar binnen. Lichtapparatuur wordt opgebouwd. Technici werken. Publiek stroomt binnen. De show begint. En ergens midden in dat verhaal zie je <strong>CaseBuilder.com</strong>. Daarmee wordt een kist onderdeel van een veel groter verhaal.</p>
+        <p>Voorbeelden: <a href="https://youtu.be/al7dIo7QXRE" target="_blank" rel="noopener">video 1&nbsp;&#8599;</a> &middot; <a href="https://youtu.be/22lWXbOhKhM" target="_blank" rel="noopener">video 2&nbsp;&#8599;</a></p>
       </div>
     </section>
 
     <section>
       <div class="sec-head">
         <span class="eyebrow">04 &middot; Eerst de website</span>
-        <h2 data-rail="Eerst de website">Twee opnames voor de nieuwe site</h2>
-        <p>Samen leveren ze in november de basisset beeld voor de hele site: de hero, de fabriekspagina en de sfeerbeelden bij de producten.</p>
+        <h2 data-rail="Eerst de website">Startproductie voor de nieuwe website</h2>
+        <p>Voor de nieuwe website beginnen we direct met twee stappen. Samen vormen ze meteen de <strong>basisset beeldmateriaal van CaseBuilder</strong>.</p>
       </div>
       <div class="cards">
-        <div class="card"><h3>Oktober &middot; dronevlucht</h3><p>Het pand, de omgeving, de fabriek en de logistiek van boven. Snel bewegend beeld voor de hero. Tot die beelden er zijn, kan een tijdelijke (eventueel AI-gemaakte) versie de plek vasthouden.</p></div>
-        <div class="card"><h3>Oktober/november &middot; draaidag in de fabriek</h3><p>Eén volle dag: machines, CNC, engineering, assemblage, materialen, medewerkers, details, logistiek en eindproducten. <strong>De fotograaf loopt dezelfde dag mee</strong>, zodat foto en video bij elkaar passen en niemand later terug hoeft.</p></div>
+        <div class="card"><h3>Quick win &middot; dronevlucht</h3><p>Oktober. Dronebeelden van het pand, de omgeving, de fabriek en de logistiek. Daarmee is er snel bewegend materiaal voor de nieuwe website.</p></div>
+        <div class="card"><h3>Grote productiedag &middot; de fabriek</h3><p>Oktober/november. Eén volledige draaidag in de fabriek: machines, CNC, engineering, assemblage, materialen, medewerkers, details, logistiek en eindproducten. <strong>Tegelijkertijd wordt er gefotografeerd.</strong> Dat is goedkoper dan later teruggaan, en foto en video passen visueel bij elkaar.</p></div>
       </div>
     </section>
 
@@ -4396,40 +4390,37 @@
       <div class="sec-head">
         <span class="eyebrow">05 &middot; Planning</span>
         <h2 data-rail="Jaarplanning">Het jaar in twaalf maanden</h2>
-        <p>Productie en distributie wisselen elkaar af. De ene maand wordt er gefilmd, de volgende wordt dat materiaal verspreid. Zo draaien we niet twaalf maanden lang dure nieuwe opnames. De vier klantcases liggen vast in de planning, maar welke klanten het worden kiezen we onderweg.</p>
+        <p>Ter illustratie. We produceren niet twaalf maanden lang dure nieuwe beelden, maar wisselen <strong>productie en distributie</strong> af.</p>
       </div>
       <div class="scroller">
       <div class="htl" role="list" aria-label="Videojaarplan per maand">
-        <span class="band" style="grid-column:2 / 5">Voor de nieuwe website</span>
+        <span class="band" style="grid-column:1 / 4">Nieuwe website</span>
 
-        <span class="rl" style="grid-row:2">Productie</span>
-        <div class="hi pr site" role="listitem" style="grid-column:2"><b>Drone&shy;vlucht</b><span>Hero-beeld voor de site</span></div>
-        <div class="hi pr site" role="listitem" style="grid-column:3"><b>Fabrieks&shy;shoot</b><span>Hero-film, beeldbank en foto&rsquo;s</span></div>
-        <div class="hi pr" role="listitem" style="grid-column:5"><b>Klantcase&nbsp;1</b><span>Casefilm, shorts, foto&rsquo;s</span></div>
-        <div class="hi pr" role="listitem" style="grid-column:7"><b>Klantcase&nbsp;2</b><span>Casefilm, shorts, foto&rsquo;s</span></div>
-        <div class="hi pr" role="listitem" style="grid-column:9"><b>Klantcase&nbsp;3</b><span>Casefilm, shorts, foto&rsquo;s</span></div>
-        <div class="hi pr" role="listitem" style="grid-column:10"><b>De mensen</b><span>Voor werving</span></div>
-        <div class="hi pr" role="listitem" style="grid-column:12"><b>Klantcase&nbsp;4</b><span>Casefilm, shorts, foto&rsquo;s</span></div>
-        <div class="hi pr" role="listitem" style="grid-column:13"><b>Jaarfilm en nieuwe hero</b><span>Het beste van het jaar</span></div>
+        <span class="m site" style="grid-column:1">okt<small>2026</small></span>
+        <span class="m site" style="grid-column:2">nov</span>
+        <span class="m site" style="grid-column:3">dec</span>
+        <span class="m" style="grid-column:4">jan<small>2027</small></span>
+        <span class="m" style="grid-column:5">feb</span>
+        <span class="m" style="grid-column:6">mrt</span>
+        <span class="m" style="grid-column:7">apr</span>
+        <span class="m" style="grid-column:8">mei</span>
+        <span class="m" style="grid-column:9">jun</span>
+        <span class="m" style="grid-column:10">jul</span>
+        <span class="m" style="grid-column:11">aug</span>
+        <span class="m" style="grid-column:12">sep</span>
 
-        <span class="m site" style="grid-column:2">okt<small>2026</small></span>
-        <span class="m site" style="grid-column:3">nov</span>
-        <span class="m site" style="grid-column:4">dec</span>
-        <span class="m" style="grid-column:5">jan<small>2027</small></span>
-        <span class="m" style="grid-column:6">feb</span>
-        <span class="m" style="grid-column:7">mrt</span>
-        <span class="m" style="grid-column:8">apr</span>
-        <span class="m" style="grid-column:9">mei</span>
-        <span class="m" style="grid-column:10">jun</span>
-        <span class="m" style="grid-column:11">jul</span>
-        <span class="m" style="grid-column:12">aug</span>
-        <span class="m" style="grid-column:13">sep</span>
-
-        <span class="rl" style="grid-row:4">Distributie</span>
-        <div class="hi di site" role="listitem" style="grid-column:4"><b>Montage</b><span>Websitebeeld en eerste posts</span></div>
-        <div class="hi di" role="listitem" style="grid-column:6"><b>Bestaand materiaal</b><span>LinkedIn en campagnes</span></div>
-        <div class="hi di" role="listitem" style="grid-column:8"><b>Kennis&shy;content</b><span>Korte inhoudelijke video&rsquo;s</span></div>
-        <div class="hi di" role="listitem" style="grid-column:11"><b>Content&shy;productie</b><span>Social en advertenties</span></div>
+        <div class="hi site" role="listitem" style="grid-column:1"><b>Drone&shy;vlucht</b><span>Quick win. Website&shy;beelden, hero</span></div>
+        <div class="hi site" role="listitem" style="grid-column:2"><b>Grote fabrieks&shy;shoot</b><span>Okt/nov. Hero-film, content&shy;bank, foto&shy;grafie</span></div>
+        <div class="hi site" role="listitem" style="grid-column:3"><b>Montage en content&shy;productie</b><span>Website en socials</span></div>
+        <div class="hi" role="listitem" style="grid-column:4"><b>Customer case&nbsp;1</b><span>Casefilm, shorts, foto&rsquo;s</span></div>
+        <div class="hi" role="listitem" style="grid-column:5"><b>Content uit bestaand materiaal</b><span>LinkedIn, campagnes</span></div>
+        <div class="hi" role="listitem" style="grid-column:6"><b>Customer case&nbsp;2</b><span>Casefilm, shorts, foto&rsquo;s</span></div>
+        <div class="hi" role="listitem" style="grid-column:7"><b>Product- en kennis&shy;content</b><span>Korte inhoudelijke video&rsquo;s</span></div>
+        <div class="hi" role="listitem" style="grid-column:8"><b>Customer case&nbsp;3</b><span>Casefilm, shorts, foto&rsquo;s</span></div>
+        <div class="hi" role="listitem" style="grid-column:9"><b>Employer / people</b><span>Mensen achter CaseBuilder</span></div>
+        <div class="hi" role="listitem" style="grid-column:10"><b>Content&shy;productie</b><span>Social, advertising</span></div>
+        <div class="hi" role="listitem" style="grid-column:11"><b>Customer case&nbsp;4</b><span>Casefilm, shorts, foto&rsquo;s</span></div>
+        <div class="hi" role="listitem" style="grid-column:12"><b>Jaarfilm / nieuwe hero</b><span>High-end video. Beste materiaal samen&shy;brengen; script en storyboard al klaar okt/nov 2026</span></div>
       </div>
       </div>
     </section>
@@ -4437,16 +4428,16 @@
     <section>
       <div class="sec-head">
         <span class="eyebrow">06 &middot; Klantcases</span>
-        <h2 data-rail="Klantcases">Vier klanten per jaar, gekozen op beeld</h2>
-        <p>De klantcases zijn de motor van het plan. We kiezen klanten met een toepassing die visueel iets toevoegt. Welke vier het worden hoeft nu niet vast te liggen: gedurende het jaar pakken we de beste gelegenheid.</p>
+        <h2 data-rail="Klantcases">Klantcases worden de motor</h2>
+        <p>Gedurende het jaar selecteren we ongeveer vier klanten met een visueel interessante toepassing. Welke vier het worden hoeven we nu nog niet te bepalen: gedurende het jaar vinden we de meest interessante gelegenheid.</p>
       </div>
       <div class="scroller">
       <table class="tpl">
-        <thead><tr><th>Soort klant</th><th>Mogelijke beelden</th></tr></thead>
+        <thead><tr><th>Case</th><th>Mogelijke beelden</th></tr></thead>
         <tbody>
           <tr><td><strong>Events en broadcast</strong></td><td>Backstage, vrachtwagens, podium, techniek</td></tr>
           <tr><td><strong>Dakar en motorsport</strong></td><td>Rallyauto, pit, transport, gereedschap</td></tr>
-          <tr><td><strong>Hightech</strong></td><td>Kostbare apparatuur, cleanroom, engineering</td></tr>
+          <tr><td><strong>Hightech</strong></td><td>Kostbare apparatuur, clean omgeving, engineering</td></tr>
           <tr><td><strong>Industrie</strong></td><td>Machines, productie, logistiek</td></tr>
           <tr><td><strong>Defensie</strong></td><td>Transport, robuust gebruik, apparatuur</td></tr>
           <tr><td><strong>Marine en offshore</strong></td><td>Schepen, havens, zware omstandigheden</td></tr>
@@ -4454,23 +4445,23 @@
       </table>
       </div>
       <div class="card">
-        <h3>Eén draaidag, twee bedrijven</h3>
-        <p>Filmen we bij een klant van CaseBuilder, dan kan dezelfde dag ook materiaal voor die klant opleveren: een bedrijfsvideo, socialcontent of productfoto&rsquo;s. CaseBuilder krijgt toegang tot bijzondere locaties, de klant krijgt professioneel beeld. <strong>De productiekosten kunnen dan eventueel gedeeld worden.</strong></p>
+        <h3>Twee bedrijven profiteren van één draaidag</h3>
+        <p>Filmen we bij een klant van CaseBuilder, dan maken we tegelijk materiaal voor die klant zelf. Voor CaseBuilder een klantcase over het gebruik van de flightcase, voor de eindklant een bedrijfsvideo, socialcontent, fotografie of productbeelden. CaseBuilder krijgt toegang tot bijzondere locaties en toepassingen, de eindklant krijgt professioneel beeldmateriaal. <strong>De productiekosten kunnen eventueel gedeeltelijk worden gedeeld.</strong></p>
       </div>
     </section>
 
     <section>
       <div class="sec-head">
         <span class="eyebrow">07 &middot; Rendement</span>
-        <h2 data-rail="Eén draaidag">Wat één draaidag moet opleveren</h2>
-        <p>We schrijven geen storyboard voor één film. Vooraf ligt er een shotlist met alle beelden die we nodig hebben, zodat dezelfde crew op dezelfde locatie veel meer oplevert.</p>
+        <h2 data-rail="Eén draaidag">Eén draaidag, veel content</h2>
+        <p>Het storyboard wordt niet geschreven vanuit één film. Vooraf maken we een shotlist of contentmatrix met alle assets die we nodig hebben. Zo halen we veel meer rendement uit dezelfde crew en locatie. Een draaidag voor een klantcase moet bijvoorbeeld opleveren:</p>
       </div>
       <div class="track">
         <div class="item"><span class="when">1&times;</span><span class="what">Hoofdvideo</span><span class="st"></span></div>
         <div class="item"><span class="when">3&ndash;6&times;</span><span class="what">Korte video&rsquo;s</span><span class="st"></span></div>
-        <div class="item"><span class="when">foto</span><span class="what">Fotografie, op dezelfde dag</span><span class="st"></span></div>
-        <div class="item"><span class="when">tekst</span><span class="what">Quotes van de klant</span><span class="st"></span></div>
-        <div class="item"><span class="when">9:16</span><span class="what">Verticale versies voor Reels en Stories</span><span class="st"></span></div>
+        <div class="item"><span class="when">foto</span><span class="what">Fotografie</span><span class="st"></span></div>
+        <div class="item"><span class="when">tekst</span><span class="what">Quotes</span><span class="st"></span></div>
+        <div class="item"><span class="when">verticaal</span><span class="what">Verticale content</span><span class="st"></span></div>
         <div class="item"><span class="when">web</span><span class="what">Websitebeelden en advertentiemateriaal</span><span class="st"></span></div>
       </div>
     </section>
@@ -4478,16 +4469,16 @@
     <section>
       <div class="sec-head">
         <span class="eyebrow">08 &middot; Beeldtaal</span>
-        <h2 data-rail="Beeldtaal">Eén herkenbare CaseBuilder-stijl</h2>
-        <p>Per productie zetten we de juiste specialisten in: drone, video, fotografie. Het risico is dat iedereen op zijn eigen manier filmt, kleurt en monteert. Daarom leggen we vooraf één beeldtaal en één technische standaard vast.</p>
+        <h2 data-rail="Beeldtaal">Eén herkenbare beeldtaal</h2>
+        <p>We werken met verschillende specialisten. Dat geeft flexibiliteit, maar als iedere partij op zijn eigen manier filmt, kleurt en monteert, ontstaat er geen herkenbare CaseBuilder-stijl. Daarom leggen we vooraf één centrale beeldtaal en technische standaard vast.</p>
       </div>
       <div class="cards">
-        <div class="card"><h3>Video Style Guide</h3><p>Een compact brandbook voor bewegend beeld: sfeer, kleur en contrast, camerabeweging, close-ups en wide shots, licht, slow motion, drone, typografie en logo, muziek, montagetempo. Met voorbeelden van wat wel en niet bij CaseBuilder past.</p></div>
-        <div class="card"><h3>Technische standaard</h3><p>Vaste opname-eisen: resolutie, framerate, witbalans, kleurprofiel, codec en aanlevering. Niet iedereen hoeft dezelfde camera te gebruiken. Wel levert iedereen neutraal bronmateriaal volgens dezelfde regels, zodat opnames van verschillende dagen samen te monteren zijn.</p></div>
-        <div class="card"><h3>Centrale afwerking</h3><p>Montage, kleurcorrectie, typografie en geluid gebeuren zoveel mogelijk op één plek, bij voorkeur door één vaste editor. Zo worden drone, fabriek en klantcases uit verschillende maanden toch één geheel.</p></div>
-        <div class="card"><h3>Eén beeldbank</h3><p>Alles wordt centraal bewaard, niet alleen de eindversies: ruwe video, dronebeeld, foto&rsquo;s, audio, projectbestanden, muziek- en gebruiksrechten. Logisch ingedeeld, zodat het over jaren nog bruikbaar is voor een campagne of een nieuwe brandfilm.</p></div>
+        <div class="card"><h3>Video Style Guide</h3><p>Hoe CaseBuilder er in bewegend beeld uitziet: sfeer, kleur en contrast; cameravoering en beweging; close-ups, wide shots en details; belichting; slow motion en framerate; dronebeelden; typografie en logo; muziek en sound design; montage en tempo. Met voorbeelden van wat wel en niet bij CaseBuilder past.</p></div>
+        <div class="card"><h3>Technische standaard</h3><p>Opname-eisen zoals resolutie, framerate, witbalans, kleurprofiel, codec en wijze van aanleveren. Niet iedere productie hoeft met dezelfde camera, maar alle partijen werken volgens dezelfde technische spelregels. Zo zijn beelden van verschillende draaidagen later goed te combineren.</p></div>
+        <div class="card"><h3>Centrale montage en kleurcorrectie</h3><p>De finishing gebeurt zoveel mogelijk centraal: montage, kleurcorrectie, typografie, muziek en sound design in dezelfde CaseBuilder-stijl, bij voorkeur door één vaste editor/colorist.</p></div>
+        <div class="card"><h3>Eén centrale beeldbank</h3><p>Niet alleen de uiteindelijke video&rsquo;s, maar ook ruwe videobestanden, dronebeelden, fotografie, audio, projectbestanden, muziek- en gebruiksrechten en definitieve exports. Logisch gecategoriseerd, zodat het ook jaren later opnieuw te gebruiken is.</p></div>
       </div>
-      <p class="note"><strong>Wel:</strong> echte werksituaties, beweging, materiaal, machines, details, techniek en context. <strong>Niet:</strong> generieke corporate beelden, zware filters, willekeurige kleurstijlen.</p>
+      <p class="note"><strong>Wel:</strong> echte werksituaties, beweging, materiaal, machines, details, techniek en context. <strong>Niet:</strong> generieke corporate beelden, overdreven filters, willekeurige kleurstijlen of producties die losstaan van de bestaande CaseBuilder-uitstraling.</p>
     </section>
 
   </div>
