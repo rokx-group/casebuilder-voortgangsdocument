@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Webshop, Optie B · categorieën als filters links</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#003352; --signaal:#0393d1; --diep:#0276a8; --helder:#2ba9dd; --inkt:#1a1a1a;
+  --papier:#f2f5f9; --licht:#e6eff6; --lijn:#d9dee5; --gedempt:#5f6873; --wit:#fff;
+  --rand:clamp(16px,7vw,112px); --goot:28px;
+  --kop:"Barlow Condensed",sans-serif; --tekst:"DM Sans",sans-serif; --mono:"IBM Plex Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--tekst);color:var(--inkt);background:var(--wit)}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.label{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+
+/* proefbalk, alleen voor de keuze */
+.proef{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:12px var(--rand);background:var(--inkt);color:var(--wit)}
+.proef a{color:var(--helder)}
+
+/* de kop van de shop, zoals in de demo */
+.kop{background:var(--navy);color:var(--wit);padding:40px var(--rand) 0}
+.kop .kruimel{color:rgba(255,255,255,.6)}
+.kop h1{font-family:var(--kop);font-weight:900;text-transform:uppercase;font-size:clamp(44px,6.4vw,96px);line-height:.88;margin-top:28px}
+.kop .intro{max-width:52ch;margin-top:14px;color:rgba(255,255,255,.85);font-size:17px;line-height:1.6}
+.tabs{display:flex;gap:28px;margin-top:40px;overflow-x:auto;scrollbar-width:none}
+.tab{font-family:var(--kop);font-weight:700;text-transform:uppercase;font-size:19px;padding:12px 0 14px;border-bottom:3px solid transparent;white-space:nowrap;color:rgba(255,255,255,.7)}
+.tab:hover{color:var(--wit)}
+.tab[aria-selected="true"]{color:var(--wit);border-color:var(--signaal)}
+.tab small{font-family:var(--mono);font-size:11px;letter-spacing:.1em;margin-left:6px;opacity:.7}
+.tab.los{margin-left:auto}
+
+/* optie A: de categorieën als balk direct onder de tabs */
+.subbalk{position:sticky;top:0;z-index:5;background:var(--wit);border-bottom:1px solid var(--lijn);padding:0 var(--rand)}
+.subbalk .rij{display:flex;gap:8px;overflow-x:auto;padding:14px 0;scrollbar-width:none}
+.chip{flex:none;display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px;border:1.5px solid var(--lijn);font-size:14.5px;font-weight:500;color:var(--navy);background:var(--wit);white-space:nowrap}
+.chip:hover{border-color:var(--navy)}
+.chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:var(--wit)}
+.chip .n{font-family:var(--mono);font-size:11px;opacity:.65}
+.chip[data-leeg]{color:var(--gedempt)}
+.subbalk .uitleg{font-size:12.5px;color:var(--gedempt);padding:0 0 12px}
+
+/* de pagina: filters links, raster rechts */
+.inhoud{display:grid;grid-template-columns:260px 1fr;gap:var(--goot);padding:32px var(--rand) 96px}
+.filters{align-self:start;position:sticky;top:90px}
+.groep{border-top:1px solid var(--lijn);padding:16px 0}
+.groep:first-child{border-top:0;padding-top:0}
+.groep h3{font-family:var(--kop);font-weight:700;text-transform:uppercase;font-size:18px;color:var(--navy);margin-bottom:10px}
+.groep.nadruk h3{color:var(--diep)}
+.vak{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:5px 0;font-size:14.5px}
+.vak i{flex:none;width:16px;height:16px;border:1.5px solid var(--navy)}
+.vak[aria-pressed="true"] i{background:var(--navy)}
+.vak .n{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--gedempt)}
+.vak[data-leeg]{color:var(--gedempt)}
+.vak[data-leeg] i{border-color:var(--lijn)}
+.groep .laag{font-size:12px;color:var(--gedempt);margin:-4px 0 8px}
+
+.boven{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:18px}
+.boven h2{font-family:var(--kop);font-weight:700;text-transform:uppercase;font-size:30px;color:var(--navy);line-height:1}
+.boven p{font-size:14px;color:var(--gedempt)}
+.raster{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:var(--goot)}
+.tegel{display:flex;flex-direction:column}
+.tegel .beeld{aspect-ratio:4/3;background:var(--papier);display:grid;place-items:center;padding:18px}
+.tegel img{max-width:100%;max-height:100%;object-fit:contain}
+.tegel .cat{font-size:13px;color:var(--diep);margin-top:12px}
+.tegel b{font-weight:500;font-size:16px;margin-top:2px;color:var(--inkt)}
+.tegel .maat{font-size:13px;color:var(--gedempt);margin-top:2px}
+.tegel .prijs{margin-top:8px;font-size:15px}
+.tegel .prijs span{font-size:12px;color:var(--gedempt)}
+.leeg{border:1.5px dashed var(--lijn);padding:28px;grid-column:1/-1;max-width:60ch}
+.leeg b{font-family:var(--kop);font-weight:700;text-transform:uppercase;font-size:24px;color:var(--navy);display:block}
+.leeg p{margin-top:6px;color:var(--gedempt)}
+.leeg a{display:inline-flex;align-items:center;height:44px;padding:0 18px;margin-top:16px;background:var(--navy);color:var(--wit);font-family:var(--kop);font-weight:700;text-transform:uppercase;text-decoration:none}
+.voetnoot{font-size:12px;color:var(--gedempt);margin-top:40px}
+@media(max-width:900px){.inhoud{grid-template-columns:1fr}.filters{position:static}}
+</style>
+</head>
+<body data-optie="links">
+
+<div class="proef label">
+  <span>Proef · Optie B · categorieën als filters links</span>
+  <a href="shop-optie-a.html">Naar optie A · categorieën als balk onder de tabs</a>
+</div>
+
+<header class="kop">
+  <nav class="kruimel label" aria-label="Kruimelpad">// Home &nbsp;/&nbsp; Webshop</nav>
+  <h1>Webshop</h1>
+  <p class="intro">Kant-en-klare cases, per toepassing. Vaste maat, vaste prijs; kleur en logo kies je bij het product.</p>
+  <div class="tabs" role="tablist" aria-label="Toepassingen" id="tabs"></div>
+</header>
+
+<div class="subbalk" id="subbalk" hidden>
+  <div class="rij" id="chips"></div>
+</div>
+
+<main class="inhoud">
+  <aside class="filters" id="filters" aria-label="Filters"></aside>
+  <section>
+    <div class="boven"><h2 id="kop2"></h2><p id="aantal"></p></div>
+    <div class="raster" id="raster"></div>
+    <p class="voetnoot">VOORBEELD: producten en prijzen uit de demo (producten.ts). Categorieën volgens de tabel Clusters naar toepassingen en branches (Drive 1602).</p>
+  </section>
+</main>
+
+<script>
+/* ── de gegevens ─────────────────────────────────────────────── */
+const TOEPASSINGEN = [
+  { id: "av", naam: "AV & licht", categorieen: ["Lichtcases", "Speaker- en audiocases", "Mixercases", "Kabelkisten", "Motorcases"] },
+  { id: "backline", naam: "Backline & muziek", categorieen: ["Instrumentcases", "DJ-cases"] },
+  { id: "broadcast", naam: "Broadcast & camera", categorieen: ["Camera- en videocases"] },
+  { id: "medisch", naam: "Medisch & lab", categorieen: [] },
+  { id: "industrie", naam: "Industrie & meettechniek", categorieen: ["Toolcases en ladecases", "Industriële verpakking"] },
+  { id: "evenement", naam: "Evenement & beursbouw", categorieen: ["Schermkisten", "Presentatie en beurs", "Meubels"] },
+];
+const M = "media/uitsnede/";
+const PRODUCTEN = [
+  { naam: "Moving heads, set van twee", toep: "av", cat: "Lichtcases", branches: ["Audio-visueel", "Standbouw"], type: "Hoedcase", maat: "420 × 420 × 620 mm", prijs: 229, foto: "hoedcase" },
+  { naam: "Midas M32", toep: "av", cat: "Mixercases", branches: ["Audio-visueel", "Broadcast"], type: "Hoedcase", maat: "900 × 560 × 250 mm", prijs: 289, foto: "hoedcase" },
+  { naam: "Behringer X32", toep: "av", cat: "Mixercases", branches: ["Audio-visueel"], type: "Hoedcase", maat: "940 × 610 × 260 mm", prijs: 295, foto: "hoedcase" },
+  { naam: "Allen & Heath SQ-5", toep: "av", cat: "Mixercases", branches: ["Audio-visueel", "Broadcast"], type: "Hoedcase", maat: "560 × 560 × 230 mm", prijs: 249, foto: "hoedcase" },
+  { naam: "Kabelkist 1.000 × 600 × 600", toep: "av", cat: "Kabelkisten", branches: ["Audio-visueel", "Standbouw", "Motorsport"], type: "Trunccase", maat: "1.000 × 600 × 600 mm", prijs: 247.2, foto: "trunccase" },
+  { naam: "19 inch rack, 6 HE", toep: "av", cat: null, branches: ["Audio-visueel", "Broadcast", "Defensie"], type: "Rackcase", maat: "560 × 420 × 600 mm", prijs: 229, foto: "rackcase-enkel" },
+  { naam: "Gibson Les Paul", toep: "backline", cat: "Instrumentcases", branches: ["Audio-visueel"], type: "Koffer", maat: "1.060 × 410 × 140 mm", prijs: 186.5, foto: "koffer" },
+  { naam: "Gibson SG", toep: "backline", cat: "Instrumentcases", branches: ["Audio-visueel"], type: "Koffer", maat: "1.020 × 380 × 130 mm", prijs: 179, foto: "koffer" },
+  { naam: "Fender Stratocaster", toep: "backline", cat: "Instrumentcases", branches: ["Audio-visueel"], type: "Koffer", maat: "1.005 × 380 × 130 mm", prijs: 189, foto: "koffer" },
+  { naam: "Fender Precision Bass", toep: "backline", cat: "Instrumentcases", branches: ["Audio-visueel"], type: "Koffer", maat: "1.230 × 400 × 140 mm", prijs: 215, foto: "koffer" },
+  { naam: "Nord Stage 4, 88 toetsen", toep: "backline", cat: "Instrumentcases", branches: ["Audio-visueel"], type: "Koffer", maat: "1.340 × 390 × 180 mm", prijs: 259, foto: "koffer" },
+  { naam: "Pedalboard, 90 cm", toep: "backline", cat: "Instrumentcases", branches: ["Audio-visueel"], type: "Koffer", maat: "900 × 390 × 140 mm", prijs: 189, foto: "koffer" },
+  { naam: "Pioneer DDJ-FLX10", toep: "backline", cat: "DJ-cases", branches: ["Audio-visueel"], type: "Koffer", maat: "730 × 450 × 120 mm", prijs: 199, foto: "koffer" },
+  { naam: "DJI Inspire 3", toep: "broadcast", cat: "Camera- en videocases", branches: ["Broadcast", "Industrie"], type: "Koffer", maat: "620 × 520 × 330 mm", prijs: 265, foto: "dronecase" },
+  { naam: "DJI Mavic 3", toep: "broadcast", cat: "Camera- en videocases", branches: ["Broadcast", "Industrie", "Defensie"], type: "Koffer", maat: "450 × 350 × 180 mm", prijs: 165, foto: "dronecase" },
+  { naam: "Sony FX6", toep: "broadcast", cat: "Camera- en videocases", branches: ["Broadcast", "Motorsport"], type: "Koffer", maat: "560 × 420 × 250 mm", prijs: 245, foto: "koffer" },
+  { naam: "Demokoffer 500 × 350 × 150", toep: "evenement", cat: "Presentatie en beurs", branches: ["Standbouw", "Meet- en test"], type: "Koffer", maat: "500 × 350 × 150 mm", prijs: 149, foto: "koffer" },
+];
+const BRANCHES = ["Audio-visueel", "Broadcast", "Industrie", "Meet- en test", "Defensie", "Motorsport", "Standbouw", "Schaalmodellen"];
+const TYPES = ["Koffer", "Hoedcase", "Trunccase", "Rackcase"];
+
+/* ── de stand ─────────────────────────────────────────────────── */
+const OPTIE = document.body.dataset.optie;
+const stand = { toep: "alle", cat: new Set(), branche: new Set(), type: new Set() };
+
+const bedrag = (n) => "€ " + n.toLocaleString("nl-NL", { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 });
+const el = (tag, attrs = {}, ...kids) => {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "tekst") e.textContent = v;
+    else if (k.startsWith("on")) e.addEventListener(k.slice(2), v);
+    else if (v !== false && v != null) e.setAttribute(k, v === true ? "" : v);
+  }
+  for (const k of kids) if (k) e.append(k);
+  return e;
+};
+
+function inTab(p) { return stand.toep === "alle" || p.toep === stand.toep; }
+function past(p, zonder) {
+  if (!inTab(p)) return false;
+  if (zonder !== "cat" && stand.cat.size && !stand.cat.has(p.cat)) return false;
+  if (zonder !== "branche" && stand.branche.size && !p.branches.some((b) => stand.branche.has(b))) return false;
+  if (zonder !== "type" && stand.type.size && !stand.type.has(p.type)) return false;
+  return true;
+}
+const tel = (sleutel, waarde) => PRODUCTEN.filter((p) => past(p, sleutel) && (
+  sleutel === "cat" ? p.cat === waarde : sleutel === "branche" ? p.branches.includes(waarde) : p.type === waarde)).length;
+
+function categorieenNu() {
+  return stand.toep === "alle"
+    ? TOEPASSINGEN.flatMap((t) => t.categorieen)
+    : TOEPASSINGEN.find((t) => t.id === stand.toep).categorieen;
+}
+
+/* ── tekenen ──────────────────────────────────────────────────── */
+function tabs() {
+  const box = document.getElementById("tabs");
+  box.replaceChildren(
+    ...[{ id: "alle", naam: "Alles" }, ...TOEPASSINGEN].map((t) => {
+      const n = t.id === "alle" ? PRODUCTEN.length : PRODUCTEN.filter((p) => p.toep === t.id).length;
+      return el("button", { class: "tab", role: "tab", "aria-selected": String(stand.toep === t.id), onclick: () => { stand.toep = t.id; stand.cat.clear(); teken(); } },
+        t.naam, el("small", { tekst: String(n) }));
+    }),
+    el("button", { class: "tab los", role: "tab", "aria-selected": "false", tekst: "Onderdelen" }),
+  );
+}
+
+function chips() {
+  const balk = document.getElementById("subbalk");
+  if (OPTIE !== "balk") { balk.hidden = true; return; }
+  const cats = categorieenNu();
+  balk.hidden = false;
+  const alle = el("button", { class: "chip", "aria-pressed": String(stand.cat.size === 0), onclick: () => { stand.cat.clear(); teken(); } },
+    stand.toep === "alle" ? "Alle categorieën" : "Alles in " + TOEPASSINGEN.find((t) => t.id === stand.toep).naam,
+    el("span", { class: "n", tekst: String(PRODUCTEN.filter((p) => past(p, "cat")).length) }));
+  const lijst = cats.map((c) => {
+    const n = tel("cat", c);
+    return el("button", { class: "chip", "aria-pressed": String(stand.cat.has(c)), "data-leeg": n === 0,
+      onclick: () => { stand.cat.has(c) ? stand.cat.delete(c) : (stand.cat.clear(), stand.cat.add(c)); teken(); } },
+      c, el("span", { class: "n", tekst: String(n) }));
+  });
+  const rij = document.getElementById("chips");
+  rij.replaceChildren(alle, ...lijst);
+  if (!cats.length) rij.append(el("span", { class: "chip", "data-leeg": true, tekst: "Nog geen categorieën: alles op aanvraag" }));
+}
+
+function groep(titel, sleutel, waarden, extra) {
+  const g = el("div", { class: "groep" + (extra?.nadruk ? " nadruk" : "") }, el("h3", { tekst: titel }));
+  if (extra?.laag) g.append(el("p", { class: "laag", tekst: extra.laag }));
+  if (!waarden.length) g.append(el("p", { class: "laag", tekst: "Nog geen categorieën in deze toepassing: alles op aanvraag." }));
+  for (const w of waarden) {
+    const n = tel(sleutel, w);
+    g.append(el("button", { class: "vak", "aria-pressed": String(stand[sleutel].has(w)), "data-leeg": n === 0,
+      onclick: () => { stand[sleutel].has(w) ? stand[sleutel].delete(w) : stand[sleutel].add(w); teken(); } },
+      el("i"), w, el("span", { class: "n", tekst: String(n) })));
+  }
+  return g;
+}
+
+function filters() {
+  const box = document.getElementById("filters");
+  const delen = [];
+  if (OPTIE === "links") {
+    const laag = stand.toep === "alle" ? "Alle toepassingen" : "Binnen " + TOEPASSINGEN.find((t) => t.id === stand.toep).naam.toLowerCase();
+    delen.push(groep("Categorie", "cat", categorieenNu(), { nadruk: true, laag }));
+  }
+  delen.push(groep("Branche", "branche", BRANCHES, { laag: "Wie je bent" }));
+  delen.push(groep("Casetype", "type", TYPES));
+  box.replaceChildren(...delen);
+}
+
+function raster() {
+  const lijst = PRODUCTEN.filter((p) => past(p));
+  const t = TOEPASSINGEN.find((x) => x.id === stand.toep);
+  const cat = [...stand.cat][0];
+  document.getElementById("kop2").textContent = stand.cat.size === 1 && OPTIE === "balk" ? cat : t ? t.naam : "Alle cases";
+  document.getElementById("aantal").textContent = lijst.length === 1 ? "1 case" : lijst.length + " cases";
+  const box = document.getElementById("raster");
+  if (!lijst.length) {
+    box.replaceChildren(el("div", { class: "leeg" },
+      el("b", { tekst: "Nog niets kant-en-klaar" }),
+      el("p", { tekst: "Hier ligt nog geen vaste case voor. Stuur een foto of een schets; je krijgt dezelfde dag een tekening met een vaste prijs terug." }),
+      el("a", { href: "#", tekst: "Maatwerk aanvragen" })));
+    return;
+  }
+  box.replaceChildren(...lijst.map((p) => el("article", { class: "tegel" },
+    el("div", { class: "beeld" }, el("img", { src: M + p.foto + ".webp", alt: p.type, width: "720", height: "540", loading: "lazy" })),
+    el("span", { class: "cat", tekst: (p.cat ?? p.type) + " · " + TOEPASSINGEN.find((x) => x.id === p.toep).naam }),
+    el("b", { tekst: p.naam }),
+    el("span", { class: "maat", tekst: p.type + " · " + p.maat }),
+    el("span", { class: "prijs" }, "Vanaf " + bedrag(p.prijs) + " ", el("span", { tekst: "excl. btw" })))));
+}
+
+function teken() { tabs(); chips(); filters(); raster(); }
+teken();
+</script>
+</body>
+</html>

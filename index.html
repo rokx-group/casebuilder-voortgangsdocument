@@ -702,6 +702,16 @@
      de productpagina (mockups/product-v1, stand L1). Kleiner, maar met
      dezelfde onderdelen in dezelfde volgorde, zodat je ziet welk veld waar
      landt. */
+  /* Twee ontwerpen naast elkaar, om te vergelijken. */
+  .kotwee { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+  @media (max-width:760px) { .kotwee { grid-template-columns:1fr; } }
+  .kotwee figure { margin:0; }
+  .kotwee img { width:100%; height:auto; display:block; border:1px solid var(--line); border-radius:var(--r-sm);
+    background:var(--surface); }
+  .kotwee a:focus-visible img { outline:2px solid var(--accent); outline-offset:2px; }
+  .kotwee figcaption { font-size:13.5px; color:var(--muted); margin-top:9px; line-height:1.5; }
+  table.tpl td.kja { color:var(--keep); }
+  table.tpl td.knee { color:var(--drop); }
   .kol1 { display:grid; grid-template-columns:260px minmax(0,1fr); gap:18px; align-items:start; }
   @media (max-width:760px) { .kol1 { grid-template-columns:1fr; } }
   .kol1 figure { margin:0; }
@@ -3435,6 +3445,66 @@
       </div>
       <h3 style="margin:26px 0 10px">Shopindeling</h3>
       <div class="cards" id="ko-shop"></div>
+    </section>
+
+
+    <!-- ══ Ontwerpkeuze met SEO-gevolg ════════════════════════════════════
+         Twee proefpagina's voor de winkel, gemaakt in een andere sessie
+         (scratchpad/winkel). Ze staan hier in mockups/ zodat de links ook
+         live werken; de foto's komen uit casebuilder-demo-git. Het enige
+         verschil tussen de twee bestanden is data-optie="balk" of "links".
+         Het gevolg voor SEO zit in de code: bij "balk" vervangt een keuze
+         de vorige (stand.cat.clear() vóór add) en wordt de kop de naam van
+         de categorie; bij "links" is het een vinkje naast branche en
+         casetype, dus meerdere tegelijk.
+         ══════════════════════════════════════════════════════════════ -->
+    <section id="ko-winkel">
+      <div class="sec-head">
+        <span class="eyebrow">Ontwerpkeuze &middot; raakt de SEO</span>
+        <h2 data-rail="Winkel: A of B">Categorie&euml;n in de winkel: balk of filter</h2>
+        <p>Twee proefpagina&rsquo;s voor de winkel. In beide zijn de tabs de <strong>toepassingen</strong> en komen de categorie&euml;n uit de clustertabel. Het verschil zit in waar de categorie staat &mdash; en dat is niet alleen een ontwerpkeuze.</p>
+        <p class="kozacht">Bekijk ze zelf: <a class="kolink" href="mockups/shop-optie-a.html">optie A</a> &middot; <a class="kolink" href="mockups/shop-optie-b.html">optie B</a>. Je kunt in de pagina&rsquo;s heen en weer springen.</p>
+      </div>
+
+      <div class="kotwee">
+        <figure>
+          <a href="mockups/shop-optie-a.html"><img src="mockups/beeld/shop-optie-a.png" alt="Optie A: de categorie&euml;n staan als knoppenbalk direct onder de tabs" loading="lazy"></a>
+          <figcaption><strong>Optie A &mdash; balk onder de tabs.</strong> Categorie&euml;n als knoppen, links de filters branche en casetype. Je kiest er <strong>&eacute;&eacute;n tegelijk</strong>: een nieuwe keuze vervangt de vorige, en de kop boven het raster wordt de naam van de categorie.</figcaption>
+        </figure>
+        <figure>
+          <a href="mockups/shop-optie-b.html"><img src="mockups/beeld/shop-optie-b.png" alt="Optie B: de categorie&euml;n staan als vinkjes in de filterkolom links" loading="lazy"></a>
+          <figcaption><strong>Optie B &mdash; vinkjes links.</strong> Categorie bovenaan in dezelfde kolom als branche en casetype. Je kunt er <strong>meerdere tegelijk</strong> aanvinken; de kop blijft de naam van de toepassing.</figcaption>
+        </figure>
+      </div>
+
+      <h3>Ja, dit raakt de SEO &mdash; op &eacute;&eacute;n punt</h3>
+      <p>Niet omdat de ene indeling beter scoort dan de andere. Het gaat hierom: <strong>in A is een categorie een pagina, in B is een categorie een filter.</strong> En het hele onderzoek hierboven gaat ervan uit dat een categorie een pagina is.</p>
+      <div class="scroller">
+      <table class="tpl">
+        <thead><tr><th>Wat het onderzoek aanneemt</th><th>Optie A</th><th>Optie B</th></tr></thead>
+        <tbody>
+          <tr><td>Elk cluster met een categorie&shy;rol krijgt <strong>&eacute;&eacute;n SEO-pagina</strong>: <code>/case-voor/{categorie}</code></td><td class="kja">Past. E&eacute;n categorie tegelijk = &eacute;&eacute;n toestand met &eacute;&eacute;n naam, dus &eacute;&eacute;n adres en &eacute;&eacute;n H1.</td><td class="knee">Wringt. Meerdere categorie&euml;n tegelijk levert combinaties, geen pagina.</td></tr>
+          <tr><td>Die pagina draagt het <strong>hoofdzoekwoord</strong> van het cluster</td><td class="kja">De kop boven het raster is al de categorienaam &mdash; dat kan de H1 worden.</td><td class="knee">De kop blijft de toepassing. Het zoekwoord van de categorie staat nergens als kop.</td></tr>
+          <tr><td>Aantal adressen blijft <strong>overzienbaar</strong></td><td class="kja">13 categorie&euml;n &times; 6 toepassingen, met &eacute;&eacute;n categorie tegelijk.</td><td class="knee">13 categorie&euml;n, 8 branches en 4 casetypes vrij te combineren: duizenden adressen die niemand zoekt.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>Branche en casetype h&oacute;ren wel filters te zijn: branche heeft zijn eigen pagina <code>/branches/{branche}</code> en zit verder alleen als filter in de winkel, en de casetypes hebben al een eigen modelpagina onder <code>/flightcases</code>. De categorie is de enige as waar de keuze echt wat uitmaakt.</p>
+
+      <h3>Wat dat betekent voor de keuze</h3>
+      <ul class="kobron">
+        <li><strong>Kies je A</strong>, dan volgt de winkel vanzelf de indeling uit dit onderzoek. De categorieknop kan een echte link worden naar de eigen pagina van die categorie.</li>
+        <li><strong>Kies je B</strong>, dan kan het ook &mdash; maar dan moet de categorie uit de filterkolom worden getild: een eigen adres en een eigen kop, zichtbaar anders dan de vinkjes van branche en casetype. Anders bestaan de pagina&rsquo;s waar dit hele onderzoek op gebouwd is straks niet.</li>
+        <li><strong>B is wel prettiger in gebruik.</strong> Je ziet alle dertien categorie&euml;n in &eacute;&eacute;n oogopslag, inclusief de lege. De balk in A schuift horizontaal en valt rechts weg &mdash; op de schermafbeelding zie je de laatste categorie al half afgesneden.</li>
+      </ul>
+
+      <h3>Drie vragen voor de SEO-specialist</h3>
+      <ol class="kobron">
+        <li>Wordt een categorie een eigen pagina met eigen adres, of blijft het een filter? En als het een filter wordt: welke adresvorm, en indexeren of niet?</li>
+        <li>Mogen twee categorie&euml;n tegelijk aanstaan (mixercases &eacute;n kabelkisten), of is het er altijd &eacute;&eacute;n? Dat bepaalt A of B, meer dan de vormgeving.</li>
+        <li>Wat doen we met categorie&euml;n die <strong>zoekvolume hebben maar nog geen producten</strong>? In de proef staan er zes op nul. Een pagina zonder producten is een dunne pagina; wachten kost het zoekwoord.</li>
+      </ol>
+      <p class="kozacht">De proefpagina&rsquo;s gebruiken de producten uit de demo en de categorie&euml;n uit &ldquo;Clusters naar toepassingen en branches&rdquo;. Prijzen en aantallen zijn dus voorbeelden, de indeling niet.</p>
     </section>
 
     <!-- ══ Stap 8 · het eerste echte L1-product ══════════════════════════
