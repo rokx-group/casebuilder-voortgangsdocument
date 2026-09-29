@@ -1,6 +1,10 @@
 <!doctype html>
 <html lang="nl">
 <head>
+<script>
+  // Het gekozen thema voor de eerste weergave, zonder flits.
+  try { var t = localStorage.getItem('vgd-thema'); if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
@@ -116,7 +120,6 @@
   table.tpl a:hover { color:var(--primary); }
   table.tpl a:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
 
-  .tab.tab-right { margin-left:auto; }
 
   /* Verwijzingen zijn geen acties: geen kader, geen vlak. Een tekstlink
      met een klein bronlabel ervoor. */
@@ -334,6 +337,7 @@
   .mt h4 { font-family:"Barlow Condensed",sans-serif; font-size:19px; font-weight:600;
     line-height:1.1; margin:0; color:var(--ink); text-wrap:balance; }
   .mt p { font-size:13px; color:var(--muted); line-height:1.5; }
+  .mt p a { color:var(--accent); text-decoration:none; border-bottom:1px solid currentColor; }
   .mt .tag { border-top:1.5px solid var(--line); padding:8px 16px;
     font-family:"Inter",sans-serif; font-size:10px; font-weight:600; letter-spacing:.09em;
     text-transform:uppercase; }
@@ -412,6 +416,39 @@
     .tl .tlrow { grid-template-columns:64px 18px minmax(0,1fr); gap:0 10px; }
     .tl .tlwhen { font-size:10px; }
   }
+
+  /* Horizontale tijdlijn (tab Video). Twaalf maanden naast elkaar op één
+     as, met per maand één kaart eronder. Wat voor de nieuwe website telt,
+     staat in accentkleur onder een eigen band. Hij krijgt een
+     minimumbreedte in een .scroller, net als de schema's op Koppelingen:
+     op een telefoon scrol je opzij in plaats van kolommen van veertig
+     pixels te lezen. */
+  .htl { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:0 6px;
+    min-width:1060px; padding-bottom:4px; }
+  .htl .band { grid-row:1; font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--accent); border-bottom:2px solid var(--accent);
+    padding-bottom:5px; margin-bottom:10px; }
+  /* De as: één doorlopende lijn door de maandcellen, met een stip per maand. */
+  .htl .m { grid-row:2; position:relative; text-align:center; padding-top:16px;
+    font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--muted); }
+  .htl .m::before { content:""; position:absolute; left:-3px; right:-3px; top:5px; height:1px;
+    background:var(--line); }
+  .htl .m::after { content:""; position:absolute; left:50%; top:1px; width:9px; height:9px;
+    border-radius:50%; background:var(--surface); border:2px solid var(--line); transform:translateX(-50%); }
+  .htl .m.site::after { border-color:var(--accent); }
+  .htl .m small { display:block; font-size:9.5px; color:var(--faint); letter-spacing:.06em; }
+  /* Kaart per maand, met een steeltje omhoog naar de as. */
+  .htl .hi { grid-row:3; position:relative; margin-top:14px; background:var(--surface);
+    border:1px solid var(--line); border-radius:3px; padding:8px 8px;
+    display:flex; flex-direction:column; gap:3px; hyphens:auto; overflow-wrap:break-word; }
+  .htl .hi::after { content:""; position:absolute; left:50%; bottom:100%; width:1px; height:14px;
+    background:var(--line); }
+  .htl .hi b { font-family:"Barlow Condensed",sans-serif; font-size:15px; font-weight:600;
+    line-height:1.12; color:var(--ink); }
+  .htl .hi span { font-size:11.5px; line-height:1.4; color:var(--muted); }
+  .htl .hi.site { border-color:var(--accent); background:var(--accent-bg); }
+  .htl .hi.site b { color:var(--accent); }
+  .htl .hi.site::after { background:var(--accent); }
 
   /* Merch-tab: galerij, drukkers en printbestanden van merch-concept 1. */
   .mx-links { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
@@ -660,6 +697,64 @@
   .koshop { list-style:none; margin:10px 0 0; padding:0; display:flex; flex-direction:column; gap:10px; font-size:14px; }
   .koprod { display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
   .koprod span { font-size:12px; border:1px solid var(--line); border-radius:3px; padding:2px 7px; color:var(--muted); background:var(--surface-2); }
+  /* Voorbeeld L1-product uit de offerte van Joran. Twee nagebouwde stukken
+     site naast elkaar: de kaart in de shop (mockups/shop-v1, klasse .mod) en
+     de productpagina (mockups/product-v1, stand L1). Kleiner, maar met
+     dezelfde onderdelen in dezelfde volgorde, zodat je ziet welk veld waar
+     landt. */
+  .kol1 { display:grid; grid-template-columns:260px minmax(0,1fr); gap:18px; align-items:start; }
+  @media (max-width:760px) { .kol1 { grid-template-columns:1fr; } }
+  .kol1 figure { margin:0; }
+  .kol1 figcaption { font-size:12px; color:var(--faint); margin-top:7px; }
+  .kodemo { background:var(--surface); border:1px solid var(--line); border-radius:var(--r-sm); overflow:hidden; }
+  .kodemo-im { background:var(--surface-2); border-bottom:1px solid var(--line-soft); aspect-ratio:4/3;
+    display:flex; align-items:center; justify-content:center; padding:10px; }
+  .kodemo-im img { max-width:100%; max-height:100%; mix-blend-mode:multiply; }
+  :root[data-theme="dark"] .kodemo-im img { mix-blend-mode:normal; }
+  .kodemo-bd { padding:13px 15px 15px; display:flex; flex-direction:column; gap:5px; }
+  .kodemo-bd .meta { font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--faint); }
+  .kodemo-bd h4 { margin:0; font-size:17px; line-height:1.25; }
+  .kodemo-bd .waar { margin:0; font-size:13px; color:var(--muted); }
+  .kodemo-bd .pr { font-size:13px; color:var(--muted); margin-top:3px; }
+  .kodemo-bd .pr b { font-size:21px; color:var(--ink); margin-right:7px; }
+  .kodemo-bd .lvl, .kodemo-bd .stk { font-size:12px; padding:4px 8px; border-radius:3px; align-self:flex-start; }
+  .kodemo-bd .lvl { background:var(--accent-bg); color:var(--accent); }
+  .kodemo-bd .stk { background:var(--move-bg); color:var(--move); }
+  /* De productpagina: kruimels, kop, prijs, keuzes, en de blokken waarom. */
+  .kopdp { background:var(--surface); border:1px solid var(--line); border-radius:var(--r-sm); padding:18px 20px 20px; }
+  .kopdp .kruim { font-size:12px; color:var(--faint); margin:0 0 12px; }
+  .kopdp h4 { margin:0 0 6px; font-size:22px; line-height:1.2; }
+  .kopdp .lead { margin:0 0 14px; font-size:14.5px; color:var(--muted); max-width:62ch; }
+  .kopdp .prijsbalk { display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 12px; border-top:1px solid var(--line-soft);
+    border-bottom:1px solid var(--line-soft); padding:11px 0; margin-bottom:14px; }
+  .kopdp .prijsbalk b { font-size:26px; }
+  .kopdp .prijsbalk span { font-size:13px; color:var(--muted); }
+  .kopdp h5 { margin:0 0 7px; font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--faint); font-weight:500; }
+  .kowaarom { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; background:var(--line);
+    border:1px solid var(--line); border-radius:3px; overflow:hidden; margin:0 0 16px; }
+  @media (max-width:620px) { .kowaarom { grid-template-columns:1fr; } }
+  .kowaarom div { background:var(--surface-2); padding:11px 13px; }
+  .kowaarom b { display:block; font-size:15px; }
+  .kowaarom small { display:block; font-size:12.5px; color:var(--muted); margin-top:3px; }
+  .kokeuze { display:flex; flex-direction:column; gap:10px; margin-bottom:16px; }
+  .kokeuze > div { display:grid; grid-template-columns:78px minmax(0,1fr); gap:10px; align-items:center; font-size:13.5px; }
+  @media (max-width:520px) { .kokeuze > div { grid-template-columns:1fr; gap:3px; } }
+  .kokeuze .lb { font-size:12px; color:var(--faint); }
+  .kostaal { display:flex; gap:6px; }
+  .kostaal i { width:22px; height:22px; border-radius:3px; border:1px solid var(--line); }
+  .kovak { border:1px dashed var(--line); border-radius:3px; padding:7px 10px; color:var(--muted); font-size:13px; }
+  .komaten { display:flex; flex-wrap:wrap; gap:6px; }
+  .komaten a, .komaten span { font-size:12.5px; border:1px solid var(--line); border-radius:3px; padding:5px 9px;
+    background:var(--surface); color:var(--muted); text-decoration:none; white-space:nowrap; }
+  .komaten span.nu { border-color:var(--accent); background:var(--accent-bg); color:var(--accent); font-weight:600; }
+  .kodeur { display:block; border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:3px;
+    padding:11px 14px; font-size:13.5px; color:var(--muted); background:var(--surface-2); }
+  .kodeur b { display:block; color:var(--ink); font-size:14.5px; margin-bottom:2px; }
+  table.kogat td:first-child { white-space:nowrap; }
+  table.kogat .ja { color:var(--keep); font-weight:600; }
+  table.kogat .nee { color:var(--drop); font-weight:600; }
   /* Eén regel per rij: naam van de concurrent en de link breken niet af. */
   #ko-lijst td:first-child, #ko-lijst td:last-child, #ko-top-tabel td, .kocltab td.mono { white-space:nowrap; }
   #ko-top-tabel td:nth-child(2) { white-space:normal; }
@@ -720,6 +815,13 @@
   .doorsnee:hover .doorsnee-knop, .doorsnee:focus-within .doorsnee-knop { color:var(--muted); }
   .doorsnee:hover .pijl-dicht, .doorsnee:focus-within .pijl-dicht, .doorsnee.open .pijl-dicht { transform:rotate(180deg); }
   .doorsnee-knop:focus-visible { outline:2px solid var(--accent); outline-offset:2px; border-radius:2px; }
+  /* De themaknop rechtsboven, in de letter van Meer. */
+  .thema-knop { align-self:center; display:inline-flex; align-items:center; gap:7px; margin-left:12px;
+    padding:6px 10px; background:none; border:1px solid var(--line); border-radius:2px; cursor:pointer;
+    font-family:"Barlow Condensed","Inter",sans-serif; font-weight:600; font-size:15px; color:var(--muted); }
+  .thema-knop:hover { color:var(--ink); border-color:var(--muted); }
+  .thema-knop:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .thema-teken { font-size:14px; color:var(--accent); }
   .doorsnee-menu { list-style:none; margin:0; padding:10px 0 0; position:absolute; right:0; top:100%;
     z-index:40; min-width:190px; display:none; }
   .doorsnee:hover .doorsnee-menu, .doorsnee:focus-within .doorsnee-menu, .doorsnee.open .doorsnee-menu { display:block; }
@@ -904,8 +1006,10 @@
         <button class="tab" role="tab" id="t3" data-hash="bouw" aria-controls="p3" aria-selected="false"><span class="tnum">03</span>Bouwfase</button>
         <button class="tab" role="tab" id="t5" data-hash="content" aria-controls="p5" aria-selected="false"><span class="tnum">04</span>Contentfase</button>
         <button class="tab" role="tab" id="t6" data-hash="livegang" aria-controls="p6" aria-selected="false"><span class="tnum">05</span>Live-gang</button>
-        <button class="tab tab-right" role="tab" id="t8" data-hash="features" aria-controls="p8" aria-selected="false">Features</button>
       </div>
+      <!-- Licht of donker. Zonder keuze volgt de pagina het systeem; een
+           keuze blijft in deze browser bewaard (localStorage). -->
+      <button type="button" class="thema-knop" aria-pressed="false" aria-label="Donker thema"><span class="thema-teken" aria-hidden="true">&#9680;</span><span class="thema-tekst">Donker</span></button>
     </div>
 
     <!-- Deze horen niet bij de fasereeks: het zijn doorsneden door het
@@ -921,7 +1025,9 @@
       <li><button class="tab" role="tab" id="t10" data-hash="productlijst" aria-controls="p10" aria-selected="false">Productlijst</button></li>
       <li><button class="tab" role="tab" id="t11" data-hash="opzet-pages" aria-controls="p11" aria-selected="false">Opzet pages</button></li>
       <li><button class="tab" role="tab" id="t12" data-hash="merch" aria-controls="p12" aria-selected="false">Merch</button></li>
+      <li><button class="tab" role="tab" id="t14" data-hash="video" aria-controls="p14" aria-selected="false">Video</button></li>
       <li><button class="tab" role="tab" id="t13" data-hash="koppelingen" aria-controls="p13" aria-selected="false">Koppelingen</button></li>
+      <li><button class="tab" role="tab" id="t8" data-hash="features" aria-controls="p8" aria-selected="false">Features</button></li>
       <li class="lijn"><a class='uit' href='https://casebuilder.demo.rokxgroup.com/home-schoon.html' rel='noopener' target='_blank'>Final design<span class="pijl">&#8599;</span></a></li>
       <li><a class='uit' href='/mockups/header-varianten' rel='noopener' target='_blank'>1st draft design<span class="pijl">&#8599;</span></a></li>
       <li><a class='uit' href='/mockups/overzicht#componenten' rel='noopener' target='_blank'>Componenten<span class="pijl">&#8599;</span></a></li>
@@ -1016,7 +1122,7 @@
       <div class="urgent" style="margin-top:18px">
         <h3>Lees dit als het plan van juli, niet als de stand van nu</h3>
         <p><strong>Plan en werkelijkheid lopen uiteen.</strong> Deze fase beschrijft het advies uit het architectuurvoorstel. Wat er sinds augustus daadwerkelijk staat, wijkt daarvan af &mdash; en dat is bewust:</p>
-        <p><strong>Medusa draait self-hosted</strong> in Docker op een VPS in Neurenberg, niet in Medusa Cloud. Managed hosting is nog een open keuze. <strong>Er is geen eigen middleware</strong>: de site praat rechtstreeks met Medusa, en de prijs van een configuratie halen we server-side op bij de read-API van CaseBuilder. <strong>Er zijn geen koppelingen</strong> met Ridder of cb_core_v2.</p>
+        <p><strong>Medusa draait self-hosted</strong> in Docker op een VPS in Neurenberg, niet in Medusa Cloud. Managed hosting is nog een open keuze. <strong>De eigen Casebuilder API-middleware uit opdracht 1595 hoort w&eacute;l bij de MVP</strong> en wordt gebouwd; de prijs van een configuratie halen we server-side op bij de read-API van CaseBuilder. <strong>Er zijn geen koppelingen</strong> met Ridder of cb_core_v2.</p>
         <p><strong>De betaalprovider is Stripe</strong> (besloten op 28 september). Tot de koppeling er is, loopt afrekenen op de handmatige provider van Medusa en wordt er dus niets afgeschreven. <strong>Een PIM is niet gekozen</strong>; dat hangt aan de vraag of Bol, Amazon en eBay een echt doel zijn. <strong>Orders gaan nu nog met de hand naar productie</strong>: een medewerker van CaseBuilder neemt het configuratie-id over uit onze Medusa-admin. Straks haalt het ERP van CaseBuilder de orders zelf op, zoals nu bij Magento. Zie <a href="#koppelingen">Koppelingen</a>.</p>
       </div>
       <div class="srcrow">
@@ -1314,18 +1420,21 @@
       <div class="sec-head">
         <span class="eyebrow">Toetsmomenten</span>
         <h2>Milestones</h2>
-        <p>Chronologisch, met de stand per 12 september. Vier zijn afgerond, één loopt, één wacht op CaseBuilder, één vervalt voor de MVP en de rest staat gepland.</p>
+        <p>Chronologisch, met de stand per 28 september. Vier zijn afgerond, vijf lopen, &eacute;&eacute;n is deels gedaan &mdash; de rest wacht op CaseBuilder &mdash; en drie staan gepland.</p>
       </div>
       <div class="mtiles">
         <div class="mt af"><div class="mtop"><span class="mn">1</span><h4>Tool set-up klaar</h4><p>Vercel-project, Sanity-basisinrichting en de bevestigde stack: Medusa, Sanity, Next.js.</p></div><span class="tag">afgerond</span></div>
         <div class="mt af"><div class="mtop"><span class="mn">2a</span><h4>Minimale frontend om een geconfigureerd product te bestellen</h4><p>Gebouwd: productpagina, winkelwagen, afrekenen en de orderpagina staan in de klantrepo (PR #12 en #16). De configurator-embed loopt via <strong>postMessage</strong> &mdash; hij stuurt een configuratie-id, wij halen de prijs server-side op bij de read-API van CaseBuilder. Geen POST-integratie dus.</p></div><span class="tag">afgerond</span></div>
-        <div class="mt cb"><div class="mtop"><span class="mn">2b</span><h4>We zien de order terug in het webshopportaal</h4><p>Hangt op het Magento-orderendpoint en de watchdog-koppeling met cb_core_v2 — beide van CaseBuilder.</p></div><span class="tag">wacht op cb</span></div>
+        <div class="mt deels"><div class="mtop"><span class="mn">2b</span><h4>We zien de order terug in het webshopportaal</h4><p>De order komt binnen in <strong>Medusa</strong> en is daar zichtbaar in de admin, voorlopig als onbetaald. Wat nog ontbreekt is de doorgifte naar het portaal van CaseBuilder: het Magento-orderendpoint en de watchdog-koppeling met cb_core_v2 &mdash; beide van CaseBuilder.</p></div><span class="tag">deels &middot; rest wacht op cb</span></div>
         <div class="mt af"><div class="mtop"><span class="mn">3</span><h4>Stresstest — afgerond</h4><p>Medusa blijft binnen alle grenzen; het knelpunt zit in de frontend, die álle producten ophaalt en in het geheugen filtert. De oorzaak is bekend en de drie ingrepen staan vast — dat is <strong>bouwwerk, geen onderzoek meer</strong>.</p></div><span class="tag">afgerond</span></div>
         <div class="mt af"><div class="mtop"><span class="mn">4</span><h4>Sitemap, wireframes en user flows uitgestippeld</h4><p>Negentien sjablonen, twintig besteltaken en de volledige nieuwe boom liggen er; alle sjablonen zijn getekend.</p></div><span class="tag">afgerond</span></div>
-        <div class="mt gepland"><div class="mtop"><span class="mn">4</span><h4>API en endpoint klaar</h4><p>De eigen Casebuilder API-middleware uit opdracht 1595 zit <strong>niet</strong> in de MVP: de site praat rechtstreeks met Medusa, en de prijs van een configuratie halen we server-side op bij de read-API van CaseBuilder. Blijft staan als plan voor later.</p></div><span class="tag">vervalt voor mvp</span></div>
-        <div class="mt gepland"><div class="mtop"><span class="mn">4</span><h4>Hoofdtemplates staan in de CMS</h4><p>Sanity-templates en de blokkenbibliotheek — oktober.</p></div><span class="tag">gepland</span></div>
+        <div class="mt loopt"><div class="mtop"><span class="mn">4</span><h4>Productcategorie&euml;n webshop bepaald</h4><p>Uit het concurrentenonderzoek ligt er een eerste indeling: welk cluster een shopcategorie wordt, welk een filter en welk een optie. Nog vast te leggen met CaseBuilder. Zie <a href="#ko-site">Van onderzoek naar site</a>.</p></div><span class="tag">loopt</span></div>
+        <div class="mt loopt"><div class="mtop"><span class="mn">4</span><h4>L1-producten geselecteerd</h4><p>Welke cases als kant-en-klaar product in de shop komen: vaste maat, alleen kleur en logo. De zeven uit de offerte van Joran zijn de eerste kandidaten. Zie <a href="#ko-l1">het uitgewerkte voorbeeld</a>.</p></div><span class="tag">loopt</span></div>
+        <div class="mt loopt"><div class="mtop"><span class="mn">4</span><h4>API en endpoint klaar</h4><p>De eigen Casebuilder API-middleware uit opdracht 1595 hoort <strong>bij de MVP</strong> en wordt nu gebouwd. De prijs van een configuratie halen we server-side op bij de read-API van CaseBuilder.</p></div><span class="tag">loopt</span></div>
+        <div class="mt loopt"><div class="mtop"><span class="mn">4</span><h4>Hoofdtemplates staan in de CMS</h4><p>Sanity-templates en de blokkenbibliotheek &mdash; oktober.</p></div><span class="tag">loopt</span></div>
         <div class="mt loopt"><div class="mtop"><span class="mn">5a</span><h4>Designprototype klaar</h4><p>Alle negentien sjablonen hebben een ontwerp. De laatste vier &mdash; account, afrekenen, bevestiging en de foutpagina &mdash; zijn op 15 september getekend.</p></div><span class="tag">loopt</span></div>
         <div class="mt gepland"><div class="mtop"><span class="mn">5b</span><h4>Website usability-test</h4><p>Nog niet belegd. Vraagt een werkend prototype en deelnemers uit de doelgroep.</p></div><span class="tag">te plannen</span></div>
+        <div class="mt gepland"><div class="mtop"><span class="mn">6</span><h4>Eigen beeldmateriaal: drone en fabriekshoot</h4><p>Uit het videojaarplan (oktober 2026 &ndash; september 2027). Voor de nieuwe website beginnen we met twee stappen: in oktober een <strong>dronevlucht</strong> over het pand, de omgeving, de fabriek en de logistiek, voor snel bewegend materiaal; daarna, in oktober/november, &eacute;&eacute;n <strong>volledige draaidag in de fabriek</strong> met tegelijk fotografie. Samen vormen ze de basisset beeldmateriaal van CaseBuilder. Zie <a href="#video">de uitwerking</a>.</p></div><span class="tag">gepland &middot; okt/nov</span></div>
         <div class="mt gepland"><div class="mtop"><span class="mn">6</span><h4>Eerste contentpagina&#39;s live</h4><p>Vraagt de blokkenbibliotheek én de vertaalbeslissing — beide staan nog open.</p></div><span class="tag">gepland</span></div>
       </div>
     </section>
@@ -1422,14 +1531,14 @@
       <div class="sec-head">
         <span class="eyebrow">Augustus en september</span>
         <h2>Wat liep, en waar het staat</h2>
-        <p>Vier sporen tegelijk: set-up, cms en design, webshop, en de api-contracten. Dit document zit in het eerste blok. De webshop en de configurator-embed zijn inmiddels af; het API-skeleton vervalt voor de MVP, en het klantportaal is niet gestart.</p>
+        <p>Vier sporen tegelijk: set-up, cms en design, webshop, en de api-contracten. Dit document zit in het eerste blok. De webshop en de configurator-embed zijn inmiddels af; het API-skeleton hoort bij de MVP en wordt gebouwd, en het klantportaal is niet gestart.</p>
       </div>
       <div class="track">
         <div class="item"><span class="when">aug</span><span class="what">User flows, sitemap, wireframes, productcategorieën<small>Dit document — zie de ontwerpfase</small></span><span class="st"><span class="chip chip-move">loopt</span></span></div>
         <div class="item"><span class="when">aug</span><span class="what">Design frontend</span><span class="st"><span class="chip chip-move">loopt</span></span></div>
-        <div class="item"><span class="when">aug</span><span class="what">Casebuilder API skeleton<small>Vervalt voor de MVP: geen eigen middleware, de site praat rechtstreeks met Medusa</small></span><span class="st"><span class="chip chip-open">vervalt</span></span></div>
+        <div class="item"><span class="when">aug</span><span class="what">Casebuilder API skeleton<small>Hoort bij de MVP en wordt gebouwd &mdash; zie de milestone &ldquo;API en endpoint klaar&rdquo;</small></span><span class="st"><span class="chip chip-move">loopt</span></span></div>
         <div class="item"><span class="when">aug</span><span class="what">Definitieve datastroom-diagram</span><span class="st"><span class="chip chip-move">loopt</span></span></div>
-        <div class="item"><span class="when">aug</span><span class="what">API-contracten casebuilder api vastleggen<small>Vervalt met het skeleton; wat we nodig hebben staat in de vier vragen aan Gert</small></span><span class="st"><span class="chip chip-open">vervalt</span></span></div>
+        <div class="item"><span class="when">aug</span><span class="what">API-contracten casebuilder api vastleggen<small>Hoort bij het skeleton; wat we nodig hebben staat in de vier vragen aan Gert</small></span><span class="st"><span class="chip chip-move">loopt</span></span></div>
         <div class="item"><span class="when">aug</span><span class="what">Medusa webshop skeleton<small>Gebouwd: catalogus, foto's, bedragen, afrekenen en het overzicht met filters (PR #13 t/m #19)</small></span><span class="st"><span class="chip chip-keep">af</span></span></div>
         <div class="item"><span class="when">aug</span><span class="what">Configurator iframe-embed<small>Gebouwd in PR #12. Geen POST maar postMessage: de configurator stuurt een configuratie-id, wij halen de prijs server-side op</small></span><span class="st"><span class="chip chip-keep">af</span></span></div>
         <div class="item"><span class="when">aug</span><span class="what">Prototype klantportaal<small>Niet gestart: er is geen account- of portaalroute in de site, alleen de bevestigingspagina van een order</small></span><span class="st"><span class="chip chip-open">niet gestart</span></span></div>
@@ -3328,6 +3437,152 @@
       <div class="cards" id="ko-shop"></div>
     </section>
 
+    <!-- ══ Stap 8 · het eerste echte L1-product ══════════════════════════
+         De zeven cases uit de offerte die Joran op 11 september 2026 mailde
+         (opgesteld 21 oktober 2024) zijn de eerste producten waarvan we alle gegevens
+         echt hebben: vaste maat, vaste prijs, volledige specificatie. Eén
+         is helemaal uitgewerkt, zodat te zien is welk veld van de offerte
+         waar op de site landt — en welke velden de offerte niet geeft.
+         De productgegevens staan hier vast: de offerte is een bevroren
+         document. De PDF blijft bewust buiten deze repo: die is publiek. De zoekwoorden komen uit de data, want die bewegen mee.
+         Volledige lijst met alle zeven: producten-joran/index.html.
+         ══════════════════════════════════════════════════════════════ -->
+    <section id="ko-l1">
+      <div class="sec-head">
+        <span class="eyebrow">Stap 8 &middot; van cluster naar product</span>
+        <h2 data-rail="Voorbeeld L1">Voorbeeld: een L1-product uit de offerte</h2>
+        <p>Joran stuurde een offerte met <strong>zeven kant-en-klare flightcases</strong>: vaste maten, vaste prijzen en een volledige specificatie. Dat is precies een <strong>L1-product</strong> &mdash; de klant kiest niets meer dan kleur en logo. Hieronder &eacute;&eacute;n case helemaal uitgewerkt: hoe hij in de shop staat, hoe zijn productpagina eruitziet, en welke velden de offerte nog niet geeft.</p>
+        <p class="kozacht">Alle zeven met foto en specificatie: <a class="kolink" href="producten-joran/index.html">Producten van Joran</a>. De offerte-PDF zelf staat niet in deze repo maar in Drive, onder Opdracht 1602.</p>
+      </div>
+
+      <h3>Waar de zeven landen</h3>
+      <p>Twee clusters uit het onderzoek, beide een <strong>casetype</strong>: geen eigen categoriepagina, maar een filter op de modelpagina. De zes trunccases vormen samen een maatladder; de rackcase staat er alleen voor.</p>
+      <div class="scroller">
+      <table class="tpl">
+        <thead><tr><th>Cluster</th><th class="r">Cases</th><th>Op de site</th><th>Zwaarste zoekwoord</th><th class="r">Prijs</th></tr></thead>
+        <tbody>
+          <tr><td><strong>transportkisten</strong></td><td class="num">6</td><td><code>/flightcases/trunccase</code> &middot; filter Casetype: Trunccase</td><td data-kol1-kw="transportkisten">&hellip;</td><td class="num">&euro; 279 &ndash; 579</td></tr>
+          <tr><td><strong>19 inch racks</strong></td><td class="num">1</td><td><code>/flightcases/rackcase-dubbel-deksel</code> &middot; filter Casetype: Rackcase</td><td data-kol1-kw="racks">&hellip;</td><td class="num">&euro; 489</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <p class="kozacht">De indeling wijst cluster &ldquo;19 inch racks&rdquo; naar <code>/flightcases/rackcase-enkel</code>; die van Joran heeft een dubbel deksel en hoort dus op de modelpagina ernaast (<a class="kolink" href="mockups/casetype-rackcase-dubbel-deksel-v1.html">mockup</a>). Het cluster levert de zoekwoorden voor beide.</p>
+
+      <h3>De maatladder van de trunccase</h3>
+      <p>Elke maat is een eigen product met een eigen pagina, zoals afgesproken op 11 september. De knoppen &ldquo;ook in deze maten&rdquo; wisselen tussen die pagina&rsquo;s; een maat ertussen is geen product maar een aanvraag. Het gewicht staat erbij omdat de verzendkosten erop rekenen.</p>
+      <div class="scroller">
+      <table class="tpl">
+        <thead><tr><th>Maat (buitenmaat)</th><th>Binnenmaat</th><th class="r">Gewicht</th><th>Wielen</th><th>Stapelbaar</th><th class="r">Prijs</th><th>Builder-ID</th></tr></thead>
+        <tbody>
+          <tr><td>600 &times; 400 &times; 400 mm</td><td class="mono">556 &times; 362 &times; 354</td><td class="num">12,38 kg</td><td>nee</td><td>ja, op balhoeken</td><td class="num">&euro; 279</td><td class="mono">129463</td></tr>
+          <tr><td>800 &times; 400 &times; 400 mm</td><td class="mono">756 &times; 362 &times; 354</td><td class="num">14,78 kg</td><td>nee</td><td>ja, op balhoeken</td><td class="num">&euro; 319</td><td class="mono">129464</td></tr>
+          <tr style="background:var(--accent-bg)"><td><strong>600 &times; 600 &times; 600 mm</strong></td><td class="mono">556 &times; 562 &times; 554</td><td class="num">25,71 kg</td><td>4&times; 100 mm zwenk</td><td>nee</td><td class="num"><strong>&euro; 399</strong></td><td class="mono">129460</td></tr>
+          <tr><td>800 &times; 600 &times; 600 mm</td><td class="mono">756 &times; 562 &times; 554</td><td class="num">29,22 kg</td><td>4&times; 100 mm zwenk</td><td>nee</td><td class="num">&euro; 479</td><td class="mono">129461</td></tr>
+          <tr><td>1200 &times; 600 &times; 600 mm</td><td class="mono">1156 &times; 562 &times; 554</td><td class="num">36,20 kg</td><td>4&times; 100 mm zwenk</td><td>nee</td><td class="num">&euro; 539</td><td class="mono">129462</td></tr>
+          <tr><td>1200 &times; 600 &times; 600 mm, met vakken</td><td class="mono">1156 &times; 562 &times; 554</td><td class="num">42,20 kg</td><td>4&times; 100 mm zwenk</td><td>nee</td><td class="num">&euro; 579</td><td class="mono">129465</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="kozacht">De blauwe rij is de case die hieronder is uitgewerkt. Prijzen zijn de offerteprijzen van oktober 2024, exclusief btw; voor de shop moeten ze herijkt worden.</p>
+
+      <h3>In de shop</h3>
+      <p>De kaart heeft acht velden. Vijf komen rechtstreeks uit de offerte, drie moeten we nog bepalen &mdash; die staan eronder.</p>
+      <div class="kol1">
+        <figure>
+          <div class="kodemo">
+            <div class="kodemo-im"><img src="producten-joran/beeld/129460.png" alt="Trunccase 600 bij 600 bij 600 mm, zwart, op wielen" loading="lazy"></div>
+            <div class="kodemo-bd">
+              <div class="meta">Trunccase &middot; 60 &times; 60 &times; 60</div>
+              <h4>Trunccase 600 &times; 600 &times; 600 mm</h4>
+              <p class="waar">Vaste maat met scharnierend deksel en vier wielen. Kleur en logo naar keuze.</p>
+              <div class="pr"><b>&euro; 399</b>excl. btw</div>
+              <div class="lvl">Vaste vorm &middot; alleen kleur en logo</div>
+              <div class="stk">Op bestelling &middot; gebouwd op order</div>
+            </div>
+          </div>
+          <figcaption>Nagebouwd uit <code>mockups/shop-v1</code>, klasse <code>.mod</code>. De foto komt uit de offerte-PDF.</figcaption>
+        </figure>
+        <div class="scroller">
+        <table class="tpl">
+          <thead><tr><th>Veld op de kaart</th><th>Waarde</th><th>Waar komt het vandaan</th></tr></thead>
+          <tbody>
+            <tr><td>Naam</td><td>Trunccase 600 &times; 600 &times; 600 mm</td><td>offerte: model + buitenmaat</td></tr>
+            <tr><td>Model</td><td>Trunccase</td><td>offerte, veld Model</td></tr>
+            <tr><td>Prijs</td><td>&euro; 399 excl. btw</td><td>offerte, okt 2024 &mdash; <span class="chip chip-open">herijken</span></td></tr>
+            <tr><td>Regel in klanttaal</td><td>&ldquo;Vaste maat met scharnierend deksel &hellip;&rdquo;</td><td>offerte: deksel + wielen, in klanttaal geschreven</td></tr>
+            <tr><td>Niveau</td><td>Vaste vorm &middot; alleen kleur en logo</td><td>L1, want de offerte geeft &eacute;&eacute;n vaste maat</td></tr>
+            <tr><td>Foto</td><td>uit de PDF gehaald</td><td><span class="chip chip-move">studiofoto nodig</span> &mdash; raster, geen witte achtergrond</td></tr>
+            <tr><td>Categorie en shoptab</td><td>nog kiezen</td><td><span class="chip chip-open">open</span> &mdash; een trunccase past onder AV &amp; licht, industrie en evenement</td></tr>
+            <tr><td>Voorraad of levertijd</td><td>nog onbekend</td><td><span class="chip chip-open">open</span> &mdash; staat niet in een offerte</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+
+      <h3>Op de productpagina</h3>
+      <p>De pagina in de stand L1: de kist, de prijs, drie blokken met de maat die telt, en twee keuzes. Verder niets &mdash; wie een andere maat wil, gaat naar de maatladder of naar een aanvraag.</p>
+      <div class="kopdp">
+        <p class="kruim">Shop &rsaquo; AV &amp; licht &rsaquo; Trunccase &rsaquo; 600 &times; 600 &times; 600 mm</p>
+        <span class="eyebrow">// VASTE CASE &middot; VASTE MAAT</span>
+        <h4>Trunccase 600 &times; 600 &times; 600 mm</h4>
+        <p class="lead">Een kubus van 60 bij 60 met een scharnierend deksel, waarvan de bovenste 75 mm meedraait. Onder vier zwenkwielen van 100 mm, twee met rem. 9 mm berken multiplex met zwart PVC, acht grote balhoeken en twee vlindersloten met verzet.</p>
+        <div class="prijsbalk"><b>&euro; 399</b><span>excl. btw</span><span>Builder-ID 129460</span><span>leeg 25,71 kg</span></div>
+        <div class="kowaarom">
+          <div><h5>// Binnenmaat</h5><b>556 &times; 562 &times; 554 mm</b><small>Waarvan 75 mm in het deksel. Meet je apparaat plus het schuim dat eromheen moet.</small></div>
+          <div><h5>// Wielen</h5><b>4&times; 100 mm zwenk</b><small>Twee met rem. Met wielen wordt hij 732 mm hoog &mdash; dat is de maat die door een deur moet.</small></div>
+          <div><h5>// Gewicht</h5><b>25,71 kg leeg</b><small>Boven de 23 kg van pakketvervoer: deze gaat als pallet of met een koerier.</small></div>
+        </div>
+        <div class="kokeuze">
+          <div><span class="lb">Kleur</span><div class="kostaal"><i style="background:#1A1A1A"></i><i style="background:#8C1C1C"></i><i style="background:#1C3A6B"></i><i style="background:#F2F2F2"></i></div></div>
+          <div><span class="lb">Logo</span><div class="kovak">Upload je logo &middot; SVG, PNG of JPG &mdash; wij zetten hem op het deksel</div></div>
+          <div><span class="lb">Aantal</span><div class="kovak" style="max-width:70px">1</div></div>
+          <div><span class="lb">&nbsp;</span><div><span class="chip chip-keep">In winkelwagen &rarr;</span></div></div>
+        </div>
+        <h5>// Ook in deze maten</h5>
+        <div class="komaten" style="margin-bottom:16px">
+          <a href="#ko-l1">60 &times; 40 &times; 40<br>&euro; 279</a>
+          <a href="#ko-l1">80 &times; 40 &times; 40<br>&euro; 319</a>
+          <span class="nu">60 &times; 60 &times; 60<br>&euro; 399</span>
+          <a href="#ko-l1">80 &times; 60 &times; 60<br>&euro; 479</a>
+          <a href="#ko-l1">120 &times; 60 &times; 60<br>&euro; 539</a>
+          <a href="#ko-l1">120 &times; 60 &times; 60 met vakken<br>&euro; 579</a>
+        </div>
+        <span class="kodeur"><b>Niet precies wat je zoekt?</b>Wij bouwen hem op maat. Stuur een schets, een foto of je maten &mdash; een casebouwer tekent hem uit.</span>
+      </div>
+      <p class="kozacht">Nagebouwd uit <code>mockups/product-v1</code>, stand L1 (daar zit de kist die je kunt draaien). Kleurstalen zijn een voorbeeld; welke kleuren CaseBuilder standaard levert, weten we nog niet.</p>
+
+      <h3>Wat de pagina van het onderzoek krijgt</h3>
+      <p>De tekst en de titels komen niet uit de offerte maar uit het cluster: de zoekwoorden van <strong>transportkisten</strong> bepalen waarop deze pagina gevonden moet worden.</p>
+      <div class="kosite">
+        <article class="card">
+          <p class="koseo-url">casebuilder.nl/flightcases/trunccase/600x600x600</p>
+          <dl class="koseo" id="ko-l1-seo"></dl>
+        </article>
+      </div>
+
+      <h3>Wat de offerte niet geeft</h3>
+      <p>Een offerte is geen productpagina. Dit staat er niet in en moet ergens anders vandaan komen &mdash; bij zeven cases met de hand, bij honderden uit een PIM.</p>
+      <div class="scroller">
+      <table class="tpl kogat">
+        <thead><tr><th>Wat de shop nodig heeft</th><th>In de offerte</th><th>Waar het vandaan moet komen</th></tr></thead>
+        <tbody>
+          <tr><td>Naam, model, maten, prijs</td><td class="ja">ja</td><td>Direct over te nemen; prijzen wel herijken (okt 2024).</td></tr>
+          <tr><td>Materiaal, beslag, wielen, sloten</td><td class="ja">ja</td><td>Volledig, tot op het aantal balhoeken. Dit is de specificatietabel op de pagina.</td></tr>
+          <tr><td>Gewicht</td><td class="ja">ja</td><td>Nodig voor verzendkosten. 25,71 kg leeg valt buiten pakketvervoer.</td></tr>
+          <tr><td>Foto</td><td>deels</td><td>Uit de PDF gehaald: bruikbaar om te kijken, te klein en te grijs voor de shop. Studiofoto&rsquo;s nodig, met een witte achtergrond en vier standen.</td></tr>
+          <tr><td>Categorie, shoptab, branche</td><td class="nee">nee</td><td>Wij kiezen, uit het onderzoek. Een trunccase raakt drie shoptabs; dat wordt een keuze.</td></tr>
+          <tr><td>Voorraad of levertijd</td><td class="nee">nee</td><td>CaseBuilder: zijn deze maten voorradig of worden ze per order gebouwd?</td></tr>
+          <tr><td>Kleuren en logo-opties</td><td class="nee">nee</td><td>CaseBuilder: welke paneelkleuren standaard, en wat kost een logo.</td></tr>
+          <tr><td>Titel, meta, alt-tekst, URL</td><td class="nee">nee</td><td>Uit het cluster, zie hierboven.</td></tr>
+          <tr><td>Verkooptekst</td><td class="nee">nee</td><td>Te schrijven uit de specificatie. De lead hierboven is een voorbeeld.</td></tr>
+          <tr><td>EAN of artikelnummer</td><td>deels</td><td>De Builder-ID (129460) is een intern nummer uit de configurator, geen EAN. Voor Amazon of Google Shopping is een EAN nodig.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="kozacht">Conclusie: van de tien regels hierboven vult de offerte er drie volledig, twee half en vijf helemaal niet. Die vijf zijn een vraag aan CaseBuilder of komen uit dit onderzoek. Voor zeven cases is dat handwerk van een middag; voor de hele catalogus is het de reden dat er een PIM moet komen.</p>
+    </section>
+
     <section id="ko-top">
       <div class="sec-head">
         <span class="eyebrow">Stap 5 &middot; zoekwoorden</span>
@@ -3600,6 +3855,15 @@
 
     <section>
       <div class="sec-head">
+        <span class="eyebrow">01b &middot; Beelden</span>
+        <h2 data-rail="Accessoires">Accessoires</h2>
+        <p>Dezelfde stijl op drinkgerei, sleutelhanger, multitool en gehoorbescherming. Deze komen van relatiegeschenk-leveranciers, niet van de textieldrukkers.</p>
+      </div>
+      <div class="mx-grid"><a class="mx-kaart" href="merch/beeld/11_insulated_bottle_4x5.jpg" data-mx-titel="11 &middot; Thermosfles 750 ml"><img src="merch/beeld/11_insulated_bottle_4x5.jpg" alt="Thermosfles 750 ml" loading="lazy"><span class="mx-bij"><b>11</b> Thermosfles 750 ml<em>Nieuw</em></span></a><a class="mx-kaart" href="merch/beeld/12_keychain_carabiner_4x5.jpg" data-mx-titel="12 &middot; Sleutelhanger met karabiner"><img src="merch/beeld/12_keychain_carabiner_4x5.jpg" alt="Sleutelhanger met karabiner" loading="lazy"><span class="mx-bij"><b>12</b> Sleutelhanger met karabiner<em>Nieuw</em></span></a><a class="mx-kaart" href="merch/beeld/13_multitool_4x5.jpg" data-mx-titel="13 &middot; Multitool"><img src="merch/beeld/13_multitool_4x5.jpg" alt="Multitool" loading="lazy"><span class="mx-bij"><b>13</b> Multitool<em>Nieuw</em></span></a><a class="mx-kaart" href="merch/beeld/14_camp_mug_4x5.jpg" data-mx-titel="14 &middot; Campingmok"><img src="merch/beeld/14_camp_mug_4x5.jpg" alt="Campingmok" loading="lazy"><span class="mx-bij"><b>14</b> Campingmok<em>Nieuw</em></span></a><a class="mx-kaart" href="merch/beeld/15_ear_defenders_4x5.jpg" data-mx-titel="15 &middot; Gehoorkap"><img src="merch/beeld/15_ear_defenders_4x5.jpg" alt="Gehoorkap" loading="lazy"><span class="mx-bij"><b>15</b> Gehoorkap<em>Nieuw</em></span></a></div>
+    </section>
+
+    <section>
+      <div class="sec-head">
         <span class="eyebrow">02 &middot; Beelden</span>
         <h2 data-rail="Witte variant">Witte variant</h2>
         <p>Dezelfde set in wit. Op het borstlogo na zijn dit uitsneden uit het overzichtsbord, dus klein. Na akkoord worden ze los op volle grootte gemaakt.</p>
@@ -3612,12 +3876,12 @@
       <div class="sec-head">
         <span class="eyebrow">03 &middot; Productie</span>
         <h2 data-rail="Te printen?">Is het te maken?</h2>
-        <p>Ongeveer 80% kan zoals op de beelden. Drie details moeten anders: het raster op de broek, de metalen naamplaat en alles aan de werkschoen.</p>
+        <p>Van de kleding kan ongeveer 80% zoals op de beelden; drie details moeten anders: het raster op de broek, de metalen naamplaat en alles aan de werkschoen. De accessoires kunnen allemaal, maar elk met een aanpassing.</p>
       </div>
       <div class="scroller">
       <table class="tpl">
         <thead><tr><th>Item</th><th>In het ontwerp</th><th>Techniek</th><th>Haalbaar</th><th>Opmerking</th></tr></thead>
-        <tbody><tr><td><strong>T-shirt zwart, rug</strong></td><td>KEES groot, blauwe hoekmarkering, crewregel en CB-nummer</td><td>Zeefdruk 2 kleuren, naam per persoon via DTF of flex</td><td><span class="mx-st mx-ja">Ja</span></td><td>Basis in zeefdruk, naam en nummer per persoon erbij.</td></tr><tr><td><strong>T-shirts, voorkant</strong></td><td>Borstlogo, woordmerk met BUILD / DEPLOY / SUPPORT / REPEAT</td><td>Zeefdruk of DTG</td><td><span class="mx-st mx-ja">Ja</span></td><td>Het slot in beeld 02 is het echte koffer-beslag, geen print.</td></tr><tr><td><strong>Hoodie, rug</strong></td><td>Groot CB-beeldmerk</td><td>Zeefdruk 2 kleuren</td><td><span class="mx-st mx-ja">Ja</span></td><td>Blauw vraagt een Pantone-match.</td></tr><tr><td><strong>Overall, voorkant</strong></td><td>Geborduurd logo, metalen naamplaat, reflectieband</td><td>Borduren + patch</td><td><span class="mx-st mx-aan">Met aanpassing</span></td><td>Metalen plaat wordt een geweven of rubber patch. Kies een overall met reflectieband.</td></tr><tr><td><strong>Overall, rug</strong></td><td>Logo, CASEBUILDER.COM, pijlen DEZE KANT BOVEN</td><td>DTF / stretch-transfer</td><td><span class="mx-st mx-ja">Ja</span></td><td>Transfer is de norm op werkkledingstof.</td></tr><tr><td><strong>Werkbroek CNC</strong></td><td>Raster over de dijen, liniaal 0 tot 400 mm, kniemarkering, logo</td><td>Stretch-transfer</td><td><span class="mx-st mx-aan">Met aanpassing</span></td><td>Liniaal en logo kunnen. Het volle raster breekt op de knie: alleen met eigen stof (cut &amp; sew). Advies: raster weglaten.</td></tr><tr><td><strong>Fleece</strong></td><td>Borstlogo, verticale mouwtekst</td><td>Borduren</td><td><span class="mx-st mx-ja">Ja</span></td><td>Mouwtekst minstens 6 tot 8 mm hoog.</td></tr><tr><td><strong>Pet en muts</strong></td><td>Logo voor, tekst achter, liniaal op de klep, geweven label</td><td>Borduren + print</td><td><span class="mx-st mx-ja">Ja</span></td><td>Klepliniaal eerst als proef.</td></tr><tr><td><strong>Werkschoenen</strong></td><td>Logo op de zijkant, liniaal in de zool</td><td>Geen van de drukkers</td><td><span class="mx-st mx-nee">Niet realistisch</span></td><td>Zool vraagt een eigen mal (duizenden paren). Standaard zwarte schoen met blauwe veters.</td></tr></tbody>
+        <tbody><tr><td><strong>T-shirt zwart, rug</strong></td><td>KEES groot, blauwe hoekmarkering, crewregel en CB-nummer</td><td>Zeefdruk 2 kleuren, naam per persoon via DTF of flex</td><td><span class="mx-st mx-ja">Ja</span></td><td>Basis in zeefdruk, naam en nummer per persoon erbij.</td></tr><tr><td><strong>T-shirts, voorkant</strong></td><td>Borstlogo, woordmerk met BUILD / DEPLOY / SUPPORT / REPEAT</td><td>Zeefdruk of DTG</td><td><span class="mx-st mx-ja">Ja</span></td><td>Het slot in beeld 02 is het echte koffer-beslag, geen print.</td></tr><tr><td><strong>Hoodie, rug</strong></td><td>Groot CB-beeldmerk</td><td>Zeefdruk 2 kleuren</td><td><span class="mx-st mx-ja">Ja</span></td><td>Blauw vraagt een Pantone-match.</td></tr><tr><td><strong>Overall, voorkant</strong></td><td>Geborduurd logo, metalen naamplaat, reflectieband</td><td>Borduren + patch</td><td><span class="mx-st mx-aan">Met aanpassing</span></td><td>Metalen plaat wordt een geweven of rubber patch. Kies een overall met reflectieband.</td></tr><tr><td><strong>Overall, rug</strong></td><td>Logo, CASEBUILDER.COM, pijlen DEZE KANT BOVEN</td><td>DTF / stretch-transfer</td><td><span class="mx-st mx-ja">Ja</span></td><td>Transfer is de norm op werkkledingstof.</td></tr><tr><td><strong>Werkbroek CNC</strong></td><td>Raster over de dijen, liniaal 0 tot 400 mm, kniemarkering, logo</td><td>Stretch-transfer</td><td><span class="mx-st mx-aan">Met aanpassing</span></td><td>Liniaal en logo kunnen. Het volle raster breekt op de knie: alleen met eigen stof (cut &amp; sew). Advies: raster weglaten.</td></tr><tr><td><strong>Fleece</strong></td><td>Borstlogo, verticale mouwtekst</td><td>Borduren</td><td><span class="mx-st mx-ja">Ja</span></td><td>Mouwtekst minstens 6 tot 8 mm hoog.</td></tr><tr><td><strong>Pet en muts</strong></td><td>Logo voor, tekst achter, liniaal op de klep, geweven label</td><td>Borduren + print</td><td><span class="mx-st mx-ja">Ja</span></td><td>Klepliniaal eerst als proef.</td></tr><tr><td><strong>Thermosfles</strong></td><td>Groot logo, caseBuilder.com, ml-schaal, blauwe karabiner</td><td>Full-colour UV-print</td><td><span class="mx-st mx-aan">Met aanpassing</span></td><td>Full colour kan op een blanco fles (Retulp) of Klean Kanteen (Loopper); Stanley alleen graveren op een klein vlak. De ml-schaal is decoratie: per model kalibreren of een mm-liniaal maken.</td></tr><tr><td><strong>Sleutelhanger</strong></td><td>Band met PVC-logo, liniaal 0 tot 3 cm, karabiner met blauwe schroefsluiting</td><td>Sublimatie + PVC + graveren</td><td><span class="mx-st mx-aan">Met aanpassing</span></td><td>Drie onderdelen van drie leveranciers, of &eacute;&eacute;n maatwerkmaker in Taiwan (vanaf 100). Zwart met blauwe schroefsluiting is geen standaardartikel.</td></tr><tr><td><strong>Multitool</strong></td><td>Zwarte stalen kaart, opener, inbus 6/8/10, liniaal 0 tot 5 cm</td><td>Lasergravure</td><td><span class="mx-st mx-aan">Met aanpassing</span></td><td>Standaardkaarten hebben een vaste vorm. Deze exacte vorm vraagt lasersnijden of etsen, vanaf een paar honderd stuks.</td></tr><tr><td><strong>Campingmok</strong></td><td>Logo met MILLIMETERWERK OP SNELHEID, liniaal rond de voet</td><td>360° UV-print</td><td><span class="mx-st mx-aan">Met aanpassing</span></td><td>Stanley via NL-dealers: alleen 30 &times; 65 mm achterop. Het hele ontwerp past op een Klean Kanteen (Loopper) of een blanco mok.</td></tr><tr><td><strong>Gehoorkap</strong></td><td>Logo op de kap, liniaal op de beugel, blauwe ring</td><td>Doming-sticker of tampondruk</td><td><span class="mx-st mx-aan">Met aanpassing</span></td><td>Gecertificeerde kap kopen (Peltor X5, uvex K2) en een doming-sticker. Eerst schriftelijk akkoord van de fabrikant (PBM-regels), EN 352-markering vrijlaten. Blauwe ring bestaat niet standaard.</td></tr><tr><td><strong>Werkschoenen</strong></td><td>Logo op de zijkant, liniaal in de zool</td><td>Geen van de drukkers</td><td><span class="mx-st mx-nee">Niet realistisch</span></td><td>Zool vraagt een eigen mal (duizenden paren). Standaard zwarte schoen met blauwe veters.</td></tr></tbody>
       </table>
       </div>
     </section>
@@ -3626,9 +3890,9 @@
       <div class="sec-head">
         <span class="eyebrow">04 &middot; Productie</span>
         <h2 data-rail="Drukkers">Drukkers in Nederland</h2>
-        <p>Geen enkele partij doet premium textieldruk &eacute;n werkkleding op topniveau. Advies: splitsen over twee leveranciers. Alle productlinks, prijzen en levertijden staan in het printadvies op Drive.</p>
+        <p>Geen enkele partij doet premium textieldruk, werkkleding &eacute;n accessoires op topniveau. Advies: splitsen per soort. Alle productlinks, prijzen en levertijden staan in het printadvies op Drive.</p>
       </div>
-      <div class="mx-druk"><div class="mx-drukkol"><h3>Textiel: shirts, hoodie, pet, muts</h3><ul><li><a href="https://www.morecolor.nl/en" target="_blank" rel="noopener"><b>More Color</b></a> <span class="mx-stad">Amsterdam</span><br>Premium zeefdruk en borduren, Stanley/Stella en Build Your Brand. Vanaf 15 stuks, 2 tot 3 weken. Eerste keus.</li><li><a href="https://www.katoenfabriek.nl/kleding-bedrukken" target="_blank" rel="noopener"><b>Katoenfabriek</b></a> <span class="mx-stad">Utrecht</span><br>Pantone met de hand gemengd, DTG vanaf 5, zeefdruk vanaf 25. 10 tot 14 werkdagen.</li><li><a href="https://www.groenewas.nl/" target="_blank" rel="noopener"><b>Groenewas</b></a> <span class="mx-stad">Nijmegen</span><br>Discharge-inkt voor zachte ton-sur-ton, ook Carhartt werkkleding. Vanaf 10, ongeveer 1 week.</li></ul></div><div class="mx-drukkol"><h3>Werkkleding: overall, broek, fleece, schoenen</h3><ul><li><a href="https://proforto.nl/werkkleding-borduren" target="_blank" rel="noopener"><b>Proforto</b></a> <span class="mx-stad">Nijmegen</span><br>Tricorp, Mascot, Blaklader, Snickers, eigen borduurstudio. Vanaf 1 stuk, 5 tot 7 werkdagen. Eerste keus.</li><li><a href="https://www.e-snickers.nl/productinformatie/laat-je-logo-zien/" target="_blank" rel="noopener"><b>e-Snickers</b></a> <span class="mx-stad">Groningen</span><br>Alles Snickers, altijd eerst een proefborduursel. Borduurbestand EUR 50, extra logo EUR 30.</li><li><a href="https://www.opdruq.nl/collections/bedrukte-bedrijfskleding" target="_blank" rel="noopener"><b>Opdruq</b></a> <span class="mx-stad">Utrecht</span><br>Als het één leverancier moet zijn: streetwear en werkkleding inclusief werkschoenen.</li></ul></div></div>
+      <div class="mx-druk"><div class="mx-drukkol"><h3>Textiel: shirts, hoodie, pet, muts</h3><ul><li><a href="https://www.morecolor.nl/en" target="_blank" rel="noopener"><b>More Color</b></a> <span class="mx-stad">Amsterdam</span><br>Premium zeefdruk en borduren, Stanley/Stella en Build Your Brand. Vanaf 15 stuks, 2 tot 3 weken. Eerste keus.</li><li><a href="https://www.katoenfabriek.nl/kleding-bedrukken" target="_blank" rel="noopener"><b>Katoenfabriek</b></a> <span class="mx-stad">Utrecht</span><br>Pantone met de hand gemengd, DTG vanaf 5, zeefdruk vanaf 25. 10 tot 14 werkdagen.</li><li><a href="https://www.groenewas.nl/" target="_blank" rel="noopener"><b>Groenewas</b></a> <span class="mx-stad">Nijmegen</span><br>Discharge-inkt voor zachte ton-sur-ton, ook Carhartt werkkleding. Vanaf 10, ongeveer 1 week.</li></ul></div><div class="mx-drukkol"><h3>Werkkleding: overall, broek, fleece, schoenen</h3><ul><li><a href="https://proforto.nl/werkkleding-borduren" target="_blank" rel="noopener"><b>Proforto</b></a> <span class="mx-stad">Nijmegen</span><br>Tricorp, Mascot, Blaklader, Snickers, eigen borduurstudio. Vanaf 1 stuk, 5 tot 7 werkdagen. Eerste keus.</li><li><a href="https://www.e-snickers.nl/productinformatie/laat-je-logo-zien/" target="_blank" rel="noopener"><b>e-Snickers</b></a> <span class="mx-stad">Groningen</span><br>Alles Snickers, altijd eerst een proefborduursel. Borduurbestand EUR 50, extra logo EUR 30.</li><li><a href="https://www.opdruq.nl/collections/bedrukte-bedrijfskleding" target="_blank" rel="noopener"><b>Opdruq</b></a> <span class="mx-stad">Utrecht</span><br>Als het één leverancier moet zijn: streetwear en werkkleding inclusief werkschoenen.</li></ul></div><div class="mx-drukkol"><h3>Accessoires: fles, mok, sleutelhanger, multitool, gehoorkap</h3><ul><li><a href="https://retulp.com/thermos-bottles/thermos-bottles-white-label/" target="_blank" rel="noopener"><b>Retulp</b></a> <span class="mx-stad">Apeldoorn</span><br>Nederlandse flessenmaker, blanco fles in full colour, vanaf 100 stuks, 9 werkdagen. Fles.</li><li><a href="https://www.loopper.com/personalized-water-bottles/klean-kanteen" target="_blank" rel="noopener"><b>Loopper</b></a> <span class="mx-stad">NL</span><br>Klean Kanteen in full colour of laser, vanaf 6 stuks. Mok en premium fles.</li><li><a href="https://cintapunto.nl/product/korte-sublimatie-sleutelhanger-lanyard/" target="_blank" rel="noopener"><b>Cintapunto</b></a> <span class="mx-stad">NL</span><br>Gesublimeerde sleutelhangerband met karabiner, vanaf 50 stuks. Patch via Emblemenkopen.nl.</li><li><a href="https://www.sleutelhangers.nl/product/35077-creditcard-multitool-met-20-functies" target="_blank" rel="noopener"><b>Sleutelhangers.nl</b></a> <span class="mx-stad">Tiel</span><br>Multitoolkaart met gravure in kleur. Zwarte variant: Dhr. Graveer (Wierden).</li><li><a href="https://www.domingstickers.nl/" target="_blank" rel="noopener"><b>Domingstickers.nl</b></a> <span class="mx-stad">Eindhoven e.o.</span><br>Doming-sticker voor de gehoorkap, op een Peltor X5 of uvex K2.</li></ul></div></div>
     </section>
 
     <section>
@@ -3637,7 +3901,7 @@
         <h2 data-rail="Printbestanden">Printbestanden</h2>
         <p>Vector, op ware grootte in millimeters, alle tekst omgezet naar contouren. Gebouwd uit de offici&euml;le logobestanden en de merkletters Barlow Condensed en IBM Plex Mono. Mappen heten product_drukker. Per stuk een <em>print</em>-bestand (transparant, wit is witte inkt, dit gaat naar de drukker; op een wit scherm lijkt het daarom leeg) en een <em>preview</em> op de kledingkleur om te beoordelen.</p>
       </div>
-      <div class="mx-grid mx-art"><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/tees_more-color/tee-black_back_crew-KEES_print.svg" alt="tee-black_back_crew-KEES" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">T-shirts &middot; more-color</span><b>tee-black_back_crew-KEES</b><span class="mx-maat">280 &times; 175 mm</span><p>Back, centred ~8 cm below collar. Screen print 2 colours (white + blue) or DTF. Name and CB number change per person.</p><a href="merch/artwork/tees_more-color/tee-black_back_crew-KEES_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/tees_more-color/tee-black_back_crew-KEES_print.pdf" download>Print PDF</a> <a href="merch/artwork/tees_more-color/tee-black_back_crew-KEES_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/tees_more-color/tee-black_back_crew-TEMPLATE_print.svg" alt="tee-black_back_crew-TEMPLATE" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">T-shirts &middot; more-color</span><b>tee-black_back_crew-TEMPLATE</b><span class="mx-maat">280 &times; 175 mm</span><p>Template: replace NAAM and the CB number per crew member (Barlow Condensed Bold / IBM Plex Mono Medium). Print name via DTF or flex if runs are small.</p><a href="merch/artwork/tees_more-color/tee-black_back_crew-TEMPLATE_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/tees_more-color/tee-black_back_crew-TEMPLATE_print.pdf" download>Print PDF</a> <a href="merch/artwork/tees_more-color/tee-black_back_crew-TEMPLATE_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/tees_more-color/tee-black_front_chest-logo_print.svg" alt="tee-black_front_chest-logo" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">T-shirts &middot; more-color</span><b>tee-black_front_chest-logo</b><span class="mx-maat">80 &times; 56 mm</span><p>Left chest, 80 mm wide. Screen print or embroidery. Colours: blue + white.</p><a href="merch/artwork/tees_more-color/tee-black_front_chest-logo_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/tees_more-color/tee-black_front_chest-logo_print.pdf" download>Print PDF</a> <a href="merch/artwork/tees_more-color/tee-black_front_chest-logo_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/tees_more-color/tee-black_front_crew_print.svg" alt="tee-black_front_crew" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">T-shirts &middot; more-color</span><b>tee-black_front_crew</b><span class="mx-maat">240 &times; 108 mm</span><p>Front, centred, 24 cm wide. Screen print 2 colours. Wordmark is the official caseBuilder.com logo (the renders showed an invented &quot;CaseBuilder Crew&quot; lettering).</p><a href="merch/artwork/tees_more-color/tee-black_front_crew_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/tees_more-color/tee-black_front_crew_print.pdf" download>Print PDF</a> <a href="merch/artwork/tees_more-color/tee-black_front_crew_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld mx-licht"><img src="merch/artwork/tees_more-color/tee-white_front_chest-logo_print.svg" alt="tee-white_front_chest-logo" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">T-shirts &middot; more-color</span><b>tee-white_front_chest-logo</b><span class="mx-maat">80 &times; 56 mm</span><p>Left chest, 80 mm wide. Screen print or embroidery. Colours: blue + ink #1A1A1A.</p><a href="merch/artwork/tees_more-color/tee-white_front_chest-logo_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/tees_more-color/tee-white_front_chest-logo_print.pdf" download>Print PDF</a> <a href="merch/artwork/tees_more-color/tee-white_front_chest-logo_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld mx-licht"><img src="merch/artwork/tees_more-color/tee-white_front_crew_print.svg" alt="tee-white_front_crew" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">T-shirts &middot; more-color</span><b>tee-white_front_crew</b><span class="mx-maat">240 &times; 108 mm</span><p>Front, centred, 24 cm wide. Screen print 2 colours. Wordmark is the official caseBuilder.com logo (the renders showed an invented &quot;CaseBuilder Crew&quot; lettering).</p><a href="merch/artwork/tees_more-color/tee-white_front_crew_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/tees_more-color/tee-white_front_crew_print.pdf" download>Print PDF</a> <a href="merch/artwork/tees_more-color/tee-white_front_crew_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/hoodie_more-color/hoodie-black_back_logo_print.svg" alt="hoodie-black_back_logo" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Hoodie &middot; more-color</span><b>hoodie-black_back_logo</b><span class="mx-maat">300 &times; 212 mm</span><p>Back, centred ~12 cm below hood seam, 30 cm wide. Screen print 2 colours (blue + white).</p><a href="merch/artwork/hoodie_more-color/hoodie-black_back_logo_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/hoodie_more-color/hoodie-black_back_logo_print.pdf" download>Print PDF</a> <a href="merch/artwork/hoodie_more-color/hoodie-black_back_logo_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/hoodie_more-color/hoodie-black_front_chest-logo_print.svg" alt="hoodie-black_front_chest-logo" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Hoodie &middot; more-color</span><b>hoodie-black_front_chest-logo</b><span class="mx-maat">80 &times; 56 mm</span><p>Left chest, 80 mm. Embroidery or screen print.</p><a href="merch/artwork/hoodie_more-color/hoodie-black_front_chest-logo_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/hoodie_more-color/hoodie-black_front_chest-logo_print.pdf" download>Print PDF</a> <a href="merch/artwork/hoodie_more-color/hoodie-black_front_chest-logo_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/cap_more-color/cap-black_front_logo_print.svg" alt="cap-black_front_logo" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Pet &middot; more-color</span><b>cap-black_front_logo</b><span class="mx-maat">60 &times; 42 mm</span><p>Front panel, 60 mm wide. Embroidery (blue + white thread).</p><a href="merch/artwork/cap_more-color/cap-black_front_logo_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/cap_more-color/cap-black_front_logo_print.pdf" download>Print PDF</a> <a href="merch/artwork/cap_more-color/cap-black_front_logo_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/cap_more-color/cap-black_back_text_print.svg" alt="cap-black_back_text" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Pet &middot; more-color</span><b>cap-black_back_text</b><span class="mx-maat">72 &times; 18 mm</span><p>Back, above strap opening. Embroidery, white thread, cap height 6 mm (minimum for clean lettering).</p><a href="merch/artwork/cap_more-color/cap-black_back_text_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/cap_more-color/cap-black_back_text_print.pdf" download>Print PDF</a> <a href="merch/artwork/cap_more-color/cap-black_back_text_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/cap_more-color/cap-black_brim-ruler_print.svg" alt="cap-black_brim-ruler" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Pet &middot; more-color</span><b>cap-black_brim-ruler</b><span class="mx-maat">164 &times; 15 mm</span><p>Along the front edge of the brim, 1:1 scale (real millimetres). DTF or pad print, ask for a sample: the brim is curved.</p><a href="merch/artwork/cap_more-color/cap-black_brim-ruler_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/cap_more-color/cap-black_brim-ruler_print.pdf" download>Print PDF</a> <a href="merch/artwork/cap_more-color/cap-black_brim-ruler_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/beanie_more-color/beanie-black_woven-label_print.svg" alt="beanie-black_woven-label" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Muts &middot; more-color</span><b>beanie-black_woven-label</b><span class="mx-maat">50 &times; 30 mm</span><p>Woven label 50 x 30 mm, black base, logo blue + white. Sewn on the cuff. Woven labels usually from ~100 pcs; embroidery is the alternative.</p><a href="merch/artwork/beanie_more-color/beanie-black_woven-label_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/beanie_more-color/beanie-black_woven-label_print.pdf" download>Print PDF</a> <a href="merch/artwork/beanie_more-color/beanie-black_woven-label_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/coverall_proforto/coverall-black_front_chest-logo_print.svg" alt="coverall-black_front_chest-logo" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Overall &middot; proforto</span><b>coverall-black_front_chest-logo</b><span class="mx-maat">90 &times; 64 mm</span><p>Left chest (as worn), 90 mm wide, opposite the name patch. Embroidery (blue + white).</p><a href="merch/artwork/coverall_proforto/coverall-black_front_chest-logo_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/coverall_proforto/coverall-black_front_chest-logo_print.pdf" download>Print PDF</a> <a href="merch/artwork/coverall_proforto/coverall-black_front_chest-logo_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/coverall_proforto/coverall-black_back_upper_print.svg" alt="coverall-black_back_upper" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Overall &middot; proforto</span><b>coverall-black_back_upper</b><span class="mx-maat">260 &times; 168 mm</span><p>Back, between shoulder blades, 26 cm wide. DTF or stretch transfer (not rigid screen print on workwear fabric).</p><a href="merch/artwork/coverall_proforto/coverall-black_back_upper_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/coverall_proforto/coverall-black_back_upper_print.pdf" download>Print PDF</a> <a href="merch/artwork/coverall_proforto/coverall-black_back_upper_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/coverall_proforto/coverall-black_back_lower-arrows_print.svg" alt="coverall-black_back_lower-arrows" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Overall &middot; proforto</span><b>coverall-black_back_lower-arrows</b><span class="mx-maat">124 &times; 46 mm</span><p>Back, just below the waist seam, 12 cm wide. DTF or stretch transfer, white.</p><a href="merch/artwork/coverall_proforto/coverall-black_back_lower-arrows_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/coverall_proforto/coverall-black_back_lower-arrows_print.pdf" download>Print PDF</a> <a href="merch/artwork/coverall_proforto/coverall-black_back_lower-arrows_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/coverall_proforto/coverall-black_front_name-patch_print.svg" alt="coverall-black_front_name-patch" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Overall &middot; proforto</span><b>coverall-black_front_name-patch</b><span class="mx-maat">90 &times; 32 mm</span><p>Right chest (as worn). Name plate 90 x 32 mm as in render 03: CASEBUILDER.COM over the CB number. Make it as a woven or rubber (PVC) patch in metal grey with velcro, or engrave it on aluminium. CB number per person.</p><a href="merch/artwork/coverall_proforto/coverall-black_front_name-patch_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/coverall_proforto/coverall-black_front_name-patch_print.pdf" download>Print PDF</a> <a href="merch/artwork/coverall_proforto/coverall-black_front_name-patch_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/trousers_proforto/trousers-black_side-ruler-0-400mm_print.svg" alt="trousers-black_side-ruler-0-400mm" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Werkbroek &middot; proforto</span><b>trousers-black_side-ruler-0-400mm</b><span class="mx-maat">418 &times; 21 mm</span><p>Outer leg, from pocket downwards, true 1:1 scale (0 to 400 mm). Stretch transfer. 1 mm ticks left out on purpose (too fine for transfer).</p><a href="merch/artwork/trousers_proforto/trousers-black_side-ruler-0-400mm_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/trousers_proforto/trousers-black_side-ruler-0-400mm_print.pdf" download>Print PDF</a> <a href="merch/artwork/trousers_proforto/trousers-black_side-ruler-0-400mm_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/trousers_proforto/trousers-black_thigh-pocket-logo_print.svg" alt="trousers-black_thigh-pocket-logo" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Werkbroek &middot; proforto</span><b>trousers-black_thigh-pocket-logo</b><span class="mx-maat">60 &times; 42 mm</span><p>Thigh pocket flap, 60 mm. Embroidery or transfer.</p><a href="merch/artwork/trousers_proforto/trousers-black_thigh-pocket-logo_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/trousers_proforto/trousers-black_thigh-pocket-logo_print.pdf" download>Print PDF</a> <a href="merch/artwork/trousers_proforto/trousers-black_thigh-pocket-logo_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/trousers_proforto/trousers-black_knee-corner-marks_print.svg" alt="trousers-black_knee-corner-marks" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Werkbroek &middot; proforto</span><b>trousers-black_knee-corner-marks</b><span class="mx-maat">110 &times; 90 mm</span><p>Optional, on the knee-pad pocket. Stretch transfer, white. The full thigh grid from the render is left out: not durable on stock trousers.</p><a href="merch/artwork/trousers_proforto/trousers-black_knee-corner-marks_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/trousers_proforto/trousers-black_knee-corner-marks_print.pdf" download>Print PDF</a> <a href="merch/artwork/trousers_proforto/trousers-black_knee-corner-marks_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/fleece_proforto/fleece-black_front_chest-logo_print.svg" alt="fleece-black_front_chest-logo" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Fleece &middot; proforto</span><b>fleece-black_front_chest-logo</b><span class="mx-maat">80 &times; 56 mm</span><p>Left chest, 80 mm. Embroidery only on fleece (blue + white thread), with water-soluble topping.</p><a href="merch/artwork/fleece_proforto/fleece-black_front_chest-logo_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/fleece_proforto/fleece-black_front_chest-logo_print.pdf" download>Print PDF</a> <a href="merch/artwork/fleece_proforto/fleece-black_front_chest-logo_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/fleece_proforto/fleece-black_sleeve-text_horizontal_print.svg" alt="fleece-black_sleeve-text_horizontal" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Fleece &middot; proforto</span><b>fleece-black_sleeve-text_horizontal</b><span class="mx-maat">131 &times; 7 mm</span><p>Sleeve text, embroidery, cap height 7 mm (6 mm is the minimum on fleece). Placed vertically on the left sleeve, reading top to bottom as in the render: see the _vertical file.</p><a href="merch/artwork/fleece_proforto/fleece-black_sleeve-text_horizontal_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/fleece_proforto/fleece-black_sleeve-text_horizontal_print.pdf" download>Print PDF</a> <a href="merch/artwork/fleece_proforto/fleece-black_sleeve-text_horizontal_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/fleece_proforto/fleece-black_sleeve-text_vertical_print.svg" alt="fleece-black_sleeve-text_vertical" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Fleece &middot; proforto</span><b>fleece-black_sleeve-text_vertical</b><span class="mx-maat">7 &times; 131 mm</span><p>Same text rotated for placement, reading top to bottom (letter tops facing away from the body), as in the render.</p><a href="merch/artwork/fleece_proforto/fleece-black_sleeve-text_vertical_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/fleece_proforto/fleece-black_sleeve-text_vertical_print.pdf" download>Print PDF</a> <a href="merch/artwork/fleece_proforto/fleece-black_sleeve-text_vertical_print.svg" download>Print SVG</a></div></div></div>
+      <div class="mx-grid mx-art"><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/tees_more-color/tee-black_back_crew-KEES_print.svg" alt="tee-black_back_crew-KEES" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">T-shirts &middot; more-color</span><b>tee-black_back_crew-KEES</b><span class="mx-maat">280 &times; 175 mm</span><p>Back, centred ~8 cm below collar. Screen print 2 colours (white + blue) or DTF. Name and CB number change per person.</p><a href="merch/artwork/tees_more-color/tee-black_back_crew-KEES_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/tees_more-color/tee-black_back_crew-KEES_print.pdf" download>Print PDF</a> <a href="merch/artwork/tees_more-color/tee-black_back_crew-KEES_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/tees_more-color/tee-black_back_crew-TEMPLATE_print.svg" alt="tee-black_back_crew-TEMPLATE" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">T-shirts &middot; more-color</span><b>tee-black_back_crew-TEMPLATE</b><span class="mx-maat">280 &times; 175 mm</span><p>Template: replace NAAM and the CB number per crew member (Barlow Condensed Bold / IBM Plex Mono Medium). Print name via DTF or flex if runs are small.</p><a href="merch/artwork/tees_more-color/tee-black_back_crew-TEMPLATE_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/tees_more-color/tee-black_back_crew-TEMPLATE_print.pdf" download>Print PDF</a> <a href="merch/artwork/tees_more-color/tee-black_back_crew-TEMPLATE_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/tees_more-color/tee-black_front_chest-logo_print.svg" alt="tee-black_front_chest-logo" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">T-shirts &middot; more-color</span><b>tee-black_front_chest-logo</b><span class="mx-maat">80 &times; 56 mm</span><p>Left chest, 80 mm wide. Screen print or embroidery. Colours: blue + white.</p><a href="merch/artwork/tees_more-color/tee-black_front_chest-logo_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/tees_more-color/tee-black_front_chest-logo_print.pdf" download>Print PDF</a> <a href="merch/artwork/tees_more-color/tee-black_front_chest-logo_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/tees_more-color/tee-black_front_crew_print.svg" alt="tee-black_front_crew" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">T-shirts &middot; more-color</span><b>tee-black_front_crew</b><span class="mx-maat">240 &times; 108 mm</span><p>Front, centred, 24 cm wide. Screen print 2 colours. Wordmark is the official caseBuilder.com logo (the renders showed an invented &quot;CaseBuilder Crew&quot; lettering).</p><a href="merch/artwork/tees_more-color/tee-black_front_crew_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/tees_more-color/tee-black_front_crew_print.pdf" download>Print PDF</a> <a href="merch/artwork/tees_more-color/tee-black_front_crew_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld mx-licht"><img src="merch/artwork/tees_more-color/tee-white_front_chest-logo_print.svg" alt="tee-white_front_chest-logo" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">T-shirts &middot; more-color</span><b>tee-white_front_chest-logo</b><span class="mx-maat">80 &times; 56 mm</span><p>Left chest, 80 mm wide. Screen print or embroidery. Colours: blue + ink #1A1A1A.</p><a href="merch/artwork/tees_more-color/tee-white_front_chest-logo_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/tees_more-color/tee-white_front_chest-logo_print.pdf" download>Print PDF</a> <a href="merch/artwork/tees_more-color/tee-white_front_chest-logo_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld mx-licht"><img src="merch/artwork/tees_more-color/tee-white_front_crew_print.svg" alt="tee-white_front_crew" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">T-shirts &middot; more-color</span><b>tee-white_front_crew</b><span class="mx-maat">240 &times; 108 mm</span><p>Front, centred, 24 cm wide. Screen print 2 colours. Wordmark is the official caseBuilder.com logo (the renders showed an invented &quot;CaseBuilder Crew&quot; lettering).</p><a href="merch/artwork/tees_more-color/tee-white_front_crew_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/tees_more-color/tee-white_front_crew_print.pdf" download>Print PDF</a> <a href="merch/artwork/tees_more-color/tee-white_front_crew_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/hoodie_more-color/hoodie-black_back_logo_print.svg" alt="hoodie-black_back_logo" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Hoodie &middot; more-color</span><b>hoodie-black_back_logo</b><span class="mx-maat">300 &times; 212 mm</span><p>Back, centred ~12 cm below hood seam, 30 cm wide. Screen print 2 colours (blue + white).</p><a href="merch/artwork/hoodie_more-color/hoodie-black_back_logo_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/hoodie_more-color/hoodie-black_back_logo_print.pdf" download>Print PDF</a> <a href="merch/artwork/hoodie_more-color/hoodie-black_back_logo_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/hoodie_more-color/hoodie-black_front_chest-logo_print.svg" alt="hoodie-black_front_chest-logo" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Hoodie &middot; more-color</span><b>hoodie-black_front_chest-logo</b><span class="mx-maat">80 &times; 56 mm</span><p>Left chest, 80 mm. Embroidery or screen print.</p><a href="merch/artwork/hoodie_more-color/hoodie-black_front_chest-logo_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/hoodie_more-color/hoodie-black_front_chest-logo_print.pdf" download>Print PDF</a> <a href="merch/artwork/hoodie_more-color/hoodie-black_front_chest-logo_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/cap_more-color/cap-black_front_logo_print.svg" alt="cap-black_front_logo" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Pet &middot; more-color</span><b>cap-black_front_logo</b><span class="mx-maat">60 &times; 42 mm</span><p>Front panel, 60 mm wide. Embroidery (blue + white thread).</p><a href="merch/artwork/cap_more-color/cap-black_front_logo_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/cap_more-color/cap-black_front_logo_print.pdf" download>Print PDF</a> <a href="merch/artwork/cap_more-color/cap-black_front_logo_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/cap_more-color/cap-black_back_text_print.svg" alt="cap-black_back_text" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Pet &middot; more-color</span><b>cap-black_back_text</b><span class="mx-maat">72 &times; 18 mm</span><p>Back, above strap opening. Embroidery, white thread, cap height 6 mm (minimum for clean lettering).</p><a href="merch/artwork/cap_more-color/cap-black_back_text_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/cap_more-color/cap-black_back_text_print.pdf" download>Print PDF</a> <a href="merch/artwork/cap_more-color/cap-black_back_text_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/cap_more-color/cap-black_brim-ruler_print.svg" alt="cap-black_brim-ruler" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Pet &middot; more-color</span><b>cap-black_brim-ruler</b><span class="mx-maat">164 &times; 15 mm</span><p>Along the front edge of the brim, 1:1 scale (real millimetres). DTF or pad print, ask for a sample: the brim is curved.</p><a href="merch/artwork/cap_more-color/cap-black_brim-ruler_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/cap_more-color/cap-black_brim-ruler_print.pdf" download>Print PDF</a> <a href="merch/artwork/cap_more-color/cap-black_brim-ruler_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/beanie_more-color/beanie-black_woven-label_print.svg" alt="beanie-black_woven-label" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Muts &middot; more-color</span><b>beanie-black_woven-label</b><span class="mx-maat">50 &times; 30 mm</span><p>Woven label 50 x 30 mm, black base, logo blue + white. Sewn on the cuff. Woven labels usually from ~100 pcs; embroidery is the alternative.</p><a href="merch/artwork/beanie_more-color/beanie-black_woven-label_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/beanie_more-color/beanie-black_woven-label_print.pdf" download>Print PDF</a> <a href="merch/artwork/beanie_more-color/beanie-black_woven-label_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/coverall_proforto/coverall-black_front_chest-logo_print.svg" alt="coverall-black_front_chest-logo" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Overall &middot; proforto</span><b>coverall-black_front_chest-logo</b><span class="mx-maat">90 &times; 64 mm</span><p>Left chest (as worn), 90 mm wide, opposite the name patch. Embroidery (blue + white).</p><a href="merch/artwork/coverall_proforto/coverall-black_front_chest-logo_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/coverall_proforto/coverall-black_front_chest-logo_print.pdf" download>Print PDF</a> <a href="merch/artwork/coverall_proforto/coverall-black_front_chest-logo_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/coverall_proforto/coverall-black_back_upper_print.svg" alt="coverall-black_back_upper" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Overall &middot; proforto</span><b>coverall-black_back_upper</b><span class="mx-maat">260 &times; 168 mm</span><p>Back, between shoulder blades, 26 cm wide. DTF or stretch transfer (not rigid screen print on workwear fabric).</p><a href="merch/artwork/coverall_proforto/coverall-black_back_upper_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/coverall_proforto/coverall-black_back_upper_print.pdf" download>Print PDF</a> <a href="merch/artwork/coverall_proforto/coverall-black_back_upper_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/coverall_proforto/coverall-black_back_lower-arrows_print.svg" alt="coverall-black_back_lower-arrows" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Overall &middot; proforto</span><b>coverall-black_back_lower-arrows</b><span class="mx-maat">124 &times; 46 mm</span><p>Back, just below the waist seam, 12 cm wide. DTF or stretch transfer, white.</p><a href="merch/artwork/coverall_proforto/coverall-black_back_lower-arrows_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/coverall_proforto/coverall-black_back_lower-arrows_print.pdf" download>Print PDF</a> <a href="merch/artwork/coverall_proforto/coverall-black_back_lower-arrows_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/coverall_proforto/coverall-black_front_name-patch_print.svg" alt="coverall-black_front_name-patch" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Overall &middot; proforto</span><b>coverall-black_front_name-patch</b><span class="mx-maat">90 &times; 32 mm</span><p>Right chest (as worn). Name plate 90 x 32 mm as in render 03: CASEBUILDER.COM over the CB number. Make it as a woven or rubber (PVC) patch in metal grey with velcro, or engrave it on aluminium. CB number per person.</p><a href="merch/artwork/coverall_proforto/coverall-black_front_name-patch_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/coverall_proforto/coverall-black_front_name-patch_print.pdf" download>Print PDF</a> <a href="merch/artwork/coverall_proforto/coverall-black_front_name-patch_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/trousers_proforto/trousers-black_side-ruler-0-400mm_print.svg" alt="trousers-black_side-ruler-0-400mm" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Werkbroek &middot; proforto</span><b>trousers-black_side-ruler-0-400mm</b><span class="mx-maat">418 &times; 21 mm</span><p>Outer leg, from pocket downwards, true 1:1 scale (0 to 400 mm). Stretch transfer. 1 mm ticks left out on purpose (too fine for transfer).</p><a href="merch/artwork/trousers_proforto/trousers-black_side-ruler-0-400mm_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/trousers_proforto/trousers-black_side-ruler-0-400mm_print.pdf" download>Print PDF</a> <a href="merch/artwork/trousers_proforto/trousers-black_side-ruler-0-400mm_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/trousers_proforto/trousers-black_thigh-pocket-logo_print.svg" alt="trousers-black_thigh-pocket-logo" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Werkbroek &middot; proforto</span><b>trousers-black_thigh-pocket-logo</b><span class="mx-maat">60 &times; 42 mm</span><p>Thigh pocket flap, 60 mm. Embroidery or transfer.</p><a href="merch/artwork/trousers_proforto/trousers-black_thigh-pocket-logo_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/trousers_proforto/trousers-black_thigh-pocket-logo_print.pdf" download>Print PDF</a> <a href="merch/artwork/trousers_proforto/trousers-black_thigh-pocket-logo_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/trousers_proforto/trousers-black_knee-corner-marks_print.svg" alt="trousers-black_knee-corner-marks" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Werkbroek &middot; proforto</span><b>trousers-black_knee-corner-marks</b><span class="mx-maat">110 &times; 90 mm</span><p>Optional, on the knee-pad pocket. Stretch transfer, white. The full thigh grid from the render is left out: not durable on stock trousers.</p><a href="merch/artwork/trousers_proforto/trousers-black_knee-corner-marks_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/trousers_proforto/trousers-black_knee-corner-marks_print.pdf" download>Print PDF</a> <a href="merch/artwork/trousers_proforto/trousers-black_knee-corner-marks_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/fleece_proforto/fleece-black_front_chest-logo_print.svg" alt="fleece-black_front_chest-logo" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Fleece &middot; proforto</span><b>fleece-black_front_chest-logo</b><span class="mx-maat">80 &times; 56 mm</span><p>Left chest, 80 mm. Embroidery only on fleece (blue + white thread), with water-soluble topping.</p><a href="merch/artwork/fleece_proforto/fleece-black_front_chest-logo_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/fleece_proforto/fleece-black_front_chest-logo_print.pdf" download>Print PDF</a> <a href="merch/artwork/fleece_proforto/fleece-black_front_chest-logo_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/fleece_proforto/fleece-black_sleeve-text_horizontal_print.svg" alt="fleece-black_sleeve-text_horizontal" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Fleece &middot; proforto</span><b>fleece-black_sleeve-text_horizontal</b><span class="mx-maat">131 &times; 7 mm</span><p>Sleeve text, embroidery, cap height 7 mm (6 mm is the minimum on fleece). Placed vertically on the left sleeve, reading top to bottom as in the render: see the _vertical file.</p><a href="merch/artwork/fleece_proforto/fleece-black_sleeve-text_horizontal_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/fleece_proforto/fleece-black_sleeve-text_horizontal_print.pdf" download>Print PDF</a> <a href="merch/artwork/fleece_proforto/fleece-black_sleeve-text_horizontal_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/fleece_proforto/fleece-black_sleeve-text_vertical_print.svg" alt="fleece-black_sleeve-text_vertical" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Fleece &middot; proforto</span><b>fleece-black_sleeve-text_vertical</b><span class="mx-maat">7 &times; 131 mm</span><p>Same text rotated for placement, reading top to bottom (letter tops facing away from the body), as in the render.</p><a href="merch/artwork/fleece_proforto/fleece-black_sleeve-text_vertical_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/fleece_proforto/fleece-black_sleeve-text_vertical_print.pdf" download>Print PDF</a> <a href="merch/artwork/fleece_proforto/fleece-black_sleeve-text_vertical_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/bottle_retulp/bottle-black_front_full-colour_print.svg" alt="bottle-black_front_full-colour" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Fles &middot; retulp</span><b>bottle-black_front_full-colour</b><span class="mx-maat">72 &times; 175 mm</span><p>Print area on a ~750 ml black insulated bottle, 72 x 175 mm. Full-colour UV/digital print: logo, wordmark and ml scale. The ml scale spacing is a template (linear 100 to 750 ml over 140 mm): the supplier must calibrate it to the inner volume of the chosen bottle.</p><a href="merch/artwork/bottle_retulp/bottle-black_front_full-colour_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/bottle_retulp/bottle-black_front_full-colour_print.pdf" download>Print PDF</a> <a href="merch/artwork/bottle_retulp/bottle-black_front_full-colour_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/bottle_retulp/bottle-black_front_engrave_print.svg" alt="bottle-black_front_engrave" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Fles &middot; retulp</span><b>bottle-black_front_engrave</b><span class="mx-maat">72 &times; 175 mm</span><p>Same layout, single colour for laser engraving (white = engraved, the steel shows through). No blue possible with engraving.</p><a href="merch/artwork/bottle_retulp/bottle-black_front_engrave_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/bottle_retulp/bottle-black_front_engrave_print.pdf" download>Print PDF</a> <a href="merch/artwork/bottle_retulp/bottle-black_front_engrave_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/keychain_cintapunto/keychain_logo-patch_print.svg" alt="keychain_logo-patch" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Sleutelhanger &middot; cintapunto</span><b>keychain_logo-patch</b><span class="mx-maat">30 &times; 22 mm</span><p>Rubber (PVC) or silicone patch 30 x 22 mm on the webbing strap: black base, logo blue + white. Small print: blue #0393D1 as Pantone.</p><a href="merch/artwork/keychain_cintapunto/keychain_logo-patch_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/keychain_cintapunto/keychain_logo-patch_print.pdf" download>Print PDF</a> <a href="merch/artwork/keychain_cintapunto/keychain_logo-patch_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/keychain_cintapunto/keychain_webbing-ruler-0-3cm_print.svg" alt="keychain_webbing-ruler-0-3cm" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Sleutelhanger &middot; cintapunto</span><b>keychain_webbing-ruler-0-3cm</b><span class="mx-maat">33 &times; 11 mm</span><p>Ruler 0 to 3 cm, true 1:1 scale, printed white on 25 mm black webbing (sublimation or screen print on the strap). 1 mm ticks are 0.35 mm wide: ask for a sample.</p><a href="merch/artwork/keychain_cintapunto/keychain_webbing-ruler-0-3cm_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/keychain_cintapunto/keychain_webbing-ruler-0-3cm_print.pdf" download>Print PDF</a> <a href="merch/artwork/keychain_cintapunto/keychain_webbing-ruler-0-3cm_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/keychain_cintapunto/keychain_carabiner-engrave_print.svg" alt="keychain_carabiner-engrave" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Sleutelhanger &middot; cintapunto</span><b>keychain_carabiner-engrave</b><span class="mx-maat">14 &times; 10 mm</span><p>Laser engraving on the black anodised carabiner, 14 mm wide, single colour (white = engraved, aluminium shows through).</p><a href="merch/artwork/keychain_cintapunto/keychain_carabiner-engrave_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/keychain_cintapunto/keychain_carabiner-engrave_print.pdf" download>Print PDF</a> <a href="merch/artwork/keychain_cintapunto/keychain_carabiner-engrave_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/multitool_sleutelhangers-nl/multitool_logo-ruler_colour_print.svg" alt="multitool_logo-ruler_colour" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Multitool &middot; sleutelhangers-nl</span><b>multitool_logo-ruler_colour</b><span class="mx-maat">78 &times; 32 mm</span><p>Artwork for a flat steel multitool (ruler 0 to 5 cm is true 1:1). Colour version for UV print or colour-filled engraving. Hex sizes 6/8/10 belong to the tool shape itself.</p><a href="merch/artwork/multitool_sleutelhangers-nl/multitool_logo-ruler_colour_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/multitool_sleutelhangers-nl/multitool_logo-ruler_colour_print.pdf" download>Print PDF</a> <a href="merch/artwork/multitool_sleutelhangers-nl/multitool_logo-ruler_colour_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/multitool_sleutelhangers-nl/multitool_logo-ruler_engrave_print.svg" alt="multitool_logo-ruler_engrave" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Multitool &middot; sleutelhangers-nl</span><b>multitool_logo-ruler_engrave</b><span class="mx-maat">78 &times; 32 mm</span><p>Same artwork, single colour for laser engraving (white = engraved). Minimum line 0.2 mm, text at least 1.5 mm high.</p><a href="merch/artwork/multitool_sleutelhangers-nl/multitool_logo-ruler_engrave_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/multitool_sleutelhangers-nl/multitool_logo-ruler_engrave_print.pdf" download>Print PDF</a> <a href="merch/artwork/multitool_sleutelhangers-nl/multitool_logo-ruler_engrave_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/mug_loopper/mug-black_wrap_full-colour_print.svg" alt="mug-black_wrap_full-colour" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Mok &middot; loopper</span><b>mug-black_wrap_full-colour</b><span class="mx-maat">126 &times; 64 mm</span><p>Front of a ~350 ml black camp mug. Full-colour UV print: logo lockup with MILLIMETERWERK OP SNELHEID, and a real centimetre scale 0 to 10 cm (1:1) around the base (the render showed 0 to 40 with no unit; made into a true measure).</p><a href="merch/artwork/mug_loopper/mug-black_wrap_full-colour_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/mug_loopper/mug-black_wrap_full-colour_print.pdf" download>Print PDF</a> <a href="merch/artwork/mug_loopper/mug-black_wrap_full-colour_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/mug_loopper/mug-black_wrap_engrave_print.svg" alt="mug-black_wrap_engrave" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Mok &middot; loopper</span><b>mug-black_wrap_engrave</b><span class="mx-maat">126 &times; 64 mm</span><p>Same layout, single colour for laser engraving.</p><a href="merch/artwork/mug_loopper/mug-black_wrap_engrave_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/mug_loopper/mug-black_wrap_engrave_print.pdf" download>Print PDF</a> <a href="merch/artwork/mug_loopper/mug-black_wrap_engrave_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/earmuffs_domingstickers/earmuffs-black_cup_lockup_print.svg" alt="earmuffs-black_cup_lockup" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Gehoorkap &middot; domingstickers</span><b>earmuffs-black_cup_lockup</b><span class="mx-maat">64 &times; 18 mm</span><p>On the outside of one cup, ~55 mm wide. Pad print 2 colours (blue + white) or a domed sticker. Keep clear of the ventilation/label area required by EN 352.</p><a href="merch/artwork/earmuffs_domingstickers/earmuffs-black_cup_lockup_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/earmuffs_domingstickers/earmuffs-black_cup_lockup_print.pdf" download>Print PDF</a> <a href="merch/artwork/earmuffs_domingstickers/earmuffs-black_cup_lockup_print.svg" download>Print SVG</a></div></div><div class="mx-artkaart"><div class="mx-artbeeld"><img src="merch/artwork/earmuffs_domingstickers/earmuffs-black_headband_ruler_print.svg" alt="earmuffs-black_headband_ruler" loading="lazy"></div><div class="mx-artbij"><span class="mx-groep">Gehoorkap &middot; domingstickers</span><b>earmuffs-black_headband_ruler</b><span class="mx-maat">22 &times; 62 mm</span><p>On the headband, 62 mm long: scale 0 to 50 and the text in white. Only possible if the headband has a flat printable surface; ask for a sample. The blue ring between cup and cushion comes from the model choice, not from branding.</p><a href="merch/artwork/earmuffs_domingstickers/earmuffs-black_headband_ruler_preview.pdf" target="_blank">Preview</a> <a href="merch/artwork/earmuffs_domingstickers/earmuffs-black_headband_ruler_print.pdf" download>Print PDF</a> <a href="merch/artwork/earmuffs_domingstickers/earmuffs-black_headband_ruler_print.svg" download>Print SVG</a></div></div></div>
     </section>
 
     <section>
@@ -3990,11 +4254,11 @@
         <p>Vraag 1 tot en met 6 zijn op 28 september naar Martijn gestuurd. Waar we zelf een verstandige keuze kunnen maken, staat ons voorstel erbij.</p>
       </div>
       <div class="qlist">
-        <div class="q"><span class="n">01</span><div class="body"><span class="qq">Hoe logt het ERP nu in bij het Magento-endpoint?</span><span class="why">Dan accepteert de nieuwe feed dezelfde vorm, en hoeft er aan jullie kant zo min mogelijk te veranderen.</span><span class="src">uitgezet 28 sep</span></div></div>
-        <div class="q"><span class="n">02</span><div class="body"><span class="qq">Wat betekenen de nummers van stateId, paymentMethodId en webshopId?</span><span class="why">Die nummers komen uit jullie systeem. De vertaling bouwen wij, de betekenis moet van jullie komen.</span><span class="src">uitgezet 28 sep</span></div></div>
+        <div class="q"><span class="n">01</span><div class="body"><span class="qq">Hoe logt het ERP nu in bij het Magento-endpoint?</span><span class="why">Gebeurt nu met een bearer token; de nieuwe feed sluit daarop aan.</span><span class="src">beantwoord 29 sep</span></div></div>
+        <div class="q"><span class="n">02</span><div class="body"><span class="qq">Wat betekenen de nummers van stateId, paymentMethodId en webshopId?</span><span class="why">Het zijn vaste enums uit hun systeem (order- en betaalstatussen); de nieuwe webshop krijgt webshopId NL als default en DE voor Duitstalige orders (DE/CH/AT).</span><span class="src">beantwoord 29 sep</span></div></div>
         <div class="q"><span class="n">03</span><div class="body"><span class="qq">Een echt voorbeeld van een antwoord, met korting en met een gedeeltelijke terugbetaling</span><span class="why">Voorstel: bedragen blijven de oorspronkelijke orderbedragen, een terugbetaling verandert alleen de status.</span><span class="src">uitgezet 28 sep</span></div></div>
         <div class="q"><span class="n">04</span><div class="body"><span class="qq">Is de laatste stand van een order genoeg?</span><span class="why">Voorstel: ja. Zo werkt het huidige endpoint ook.</span><span class="src">uitgezet 28 sep</span></div></div>
-        <div class="q"><span class="n">05</span><div class="body"><span class="qq">Welke velden zijn verplicht?</span><span class="why">Voorstel: verplicht is wat nodig is om te leveren, met het huisnummer als apart veld. KvK, btw-nummer en referentie zijn optioneel, anders kan een particulier niet bestellen.</span><span class="src">uitgezet 28 sep</span></div></div>
+        <div class="q"><span class="n">05</span><div class="body"><span class="qq">Welke velden zijn verplicht?</span><span class="why">Geen extra verplichte velden nu; ze houden voorlopig het voorbeeld-orderobject uit hun documentatie aan en laten later weten als er iets ontbreekt.</span><span class="src">beantwoord 29 sep</span></div></div>
         <div class="q"><span class="n">06</span><div class="body"><span class="qq">Wie zet een overschrijving op betaald?</span><span class="why">Voorstel: een medewerker in de admin van de webshop. Nog te bevestigen.</span><span class="src">uitgezet 28 sep</span></div></div>
         <div class="q"><span class="n">07</span><div class="body"><span class="qq">Vanaf welke adressen haalt het ERP op, en hoe kiest het de volgende starttijd?</span><span class="why">Voor de afzendercontrole, en om later veilig een maximum per antwoord in te stellen.</span><span class="src">nog uit te zetten</span></div></div>
       </div>
@@ -4015,6 +4279,207 @@
         <div class="item"><span class="when">Stap 5</span><span class="what">Extra velden in het afrekenen: KvK, btw-nummer, referentie, huisnummer apart<small>Hangt af van vraag 5</small></span><span class="st"><span class="chip chip-drop">cb</span></span></div>
         <div class="item"><span class="when">Stap 6</span><span class="what">Stripe voor iDEAL, creditcard en PayPal</span><span class="st"><span class="chip chip-open">gepland</span></span></div>
       </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">Planning</span>
+        <h2 data-rail="Wat nu al kan">Wat we al bouwen, en wat op antwoord wacht</h2>
+        <p>De antwoorden van CaseBuilder veranderen de vertaling naar hun formaat, niet de opbouw. Daarom beginnen we nu al met stap 1 en 2.</p>
+      </div>
+      <div class="scroller">
+      <table class="tpl">
+        <thead><tr><th>Onderdeel</th><th>Wacht op antwoord?</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Feed-tabel, bijhouden van wijzigingen en het vangnet</strong> (stap 1)</td><td>Nee.</td></tr>
+          <tr><td><strong>De route zelf, met sleutel en vertaling</strong> (stap 2)</td><td>Nee. Alleen hoe het ERP de sleutel meestuurt hangt af van vraag 1, en dat is een kleine aanpassing.</td></tr>
+          <tr><td><strong>De nummers voor status, betaalmethode en webshop</strong></td><td>Ja, vraag 2. Tot dan werken we lokaal met tijdelijke nummers.</td></tr>
+          <tr><td><strong>Kortingen en terugbetalingen in de bedragen</strong></td><td>Deels, vraag 3. We bouwen ons voorstel en leggen het vast in een test. Een ander antwoord is dan een kleine aanpassing.</td></tr>
+          <tr><td><strong>Handmatige betaalmethoden</strong> (stap 4)</td><td>Vraag 6. Om te testen zetten we een order met de hand op betaald in de admin.</td></tr>
+          <tr><td><strong>Live zetten</strong></td><td>Ja. Eerst stap 0, en de vaste adressen van CaseBuilder uit vraag 7.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Video: de externe uitwerking van het videojaarplan van George
+       (23-09-2026). Het origineel is intern; budget, productiepartners en
+       wie wat uitvoert staan er bewust niet in, want deze pagina is
+       openbaar. Alleen weglaten en herformuleren, niets toevoegen: wat hier
+       staat moet terug te vinden zijn in het jaarplan. De externe tekst
+       staat ook als los document in de Drive. -->
+  <div class="tabpanel" id="p14" role="tabpanel" aria-labelledby="t14" hidden>
+
+    <header class="masthead">
+      <span class="eyebrow">Content &middot; videojaarplan</span>
+      <h1>Een jaar video voor CaseBuilder</h1>
+      <p class="lede">Van oktober 2026 tot en met september 2027 bouwen we een eigen beeldbank en videobibliotheek, waarmee CaseBuilder structureel content kan produceren. Niet &eacute;&eacute;n losse bedrijfsfilm die jarenlang bovenaan de homepage blijft staan, maar videocontent waar CaseBuilder jaren mee kan communiceren.</p>
+      <p class="lede">Stand van 28 september 2026. De eerste twee stappen staan ook als milestone in de <a href="#bouw">bouwfase</a>.</p>
+      <nav class="mx-links"><a href="https://docs.google.com/document/d/1aePZOFHuks_e5ULHA3LgrMwg4-E_JWLnJK-dx-5k85U/edit" target="_blank" rel="noopener">Videojaarplan als document<span class="pijl">&#8599;</span></a></nav>
+    </header>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">01 &middot; Waarom</span>
+        <h2 data-rail="Waarom">Het product is simpel, de wereld eromheen niet</h2>
+        <p>Een flightcase kan overal terechtkomen: backstage bij een concert, in een fabriek, op een Dakar-rally, aan boord van een schip, bij defensie of rondom kostbare hightechapparatuur. Daar ligt het verhaal. Niet alleen laten zien wat CaseBuilder maakt, maar waarvoor het gemaakt wordt.</p>
+      </div>
+      <div class="cards">
+        <div class="card"><h3>Maken</h3><p>De fabriek laat zien <strong>hoe</strong> CaseBuilder werkt.</p></div>
+        <div class="card"><h3>Beschermen</h3><p>De flightcase laat zien <strong>wat</strong> er wordt gemaakt.</p></div>
+        <div class="card"><h3>Gebruiken</h3><p>De toepassing laat zien <strong>waarom</strong> dat ertoe doet.</p></div>
+      </div>
+      <p class="note">Dat sluit aan bij het merk: <em>Klik Klaar</em>, <em>Maken boven praten</em>, <em>Maatwerk versneld</em>. De stijl wordt daarom niet te gepolijst of corporate. Liever echte machines, mensen, aluminium, houtstof, transport, beweging, techniek en actie.</p>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">02 &middot; Waar het terechtkomt</span>
+        <h2 data-rail="Kanalen">Eén beeldbank, zeven kanalen</h2>
+        <p>Het doel is dus niet &eacute;&eacute;n video maken, maar videocontent waar CaseBuilder jaren mee kan communiceren.</p>
+      </div>
+      <div class="scroller">
+      <table class="tpl">
+        <thead><tr><th>Kanaal</th><th>Toepassing</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Website</strong></td><td>Hero-video&rsquo;s, productpagina&rsquo;s, cases</td></tr>
+          <tr><td><strong>LinkedIn</strong></td><td>Korte video&rsquo;s, cases, behind the scenes</td></tr>
+          <tr><td><strong>Sales</strong></td><td>Cases en video&rsquo;s tijdens commerci&euml;le trajecten</td></tr>
+          <tr><td><strong>SEA en social advertising</strong></td><td>Korte advertenties en snippets</td></tr>
+          <tr><td><strong>E-mail</strong></td><td>Cases, innovaties en productcontent</td></tr>
+          <tr><td><strong>Recruitment</strong></td><td>Mensen, fabriek en cultuur</td></tr>
+          <tr><td><strong>Presentaties en beurzen</strong></td><td>Sfeer-, product- en toepassingsvideo</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">03 &middot; Formats</span>
+        <h2 data-rail="Vier formats">Vier contentformats</h2>
+        <p>Vooral <strong>CaseBuilder at Work</strong> wordt groot.</p>
+      </div>
+      <div class="cards">
+        <div class="card"><h3>Inside CaseBuilder</h3><p><strong>Zo maken we het.</strong> CNC, assemblage, engineering, mensen, drone.</p></div>
+        <div class="card"><h3>CaseBuilder at Work</h3><p><strong>Hier doen we het voor.</strong> Dakar, festival, defensie, hightech, machinebouw.</p></div>
+        <div class="card"><h3>Customer Stories</h3><p><strong>Klanten vertellen waarom.</strong> Interview, toepassing en product. Bijzondere verhalen, bijvoorbeeld van een hoogwaardig technisch product, een maquettebouwer of een band.</p></div>
+        <div class="card"><h3>Shorts</h3><p><strong>Kleine verhalen uit grote producties.</strong> Reels, LinkedIn, advertenties, snippets.</p></div>
+      </div>
+      <div class="card">
+        <h3>Zo werkt At Work</h3>
+        <p>Niet &ldquo;dit is een flightcase&rdquo;, maar bijvoorbeeld: een vrachtwagen arriveert backstage. Flightcases rollen naar binnen. Lichtapparatuur wordt opgebouwd. Technici werken. Publiek stroomt binnen. De show begint. En ergens midden in dat verhaal zie je <strong>CaseBuilder.com</strong>. Daarmee wordt een kist onderdeel van een veel groter verhaal.</p>
+        <p>Voorbeelden: <a href="https://youtu.be/al7dIo7QXRE" target="_blank" rel="noopener">video 1&nbsp;&#8599;</a> &middot; <a href="https://youtu.be/22lWXbOhKhM" target="_blank" rel="noopener">video 2&nbsp;&#8599;</a></p>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">04 &middot; Eerst de website</span>
+        <h2 data-rail="Eerst de website">Startproductie voor de nieuwe website</h2>
+        <p>Voor de nieuwe website beginnen we direct met twee stappen. Samen vormen ze meteen de <strong>basisset beeldmateriaal van CaseBuilder</strong>.</p>
+      </div>
+      <div class="cards">
+        <div class="card"><h3>Quick win &middot; dronevlucht</h3><p>Oktober. Dronebeelden van het pand, de omgeving, de fabriek en de logistiek. Daarmee is er snel bewegend materiaal voor de nieuwe website.</p></div>
+        <div class="card"><h3>Grote productiedag &middot; de fabriek</h3><p>Oktober/november. Eén volledige draaidag in de fabriek: machines, CNC, engineering, assemblage, materialen, medewerkers, details, logistiek en eindproducten. <strong>Tegelijkertijd wordt er gefotografeerd.</strong> Dat is goedkoper dan later teruggaan, en foto en video passen visueel bij elkaar.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">05 &middot; Planning</span>
+        <h2 data-rail="Jaarplanning">Het jaar in twaalf maanden</h2>
+        <p>Ter illustratie. We produceren niet twaalf maanden lang dure nieuwe beelden, maar wisselen <strong>productie en distributie</strong> af.</p>
+      </div>
+      <div class="scroller">
+      <div class="htl" role="list" aria-label="Videojaarplan per maand">
+        <span class="band" style="grid-column:1 / 4">Nieuwe website</span>
+
+        <span class="m site" style="grid-column:1">okt<small>2026</small></span>
+        <span class="m site" style="grid-column:2">nov</span>
+        <span class="m site" style="grid-column:3">dec</span>
+        <span class="m" style="grid-column:4">jan<small>2027</small></span>
+        <span class="m" style="grid-column:5">feb</span>
+        <span class="m" style="grid-column:6">mrt</span>
+        <span class="m" style="grid-column:7">apr</span>
+        <span class="m" style="grid-column:8">mei</span>
+        <span class="m" style="grid-column:9">jun</span>
+        <span class="m" style="grid-column:10">jul</span>
+        <span class="m" style="grid-column:11">aug</span>
+        <span class="m" style="grid-column:12">sep</span>
+
+        <div class="hi site" role="listitem" style="grid-column:1"><b>Drone&shy;vlucht</b><span>Quick win. Website&shy;beelden, hero</span></div>
+        <div class="hi site" role="listitem" style="grid-column:2"><b>Grote fabrieks&shy;shoot</b><span>Okt/nov. Hero-film, content&shy;bank, foto&shy;grafie</span></div>
+        <div class="hi site" role="listitem" style="grid-column:3"><b>Montage en content&shy;productie</b><span>Website en socials</span></div>
+        <div class="hi" role="listitem" style="grid-column:4"><b>Customer case&nbsp;1</b><span>Casefilm, shorts, foto&rsquo;s</span></div>
+        <div class="hi" role="listitem" style="grid-column:5"><b>Content uit bestaand materiaal</b><span>LinkedIn, campagnes</span></div>
+        <div class="hi" role="listitem" style="grid-column:6"><b>Customer case&nbsp;2</b><span>Casefilm, shorts, foto&rsquo;s</span></div>
+        <div class="hi" role="listitem" style="grid-column:7"><b>Product- en kennis&shy;content</b><span>Korte inhoudelijke video&rsquo;s</span></div>
+        <div class="hi" role="listitem" style="grid-column:8"><b>Customer case&nbsp;3</b><span>Casefilm, shorts, foto&rsquo;s</span></div>
+        <div class="hi" role="listitem" style="grid-column:9"><b>Employer / people</b><span>Mensen achter CaseBuilder</span></div>
+        <div class="hi" role="listitem" style="grid-column:10"><b>Content&shy;productie</b><span>Social, advertising</span></div>
+        <div class="hi" role="listitem" style="grid-column:11"><b>Customer case&nbsp;4</b><span>Casefilm, shorts, foto&rsquo;s</span></div>
+        <div class="hi" role="listitem" style="grid-column:12"><b>Jaarfilm / nieuwe hero</b><span>High-end video. Beste materiaal samen&shy;brengen; script en storyboard al klaar okt/nov 2026</span></div>
+      </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">06 &middot; Klantcases</span>
+        <h2 data-rail="Klantcases">Klantcases worden de motor</h2>
+        <p>Gedurende het jaar selecteren we ongeveer vier klanten met een visueel interessante toepassing. Welke vier het worden hoeven we nu nog niet te bepalen: gedurende het jaar vinden we de meest interessante gelegenheid.</p>
+      </div>
+      <div class="scroller">
+      <table class="tpl">
+        <thead><tr><th>Case</th><th>Mogelijke beelden</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Events en broadcast</strong></td><td>Backstage, vrachtwagens, podium, techniek</td></tr>
+          <tr><td><strong>Dakar en motorsport</strong></td><td>Rallyauto, pit, transport, gereedschap</td></tr>
+          <tr><td><strong>Hightech</strong></td><td>Kostbare apparatuur, clean omgeving, engineering</td></tr>
+          <tr><td><strong>Industrie</strong></td><td>Machines, productie, logistiek</td></tr>
+          <tr><td><strong>Defensie</strong></td><td>Transport, robuust gebruik, apparatuur</td></tr>
+          <tr><td><strong>Marine en offshore</strong></td><td>Schepen, havens, zware omstandigheden</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="card">
+        <h3>Twee bedrijven profiteren van één draaidag</h3>
+        <p>Filmen we bij een klant van CaseBuilder, dan maken we tegelijk materiaal voor die klant zelf. Voor CaseBuilder een klantcase over het gebruik van de flightcase, voor de eindklant een bedrijfsvideo, socialcontent, fotografie of productbeelden. CaseBuilder krijgt toegang tot bijzondere locaties en toepassingen, de eindklant krijgt professioneel beeldmateriaal. <strong>De productiekosten kunnen eventueel gedeeltelijk worden gedeeld.</strong></p>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">07 &middot; Rendement</span>
+        <h2 data-rail="Eén draaidag">Eén draaidag, veel content</h2>
+        <p>Het storyboard wordt niet geschreven vanuit één film. Vooraf maken we een shotlist of contentmatrix met alle assets die we nodig hebben. Zo halen we veel meer rendement uit dezelfde crew en locatie. Een draaidag voor een klantcase moet bijvoorbeeld opleveren:</p>
+      </div>
+      <div class="track">
+        <div class="item"><span class="when">1&times;</span><span class="what">Hoofdvideo</span><span class="st"></span></div>
+        <div class="item"><span class="when">3&ndash;6&times;</span><span class="what">Korte video&rsquo;s</span><span class="st"></span></div>
+        <div class="item"><span class="when">foto</span><span class="what">Fotografie</span><span class="st"></span></div>
+        <div class="item"><span class="when">tekst</span><span class="what">Quotes</span><span class="st"></span></div>
+        <div class="item"><span class="when">verticaal</span><span class="what">Verticale content</span><span class="st"></span></div>
+        <div class="item"><span class="when">web</span><span class="what">Websitebeelden en advertentiemateriaal</span><span class="st"></span></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="eyebrow">08 &middot; Beeldtaal</span>
+        <h2 data-rail="Beeldtaal">Eén herkenbare beeldtaal</h2>
+        <p>We werken met verschillende specialisten. Dat geeft flexibiliteit, maar als iedere partij op zijn eigen manier filmt, kleurt en monteert, ontstaat er geen herkenbare CaseBuilder-stijl. Daarom leggen we vooraf één centrale beeldtaal en technische standaard vast.</p>
+      </div>
+      <div class="cards">
+        <div class="card"><h3>Video Style Guide</h3><p>Hoe CaseBuilder er in bewegend beeld uitziet: sfeer, kleur en contrast; cameravoering en beweging; close-ups, wide shots en details; belichting; slow motion en framerate; dronebeelden; typografie en logo; muziek en sound design; montage en tempo. Met voorbeelden van wat wel en niet bij CaseBuilder past.</p></div>
+        <div class="card"><h3>Technische standaard</h3><p>Opname-eisen zoals resolutie, framerate, witbalans, kleurprofiel, codec en wijze van aanleveren. Niet iedere productie hoeft met dezelfde camera, maar alle partijen werken volgens dezelfde technische spelregels. Zo zijn beelden van verschillende draaidagen later goed te combineren.</p></div>
+        <div class="card"><h3>Centrale montage en kleurcorrectie</h3><p>De finishing gebeurt zoveel mogelijk centraal: montage, kleurcorrectie, typografie, muziek en sound design in dezelfde CaseBuilder-stijl, bij voorkeur door één vaste editor/colorist.</p></div>
+        <div class="card"><h3>Eén centrale beeldbank</h3><p>Niet alleen de uiteindelijke video&rsquo;s, maar ook ruwe videobestanden, dronebeelden, fotografie, audio, projectbestanden, muziek- en gebruiksrechten en definitieve exports. Logisch gecategoriseerd, zodat het ook jaren later opnieuw te gebruiken is.</p></div>
+      </div>
+      <p class="note"><strong>Wel:</strong> echte werksituaties, beweging, materiaal, machines, details, techniek en context. <strong>Niet:</strong> generieke corporate beelden, overdreven filters, willekeurige kleurstijlen of producties die losstaan van de bestaande CaseBuilder-uitstraling.</p>
     </section>
 
   </div>
@@ -4406,6 +4871,33 @@
             (IND[c.slug].seo ? ' <code>' + e(IND[c.slug].seo) + '</code>' : '') + '</li>';
         }).join('') + '</ul></article>';
       document.getElementById('ko-shop').innerHTML = html;
+
+      // Voorbeeld L1-product (stap 8). De productgegevens staan vast in de
+      // HTML — de offerte is een bevroren document — maar de zoekwoorden
+      // komen hier uit de data, zodat ze meebewegen met een nieuwe export.
+      var spec = function (slug) {
+        return (D.clusterlijst[slug] || []).filter(function (k) { return k[1] && k[5] === 'case-specifiek'; });
+      };
+      Array.prototype.forEach.call(document.querySelectorAll('[data-kol1-kw]'), function (el) {
+        var k = spec(el.getAttribute('data-kol1-kw'))[0];
+        el.innerHTML = k ? '<strong>' + e(k[0]) + '</strong> <span class="kozacht">' + bereik(k[1]) + '</span>'
+                        : '<span class="kozacht">geen gemeten zoekwoord</span>';
+      });
+      var seo = document.getElementById('ko-l1-seo');
+      if (seo) {
+        var tk = spec('transportkisten'), hoofd = tk[0], rest = tk.slice(1, 5), it = IND.transportkisten || {};
+        var r = function (dt, dd) { return '<dt>' + dt + '</dt><dd>' + dd + '</dd>'; };
+        seo.innerHTML =
+          r('Titel', 'Trunccase 60 &times; 60 &times; 60 cm | CaseBuilder') +
+          r('H1', 'Trunccase 600 &times; 600 &times; 600 mm') +
+          r('Hoofdzoekwoord', hoofd ? '<strong>' + e(hoofd[0]) + '</strong> <span class="kozacht">' + bereik(hoofd[1]) + '</span>'
+                                    : '<span class="kozacht">geen gemeten zoekwoord</span>') +
+          r('Meeliften op', rest.length ? rest.map(function (k) { return e(k[0]) + ' <span class="kozacht">' + bereik(k[1]) + '</span>'; }).join('<br>')
+                                        : '<span class="kozacht">nog geen</span>') +
+          r('Cluster', 'transportkisten <span class="kozacht">' + e(it.demo) + '</span>') +
+          r('Modelpagina', '<code>' + e(it.seo) + '</code> <span class="kozacht">de categoriepagina erboven; deze case is er een product in</span>') +
+          r('Gevonden bij', '<span class="kozacht">' + e((D.clusterwie.transportkisten || []).map(function (x) { return NAAM[x]; }).join(', ')) + '</span>');
+      }
     })();
 
     // Overlap.
@@ -4994,6 +5486,31 @@
       if (ev.key === 'ArrowLeft') toon(i - 1);
       if (ev.key === 'ArrowRight') toon(i + 1);
     });
+  })();
+</script>
+
+<script>
+  // Licht of donker: de knop draait de huidige stand om en onthoudt hem.
+  (function () {
+    var knop = document.querySelector('.thema-knop');
+    if (!knop) return;
+    var root = document.documentElement;
+    var systeemDonker = window.matchMedia('(prefers-color-scheme: dark)');
+    function stand() { return root.dataset.theme || (systeemDonker.matches ? 'dark' : 'light'); }
+    function toon() {
+      var donker = stand() === 'dark';
+      knop.setAttribute('aria-pressed', String(donker));
+      knop.setAttribute('aria-label', donker ? 'Licht thema' : 'Donker thema');
+      knop.querySelector('.thema-tekst').textContent = donker ? 'Licht' : 'Donker';
+    }
+    knop.addEventListener('click', function () {
+      var nieuw = stand() === 'dark' ? 'light' : 'dark';
+      root.dataset.theme = nieuw;
+      try { localStorage.setItem('vgd-thema', nieuw); } catch (e) {}
+      toon();
+    });
+    systeemDonker.addEventListener('change', toon);
+    toon();
   })();
 </script>
 </body>

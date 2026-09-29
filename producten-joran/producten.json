@@ -1,0 +1,345 @@
+[
+ {
+  "bid": "129460",
+  "naam": "Trunccase L=600 x B=600 x H=600 mm",
+  "prijs": 399.0,
+  "beeld": "beeld/129460.png",
+  "spec": {
+   "Builder-ID": "129460",
+   "Materiaal": "9mm Berken PVC-Zwart en Backing zwart",
+   "Model": "Trunccase",
+   "Kwaliteitsklasse": "Standaard",
+   "Bruto binnenmaat": "L=556 x B=562 x H=554 mm, waarvan 75mm deksel",
+   "Netto binnenmaat": "L=556 x B=562 x H=554 mm",
+   "Geschatte buitenmaat": "L=600 x B=600 x H=600 mm zonder wielen, L=600 x B=600 x H=732 mm inclusief wielen",
+   "Dekseluitvoering": "Scharnierend",
+   "Sloten": "2x Vlinderslot medium met verzet",
+   "Handgrepen": "4x Inbouw handgreep",
+   "Hoeken": "8x Grote balhoek",
+   "Wielen": "2x 100mm zwenkwiel, geremd + 2x 100mm zwenkwiel, ongeremd",
+   "Stapelbaar": "Nee",
+   "Afwerking Basis": "Geheel Zwart afgewerkt",
+   "Afwerking Deksel": "Geheel Zwart afgewerkt",
+   "Overige details": "25,71kg"
+  },
+  "cluster": "transportkisten",
+  "clusternaam": "transportkisten",
+  "rol": "casetype",
+  "zoekwoorden": [
+   [
+    "opbergkist",
+    5000.0
+   ],
+   [
+    "transportkist",
+    500.0
+   ],
+   [
+    "transportkoffer",
+    500.0
+   ],
+   [
+    "stolpcase",
+    50.0
+   ],
+   [
+    "flightcase trunk",
+    50.0
+   ]
+  ]
+ },
+ {
+  "bid": "129461",
+  "naam": "Trunccase L=800 x B=600 x H=600 mm",
+  "prijs": 479.0,
+  "beeld": "beeld/129461.png",
+  "spec": {
+   "Builder-ID": "129461",
+   "Materiaal": "9mm Berken PVC-Zwart en Backing zwart",
+   "Model": "Trunccase",
+   "Kwaliteitsklasse": "Standaard",
+   "Bruto binnenmaat": "L=756 x B=562 x H=554 mm, waarvan 75mm deksel",
+   "Netto binnenmaat": "L=756 x B=562 x H=554 mm",
+   "Geschatte buitenmaat": "L=800 x B=600 x H=600 mm zonder wielen, L=800 x B=600 x H=600 mm inclusief wielen",
+   "Dekseluitvoering": "Scharnierend",
+   "Sloten": "2x Vlinderslot medium met verzet",
+   "Handgrepen": "4x Inbouw handgreep",
+   "Hoeken": "8x Grote balhoek",
+   "Wielen": "2x 100mm zwenkwiel, geremd + 2x 100mm zwenkwiel, ongeremd",
+   "Stapelbaar": "Nee",
+   "Afwerking Basis": "Geheel Zwart afgewerkt",
+   "Afwerking Deksel": "Geheel Zwart afgewerkt",
+   "Overige details": "29,22kg"
+  },
+  "cluster": "transportkisten",
+  "clusternaam": "transportkisten",
+  "rol": "casetype",
+  "zoekwoorden": [
+   [
+    "opbergkist",
+    5000.0
+   ],
+   [
+    "transportkist",
+    500.0
+   ],
+   [
+    "transportkoffer",
+    500.0
+   ],
+   [
+    "stolpcase",
+    50.0
+   ],
+   [
+    "flightcase trunk",
+    50.0
+   ]
+  ]
+ },
+ {
+  "bid": "129462",
+  "naam": "Trunccase L=1200 x B=600 x H=600 mm",
+  "prijs": 539.0,
+  "beeld": "beeld/129462.png",
+  "spec": {
+   "Builder-ID": "129462",
+   "Materiaal": "9mm Berken PVC-Zwart en Backing zwart",
+   "Model": "Trunccase",
+   "Kwaliteitsklasse": "Standaard",
+   "Bruto binnenmaat": "L=1156 x B=562 x H=554 mm, waarvan 75mm deksel",
+   "Netto binnenmaat": "L=1156 x B=562 x H=554 mm",
+   "Geschatte buitenmaat": "L=1200 x B=600 x H=600 mm zonder wielen, L=1200 x B=600 x H=732 mm inclusief wielen",
+   "Dekseluitvoering": "Scharnierend",
+   "Sloten": "2x Vlinderslot medium met verzet",
+   "Handgrepen": "4x Inbouw handgreep",
+   "Hoeken": "8x Grote balhoek",
+   "Wielen": "2x 100mm zwenkwiel, geremd + 2x 100mm zwenkwiel, ongeremd",
+   "Stapelbaar": "Nee",
+   "Afwerking Basis": "Geheel Zwart afgewerkt",
+   "Afwerking Deksel": "Geheel Zwart afgewerkt",
+   "Overige details": "36,20kg"
+  },
+  "cluster": "transportkisten",
+  "clusternaam": "transportkisten",
+  "rol": "casetype",
+  "zoekwoorden": [
+   [
+    "opbergkist",
+    5000.0
+   ],
+   [
+    "transportkist",
+    500.0
+   ],
+   [
+    "transportkoffer",
+    500.0
+   ],
+   [
+    "stolpcase",
+    50.0
+   ],
+   [
+    "flightcase trunk",
+    50.0
+   ]
+  ]
+ },
+ {
+  "bid": "129463",
+  "naam": "Trunccase L=600 x B=400 x H=400 mm",
+  "prijs": 279.0,
+  "beeld": "beeld/129463.png",
+  "spec": {
+   "Builder-ID": "129463",
+   "Materiaal": "9mm Berken PVC-Zwart en Backing zwart",
+   "Model": "Trunccase",
+   "Kwaliteitsklasse": "Standaard",
+   "Bruto binnenmaat": "L=556 x B=362 x H=354 mm, waarvan 75mm deksel",
+   "Netto binnenmaat": "L=556 x B=362 x H=354 mm",
+   "Geschatte buitenmaat": "L=600 x B=400 x H=400 mm",
+   "Dekseluitvoering": "Scharnierend",
+   "Sloten": "2x Vlinderslot medium met verzet",
+   "Handgrepen": "2x Inbouw handgreep",
+   "Hoeken": "8x Medium balhoek",
+   "Wielen": "Nee",
+   "Stapelbaar": "ja, d.m.v. 4x Medium balhoek stapelbaar",
+   "Afwerking Basis": "Geheel Zwart afgewerkt",
+   "Afwerking Deksel": "Geheel Zwart afgewerkt",
+   "Overige details": "12,38kg"
+  },
+  "cluster": "transportkisten",
+  "clusternaam": "transportkisten",
+  "rol": "casetype",
+  "zoekwoorden": [
+   [
+    "opbergkist",
+    5000.0
+   ],
+   [
+    "transportkist",
+    500.0
+   ],
+   [
+    "transportkoffer",
+    500.0
+   ],
+   [
+    "stolpcase",
+    50.0
+   ],
+   [
+    "flightcase trunk",
+    50.0
+   ]
+  ]
+ },
+ {
+  "bid": "129464",
+  "naam": "Trunccase L=800 x B=400 x H=400 mm",
+  "prijs": 319.0,
+  "beeld": "beeld/129464.png",
+  "spec": {
+   "Builder-ID": "129464",
+   "Materiaal": "9mm Berken PVC-Zwart en Backing zwart",
+   "Model": "Trunccase",
+   "Kwaliteitsklasse": "Standaard",
+   "Bruto binnenmaat": "L=756 x B=362 x H=354 mm, waarvan 75mm deksel",
+   "Netto binnenmaat": "L=756 x B=362 x H=354 mm",
+   "Geschatte buitenmaat": "L=800 x B=400 x H=400 mm",
+   "Dekseluitvoering": "Scharnierend",
+   "Sloten": "2x Vlinderslot medium met verzet",
+   "Handgrepen": "2x Inbouw handgreep",
+   "Hoeken": "8x Medium balhoek",
+   "Wielen": "Nee",
+   "Stapelbaar": "ja, d.m.v. 4x Medium balhoek stapelbaar",
+   "Afwerking Basis": "Geheel Zwart afgewerkt",
+   "Afwerking Deksel": "Geheel Zwart afgewerkt",
+   "Overige details": "14,78kg"
+  },
+  "cluster": "transportkisten",
+  "clusternaam": "transportkisten",
+  "rol": "casetype",
+  "zoekwoorden": [
+   [
+    "opbergkist",
+    5000.0
+   ],
+   [
+    "transportkist",
+    500.0
+   ],
+   [
+    "transportkoffer",
+    500.0
+   ],
+   [
+    "stolpcase",
+    50.0
+   ],
+   [
+    "flightcase trunk",
+    50.0
+   ]
+  ]
+ },
+ {
+  "bid": "129465",
+  "naam": "Trunccase L=1200 x B=600 x H=600 mm dividers",
+  "prijs": 579.0,
+  "beeld": "beeld/129465.png",
+  "spec": {
+   "Builder-ID": "129465",
+   "Materiaal": "9mm Berken PVC-Zwart en Backing zwart",
+   "Model": "Trunccase",
+   "Kwaliteitsklasse": "Standaard",
+   "Bruto binnenmaat": "L=1156 x B=562 x H=554 mm, waarvan 75mm deksel",
+   "Netto binnenmaat": "L=1156 x B=562 x H=554 mm",
+   "Geschatte buitenmaat": "L=1200 x B=600 x H=800 mm (Inclusief wielen)",
+   "Dekseluitvoering": "Scharnierend",
+   "Sloten": "2x Vlinderslot medium met verzet",
+   "Handgrepen": "4x Inbouw handgreep",
+   "Hoeken": "8x Grote balhoek",
+   "Wielen": "2x 100mm zwenkwiel, geremd + 2x 100mm zwenkwiel, ongeremd",
+   "Stapelbaar": "Nee",
+   "Afwerking Basis": "- Flightcase is voorzien van sleuven voor het maken van vakken naar keuze. Er",
+   "Afwerking Deksel": "Geheel Zwart afgewerkt",
+   "Overige details": "42,20kg"
+  },
+  "cluster": "transportkisten",
+  "clusternaam": "transportkisten",
+  "rol": "casetype",
+  "zoekwoorden": [
+   [
+    "opbergkist",
+    5000.0
+   ],
+   [
+    "transportkist",
+    500.0
+   ],
+   [
+    "transportkoffer",
+    500.0
+   ],
+   [
+    "stolpcase",
+    50.0
+   ],
+   [
+    "flightcase trunk",
+    50.0
+   ]
+  ]
+ },
+ {
+  "bid": "129466",
+  "naam": "Rackcase dubbel deksel 19 inch, 10HE, 596mm Tunnel",
+  "prijs": 489.0,
+  "beeld": "beeld/129466.png",
+  "spec": {
+   "Builder-ID": "129466",
+   "Materiaal": "9mm Berken PVC-Zwart en Backing zwart",
+   "Model": "Rackcase dubbel deksel",
+   "Kwaliteitsklasse": "Standaard",
+   "Bruto binnenmaat": "L=746 x B=502 x H=453 mm",
+   "Netto binnenmaat": "B=19 inch, H=10HE, Tunnel=596mm en 75mm deksel",
+   "Geschatte buitenmaat": "L=786 x B=542 x H=643 mm (Inclusief wielen)",
+   "Dekseluitvoering": "Los afneembaar",
+   "Sloten": "4x Vlinderslot medium met verzet",
+   "Handgrepen": "4x Inbouw handgreep",
+   "Hoeken": "8x Grote balhoek",
+   "Wielen": "2x 100mm zwenkwiel, ongeremd + 2x 100mm zwenkwiel, geremd",
+   "Stapelbaar": "Nee",
+   "Afwerking Basis": "- Voor- en achterzijde tunnel voorzien van 10HE Rackprofiel",
+   "Afwerking Deksel": "Geheel Zwart afgewerkt",
+   "Overige details": "28,71kg"
+  },
+  "cluster": "racks",
+  "clusternaam": "19 inch racks",
+  "rol": "casetype",
+  "zoekwoorden": [
+   [
+    "19 inch rack",
+    5000.0
+   ],
+   [
+    "19 racks",
+    5000.0
+   ],
+   [
+    "19 inch flightcase",
+    500.0
+   ],
+   [
+    "rackcase",
+    50.0
+   ],
+   [
+    "flightcase rack",
+    50.0
+   ]
+  ]
+ }
+]
